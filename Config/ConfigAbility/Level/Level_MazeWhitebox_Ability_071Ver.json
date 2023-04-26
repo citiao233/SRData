@@ -1,0 +1,249 @@
+{
+  "AbilityList": [
+    {
+      "Modifiers": {
+        "StageAbility_MazeWhitebox_Boxing_021_Modifier": {
+          "OnEnterBattle": [
+            {
+              "$type": "RPG.GameCore.HealHP",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              },
+              "FormulaType": "HealByTargetMaxHP",
+              "HealPercentage": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0.9999999843067494
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.ModifySPNew",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              },
+              "FixedAddValue": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": -2.3283064E-10
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.ModifySPNew",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              },
+              "FixedAddValue": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 29.999999529202483
+                }
+              }
+            }
+          ]
+        }
+      },
+      "Name": "StageAbility_MazeWhitebox_Boxing_021",
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "StageAbility_MazeWhitebox_Boxing_021_Modifier"
+        }
+      ]
+    },
+    {
+      "Modifiers": {
+        "StageAbility_MazeWhitebox_Boxing_022_Modifier": {
+          "OnEnterBattle": [
+            {
+              "$type": "RPG.GameCore.HealHP",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              },
+              "FormulaType": "HealByTargetMaxHP",
+              "HealPercentage": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0.9999999843067494
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.ModifySPNew",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              },
+              "FixedAddValue": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": -2.3283064E-10
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.ModifySPNew",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              },
+              "FixedAddValue": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 29.999999529202483
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.Retarget",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllDarkTeam"
+              },
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareMonsterID",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "TargetMonsterID": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 1013009.9841025802
+                  }
+                }
+              },
+              "TaskList": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "ModifierName": "StageAbility_MazeWhitebox_Boxing_022_Summon_Modifier"
+                }
+              ]
+            }
+          ]
+        },
+        "StageAbility_MazeWhitebox_Boxing_022_Summon_Modifier": {
+          "OnPhase1": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareCharacterNumber",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "AllDarkTeam"
+                },
+                "CompareType": "LessEqual",
+                "CompareNumber": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 2.9999999529202483
+                  }
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SummonMonster",
+                  "SummonMonsterDataList": [
+                    {
+                      "MonsterID": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1012020.9841181008
+                        }
+                      },
+                      "LocationType": "BeforeCaster",
+                      "InitAnimStateName": "Appear"
+                    },
+                    {
+                      "MonsterID": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1012020.9841181008
+                        }
+                      },
+                      "LocationType": "AfterCaster",
+                      "InitAnimStateName": "Appear"
+                    }
+                  ],
+                  "DelayRatio": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0
+                    }
+                  }
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareCharacterNumber",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "AllDarkTeam"
+                    },
+                    "CompareType": "Equal",
+                    "CompareNumber": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 3.9999999372269976
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SummonMonster",
+                      "SummonMonsterDataList": [
+                        {
+                          "MonsterID": {
+                            "IsDynamic": false,
+                            "FixedValue": {
+                              "Value": 1012020.9841181008
+                            }
+                          },
+                          "LocationType": "BeforeCaster",
+                          "InitAnimStateName": "Appear"
+                        }
+                      ],
+                      "DelayRatio": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 0
+                        }
+                      }
+                    }
+                  ],
+                  "FailedTaskList": []
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "Name": "StageAbility_MazeWhitebox_Boxing_022",
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "StageAbility_MazeWhitebox_Boxing_022_Modifier"
+        }
+      ]
+    }
+  ]
+}

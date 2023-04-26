@@ -1,0 +1,120 @@
+{
+  "OnInitSequece": [],
+  "OnStartSequece": [
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.SetBillboardInfo",
+          "TargetEntityType": "NPC",
+          "ID": 400001,
+          "GroupID": 32,
+          "Name": {
+            "Hash": -1395502208
+          }
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.PropStateExecute",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetFetchAdvPropEx",
+            "SinglePropID": {
+              "GroupID": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 11.999999811680993
+                }
+              },
+              "ID": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 300005.9952919307
+                }
+              }
+            }
+          },
+          "Execute": [
+            {
+              "$type": "RPG.GameCore.PropSetupTrigger",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+              },
+              "TargetEntityType": "LocalPlayer",
+              "TargetGroupID": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0
+                }
+              },
+              "TargetID": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0
+                }
+              },
+              "TargetTypes": [
+                "LocalPlayer"
+              ],
+              "OnTriggerEnter": [
+                {
+                  "$type": "RPG.GameCore.PlayMunicipalChat",
+                  "MunicipalChatConfigPath": "Config/Level/MunicipalChat/MunicipalChatConfig_M302_Raid.json",
+                  "MunicipalChatName": "MunicipalChat01"
+                }
+              ],
+              "OnTriggerExit": [
+                {
+                  "$type": "RPG.GameCore.StopMunicipalChat",
+                  "MunicipalChatName": "MunicipalChat01"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.PropStateChangeListenerConfig",
+          "ToState": "Open",
+          "OnChange": [
+            {
+              "$type": "RPG.GameCore.StopMunicipalChat",
+              "MunicipalChatName": "MunicipalChat01"
+            },
+            {
+              "$type": "RPG.GameCore.PropEnableCollider",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+              }
+            }
+          ],
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetFetchAdvPropEx",
+            "FetchType": "SinglePropByPropID",
+            "SinglePropID": {
+              "GroupID": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 31.99999949781598
+                }
+              },
+              "ID": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 300000.99529200915
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "ValueSource": {
+    "Values": []
+  }
+}
