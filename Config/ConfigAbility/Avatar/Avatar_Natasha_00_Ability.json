@@ -40,13 +40,13 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.9999999843067494
+              "Value": 1
             }
           },
           "NormalizedTimeWait": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.6799999899618889
+              "Value": 0.6800000006332994
             }
           }
         }
@@ -73,7 +73,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.1369999974886715
+              "Value": 0.13699999963864684
             }
           }
         },
@@ -93,7 +93,7 @@
             "LinearPitchAngle": {
               "IsDynamic": false,
               "FixedValue": {
-                "Value": 29.999999529202483
+                "Value": 30
               }
             },
             "WriteProgressToEffectAnimator": true
@@ -127,7 +127,7 @@
                 "SPHitRatio": {
                   "IsDynamic": false,
                   "FixedValue": {
-                    "Value": 0.9999999843067494
+                    "Value": 1
                   }
                 },
                 "HitAnimation": "Hit_H",
@@ -190,7 +190,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.3999999940952288
+              "Value": 0.40000000037252903
             }
           }
         },
@@ -256,13 +256,13 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.9999999843067494
+              "Value": 1
             }
           },
           "NormalizedTimeWait": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.6599999902571275
+              "Value": 0.6600000006146729
             }
           }
         },
@@ -298,7 +298,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.34999999483332517
+              "Value": 0.3500000003259629
             }
           }
         },
@@ -316,7 +316,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.42999999365237096
+              "Value": 0.4300000004004687
             }
           }
         },
@@ -473,7 +473,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.5299999921761781
+              "Value": 0.530000000493601
             }
           }
         },
@@ -486,7 +486,7 @@
           "AddRatio": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.9999999843067494
+              "Value": 1
             }
           }
         },
@@ -687,7 +687,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.2159999963923284
+              "Value": 0.21599999978207052
             }
           }
         },
@@ -701,7 +701,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.7299999892237925
+              "Value": 0.7300000006798655
             }
           }
         },
@@ -723,7 +723,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.9979999847088022
+              "Value": 0.9980000003706664
             }
           }
         },
@@ -749,43 +749,62 @@
           "LifeStepMoment": "ModifierPhase1End",
           "OnPhase1": [
             {
-              "$type": "RPG.GameCore.TriggerEffect",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_Heal.prefab"
-            },
-            {
-              "$type": "RPG.GameCore.HealHP",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "FormulaType": "HealByHealerMaxHP",
-              "HealPercentage": {
-                "IsDynamic": true,
-                "Expressions": [
-                  {
-                    "Type": "DynamicNumber",
-                    "DynamicHash": 1733325153
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareHP",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ModifierOwnerEntity"
+                },
+                "CompareType": "Greater",
+                "CompareValue": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 0
                   }
-                ]
+                }
               },
-              "ModifyValue": {
-                "IsDynamic": true,
-                "Expressions": [
-                  {
-                    "Type": "DynamicNumber",
-                    "DynamicHash": 2136609680
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.TriggerEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_Heal.prefab"
+                },
+                {
+                  "$type": "RPG.GameCore.HealHP",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "FormulaType": "HealByHealerMaxHP",
+                  "HealPercentage": {
+                    "IsDynamic": true,
+                    "Expressions": [
+                      {
+                        "Type": "DynamicNumber",
+                        "DynamicHash": 1733325153
+                      }
+                    ]
+                  },
+                  "ModifyValue": {
+                    "IsDynamic": true,
+                    "Expressions": [
+                      {
+                        "Type": "DynamicNumber",
+                        "DynamicHash": 2136609680
+                      }
+                    ]
+                  },
+                  "DisplayData": {
+                    "UIMessageHeight": 1,
+                    "DitherRangeX": 0.01,
+                    "DitherRangeY": 0.1
                   }
-                ]
-              },
-              "DisplayData": {
-                "UIMessageHeight": 1,
-                "DitherRangeX": 0.01,
-                "DitherRangeY": 0.1
-              }
+                }
+              ]
             }
           ],
           "UseSnapshotEntity": true,
@@ -809,7 +828,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.7299999892237925
+              "Value": 0.7300000006798655
             }
           }
         },
@@ -827,7 +846,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.749999988928554
+              "Value": 0.7500000006984919
             }
           }
         },
@@ -874,7 +893,7 @@
               "MaxNumber": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 4.999999921533747
+                  "Value": 5
                 }
               },
               "TaskList": [
@@ -926,7 +945,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.7799999884856962
+              "Value": 0.7800000007264316
             }
           }
         },
@@ -970,7 +989,7 @@
           "AddRatio": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.9999999843067494
+              "Value": 1
             }
           }
         },
@@ -1001,7 +1020,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.9979999847088022
+              "Value": 0.9980000003706664
             }
           }
         },
@@ -1149,7 +1168,7 @@
                     "CompareValue": {
                       "IsDynamic": false,
                       "FixedValue": {
-                        "Value": 0.9999999843067494
+                        "Value": 1
                       }
                     }
                   }
@@ -1165,7 +1184,7 @@
                   "MaxNumber": {
                     "IsDynamic": false,
                     "FixedValue": {
-                      "Value": 0.9999999843067494
+                      "Value": 1
                     }
                   },
                   "TaskList": [
@@ -1188,7 +1207,7 @@
                         "SPHitRatio": {
                           "IsDynamic": false,
                           "FixedValue": {
-                            "Value": 0.9999999843067494
+                            "Value": 1
                           }
                         },
                         "AttackType": "Maze",
@@ -1434,13 +1453,13 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.9999999843067494
+              "Value": 1
             }
           },
           "NormalizedTimeWait": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.6599999902571275
+              "Value": 0.6600000006146729
             }
           }
         },
@@ -1476,7 +1495,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.34999999483332517
+              "Value": 0.3500000003259629
             }
           }
         },
@@ -1494,7 +1513,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.42999999365237096
+              "Value": 0.4300000004004687
             }
           }
         },
@@ -1543,44 +1562,63 @@
       "LifeStepMoment": "ModifierPhase1End",
       "OnPhase1": [
         {
-          "$type": "RPG.GameCore.TriggerEffect",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "ModifierOwnerEntity"
-          },
-          "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_Heal.prefab"
-        },
-        {
-          "$type": "RPG.GameCore.HealHP",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "ModifierOwnerEntity"
-          },
-          "FormulaType": "HealByHealerMaxHP",
-          "HealPercentage": {
-            "IsDynamic": true,
-            "Expressions": [
-              {
-                "Type": "DynamicNumber",
-                "DynamicHash": 1733325153
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareHP",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "ModifierOwnerEntity"
+            },
+            "CompareType": "Greater",
+            "CompareValue": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 0
               }
-            ]
+            }
           },
-          "ModifyValue": {
-            "IsDynamic": true,
-            "Expressions": [
-              {
-                "Type": "DynamicNumber",
-                "DynamicHash": 2136609680
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.TriggerEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_Heal.prefab"
+            },
+            {
+              "$type": "RPG.GameCore.HealHP",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "FormulaType": "HealByHealerMaxHP",
+              "HealPercentage": {
+                "IsDynamic": true,
+                "Expressions": [
+                  {
+                    "Type": "DynamicNumber",
+                    "DynamicHash": 1733325153
+                  }
+                ]
+              },
+              "ModifyValue": {
+                "IsDynamic": true,
+                "Expressions": [
+                  {
+                    "Type": "DynamicNumber",
+                    "DynamicHash": 2136609680
+                  }
+                ]
+              },
+              "DisplayData": {
+                "UIMessageHeight": 0.8,
+                "DitherRangeX": 0,
+                "DitherRangeY": 0,
+                "FixedPosition": false
               }
-            ]
-          },
-          "DisplayData": {
-            "UIMessageHeight": 0.8,
-            "DitherRangeX": 0,
-            "DitherRangeY": 0,
-            "FixedPosition": false
-          }
+            }
+          ]
         }
       ],
       "UseSnapshotEntity": true,

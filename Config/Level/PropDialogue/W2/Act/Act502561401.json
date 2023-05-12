@@ -6,8 +6,14 @@
         {
           "$type": "RPG.GameCore.LevelPerformanceInitialize",
           "PerformanceType": "E",
+          "CreateCharacterList": [],
+          "EntityVisiableList": [],
           "HideMunicipalCrowd": false,
-          "HideMunicipalPedestrian": false
+          "HideMunicipalPedestrian": false,
+          "PropVisiableList": [],
+          "StreamingCentersInBlackMask": [],
+          "StreamingCentersAfterBlackMask": [],
+          "MarkStreamingItems": []
         },
         {
           "$type": "RPG.GameCore.PlaySimpleTalk",
@@ -56,10 +62,6 @@
             {
               "TalkSentenceID": 502561405,
               "ProtectTime": 0.3
-            },
-            {
-              "TalkSentenceID": 502561406,
-              "ProtectTime": 0.3
             }
           ]
         },
@@ -67,10 +69,43 @@
           "$type": "RPG.GameCore.WaitSimpleTalkFinish"
         },
         {
-          "$type": "RPG.GameCore.TriggerCustomString",
-          "CustomString": {
-            "Value": "ALL_TALK_END"
-          }
+          "$type": "RPG.GameCore.ConsumeMissionItemPerformance",
+          "SubMissionID": 404024601,
+          "OnSubmitConfirm": [
+            {
+              "$type": "RPG.GameCore.PlaySimpleTalk",
+              "SimpleTalkList": [
+                {
+                  "TalkSentenceID": 502561406,
+                  "ProtectTime": 0.3
+                }
+              ]
+            },
+            {
+              "$type": "RPG.GameCore.WaitSimpleTalkFinish"
+            },
+            {
+              "$type": "RPG.GameCore.TriggerCustomString",
+              "CustomString": {
+                "Value": "Talk_404024601"
+              }
+            },
+            {
+              "$type": "RPG.GameCore.TriggerCustomString",
+              "CustomString": {
+                "Value": "ALL_TALK_END"
+              }
+            }
+          ],
+          "OnSubmitCancel": [
+            {
+              "$type": "RPG.GameCore.TriggerCustomString",
+              "CustomString": {
+                "Value": "ALL_TALK_END"
+              }
+            }
+          ],
+          "SimpleTalk": {}
         }
       ]
     },
@@ -97,6 +132,12 @@
         {
           "$type": "RPG.GameCore.TriggerCustomString",
           "CustomString": {
+            "Value": "Talk_404024602"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerCustomString",
+          "CustomString": {
             "Value": "ALL_TALK_END"
           }
         }
@@ -112,10 +153,6 @@
         },
         {
           "$type": "RPG.GameCore.EndPerformance"
-        },
-        {
-          "$type": "RPG.GameCore.FinishPerformanceMission",
-          "Key": "Mission_404024008"
         }
       ]
     },
