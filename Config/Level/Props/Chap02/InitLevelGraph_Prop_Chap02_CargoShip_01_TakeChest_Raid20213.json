@@ -5,11 +5,11 @@
       "Order": 1,
       "TaskList": [
         {
-          "$type": "RPG.GameCore.SyncSubPropState",
+          "$type": "RPG.GameCore.CreateNPCMonster",
           "TaskEnabled": true
         },
         {
-          "$type": "RPG.GameCore.SyncSubPropState",
+          "$type": "RPG.GameCore.CreateNPCMonster",
           "TaskEnabled": true
         }
       ]
@@ -17,7 +17,7 @@
     {
       "TaskList": [
         {
-          "$type": "RPG.GameCore.SyncAllSubPropState",
+          "$type": "RPG.GameCore.CreateNPCMonster",
           "TaskEnabled": true
         }
       ]
@@ -152,12 +152,17 @@
               "$type": "RPG.GameCore.PropMoveTo",
               "Duration": {
                 "IsDynamic": true,
-                "Expressions": [
-                  {
-                    "Type": "DynamicNumber",
-                    "DynamicHash": -200302061
-                  }
-                ]
+                "PostfixExpr": {
+                  "OpCodes": [
+                    "Constant",
+                    "Constant",
+                    "Constant"
+                  ],
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    0
+                  ]
+                }
               },
               "LevelAreaKey": {
                 "Custom": true,

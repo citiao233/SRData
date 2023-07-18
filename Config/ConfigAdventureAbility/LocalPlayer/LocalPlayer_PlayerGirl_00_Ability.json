@@ -1,6 +1,16 @@
 {
   "AbilityList": [
     {
+      "OnAbort": [
+        {
+          "$type": "RPG.GameCore.RadialBlurEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "Active": false
+        }
+      ],
       "Name": "LocalPlayer_PlayerGirl_NormalAtk01",
       "TargetInfo": {
         "TargetType": "SkillPointEntityOrNone"
@@ -475,12 +485,17 @@
           "$type": "RPG.GameCore.AdventureModifyTeamPlayerHP",
           "AddRatio": {
             "IsDynamic": true,
-            "Expressions": [
-              {
-                "Type": "DynamicNumber",
-                "DynamicHash": -850066311
-              }
-            ]
+            "PostfixExpr": {
+              "OpCodes": [
+                "Constant",
+                "Constant",
+                "Constant"
+              ],
+              "FixedValues": [],
+              "DynamicHashes": [
+                0
+              ]
+            }
           },
           "TriggerCommonEffect": false
         },

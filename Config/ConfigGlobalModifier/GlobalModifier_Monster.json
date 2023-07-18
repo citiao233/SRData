@@ -33,12 +33,17 @@
               "Property": "AllDamageReduce",
               "PropertyValue": {
                 "IsDynamic": true,
-                "Expressions": [
-                  {
-                    "Type": "DynamicNumber",
-                    "DynamicHash": 793099378
-                  }
-                ]
+                "PostfixExpr": {
+                  "OpCodes": [
+                    "Constant",
+                    "Constant",
+                    "Constant"
+                  ],
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    0
+                  ]
+                }
               }
             },
             {
@@ -326,19 +331,21 @@
               "Property": "AllDamageTypeAddedRatio",
               "PropertyValue": {
                 "IsDynamic": true,
-                "Expressions": [
-                  {
-                    "Type": "DynamicNumber",
-                    "DynamicHash": 1952180531
-                  },
-                  {
-                    "Type": "DynamicNumber",
-                    "DynamicHash": 2112295318
-                  },
-                  {
-                    "Type": "Mul"
-                  }
-                ]
+                "PostfixExpr": {
+                  "OpCodes": [
+                    "Constant",
+                    "Constant",
+                    "Constant",
+                    "Constant",
+                    "Constant",
+                    "Constant"
+                  ],
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    0,
+                    0
+                  ]
+                }
               }
             },
             {
@@ -350,12 +357,17 @@
               "Property": "AllDamageTypeResistance",
               "PropertyValue": {
                 "IsDynamic": true,
-                "Expressions": [
-                  {
-                    "Type": "DynamicNumber",
-                    "DynamicHash": 1373051009
-                  }
-                ]
+                "PostfixExpr": {
+                  "OpCodes": [
+                    "Constant",
+                    "Constant",
+                    "Constant"
+                  ],
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    0
+                  ]
+                }
               }
             }
           ]
@@ -383,12 +395,17 @@
               "Property": "AllDamageTypeAddedRatio",
               "PropertyValue": {
                 "IsDynamic": true,
-                "Expressions": [
-                  {
-                    "Type": "DynamicNumber",
-                    "DynamicHash": 625640552
-                  }
-                ]
+                "PostfixExpr": {
+                  "OpCodes": [
+                    "Constant",
+                    "Constant",
+                    "Constant"
+                  ],
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    0
+                  ]
+                }
               }
             }
           ]
@@ -1489,7 +1506,12 @@
                       "Alias": "PartEntity0"
                     },
                     "CompareType": "Equal",
-                    "CompareValue": 2
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 2
+                      }
+                    }
                   },
                   {
                     "$type": "RPG.GameCore.ByCompareDynamicValue",
@@ -1678,6 +1700,223 @@
                 {
                   "$type": "RPG.GameCore.SetBattleAchievement",
                   "AchievementID": 30037,
+                  "TagMatch": true
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "W2_Huanlong_00_BattleScore1": {
+      "_CallbackList": {
+        "OnCreate": {
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.DefineDynamicValue",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "DynamicKey": "W2_Huanlong_00_BattleSore1_Flag",
+              "ContextScope": "TargetEntity"
+            }
+          ]
+        },
+        "OnListenModifierDispel": {
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCheckModifierCallBackName",
+                "ModifierName": "MCommon_BlackBlood"
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValueByAddValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "Key": "W2_Huanlong_00_BattleSore1_Flag",
+                  "AddValue": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  },
+                  "ContextScope": "TargetEntity"
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "DynamicKey": "W2_Huanlong_00_BattleSore1_Flag",
+                    "ContextScope": "TargetEntity",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": [
+                          "Constant",
+                          "Constant",
+                          "Constant"
+                        ],
+                        "FixedValues": [
+                          {
+                            "Value": 0
+                          }
+                        ],
+                        "DynamicHashes": []
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetBattleAchievement",
+                      "AchievementID": 30053,
+                      "TagMatch": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "W2_Huanlong_00_BattleScore2": {
+      "_CallbackList": {
+        "OnCreate": {
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.DefineDynamicValue",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "DynamicKey": "W2_Huanlong_00_BattleSore2_Flag",
+              "ContextScope": "TargetEntity"
+            }
+          ]
+        },
+        "OnTriggerDeath": {
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCheckCustomValueBool",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "Key": {
+                  "Hash": -1391642758
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValueByAddValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "Key": "W2_Huanlong_00_BattleSore2_Flag",
+                  "AddValue": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": -1
+                    }
+                  },
+                  "Min": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": -100
+                    }
+                  },
+                  "Max": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 100
+                    }
+                  },
+                  "ContextScope": "TargetEntity"
+                }
+              ]
+            }
+          ]
+        },
+        "OnListenCharacterDie": {
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCheckCustomValueBool",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "Key": {
+                  "Hash": -1391642758
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValueByAddValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "Key": "W2_Huanlong_00_BattleSore2_Flag",
+                  "AddValue": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  },
+                  "Min": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": -100
+                    }
+                  },
+                  "Max": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 100
+                    }
+                  },
+                  "ContextScope": "TargetEntity"
+                }
+              ]
+            }
+          ]
+        },
+        "OnBeforeDying": {
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                "DynamicKey": "W2_Huanlong_00_BattleSore2_Flag",
+                "ContextScope": "TargetEntity",
+                "CompareType": "GreaterEqual",
+                "CompareValue": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 1
+                  }
+                }
+              },
+              "SuccessTaskList": [],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetBattleAchievement",
+                  "AchievementID": 30054,
                   "TagMatch": true
                 }
               ]
