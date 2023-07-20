@@ -4,6 +4,36 @@
     {
       "TaskList": [
         {
+          "$type": "RPG.GameCore.SelectorConfig",
+          "TaskList": [
+            {
+              "$type": "RPG.GameCore.PropStateExecute",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+              },
+              "State": "Open",
+              "Execute": [
+                {
+                  "$type": "RPG.GameCore.PropReqInteract",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+                  },
+                  "InteractID": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1100
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
           "$type": "RPG.GameCore.PropSetupUITrigger",
           "ColliderRelativePath": "TriggerUIBtn",
           "ButtonCallback": [
@@ -26,82 +56,71 @@
                   ]
                 },
                 {
-                  "$type": "RPG.GameCore.PredicateTaskList",
-                  "Predicate": {
-                    "$type": "RPG.GameCore.ByComparePropState",
-                    "TargetType": {
-                      "$type": "RPG.GameCore.TargetFetchAdvPropEx"
-                    },
-                    "State": "Locked"
+                  "$type": "RPG.GameCore.PropStateExecute",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetFetchAdvPropEx"
                   },
-                  "FailedTaskList": [
+                  "Execute": [
                     {
-                      "$type": "RPG.GameCore.PropStateExecute",
+                      "$type": "RPG.GameCore.PropReqInteract",
                       "TargetType": {
                         "$type": "RPG.GameCore.TargetFetchAdvPropEx"
                       },
-                      "Execute": [
-                        {
-                          "$type": "RPG.GameCore.PropReqInteract",
-                          "TargetType": {
-                            "$type": "RPG.GameCore.TargetFetchAdvPropEx"
-                          },
-                          "InteractID": {
-                            "IsDynamic": false,
-                            "FixedValue": {
-                              "Value": 1010
-                            }
-                          }
-                        },
-                        {
-                          "$type": "RPG.GameCore.WaitSecond",
-                          "WaitTime": 1
-                        },
-                        {
-                          "$type": "RPG.GameCore.PlayScreenTransfer",
-                          "Mode": "SwitchOut",
-                          "CustomTime": 0.5
-                        },
-                        {
-                          "$type": "RPG.GameCore.SwitchCharacterAnchor",
-                          "IsLocalPlayer": true,
-                          "CharacterUniqueName": "LocalPlayer",
-                          "AreaName": {
-                            "Custom": true,
-                            "Key": "LevelArea"
-                          },
-                          "AnchorName": {
-                            "Custom": true,
-                            "Key": "Anchor"
-                          }
-                        },
-                        {
-                          "$type": "RPG.GameCore.PlayScreenTransfer",
-                          "CustomTime": 0.5
-                        },
-                        {
-                          "$type": "RPG.GameCore.WaitSecond",
-                          "WaitTime": 1
-                        },
-                        {
-                          "$type": "RPG.GameCore.PropReqInteract",
-                          "TargetType": {
-                            "$type": "RPG.GameCore.TargetFetchAdvPropEx"
-                          },
-                          "InteractID": {
-                            "IsDynamic": false,
-                            "FixedValue": {
-                              "Value": 1100
-                            }
-                          }
+                      "InteractID": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1010
                         }
-                      ]
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.WaitSecond",
+                      "WaitTime": 1
+                    },
+                    {
+                      "$type": "RPG.GameCore.PlayScreenTransfer",
+                      "Mode": "SwitchOut",
+                      "CustomTime": 0.5
+                    },
+                    {
+                      "$type": "RPG.GameCore.SwitchCharacterAnchor",
+                      "IsLocalPlayer": true,
+                      "CharacterUniqueName": "LocalPlayer",
+                      "AreaName": {
+                        "Custom": true,
+                        "Key": "LevelArea"
+                      },
+                      "AnchorName": {
+                        "Custom": true,
+                        "Key": "Anchor"
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.PlayScreenTransfer",
+                      "CustomTime": 0.5
+                    },
+                    {
+                      "$type": "RPG.GameCore.WaitSecond",
+                      "WaitTime": 1
+                    },
+                    {
+                      "$type": "RPG.GameCore.PropReqInteract",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+                      },
+                      "InteractID": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1100
+                        }
+                      }
                     }
                   ]
                 }
               ]
             }
           ],
+          "OverrideTargetTypes": [],
           "TargetType": {
             "$type": "RPG.GameCore.TargetFetchAdvPropEx"
           }
