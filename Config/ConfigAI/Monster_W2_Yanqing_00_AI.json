@@ -332,8 +332,33 @@
             "ContextScope": "TargetEntity"
           },
           {
-            "$type": "RPG.GameCore.UseSkill",
-            "SkillName": "Skill02"
+            "$type": "RPG.GameCore.PredicateTaskList",
+            "Predicate": {
+              "$type": "RPG.GameCore.ByCompareCharacterNumber",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllTeamMember"
+              },
+              "CompareType": "GreaterEqual",
+              "CompareNumber": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 3
+                }
+              }
+            },
+            "SuccessTaskList": [
+              {
+                "$type": "RPG.GameCore.UseSkill",
+                "SkillName": "Skill03"
+              }
+            ],
+            "FailedTaskList": [
+              {
+                "$type": "RPG.GameCore.UseSkill",
+                "SkillName": "Skill02"
+              }
+            ]
           }
         ]
       },

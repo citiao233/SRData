@@ -1386,7 +1386,7 @@
                     },
                     {
                       "$type": "RPG.GameCore.ShowUIPage",
-                      "AssetPath": "UI/Common/Widget/BattleAlertHint.prefab",
+                      "AssetPath": "UI/Common/Widget/BattleSelfStatusHint.prefab",
                       "UITextNodes": [
                         {
                           "TextPath": "AreaInfoPanel/Title/Text",
@@ -1637,6 +1637,254 @@
               }
             }
           }
+        }
+      ]
+    },
+    {
+      "Modifiers": {
+        "RaidAbility_2420101_Modifier": {
+          "EnterBattlePriority": "LevelBuff",
+          "_CallbackList": {
+            "OnListenAllowAction": {
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "DynamicKey": "ActionCount",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "DynamicKey": "ActionCount",
+                      "Value": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1
+                        }
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.ShowUIPage",
+                      "AssetPath": "UI/Common/Widget/BattleAlertHint.prefab",
+                      "UITextNodes": [
+                        {
+                          "TextPath": "AreaInfoPanel/Title/Text",
+                          "TextContent": {
+                            "Hash": -1177970673
+                          }
+                        }
+                      ],
+                      "LifeTime": 2.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "OnEnterBattle": {
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareWaveCount",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 1
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AllDarkTeam"
+                      },
+                      "ModifierName": "RaidAbility_2420101_Modifier_Sub"
+                    }
+                  ],
+                  "FailedTaskList": []
+                }
+              ]
+            },
+            "OnListenUltraSkillPrepare": {
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "DynamicKey": "ActionCount",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "DynamicKey": "ActionCount",
+                      "Value": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1
+                        }
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.ShowUIPage",
+                      "AssetPath": "UI/Common/Widget/BattleAlertHint.prefab",
+                      "UITextNodes": [
+                        {
+                          "TextPath": "AreaInfoPanel/Title/Text",
+                          "TextContent": {
+                            "Hash": -1177970673
+                          }
+                        }
+                      ],
+                      "LifeTime": 2.5
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "DynamicValues": {
+            "Values": {
+              "-665922691": {}
+            }
+          }
+        },
+        "RaidAbility_2420101_Modifier_Sub": {
+          "LifeTime": 2,
+          "_CallbackList": {
+            "OnCreate": {
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SetActionDelay",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0.3500000003259629
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.TriggerEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Monster_Common_Immediate.prefab"
+                }
+              ]
+            },
+            "OnStack": {
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.StackWeakness",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "OPType": "Protected",
+                  "WeakList": [
+                    "Physical",
+                    "Fire",
+                    "Ice",
+                    "Thunder",
+                    "Wind",
+                    "Quantum",
+                    "Imaginary"
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      },
+      "Name": "RaidAbility_2420101",
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "RaidAbility_2420101_Modifier"
+        }
+      ]
+    },
+    {
+      "Modifiers": {
+        "RaidAbility_2420103_Modifier": {
+          "_CallbackList": {
+            "OnEnterBattle": {
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.TriggerCustomString",
+                  "CustomString": {
+                    "Value": "Stage_40232010_EnterBattle"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      },
+      "Name": "RaidAbility_2420103",
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "RaidAbility_2420103_Modifier"
+        }
+      ]
+    },
+    {
+      "Modifiers": {
+        "RaidAbility_2420101_FailCondition_Modifier": {
+          "_CallbackList": {
+            "OnListenCharacterEscape": {
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.TriggerCustomString",
+                  "CustomString": {
+                    "Value": "Level_SpecialLose"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      },
+      "Name": "RaidAbility_2420101_FailCondition",
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "RaidAbility_2420101_FailCondition_Modifier"
         }
       ]
     }

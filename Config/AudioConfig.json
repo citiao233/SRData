@@ -43,7 +43,10 @@
     "StateChallenge": "State_Menu_Forgotten_Hall",
     "StateBoxingClub": "State_Menu_Boxing_Gym",
     "StateMuseum": "State_Menu_Season_Ledger_of_Curiosities_Museum",
-    "StateRogue": "State_Menu_Rougelite"
+    "StateRogue": "State_Menu_Rougelite",
+    "StateAlleyPack": "State_Menu_Season_Inventory_Stocking",
+    "StateAlleyTransport": "State_Menu_Season_Logistics_Planning",
+    "StateRogueDLC": "State_Menu_Simulated_Universe_The_Swarm_Disaster"
   },
   "CombatStateGroupName": "StateGroup_Combat",
   "BGMWorldStateGroupName": "StateGroup_Adventure",
@@ -82,6 +85,7 @@
   "BGMVolumeRTPCName": "RTPC_Vol_BGM",
   "SFXVolumeRTPCName": "RTPC_Vol_SFX",
   "VOVolumeRTPCName": "RTPC_Vol_VO",
+  "VibrationIntensityRTPCName": "RTPC_Vol_Motion",
   "DefaultEmotionState": {
     "GroupName": "StateGroup_Emotion",
     "StateName": "State_Hollowing"
@@ -95,6 +99,7 @@
   "EventAmbStop": "Ev_global_set_amb_all_stop",
   "EventAmbBattleStop": "Ev_global_set_amb_battle_stop",
   "EventBGMBattleStop": "Ev_combat_set_bgm_stop",
+  "EventBattleEnd": "Ev_global_set_vo_combat_end",
   "EventBGMPause": "Ev_global_set_bgm_bus_pause",
   "EventVOPause": "Ev_global_set_vo_bus_pause",
   "EventSFXPause": "Ev_global_set_sfx_bus_pause",
@@ -185,19 +190,24 @@
     "Menu": "State_Menu"
   },
   "PerformanceAudioEvents": {
-    "StoryVoiceExternalEvent": "Ev_vo_external_story_play",
-    "CutsceneVoiceExternalEvent": "Ev_vo_external_cutscene_play",
     "SFXExternalCutsceneEvent": "Ev_sfx_cinematic_cutscene",
     "SFXExternalCutsceneFadeEvent": "Ev_sfx_cinematic_fadeinout_cutscene",
     "SFXExternalStoryEvent": "Ev_sfx_cinematic_c",
     "SFXExternalStoryFadeEvent": "Ev_sfx_cinematic_fadeinout_c",
-    "NPCNearEvent": "Ev_vo_external_npc_near_play",
-    "NPCNormalEvent": "Ev_vo_external_npc_normal_play",
-    "NPCFarEvent": "Ev_vo_external_npc_far_play",
-    "ArchiveEvent": "Ev_vo_external_archive_play",
-    "MissionTalk3dEvent": "Ev_vo_external_playmissiontalk_3d_play",
     "SFXExternalLoopEvent": "Ev_sfx_ex_c_loop_play",
-    "SFXExternalLoopStopEvent": "Ev_sfx_ex_c_loop_stop"
+    "SFXExternalLoopStopEvent": "Ev_sfx_ex_c_loop_stop",
+    "VoiceTypeExternalEventDict": {
+      "Story": "Ev_vo_external_story_play",
+      "Cutscene": "Ev_vo_external_cutscene_play",
+      "NPC_Near": "Ev_vo_external_npc_near_play",
+      "NPC_Normal": "Ev_vo_external_npc_normal_play",
+      "NPC_Far": "Ev_vo_external_npc_far_play",
+      "Archive": "Ev_vo_external_archive_play",
+      "MissionTalk_3d": "Ev_vo_external_playmissiontalk_3d_play",
+      "BroadcastNear": "Ev_vo_external_broadcast_near_play",
+      "BroadcastNormal": "Ev_vo_external_broadcast_normal_play",
+      "BroadcastFar": "Ev_vo_external_broadcast_far_play"
+    }
   },
   "ToneAudioEvents": {
     "BattleToneEvent": "Ev_sfx_amb_battle_tone",
@@ -225,31 +235,102 @@
     "RaycastAroundMaxDistance": 10,
     "RaycastTopMaxHeight": 5
   },
-  "SerialBellsNoteMap": {
-    "c": 0,
-    "d": 1,
-    "e": 2,
-    "f": 3,
-    "g": 4,
-    "a": 5,
-    "b": 6,
-    "c1": 7,
-    "d1": 8,
-    "e1": 9,
-    "f1": 10,
-    "g1": 11,
-    "a1": 12,
-    "b1": 13,
-    "c2": 14,
-    "d2": 15,
-    "e2": 16,
-    "f2": 17,
-    "g2": 18,
-    "a2": 19,
-    "b2": 20,
-    "endcue": -1
+  "SerialBellsInfo": {
+    "NoteMap": {
+      "c": {
+        "EffectAttachPoint": "Bell1"
+      },
+      "d": {
+        "ControllerNote": 1,
+        "EffectAttachPoint": "Bell2"
+      },
+      "e": {
+        "ControllerNote": 2,
+        "EffectAttachPoint": "Bell3"
+      },
+      "f": {
+        "ControllerNote": 3,
+        "EffectAttachPoint": "Bell2",
+        "IsEffectOnSide": true
+      },
+      "g": {
+        "ControllerNote": 4,
+        "EffectAttachPoint": "Bell5"
+      },
+      "a": {
+        "ControllerNote": 5,
+        "EffectAttachPoint": "Bell6"
+      },
+      "b": {
+        "ControllerNote": 6,
+        "EffectAttachPoint": "Bell5",
+        "IsEffectOnSide": true
+      },
+      "c1": {
+        "ControllerNote": 7,
+        "EffectAttachPoint": "Bell7"
+      },
+      "d1": {
+        "ControllerNote": 8,
+        "EffectAttachPoint": "Bell8"
+      },
+      "e1": {
+        "ControllerNote": 9,
+        "EffectAttachPoint": "Bell9"
+      },
+      "f1": {
+        "ControllerNote": 10,
+        "EffectAttachPoint": "Bell8",
+        "IsEffectOnSide": true
+      },
+      "g1": {
+        "ControllerNote": 11,
+        "EffectAttachPoint": "Bell11"
+      },
+      "a1": {
+        "ControllerNote": 12,
+        "EffectAttachPoint": "Bell12"
+      },
+      "b1": {
+        "ControllerNote": 13,
+        "EffectAttachPoint": "Bell11",
+        "IsEffectOnSide": true
+      },
+      "c2": {
+        "ControllerNote": 14,
+        "EffectAttachPoint": "Bell13"
+      },
+      "d2": {
+        "ControllerNote": 15,
+        "EffectAttachPoint": "Bell14"
+      },
+      "e2": {
+        "ControllerNote": 16,
+        "EffectAttachPoint": "Bell15"
+      },
+      "f2": {
+        "ControllerNote": 17,
+        "EffectAttachPoint": "Bell14",
+        "IsEffectOnSide": true
+      },
+      "g2": {
+        "ControllerNote": 18,
+        "EffectAttachPoint": "Bell17"
+      },
+      "a2": {
+        "ControllerNote": 19,
+        "EffectAttachPoint": "Bell18"
+      },
+      "b2": {
+        "ControllerNote": 20,
+        "EffectAttachPoint": "Bell17",
+        "IsEffectOnSide": true
+      }
+    },
+    "EndCue": "endcue",
+    "EffectFrontPath": "Effects/Eff_Prefab/Eff_Scene/Interactive Object/Eff_Chap02_GameplayProp_SerialBells_01.prefab",
+    "EffectSidePath": "Effects/Eff_Prefab/Eff_Scene/Interactive Object/Eff_Chap02_GameplayProp_SerialBells_01.prefab"
   },
-  "SerialBellsEndCue": "endcue",
   "AvatarHeightRTPCConfig": {
     "RTPCName": "RTPC_Amb_Altitude",
     "UpdateInterval": 0.5,
@@ -258,5 +339,6 @@
   },
   "CameraToAvatarRTPCName": "Param_Action_CameraToAvatar",
   "CameraToAvatarRTPCUpdateThreshold": 3,
-  "SeaLevelAltitudeRTPCName": "RTPC_SeaLevelAltitude"
+  "SeaLevelAltitudeRTPCName": "RTPC_SeaLevelAltitude",
+  "CharacterBodySizeRTPCName": "Param_Action_Avatar_Shape"
 }

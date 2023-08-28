@@ -532,6 +532,24 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
+              "Value": 0.35443040099926293
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "LightTeamCenter"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W1_Mecha03_02/Eff_Monster_W1_Mecha03_02_Skill03_Attack Ready_01.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "AnimStateName": "Skill03",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
               "Value": 0.5000000004656613
             }
           }
@@ -545,7 +563,7 @@
           "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W1_Mecha03_02/Eff_Monster_W1_Mecha03_02_Skill03_Hit_01.prefab"
         },
         {
-          "$type": "RPG.GameCore.LoopExecuteTaskListWithInterval",
+          "$type": "RPG.GameCore.LoopExecuteTaskList",
           "MaxLoopCount": {
             "IsDynamic": false,
             "FixedValue": {
@@ -2019,24 +2037,42 @@
           }
         },
         {
-          "$type": "RPG.GameCore.AddModifier",
+          "$type": "RPG.GameCore.Retarget",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "CasterSummonedMinions"
           },
-          "ModifierName": "Monster_Company_Coin",
-          "DynamicValues": {
-            "MDF_DamageUpRatio": {
-              "IsDynamic": true,
-              "PostfixExpr": {
-                "OpCodes": "AQAJ",
-                "FixedValues": [],
-                "DynamicHashes": [
-                  374173428
-                ]
+          "Predicate": {
+            "$type": "RPG.GameCore.ByIsContainModifier",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "ParamEntity"
+            },
+            "ModifierName": "Monster_Company_Coin",
+            "Inverse": true
+          },
+          "TaskList": [
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ParamEntity"
+              },
+              "ModifierName": "Monster_Company_Coin",
+              "DynamicValues": {
+                "MDF_DamageUpRatio": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAJ",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      374173428
+                    ]
+                  }
+                }
               }
             }
-          }
+          ]
         },
         {
           "$type": "RPG.GameCore.SkillPerformFinish"
@@ -2530,6 +2566,13 @@
               "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W1_Mecha03_02/Eff_Monster_W1_Mecha03_02_Buff_Loop.prefab",
               "MinMutexTime": -1,
               "MutexType": "Entity"
+            }
+          ]
+        },
+        "OnBeingBreak": {
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.RemoveSelfModifier"
             }
           ]
         }

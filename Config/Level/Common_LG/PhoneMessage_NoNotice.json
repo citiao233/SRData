@@ -31,7 +31,8 @@
         {
           "$type": "RPG.GameCore.SetCharacterMaterialEffectEnable",
           "TargetType": {
-            "$type": "RPG.GameCore.TargetFetchAdvLocalPlayer"
+            "$type": "RPG.GameCore.TargetFetchAdvLocalPlayer",
+            "IncludeStoryPlayer": false
           },
           "IsEnable": false
         },
@@ -74,7 +75,8 @@
             "CustomCurveName": "BlendCut_08to1"
           },
           "VCameraDitherNPCOn": true,
-          "VCameraDitherMaxDistance": 3
+          "VCameraDitherMaxDistance": 3,
+          "DynamicParams": {}
         },
         {
           "$type": "RPG.GameCore.WaitFrame"
@@ -93,7 +95,8 @@
             "BlendTime": 0.5
           },
           "VCameraDitherNPCOn": true,
-          "VCameraDitherMaxDistance": 3
+          "VCameraDitherMaxDistance": 3,
+          "DynamicParams": {}
         },
         {
           "$type": "RPG.GameCore.ReleaseCharacter",
@@ -139,7 +142,8 @@
         {
           "$type": "RPG.GameCore.SetCharacterMaterialEffectEnable",
           "TargetType": {
-            "$type": "RPG.GameCore.TargetFetchAdvLocalPlayer"
+            "$type": "RPG.GameCore.TargetFetchAdvLocalPlayer",
+            "IncludeStoryPlayer": false
           }
         },
         {
@@ -154,13 +158,15 @@
             "BlendType": "Custom",
             "CustomCurveName": "BlendCut_07to1_Short",
             "BlendTime": 1
-          }
+          },
+          "DynamicParams": {}
         },
         {
           "$type": "RPG.GameCore.CharacterTriggerFreeStyle",
           "CharacterUniqueName": "LocalPlayer",
           "StoryAvatarID": "NPC_Monster_XP_Minion01_00",
-          "StartMotion": "LookAtPhoneAS"
+          "StartMotion": "LookAtPhoneAS",
+          "NormalizedTimeStart": 0.4
         },
         {
           "$type": "RPG.GameCore.CharacterDisableLookAt",
@@ -173,12 +179,24 @@
         },
         {
           "$type": "RPG.GameCore.WaitSecond",
-          "WaitTime": 0.4
+          "WaitTime": 0.4,
+          "TaskEnabled": false
         },
         {
-          "$type": "RPG.GameCore.CharacterStopFreeStyle",
-          "CharacterUniqueName": "LocalPlayer",
-          "NormalizedTransitionDuration": 0
+          "$type": "RPG.GameCore.AdvEntityStopLookAt",
+          "SourceType": {
+            "$type": "RPG.GameCore.TargetFetchAdvLocalPlayer"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.CharacterTriggerAnimState",
+          "CharacterUniqueName": {
+            "Value": "LocalPlayer"
+          },
+          "ForceStart": false,
+          "AnimStateName": "StandBy",
+          "NormalizedTransitionDuration": 0.01,
+          "NormalizedTimeWait": 0.01
         },
         {
           "$type": "RPG.GameCore.ReleaseCharacter",

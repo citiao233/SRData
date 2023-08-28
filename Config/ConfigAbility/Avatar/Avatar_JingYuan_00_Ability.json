@@ -1868,7 +1868,67 @@
             }
           }
         },
-        "MAvatar_JingYuan_00_ListenFlag": {}
+        "MAvatar_JingYuan_00_ListenFlag": {},
+        "MAvatar_JingYuan_00_SkillTree02": {
+          "EnterBattlePriority": "CharacterBuff",
+          "_CallbackList": {
+            "OnEnterBattle": {
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.BySkillPointActivated",
+                        "PointTriggerKey": {
+                          "Hash": 1455742904
+                        }
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCompareWaveCount",
+                        "CompareType": "Equal",
+                        "CompareValue": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 1
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.ModifySPNew",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "AddValue": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAJ",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            1652764870
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.TriggerEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_MAZ_RecoverSP.prefab"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
       },
       "Name": "Avatar_JingYuan_00_PassiveSkill01",
       "TargetInfo": {
@@ -1882,6 +1942,14 @@
             "Alias": "Caster"
           },
           "ModifierName": "MAvatar_JingYuan_00_ListenFlag"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "MAvatar_JingYuan_00_SkillTree02"
         },
         {
           "$type": "RPG.GameCore.AddModifier",
@@ -1910,42 +1978,6 @@
               ]
             }
           }
-        },
-        {
-          "$type": "RPG.GameCore.PredicateTaskList",
-          "Predicate": {
-            "$type": "RPG.GameCore.BySkillPointActivated",
-            "PointTriggerKey": {
-              "Hash": 1455742904
-            }
-          },
-          "SuccessTaskList": [
-            {
-              "$type": "RPG.GameCore.ModifySPNew",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "Caster"
-              },
-              "AddValue": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQAJ",
-                  "FixedValues": [],
-                  "DynamicHashes": [
-                    1652764870
-                  ]
-                }
-              }
-            },
-            {
-              "$type": "RPG.GameCore.TriggerEffect",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "Caster"
-              },
-              "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_MAZ_RecoverSP.prefab"
-            }
-          ]
         },
         {
           "$type": "RPG.GameCore.SetEnergyBarState",

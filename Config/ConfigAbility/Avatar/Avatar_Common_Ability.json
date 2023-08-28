@@ -295,6 +295,9 @@
   ],
   "GlobalModifiers": {
     "TriggerStanceCountDown_Test": {
+      "BehaviorFlagList": [
+        "KeepOnDeathrattle"
+      ],
       "_CallbackList": {
         "OnTriggerBreak": {
           "CallbackConfig": [
@@ -309,15 +312,6 @@
               "UnscaledDuration": 0.16
             },
             {
-              "$type": "RPG.GameCore.SetDynamicValueByProperty",
-              "DynamicKey": "TargetStance",
-              "ReadTargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ParamEntity"
-              },
-              "Value": "MaxStance"
-            },
-            {
               "$type": "RPG.GameCore.PredicateTaskList",
               "Predicate": {
                 "$type": "RPG.GameCore.ByCharacterDamageType",
@@ -329,109 +323,28 @@
               },
               "SuccessTaskList": [
                 {
-                  "$type": "RPG.GameCore.SetDynamicValueByBreakBaseDamage",
-                  "DynamicKey": "CasterBreakBaseDamage",
-                  "ReadTargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "Caster"
-                  }
-                },
-                {
-                  "$type": "RPG.GameCore.AddModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  },
-                  "ModifierName": "MCommon_Element_Bleed",
-                  "Chance": {
-                    "IsDynamic": false,
-                    "FixedValue": {
-                      "Value": 1.5000000004656613
-                    }
-                  },
-                  "LifeTime": {
-                    "IsDynamic": false,
-                    "FixedValue": {
-                      "Value": 2
-                    }
-                  },
+                  "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                  "Name": "StanceBreak_Physical",
                   "DynamicValues": {
-                    "MDF_EliteRatio": {
+                    "DitherRangeX": {
                       "IsDynamic": false,
                       "FixedValue": {
-                        "Value": 0.07000000006519258
+                        "Value": 0
                       }
                     },
-                    "MDF_CommonRatio": {
+                    "DitherRangeY": {
                       "IsDynamic": false,
                       "FixedValue": {
-                        "Value": 0.1600000001490116
+                        "Value": 0
                       }
                     },
-                    "MDF_DamageMax": {
-                      "IsDynamic": true,
-                      "PostfixExpr": {
-                        "OpCodes": "AQAAAAQAAAEBAQIFAgQAAQUJ",
-                        "FixedValues": [
-                          {
-                            "Value": 2
-                          },
-                          {
-                            "Value": 4
-                          }
-                        ],
-                        "DynamicHashes": [
-                          -2054634397,
-                          -1293338785,
-                          -276098552
-                        ]
+                    "UIMessageHeight": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
                       }
                     }
                   }
-                },
-                {
-                  "$type": "RPG.GameCore.DamageByAttackProperty",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  },
-                  "AttackProperty": {
-                    "FormulaType": "ByBreakDamage",
-                    "AttackType": "ElementDamage",
-                    "BreakDamagePercentage": {
-                      "IsDynamic": true,
-                      "PostfixExpr": {
-                        "OpCodes": "AAAAAAEAAQEFAgQAAQUJ",
-                        "FixedValues": [
-                          {
-                            "Value": 2
-                          },
-                          {
-                            "Value": 4
-                          }
-                        ],
-                        "DynamicHashes": [
-                          -1293338785,
-                          -276098552
-                        ]
-                      }
-                    },
-                    "FinalFormulaType": "ByPureDamage"
-                  },
-                  "CanTriggerLastKill": true,
-                  "DisplayData": {
-                    "DitherRangeX": 0,
-                    "DitherRangeY": 0,
-                    "AttachPoint": "SelectRoot"
-                  }
-                },
-                {
-                  "$type": "RPG.GameCore.TriggerEffect",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  },
-                  "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_OuterSkin_Common_Physical.prefab"
                 }
               ]
             },
@@ -447,80 +360,28 @@
               },
               "SuccessTaskList": [
                 {
-                  "$type": "RPG.GameCore.AddModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  },
-                  "ModifierName": "MCommon_Element_Frozen",
-                  "Chance": {
-                    "IsDynamic": false,
-                    "FixedValue": {
-                      "Value": 1.5000000004656613
-                    }
-                  },
-                  "LifeTime": {
-                    "IsDynamic": false,
-                    "FixedValue": {
-                      "Value": 1
-                    }
-                  },
+                  "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                  "Name": "StanceBreak_Ice",
                   "DynamicValues": {
-                    "MDF_DamagePercentage": {
+                    "DitherRangeX": {
                       "IsDynamic": false,
                       "FixedValue": {
-                        "Value": 1
+                        "Value": 0
+                      }
+                    },
+                    "DitherRangeY": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    },
+                    "UIMessageHeight": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
                       }
                     }
                   }
-                },
-                {
-                  "$type": "RPG.GameCore.DamageByAttackProperty",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  },
-                  "AttackProperty": {
-                    "DamageType": "Ice",
-                    "FormulaType": "ByBreakDamage",
-                    "AttackType": "ElementDamage",
-                    "BreakDamagePercentage": {
-                      "IsDynamic": true,
-                      "PostfixExpr": {
-                        "OpCodes": "AAAAAQEAAQEFAgQAAgUJ",
-                        "FixedValues": [
-                          {
-                            "Value": 1
-                          },
-                          {
-                            "Value": 2
-                          },
-                          {
-                            "Value": 4
-                          }
-                        ],
-                        "DynamicHashes": [
-                          -1293338785,
-                          -276098552
-                        ]
-                      }
-                    },
-                    "FinalFormulaType": "ByPureDamage"
-                  },
-                  "CanTriggerLastKill": true,
-                  "DisplayData": {
-                    "DitherRangeX": 0,
-                    "DitherRangeY": 0,
-                    "AttachPoint": "SelectRoot"
-                  }
-                },
-                {
-                  "$type": "RPG.GameCore.TriggerEffect",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  },
-                  "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_OuterSkin_Common_Ice.prefab"
                 }
               ]
             },
@@ -536,77 +397,28 @@
               },
               "SuccessTaskList": [
                 {
-                  "$type": "RPG.GameCore.AddModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  },
-                  "ModifierName": "MCommon_Element_Burn",
-                  "Chance": {
-                    "IsDynamic": false,
-                    "FixedValue": {
-                      "Value": 1.5000000004656613
-                    }
-                  },
-                  "LifeTime": {
-                    "IsDynamic": false,
-                    "FixedValue": {
-                      "Value": 2
-                    }
-                  },
+                  "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                  "Name": "StanceBreak_Fire",
                   "DynamicValues": {
-                    "MDF_DamagePercentage": {
+                    "DitherRangeX": {
                       "IsDynamic": false,
                       "FixedValue": {
-                        "Value": 1
+                        "Value": 0
+                      }
+                    },
+                    "DitherRangeY": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    },
+                    "UIMessageHeight": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
                       }
                     }
                   }
-                },
-                {
-                  "$type": "RPG.GameCore.DamageByAttackProperty",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  },
-                  "AttackProperty": {
-                    "DamageType": "Fire",
-                    "FormulaType": "ByBreakDamage",
-                    "AttackType": "ElementDamage",
-                    "BreakDamagePercentage": {
-                      "IsDynamic": true,
-                      "PostfixExpr": {
-                        "OpCodes": "AAAAAAEAAQEFAgQAAQUJ",
-                        "FixedValues": [
-                          {
-                            "Value": 2
-                          },
-                          {
-                            "Value": 4
-                          }
-                        ],
-                        "DynamicHashes": [
-                          -1293338785,
-                          -276098552
-                        ]
-                      }
-                    },
-                    "FinalFormulaType": "ByPureDamage"
-                  },
-                  "CanTriggerLastKill": true,
-                  "DisplayData": {
-                    "DitherRangeX": 0,
-                    "DitherRangeY": 0,
-                    "AttachPoint": "SelectRoot"
-                  }
-                },
-                {
-                  "$type": "RPG.GameCore.TriggerEffect",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  },
-                  "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_OuterSkin_Common_Fire.prefab"
                 }
               ]
             },
@@ -622,130 +434,28 @@
               },
               "SuccessTaskList": [
                 {
-                  "$type": "RPG.GameCore.PredicateTaskList",
-                  "Predicate": {
-                    "$type": "RPG.GameCore.ByCompareMonsterRank",
-                    "TargetType": {
-                      "$type": "RPG.GameCore.TargetAlias",
-                      "Alias": "ParamEntity"
-                    },
-                    "CompareType": "GreaterEqual",
-                    "CompareValue": 3
-                  },
-                  "SuccessTaskList": [
-                    {
-                      "$type": "RPG.GameCore.AddModifier",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "ParamEntity"
-                      },
-                      "ModifierName": "MCommon_Element_Poison",
-                      "Chance": {
-                        "IsDynamic": false,
-                        "FixedValue": {
-                          "Value": 1.5000000004656613
-                        }
-                      },
-                      "LifeTime": {
-                        "IsDynamic": false,
-                        "FixedValue": {
-                          "Value": 2
-                        }
-                      },
-                      "LayerAddWhenStack": {
-                        "IsDynamic": false,
-                        "FixedValue": {
-                          "Value": 3
-                        }
-                      },
-                      "DynamicValues": {
-                        "MDF_DamagePercentage": {
-                          "IsDynamic": false,
-                          "FixedValue": {
-                            "Value": 1
-                          }
-                        }
-                      }
-                    }
-                  ],
-                  "FailedTaskList": [
-                    {
-                      "$type": "RPG.GameCore.AddModifier",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "ParamEntity"
-                      },
-                      "ModifierName": "MCommon_Element_Poison",
-                      "Chance": {
-                        "IsDynamic": false,
-                        "FixedValue": {
-                          "Value": 1.5000000004656613
-                        }
-                      },
-                      "LifeTime": {
-                        "IsDynamic": false,
-                        "FixedValue": {
-                          "Value": 2
-                        }
-                      },
-                      "DynamicValues": {
-                        "MDF_DamagePercentage": {
-                          "IsDynamic": false,
-                          "FixedValue": {
-                            "Value": 1
-                          }
-                        }
-                      }
-                    }
-                  ]
-                },
-                {
-                  "$type": "RPG.GameCore.DamageByAttackProperty",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  },
-                  "AttackProperty": {
-                    "DamageType": "Wind",
-                    "FormulaType": "ByBreakDamage",
-                    "AttackType": "ElementDamage",
-                    "BreakDamagePercentage": {
-                      "IsDynamic": true,
-                      "PostfixExpr": {
-                        "OpCodes": "AAAAAQEAAQEFAgQAAgUJ",
-                        "FixedValues": [
-                          {
-                            "Value": 1.5000000004656613
-                          },
-                          {
-                            "Value": 2
-                          },
-                          {
-                            "Value": 4
-                          }
-                        ],
-                        "DynamicHashes": [
-                          -1293338785,
-                          -276098552
-                        ]
+                  "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                  "Name": "StanceBreak_Wind",
+                  "DynamicValues": {
+                    "DitherRangeX": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
                       }
                     },
-                    "FinalFormulaType": "ByPureDamage"
-                  },
-                  "CanTriggerLastKill": true,
-                  "DisplayData": {
-                    "DitherRangeX": 0,
-                    "DitherRangeY": 0,
-                    "AttachPoint": "SelectRoot"
+                    "DitherRangeY": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    },
+                    "UIMessageHeight": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    }
                   }
-                },
-                {
-                  "$type": "RPG.GameCore.TriggerEffect",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  },
-                  "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_OuterSkin_Common_Wind.prefab"
                 }
               ]
             },
@@ -761,80 +471,28 @@
               },
               "SuccessTaskList": [
                 {
-                  "$type": "RPG.GameCore.AddModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  },
-                  "ModifierName": "MCommon_Element_Electric",
-                  "Chance": {
-                    "IsDynamic": false,
-                    "FixedValue": {
-                      "Value": 1.5000000004656613
-                    }
-                  },
-                  "LifeTime": {
-                    "IsDynamic": false,
-                    "FixedValue": {
-                      "Value": 2
-                    }
-                  },
+                  "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                  "Name": "StanceBreak_Thunder",
                   "DynamicValues": {
-                    "MDF_DamagePercentage": {
+                    "DitherRangeX": {
                       "IsDynamic": false,
                       "FixedValue": {
-                        "Value": 2
+                        "Value": 0
+                      }
+                    },
+                    "DitherRangeY": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    },
+                    "UIMessageHeight": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
                       }
                     }
                   }
-                },
-                {
-                  "$type": "RPG.GameCore.DamageByAttackProperty",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  },
-                  "AttackProperty": {
-                    "DamageType": "Thunder",
-                    "FormulaType": "ByBreakDamage",
-                    "AttackType": "ElementDamage",
-                    "BreakDamagePercentage": {
-                      "IsDynamic": true,
-                      "PostfixExpr": {
-                        "OpCodes": "AAAAAQEAAQEFAgQAAgUJ",
-                        "FixedValues": [
-                          {
-                            "Value": 1
-                          },
-                          {
-                            "Value": 2
-                          },
-                          {
-                            "Value": 4
-                          }
-                        ],
-                        "DynamicHashes": [
-                          -1293338785,
-                          -276098552
-                        ]
-                      }
-                    },
-                    "FinalFormulaType": "ByPureDamage"
-                  },
-                  "CanTriggerLastKill": true,
-                  "DisplayData": {
-                    "DitherRangeX": 0,
-                    "DitherRangeY": 0,
-                    "AttachPoint": "SelectRoot"
-                  }
-                },
-                {
-                  "$type": "RPG.GameCore.TriggerEffect",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  },
-                  "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_OuterSkin_Common_Thunder.prefab"
                 }
               ]
             },
@@ -850,86 +508,28 @@
               },
               "SuccessTaskList": [
                 {
-                  "$type": "RPG.GameCore.AddModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  },
-                  "ModifierName": "MCommon_Element_Confine",
-                  "Chance": {
-                    "IsDynamic": false,
-                    "FixedValue": {
-                      "Value": 1.5000000004656613
-                    }
-                  },
-                  "LifeTime": {
-                    "IsDynamic": false,
-                    "FixedValue": {
-                      "Value": 1
-                    }
-                  },
+                  "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                  "Name": "StanceBreak_Imaginary",
                   "DynamicValues": {
-                    "MDF_ActionDelayRatio": {
+                    "DitherRangeX": {
                       "IsDynamic": false,
                       "FixedValue": {
-                        "Value": 0.3000000002793968
+                        "Value": 0
                       }
                     },
-                    "MDF_SpeedDownRatio": {
+                    "DitherRangeY": {
                       "IsDynamic": false,
                       "FixedValue": {
-                        "Value": 0.10000000009313226
+                        "Value": 0
+                      }
+                    },
+                    "UIMessageHeight": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
                       }
                     }
                   }
-                },
-                {
-                  "$type": "RPG.GameCore.DamageByAttackProperty",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  },
-                  "AttackProperty": {
-                    "DamageType": "Imaginary",
-                    "FormulaType": "ByBreakDamage",
-                    "AttackType": "ElementDamage",
-                    "BreakDamagePercentage": {
-                      "IsDynamic": true,
-                      "PostfixExpr": {
-                        "OpCodes": "AAAAAQEAAQEFAgQAAgUJ",
-                        "FixedValues": [
-                          {
-                            "Value": 0.5000000004656613
-                          },
-                          {
-                            "Value": 2
-                          },
-                          {
-                            "Value": 4
-                          }
-                        ],
-                        "DynamicHashes": [
-                          -1293338785,
-                          -276098552
-                        ]
-                      }
-                    },
-                    "FinalFormulaType": "ByPureDamage"
-                  },
-                  "CanTriggerLastKill": true,
-                  "DisplayData": {
-                    "DitherRangeX": 0,
-                    "DitherRangeY": 0,
-                    "AttachPoint": "SelectRoot"
-                  }
-                },
-                {
-                  "$type": "RPG.GameCore.TriggerEffect",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  },
-                  "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_OuterSkin_Common_Imaginary.prefab"
                 }
               ]
             },
@@ -945,101 +545,28 @@
               },
               "SuccessTaskList": [
                 {
-                  "$type": "RPG.GameCore.AddModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  },
-                  "ModifierName": "MCommon_Element_Entangle",
-                  "Chance": {
-                    "IsDynamic": false,
-                    "FixedValue": {
-                      "Value": 1.5000000004656613
-                    }
-                  },
-                  "LifeTime": {
-                    "IsDynamic": false,
-                    "FixedValue": {
-                      "Value": 1
-                    }
-                  },
+                  "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                  "Name": "StanceBreak_Quantum",
                   "DynamicValues": {
-                    "MDF_ActionDelayRatio": {
+                    "DitherRangeX": {
                       "IsDynamic": false,
                       "FixedValue": {
-                        "Value": 0.20000000018626451
+                        "Value": 0
                       }
                     },
-                    "MDF_DamagePercentage": {
-                      "IsDynamic": true,
-                      "PostfixExpr": {
-                        "OpCodes": "AAAAAQEAAQEFAgQAAgUJ",
-                        "FixedValues": [
-                          {
-                            "Value": 0.6000000005587935
-                          },
-                          {
-                            "Value": 2
-                          },
-                          {
-                            "Value": 4
-                          }
-                        ],
-                        "DynamicHashes": [
-                          -1293338785,
-                          -276098552
-                        ]
+                    "DitherRangeY": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    },
+                    "UIMessageHeight": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
                       }
                     }
                   }
-                },
-                {
-                  "$type": "RPG.GameCore.DamageByAttackProperty",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  },
-                  "AttackProperty": {
-                    "DamageType": "Quantum",
-                    "FormulaType": "ByBreakDamage",
-                    "AttackType": "ElementDamage",
-                    "BreakDamagePercentage": {
-                      "IsDynamic": true,
-                      "PostfixExpr": {
-                        "OpCodes": "AAAAAQEAAQEFAgQAAgUJ",
-                        "FixedValues": [
-                          {
-                            "Value": 0.5000000004656613
-                          },
-                          {
-                            "Value": 2
-                          },
-                          {
-                            "Value": 4
-                          }
-                        ],
-                        "DynamicHashes": [
-                          -1293338785,
-                          -276098552
-                        ]
-                      }
-                    },
-                    "FinalFormulaType": "ByPureDamage"
-                  },
-                  "CanTriggerLastKill": true,
-                  "DisplayData": {
-                    "DitherRangeX": 0,
-                    "DitherRangeY": 0,
-                    "AttachPoint": "SelectRoot"
-                  }
-                },
-                {
-                  "$type": "RPG.GameCore.TriggerEffect",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  },
-                  "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_OuterSkin_Common_Quantum.prefab"
                 }
               ]
             }

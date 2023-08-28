@@ -138,6 +138,33 @@
     },
     {
       "Modifiers": {
+        "MAvatar_RogueBattleevent124_LevelUp4": {
+          "_CallbackList": {
+            "OnStack": {
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.StackProperty",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "Property": "SpeedDelta",
+                  "PropertyValue": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAJ",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        -978539967
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "Stacking": "Replace"
+        },
         "MAvatar_RogueBattleevent124_LevelUp1_1": {
           "_CallbackList": {
             "OnStack": {
@@ -513,7 +540,7 @@
                     ]
                   }
                 },
-                "AttackType": "Insert",
+                "AttackType": "Level",
                 "HitAnimation": "Hit_H",
                 "HitEffect": "Effects/Eff_Prefab/Eff_BattleEvent/Eff_Rogue_Hunting/Eff_BattleEvent_Rogue_Hunting_02_Hit.prefab"
               }
@@ -590,7 +617,7 @@
                     ]
                   }
                 },
-                "AttackType": "Insert",
+                "AttackType": "Level",
                 "HitAnimation": "Hit_H",
                 "HitEffect": "Effects/Eff_Prefab/Eff_BattleEvent/Eff_Rogue_Hunting/Eff_BattleEvent_Rogue_Hunting_02_Hit.prefab"
               }
@@ -662,6 +689,55 @@
                   }
                 }
               ]
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByIsContainModifier",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "LevelEntity"
+            },
+            "ModifierName": "StageAbility_612424_Modifier"
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              },
+              "ModifierName": "MAvatar_RogueBattleevent124_LevelUp4",
+              "LifeTime": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAJ",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    1750343388
+                  ]
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCreatedBattleEventEntityList"
+              },
+              "ModifierName": "MAvatar_RogueBattleevent124_LevelUp4",
+              "LifeTime": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAJ",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    1750343388
+                  ]
+                }
+              }
             }
           ]
         },
@@ -938,6 +1014,45 @@
     },
     {
       "Modifiers": {
+        "MAvatar_RogueBattleevent124_LevelUp5": {
+          "_CallbackList": {
+            "OnTriggerDeath": {
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByIsContainModifier",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "LevelEntity"
+                    },
+                    "ModifierName": "StageAbility_612425_Modifier"
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.HealHP",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AllLightTeam"
+                      },
+                      "FormulaType": "HealByTargetMaxHP",
+                      "HealPercentage": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAJ",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            567340998
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        },
         "MAvatar_RogueBattleevent124_StatusProbability": {
           "_CallbackList": {
             "OnStack": {
@@ -1527,6 +1642,14 @@
             "Alias": "Caster"
           },
           "ModifierName": "FirstBattle_Charge"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "MAvatar_RogueBattleevent124_LevelUp5"
         }
       ]
     }

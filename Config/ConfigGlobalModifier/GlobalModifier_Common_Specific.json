@@ -2115,6 +2115,13 @@
                   "AttachPoint": "SelectRoot"
                 }
               ]
+            },
+            {
+              "$type": "RPG.GameCore.ModifierOverrideOnHitEffect",
+              "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Buff_Common_Freeze_Hit.prefab",
+              "ModifierOverrideOnHitEffectPriority": "ModifyOthers",
+              "HitEffectStacking": "Multiple",
+              "KeepHitEffect": true
             }
           ]
         },
@@ -2293,18 +2300,6 @@
                   }
                 }
               ]
-            }
-          ]
-        },
-        "OnAfterBeingHit": {
-          "CallbackConfig": [
-            {
-              "$type": "RPG.GameCore.TriggerEffect",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Buff_Common_Freeze_Hit.prefab"
             }
           ]
         },
@@ -3298,7 +3293,7 @@
             }
           ]
         },
-        "OnAfterCharmAction": {
+        "OnActionEnd": {
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.RemoveModifier",
@@ -3308,13 +3303,6 @@
               },
               "ModifierName": "MCommon_MindControl_Target"
             },
-            {
-              "$type": "RPG.GameCore.ResetTeammateAttackPerform"
-            }
-          ]
-        },
-        "OnActionEnd": {
-          "CallbackConfig": [
             {
               "$type": "RPG.GameCore.RemoveModifier",
               "TargetType": {
@@ -3331,6 +3319,9 @@
               },
               "DynamicKey": "PursuitCheck",
               "ContextScope": "TargetEntity"
+            },
+            {
+              "$type": "RPG.GameCore.ResetTeammateAttackPerform"
             }
           ]
         },
@@ -3398,6 +3389,21 @@
                   }
                 }
               }
+            }
+          ]
+        },
+        "OnListenInsertAbilityStart": {
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.RemoveModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              },
+              "ModifierName": "MCommon_MindControl_Target"
+            },
+            {
+              "$type": "RPG.GameCore.ResetTeammateAttackPerform"
             }
           ]
         }
@@ -4521,6 +4527,13 @@
                   "AttachPoint": "SelectRoot"
                 }
               ]
+            },
+            {
+              "$type": "RPG.GameCore.ModifierOverrideOnHitEffect",
+              "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Buff_Common_Freeze_Hit.prefab",
+              "ModifierOverrideOnHitEffectPriority": "ModifyOthers",
+              "HitEffectStacking": "Multiple",
+              "KeepHitEffect": true
             }
           ]
         },
@@ -4667,19 +4680,6 @@
                 }
               },
               "ModifyFunction": "Set"
-            }
-          ]
-        },
-        "OnAfterBeingHit": {
-          "CallbackConfig": [
-            {
-              "$type": "RPG.GameCore.TriggerEffect",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Buff_Common_Freeze_Hit.prefab",
-              "AttachPoint": "SelectRoot"
             }
           ]
         },

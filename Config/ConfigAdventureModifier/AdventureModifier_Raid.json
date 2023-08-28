@@ -180,6 +180,89 @@
     "ADV_StageAbility_2013115": {
       "OnStack": [],
       "Count": 999
+    },
+    "ADV_StageAbility_44201": {
+      "BehaviorFlagList": [
+        "Sneak"
+      ],
+      "OnCreate": [
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_InvisibleMonster_hint.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_InvisibleMonster_DepthMask.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_InvisibleMonster_Overlay.prefab"
+        }
+      ],
+      "OnBeforeBattle": [
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.AdventureByIsBattlePostureType",
+            "PostureType": "Bad"
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.AddMazeBuff",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "ID": 2420102,
+              "Count": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "ADV_StageAbility_44201_RaidTarget": {
+      "OnBeforeBattle": [
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.AdventureByIsBattlePostureType",
+            "PostureType": "Bad"
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.UpdateTreasureChallengeProgress",
+              "RaidTargetID": 442010102,
+              "IsIncrease": true,
+              "DeltaValue": 1
+            }
+          ]
+        }
+      ]
+    },
+    "ADV_StageAbility_44203": {
+      "Count": 1
+    },
+    "ADV_StageAbility_44204": {
+      "BehaviorFlagList": [
+        "Stealth"
+      ]
     }
   }
 }

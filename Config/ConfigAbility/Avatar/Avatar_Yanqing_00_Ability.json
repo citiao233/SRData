@@ -1568,17 +1568,6 @@
       },
       "OnStart": [
         {
-          "$type": "RPG.GameCore.SetTeamRootOffset",
-          "Team": "TeamDark",
-          "Reset": true
-        },
-        {
-          "$type": "RPG.GameCore.SetTeamFormation",
-          "Team": "TeamDark",
-          "FormationType": "DarkTeamNormal",
-          "RemoveDying": true
-        },
-        {
           "$type": "RPG.GameCore.ShowBonusUIEffect",
           "UIPrefabPath": "UI/Battle/SpecialAction/SpecialAction_1209.prefab",
           "TitleTextID": {
@@ -2294,7 +2283,7 @@
                     "$type": "RPG.GameCore.ByContainBehaviorFlag",
                     "TargetType": {
                       "$type": "RPG.GameCore.TargetAlias",
-                      "Alias": "DamageDefenderEntity"
+                      "Alias": "AttackTargetList"
                     },
                     "Flag": "STAT_CTRL_Frozen"
                   },
@@ -2303,7 +2292,7 @@
                       "$type": "RPG.GameCore.DamageByAttackProperty",
                       "TargetType": {
                         "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "DamageDefenderEntity"
+                        "Alias": "AttackTargetList"
                       },
                       "AttackProperty": {
                         "DamageType": "Ice",
@@ -2628,6 +2617,34 @@
             }
           ]
         },
+        "OnBeforeBeingHitAll": {
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValue",
+              "DynamicKey": "MDF_isBeingHit",
+              "Value": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1
+                }
+              }
+            }
+          ]
+        },
+        "OnAfterBeingHitAll": {
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValue",
+              "DynamicKey": "MDF_isBeingHit",
+              "Value": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0
+                }
+              }
+            }
+          ]
+        },
         "OnStack": {
           "CallbackConfig": [
             {
@@ -2866,16 +2883,32 @@
               "SuccessTaskList": [],
               "FailedTaskList": [
                 {
-                  "$type": "RPG.GameCore.SetEnergyBarState",
-                  "CurrentState": "Normal"
-                },
-                {
-                  "$type": "RPG.GameCore.RemoveModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "Caster"
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "DynamicKey": "MDF_isBeingHit",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 1
+                      }
+                    }
                   },
-                  "ModifierName": "MAvatar_Yanqing_00_FrozenMark"
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetEnergyBarState",
+                      "CurrentState": "Normal"
+                    },
+                    {
+                      "$type": "RPG.GameCore.RemoveModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "ModifierName": "MAvatar_Yanqing_00_FrozenMark"
+                    }
+                  ]
                 }
               ]
             }
@@ -3013,7 +3046,8 @@
           "-567077291": {},
           "-1809550779": {},
           "-1510088561": {},
-          "697711987": {}
+          "697711987": {},
+          "-142628828": {}
         }
       }
     },

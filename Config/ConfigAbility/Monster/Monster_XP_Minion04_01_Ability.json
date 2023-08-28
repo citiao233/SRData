@@ -5,7 +5,8 @@
       "TargetInfo": {
         "TargetType": "Caster"
       },
-      "OnAdd": []
+      "OnAdd": [],
+      "OnStart": []
     },
     {
       "Name": "Monster_XP_Minion04_01_Skill01_Phase01",
@@ -333,6 +334,9 @@
   ],
   "GlobalModifiers": {
     "MMonster_XP_Minion04_01_EscapingCharge01": {
+      "BehaviorFlagList": [
+        "KeepOnDeathrattle"
+      ],
       "_CallbackList": {
         "OnCreate": {
           "CallbackConfig": [
@@ -365,6 +369,18 @@
         "OnDestroy": {
           "CallbackConfig": [
             {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_XP_Minion04_01/Eff_Monster_XP_Minion04_01_Skill01_Loop.prefab"
+            }
+          ]
+        },
+        "OnBeingBreak": {
+          "CallbackConfig": [
+            {
               "$type": "RPG.GameCore.CharacterChangePhase",
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
@@ -381,18 +397,6 @@
               }
             },
             {
-              "$type": "RPG.GameCore.RemoveEffect",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_XP_Minion04_01/Eff_Monster_XP_Minion04_01_Skill01_Loop.prefab"
-            }
-          ]
-        },
-        "OnBeingBreak": {
-          "CallbackConfig": [
-            {
               "$type": "RPG.GameCore.RemoveSelfModifier"
             }
           ]
@@ -401,6 +405,7 @@
     },
     "MMonster_XP_Minion04_01_EscapingCharge02": {
       "BehaviorFlagList": [
+        "KeepOnDeathrattle",
         "MuteHitFly",
         "Endurance"
       ],

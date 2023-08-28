@@ -2191,17 +2191,12 @@
       }
     },
     "MAvatar_Silwolf_00_Normal_Bug1": {
+      "BehaviorFlagList": [
+        "STAT_AttackDown"
+      ],
       "_CallbackList": {
         "OnStack": {
           "CallbackConfig": [
-            {
-              "$type": "RPG.GameCore.TriggerEffect",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Debuff_Common_AttackDown.prefab"
-            },
             {
               "$type": "RPG.GameCore.StackProperty",
               "TargetType": {
@@ -2799,6 +2794,47 @@
         "Values": {
           "2128130574": {}
         }
+      }
+    },
+    "WMAvatar_Geji_00_BattleEvent": {
+      "LifeStepMoment": "ModifierPhase1End",
+      "_CallbackList": {
+        "OnPhase1": {
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.TurnInsertAbility",
+              "AbilityName": "WAvatar_Geji_00_Skill03_Insert",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "BattleEventCaster"
+              },
+              "AbilityTarget": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllDarkTeam"
+              },
+              "AbortBehaviorFlags": [
+                "STAT_CTRL",
+                "DisableAction"
+              ],
+              "InsertAbilityPriority": "AvatarInsertAttackSelf"
+            }
+          ]
+        },
+        "OnPhase2": {
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.ForceKill",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              }
+            }
+          ]
+        }
+      },
+      "Stacking": "Prolong",
+      "DynamicValues": {
+        "Values": {}
       }
     }
   }

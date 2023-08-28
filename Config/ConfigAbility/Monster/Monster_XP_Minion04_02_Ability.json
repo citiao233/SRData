@@ -4004,55 +4004,79 @@
         "OnAfterBeingHitAll": {
           "CallbackConfig": [
             {
-              "$type": "RPG.GameCore.SetDynamicValueByDamageDataProperty",
-              "DynamicKey": "_Damage",
-              "ReadTargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ParamEntity"
-              }
-            },
-            {
-              "$type": "RPG.GameCore.SetDynamicValue",
-              "DynamicKey": "_TotalDamage",
-              "Value": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQABAQIJ",
-                  "FixedValues": [],
-                  "DynamicHashes": [
-                    1964565558,
-                    350439254
-                  ]
-                }
-              }
-            },
-            {
               "$type": "RPG.GameCore.PredicateTaskList",
               "Predicate": {
-                "$type": "RPG.GameCore.ByCompareDynamicValue",
-                "DynamicKey": "_TotalDamage",
-                "CompareType": "Greater",
-                "CompareValue": {
-                  "IsDynamic": false,
-                  "FixedValue": {
-                    "Value": 0
-                  }
-                }
+                "$type": "RPG.GameCore.ByCompareTurnActionEntityTeamType",
+                "Team": "TeamDark",
+                "Inverse": true
               },
               "SuccessTaskList": [
                 {
-                  "$type": "RPG.GameCore.AddModifier",
-                  "TargetType": {
+                  "$type": "RPG.GameCore.SetDynamicValueByDamageDataProperty",
+                  "DynamicKey": "_Damage",
+                  "ReadTargetType": {
                     "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
+                    "Alias": "ParamEntity"
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "DynamicKey": "_TotalDamage",
+                  "Value": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQABAQIJ",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        1964565558,
+                        350439254
+                      ]
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "DynamicKey": "_TotalDamage",
+                    "CompareType": "Greater",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    }
                   },
-                  "ModifierName": "MMonster_XP_Minion04_02_Fengrao_BeHit"
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "ModifierName": "MMonster_XP_Minion04_02_Fengrao_BeHit"
+                    }
+                  ]
                 }
               ]
             }
           ]
         },
         "OnBeforeBeingAttacked": {
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValue",
+              "DynamicKey": "_TotalDamage",
+              "Value": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0
+                }
+              }
+            }
+          ]
+        },
+        "OnListenBeforeAttack": {
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetDynamicValue",
@@ -4075,10 +4099,6 @@
               "$type": "RPG.GameCore.PredicateTaskList",
               "Predicate": {
                 "$type": "RPG.GameCore.ByCheckModifierCallBackName",
-                "TargetType": {
-                  "$type": "RPG.GameCore.TargetAlias",
-                  "Alias": "ParamEntity"
-                },
                 "ModifierName": "MMonster_XP_Minion04_02_Fengrao_Trigger1"
               },
               "SuccessTaskList": [
@@ -4113,10 +4133,6 @@
               "$type": "RPG.GameCore.PredicateTaskList",
               "Predicate": {
                 "$type": "RPG.GameCore.ByCheckModifierCallBackName",
-                "TargetType": {
-                  "$type": "RPG.GameCore.TargetAlias",
-                  "Alias": "ParamEntity"
-                },
                 "ModifierName": "MMonster_XP_Minion04_02_Fengrao_SelfDamage"
               },
               "SuccessTaskList": [
@@ -4200,10 +4216,6 @@
               "$type": "RPG.GameCore.PredicateTaskList",
               "Predicate": {
                 "$type": "RPG.GameCore.ByCheckModifierCallBackName",
-                "TargetType": {
-                  "$type": "RPG.GameCore.TargetAlias",
-                  "Alias": "ParamEntity"
-                },
                 "ModifierName": "MMonster_XP_Minion04_02_Fengrao_Trigger"
               },
               "SuccessTaskList": [

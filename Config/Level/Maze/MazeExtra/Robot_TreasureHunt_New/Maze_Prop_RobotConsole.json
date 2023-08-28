@@ -47,31 +47,6 @@
     {
       "TaskList": [
         {
-          "$type": "RPG.GameCore.WaitCustomString",
-          "CustomString": {
-            "Value": "MazePuzzle_Drone_Up"
-          },
-          "WaitOwnerOnly": true
-        },
-        {
-          "$type": "RPG.GameCore.StartPropInteractMode",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetFetchAdvPropEx"
-          },
-          "Mode": "UsePose01",
-          "UseOverrideData": true
-        },
-        {
-          "$type": "RPG.GameCore.DriveCurvePropGroupObject"
-        },
-        {
-          "$type": "RPG.GameCore.EndPropInteract"
-        }
-      ]
-    },
-    {
-      "TaskList": [
-        {
           "$type": "RPG.GameCore.WaitSecond",
           "WaitTime": 0.4
         },
@@ -106,6 +81,103 @@
               "ProtectTime": 2
             }
           ]
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitCustomString",
+          "CustomString": {
+            "Value": "MazePuzzle_Drone_Up"
+          },
+          "WaitOwnerOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.BlockInputController",
+          "Enable": true,
+          "ActionNameList": []
+        },
+        {
+          "$type": "RPG.GameCore.AdvForceNpcGoBack"
+        },
+        {
+          "$type": "RPG.GameCore.EnableNPCMonsterAI",
+          "GroupMonsterIDs": [],
+          "UniqueNames": []
+        },
+        {
+          "$type": "RPG.GameCore.HideTopPage",
+          "Hide": true
+        },
+        {
+          "$type": "RPG.GameCore.EnableBillboard",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.GlobalShowBillboard"
+        },
+        {
+          "$type": "RPG.GameCore.CaptureLocalPlayer",
+          "CharacterUniqueName": "LocalPlayer"
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": 0.1
+        },
+        {
+          "$type": "RPG.GameCore.CharacterTriggerAnimState",
+          "CharacterUniqueName": {
+            "Value": "LocalPlayer"
+          },
+          "AnimStateName": "UseProp1",
+          "NormalizedTransitionDuration": 0.1
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": 0.75
+        },
+        {
+          "$type": "RPG.GameCore.ReleaseCharacter",
+          "CharacterUniqueName": "LocalPlayer"
+        },
+        {
+          "$type": "RPG.GameCore.BlockInputController",
+          "ActionNameList": []
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": 1
+        },
+        {
+          "$type": "RPG.GameCore.DriveCurvePropGroupObject"
+        },
+        {
+          "$type": "RPG.GameCore.HideTopPage"
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": 0.4
+        },
+        {
+          "$type": "RPG.GameCore.BlockInputController",
+          "ActionNameList": []
+        },
+        {
+          "$type": "RPG.GameCore.EnableNPCMonsterAI",
+          "Enable": true,
+          "GroupMonsterIDs": [],
+          "UniqueNames": []
+        },
+        {
+          "$type": "RPG.GameCore.BlockInputController",
+          "ActionNameList": []
+        },
+        {
+          "$type": "RPG.GameCore.GlobalShowBillboard",
+          "IsShow": true
         }
       ]
     }

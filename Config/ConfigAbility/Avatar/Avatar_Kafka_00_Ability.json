@@ -859,16 +859,16 @@
               "CameraState": "SelectDarkTeamEntity",
               "IsLocalOffset": true,
               "AnchorOffset": {
-                "X": 1.02,
+                "X": 0.6,
                 "Y": -0.16,
-                "Z": -0.84
+                "Z": -0.6
               },
               "AimTargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "AbilityTargetEntity"
               },
               "AimOffset": {
-                "X": -1.05,
+                "X": -1.5,
                 "Y": 1.11,
                 "Z": -2.21
               },
@@ -876,7 +876,7 @@
               "FollowRadius": 1.4,
               "AnchorToAimAngle": 26,
               "Dutch": 4.5,
-              "FOV": 45
+              "FOV": 50
             },
             "BlendConfig": {
               "BlendType": "Custom",
@@ -2174,17 +2174,6 @@
       },
       "OnStart": [
         {
-          "$type": "RPG.GameCore.SetTeamFormation",
-          "Team": "TeamLight",
-          "FormationType": "LightTeamNormal"
-        },
-        {
-          "$type": "RPG.GameCore.SetTeamFormation",
-          "Team": "TeamDark",
-          "FormationType": "DarkTeamNormal",
-          "RemoveDying": true
-        },
-        {
           "$type": "RPG.GameCore.SetEnergyBarState",
           "Active": "True",
           "BarType": 3,
@@ -2910,20 +2899,12 @@
                             }
                           },
                           {
-                            "$type": "RPG.GameCore.ByCompareDynamicValue",
+                            "$type": "RPG.GameCore.ByContainBehaviorFlag",
                             "TargetType": {
                               "$type": "RPG.GameCore.TargetAlias",
                               "Alias": "ParamEntity"
                             },
-                            "DynamicKey": "MDF_HasElectric",
-                            "ContextScope": "TargetEntity",
-                            "CompareType": "Equal",
-                            "CompareValue": {
-                              "IsDynamic": false,
-                              "FixedValue": {
-                                "Value": 1
-                              }
-                            }
+                            "Flag": "STAT_DOT_Electric"
                           }
                         ]
                       },
@@ -2946,62 +2927,6 @@
                           }
                         }
                       ]
-                    }
-                  ]
-                }
-              ]
-            },
-            "OnListenCharacterLimbo": {
-              "CallbackConfig": [
-                {
-                  "$type": "RPG.GameCore.PredicateTaskList",
-                  "Predicate": {
-                    "$type": "RPG.GameCore.ByAnd",
-                    "PredicateList": [
-                      {
-                        "$type": "RPG.GameCore.ByTargetTeam",
-                        "TargetType": {
-                          "$type": "RPG.GameCore.TargetAlias",
-                          "Alias": "ParamEntity"
-                        },
-                        "Team": "TeamDark"
-                      },
-                      {
-                        "$type": "RPG.GameCore.ByContainBehaviorFlag",
-                        "TargetType": {
-                          "$type": "RPG.GameCore.TargetAlias",
-                          "Alias": "ParamEntity"
-                        },
-                        "Flag": "STAT_DOT_Electric"
-                      }
-                    ]
-                  },
-                  "SuccessTaskList": [
-                    {
-                      "$type": "RPG.GameCore.DefineDynamicValue",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "ParamEntity"
-                      },
-                      "DynamicKey": "MDF_HasElectric",
-                      "ResetValue": {
-                        "IsDynamic": false,
-                        "FixedValue": {
-                          "Value": 1
-                        }
-                      },
-                      "ContextScope": "TargetEntity"
-                    }
-                  ],
-                  "FailedTaskList": [
-                    {
-                      "$type": "RPG.GameCore.DefineDynamicValue",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "ParamEntity"
-                      },
-                      "DynamicKey": "MDF_HasElectric",
-                      "ContextScope": "TargetEntity"
                     }
                   ]
                 }

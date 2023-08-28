@@ -696,13 +696,13 @@
               "NormalizedTimeStart": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.7050000003073364
+                  "Value": 0.6489999999757856
                 }
               },
               "NormalizedTimeEnd": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.7500000006984919
+                  "Value": 0.7370000001974404
                 }
               }
             }
@@ -752,7 +752,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.6920000005047768
+              "Value": 0.7370000001974404
             }
           }
         }
@@ -2034,35 +2034,80 @@
       ]
     },
     {
+      "Modifiers": {
+        "M_PlayerGirl_SkillTree01": {
+          "EnterBattlePriority": "CharacterBuff",
+          "_CallbackList": {
+            "OnEnterBattle": {
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.BySkillPointActivated",
+                        "PointTriggerKey": {
+                          "Hash": 1455742903
+                        }
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCompareWaveCount",
+                        "CompareType": "Equal",
+                        "CompareValue": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 1
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.ModifySPNew",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "AddValue": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAJ",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            -1134534897
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.TriggerEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_MAZ_RecoverSP.prefab"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      },
       "Name": "Avatar_PlayerGirl_SkillTree01",
       "TargetInfo": {
         "TargetType": "Caster"
       },
       "OnStart": [
         {
-          "$type": "RPG.GameCore.ModifySPNew",
+          "$type": "RPG.GameCore.AddModifier",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "AddValue": {
-            "IsDynamic": true,
-            "PostfixExpr": {
-              "OpCodes": "AQAJ",
-              "FixedValues": [],
-              "DynamicHashes": [
-                -1134534897
-              ]
-            }
-          }
-        },
-        {
-          "$type": "RPG.GameCore.TriggerEffect",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_MAZ_RecoverSP.prefab"
+          "ModifierName": "M_PlayerGirl_SkillTree01"
         }
       ]
     },
@@ -2087,6 +2132,30 @@
     "PlayerGirl_Rank01_Check_Modifier": {
       "_CallbackList": {
         "OnTriggerDeath": {
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.ModifySPNew",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "AddValue": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAJ",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    67442273
+                  ]
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.RemoveSelfModifier"
+            }
+          ]
+        },
+        "OnTriggerDeathrattle": {
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.ModifySPNew",

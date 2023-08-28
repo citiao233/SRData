@@ -2,6 +2,74 @@
   "OnInitSequece": [],
   "OnStartSequece": [
     {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitLevelGraphFinish",
+          "OnFinish": [
+            {
+              "$type": "RPG.GameCore.ShowFuncBtnEffect",
+              "Show": false
+            },
+            {
+              "$type": "RPG.GameCore.ShowFuncBtn",
+              "Show": false,
+              "PuzzleFunc": "SpecialVision",
+              "CDDuration": 7.5,
+              "MissionID": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAJ",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    833656080
+                  ]
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetFetchAdvNpcEx",
+                "FetchType": "SingleNpcByNpcKey",
+                "SingleNpcKey": {
+                  "Custom": true,
+                  "Key": "NPC_Puppy_Key"
+                }
+              },
+              "EffectPath": "Stages/OriginalResPos/InteractiveProp/Common/Common_GameplayProp_SpecialVision/Common_GameplayProp_SpecialVision.prefab",
+              "UniqueEffectName": "SpecialVisionTrigger",
+              "Flags": [],
+              "Unbind": true
+            },
+            {
+              "$type": "RPG.GameCore.TriggerSound",
+              "SoundName": "Ev_sfx_xianzhou_specialvision_off",
+              "EmitterType": "TargetEvaluator",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamEntity"
+              }
+            },
+            {
+              "$type": "RPG.GameCore.TriggerSound",
+              "SoundName": "Ev_sfx_xianzhou_specialvision_on_stop",
+              "EmitterType": "TargetEvaluator",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamEntity"
+              }
+            },
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "EffectPath": "Effects/Eff_Prefab/Eff_Scene/Interactive Object/Eff_Common_GameplayProp_SpecialVision_Camera.prefab",
+              "UniqueEffectName": "SpecialVisionCamera",
+              "Flags": []
+            }
+          ]
+        }
+      ]
+    },
+    {
       "IsLoop": true,
       "TaskList": [
         {
@@ -161,6 +229,7 @@
           },
           "EffectPath": "Stages/OriginalResPos/InteractiveProp/Common/Common_GameplayProp_SpecialVision/Common_GameplayProp_SpecialVision.prefab",
           "UniqueEffectName": "SpecialVisionTrigger",
+          "Flags": [],
           "Unbind": true
         },
         {
@@ -184,7 +253,11 @@
         {
           "$type": "RPG.GameCore.TriggerSound",
           "SoundName": "Ev_sfx_xianzhou_specialvision_on",
-          "EmitterType": "LocalPlayer"
+          "EmitterType": "TargetEvaluator",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "LightTeamEntity"
+          }
         },
         {
           "$type": "RPG.GameCore.SetNpcStatus",
@@ -219,12 +292,20 @@
         {
           "$type": "RPG.GameCore.TriggerSound",
           "SoundName": "Ev_sfx_xianzhou_specialvision_off",
-          "EmitterType": "LocalPlayer"
+          "EmitterType": "TargetEvaluator",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "LightTeamEntity"
+          }
         },
         {
           "$type": "RPG.GameCore.TriggerSound",
           "SoundName": "Ev_sfx_xianzhou_specialvision_on_stop",
-          "EmitterType": "LocalPlayer"
+          "EmitterType": "TargetEvaluator",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "LightTeamEntity"
+          }
         },
         {
           "$type": "RPG.GameCore.ByIsTargetValid",
@@ -253,7 +334,8 @@
         {
           "$type": "RPG.GameCore.RemoveEffect",
           "EffectPath": "Effects/Eff_Prefab/Eff_Scene/Interactive Object/Eff_Common_GameplayProp_SpecialVision_Camera.prefab",
-          "UniqueEffectName": "SpecialVisionCamera"
+          "UniqueEffectName": "SpecialVisionCamera",
+          "Flags": []
         }
       ]
     },

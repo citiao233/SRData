@@ -124,16 +124,32 @@
                   1401099083
                 ]
               }
+            },
+            "MDF_ElementDamageTakenUp": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAJ",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  -1327361654
+                ]
+              }
             }
           }
         },
         {
-          "$type": "RPG.GameCore.AddModifier",
+          "$type": "RPG.GameCore.SetEntityVisible",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
-          },
-          "ModifierName": "MWMonster_W3_libido01_00_Skill01_Parasitize_Caster"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.ForceKill",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          }
         },
         {
           "$type": "RPG.GameCore.SetTeamFormation",
@@ -631,9 +647,8 @@
       ]
     },
     "MWMonster_W3_libido01_00_Skill01_Parasitize_Target": {
-      "BehaviorFlagList": [
-        "RemoveWhenCasterDead"
-      ],
+      "BehaviorFlagList": [],
+      "UseSnapshotEntity": true,
       "_CallbackList": {
         "OnCreate": {
           "CallbackConfig": [
@@ -652,6 +667,26 @@
             {
               "$type": "RPG.GameCore.OwnerEntityAddAbility",
               "AbilityName": "WMonster_W3_libido01_00_SkillP01_Insert_ParasitizeTarget_Camera"
+            },
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ModifierName": "MWMonster_W3_libido01_00_Skill01_Parasitize_Target_ElementDamageTakenUp",
+              "DynamicValues": {
+                "MDF_Property": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAJ",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      1928391617
+                    ]
+                  }
+                }
+              }
             }
           ]
         },
@@ -672,34 +707,14 @@
             {
               "$type": "RPG.GameCore.OwnerEntityRemoveAbility",
               "AbilityName": "WMonster_W3_libido01_00_SkillP01_Insert_ParasitizeTarget_Camera"
-            }
-          ]
-        },
-        "OnBeforeBeingHitAll": {
-          "CallbackConfig": [
+            },
             {
-              "$type": "RPG.GameCore.PredicateTaskList",
-              "Predicate": {
-                "$type": "RPG.GameCore.ByAttackType",
-                "AttackTypes": [
-                  "ElementDamage"
-                ]
+              "$type": "RPG.GameCore.RemoveModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
               },
-              "SuccessTaskList": [
-                {
-                  "$type": "RPG.GameCore.ModifyDamageData",
-                  "Defender_AllDamageTypeTakenRatio": {
-                    "IsDynamic": true,
-                    "PostfixExpr": {
-                      "OpCodes": "AQAJ",
-                      "FixedValues": [],
-                      "DynamicHashes": [
-                        -1327361654
-                      ]
-                    }
-                  }
-                }
-              ]
+              "ModifierName": "MWMonster_W3_libido01_00_Skill01_Parasitize_Target_ElementDamageTakenUp"
             }
           ]
         },
@@ -870,7 +885,7 @@
                     }
                   },
                   "DisplayData": {
-                    "UIMessageHeight": 0.8
+                    "AttachPoint": "SelectRoot"
                   }
                 },
                 {
@@ -886,13 +901,58 @@
               ]
             }
           ]
+        },
+        "OnBeingBreak": {
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.RemoveSelfModifier"
+            }
+          ]
         }
       },
       "DynamicValues": {
         "Values": {
           "-2138171419": {},
+          "1928391617": {},
           "1948829673": {},
           "234453622": {}
+        }
+      }
+    },
+    "MWMonster_W3_libido01_00_Skill01_Parasitize_Target_ElementDamageTakenUp": {
+      "_CallbackList": {
+        "OnBeforeBeingHitAll": {
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAttackType",
+                "AttackTypes": [
+                  "ElementDamage"
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.ModifyDamageData",
+                  "Defender_AllDamageTypeTakenRatio": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAJ",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        2095504499
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "DynamicValues": {
+        "Values": {
+          "2095504499": {}
         }
       }
     },

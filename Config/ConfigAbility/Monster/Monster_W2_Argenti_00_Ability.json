@@ -31,16 +31,7 @@
       "TargetInfo": {
         "TargetType": "Caster"
       },
-      "OnStart": [
-        {
-          "$type": "RPG.GameCore.AddModifier",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "ModifierName": "OneMorePerTurn"
-        }
-      ]
+      "OnStart": []
     },
     {
       "Modifiers": {
@@ -264,19 +255,19 @@
               "OffsetTargetDistance": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 1.7000000006519258
+                  "Value": 2.1000000000931323
                 }
               },
               "NormalizedTimeStart": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.20000000018626451
+                  "Value": 0.11699999962002039
                 }
               },
               "NormalizedTimeEnd": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.22299999999813735
+                  "Value": 0.12799999956041574
                 }
               }
             },
@@ -295,7 +286,7 @@
               "NormalizedTimeStart": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.612000000430271
+                  "Value": 0.5930000003427267
                 }
               },
               "NormalizedTimeEnd": {
@@ -326,7 +317,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.05000000004656613
+              "Value": 0.04199999989941716
             }
           }
         },
@@ -339,7 +330,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.20100000011734664
+              "Value": 0.1229999999050051
             }
           }
         },
@@ -350,7 +341,6 @@
             "Alias": "AbilityTargetEntity"
           },
           "AttackProperty": {
-            "DamageType": "Ice",
             "DamagePercentage": {
               "IsDynamic": true,
               "PostfixExpr": {
@@ -369,9 +359,7 @@
             },
             "AttackType": "Normal",
             "HitAnimation": "Hit",
-            "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W1_Gepard_00/Eff_Monster_W1_Gepard_00_Skill01_Hit.prefab",
-            "HitTimeSlowType": "Impact",
-            "HitTimeSlowIntensity": "Middle"
+            "HitTimeSlowType": "Impact"
           },
           "SpecialHitSoundEvent": "Ev_sfx_boss_skill_01_hit_gepard",
           "DisplayData": {
@@ -394,6 +382,16 @@
       },
       "OnStart": [
         {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamLight",
+          "FormationType": "LightTeamNormal",
+          "CustomFormationIgnoreDying": false
+        },
+        {
+          "$type": "RPG.GameCore.LookAt",
+          "TargetType": "AbilityTargetEntity"
+        },
+        {
           "$type": "RPG.GameCore.TriggerAbility",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
@@ -410,10 +408,6 @@
           },
           "AbilityName": "Monster_W2_Argenti_00_Skill02_Camera",
           "IsSkillPerform": true
-        },
-        {
-          "$type": "RPG.GameCore.LookAt",
-          "TargetType": "LightTeamCenter"
         },
         {
           "$type": "RPG.GameCore.MoveToTargetList",
@@ -444,19 +438,19 @@
               "OffsetTargetDistance": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 1.7000000006519258
+                  "Value": 3.5000000004656613
                 }
               },
               "NormalizedTimeStart": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.04599999962374568
+                  "Value": 0.20399999991059303
                 }
               },
               "NormalizedTimeEnd": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.1969999996945262
+                  "Value": 0.27200000011362135
                 }
               }
             },
@@ -475,13 +469,13 @@
               "NormalizedTimeStart": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.5589999998919666
+                  "Value": 0.6580000000540167
                 }
               },
               "NormalizedTimeEnd": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.6840000003576279
+                  "Value": 0.7520000005606562
                 }
               }
             }
@@ -496,8 +490,7 @@
     {
       "Name": "Monster_W2_Argenti_00_Skill02_Phase02",
       "TargetInfo": {
-        "TargetType": "SkillTargetEntityList",
-        "MaxTargetCount": 3
+        "TargetType": "SkillTargetEntityList"
       },
       "OnStart": [
         {
@@ -523,13 +516,9 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.20000000018626451
+              "Value": 0.13000000012107193
             }
           }
-        },
-        {
-          "$type": "RPG.GameCore.LookAt",
-          "TargetType": "AbilityTargetEntity"
         },
         {
           "$type": "RPG.GameCore.WaitAnimState",
@@ -541,7 +530,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.27599999983794987
+              "Value": 0.4150000000372529
             }
           }
         },
@@ -617,15 +606,6 @@
           "$type": "RPG.GameCore.DamagePerformFinish"
         },
         {
-          "$type": "RPG.GameCore.RadialBlurEffect",
-          "Duration": 0.5,
-          "BlurY": 0.4,
-          "BlurRadius": 1,
-          "Iteration": 4,
-          "BlurStart": 0.1,
-          "BlurFeather": 0.3
-        },
-        {
           "$type": "RPG.GameCore.SkillPerformFinish"
         }
       ]
@@ -676,12 +656,6 @@
             "FixedValue": {
               "Value": 1
             }
-          },
-          "NormalizedTimeWait": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0.8500000007916242
-            }
           }
         },
         {
@@ -726,7 +700,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.37000000034458935
+              "Value": 0.3900000003632158
             }
           }
         },
@@ -780,7 +754,7 @@
                         }
                       },
                       "LocationType": "First",
-                      "InitAnimStateName": "StandBy3"
+                      "InitAnimStateName": "Appear"
                     }
                   ],
                   "DelayRatio": {
@@ -808,7 +782,7 @@
                         }
                       },
                       "LocationType": "Last",
-                      "InitAnimStateName": "StandBy3"
+                      "InitAnimStateName": "Appear"
                     }
                   ],
                   "DelayRatio": {
@@ -878,7 +852,7 @@
                             }
                           },
                           "LocationType": "First",
-                          "InitAnimStateName": "StandBy3"
+                          "InitAnimStateName": "Appear"
                         }
                       ],
                       "DelayRatio": {
@@ -906,7 +880,7 @@
                             }
                           },
                           "LocationType": "Last",
-                          "InitAnimStateName": "StandBy3"
+                          "InitAnimStateName": "Appear"
                         }
                       ],
                       "DelayRatio": {
@@ -948,7 +922,7 @@
                             }
                           },
                           "LocationType": "First",
-                          "InitAnimStateName": "StandBy5"
+                          "InitAnimStateName": "Appear"
                         }
                       ],
                       "DelayRatio": {
@@ -976,7 +950,7 @@
                             }
                           },
                           "LocationType": "Last",
-                          "InitAnimStateName": "StandBy5"
+                          "InitAnimStateName": "Appear"
                         }
                       ],
                       "DelayRatio": {
@@ -1048,7 +1022,7 @@
                             }
                           },
                           "LocationType": "First",
-                          "InitAnimStateName": "StandBy3"
+                          "InitAnimStateName": "Appear"
                         }
                       ],
                       "DelayRatio": {
@@ -1076,7 +1050,7 @@
                             }
                           },
                           "LocationType": "Last",
-                          "InitAnimStateName": "StandBy3"
+                          "InitAnimStateName": "Appear"
                         }
                       ],
                       "DelayRatio": {
@@ -1118,7 +1092,7 @@
                             }
                           },
                           "LocationType": "First",
-                          "InitAnimStateName": "StandBy6"
+                          "InitAnimStateName": "Appear"
                         }
                       ],
                       "DelayRatio": {
@@ -1146,7 +1120,7 @@
                             }
                           },
                           "LocationType": "Last",
-                          "InitAnimStateName": "StandBy6"
+                          "InitAnimStateName": "Appear"
                         }
                       ],
                       "DelayRatio": {
@@ -1223,7 +1197,7 @@
         },
         {
           "$type": "RPG.GameCore.TriggerAnimState",
-          "AnimStateName": "Skill06",
+          "AnimStateName": "Skill04",
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
@@ -1234,12 +1208,6 @@
             "IsDynamic": false,
             "FixedValue": {
               "Value": 0.7200000006705523
-            }
-          },
-          "NormalizedTransitionDuration": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0.1500000001396984
             }
           }
         },
@@ -1261,7 +1229,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "AnimStateName": "Skill06",
+          "AnimStateName": "Skill04",
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
@@ -1278,7 +1246,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "AnimStateName": "Skill06",
+          "AnimStateName": "Skill04",
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
@@ -1353,6 +1321,26 @@
       },
       "OnStart": [
         {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamLight",
+          "FormationType": "LightTeamNormal",
+          "CustomFormationIgnoreDying": false
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamDark",
+          "CustomFormationName": "Monster_XP_Elite01_01_Skill03",
+          "CustomCenterTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "LightTeamCenter"
+          },
+          "CustomFormationIgnoreDying": false
+        },
+        {
+          "$type": "RPG.GameCore.LookAt",
+          "TargetType": "LightTeamCenter"
+        },
+        {
           "$type": "RPG.GameCore.ShowBattleUI"
         },
         {
@@ -1422,6 +1410,11 @@
       },
       "OnStart": [
         {
+          "$type": "RPG.GameCore.GlobalMainIntensityEffect",
+          "TargetIntensity": 0.4,
+          "FadeDuration": 0.3
+        },
+        {
           "$type": "RPG.GameCore.WaitAnimState",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
@@ -1469,7 +1462,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.6089999999385327
+              "Value": 0.6000000005587935
             }
           }
         },
@@ -1499,8 +1492,9 @@
             },
             "AttackType": "Normal",
             "HitAnimation": "Hit",
-            "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Mecha02_00/Eff_Monster_W2_Mecha02_00_Skill01_Attack_Hit.prefab",
-            "HitTimeSlowType": "Impact"
+            "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Argenti_00/Eff_Monster_W2_Argenti_00_Skill05_Hit.prefab",
+            "HitTimeSlowType": "Slash",
+            "HitTimeSlowIntensity": "Heavy"
           },
           "DisplayData": {
             "UIMessageHeight": 1
@@ -1545,6 +1539,11 @@
           }
         },
         {
+          "$type": "RPG.GameCore.GlobalMainIntensityEffect",
+          "IsRevert": true,
+          "FadeDuration": 0.5
+        },
+        {
           "$type": "RPG.GameCore.RadialBlurEffect",
           "Active": false
         },
@@ -1558,7 +1557,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.8300000007729977
+              "Value": 0.9900000009220093
             }
           }
         },
@@ -1672,7 +1671,7 @@
                     }
                   },
                   "LocationType": "First",
-                  "InitAnimStateName": "StandBy3"
+                  "InitAnimStateName": "Appear"
                 }
               ],
               "DelayRatio": {
@@ -1700,7 +1699,7 @@
                     }
                   },
                   "LocationType": "Last",
-                  "InitAnimStateName": "StandBy3"
+                  "InitAnimStateName": "Appear"
                 }
               ],
               "DelayRatio": {
@@ -1770,7 +1769,7 @@
                         }
                       },
                       "LocationType": "First",
-                      "InitAnimStateName": "StandBy3"
+                      "InitAnimStateName": "Appear"
                     }
                   ],
                   "DelayRatio": {
@@ -1798,7 +1797,7 @@
                         }
                       },
                       "LocationType": "Last",
-                      "InitAnimStateName": "StandBy3"
+                      "InitAnimStateName": "Appear"
                     }
                   ],
                   "DelayRatio": {
@@ -1840,7 +1839,7 @@
                         }
                       },
                       "LocationType": "First",
-                      "InitAnimStateName": "StandBy5"
+                      "InitAnimStateName": "Appear"
                     }
                   ],
                   "DelayRatio": {
@@ -1868,7 +1867,7 @@
                         }
                       },
                       "LocationType": "Last",
-                      "InitAnimStateName": "StandBy5"
+                      "InitAnimStateName": "Appear"
                     }
                   ],
                   "DelayRatio": {
@@ -1940,7 +1939,7 @@
                         }
                       },
                       "LocationType": "First",
-                      "InitAnimStateName": "StandBy6"
+                      "InitAnimStateName": "Appear"
                     }
                   ],
                   "DelayRatio": {
@@ -1968,7 +1967,7 @@
                         }
                       },
                       "LocationType": "Last",
-                      "InitAnimStateName": "StandBy6"
+                      "InitAnimStateName": "Appear"
                     }
                   ],
                   "DelayRatio": {
@@ -2036,7 +2035,7 @@
         },
         {
           "$type": "RPG.GameCore.TriggerAnimState",
-          "AnimStateName": "Skill05",
+          "AnimStateName": "Skill03",
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
@@ -2080,7 +2079,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "AnimStateName": "Skill05",
+          "AnimStateName": "Skill03",
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
@@ -2115,7 +2114,7 @@
                     }
                   },
                   "LocationType": "First",
-                  "InitAnimStateName": "StandBy3"
+                  "InitAnimStateName": "Appear"
                 }
               ],
               "DelayRatio": {
@@ -2143,7 +2142,7 @@
                     }
                   },
                   "LocationType": "Last",
-                  "InitAnimStateName": "StandBy3"
+                  "InitAnimStateName": "Appear"
                 }
               ],
               "DelayRatio": {
@@ -2213,7 +2212,7 @@
                         }
                       },
                       "LocationType": "First",
-                      "InitAnimStateName": "StandBy3"
+                      "InitAnimStateName": "Appear"
                     }
                   ],
                   "DelayRatio": {
@@ -2241,7 +2240,7 @@
                         }
                       },
                       "LocationType": "Last",
-                      "InitAnimStateName": "StandBy3"
+                      "InitAnimStateName": "Appear"
                     }
                   ],
                   "DelayRatio": {
@@ -2283,7 +2282,7 @@
                         }
                       },
                       "LocationType": "First",
-                      "InitAnimStateName": "StandBy5"
+                      "InitAnimStateName": "Appear"
                     }
                   ],
                   "DelayRatio": {
@@ -2311,7 +2310,7 @@
                         }
                       },
                       "LocationType": "Last",
-                      "InitAnimStateName": "StandBy5"
+                      "InitAnimStateName": "Appear"
                     }
                   ],
                   "DelayRatio": {
@@ -2383,7 +2382,7 @@
                         }
                       },
                       "LocationType": "First",
-                      "InitAnimStateName": "StandBy6"
+                      "InitAnimStateName": "Appear"
                     }
                   ],
                   "DelayRatio": {
@@ -2411,7 +2410,7 @@
                         }
                       },
                       "LocationType": "Last",
-                      "InitAnimStateName": "StandBy6"
+                      "InitAnimStateName": "Appear"
                     }
                   ],
                   "DelayRatio": {
@@ -2440,7 +2439,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "AnimStateName": "Skill05",
+          "AnimStateName": "Skill03",
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
@@ -2572,7 +2571,7 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "ModifierOwnerEntity"
               },
-              "EffectPath": "Characters/WhiteBox/WEffects/WEff_Prefab/WEff_Monster/WEff_Monster_W1_Gepard_00/WEff_Monster_W1_Gepard_00_Skill08_Attack.prefab"
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Argenti_00/Eff_Monster_W2_ArgentiTotem_00_Power.prefab"
             }
           ]
         },
@@ -2584,17 +2583,12 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "ModifierOwnerEntity"
               },
-              "EffectPath": "Characters/WhiteBox/WEffects/WEff_Prefab/WEff_Monster/WEff_Monster_W1_Gepard_00/WEff_Monster_W1_Gepard_00_Skill08_Attack.prefab",
-              "AttachPoint": "Head",
-              "Scale": {
-                "X": 2.5,
-                "Y": 2.5,
-                "Z": 2.5
-              }
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Argenti_00/Eff_Monster_W2_ArgentiTotem_00_Power.prefab"
             }
           ]
         }
       },
+      "Stacking": "Refresh",
       "DynamicValues": {
         "Values": {
           "1733325153": {},

@@ -7,86 +7,19 @@
             "OnBeingBreak": {
               "CallbackConfig": [
                 {
-                  "$type": "RPG.GameCore.PredicateTaskList",
-                  "Predicate": {
-                    "$type": "RPG.GameCore.ByAny",
-                    "PredicateList": [
-                      {
-                        "$type": "RPG.GameCore.ByCompareDynamicValue",
-                        "TargetType": {
-                          "$type": "RPG.GameCore.TargetAlias",
-                          "Alias": "ModifierOwnerEntity"
-                        },
-                        "DynamicKey": "AIFlag",
-                        "ContextScope": "TargetEntity",
-                        "CompareType": "Equal",
-                        "CompareValue": {
-                          "IsDynamic": false,
-                          "FixedValue": {
-                            "Value": 5
-                          }
-                        }
-                      }
-                    ]
+                  "$type": "RPG.GameCore.DefineDynamicValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
                   },
-                  "SuccessTaskList": [
-                    {
-                      "$type": "RPG.GameCore.DefineDynamicValue",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "ModifierOwnerEntity"
-                      },
-                      "DynamicKey": "AIFlag",
-                      "ResetValue": {
-                        "IsDynamic": false,
-                        "FixedValue": {
-                          "Value": 4
-                        }
-                      },
-                      "ContextScope": "TargetEntity"
+                  "DynamicKey": "AIFlag",
+                  "ResetValue": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 3
                     }
-                  ]
-                },
-                {
-                  "$type": "RPG.GameCore.PredicateTaskList",
-                  "Predicate": {
-                    "$type": "RPG.GameCore.ByAny",
-                    "PredicateList": [
-                      {
-                        "$type": "RPG.GameCore.ByCompareDynamicValue",
-                        "TargetType": {
-                          "$type": "RPG.GameCore.TargetAlias",
-                          "Alias": "ModifierOwnerEntity"
-                        },
-                        "DynamicKey": "SpecialFlag",
-                        "ContextScope": "TargetEntity",
-                        "CompareType": "Equal",
-                        "CompareValue": {
-                          "IsDynamic": false,
-                          "FixedValue": {
-                            "Value": 1
-                          }
-                        }
-                      }
-                    ]
                   },
-                  "SuccessTaskList": [
-                    {
-                      "$type": "RPG.GameCore.DefineDynamicValue",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "ModifierOwnerEntity"
-                      },
-                      "DynamicKey": "SpecialFlag",
-                      "ResetValue": {
-                        "IsDynamic": false,
-                        "FixedValue": {
-                          "Value": 2
-                        }
-                      },
-                      "ContextScope": "TargetEntity"
-                    }
-                  ]
+                  "ContextScope": "TargetEntity"
                 }
               ]
             }
@@ -308,6 +241,27 @@
           },
           "TaskList": [
             {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByIsContainModifier",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "ModifierName": "MCommon_BlackBlood"
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "ModifierName": "WMonster_XP_Elite02_02_RLElite_TryAddDirtyHP"
+                }
+              ]
+            },
+            {
               "$type": "RPG.GameCore.AddModifier",
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
@@ -452,6 +406,27 @@
                 }
               },
               "TaskList": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByIsContainModifier",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "ModifierName": "MCommon_BlackBlood"
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "WMonster_XP_Elite02_02_RLElite_TryAddDirtyHP"
+                    }
+                  ]
+                },
                 {
                   "$type": "RPG.GameCore.AddModifier",
                   "TargetType": {
@@ -747,6 +722,27 @@
           "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_XP_Elite02_02/Eff_Monster_XP_Elite02_02_Skill02.prefab"
         },
         {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByIsContainModifier",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "AbilityTargetEntity"
+            },
+            "ModifierName": "MCommon_BlackBlood"
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "ModifierName": "WMonster_XP_Elite02_02_RLElite_TryAddDirtyHP"
+            }
+          ]
+        },
+        {
           "$type": "RPG.GameCore.AddModifier",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
@@ -852,6 +848,27 @@
               }
             }
           }
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByIsContainModifier",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "AbilityTargetAdjoinEntity"
+            },
+            "ModifierName": "MCommon_BlackBlood"
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetAdjoinEntity"
+              },
+              "ModifierName": "WMonster_XP_Elite02_02_RLElite_TryAddDirtyHP"
+            }
+          ]
         },
         {
           "$type": "RPG.GameCore.AddModifier",
@@ -1070,6 +1087,27 @@
           }
         },
         {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByIsContainModifier",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "AbilityTargetEntity"
+            },
+            "ModifierName": "MCommon_BlackBlood"
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "ModifierName": "WMonster_XP_Elite02_02_RLElite_TryAddDirtyHP"
+            }
+          ]
+        },
+        {
           "$type": "RPG.GameCore.AddModifier",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
@@ -1187,6 +1225,35 @@
               }
             }
           }
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareDynamicValue",
+            "DynamicKey": "AIFlag",
+            "CompareType": "Equal",
+            "CompareValue": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 5
+              }
+            }
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.ShowUIPage",
+              "AssetPath": "UI/Common/Widget/BattleAlertHint.prefab",
+              "UITextNodes": [
+                {
+                  "TextPath": "AreaInfoPanel/Title/Text",
+                  "TextContent": {
+                    "Hash": -1899104051
+                  }
+                }
+              ],
+              "LifeTime": 3
+            }
+          ]
         },
         {
           "$type": "RPG.GameCore.SkillPerformFinish"
@@ -1839,48 +1906,151 @@
               }
             },
             {
-              "$type": "RPG.GameCore.RemoveModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByIsContainModifier",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ModifierOwnerEntity"
+                },
+                "ModifierName": "MCommon_BlackBlood"
               },
-              "ModifierName": "MCommon_BlackBlood"
-            },
-            {
-              "$type": "RPG.GameCore.AddModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "ModifierName": "MCommon_BlackBlood",
-              "Chance": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 99
-                }
-              },
-              "LifeTime": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQAJ",
-                  "FixedValues": [],
-                  "DynamicHashes": [
-                    1098697678
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "Flag": "ResistDebuff"
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValueByProperty",
+                      "DynamicKey": "MDF_CurrentDirtyHPRatio",
+                      "ReadTargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "Value": "DirtyHPRatio"
+                    },
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "ModifierName": "MCommon_BlackBlood",
+                      "LifeTime": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAJ",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            1098697678
+                          ]
+                        }
+                      },
+                      "DynamicValues": {
+                        "MDF_DirtyHPRatio": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAJ",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              21895570
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.RemoveModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "ModifierName": "MCommon_BlackBlood"
+                    },
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "ModifierName": "MCommon_BlackBlood",
+                      "LifeTime": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAJ",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            1098697678
+                          ]
+                        }
+                      },
+                      "DynamicValues": {
+                        "MDF_DirtyHPRatio": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAJ",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              21895570
+                            ]
+                          }
+                        }
+                      }
+                    }
                   ]
                 }
-              },
-              "DynamicValues": {
-                "MDF_DirtyHPRatio": {
-                  "IsDynamic": true,
-                  "PostfixExpr": {
-                    "OpCodes": "AQAJ",
-                    "FixedValues": [],
-                    "DynamicHashes": [
-                      21895570
-                    ]
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "ModifierName": "MCommon_BlackBlood",
+                  "Chance": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAJ",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        1583768018
+                      ]
+                    }
+                  },
+                  "LifeTime": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAJ",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        1098697678
+                      ]
+                    }
+                  },
+                  "DynamicValues": {
+                    "MDF_DirtyHPRatio": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAJ",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          21895570
+                        ]
+                      }
+                    }
                   }
                 }
-              }
+              ]
             },
             {
               "$type": "RPG.GameCore.TriggerEffect",
@@ -1953,7 +2123,7 @@
             }
           ]
         },
-        "OnAfterBeingAttacked": {
+        "OnAfterBeingAttackedAdv": {
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -2037,13 +2207,114 @@
                   }
                 },
                 {
-                  "$type": "RPG.GameCore.RemoveModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByIsContainModifier",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "ModifierName": "WMonster_XP_Elite02_02_RLElite_TryAddDirtyHP"
                   },
-                  "ModifierName": "MCommon_BlackBlood"
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.RemoveModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "ModifierName": "MCommon_BlackBlood"
+                    },
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "ModifierName": "MCommon_BlackBlood",
+                      "LifeTime": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAJ",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            1098697678
+                          ]
+                        }
+                      },
+                      "DynamicValues": {
+                        "MDF_DirtyHPRatio": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAJ",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              21895570
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.RemoveModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "ModifierName": "WMonster_XP_Elite02_02_RLElite_TryAddDirtyHP"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "OnCustomEvent": {
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.DefineDynamicValue",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "DynamicKey": "MDF_DirtyHPAddFlag",
+              "ResetValue": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      "Stacking": "Replace",
+      "DynamicValues": {
+        "Values": {
+          "21895570": {},
+          "-473917149": {},
+          "1342914575": {},
+          "-1636602583": {},
+          "-1835375738": {},
+          "923784427": {}
+        }
+      }
+    },
+    "WMonster_XP_Elite02_02_RLElite_TryAddDirtyHP": {
+      "_CallbackList": {
+        "OnStack": {
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ModifierOwnerEntity"
                 },
+                "Flag": "ResistDebuff"
+              },
+              "SuccessTaskList": [
                 {
                   "$type": "RPG.GameCore.AddModifier",
                   "TargetType": {
@@ -2063,32 +2334,27 @@
                   },
                   "DynamicValues": {
                     "MDF_DirtyHPRatio": {
-                      "IsDynamic": true,
-                      "PostfixExpr": {
-                        "OpCodes": "AQAJ",
-                        "FixedValues": [],
-                        "DynamicHashes": [
-                          21895570
-                        ]
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0.10000000009313226
                       }
                     }
                   }
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "ModifierName": "WMonster_XP_Elite02_02_RLElite_TryAddDirtyHP"
                 }
               ]
             }
           ]
         }
       },
-      "Stacking": "Replace",
-      "DynamicValues": {
-        "Values": {
-          "21895570": {},
-          "-473917149": {},
-          "1342914575": {},
-          "-1636602583": {},
-          "-1835375738": {}
-        }
-      }
+      "Stacking": "Replace"
     }
   }
 }

@@ -1060,95 +1060,23 @@
             "Alias": "AllEnemy"
           },
           "Predicate": {
-            "$type": "RPG.GameCore.ByIsContainModifier",
+            "$type": "RPG.GameCore.ByContainBehaviorFlag",
             "TargetType": {
               "$type": "RPG.GameCore.TargetAlias",
               "Alias": "ParamEntity"
             },
-            "ModifierName": "MCommon_DOT_Electric"
+            "Flag": "STAT_DOT_Electric"
           },
           "TaskList": [
             {
-              "$type": "RPG.GameCore.SetModifierValue",
+              "$type": "RPG.GameCore.SetModifierValueByBehaviorFlag",
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "ParamEntity"
               },
-              "ModifierName": "MCommon_DOT_Electric",
-              "ModifyFunction": "Add",
-              "ValueType": "LifeTime",
-              "Value": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQAJ",
-                  "FixedValues": [],
-                  "DynamicHashes": [
-                    -1034967551
-                  ]
-                }
-              }
-            }
-          ]
-        },
-        {
-          "$type": "RPG.GameCore.Retarget",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AllEnemy"
-          },
-          "Predicate": {
-            "$type": "RPG.GameCore.ByIsContainModifier",
-            "TargetType": {
-              "$type": "RPG.GameCore.TargetAlias",
-              "Alias": "ParamEntity"
-            },
-            "ModifierName": "MCommon_Element_Electric"
-          },
-          "TaskList": [
-            {
-              "$type": "RPG.GameCore.SetModifierValue",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ParamEntity"
-              },
-              "ModifierName": "MCommon_Element_Electric",
-              "ModifyFunction": "Add",
-              "ValueType": "LifeTime",
-              "Value": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQAJ",
-                  "FixedValues": [],
-                  "DynamicHashes": [
-                    -1034967551
-                  ]
-                }
-              }
-            }
-          ]
-        },
-        {
-          "$type": "RPG.GameCore.Retarget",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AllEnemy"
-          },
-          "Predicate": {
-            "$type": "RPG.GameCore.ByIsContainModifier",
-            "TargetType": {
-              "$type": "RPG.GameCore.TargetAlias",
-              "Alias": "ParamEntity"
-            },
-            "ModifierName": "MEquip_23006_DOT"
-          },
-          "TaskList": [
-            {
-              "$type": "RPG.GameCore.SetModifierValue",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ParamEntity"
-              },
-              "ModifierName": "MEquip_23006_DOT",
+              "ModifierBehaviorFlags": [
+                "STAT_DOT_Electric"
+              ],
               "ModifyFunction": "Add",
               "ValueType": "LifeTime",
               "Value": {
@@ -1302,35 +1230,80 @@
       ]
     },
     {
+      "Modifiers": {
+        "M_Serval_SkillTree02": {
+          "EnterBattlePriority": "CharacterBuff",
+          "_CallbackList": {
+            "OnEnterBattle": {
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.BySkillPointActivated",
+                        "PointTriggerKey": {
+                          "Hash": 1455742904
+                        }
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCompareWaveCount",
+                        "CompareType": "Equal",
+                        "CompareValue": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 1
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.ModifySPNew",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "AddValue": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAJ",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            353089918
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.TriggerEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_MAZ_RecoverSP.prefab"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      },
       "Name": "Avatar_Serval_SkillTree02",
       "TargetInfo": {
         "TargetType": "Caster"
       },
       "OnStart": [
         {
-          "$type": "RPG.GameCore.ModifySPNew",
+          "$type": "RPG.GameCore.AddModifier",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "AddValue": {
-            "IsDynamic": true,
-            "PostfixExpr": {
-              "OpCodes": "AQAJ",
-              "FixedValues": [],
-              "DynamicHashes": [
-                353089918
-              ]
-            }
-          }
-        },
-        {
-          "$type": "RPG.GameCore.TriggerEffect",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_MAZ_RecoverSP.prefab"
+          "ModifierName": "M_Serval_SkillTree02"
         }
       ]
     },

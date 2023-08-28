@@ -430,6 +430,14 @@
           }
         },
         {
+          "$type": "RPG.GameCore.SetDynamicValueByCharacterCount",
+          "DynamicKey": "W2_Yanqing_00_Skill02_SummonNumber",
+          "ReadTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "CasterSummonedMinions"
+          }
+        },
+        {
           "$type": "RPG.GameCore.SetSkillTargetFormationByPos",
           "Team": "TeamDark",
           "CustomTargetType": {
@@ -659,7 +667,7 @@
                   "MaxNumber": {
                     "IsDynamic": false,
                     "FixedValue": {
-                      "Value": 2
+                      "Value": 1
                     }
                   },
                   "TaskList": [
@@ -723,7 +731,7 @@
                   "MaxNumber": {
                     "IsDynamic": false,
                     "FixedValue": {
-                      "Value": 1
+                      "Value": 2
                     }
                   },
                   "TaskList": [
@@ -769,7 +777,7 @@
                       "MaxNumber": {
                         "IsDynamic": false,
                         "FixedValue": {
-                          "Value": 2
+                          "Value": 1
                         }
                       },
                       "TaskList": [
@@ -833,7 +841,7 @@
                       "MaxNumber": {
                         "IsDynamic": false,
                         "FixedValue": {
-                          "Value": 1
+                          "Value": 2
                         }
                       },
                       "TaskList": [
@@ -867,7 +875,7 @@
                       "MaxNumber": {
                         "IsDynamic": false,
                         "FixedValue": {
-                          "Value": 2
+                          "Value": 1
                         }
                       },
                       "TaskList": [
@@ -931,7 +939,7 @@
                       "MaxNumber": {
                         "IsDynamic": false,
                         "FixedValue": {
-                          "Value": 1
+                          "Value": 2
                         }
                       },
                       "TaskList": [
@@ -3690,6 +3698,30 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
+          "ModifierName": "W2_YanQing_00_BattleScore1"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "W2_YanQing_00_BattleScore2"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "W2_YanQing_00_BattleScore3"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
           "ModifierName": "MMonster_W2_Yanqing_00_StandBySwordEffect"
         },
         {
@@ -4176,6 +4208,14 @@
             },
             "OnBeingLimbo": {
               "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.LevelAudioState",
+                  "GroupName": "State_Stages_YanqingBoss",
+                  "StateName": {
+                    "Value": "Stage_Common"
+                  },
+                  "SaveToCustomString": true
+                },
                 {
                   "$type": "RPG.GameCore.TriggerCustomString",
                   "CustomString": {
@@ -4924,9 +4964,13 @@
                     "DynamicKey": "W2_Yanqing_00_Skill02_AccumulateRevealed",
                     "CompareType": "Less",
                     "CompareValue": {
-                      "IsDynamic": false,
-                      "FixedValue": {
-                        "Value": 4
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAJ",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          497047057
+                        ]
                       }
                     }
                   },
@@ -4985,9 +5029,13 @@
                     "DynamicKey": "W2_Yanqing_00_Skill02_AccumulateRevealed",
                     "CompareType": "Equal",
                     "CompareValue": {
-                      "IsDynamic": false,
-                      "FixedValue": {
-                        "Value": 4
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAJ",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          497047057
+                        ]
                       }
                     }
                   }
@@ -6209,12 +6257,28 @@
             {
               "$type": "RPG.GameCore.PredicateTaskList",
               "Predicate": {
-                "$type": "RPG.GameCore.ByCheckModifierCallBackBehaviorFlag",
-                "TargetType": {
-                  "$type": "RPG.GameCore.TargetAlias",
-                  "Alias": "ParamEntity"
-                },
-                "Flag": "STAT_CTRL_Frozen"
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCompareTarget",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "CompareType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    }
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByCheckModifierCallBackBehaviorFlag",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "Flag": "STAT_CTRL_Frozen"
+                  }
+                ]
               },
               "SuccessTaskList": [
                 {
@@ -6977,35 +7041,44 @@
     "MAvatar_DanhengIL_00_EXSkill01_Diable_Ultra": {
       "_CallbackList": {
         "OnStack": {
-          "CallbackConfig": [
-            {
-              "$type": "RPG.GameCore.AttachSkillTypeDisable",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "Types": [
-                "Ultra"
-              ]
-            }
-          ]
+          "CallbackConfig": []
         }
       }
     },
     "MAvatar_DanhengIL_00_EXSkill01_LV0": {
       "_CallbackList": {
-        "OnStack": {
+        "OnDestroy": {
           "CallbackConfig": [
             {
-              "$type": "RPG.GameCore.AttachSkillTypeDisable",
+              "$type": "RPG.GameCore.LockUISkillOperation",
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "ModifierOwnerEntity"
               },
-              "Types": [
-                "Skill",
-                "Ultra"
-              ]
+              "IsLock": false,
+              "ControlSkillTypes": [
+                "ControlSkill02"
+              ],
+              "Tip": {
+                "Hash": -1129675816
+              }
+            }
+          ]
+        },
+        "OnStack": {
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.LockUISkillOperation",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ControlSkillTypes": [
+                "ControlSkill02"
+              ],
+              "Tip": {
+                "Hash": -1129675816
+              }
             }
           ]
         }
@@ -7022,6 +7095,20 @@
                 "Alias": "ModifierOwnerEntity"
               },
               "ModifierName": "MAvatar_DanHengIL_00_BPCost_1_Special"
+            },
+            {
+              "$type": "RPG.GameCore.LockUISkillOperation",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "IsLock": false,
+              "ControlSkillTypes": [
+                "ControlSkill02"
+              ],
+              "Tip": {
+                "Hash": -1129675816
+              }
             }
           ]
         },
@@ -7062,21 +7149,6 @@
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "ModifierOwnerEntity"
-              },
-              "Active": "True",
-              "BarType": 3,
-              "CD": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 0
-                }
-              },
-              "IconPath": "SpriteOutput/BuffIcon/Inlevel/Icon1213SpecialBP.png",
-              "MaxCount": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 3
-                }
               },
               "CurrentCount": {
                 "IsDynamic": false,
@@ -7098,15 +7170,17 @@
         "OnStack": {
           "CallbackConfig": [
             {
-              "$type": "RPG.GameCore.AttachSkillTypeDisable",
+              "$type": "RPG.GameCore.LockUISkillOperation",
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "ModifierOwnerEntity"
               },
-              "Types": [
-                "Skill",
-                "Ultra"
-              ]
+              "ControlSkillTypes": [
+                "ControlSkill02"
+              ],
+              "Tip": {
+                "Hash": -1129675816
+              }
             }
           ]
         }
@@ -7114,6 +7188,24 @@
     },
     "MAvatar_DanhengIL_00_EXSkill01_LV2": {
       "_CallbackList": {
+        "OnDestroy": {
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.LockUISkillOperation",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "IsLock": false,
+              "ControlSkillTypes": [
+                "ControlSkill02"
+              ],
+              "Tip": {
+                "Hash": -1129675816
+              }
+            }
+          ]
+        },
         "OnPhase1": {
           "CallbackConfig": [
             {
@@ -7151,21 +7243,6 @@
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "ModifierOwnerEntity"
-              },
-              "Active": "True",
-              "BarType": 3,
-              "CD": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 0
-                }
-              },
-              "IconPath": "SpriteOutput/BuffIcon/Inlevel/Icon1213SpecialBP.png",
-              "MaxCount": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 3
-                }
               },
               "CurrentCount": {
                 "IsDynamic": false,
@@ -7187,15 +7264,17 @@
         "OnStack": {
           "CallbackConfig": [
             {
-              "$type": "RPG.GameCore.AttachSkillTypeDisable",
+              "$type": "RPG.GameCore.LockUISkillOperation",
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "ModifierOwnerEntity"
               },
-              "Types": [
-                "Skill",
-                "Ultra"
-              ]
+              "ControlSkillTypes": [
+                "ControlSkill02"
+              ],
+              "Tip": {
+                "Hash": -1129675816
+              }
             }
           ]
         }
@@ -7203,6 +7282,24 @@
     },
     "MAvatar_DanhengIL_00_EXSkill01_LV3": {
       "_CallbackList": {
+        "OnDestroy": {
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.LockUISkillOperation",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "IsLock": false,
+              "ControlSkillTypes": [
+                "ControlSkill02"
+              ],
+              "Tip": {
+                "Hash": -1129675816
+              }
+            }
+          ]
+        },
         "OnPhase1": {
           "CallbackConfig": [
             {
@@ -7241,15 +7338,6 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "ModifierOwnerEntity"
               },
-              "Active": "True",
-              "BarType": 3,
-              "CD": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 0
-                }
-              },
-              "IconPath": "SpriteOutput/BuffIcon/Inlevel/Icon1213SpecialBP.png",
               "MaxCount": {
                 "IsDynamic": false,
                 "FixedValue": {
@@ -7276,15 +7364,17 @@
         "OnStack": {
           "CallbackConfig": [
             {
-              "$type": "RPG.GameCore.AttachSkillTypeDisable",
+              "$type": "RPG.GameCore.LockUISkillOperation",
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "ModifierOwnerEntity"
               },
-              "Types": [
-                "Skill",
-                "Ultra"
-              ]
+              "ControlSkillTypes": [
+                "ControlSkill02"
+              ],
+              "Tip": {
+                "Hash": -1129675816
+              }
             }
           ]
         }
@@ -7317,6 +7407,19 @@
                   "OperatorType": "Unset"
                 }
               ]
+            },
+            {
+              "$type": "RPG.GameCore.SetEnergyBarState",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ActiveCount": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0
+                }
+              }
             }
           ]
         },
@@ -7332,18 +7435,39 @@
             },
             {
               "$type": "RPG.GameCore.SetSkillButtonAdditionalStatus",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
               "Type": 1,
               "IsActive": true,
               "PrefabPath": "UI/Battle/SkillButton/SkillBtnEff/EnhanceEff_Lv3.prefab",
-              "AnimationName": "SkillButtonStatus_Enhance_1B"
+              "AnimStateName": "SkillButtonStatus_Enhance_1B"
             },
             {
               "$type": "RPG.GameCore.SetSkillButtonAdditionalStatus",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
               "ControlSkillType": "ControlSkill02",
               "Type": 1,
               "IsActive": true,
               "PrefabPath": "UI/Battle/SkillButton/BattleCancelStatusInfo.prefab",
-              "AnimationName": "SkillButtonStatus_Enhance_1A"
+              "AnimStateName": "SkillButtonStatus_Enhance_1A"
+            },
+            {
+              "$type": "RPG.GameCore.SetEnergyBarState",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ActiveCount": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1
+                }
+              }
             }
           ]
         }
@@ -7377,6 +7501,19 @@
                   "OperatorType": "Unset"
                 }
               ]
+            },
+            {
+              "$type": "RPG.GameCore.SetEnergyBarState",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ActiveCount": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0
+                }
+              }
             }
           ]
         },
@@ -7392,18 +7529,39 @@
             },
             {
               "$type": "RPG.GameCore.SetSkillButtonAdditionalStatus",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
               "Type": 1,
               "IsActive": true,
               "PrefabPath": "UI/Battle/SkillButton/SkillBtnEff/EnhanceEff_Lv3.prefab",
-              "AnimationName": "SkillButtonStatus_Enhance_2B"
+              "AnimStateName": "SkillButtonStatus_Enhance_2B"
             },
             {
               "$type": "RPG.GameCore.SetSkillButtonAdditionalStatus",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
               "ControlSkillType": "ControlSkill02",
               "Type": 1,
               "IsActive": true,
               "PrefabPath": "UI/Battle/SkillButton/BattleCancelStatusInfo.prefab",
-              "AnimationName": "SkillButtonStatus_Enhance_2A"
+              "AnimStateName": "SkillButtonStatus_Enhance_2A"
+            },
+            {
+              "$type": "RPG.GameCore.SetEnergyBarState",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ActiveCount": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 2
+                }
+              }
             }
           ]
         }
@@ -7414,6 +7572,14 @@
       "_CallbackList": {
         "OnDestroy": {
           "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.SetControlSkillMapping",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "SkillTriggerKey": "Skill01"
+            },
             {
               "$type": "RPG.GameCore.ModifySkillPropertyByName",
               "TargetType": {
@@ -7429,11 +7595,82 @@
                   "OperatorType": "Unset"
                 }
               ]
+            },
+            {
+              "$type": "RPG.GameCore.SetEnergyBarState",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ActiveCount": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0
+                }
+              }
             }
           ]
         },
         "OnStack": {
-          "CallbackConfig": []
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.AttachSkillTypeDisable",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ControlSkillTypes": [
+                "ControlSkill02"
+              ],
+              "Tip": {
+                "Hash": 1193447455
+              }
+            },
+            {
+              "$type": "RPG.GameCore.SetControlSkillMapping",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "SkillTriggerKey": "Skill13"
+            },
+            {
+              "$type": "RPG.GameCore.SetSkillButtonAdditionalStatus",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "Type": 1,
+              "IsActive": true,
+              "PrefabPath": "UI/Battle/SkillButton/SkillBtnEff/EnhanceEff_Lv3.prefab",
+              "AnimStateName": "SkillButtonStatus_Enhance_3B"
+            },
+            {
+              "$type": "RPG.GameCore.SetSkillButtonAdditionalStatus",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ControlSkillType": "ControlSkill02",
+              "Type": 1,
+              "IsActive": true,
+              "PrefabPath": "UI/Battle/SkillButton/BattleCancelStatusInfo.prefab",
+              "AnimStateName": "SkillButtonStatus_Enhance_3A"
+            },
+            {
+              "$type": "RPG.GameCore.SetEnergyBarState",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ActiveCount": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 3
+                }
+              }
+            }
+          ]
         }
       },
       "Stacking": "ReplaceByCaster"
@@ -7657,30 +7894,7 @@
     "MMonster_W2_Yanqing_00_MainBattle_MuteUltra": {
       "_CallbackList": {
         "OnStack": {
-          "CallbackConfig": [
-            {
-              "$type": "RPG.GameCore.SwitchByCommandType",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              }
-            },
-            {
-              "$type": "RPG.GameCore.ModifySP",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "ModifyFunction": "Set",
-              "ModifyValue": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 0
-                }
-              },
-              "IgnoreBlockAdd": true
-            }
-          ]
+          "CallbackConfig": []
         }
       }
     }

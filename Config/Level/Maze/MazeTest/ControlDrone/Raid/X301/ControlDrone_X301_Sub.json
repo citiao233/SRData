@@ -28,7 +28,8 @@
             {
               "$type": "RPG.GameCore.AdvEntityFaceTo",
               "SourceType": {
-                "$type": "RPG.GameCore.TargetFetchAdvLocalPlayer"
+                "$type": "RPG.GameCore.TargetFetchAdvLocalPlayer",
+                "IncludeStoryPlayer": false
               },
               "TargetType": {
                 "$type": "RPG.GameCore.TargetFetchAdvPropEx"
@@ -41,7 +42,8 @@
             {
               "$type": "RPG.GameCore.CharacterTriggerAnimState",
               "TargetAlias": {
-                "$type": "RPG.GameCore.TargetFetchAdvLocalPlayer"
+                "$type": "RPG.GameCore.TargetFetchAdvLocalPlayer",
+                "IncludeStoryPlayer": false
               },
               "ForceStart": false,
               "AnimStateName": "LookatPhoneBS"
@@ -49,7 +51,8 @@
             {
               "$type": "RPG.GameCore.CreatePhoneOnCharacter",
               "TargetType": {
-                "$type": "RPG.GameCore.TargetFetchAdvLocalPlayer"
+                "$type": "RPG.GameCore.TargetFetchAdvLocalPlayer",
+                "IncludeStoryPlayer": false
               }
             },
             {
@@ -301,16 +304,10 @@
           "WaitOwnerOnly": true
         },
         {
-          "$type": "RPG.GameCore.UnLockPlayerControl"
-        },
-        {
-          "$type": "RPG.GameCore.BlockInputController",
-          "ActionNameList": []
-        },
-        {
           "$type": "RPG.GameCore.CharacterTriggerAnimState",
           "TargetAlias": {
-            "$type": "RPG.GameCore.TargetFetchAdvLocalPlayer"
+            "$type": "RPG.GameCore.TargetFetchAdvLocalPlayer",
+            "IncludeStoryPlayer": false
           },
           "ForceStart": false,
           "AnimStateName": "LookatPhoneAS"
@@ -319,16 +316,16 @@
           "$type": "RPG.GameCore.CreatePhoneOnCharacter",
           "IsDestroy": true,
           "TargetType": {
-            "$type": "RPG.GameCore.TargetFetchAdvLocalPlayer"
+            "$type": "RPG.GameCore.TargetFetchAdvLocalPlayer",
+            "IncludeStoryPlayer": false
           }
         },
         {
-          "$type": "RPG.GameCore.PropEnableCollider",
-          "OPType": "TriggerOnly",
-          "Enabled": true,
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetFetchAdvPropEx"
-          }
+          "$type": "RPG.GameCore.UnLockPlayerControl"
+        },
+        {
+          "$type": "RPG.GameCore.BlockInputController",
+          "ActionNameList": []
         }
       ]
     },
@@ -340,14 +337,15 @@
           "CustomString": {
             "Value": "GoNext"
           },
-          "WaitOwnerOnly": true
+          "WaitOwnerOnly": true,
+          "GoNextImmediately": true
         },
         {
           "$type": "RPG.GameCore.ShowTalkUI"
         },
         {
           "$type": "RPG.GameCore.WaitSecond",
-          "WaitTime": 3
+          "WaitTime": 2
         },
         {
           "$type": "RPG.GameCore.PropEnableCollider",

@@ -1,6 +1,13 @@
 {
   "AbilityList": [
     {
+      "Modifiers": {
+        "W2_Beast02_00_MuteHitFly": {
+          "BehaviorFlagList": [
+            "MuteHitFly"
+          ]
+        }
+      },
       "Name": "Monster_W2_Beast02_00_SkillP01_Initiate",
       "TargetInfo": {
         "TargetType": "Caster"
@@ -52,6 +59,14 @@
         }
       ],
       "OnStart": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "W2_Beast02_00_MuteHitFly"
+        },
         {
           "$type": "RPG.GameCore.PredicateTaskList",
           "Predicate": {
@@ -1384,7 +1399,7 @@
         "MuteHitFly"
       ],
       "_CallbackList": {
-        "OnBeforeDying": {
+        "OnBeingLimbo": {
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetDynamicValueByAddValue",
@@ -1815,7 +1830,7 @@
             }
           ]
         },
-        "OnBeforeDying": {
+        "OnBeingLimbo": {
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",

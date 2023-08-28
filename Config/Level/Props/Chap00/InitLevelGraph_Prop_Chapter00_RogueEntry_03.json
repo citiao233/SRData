@@ -9,7 +9,8 @@
             403000300
           ],
           "MainMissionIDList": [],
-          "PerformanceIDList": []
+          "PerformanceIDList": [],
+          "CustomValueMainMissionIDList": []
         }
       ]
     },
@@ -83,7 +84,8 @@
     {
       "TaskList": [
         {
-          "$type": "RPG.GameCore.WaitAutoTriggerRogueEntrancePropInteract"
+          "$type": "RPG.GameCore.WaitAutoTriggerRogueEntrancePropInteract",
+          "NotifyValue": 2
         },
         {
           "$type": "RPG.GameCore.PredicateTaskList",
@@ -94,13 +96,35 @@
           },
           "SuccessTaskList": [
             {
-              "$type": "RPG.GameCore.TriggerCustomString",
-              "CustomString": {
-                "Value": "Rogue_Entry_Interact"
-              }
+              "$type": "RPG.GameCore.VerifyInteractingEntity",
+              "IsOwnerEntity": true
             }
           ],
           "FailedTaskList": []
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitAutoTriggerRogueEntrancePropInteract",
+          "NotifyValue": 1
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareSubMissionState",
+            "SubMissionID": 403000300,
+            "SubMissionState": "Finish"
+          },
+          "SuccessTaskList": [],
+          "FailedTaskList": []
+        },
+        {
+          "$type": "RPG.GameCore.TriggerCustomString",
+          "CustomString": {
+            "Value": "Rogue_Entry_Interact"
+          }
         }
       ]
     },

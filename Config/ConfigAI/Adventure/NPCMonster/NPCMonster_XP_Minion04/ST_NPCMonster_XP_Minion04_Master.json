@@ -36,6 +36,12 @@
       },
       {
         "$type": "RPG.GameCore.StateTreeStateConfig",
+        "TaskList": [
+          {
+            "$type": "RPG.GameCore.ST_Side_OverrideVision",
+            "VisionSetName": "DefaultVision"
+          }
+        ],
         "TransitionList": [
           {
             "Trigger": "OnTick",
@@ -51,12 +57,7 @@
             "EnterCondition": {
               "$type": "RPG.GameCore.ST_ByAlertLevel"
             },
-            "TaskList": [
-              {
-                "$type": "RPG.GameCore.ST_Side_OverrideVision",
-                "VisionSetName": "DefaultVision"
-              }
-            ],
+            "TaskList": [],
             "TransitionList": [
               {
                 "Trigger": "OnTick",
@@ -81,9 +82,28 @@
                   "$type": "RPG.GameCore.ST_ByAlertLevel",
                   "AlertLevel": "Alert"
                 }
+              },
+              {
+                "Trigger": "OnEvent",
+                "UserDefineEvent": "ZhangZhangArrive",
+                "TransitionToState": "Attracted"
               }
             ],
             "SubStateList": [
+              {
+                "$type": "RPG.GameCore.StateTreeStateConfig",
+                "EnterCondition": {
+                  "$type": "RPG.GameCore.ST_ByHasBornSmartObject"
+                },
+                "TaskList": [
+                  {
+                    "$type": "RPG.GameCore.ST_Main_PlaySmartObject",
+                    "ParamType": "BornSmartOjbect",
+                    "RecordContext": true
+                  }
+                ],
+                "Name": "SmartObject"
+              },
               {
                 "$type": "RPG.GameCore.StateTreeStateConfig",
                 "EnterCondition": {
@@ -91,7 +111,7 @@
                 },
                 "TaskList": [
                   {
-                    "$type": "RPG.GameCore.ST_Main_MoveAlongPath",
+                    "$type": "RPG.GameCore.ST_Main_Patrol",
                     "MoveStance": "Walk"
                   }
                 ],
@@ -106,6 +126,48 @@
                   }
                 ],
                 "Name": "Idle"
+              },
+              {
+                "$type": "RPG.GameCore.StateTreeStateConfig",
+                "TaskList": [],
+                "TransitionList": [],
+                "SubStateList": [
+                  {
+                    "$type": "RPG.GameCore.StateTreeStateConfig",
+                    "TaskList": [
+                      {
+                        "$type": "RPG.GameCore.ST_Main_MoveToTarget",
+                        "TargetType": "NotifyTarget",
+                        "MoveStance": "Walk",
+                        "Tolerance": 2,
+                        "AngleTolerance": 90
+                      }
+                    ],
+                    "TransitionList": [
+                      {
+                        "Trigger": "OnStateSucceeded",
+                        "TransitionToType": "NextState"
+                      }
+                    ],
+                    "Name": "AttractedMove"
+                  },
+                  {
+                    "$type": "RPG.GameCore.StateTreeStateConfig",
+                    "TaskList": [
+                      {
+                        "$type": "RPG.GameCore.ST_Main_Wait",
+                        "Time": 5
+                      }
+                    ],
+                    "TransitionList": [
+                      {
+                        "TransitionToType": "TreeSucceed"
+                      }
+                    ],
+                    "Name": "AttractedAction"
+                  }
+                ],
+                "Name": "AttractedState"
               }
             ],
             "Name": "RelaxState"

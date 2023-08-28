@@ -76,11 +76,82 @@
         {
           "$type": "RPG.GameCore.FireProjectile",
           "Projectile": {
-            "FlyTime": 0.1,
-            "AttachPoint": "Root",
-            "TargetAttachPoint": "Root"
+            "FlySpeed": 80,
+            "AttachPoint": "Origin",
+            "AttachOffset": {
+              "X": 0,
+              "Y": 1.6,
+              "Z": 0.2
+            },
+            "TargetAttachPoint": "Root",
+            "IgnoreTargetHitbox": true,
+            "FlyEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_XP_Minion01_04/Eff_Monster_XP_Minion01_04_Skill01_Bullet_Loop.prefab",
+            "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_XP_Minion01_04/Eff_Monster_XP_Minion01_04_Skill01_Hit.prefab",
+            "LinearPitchAngle": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": -20
+              }
+            },
+            "WriteProgressToEffectAnimator": true
           },
+          "OnProjectileHit": [
+            {
+              "$type": "RPG.GameCore.VCameraConfigChange",
+              "CameraConfig": {
+                "ShakeTemplateName": "Common_Rapid_Light"
+              }
+            },
+            {
+              "$type": "RPG.GameCore.DamageByAttackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "AttackProperty": {
+                "DamagePercentage": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAAAAUJ",
+                    "FixedValues": [
+                      {
+                        "Value": 2
+                      }
+                    ],
+                    "DynamicHashes": [
+                      -1126825319
+                    ]
+                  }
+                },
+                "SPHitRatio": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 1
+                  }
+                },
+                "HitAnimation": "Hit",
+                "HitTimeSlowType": "Puncture"
+              },
+              "TriggerHitSound": true,
+              "SpecialHitSoundEvent": "Ev_sfx_monster_skill_01_hit_soldiergun",
+              "DisplayData": {
+                "UIMessageHeight": 1,
+                "DitherRangeX": 0.02,
+                "DitherRangeY": 0.02
+              }
+            }
+          ],
           "WaitProjectileFinish": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "AnimStateName": "Skill01",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.4200000003911555
+            }
+          }
         },
         {
           "$type": "RPG.GameCore.VCameraConfigChange",
@@ -98,8 +169,12 @@
             "DamagePercentage": {
               "IsDynamic": true,
               "PostfixExpr": {
-                "OpCodes": "AQAJ",
-                "FixedValues": [],
+                "OpCodes": "AQAAAAUJ",
+                "FixedValues": [
+                  {
+                    "Value": 2
+                  }
+                ],
                 "DynamicHashes": [
                   -1126825319
                 ]

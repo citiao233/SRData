@@ -72,6 +72,17 @@
                   },
                   "Execute": [
                     {
+                      "$type": "RPG.GameCore.StartPropInteractMode",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+                      },
+                      "Mode": "UsePose01"
+                    },
+                    {
+                      "$type": "RPG.GameCore.WaitSecond",
+                      "WaitTime": 0.5
+                    },
+                    {
                       "$type": "RPG.GameCore.PropReqInteract",
                       "TargetType": {
                         "$type": "RPG.GameCore.TargetFetchAdvPropEx"
@@ -96,6 +107,12 @@
                             "Custom": true,
                             "Key": "Maze_Prop_Chap00_BaseControlLockDesc"
                           }
+                        },
+                        {
+                          "$type": "RPG.GameCore.TriggerCustomString",
+                          "CustomString": {
+                            "Value": "ConsoleUsed"
+                          }
                         }
                       ],
                       "OnCheckItemFail": [
@@ -104,6 +121,12 @@
                           "DescTextKey": {
                             "Custom": true,
                             "Key": "Maze_Prop_Chap00_BaseControlLockDesc"
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.TriggerCustomString",
+                          "CustomString": {
+                            "Value": "ConsoleUsed"
                           }
                         }
                       ]
@@ -138,19 +161,27 @@
       ]
     },
     {
+      "IsLoop": true,
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitCustomString",
+          "CustomString": {
+            "Value": "ConsoleUsed"
+          },
+          "WaitOwnerOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.EndPropInteract"
+        }
+      ]
+    },
+    {
       "TaskList": [
         {
           "$type": "RPG.GameCore.PropStateChangeListenerConfig",
           "ToState": "Open",
           "FromAnyState": true,
           "OnChange": [
-            {
-              "$type": "RPG.GameCore.StartPropInteractMode",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetFetchAdvPropEx"
-              },
-              "Mode": "UsePose01"
-            },
             {
               "$type": "RPG.GameCore.WaitSecond",
               "WaitTime": 0.2
@@ -164,41 +195,6 @@
                 "SinglePropKey": {
                   "Custom": true,
                   "Key": "Maze_Prop_Chap01_DoorFrame_01"
-                }
-              }
-            },
-            {
-              "$type": "RPG.GameCore.PropTriggerAnimState",
-              "AnimStateName": "Closed",
-              "TransitionDuration": 0,
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetFetchAdvPropEx",
-                "FetchType": "SinglePropByPropKey",
-                "SinglePropKey": {
-                  "Custom": true,
-                  "Key": "Maze_Prop_Chap01_Door"
-                }
-              }
-            },
-            {
-              "$type": "RPG.GameCore.WaitSecond",
-              "WaitTime": 0.5
-            },
-            {
-              "$type": "RPG.GameCore.PropEnableCollider",
-              "OPType": "TriggerOnly",
-              "Enabled": true,
-              "SpecifiedRelativePaths": [
-                "TriggerOpen"
-              ],
-              "TriggerSelect": "CustomTrigger",
-              "CustomTriggerName": "CustomTrigger_Open",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetFetchAdvPropEx",
-                "FetchType": "SinglePropByPropKey",
-                "SinglePropKey": {
-                  "Custom": true,
-                  "Key": "Maze_Prop_Chap01_Door"
                 }
               }
             },

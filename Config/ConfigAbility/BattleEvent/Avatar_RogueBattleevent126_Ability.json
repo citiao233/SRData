@@ -943,6 +943,193 @@
     },
     {
       "Modifiers": {
+        "MAvatar_RogueBattleevent126_LevelUp5": {
+          "_CallbackList": {
+            "OnAfterHit": {
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByIsContainModifier",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "LevelEntity"
+                    },
+                    "ModifierName": "StageAbility_612625_Modifier"
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByIsDamageType",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "DamageTypeList": [
+                          "Ice"
+                        ]
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.AddModifier",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "ModifierName": "MCommon_Element_Frozen",
+                          "Chance": {
+                            "IsDynamic": false,
+                            "FixedValue": {
+                              "Value": 1.5000000004656613
+                            }
+                          },
+                          "LifeTime": {
+                            "IsDynamic": true,
+                            "PostfixExpr": {
+                              "OpCodes": "AQAJ",
+                              "FixedValues": [],
+                              "DynamicHashes": [
+                                -159449476
+                              ]
+                            }
+                          },
+                          "DynamicValues": {
+                            "MDF_DamagePercentage": {
+                              "IsDynamic": false,
+                              "FixedValue": {
+                                "Value": 1
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "MAvatar_RogueBattleevent126_LevelUp4": {
+          "_CallbackList": {
+            "OnAfterHit": {
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "DynamicKey": "DispelFlag",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "DynamicKey": "DispelRealFlag",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByIsContainModifier",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "LevelEntity"
+                    },
+                    "ModifierName": "StageAbility_612624_Modifier"
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.Retarget",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AllLightTeam"
+                      },
+                      "MaxNumber": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 10
+                        }
+                      },
+                      "TaskList": [
+                        {
+                          "$type": "RPG.GameCore.PredicateTaskList",
+                          "Predicate": {
+                            "$type": "RPG.GameCore.ByCompareDynamicValue",
+                            "DynamicKey": "DispelRealFlag",
+                            "CompareType": "Equal",
+                            "CompareValue": {
+                              "IsDynamic": false,
+                              "FixedValue": {
+                                "Value": 0
+                              }
+                            }
+                          },
+                          "SuccessTaskList": [
+                            {
+                              "$type": "RPG.GameCore.DispelStatus",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "ParamEntity"
+                              },
+                              "Numbers": {
+                                "IsDynamic": false,
+                                "FixedValue": {
+                                  "Value": 1
+                                }
+                              },
+                              "Order": "LastAdded",
+                              "DispelCountKey": "DispelFlag"
+                            }
+                          ]
+                        },
+                        {
+                          "$type": "RPG.GameCore.PredicateTaskList",
+                          "Predicate": {
+                            "$type": "RPG.GameCore.ByCompareDynamicValue",
+                            "DynamicKey": "DispelFlag",
+                            "CompareType": "Equal",
+                            "CompareValue": {
+                              "IsDynamic": false,
+                              "FixedValue": {
+                                "Value": 1
+                              }
+                            }
+                          },
+                          "SuccessTaskList": [
+                            {
+                              "$type": "RPG.GameCore.SetDynamicValue",
+                              "DynamicKey": "DispelRealFlag",
+                              "Value": {
+                                "IsDynamic": false,
+                                "FixedValue": {
+                                  "Value": 1
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "DynamicValues": {
+            "Values": {
+              "1153519447": {},
+              "-18855619": {}
+            }
+          }
+        },
         "MAvatar_RogueBattleevent126_StatusProbability": {
           "_CallbackList": {
             "OnStack": {
@@ -1619,6 +1806,22 @@
             "Alias": "Caster"
           },
           "ModifierName": "FirstBattle_Charge"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "MAvatar_RogueBattleevent126_LevelUp4"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "MAvatar_RogueBattleevent126_LevelUp5"
         }
       ]
     }
