@@ -3,8 +3,9 @@
     {
       "Modifiers": {
         "MMonster_W2_Xuanlu_02_Break": {
-          "_CallbackList": {
-            "OnBeingBreak": {
+          "_CallbackList": [
+            {
+              "Event": "OnBeingBreak",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.RemoveModifier",
@@ -31,7 +32,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "Monster_W2_Xuanlu_02_PassiveSkill_Initiate",
@@ -92,8 +93,9 @@
     {
       "Modifiers": {
         "MMonster_W2_Xuanlu_02_Buff": {
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.ModifierAttachEffect",
@@ -125,7 +127,7 @@
                 }
               ]
             }
-          },
+          ],
           "Stacking": "Replace",
           "DynamicValues": {
             "Values": {
@@ -234,8 +236,9 @@
     {
       "Modifiers": {
         "MMonster_W2_Xuanlu_02_Counter": {
-          "_CallbackList": {
-            "OnListenTurnEnd": {
+          "_CallbackList": [
+            {
+              "Event": "OnListenTurnEnd",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.DefineDynamicValue",
@@ -254,7 +257,8 @@
                 }
               ]
             },
-            "OnStack": {
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.ModifierAttachEffect",
@@ -268,7 +272,8 @@
                 }
               ]
             },
-            "OnAfterBeingAttacked": {
+            {
+              "Event": "OnAfterBeingAttacked",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -331,13 +336,31 @@
                         "Break"
                       ],
                       "InsertAbilityPriority": "MonsterInsertAttackSelf",
+                      "InsertConditionPriority": {
+                        "OverridePriority": "MonsterForceKill",
+                        "Predicate": {
+                          "$type": "RPG.GameCore.ByCompareAbilityProperty",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "CasterSummoner"
+                          },
+                          "Property": "CurrentHP",
+                          "CompareType": "LessEqual",
+                          "CompareValue": {
+                            "IsDynamic": false,
+                            "FixedValue": {
+                              "Value": 0
+                            }
+                          }
+                        }
+                      },
                       "ShowInActionBar": true
                     }
                   ]
                 }
               ]
             }
-          },
+          ],
           "Stacking": "Replace"
         }
       },
@@ -433,8 +456,9 @@
     {
       "Modifiers": {
         "MMonster_W2_Xuanlu_02_Counter_RL": {
-          "_CallbackList": {
-            "OnListenTurnEnd": {
+          "_CallbackList": [
+            {
+              "Event": "OnListenTurnEnd",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.DefineDynamicValue",
@@ -453,7 +477,8 @@
                 }
               ]
             },
-            "OnStack": {
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.ModifierAttachEffect",
@@ -467,7 +492,8 @@
                 }
               ]
             },
-            "OnAfterBeingAttacked": {
+            {
+              "Event": "OnAfterBeingAttacked",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -530,13 +556,31 @@
                         "Break"
                       ],
                       "InsertAbilityPriority": "MonsterInsertAttackSelf",
+                      "InsertConditionPriority": {
+                        "OverridePriority": "MonsterForceKill",
+                        "Predicate": {
+                          "$type": "RPG.GameCore.ByCompareAbilityProperty",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "CasterSummoner"
+                          },
+                          "Property": "CurrentHP",
+                          "CompareType": "LessEqual",
+                          "CompareValue": {
+                            "IsDynamic": false,
+                            "FixedValue": {
+                              "Value": 0
+                            }
+                          }
+                        }
+                      },
                       "ShowInActionBar": true
                     }
                   ]
                 }
               ]
             }
-          },
+          ],
           "Stacking": "Replace"
         }
       },

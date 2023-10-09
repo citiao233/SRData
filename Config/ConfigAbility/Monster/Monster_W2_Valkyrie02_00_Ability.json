@@ -670,6 +670,12 @@
             "FixedValue": {
               "Value": 1
             }
+          },
+          "NormalizedTimeWait": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.9000000008381903
+            }
           }
         },
         {
@@ -1419,14 +1425,14 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.4550000000745058
+              "Value": 0.43799999984912574
             }
           }
         },
         {
           "$type": "RPG.GameCore.GlobalMainIntensityEffect",
           "TargetIntensity": 0.3,
-          "FadeDuration": 0.55
+          "FadeDuration": 0.385
         },
         {
           "$type": "RPG.GameCore.WaitAnimState",
@@ -1523,6 +1529,25 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
+              "Value": 0.5971014490351081
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.GlobalMainIntensityEffect",
+          "IsRevert": true,
+          "FadeDuration": 1
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill04",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
               "Value": 0.7670000002253801
             }
           }
@@ -1552,25 +1577,6 @@
           },
           "DynamicKey": "W2_Valkyrie02_00_Skill04_TriggerFlag",
           "ContextScope": "TargetEntity"
-        },
-        {
-          "$type": "RPG.GameCore.GlobalMainIntensityEffect",
-          "IsRevert": true,
-          "FadeDuration": 1
-        },
-        {
-          "$type": "RPG.GameCore.WaitAnimState",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "AnimStateName": "Skill04",
-          "NormalizedTimeEnd": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0.8030000005383044
-            }
-          }
         },
         {
           "$type": "RPG.GameCore.SkillPerformFinish"
@@ -2181,8 +2187,9 @@
   ],
   "GlobalModifiers": {
     "MMonster_W2_Valkyrie02_00_RemoveOneMore": {
-      "_CallbackList": {
-        "OnPhase2": {
+      "_CallbackList": [
+        {
+          "Event": "OnPhase2",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -2407,7 +2414,8 @@
             }
           ]
         },
-        "OnBeingBreak": {
+        {
+          "Event": "OnBeingBreak",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -2527,7 +2535,8 @@
             }
           ]
         },
-        "OnListenModifierAdd": {
+        {
+          "Event": "OnListenModifierAdd",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -2708,11 +2717,12 @@
             }
           ]
         }
-      }
+      ]
     },
     "MMonster_W2_Valkyrie02_00_DynamicAI_ToastAndEffect": {
-      "_CallbackList": {
-        "OnCreate": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.ShowUIPage",
@@ -2729,7 +2739,7 @@
             }
           ]
         }
-      }
+      ]
     },
     "MMonster_W2_Valkyrie02_00_Skill04_DuringSkill": {},
     "MMonster_W2_Valkyrie02_00_Skill04_Target": {
@@ -2742,8 +2752,9 @@
         "UIPosition": "UI_TOP",
         "ModifierUIPriority": "Debuff"
       },
-      "_CallbackList": {
-        "OnCreate": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.TriggerEffect",
@@ -2755,7 +2766,7 @@
             }
           ]
         }
-      },
+      ],
       "Stacking": "ReplaceByCaster"
     }
   }

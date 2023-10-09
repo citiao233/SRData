@@ -3,8 +3,9 @@
     {
       "Modifiers": {
         "Monster_W2_Kafka_BattleScore1": {
-          "_CallbackList": {
-            "OnListenModifierDispel": {
+          "_CallbackList": [
+            {
+              "Event": "OnListenModifierDispel",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -80,7 +81,7 @@
                 }
               ]
             }
-          }
+          ]
         },
         "Monster_W2_Kafka_00_AIChange": {}
       },
@@ -1533,6 +1534,17 @@
           "$type": "RPG.GameCore.SkillExecutionStart"
         },
         {
+          "$type": "RPG.GameCore.SetDynamicValue",
+          "DynamicKey": "BattleEventFlag",
+          "ContextScope": "TargetEntity",
+          "Value": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          }
+        },
+        {
           "$type": "RPG.GameCore.WaitAnimState",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
@@ -1913,7 +1925,12 @@
           "SuccessTaskList": [
             {
               "$type": "RPG.GameCore.CreateBattleEvent",
-              "EventID": 20002,
+              "EventID": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 20002
+                }
+              },
               "PropertyFromTarget": {
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "Caster"
@@ -1940,13 +1957,19 @@
                   }
                 }
               },
-              "Team": "TeamDark"
+              "Team": "TeamDark",
+              "DuplicateOption": "Coexist"
             }
           ],
           "FailedTaskList": [
             {
               "$type": "RPG.GameCore.CreateBattleEvent",
-              "EventID": 20002,
+              "EventID": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 20002
+                }
+              },
               "PropertyFromTarget": {
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "Caster"
@@ -1973,7 +1996,8 @@
                   }
                 }
               },
-              "Team": "TeamDark"
+              "Team": "TeamDark",
+              "DuplicateOption": "Coexist"
             }
           ]
         },
@@ -2432,6 +2456,17 @@
           "ContextScope": "TargetEntity"
         },
         {
+          "$type": "RPG.GameCore.SetDynamicValue",
+          "DynamicKey": "BattleEventFlag",
+          "ContextScope": "TargetEntity",
+          "Value": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0
+            }
+          }
+        },
+        {
           "$type": "RPG.GameCore.Retarget",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
@@ -2483,8 +2518,9 @@
       "Modifiers": {
         "Modifier_W2_Kafka_00_RL_BattleEvent": {
           "LifeStepMoment": "ModifierPhase1End",
-          "_CallbackList": {
-            "OnPhase1": {
+          "_CallbackList": [
+            {
+              "Event": "OnPhase1",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.TurnInsertAbility",
@@ -2508,11 +2544,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "Modifier_W2_Kafka_00_RL_BattleEvent_BaseSpeed": {
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.StackProperty",
@@ -2534,7 +2571,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "BattleEventAbility_W2_Kafka_00_RL",
@@ -2882,6 +2919,17 @@
           "ModifierName": "Monster_W2_Kafka_00_RL_MindControl_False"
         },
         {
+          "$type": "RPG.GameCore.SetDynamicValue",
+          "DynamicKey": "BattleEventFlag",
+          "ContextScope": "TargetEntity",
+          "Value": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0
+            }
+          }
+        },
+        {
           "$type": "RPG.GameCore.WaitSecond",
           "WaitTime": 0.5
         },
@@ -2901,8 +2949,9 @@
   "GlobalModifiers": {
     "Monster_W2_Kafka_00_RL_PhaseController": {
       "LimboWaitHealPriority": "ChangePhase",
-      "_CallbackList": {
-        "OnLimboWaitHeal": {
+      "_CallbackList": [
+        {
+          "Event": "OnLimboWaitHeal",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -3057,14 +3106,15 @@
             }
           ]
         }
-      }
+      ]
     },
     "Monster_W2_Kafka_00_RL_Endurance": {
       "BehaviorFlagList": [
         "Endurance"
       ],
-      "_CallbackList": {
-        "OnCreate": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.CharacterChangePhase",
@@ -3082,7 +3132,8 @@
             }
           ]
         },
-        "OnDestroy": {
+        {
+          "Event": "OnDestroy",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.CharacterChangePhase",
@@ -3098,7 +3149,8 @@
             }
           ]
         },
-        "OnStack": {
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.StackStatusResistance",
@@ -3116,11 +3168,15 @@
             }
           ]
         }
-      }
+      ]
     },
     "Monster_W2_Kafka_00_RL_Pursuit": {
-      "_CallbackList": {
-        "OnListenCharmMakeDamage": {
+      "BehaviorFlagList": [
+        "ListenBattleEventSkill"
+      ],
+      "_CallbackList": [
+        {
+          "Event": "OnListenCharmMakeDamage",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -3188,7 +3244,8 @@
             }
           ]
         },
-        "OnListenAfterSkillUse": {
+        {
+          "Event": "OnListenAfterSkillUse",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -3262,7 +3319,7 @@
             }
           ]
         }
-      },
+      ],
       "DynamicValues": {
         "Values": {
           "-2027709849": {}
@@ -3271,8 +3328,9 @@
     },
     "Monster_W2_Kafka_00_RL_Skill04_Target": {},
     "Monster_W2_Kafka_00_RL_Power": {
-      "_CallbackList": {
-        "OnCreate": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.AddModifier",
@@ -3296,7 +3354,8 @@
             }
           ]
         },
-        "OnListenTurnEnd": {
+        {
+          "Event": "OnListenTurnEnd",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.Retarget",
@@ -3338,7 +3397,7 @@
             }
           ]
         }
-      },
+      ],
       "DynamicValues": {
         "Values": {
           "-945261968": {}
@@ -3349,8 +3408,9 @@
       "BehaviorFlagList": [
         "RemoveWhenCasterDead"
       ],
-      "_CallbackList": {
-        "OnAfterBeingHitAll": {
+      "_CallbackList": [
+        {
+          "Event": "OnAfterBeingHitAll",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -3450,7 +3510,7 @@
             }
           ]
         }
-      },
+      ],
       "DynamicValues": {
         "Values": {
           "-945261968": {}
@@ -3459,8 +3519,9 @@
     },
     "Monster_W2_Kafka_00_RL_MeleeAttack": {
       "LifeTime": 1,
-      "_CallbackList": {
-        "OnDestroy": {
+      "_CallbackList": [
+        {
+          "Event": "OnDestroy",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -3514,7 +3575,7 @@
             }
           ]
         }
-      },
+      ],
       "DynamicValues": {
         "Values": {
           "-945261968": {}
@@ -3528,8 +3589,9 @@
           "Value": 1
         }
       },
-      "_CallbackList": {
-        "OnStack": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
@@ -3571,7 +3633,7 @@
             }
           ]
         }
-      },
+      ],
       "Stacking": "Replace",
       "DynamicValues": {
         "Values": {
@@ -3589,8 +3651,9 @@
         "UIPosition": "UI_TOP",
         "ModifierUIPriority": "HardControl"
       },
-      "_CallbackList": {
-        "OnCreate": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.TriggerAnimState",
@@ -3603,7 +3666,7 @@
             }
           ]
         }
-      }
+      ]
     },
     "Monster_W2_Kafka_00_RL_MindControl_TrueEffect": {
       "BehaviorFlagList": [
@@ -3614,8 +3677,9 @@
         "UIPosition": "UI_TOP",
         "ModifierUIPriority": "HardControl"
       },
-      "_CallbackList": {
-        "OnCreate": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.RemoveModifier",
@@ -3627,7 +3691,7 @@
             }
           ]
         }
-      }
+      ]
     },
     "Monster_W2_Kafka_00_RL_MindControl_False": {
       "BehaviorFlagList": [
@@ -3640,8 +3704,9 @@
       }
     },
     "Monster_W2_Kafka_00_RL_MindControlStanceResistance": {
-      "_CallbackList": {
-        "OnStack": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.StackProperty",
@@ -3659,18 +3724,20 @@
             }
           ]
         },
-        "OnAfterBeingAttacked": {
+        {
+          "Event": "OnAfterBeingAttacked",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.RemoveSelfModifier"
             }
           ]
         }
-      }
+      ]
     },
     "Monster_W2_Kafka_00_RL_MindControlCheck": {
-      "_CallbackList": {
-        "OnBeforeBeingHitAll": {
+      "_CallbackList": [
+        {
+          "Event": "OnBeforeBeingHitAll",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -3709,7 +3776,8 @@
             }
           ]
         },
-        "OnBeforeBeingAttacked": {
+        {
+          "Event": "OnBeforeBeingAttacked",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -3747,7 +3815,8 @@
             }
           ]
         },
-        "OnAfterBeingAttacked": {
+        {
+          "Event": "OnAfterBeingAttacked",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -4028,11 +4097,12 @@
             }
           ]
         }
-      }
+      ]
     },
     "Monster_W2_Kafka_00_RL_LowHP": {
-      "_CallbackList": {
-        "OnHPChange": {
+      "_CallbackList": [
+        {
+          "Event": "OnHPChange",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -4081,6 +4151,21 @@
                     "Alias": "ModifierOwnerEntity"
                   },
                   "DynamicKey": "FinalPhase",
+                  "ResetValue": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  },
+                  "ContextScope": "TargetEntity"
+                },
+                {
+                  "$type": "RPG.GameCore.DefineDynamicValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "DynamicKey": "FinalPhaseFirstCheck",
                   "ResetValue": {
                     "IsDynamic": false,
                     "FixedValue": {
@@ -4158,7 +4243,7 @@
             }
           ]
         }
-      },
+      ],
       "DynamicValues": {
         "Values": {
           "-71259139": {}
@@ -4166,8 +4251,9 @@
       }
     },
     "Monster_W2_Kafka_00_RL_Phase03EnhanceEffect": {
-      "_CallbackList": {
-        "OnCreate": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.ModifierAttachEffect",
@@ -4182,11 +4268,12 @@
             }
           ]
         }
-      }
+      ]
     },
     "Monster_W2_Kafka_00_RL_Phase03WeaponEnhanceEffect": {
-      "_CallbackList": {
-        "OnCreate": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.ModifierAttachEffect",
@@ -4201,7 +4288,7 @@
             }
           ]
         }
-      }
+      ]
     }
   }
 }

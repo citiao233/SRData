@@ -3,8 +3,9 @@
     {
       "Modifiers": {
         "Monster_W1_Mecha04_00_InsertControl": {
-          "_CallbackList": {
-            "OnBeingBreak": {
+          "_CallbackList": [
+            {
+              "Event": "OnBeingBreak",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.DefineDynamicValue",
@@ -17,7 +18,8 @@
                 }
               ]
             },
-            "OnEndBreak": {
+            {
+              "Event": "OnEndBreak",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -117,11 +119,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "HideMonsterHUD": {
-          "_CallbackList": {
-            "OnPhase1": {
+          "_CallbackList": [
+            {
+              "Event": "OnPhase1",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.MakeCharacterHUDVisible",
@@ -132,7 +135,8 @@
                 }
               ]
             },
-            "OnAllowAction": {
+            {
+              "Event": "OnAllowAction",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.MakeCharacterHUDVisible",
@@ -143,7 +147,7 @@
                 }
               ]
             }
-          }
+          ]
         },
         "WMonster_Mecha_02_MuteHitFly": {
           "BehaviorFlagList": [
@@ -151,8 +155,9 @@
           ]
         },
         "MMonster_W1_Mecha04_00_ChainSawSpeedController": {
-          "_CallbackList": {
-            "OnCreate": {
+          "_CallbackList": [
+            {
+              "Event": "OnCreate",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -191,7 +196,8 @@
                 }
               ]
             },
-            "OnModifierAdd": {
+            {
+              "Event": "OnModifierAdd",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -238,7 +244,8 @@
                 }
               ]
             },
-            "OnModifierRemove": {
+            {
+              "Event": "OnModifierRemove",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -285,11 +292,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "MMonster_W1_Mecha04_00_ChainSawSpeedNormal": {
-          "_CallbackList": {
-            "OnCreate": {
+          "_CallbackList": [
+            {
+              "Event": "OnCreate",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.SetEffectAnimSpeed",
@@ -309,7 +317,8 @@
                 }
               ]
             },
-            "OnDestroy": {
+            {
+              "Event": "OnDestroy",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.SetEffectAnimSpeed",
@@ -328,7 +337,7 @@
                 }
               ]
             }
-          }
+          ]
         },
         "Monster_W1_Mecha04_00_PassiveMDF": {
           "UIConfig": {
@@ -2136,8 +2145,9 @@
   "GlobalModifiers": {
     "Monster_W1_Mecha04_00_RL_PhaseController": {
       "LimboWaitHealPriority": "ChangePhase",
-      "_CallbackList": {
-        "OnLimboWaitHeal": {
+      "_CallbackList": [
+        {
+          "Event": "OnLimboWaitHeal",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -2587,15 +2597,17 @@
             }
           ]
         }
-      }
+      ]
     },
     "Monster_W1_Mecha04_00_RL_Dormancy": {
       "BehaviorFlagList": [
         "DisableHealHP",
-        "DisableAction"
+        "DisableAction",
+        "MuteSpeed"
       ],
-      "_CallbackList": {
-        "OnCreate": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.AddModifier",
@@ -2607,7 +2619,8 @@
             }
           ]
         },
-        "OnDestroy": {
+        {
+          "Event": "OnDestroy",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.RemoveModifier",
@@ -2619,39 +2632,9 @@
             }
           ]
         },
-        "OnStack": {
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
-            {
-              "$type": "RPG.GameCore.SetDynamicValueByProperty",
-              "DynamicKey": "BaseSpeed",
-              "ReadTargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "Value": "BaseSpeed"
-            },
-            {
-              "$type": "RPG.GameCore.StackProperty",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "Property": "SpeedDelta",
-              "PropertyValue": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AAABAAMJ",
-                  "FixedValues": [
-                    {
-                      "Value": 0
-                    }
-                  ],
-                  "DynamicHashes": [
-                    -906730870
-                  ]
-                }
-              }
-            },
             {
               "$type": "RPG.GameCore.StackProperty",
               "TargetType": {
@@ -2668,15 +2651,16 @@
             }
           ]
         }
-      }
+      ]
     },
     "Monster_W1_Mecha04_00_RL_Stealth": {
       "BehaviorFlagList": [
         "Stealth",
         "Endurance"
       ],
-      "_CallbackList": {
-        "OnCreate": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.MakeCharacterHUDVisible",
@@ -2696,7 +2680,8 @@
             }
           ]
         },
-        "OnDestroy": {
+        {
+          "Event": "OnDestroy",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.ReleaseCharacterHUDVisibleControl",
@@ -2714,14 +2699,15 @@
             }
           ]
         }
-      }
+      ]
     },
     "Monster_W1_Mecha04_00_RL_Endurance": {
       "BehaviorFlagList": [
         "Endurance"
       ],
-      "_CallbackList": {
-        "OnStack": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.StackStatusResistance",
@@ -2739,11 +2725,12 @@
             }
           ]
         }
-      }
+      ]
     },
     "Monster_W1_Mecha04_00_RL_Support": {
-      "_CallbackList": {
-        "OnBeingBreak": {
+      "_CallbackList": [
+        {
+          "Event": "OnBeingBreak",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.RemoveModifier",
@@ -2827,12 +2814,13 @@
             }
           ]
         }
-      }
+      ]
     },
     "Monster_W1_Mecha04_00_RL_BreakTarget": {},
     "Monster_W1_Mecha04_00_RL_Phase3Passive": {
-      "_CallbackList": {
-        "OnStack": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.StackProperty",
@@ -2862,7 +2850,7 @@
             }
           ]
         }
-      },
+      ],
       "DynamicValues": {
         "Values": {
           "-422130114": {}
@@ -2876,8 +2864,9 @@
           "Value": 1
         }
       },
-      "_CallbackList": {
-        "OnStack": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetDynamicValue",
@@ -2933,7 +2922,7 @@
             }
           ]
         }
-      },
+      ],
       "Stacking": "Replace",
       "DynamicValues": {
         "Values": {
@@ -2943,8 +2932,9 @@
       }
     },
     "Monster_W1_Mecha04_00_RL_ChargeFlag": {
-      "_CallbackList": {
-        "OnAfterSkillUse": {
+      "_CallbackList": [
+        {
+          "Event": "OnAfterSkillUse",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.ModifyCurrentSkillDelayCost",
@@ -2961,11 +2951,12 @@
             }
           ]
         }
-      }
+      ]
     },
     "Monster_Mecha04_00_RL_ResetAI": {
-      "_CallbackList": {
-        "OnActionEnd": {
+      "_CallbackList": [
+        {
+          "Event": "OnActionEnd",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -3033,7 +3024,8 @@
             }
           ]
         },
-        "OnListenTurnEnd": {
+        {
+          "Event": "OnListenTurnEnd",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.Retarget",
@@ -3092,7 +3084,8 @@
             }
           ]
         },
-        "OnListenModifierRemove": {
+        {
+          "Event": "OnListenModifierRemove",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -3164,7 +3157,7 @@
             }
           ]
         }
-      },
+      ],
       "DynamicValues": {
         "Values": {
           "825300340": {}
@@ -3172,8 +3165,9 @@
       }
     },
     "Monster_W1_Mecha04_00_RL_Phase02Effect": {
-      "_CallbackList": {
-        "OnCreate": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.ModifierAttachEffect",
@@ -3185,11 +3179,12 @@
             }
           ]
         }
-      }
+      ]
     },
     "Monster_W1_Mecha04_00_RL_Phase03Effect": {
-      "_CallbackList": {
-        "OnCreate": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.ModifierAttachEffect",
@@ -3217,11 +3212,12 @@
             }
           ]
         }
-      }
+      ]
     },
     "Monster_W1_Mecha04_00_RL_ChargeDecision": {
-      "_CallbackList": {
-        "OnModifierAdd": {
+      "_CallbackList": [
+        {
+          "Event": "OnModifierAdd",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -3258,7 +3254,7 @@
             }
           ]
         }
-      },
+      ],
       "DynamicValues": {
         "Values": {
           "-1372316912": {}
@@ -3267,8 +3263,9 @@
     },
     "Monster_W1_Mecha04_00_RL_AfterCharge": {
       "LifeTime": 1,
-      "_CallbackList": {
-        "OnDestroy": {
+      "_CallbackList": [
+        {
+          "Event": "OnDestroy",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -3307,7 +3304,8 @@
             }
           ]
         },
-        "OnAfterSkillUse": {
+        {
+          "Event": "OnAfterSkillUse",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -3330,7 +3328,7 @@
             }
           ]
         }
-      },
+      ],
       "DynamicValues": {
         "Values": {
           "831182077": {},

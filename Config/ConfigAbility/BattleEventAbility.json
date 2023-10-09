@@ -3,201 +3,212 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_Xianzhou_01": {
-          "_CallbackList": {
-            "OnPhase1": {
+          "_CallbackList": [
+            {
+              "Event": "OnPhase1",
               "CallbackConfig": [
                 {
-                  "$type": "RPG.GameCore.TriggerAbility",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "Caster"
-                  },
-                  "AbilityName": "BattleEventAbility_SummonMonsterInfinite_Camera",
-                  "IsSkillPerform": true
-                },
-                {
-                  "$type": "RPG.GameCore.Retarget",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "AllDarkTeam"
-                  },
+                  "$type": "RPG.GameCore.PredicateTaskList",
                   "Predicate": {
-                    "$type": "RPG.GameCore.ByAny",
-                    "PredicateList": [
-                      {
-                        "$type": "RPG.GameCore.ByCompareMonsterID",
-                        "TargetType": {
-                          "$type": "RPG.GameCore.TargetAlias",
-                          "Alias": "ParamEntity"
-                        },
-                        "TargetMonsterID": {
-                          "IsDynamic": false,
-                          "FixedValue": {
-                            "Value": 202301008
-                          }
-                        }
-                      },
-                      {
-                        "$type": "RPG.GameCore.ByCompareMonsterID",
-                        "TargetType": {
-                          "$type": "RPG.GameCore.TargetAlias",
-                          "Alias": "ParamEntity"
-                        },
-                        "TargetMonsterID": {
-                          "IsDynamic": false,
-                          "FixedValue": {
-                            "Value": 2022010
-                          }
-                        }
-                      }
-                    ]
+                    "$type": "RPG.GameCore.ByCheckDarkTeamDestroy",
+                    "Inverse": true
                   },
-                  "MaxNumber": {
-                    "IsDynamic": false,
-                    "FixedValue": {
-                      "Value": 1
-                    }
-                  },
-                  "TaskList": [
+                  "SuccessTaskList": [
                     {
-                      "$type": "RPG.GameCore.SummonMonster",
-                      "SummonMonsterDataList": [
-                        {
-                          "MonsterID": {
-                            "IsDynamic": true,
-                            "PostfixExpr": {
-                              "OpCodes": "AAAJ",
-                              "FixedValues": [
-                                {
-                                  "Value": 2022010
-                                }
-                              ],
-                              "DynamicHashes": []
-                            }
-                          },
-                          "LocationType": "First",
-                          "InitAnimStateName": "Appear"
-                        }
-                      ],
-                      "DelayRatio": {
-                        "IsDynamic": true,
-                        "PostfixExpr": {
-                          "OpCodes": "AQAJ",
-                          "FixedValues": [],
-                          "DynamicHashes": [
-                            -142090201
-                          ]
-                        }
+                      "$type": "RPG.GameCore.TriggerAbility",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
                       },
-                      "RefreshTeamLocation": false
+                      "AbilityName": "BattleEventAbility_SummonMonsterInfinite_Camera",
+                      "IsSkillPerform": true
                     },
                     {
-                      "$type": "RPG.GameCore.SummonMonster",
-                      "SummonMonsterDataList": [
-                        {
-                          "MonsterID": {
-                            "IsDynamic": true,
-                            "PostfixExpr": {
-                              "OpCodes": "AAAJ",
-                              "FixedValues": [
-                                {
-                                  "Value": 2022010
-                                }
-                              ],
-                              "DynamicHashes": []
+                      "$type": "RPG.GameCore.Retarget",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AllDarkTeam"
+                      },
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByAny",
+                        "PredicateList": [
+                          {
+                            "$type": "RPG.GameCore.ByCompareMonsterID",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "ParamEntity"
+                            },
+                            "TargetMonsterID": {
+                              "IsDynamic": false,
+                              "FixedValue": {
+                                "Value": 202301008
+                              }
                             }
                           },
-                          "LocationType": "Last",
-                          "InitAnimStateName": "Appear"
-                        }
-                      ],
-                      "DelayRatio": {
-                        "IsDynamic": true,
-                        "PostfixExpr": {
-                          "OpCodes": "AQAJ",
-                          "FixedValues": [],
-                          "DynamicHashes": [
-                            -142090201
-                          ]
+                          {
+                            "$type": "RPG.GameCore.ByCompareMonsterID",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "ParamEntity"
+                            },
+                            "TargetMonsterID": {
+                              "IsDynamic": false,
+                              "FixedValue": {
+                                "Value": 2022010
+                              }
+                            }
+                          }
+                        ]
+                      },
+                      "MaxNumber": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1
                         }
                       },
-                      "RefreshTeamLocation": false
-                    }
-                  ],
-                  "FailedTaskList": [
-                    {
-                      "$type": "RPG.GameCore.SummonMonster",
-                      "SummonMonsterDataList": [
+                      "TaskList": [
                         {
-                          "MonsterID": {
+                          "$type": "RPG.GameCore.SummonMonster",
+                          "SummonMonsterDataList": [
+                            {
+                              "MonsterID": {
+                                "IsDynamic": true,
+                                "PostfixExpr": {
+                                  "OpCodes": "AAAJ",
+                                  "FixedValues": [
+                                    {
+                                      "Value": 2022010
+                                    }
+                                  ],
+                                  "DynamicHashes": []
+                                }
+                              },
+                              "LocationType": "First",
+                              "InitAnimStateName": "Appear"
+                            }
+                          ],
+                          "DelayRatio": {
                             "IsDynamic": true,
                             "PostfixExpr": {
-                              "OpCodes": "AAAJ",
-                              "FixedValues": [
-                                {
-                                  "Value": 2022040
-                                }
-                              ],
-                              "DynamicHashes": []
+                              "OpCodes": "AQAJ",
+                              "FixedValues": [],
+                              "DynamicHashes": [
+                                -142090201
+                              ]
                             }
                           },
-                          "LocationType": "First",
-                          "InitAnimStateName": "Appear"
+                          "RefreshTeamLocation": false
+                        },
+                        {
+                          "$type": "RPG.GameCore.SummonMonster",
+                          "SummonMonsterDataList": [
+                            {
+                              "MonsterID": {
+                                "IsDynamic": true,
+                                "PostfixExpr": {
+                                  "OpCodes": "AAAJ",
+                                  "FixedValues": [
+                                    {
+                                      "Value": 2022010
+                                    }
+                                  ],
+                                  "DynamicHashes": []
+                                }
+                              },
+                              "LocationType": "Last",
+                              "InitAnimStateName": "Appear"
+                            }
+                          ],
+                          "DelayRatio": {
+                            "IsDynamic": true,
+                            "PostfixExpr": {
+                              "OpCodes": "AQAJ",
+                              "FixedValues": [],
+                              "DynamicHashes": [
+                                -142090201
+                              ]
+                            }
+                          },
+                          "RefreshTeamLocation": false
                         }
                       ],
-                      "DelayRatio": {
-                        "IsDynamic": true,
-                        "PostfixExpr": {
-                          "OpCodes": "AQAJ",
-                          "FixedValues": [],
-                          "DynamicHashes": [
-                            -142090201
-                          ]
+                      "FailedTaskList": [
+                        {
+                          "$type": "RPG.GameCore.SummonMonster",
+                          "SummonMonsterDataList": [
+                            {
+                              "MonsterID": {
+                                "IsDynamic": true,
+                                "PostfixExpr": {
+                                  "OpCodes": "AAAJ",
+                                  "FixedValues": [
+                                    {
+                                      "Value": 2022040
+                                    }
+                                  ],
+                                  "DynamicHashes": []
+                                }
+                              },
+                              "LocationType": "First",
+                              "InitAnimStateName": "Appear"
+                            }
+                          ],
+                          "DelayRatio": {
+                            "IsDynamic": true,
+                            "PostfixExpr": {
+                              "OpCodes": "AQAJ",
+                              "FixedValues": [],
+                              "DynamicHashes": [
+                                -142090201
+                              ]
+                            }
+                          },
+                          "RefreshTeamLocation": false
+                        },
+                        {
+                          "$type": "RPG.GameCore.SummonMonster",
+                          "SummonMonsterDataList": [
+                            {
+                              "MonsterID": {
+                                "IsDynamic": true,
+                                "PostfixExpr": {
+                                  "OpCodes": "AAAJ",
+                                  "FixedValues": [
+                                    {
+                                      "Value": 2022040
+                                    }
+                                  ],
+                                  "DynamicHashes": []
+                                }
+                              },
+                              "LocationType": "Last",
+                              "InitAnimStateName": "Appear"
+                            }
+                          ],
+                          "DelayRatio": {
+                            "IsDynamic": true,
+                            "PostfixExpr": {
+                              "OpCodes": "AQAJ",
+                              "FixedValues": [],
+                              "DynamicHashes": [
+                                -142090201
+                              ]
+                            }
+                          },
+                          "RefreshTeamLocation": false
                         }
-                      },
-                      "RefreshTeamLocation": false
+                      ]
                     },
                     {
-                      "$type": "RPG.GameCore.SummonMonster",
-                      "SummonMonsterDataList": [
-                        {
-                          "MonsterID": {
-                            "IsDynamic": true,
-                            "PostfixExpr": {
-                              "OpCodes": "AAAJ",
-                              "FixedValues": [
-                                {
-                                  "Value": 2022040
-                                }
-                              ],
-                              "DynamicHashes": []
-                            }
-                          },
-                          "LocationType": "Last",
-                          "InitAnimStateName": "Appear"
-                        }
-                      ],
-                      "DelayRatio": {
-                        "IsDynamic": true,
-                        "PostfixExpr": {
-                          "OpCodes": "AQAJ",
-                          "FixedValues": [],
-                          "DynamicHashes": [
-                            -142090201
-                          ]
-                        }
-                      },
-                      "RefreshTeamLocation": false
+                      "$type": "RPG.GameCore.WaitSecond",
+                      "WaitTime": 1.5
                     }
                   ]
-                },
-                {
-                  "$type": "RPG.GameCore.WaitSecond",
-                  "WaitTime": 1.5
                 }
               ]
             },
-            "OnStack": {
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.OwnerEntityAddAbility",
@@ -235,7 +246,8 @@
                 }
               ]
             },
-            "OnListenCharacterCreate": {
+            {
+              "Event": "OnListenCharacterCreate",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -273,7 +285,7 @@
                 }
               ]
             }
-          },
+          ],
           "DynamicValues": {
             "Values": {
               "-1387017452": {}
@@ -284,8 +296,9 @@
           "BehaviorFlagList": [
             "Deathrattle"
           ],
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.OwnerEntityAddAbility",
@@ -297,7 +310,8 @@
                 }
               ]
             },
-            "OnDeathrattle": {
+            {
+              "Event": "OnDeathrattle",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.TurnInsertAbility",
@@ -324,7 +338,7 @@
                 }
               ]
             }
-          },
+          ],
           "DynamicValues": {
             "Values": {
               "286452074": {}
@@ -480,8 +494,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_Xianzhou_02": {
-          "_CallbackList": {
-            "OnPhase1": {
+          "_CallbackList": [
+            {
+              "Event": "OnPhase1",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.TriggerAbility",
@@ -554,6 +569,7 @@
                         "Alias": "ParamEntity"
                       },
                       "ModifierName": "MCommon_DOT_Electric",
+                      "StackingFlag": "Level",
                       "Chance": {
                         "IsDynamic": true,
                         "PostfixExpr": {
@@ -617,6 +633,7 @@
                         "Alias": "ParamEntity"
                       },
                       "ModifierName": "MCommon_DOT_Poison",
+                      "StackingFlag": "Level",
                       "Chance": {
                         "IsDynamic": true,
                         "PostfixExpr": {
@@ -680,6 +697,7 @@
                         "Alias": "ParamEntity"
                       },
                       "ModifierName": "MCommon_DOT_Poison",
+                      "StackingFlag": "Level",
                       "Chance": {
                         "IsDynamic": true,
                         "PostfixExpr": {
@@ -743,6 +761,7 @@
                         "Alias": "ParamEntity"
                       },
                       "ModifierName": "MCommon_DOT_Burn",
+                      "StackingFlag": "Level",
                       "Chance": {
                         "IsDynamic": true,
                         "PostfixExpr": {
@@ -806,6 +825,7 @@
                         "Alias": "ParamEntity"
                       },
                       "ModifierName": "MCommon_DOT_Tear",
+                      "StackingFlag": "Level",
                       "Chance": {
                         "IsDynamic": true,
                         "PostfixExpr": {
@@ -857,7 +877,8 @@
                 }
               ]
             },
-            "OnStack": {
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.SetDynamicValueByProperty",
@@ -932,7 +953,8 @@
                 }
               ]
             },
-            "OnListenCharacterCreate": {
+            {
+              "Event": "OnListenCharacterCreate",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -957,7 +979,7 @@
                 }
               ]
             }
-          },
+          ],
           "DynamicValues": {
             "Values": {
               "-1387017452": {},
@@ -967,8 +989,9 @@
           }
         },
         "Modifier_BattleEventAbility_Challenge_Xianzhou_02_Sub": {
-          "_CallbackList": {
-            "OnBeforeBeingHitAll": {
+          "_CallbackList": [
+            {
+              "Event": "OnBeforeBeingHitAll",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -996,7 +1019,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "BattleEventAbility_Challenge_Xianzhou_02",
@@ -1042,8 +1065,12 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_Xianzhou_03": {
-          "_CallbackList": {
-            "OnListenCharacterCreate": {
+          "BehaviorFlagList": [
+            "ListenBattleEventSkill"
+          ],
+          "_CallbackList": [
+            {
+              "Event": "OnListenCharacterCreate",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -1073,7 +1100,8 @@
                 }
               ]
             },
-            "OnListenBeforeSkillUse": {
+            {
+              "Event": "OnListenBeforeSkillUse",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -1134,11 +1162,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "Modifier_BattleEventAbility_Challenge_Xianzhou_03_Sub": {
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.StackProperty",
@@ -1178,7 +1207,7 @@
                 }
               ]
             }
-          },
+          ],
           "Stacking": "Replace"
         },
         "Modifier_BattleEventAbility_Challenge_Xianzhou_03_Sub2": {}
@@ -1220,8 +1249,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_Xianzhou_04": {
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.SetDynamicValueByProperty",
@@ -1256,7 +1286,8 @@
                 }
               ]
             },
-            "OnListenCharacterCreate": {
+            {
+              "Event": "OnListenCharacterCreate",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -1295,7 +1326,7 @@
                 }
               ]
             }
-          },
+          ],
           "DynamicValues": {
             "Values": {
               "-1387017452": {}
@@ -1303,8 +1334,9 @@
           }
         },
         "Modifier_BattleEventAbility_Challenge_Xianzhou_04_Sub": {
-          "_CallbackList": {
-            "OnAfterHit": {
+          "_CallbackList": [
+            {
+              "Event": "OnAfterHit",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -1329,7 +1361,8 @@
                 }
               ]
             },
-            "OnBeforeAttack": {
+            {
+              "Event": "OnBeforeAttack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.SetDynamicValue",
@@ -1343,7 +1376,8 @@
                 }
               ]
             },
-            "OnAfterAttack": {
+            {
+              "Event": "OnAfterAttack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -1406,7 +1440,7 @@
                 }
               ]
             }
-          },
+          ],
           "DynamicValues": {
             "Values": {
               "1983882602": {},
@@ -1440,8 +1474,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_Xianzhou_05": {
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.AddModifier",
@@ -1462,7 +1497,8 @@
                 }
               ]
             },
-            "OnListenCharacterDie": {
+            {
+              "Event": "OnListenCharacterDie",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -1493,7 +1529,8 @@
                 }
               ]
             },
-            "OnListenCharacterCreate": {
+            {
+              "Event": "OnListenCharacterCreate",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -1546,7 +1583,8 @@
                 }
               ]
             },
-            "OnListenModifierDispel": {
+            {
+              "Event": "OnListenModifierDispel",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -1581,11 +1619,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "Modifier_BattleEventAbility_Challenge_Xianzhou_05_Sub": {
-          "_CallbackList": {
-            "OnAfterSkillUse": {
+          "_CallbackList": [
+            {
+              "Event": "OnAfterSkillUse",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -1630,7 +1669,7 @@
                 }
               ]
             }
-          }
+          ]
         },
         "Modifier_BattleEventAbility_Challenge_Xianzhou_05_Sub1": {
           "MaxLayer": 10,
@@ -1640,8 +1679,9 @@
               "Value": 1
             }
           },
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
@@ -1679,7 +1719,7 @@
                 }
               ]
             }
-          },
+          ],
           "Stacking": "ReplaceByCaster",
           "DynamicValues": {
             "Values": {
@@ -1688,8 +1728,9 @@
           }
         },
         "Modifier_BattleEventAbility_Challenge_Xianzhou_05_Sub2": {
-          "_CallbackList": {
-            "OnDestroy": {
+          "_CallbackList": [
+            {
+              "Event": "OnDestroy",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.RecordEntityFormationIndex",
@@ -1700,7 +1741,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "BattleEventAbility_Challenge_Xianzhou_05",
@@ -1791,8 +1832,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_Xianzhou_06": {
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.AddModifier",
@@ -1816,7 +1858,8 @@
                 }
               ]
             },
-            "OnListenCharacterCreate": {
+            {
+              "Event": "OnListenCharacterCreate",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -1874,11 +1917,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "Modifier_BattleEventAbility_Challenge_Xianzhou_06_Sub": {
-          "_CallbackList": {
-            "OnBeforeBeingHitAll": {
+          "_CallbackList": [
+            {
+              "Event": "OnBeforeBeingHitAll",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -1954,7 +1998,7 @@
                 }
               ]
             }
-          },
+          ],
           "DynamicValues": {
             "Values": {
               "-961442142": {}
@@ -1962,8 +2006,9 @@
           }
         },
         "Modifier_BattleEventAbility_Challenge_Xianzhou_06_Sub1": {
-          "_CallbackList": {
-            "OnBeforeAttack": {
+          "_CallbackList": [
+            {
+              "Event": "OnBeforeAttack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -2029,7 +2074,8 @@
                 }
               ]
             },
-            "OnAfterAttack": {
+            {
+              "Event": "OnAfterAttack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.RemoveModifier",
@@ -2041,7 +2087,7 @@
                 }
               ]
             }
-          },
+          ],
           "DynamicValues": {
             "Values": {
               "268198220": {}
@@ -2049,8 +2095,9 @@
           }
         },
         "Modifier_BattleEventAbility_Challenge_Xianzhou_06_Sub2": {
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.StackProperty",
@@ -2072,7 +2119,7 @@
                 }
               ]
             }
-          },
+          ],
           "DynamicValues": {
             "Values": {
               "2128130574": {}
@@ -2149,8 +2196,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_01": {
-          "_CallbackList": {
-            "OnListenCharacterCreate": {
+          "_CallbackList": [
+            {
+              "Event": "OnListenCharacterCreate",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.AddModifier",
@@ -2162,11 +2210,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "Modifier_BattleEventAbility_Challenge_01_Sub": {
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.StackProperty",
@@ -2188,7 +2237,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "BattleEventAbility_Challenge_01",
@@ -2216,8 +2265,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_02": {
-          "_CallbackList": {
-            "OnListenCharacterCreate": {
+          "_CallbackList": [
+            {
+              "Event": "OnListenCharacterCreate",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.AddModifier",
@@ -2229,11 +2279,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "Modifier_BattleEventAbility_Challenge_02_Sub": {
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.StackProperty",
@@ -2255,7 +2306,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "BattleEventAbility_Challenge_02",
@@ -2283,8 +2334,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_03": {
-          "_CallbackList": {
-            "OnListenCharacterCreate": {
+          "_CallbackList": [
+            {
+              "Event": "OnListenCharacterCreate",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.AddModifier",
@@ -2296,11 +2348,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "Modifier_BattleEventAbility_Challenge_03_Sub": {
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.StackProperty",
@@ -2322,7 +2375,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "BattleEventAbility_Challenge_03",
@@ -2350,8 +2403,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_04": {
-          "_CallbackList": {
-            "OnListenCharacterCreate": {
+          "_CallbackList": [
+            {
+              "Event": "OnListenCharacterCreate",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.AddModifier",
@@ -2363,11 +2417,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "Modifier_BattleEventAbility_Challenge_04_Sub": {
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.StackProperty",
@@ -2389,7 +2444,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "BattleEventAbility_Challenge_04",
@@ -2417,8 +2472,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_05": {
-          "_CallbackList": {
-            "OnListenCharacterCreate": {
+          "_CallbackList": [
+            {
+              "Event": "OnListenCharacterCreate",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.AddModifier",
@@ -2430,11 +2486,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "Modifier_BattleEventAbility_Challenge_05_Sub": {
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.StackProperty",
@@ -2456,7 +2513,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "BattleEventAbility_Challenge_05",
@@ -2484,8 +2541,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_06": {
-          "_CallbackList": {
-            "OnPhase1": {
+          "_CallbackList": [
+            {
+              "Event": "OnPhase1",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.Retarget",
@@ -2564,11 +2622,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "MLevel_BattleEventAbility_Challenge_06": {
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.StackProperty",
@@ -2590,7 +2649,7 @@
                 }
               ]
             }
-          },
+          ],
           "Stacking": "ReplaceByCaster"
         }
       },
@@ -2631,8 +2690,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_07": {
-          "_CallbackList": {
-            "OnPhase1": {
+          "_CallbackList": [
+            {
+              "Event": "OnPhase1",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.Retarget",
@@ -2711,11 +2771,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "MLevel_BattleEventAbility_Challenge_07": {
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.StackProperty",
@@ -2737,7 +2798,7 @@
                 }
               ]
             }
-          },
+          ],
           "Stacking": "ReplaceByCaster"
         }
       },
@@ -2778,8 +2839,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_08": {
-          "_CallbackList": {
-            "OnPhase1": {
+          "_CallbackList": [
+            {
+              "Event": "OnPhase1",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.Retarget",
@@ -2858,11 +2920,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "MLevel_BattleEventAbility_Challenge_08": {
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.StackProperty",
@@ -2884,7 +2947,7 @@
                 }
               ]
             }
-          },
+          ],
           "Stacking": "ReplaceByCaster"
         }
       },
@@ -2925,8 +2988,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_09": {
-          "_CallbackList": {
-            "OnPhase1": {
+          "_CallbackList": [
+            {
+              "Event": "OnPhase1",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.Retarget",
@@ -3005,11 +3069,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "MLevel_BattleEventAbility_Challenge_09": {
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.StackProperty",
@@ -3031,7 +3096,7 @@
                 }
               ]
             }
-          },
+          ],
           "Stacking": "ReplaceByCaster"
         }
       },
@@ -3072,8 +3137,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_10": {
-          "_CallbackList": {
-            "OnPhase1": {
+          "_CallbackList": [
+            {
+              "Event": "OnPhase1",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.Retarget",
@@ -3152,11 +3218,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "MLevel_BattleEventAbility_Challenge_10": {
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.StackProperty",
@@ -3178,7 +3245,7 @@
                 }
               ]
             }
-          },
+          ],
           "Stacking": "ReplaceByCaster"
         }
       },
@@ -3219,8 +3286,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_11": {
-          "_CallbackList": {
-            "OnPhase1": {
+          "_CallbackList": [
+            {
+              "Event": "OnPhase1",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.TriggerAbility",
@@ -3288,7 +3356,7 @@
                 }
               ]
             }
-          }
+          ]
         },
         "MLevel_BattleEventAbility_Challenge_11": {
           "MaxLayer": 5,
@@ -3298,8 +3366,9 @@
               "Value": 1
             }
           },
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.TriggerEffect",
@@ -3345,7 +3414,7 @@
                 }
               ]
             }
-          },
+          ],
           "Stacking": "ReplaceByCaster",
           "DynamicValues": {
             "Values": {
@@ -3386,8 +3455,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_12": {
-          "_CallbackList": {
-            "OnPhase1": {
+          "_CallbackList": [
+            {
+              "Event": "OnPhase1",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.TriggerAbility",
@@ -3455,7 +3525,7 @@
                 }
               ]
             }
-          }
+          ]
         },
         "MLevel_BattleEventAbility_Challenge_12": {
           "MaxLayer": 5,
@@ -3465,8 +3535,9 @@
               "Value": 1
             }
           },
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.TriggerEffect",
@@ -3512,7 +3583,7 @@
                 }
               ]
             }
-          },
+          ],
           "Stacking": "ReplaceByCaster",
           "DynamicValues": {
             "Values": {
@@ -3553,8 +3624,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_13": {
-          "_CallbackList": {
-            "OnPhase1": {
+          "_CallbackList": [
+            {
+              "Event": "OnPhase1",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.TriggerAbility",
@@ -3622,7 +3694,7 @@
                 }
               ]
             }
-          }
+          ]
         },
         "MLevel_BattleEventAbility_Challenge_13": {
           "MaxLayer": 5,
@@ -3632,8 +3704,9 @@
               "Value": 1
             }
           },
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.TriggerEffect",
@@ -3679,7 +3752,7 @@
                 }
               ]
             }
-          },
+          ],
           "Stacking": "ReplaceByCaster",
           "DynamicValues": {
             "Values": {
@@ -3720,8 +3793,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_14": {
-          "_CallbackList": {
-            "OnPhase1": {
+          "_CallbackList": [
+            {
+              "Event": "OnPhase1",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.TriggerAbility",
@@ -3789,7 +3863,7 @@
                 }
               ]
             }
-          }
+          ]
         },
         "MLevel_BattleEventAbility_Challenge_14": {
           "MaxLayer": 5,
@@ -3799,8 +3873,9 @@
               "Value": 1
             }
           },
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.TriggerEffect",
@@ -3846,7 +3921,7 @@
                 }
               ]
             }
-          },
+          ],
           "Stacking": "ReplaceByCaster",
           "DynamicValues": {
             "Values": {
@@ -3887,8 +3962,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_15": {
-          "_CallbackList": {
-            "OnPhase1": {
+          "_CallbackList": [
+            {
+              "Event": "OnPhase1",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.TriggerAbility",
@@ -3956,7 +4032,7 @@
                 }
               ]
             }
-          }
+          ]
         },
         "MLevel_BattleEventAbility_Challenge_15": {
           "MaxLayer": 5,
@@ -3966,8 +4042,9 @@
               "Value": 1
             }
           },
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.TriggerEffect",
@@ -4013,7 +4090,7 @@
                 }
               ]
             }
-          },
+          ],
           "Stacking": "ReplaceByCaster",
           "DynamicValues": {
             "Values": {
@@ -4054,8 +4131,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_16": {
-          "_CallbackList": {
-            "OnListenCharacterCreate": {
+          "_CallbackList": [
+            {
+              "Event": "OnListenCharacterCreate",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.AddModifier",
@@ -4067,11 +4145,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "Modifier_BattleEventAbility_Challenge_16_Sub": {
-          "_CallbackList": {
-            "OnBeforeBeingHitAll": {
+          "_CallbackList": [
+            {
+              "Event": "OnBeforeBeingHitAll",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -4099,7 +4178,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "BattleEventAbility_Challenge_16",
@@ -4127,8 +4206,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_17": {
-          "_CallbackList": {
-            "OnListenCharacterCreate": {
+          "_CallbackList": [
+            {
+              "Event": "OnListenCharacterCreate",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.AddModifier",
@@ -4140,11 +4220,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "Modifier_BattleEventAbility_Challenge_17_Sub": {
-          "_CallbackList": {
-            "OnBeforeBeingHitAll": {
+          "_CallbackList": [
+            {
+              "Event": "OnBeforeBeingHitAll",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -4172,7 +4253,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "BattleEventAbility_Challenge_17",
@@ -4200,8 +4281,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_18": {
-          "_CallbackList": {
-            "OnListenCharacterCreate": {
+          "_CallbackList": [
+            {
+              "Event": "OnListenCharacterCreate",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.AddModifier",
@@ -4213,11 +4295,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "Modifier_BattleEventAbility_Challenge_18_Sub": {
-          "_CallbackList": {
-            "OnBeforeBeingHitAll": {
+          "_CallbackList": [
+            {
+              "Event": "OnBeforeBeingHitAll",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -4245,7 +4328,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "BattleEventAbility_Challenge_18",
@@ -4273,8 +4356,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_19": {
-          "_CallbackList": {
-            "OnListenCharacterCreate": {
+          "_CallbackList": [
+            {
+              "Event": "OnListenCharacterCreate",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.AddModifier",
@@ -4286,11 +4370,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "Modifier_BattleEventAbility_Challenge_19_Sub": {
-          "_CallbackList": {
-            "OnBeforeBeingHitAll": {
+          "_CallbackList": [
+            {
+              "Event": "OnBeforeBeingHitAll",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -4318,7 +4403,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "BattleEventAbility_Challenge_19",
@@ -4346,8 +4431,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_20": {
-          "_CallbackList": {
-            "OnListenCharacterCreate": {
+          "_CallbackList": [
+            {
+              "Event": "OnListenCharacterCreate",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.AddModifier",
@@ -4359,11 +4445,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "Modifier_BattleEventAbility_Challenge_20_Sub": {
-          "_CallbackList": {
-            "OnBeforeBeingHitAll": {
+          "_CallbackList": [
+            {
+              "Event": "OnBeforeBeingHitAll",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -4392,7 +4479,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "BattleEventAbility_Challenge_20",
@@ -4420,8 +4507,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_21": {
-          "_CallbackList": {
-            "OnListenCharacterCreate": {
+          "_CallbackList": [
+            {
+              "Event": "OnListenCharacterCreate",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.AddModifier",
@@ -4433,11 +4521,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "Modifier_BattleEventAbility_Challenge_21_Sub": {
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -4474,7 +4563,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "BattleEventAbility_Challenge_21",
@@ -4502,8 +4591,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_22": {
-          "_CallbackList": {
-            "OnListenCharacterCreate": {
+          "_CallbackList": [
+            {
+              "Event": "OnListenCharacterCreate",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.AddModifier",
@@ -4515,11 +4605,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "Modifier_BattleEventAbility_Challenge_22_Sub": {
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -4556,7 +4647,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "BattleEventAbility_Challenge_22",
@@ -4584,8 +4675,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_23": {
-          "_CallbackList": {
-            "OnListenCharacterCreate": {
+          "_CallbackList": [
+            {
+              "Event": "OnListenCharacterCreate",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.AddModifier",
@@ -4597,11 +4689,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "Modifier_BattleEventAbility_Challenge_23_Sub": {
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -4638,7 +4731,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "BattleEventAbility_Challenge_23",
@@ -4666,8 +4759,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_24": {
-          "_CallbackList": {
-            "OnListenCharacterCreate": {
+          "_CallbackList": [
+            {
+              "Event": "OnListenCharacterCreate",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.AddModifier",
@@ -4679,11 +4773,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "Modifier_BattleEventAbility_Challenge_24_Sub": {
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -4720,7 +4815,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "BattleEventAbility_Challenge_24",
@@ -4748,8 +4843,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_25": {
-          "_CallbackList": {
-            "OnListenCharacterCreate": {
+          "_CallbackList": [
+            {
+              "Event": "OnListenCharacterCreate",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.AddModifier",
@@ -4761,11 +4857,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "Modifier_BattleEventAbility_Challenge_25_Sub": {
-          "_CallbackList": {
-            "OnBeforeHitAll": {
+          "_CallbackList": [
+            {
+              "Event": "OnBeforeHitAll",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -4795,7 +4892,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "BattleEventAbility_Challenge_25",
@@ -4823,8 +4920,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_New_01": {
-          "_CallbackList": {
-            "OnPhase1": {
+          "_CallbackList": [
+            {
+              "Event": "OnPhase1",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.TriggerAbility",
@@ -4897,7 +4995,8 @@
                 }
               ]
             },
-            "OnListenCharacterCreate": {
+            {
+              "Event": "OnListenCharacterCreate",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.AddModifier",
@@ -4909,11 +5008,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "Modifier_BattleEventAbility_Challenge_New_01_Sub": {
-          "_CallbackList": {
-            "OnBeforeHit": {
+          "_CallbackList": [
+            {
+              "Event": "OnBeforeHit",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -4941,7 +5041,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "BattleEventAbility_Challenge_New_01",
@@ -4975,8 +5075,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_New_02": {
-          "_CallbackList": {
-            "OnPhase1": {
+          "_CallbackList": [
+            {
+              "Event": "OnPhase1",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.TriggerAbility",
@@ -5061,7 +5162,8 @@
                 }
               ]
             },
-            "OnListenCharacterCreate": {
+            {
+              "Event": "OnListenCharacterCreate",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.AddModifier",
@@ -5073,11 +5175,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "Modifier_BattleEventAbility_Challenge_New_02_Sub": {
-          "_CallbackList": {
-            "OnBeforeHit": {
+          "_CallbackList": [
+            {
+              "Event": "OnBeforeHit",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -5105,7 +5208,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "BattleEventAbility_Challenge_New_02",
@@ -5139,8 +5242,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_New_03": {
-          "_CallbackList": {
-            "OnPhase1": {
+          "_CallbackList": [
+            {
+              "Event": "OnPhase1",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.TriggerAbility",
@@ -5198,11 +5302,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "MLevel_BattleEventAbility_Challenge_New_03": {
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.TriggerEffect",
@@ -5232,14 +5337,15 @@
                 }
               ]
             },
-            "OnAfterAttack": {
+            {
+              "Event": "OnAfterAttack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.RemoveSelfModifier"
                 }
               ]
             }
-          },
+          ],
           "Stacking": "ReplaceByCaster",
           "DynamicValues": {
             "Values": {
@@ -5273,8 +5379,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_New_04": {
-          "_CallbackList": {
-            "OnPhase1": {
+          "_CallbackList": [
+            {
+              "Event": "OnPhase1",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.TriggerAbility",
@@ -5366,7 +5473,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "BattleEventAbility_Challenge_New_04",
@@ -5394,8 +5501,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_New_05": {
-          "_CallbackList": {
-            "OnPhase1": {
+          "_CallbackList": [
+            {
+              "Event": "OnPhase1",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.TriggerAbility",
@@ -5492,7 +5600,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "BattleEventAbility_Challenge_New_05",
@@ -5526,8 +5634,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_New_06": {
-          "_CallbackList": {
-            "OnPhase1": {
+          "_CallbackList": [
+            {
+              "Event": "OnPhase1",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.TriggerAbility",
@@ -5638,11 +5747,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "MLevel_BattleEventAbility_Challenge_New_06": {
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.TriggerEffect",
@@ -5690,7 +5800,7 @@
                 }
               ]
             }
-          },
+          ],
           "Stacking": "ReplaceByCaster",
           "DynamicValues": {
             "Values": {
@@ -5743,8 +5853,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_New_07": {
-          "_CallbackList": {
-            "OnPhase1": {
+          "_CallbackList": [
+            {
+              "Event": "OnPhase1",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.TriggerAbility",
@@ -5836,7 +5947,7 @@
                 }
               ]
             }
-          },
+          ],
           "DynamicValues": {
             "Values": {
               "350723007": {}
@@ -5869,8 +5980,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_Group_01": {
-          "_CallbackList": {
-            "OnPhase1": {
+          "_CallbackList": [
+            {
+              "Event": "OnPhase1",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.TriggerAbility",
@@ -5928,11 +6040,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "MLevel_BattleEventAbility_Challenge_Group_01": {
-          "_CallbackList": {
-            "OnBeforeHit": {
+          "_CallbackList": [
+            {
+              "Event": "OnBeforeHit",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.ModifyDamageData",
@@ -5949,7 +6062,8 @@
                 }
               ]
             },
-            "OnStack": {
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.TriggerEffect",
@@ -5961,14 +6075,15 @@
                 }
               ]
             },
-            "OnAfterAttack": {
+            {
+              "Event": "OnAfterAttack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.RemoveSelfModifier"
                 }
               ]
             }
-          },
+          ],
           "Stacking": "ReplaceByCaster",
           "DynamicValues": {
             "Values": {
@@ -6002,8 +6117,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_Group_02": {
-          "_CallbackList": {
-            "OnPhase1": {
+          "_CallbackList": [
+            {
+              "Event": "OnPhase1",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.Retarget",
@@ -6097,11 +6213,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "MLevel_BattleEventAbility_Challenge_Group_02": {
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.StackProperty",
@@ -6123,14 +6240,15 @@
                 }
               ]
             },
-            "OnBeforeSkillUse": {
+            {
+              "Event": "OnBeforeSkillUse",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.RemoveSelfModifier"
                 }
               ]
             }
-          },
+          ],
           "Stacking": "ReplaceByCaster",
           "DynamicValues": {
             "Values": {
@@ -6164,8 +6282,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_Month_01": {
-          "_CallbackList": {
-            "OnPhase1": {
+          "_CallbackList": [
+            {
+              "Event": "OnPhase1",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.TriggerAbility",
@@ -6306,11 +6425,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "MLevel_BattleEventAbility_Challenge_Month_01": {
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.TriggerEffect",
@@ -6340,7 +6460,7 @@
                 }
               ]
             }
-          },
+          ],
           "Stacking": "ReplaceByCaster",
           "DynamicValues": {
             "Values": {
@@ -6380,8 +6500,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_Month_02": {
-          "_CallbackList": {
-            "OnPhase1": {
+          "_CallbackList": [
+            {
+              "Event": "OnPhase1",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.TriggerAbility",
@@ -6492,7 +6613,7 @@
                 }
               ]
             }
-          }
+          ]
         },
         "MLevel_BattleEventAbility_Challenge_Month_02": {
           "MaxLayer": 3,
@@ -6502,8 +6623,9 @@
               "Value": 1
             }
           },
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.TriggerEffect",
@@ -6568,7 +6690,7 @@
                 }
               ]
             }
-          },
+          ],
           "Stacking": "ReplaceByCaster",
           "DynamicValues": {
             "Values": {
@@ -6622,8 +6744,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_Month_03": {
-          "_CallbackList": {
-            "OnPhase1": {
+          "_CallbackList": [
+            {
+              "Event": "OnPhase1",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.RemoveModifier",
@@ -6712,11 +6835,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "MLevel_BattleEventAbility_Challenge_Month_03": {
-          "_CallbackList": {
-            "OnBeforeBeingHit": {
+          "_CallbackList": [
+            {
+              "Event": "OnBeforeBeingHit",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -6745,7 +6869,7 @@
                 }
               ]
             }
-          },
+          ],
           "Stacking": "ReplaceByCaster",
           "DynamicValues": {
             "Values": {
@@ -6779,8 +6903,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_Month_04": {
-          "_CallbackList": {
-            "OnPhase1": {
+          "_CallbackList": [
+            {
+              "Event": "OnPhase1",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.TriggerAbility",
@@ -6895,7 +7020,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "BattleEventAbility_Challenge_Month_04",
@@ -6929,8 +7054,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_Month_05": {
-          "_CallbackList": {
-            "OnPhase1": {
+          "_CallbackList": [
+            {
+              "Event": "OnPhase1",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.RemoveModifier",
@@ -7007,11 +7133,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "MLevel_BattleEventAbility_Challenge_Month_05": {
-          "_CallbackList": {
-            "OnAfterAttack": {
+          "_CallbackList": [
+            {
+              "Event": "OnAfterAttack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.Retarget",
@@ -7057,7 +7184,7 @@
                 }
               ]
             }
-          },
+          ],
           "Stacking": "ReplaceByCaster",
           "DynamicValues": {
             "Values": {
@@ -7098,8 +7225,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_Month_06": {
-          "_CallbackList": {
-            "OnPhase1": {
+          "_CallbackList": [
+            {
+              "Event": "OnPhase1",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.TriggerAbility",
@@ -7178,11 +7306,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "MLevel_BattleEventAbility_Challenge_Month_06": {
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.StackProperty",
@@ -7204,14 +7333,15 @@
                 }
               ]
             },
-            "OnBeforeSkillUse": {
+            {
+              "Event": "OnBeforeSkillUse",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.RemoveSelfModifier"
                 }
               ]
             }
-          },
+          ],
           "Stacking": "ReplaceByCaster",
           "DynamicValues": {
             "Values": {
@@ -7245,8 +7375,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_Month_07": {
-          "_CallbackList": {
-            "OnPhase1": {
+          "_CallbackList": [
+            {
+              "Event": "OnPhase1",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.TriggerAbility",
@@ -7390,7 +7521,7 @@
                 }
               ]
             }
-          }
+          ]
         },
         "MLevel_BattleEventAbility_Challenge_Month_07": {
           "MaxLayer": 5,
@@ -7403,8 +7534,9 @@
           "BehaviorFlagList": [
             "STAT_Fatigue"
           ],
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
@@ -7442,7 +7574,7 @@
                 }
               ]
             }
-          },
+          ],
           "Stacking": "ReplaceByCaster",
           "DynamicValues": {
             "Values": {
@@ -7485,8 +7617,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_Month_08": {
-          "_CallbackList": {
-            "OnPhase1": {
+          "_CallbackList": [
+            {
+              "Event": "OnPhase1",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.TriggerAbility",
@@ -7630,7 +7763,7 @@
                 }
               ]
             }
-          }
+          ]
         },
         "MLevel_BattleEventAbility_Challenge_Month_08": {
           "MaxLayer": 5,
@@ -7643,8 +7776,9 @@
           "BehaviorFlagList": [
             "STAT_DefenceDown"
           ],
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
@@ -7682,7 +7816,7 @@
                 }
               ]
             }
-          },
+          ],
           "Stacking": "ReplaceByCaster",
           "DynamicValues": {
             "Values": {
@@ -7725,8 +7859,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_Month_09": {
-          "_CallbackList": {
-            "OnPhase1": {
+          "_CallbackList": [
+            {
+              "Event": "OnPhase1",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.TriggerAbility",
@@ -7827,11 +7962,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "MLevel_BattleEventAbility_Challenge_Month_09": {
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.TriggerEffect",
@@ -7861,7 +7997,7 @@
                 }
               ]
             }
-          },
+          ],
           "Stacking": "ReplaceByCaster",
           "DynamicValues": {
             "Values": {
@@ -7907,8 +8043,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_Month_10": {
-          "_CallbackList": {
-            "OnPhase1": {
+          "_CallbackList": [
+            {
+              "Event": "OnPhase1",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.Retarget",
@@ -8102,7 +8239,8 @@
                 }
               ]
             },
-            "OnListenCharacterCreate": {
+            {
+              "Event": "OnListenCharacterCreate",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.AddModifier",
@@ -8114,7 +8252,7 @@
                 }
               ]
             }
-          },
+          ],
           "DynamicValues": {
             "Values": {
               "1662446059": {},
@@ -8123,8 +8261,9 @@
           }
         },
         "MLevel_BattleEventAbility_Challenge_Month_10": {
-          "_CallbackList": {
-            "OnHPChange": {
+          "_CallbackList": [
+            {
+              "Event": "OnHPChange",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -8196,7 +8335,8 @@
                 }
               ]
             },
-            "OnAfterBeingAttacked": {
+            {
+              "Event": "OnAfterBeingAttacked",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.AddModifier",
@@ -8230,7 +8370,7 @@
                 }
               ]
             }
-          },
+          ],
           "Stacking": "ReplaceByCaster"
         },
         "MLevel_BattleEventAbility_Challenge_Month_10_Sub": {
@@ -8240,8 +8380,9 @@
               "Value": 1
             }
           },
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
@@ -8279,7 +8420,7 @@
                 }
               ]
             }
-          },
+          ],
           "Stacking": "Replace",
           "DynamicValues": {
             "Values": {
@@ -8326,8 +8467,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_Month_11": {
-          "_CallbackList": {
-            "OnListenCharacterCreate": {
+          "_CallbackList": [
+            {
+              "Event": "OnListenCharacterCreate",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.AddModifier",
@@ -8339,11 +8481,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "MLevel_BattleEventAbility_Challenge_Month_11": {
-          "_CallbackList": {
-            "OnAfterHit": {
+          "_CallbackList": [
+            {
+              "Event": "OnAfterHit",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -8368,7 +8511,8 @@
                 }
               ]
             },
-            "OnBeforeAttack": {
+            {
+              "Event": "OnBeforeAttack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.SetDynamicValue",
@@ -8382,7 +8526,8 @@
                 }
               ]
             },
-            "OnAfterAttack": {
+            {
+              "Event": "OnAfterAttack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -8451,7 +8596,7 @@
                 }
               ]
             }
-          },
+          ],
           "DynamicValues": {
             "Values": {
               "1983882602": {}
@@ -8490,8 +8635,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_Month_12": {
-          "_CallbackList": {
-            "OnPhase1": {
+          "_CallbackList": [
+            {
+              "Event": "OnPhase1",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.Retarget",
@@ -8600,7 +8746,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "BattleEventAbility_Challenge_Month_12",
@@ -8629,25 +8775,35 @@
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_Month_13": {
           "EnterBattlePriority": "MonsterInsertAbility",
-          "_CallbackList": {
-            "OnPhase1": {
+          "_CallbackList": [
+            {
+              "Event": "OnPhase1",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
                   "Predicate": {
-                    "$type": "RPG.GameCore.ByCompareTargetCount",
-                    "TargetType": {
-                      "$type": "RPG.GameCore.TargetAlias",
-                      "Alias": "AllDarkTeam"
-                    },
-                    "AliveOnly": true,
-                    "Number": {
-                      "IsDynamic": false,
-                      "FixedValue": {
-                        "Value": 4
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByCheckDarkTeamDestroy",
+                        "Inverse": true
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCompareTargetCount",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "AllDarkTeam"
+                        },
+                        "AliveOnly": true,
+                        "Number": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 4
+                          }
+                        },
+                        "CompareType": "LessEqual"
                       }
-                    },
-                    "CompareType": "LessEqual"
+                    ]
                   },
                   "SuccessTaskList": [
                     {
@@ -8694,7 +8850,8 @@
                 }
               ]
             },
-            "OnStack": {
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.OwnerEntityAddAbility",
@@ -8702,7 +8859,8 @@
                 }
               ]
             },
-            "OnListenCharacterCreate": {
+            {
+              "Event": "OnListenCharacterCreate",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -8732,7 +8890,8 @@
                 }
               ]
             },
-            "OnEnterBattle": {
+            {
+              "Event": "OnEnterBattle",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.TriggerAbility",
@@ -8776,15 +8935,16 @@
                 }
               ]
             }
-          }
+          ]
         },
         "Modifier_BattleEventAbility_Challenge_Month_13_Sub": {
           "BehaviorFlagList": [
             "Deathrattle",
             "RemoveWhenCasterDead"
           ],
-          "_CallbackList": {
-            "OnCreate": {
+          "_CallbackList": [
+            {
+              "Event": "OnCreate",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.OwnerEntityAddAbility",
@@ -8792,7 +8952,8 @@
                 }
               ]
             },
-            "OnBeforeBeingHitAll": {
+            {
+              "Event": "OnBeforeBeingHitAll",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -8821,7 +8982,8 @@
                 }
               ]
             },
-            "OnStack": {
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.OwnerEntityAddAbility",
@@ -8833,7 +8995,8 @@
                 }
               ]
             },
-            "OnListenCharacterDie": {
+            {
+              "Event": "OnListenCharacterDie",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -8893,7 +9056,8 @@
                 }
               ]
             },
-            "OnDeathrattle": {
+            {
+              "Event": "OnDeathrattle",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.DispelStatus",
@@ -8938,7 +9102,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "BattleEventAbility_Challenge_Month_13",
@@ -9100,25 +9264,35 @@
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_Month_14": {
           "EnterBattlePriority": "MonsterInsertAbility",
-          "_CallbackList": {
-            "OnPhase1": {
+          "_CallbackList": [
+            {
+              "Event": "OnPhase1",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
                   "Predicate": {
-                    "$type": "RPG.GameCore.ByCompareTargetCount",
-                    "TargetType": {
-                      "$type": "RPG.GameCore.TargetAlias",
-                      "Alias": "AllDarkTeam"
-                    },
-                    "AliveOnly": true,
-                    "Number": {
-                      "IsDynamic": false,
-                      "FixedValue": {
-                        "Value": 4
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByCheckDarkTeamDestroy",
+                        "Inverse": true
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCompareTargetCount",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "AllDarkTeam"
+                        },
+                        "AliveOnly": true,
+                        "Number": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 4
+                          }
+                        },
+                        "CompareType": "LessEqual"
                       }
-                    },
-                    "CompareType": "LessEqual"
+                    ]
                   },
                   "SuccessTaskList": [
                     {
@@ -9165,7 +9339,8 @@
                 }
               ]
             },
-            "OnStack": {
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.OwnerEntityAddAbility",
@@ -9182,7 +9357,8 @@
                 }
               ]
             },
-            "OnListenCharacterCreate": {
+            {
+              "Event": "OnListenCharacterCreate",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -9225,7 +9401,8 @@
                 }
               ]
             },
-            "OnEnterBattle": {
+            {
+              "Event": "OnEnterBattle",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.TriggerAbility",
@@ -9269,7 +9446,7 @@
                 }
               ]
             }
-          },
+          ],
           "DynamicValues": {
             "Values": {
               "-1387017452": {}
@@ -9281,8 +9458,9 @@
             "Deathrattle",
             "RemoveWhenCasterDead"
           ],
-          "_CallbackList": {
-            "OnCreate": {
+          "_CallbackList": [
+            {
+              "Event": "OnCreate",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.OwnerEntityAddAbility",
@@ -9290,7 +9468,8 @@
                 }
               ]
             },
-            "OnBeforeBeingHit": {
+            {
+              "Event": "OnBeforeBeingHit",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -9319,7 +9498,8 @@
                 }
               ]
             },
-            "OnStack": {
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.OwnerEntityAddAbility",
@@ -9331,7 +9511,8 @@
                 }
               ]
             },
-            "OnListenCharacterDie": {
+            {
+              "Event": "OnListenCharacterDie",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -9391,7 +9572,8 @@
                 }
               ]
             },
-            "OnDeathrattle": {
+            {
+              "Event": "OnDeathrattle",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.DispelStatus",
@@ -9436,7 +9618,7 @@
                 }
               ]
             }
-          },
+          ],
           "DynamicValues": {
             "Values": {
               "286452074": {}
@@ -9562,12 +9744,41 @@
           "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_XP_Minion04_01/Eff_Monster_XP_Minion04_01_Die.prefab"
         },
         {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill04",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.2300000002142042
+            }
+          }
+        },
+        {
           "$type": "RPG.GameCore.TriggerEffect",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_BattleEvent_ShenYuan_Damage_hit.prefab"
+          "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_BattleEvent_ShenYuan_Damage_hit.prefab",
+          "AttachPoint": "Origin"
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill04",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.2669999997597188
+            }
+          }
         },
         {
           "$type": "RPG.GameCore.DamageByAttackProperty",
@@ -9592,10 +9803,27 @@
             "HitEffect": "Effects/Eff_Prefab/Eff_Common/Eff_BattleEvent_ShenYuan_Damage_hit2.prefab"
           },
           "CanTriggerLastKill": true,
-          "PerformanceDelay": 0.3
+          "DisplayData": {
+            "UIMessageHeight": 1,
+            "DitherRangeX": 0.01,
+            "DitherRangeY": 0.01
+          }
         },
         {
           "$type": "RPG.GameCore.DamagePerformFinish"
+        },
+        {
+          "$type": "RPG.GameCore.ShowUIPage",
+          "AssetPath": "UI/Common/Widget/BattleSelfStatusHint.prefab",
+          "UITextNodes": [
+            {
+              "TextPath": "AreaInfoPanel/Title/Text",
+              "TextContent": {
+                "Hash": -1400107669
+              }
+            }
+          ],
+          "LifeTime": 3
         },
         {
           "$type": "RPG.GameCore.WaitAnimState",
@@ -9666,25 +9894,35 @@
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_Month_15": {
           "EnterBattlePriority": "MonsterInsertAbility",
-          "_CallbackList": {
-            "OnPhase1": {
+          "_CallbackList": [
+            {
+              "Event": "OnPhase1",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
                   "Predicate": {
-                    "$type": "RPG.GameCore.ByCompareTargetCount",
-                    "TargetType": {
-                      "$type": "RPG.GameCore.TargetAlias",
-                      "Alias": "AllDarkTeam"
-                    },
-                    "AliveOnly": true,
-                    "Number": {
-                      "IsDynamic": false,
-                      "FixedValue": {
-                        "Value": 4
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByCheckDarkTeamDestroy",
+                        "Inverse": true
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCompareTargetCount",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "AllDarkTeam"
+                        },
+                        "AliveOnly": true,
+                        "Number": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 4
+                          }
+                        },
+                        "CompareType": "LessEqual"
                       }
-                    },
-                    "CompareType": "LessEqual"
+                    ]
                   },
                   "SuccessTaskList": [
                     {
@@ -9731,7 +9969,8 @@
                 }
               ]
             },
-            "OnStack": {
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.OwnerEntityAddAbility",
@@ -9739,7 +9978,8 @@
                 }
               ]
             },
-            "OnListenCharacterCreate": {
+            {
+              "Event": "OnListenCharacterCreate",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -9769,7 +10009,8 @@
                 }
               ]
             },
-            "OnEnterBattle": {
+            {
+              "Event": "OnEnterBattle",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.TriggerAbility",
@@ -9813,15 +10054,16 @@
                 }
               ]
             }
-          }
+          ]
         },
         "Modifier_BattleEventAbility_Challenge_Month_15_Sub": {
           "BehaviorFlagList": [
             "Deathrattle",
             "RemoveWhenCasterDead"
           ],
-          "_CallbackList": {
-            "OnCreate": {
+          "_CallbackList": [
+            {
+              "Event": "OnCreate",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.OwnerEntityAddAbility",
@@ -9829,7 +10071,8 @@
                 }
               ]
             },
-            "OnBeforeBeingHit": {
+            {
+              "Event": "OnBeforeBeingHit",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -9858,7 +10101,8 @@
                 }
               ]
             },
-            "OnStack": {
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.OwnerEntityAddAbility",
@@ -9870,7 +10114,8 @@
                 }
               ]
             },
-            "OnListenCharacterDie": {
+            {
+              "Event": "OnListenCharacterDie",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -9930,7 +10175,8 @@
                 }
               ]
             },
-            "OnDeathrattle": {
+            {
+              "Event": "OnDeathrattle",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.DispelStatus",
@@ -9995,7 +10241,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "BattleEventAbility_Challenge_Month_15",
@@ -10048,8 +10294,9 @@
               "Value": 1
             }
           },
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
@@ -10087,7 +10334,7 @@
                 }
               ]
             }
-          },
+          ],
           "Stacking": "Replace",
           "DynamicValues": {
             "Values": {
@@ -10186,12 +10433,40 @@
           "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_XP_Minion04_01/Eff_Monster_XP_Minion04_01_Die.prefab"
         },
         {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill04",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.2300000002142042
+            }
+          }
+        },
+        {
           "$type": "RPG.GameCore.TriggerEffect",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "AllDarkTeam"
           },
           "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_BattleEvent_ShenYuan_DeBuff_03.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill04",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.2669999997597188
+            }
+          }
         },
         {
           "$type": "RPG.GameCore.AddModifier",
@@ -10231,7 +10506,25 @@
                 ]
               }
             }
+          },
+          "CustomOffset": {
+            "X": 0,
+            "Y": 1.6,
+            "Z": 0
           }
+        },
+        {
+          "$type": "RPG.GameCore.ShowUIPage",
+          "AssetPath": "UI/Common/Widget/BattleSelfStatusHint.prefab",
+          "UITextNodes": [
+            {
+              "TextPath": "AreaInfoPanel/Title/Text",
+              "TextContent": {
+                "Hash": -1400107670
+              }
+            }
+          ],
+          "LifeTime": 3
         },
         {
           "$type": "RPG.GameCore.WaitAnimState",
@@ -10252,8 +10545,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_03": {
-          "_CallbackList": {
-            "OnPhase1": {
+          "_CallbackList": [
+            {
+              "Event": "OnPhase1",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.Retarget",
@@ -10344,7 +10638,7 @@
                 }
               ]
             }
-          },
+          ],
           "DynamicValues": {
             "Values": {
               "1691404994": {}
@@ -10367,8 +10661,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_Challenge_04": {
-          "_CallbackList": {
-            "OnPhase1": {
+          "_CallbackList": [
+            {
+              "Event": "OnPhase1",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.Retarget",
@@ -10466,11 +10761,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "MLevel_BattleEventAbility_Challenge_04": {
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.StackProperty",
@@ -10492,7 +10788,7 @@
                 }
               ]
             }
-          },
+          ],
           "Stacking": "ReplaceByCaster"
         }
       },
@@ -11562,8 +11858,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_RogueRage_Speed": {
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.StackProperty",
@@ -11581,11 +11878,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "Modifier_BattleEventAbility_RogueRage": {
-          "_CallbackList": {
-            "OnPhase1": {
+          "_CallbackList": [
+            {
+              "Event": "OnPhase1",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.RemoveModifier",
@@ -11721,7 +12019,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "BattleEventAbility_RogueRage",
@@ -11757,8 +12055,9 @@
     {
       "Modifiers": {
         "Modifier_BattleEventAbility_RogueDLCReinforce": {
-          "_CallbackList": {
-            "OnPhase1": {
+          "_CallbackList": [
+            {
+              "Event": "OnPhase1",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -12066,7 +12365,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "BattleEventAbility_RogueDLCReinforce",
@@ -12088,7 +12387,7 @@
           "AddNormalizedValue": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": -1
+              "Value": -0.5000000004656613
             }
           }
         }
@@ -12107,8 +12406,9 @@
     {
       "Modifiers": {
         "BattleEventAbility_RogueDLCSummonMonsterEvent01_Modifier": {
-          "_CallbackList": {
-            "OnCreate": {
+          "_CallbackList": [
+            {
+              "Event": "OnCreate",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.DefineDynamicValue",
@@ -12121,7 +12421,8 @@
                 }
               ]
             },
-            "OnListenCharacterDie": {
+            {
+              "Event": "OnListenCharacterDie",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -12209,7 +12510,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "BattleEventAbility_RogueDLCSummonMonsterEvent01",
@@ -12377,8 +12678,9 @@
     {
       "Modifiers": {
         "BattleEventAbility_RogueDLCSummonMonsterEvent02_Modifier": {
-          "_CallbackList": {
-            "OnCreate": {
+          "_CallbackList": [
+            {
+              "Event": "OnCreate",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.DefineDynamicValue",
@@ -12391,7 +12693,8 @@
                 }
               ]
             },
-            "OnListenCharacterDie": {
+            {
+              "Event": "OnListenCharacterDie",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -12479,7 +12782,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "BattleEventAbility_RogueDLCSummonMonsterEvent02",
@@ -12685,8 +12988,9 @@
     {
       "Modifiers": {
         "BattleEventAbility_SummonMonsterInfinite_Modifier": {
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.DefineDynamicValue",
@@ -12707,7 +13011,8 @@
                 }
               ]
             },
-            "OnListenCharacterDie": {
+            {
+              "Event": "OnListenCharacterDie",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.IncludeGlobalTaskListTemplate",
@@ -12715,7 +13020,8 @@
                 }
               ]
             },
-            "OnListenCharacterEscape": {
+            {
+              "Event": "OnListenCharacterEscape",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.IncludeGlobalTaskListTemplate",
@@ -12723,14 +13029,15 @@
                 }
               ]
             }
-          },
+          ],
           "DynamicValues": {
             "Values": {}
           }
         },
         "Modifier_Infinite_Summon_Level": {
-          "_CallbackList": {
-            "OnWaveMonster": {
+          "_CallbackList": [
+            {
+              "Event": "OnWaveMonster",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.ShowEntityFloatMessage",
@@ -12744,7 +13051,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "BattleEventAbility_SummonMonsterInfinite",
@@ -12946,8 +13253,9 @@
   ],
   "GlobalModifiers": {
     "Challenge_Camera_AllTeam_Temp_1": {
-      "_CallbackList": {
-        "OnStack": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetTeamFormation",
@@ -13044,11 +13352,12 @@
             }
           ]
         }
-      }
+      ]
     },
     "Challenge_Camera_AllTeam_Temp_2": {
-      "_CallbackList": {
-        "OnStack": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.VCameraConfigChange",
@@ -13093,7 +13402,7 @@
             }
           ]
         }
-      }
+      ]
     }
   }
 }

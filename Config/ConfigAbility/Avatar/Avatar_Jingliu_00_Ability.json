@@ -279,77 +279,6 @@
           "$type": "RPG.GameCore.DamagePerformFinish"
         },
         {
-          "$type": "RPG.GameCore.PredicateTaskList",
-          "Predicate": {
-            "$type": "RPG.GameCore.ByIsContainModifier",
-            "TargetType": {
-              "$type": "RPG.GameCore.TargetAlias",
-              "Alias": "Caster"
-            },
-            "ModifierName": "MWAvatar_Jingliu_Attack_Transfer"
-          },
-          "FailedTaskList": [
-            {
-              "$type": "RPG.GameCore.SetDynamicValue",
-              "DynamicKey": "Jingliu_MoonFlag",
-              "Value": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQAAAAIJ",
-                  "FixedValues": [
-                    {
-                      "Value": 1
-                    }
-                  ],
-                  "DynamicHashes": [
-                    -33614224
-                  ]
-                }
-              }
-            },
-            {
-              "$type": "RPG.GameCore.SetEnergyBarState",
-              "Active": "True",
-              "BarType": 3,
-              "CurrentState": "Normal",
-              "CD": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 0
-                }
-              },
-              "IconPath": "SpriteOutput/BuffIcon/Inlevel/Icon1212EnergyBar.png",
-              "MaxCount": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQAJ",
-                  "FixedValues": [],
-                  "DynamicHashes": [
-                    1402962806
-                  ]
-                }
-              },
-              "CurrentCount": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQAJ",
-                  "FixedValues": [],
-                  "DynamicHashes": [
-                    -33614224
-                  ]
-                }
-              },
-              "PrefabPath": "UI/Battle/Widget/PassiveSkill/SpecialPassive1212.prefab",
-              "EnergyDotPrefabPaths": [
-                "UI/Battle/Widget/PassiveSkill/SkillDotPoint1212_01.prefab",
-                "UI/Battle/Widget/PassiveSkill/SkillDotPoint1212_02.prefab",
-                "UI/Battle/Widget/PassiveSkill/SkillDotPoint1212_03.prefab",
-                "UI/Battle/Widget/PassiveSkill/SkillDotPoint1212_04.prefab"
-              ]
-            }
-          ]
-        },
-        {
           "$type": "RPG.GameCore.SkillPerformFinish"
         }
       ]
@@ -437,57 +366,6 @@
       },
       "OnStart": [
         {
-          "$type": "RPG.GameCore.PredicateTaskList",
-          "Predicate": {
-            "$type": "RPG.GameCore.BySkillPointActivated",
-            "PointTriggerKey": {
-              "Hash": 1455742903
-            }
-          },
-          "SuccessTaskList": [
-            {
-              "$type": "RPG.GameCore.AddModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "Caster"
-              },
-              "ModifierName": "MAvatar_Jingliu_SkillTree_B1_Freeze",
-              "DynamicValues": {
-                "SkillTree_PointB1_P2_DamageRatio": {
-                  "IsDynamic": true,
-                  "PostfixExpr": {
-                    "OpCodes": "AQAJ",
-                    "FixedValues": [],
-                    "DynamicHashes": [
-                      -1906128664
-                    ]
-                  }
-                },
-                "SkillTree_PointB1_P1_Chance": {
-                  "IsDynamic": true,
-                  "PostfixExpr": {
-                    "OpCodes": "AQAJ",
-                    "FixedValues": [],
-                    "DynamicHashes": [
-                      -1761699449
-                    ]
-                  }
-                },
-                "SkillTree_PointB1_P3_LifeTime": {
-                  "IsDynamic": true,
-                  "PostfixExpr": {
-                    "OpCodes": "AQAJ",
-                    "FixedValues": [],
-                    "DynamicHashes": [
-                      -823027098
-                    ]
-                  }
-                }
-              }
-            }
-          ]
-        },
-        {
           "$type": "RPG.GameCore.WaitAnimState",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
@@ -534,14 +412,11 @@
           "Value": {
             "IsDynamic": true,
             "PostfixExpr": {
-              "OpCodes": "AQAAAAIJ",
-              "FixedValues": [
-                {
-                  "Value": 2
-                }
-              ],
+              "OpCodes": "AQABAQIJ",
+              "FixedValues": [],
               "DynamicHashes": [
-                -33614224
+                -33614224,
+                1525957993
               ]
             }
           }
@@ -580,10 +455,7 @@
           },
           "PrefabPath": "UI/Battle/Widget/PassiveSkill/SpecialPassive1212.prefab",
           "EnergyDotPrefabPaths": [
-            "UI/Battle/Widget/PassiveSkill/SkillDotPoint1212_01.prefab",
-            "UI/Battle/Widget/PassiveSkill/SkillDotPoint1212_02.prefab",
-            "UI/Battle/Widget/PassiveSkill/SkillDotPoint1212_03.prefab",
-            "UI/Battle/Widget/PassiveSkill/SkillDotPoint1212_04.prefab"
+            "UI/Battle/Widget/PassiveSkill/SkillDotPoint1212_01.prefab"
           ]
         },
         {
@@ -669,12 +541,77 @@
           "$type": "RPG.GameCore.DamagePerformFinish"
         },
         {
-          "$type": "RPG.GameCore.RemoveModifier",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.BySkillPointActivated",
+            "PointTriggerKey": {
+              "Hash": 1455742904
+            }
           },
-          "ModifierName": "MAvatar_Jingliu_SkillTree_B1_Freeze"
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByIsInsertAction"
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByIsTurnOwnerEntity",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "Caster"
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "ModifierName": "MAvatar_Jingliu_SkillTree02_ModifyAction"
+                    }
+                  ],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.ModifyActionDelay",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "AddNormalizedValue": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAGCQ==",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            537016579
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.ModifyCurrentSkillDelayCost",
+                  "NormalizedValue": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAGCQ==",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        537016579
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          ]
         },
         {
           "$type": "RPG.GameCore.SkillPerformFinish"
@@ -915,6 +852,16 @@
           "IsShow": true
         },
         {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamDark",
+          "FormationType": "DarkTeamNormal"
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamLight",
+          "FormationType": "LightTeamNormal"
+        },
+        {
           "$type": "RPG.GameCore.HideLevelStage"
         }
       ]
@@ -925,6 +872,47 @@
         "TargetType": "SkillPointEntity"
       },
       "OnStart": [
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByRankActivated",
+            "TriggerKey": {
+              "Hash": 2089636447
+            }
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "ModifierName": "MAvatar_Jingliu_Rank01_CriticalDamage",
+              "LifeTime": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAJ",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    -1118347224
+                  ]
+                }
+              },
+              "DynamicValues": {
+                "MDF_PropertyValue": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAJ",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      -762867411
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        },
         {
           "$type": "RPG.GameCore.WaitAnimState",
           "TargetType": {
@@ -1187,11 +1175,10 @@
                     "DamagePercentage": {
                       "IsDynamic": true,
                       "PostfixExpr": {
-                        "OpCodes": "AQABAQQJ",
+                        "OpCodes": "AQAJ",
                         "FixedValues": [],
                         "DynamicHashes": [
-                          -775542811,
-                          -1523833017
+                          79718518
                         ]
                       }
                     },
@@ -1281,7 +1268,7 @@
                   "OpCodes": "AQABAQIJ",
                   "FixedValues": [],
                   "DynamicHashes": [
-                    -1808801436,
+                    766655108,
                     -1230856483
                   ]
                 }
@@ -1293,7 +1280,7 @@
                 "$type": "RPG.GameCore.ByCompareDynamicValue",
                 "DynamicKey": "Jingliu_FullMoonFlag",
                 "ContextScope": "ContextCater",
-                "CompareType": "GreaterEqual",
+                "CompareType": "Greater",
                 "CompareValue": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -1356,7 +1343,7 @@
               },
               "PrefabPath": "UI/Battle/Widget/PassiveSkill/SpecialPassive1212.prefab",
               "EnergyDotPrefabPaths": [
-                "UI/Battle/Widget/PassiveSkill/SkillDotPoint1212_05.prefab"
+                "UI/Battle/Widget/PassiveSkill/SkillDotPoint1212_03.prefab"
               ]
             }
           ],
@@ -1410,16 +1397,44 @@
               },
               "PrefabPath": "UI/Battle/Widget/PassiveSkill/SpecialPassive1212.prefab",
               "EnergyDotPrefabPaths": [
-                "UI/Battle/Widget/PassiveSkill/SkillDotPoint1212_01.prefab",
-                "UI/Battle/Widget/PassiveSkill/SkillDotPoint1212_02.prefab",
-                "UI/Battle/Widget/PassiveSkill/SkillDotPoint1212_03.prefab",
-                "UI/Battle/Widget/PassiveSkill/SkillDotPoint1212_04.prefab"
+                "UI/Battle/Widget/PassiveSkill/SkillDotPoint1212_01.prefab"
               ]
             }
           ]
         },
         {
           "$type": "RPG.GameCore.DamagePerformFinish"
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByRankActivated",
+            "TriggerKey": {
+              "Hash": 523552506
+            }
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "ModifierName": "MAvatar_Jingliu_Rank02",
+              "DynamicValues": {
+                "MDF_PropertyValue": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAJ",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      1307853952
+                    ]
+                  }
+                }
+              }
+            }
+          ]
         },
         {
           "$type": "RPG.GameCore.WaitAnimState",
@@ -1436,17 +1451,6 @@
           }
         },
         {
-          "$type": "RPG.GameCore.SetTeamRootOffset",
-          "Team": "TeamDark",
-          "Reset": true
-        },
-        {
-          "$type": "RPG.GameCore.SetTeamFormation",
-          "Team": "TeamDark",
-          "FormationType": "DarkTeamNormal",
-          "RemoveDying": true
-        },
-        {
           "$type": "RPG.GameCore.TriggerAnimState",
           "AnimLogicState": "Idle",
           "AnimStateName": "StandBy"
@@ -1461,200 +1465,19 @@
       ]
     },
     {
-      "Modifiers": {
-        "Avatar_Jingliu_Skill01PreShowModifier": {
-          "ModifierAffectedPreshowConfig": {
-            "SkillTypes": [
-              "Normal"
-            ],
-            "TargetType": {
-              "$type": "RPG.GameCore.TargetAlias",
-              "Alias": "ModifierOwnerEntity"
-            },
-            "Condition": {
-              "$type": "RPG.GameCore.ByAnd",
-              "PredicateList": [
-                {
-                  "$type": "RPG.GameCore.ByCompareDynamicValue",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
-                  },
-                  "DynamicKey": "Jingliu_MoonFlag",
-                  "CompareType": "Equal",
-                  "CompareValue": {
-                    "IsDynamic": true,
-                    "PostfixExpr": {
-                      "OpCodes": "AQAAAAMJ",
-                      "FixedValues": [
-                        {
-                          "Value": 1
-                        }
-                      ],
-                      "DynamicHashes": [
-                        1402962806
-                      ]
-                    }
-                  }
-                }
-              ]
-            },
-            "ActionDelayPreshowConfig": {
-              "AddSpeedRatio": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQAJ",
-                  "FixedValues": [],
-                  "DynamicHashes": [
-                    -1479187452
-                  ]
-                }
-              }
-            }
-          }
-        },
-        "Avatar_Jingliu_Skill02PreShowModifier": {
-          "ModifierAffectedPreshowConfig": {
-            "SkillTypes": [
-              "Skill"
-            ],
-            "TargetType": {
-              "$type": "RPG.GameCore.TargetAlias",
-              "Alias": "ModifierOwnerEntity"
-            },
-            "Condition": {
-              "$type": "RPG.GameCore.ByAnd",
-              "PredicateList": [
-                {
-                  "$type": "RPG.GameCore.ByCompareDynamicValue",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
-                  },
-                  "DynamicKey": "Jingliu_MoonFlag",
-                  "CompareType": "GreaterEqual",
-                  "CompareValue": {
-                    "IsDynamic": true,
-                    "PostfixExpr": {
-                      "OpCodes": "AQAAAAMJ",
-                      "FixedValues": [
-                        {
-                          "Value": 2
-                        }
-                      ],
-                      "DynamicHashes": [
-                        1402962806
-                      ]
-                    }
-                  }
-                }
-              ]
-            },
-            "ActionDelayPreshowConfig": {
-              "AddSpeedRatio": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQAJ",
-                  "FixedValues": [],
-                  "DynamicHashes": [
-                    -1479187452
-                  ]
-                }
-              }
-            }
-          }
-        },
-        "Avatar_Jingliu_Skill03PreShowModifier": {
-          "ModifierAffectedPreshowConfig": {
-            "SkillTypes": [
-              "Ultra"
-            ],
-            "TargetType": {
-              "$type": "RPG.GameCore.TargetAlias",
-              "Alias": "ModifierOwnerEntity"
-            },
-            "Condition": {
-              "$type": "RPG.GameCore.ByAnd",
-              "PredicateList": [
-                {
-                  "$type": "RPG.GameCore.ByCompareDynamicValue",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
-                  },
-                  "DynamicKey": "Jingliu_MoonFlag",
-                  "CompareType": "GreaterEqual",
-                  "CompareValue": {
-                    "IsDynamic": true,
-                    "PostfixExpr": {
-                      "OpCodes": "AQAAAAMJ",
-                      "FixedValues": [
-                        {
-                          "Value": 2
-                        }
-                      ],
-                      "DynamicHashes": [
-                        1402962806
-                      ]
-                    }
-                  }
-                }
-              ]
-            },
-            "ActionDelayPreshowConfig": {
-              "AddSpeedRatio": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQAJ",
-                  "FixedValues": [],
-                  "DynamicHashes": [
-                    -1479187452
-                  ]
-                }
-              }
-            }
-          }
-        }
-      },
+      "Modifiers": {},
       "Name": "Avatar_Jingliu_PassiveSkill01",
       "TargetInfo": {
         "TargetType": "Caster"
       },
       "OnStart": [
         {
-          "$type": "RPG.GameCore.PredicateTaskList",
-          "Predicate": {
-            "$type": "RPG.GameCore.BySkillPointActivated",
-            "PointTriggerKey": {
-              "Hash": 1455742904
-            }
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
           },
-          "SuccessTaskList": [
-            {
-              "$type": "RPG.GameCore.AddModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "Caster"
-              },
-              "ModifierName": "Avatar_Jingliu_Skill01PreShowModifier"
-            },
-            {
-              "$type": "RPG.GameCore.AddModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "Caster"
-              },
-              "ModifierName": "Avatar_Jingliu_Skill02PreShowModifier"
-            },
-            {
-              "$type": "RPG.GameCore.AddModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "Caster"
-              },
-              "ModifierName": "Avatar_Jingliu_Skill03PreShowModifier"
-            }
-          ]
+          "ModifierName": "MAvatar_Jingliu_LoseHPPreShow"
         },
         {
           "$type": "RPG.GameCore.AnimSetParameter",
@@ -1683,31 +1506,20 @@
               "Value": {
                 "IsDynamic": true,
                 "PostfixExpr": {
-                  "OpCodes": "AAABAAIJ",
+                  "OpCodes": "AQAAAAIJ",
                   "FixedValues": [
                     {
-                      "Value": 2
+                      "Value": 1
                     }
                   ],
                   "DynamicHashes": [
-                    -1222495635
+                    1592036301
                   ]
                 }
               }
             }
           ],
-          "FailedTaskList": [
-            {
-              "$type": "RPG.GameCore.SetDynamicValue",
-              "DynamicKey": "Jingliu_FullMoonFlagMax",
-              "Value": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 2
-                }
-              }
-            }
-          ]
+          "FailedTaskList": []
         },
         {
           "$type": "RPG.GameCore.SetDynamicValue",
@@ -1733,9 +1545,13 @@
           "$type": "RPG.GameCore.SetDynamicValue",
           "DynamicKey": "Jingliu_MoonFlagMax",
           "Value": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 4
+            "IsDynamic": true,
+            "PostfixExpr": {
+              "OpCodes": "AQAJ",
+              "FixedValues": [],
+              "DynamicHashes": [
+                1328492353
+              ]
             }
           }
         },
@@ -1773,10 +1589,7 @@
           },
           "PrefabPath": "UI/Battle/Widget/PassiveSkill/SpecialPassive1212.prefab",
           "EnergyDotPrefabPaths": [
-            "UI/Battle/Widget/PassiveSkill/SkillDotPoint1212_01.prefab",
-            "UI/Battle/Widget/PassiveSkill/SkillDotPoint1212_02.prefab",
-            "UI/Battle/Widget/PassiveSkill/SkillDotPoint1212_03.prefab",
-            "UI/Battle/Widget/PassiveSkill/SkillDotPoint1212_04.prefab"
+            "UI/Battle/Widget/PassiveSkill/SkillDotPoint1212_01.prefab"
           ]
         },
         {
@@ -1786,20 +1599,39 @@
             "Alias": "Caster"
           },
           "ModifierName": "MAvatar_Jingliu_Passive"
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.BySkillPointActivated",
+            "PointTriggerKey": {
+              "Hash": 1455742904
+            }
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "ModifierName": "MAvatar_Jingliu_SkillPreShow"
+            }
+          ]
         }
       ]
     },
     {
-      "Name": "Avatar_Jingliu_00_PassiveAtkReady_EnterReady",
+      "Name": "Avatar_Jingliu_00_PassiveAtkReady_Phase01",
       "TargetInfo": {
-        "TargetType": "InherentTargetEntity"
+        "TargetType": "Caster"
       },
       "OnStart": [
         {
           "$type": "RPG.GameCore.ShowBonusUIEffect",
           "UIPrefabPath": "UI/Battle/SpecialAction/SpecialAction_1212.prefab",
           "TitleTextID": {
-            "Hash": 692237128
+            "Hash": -651723871
           }
         },
         {
@@ -1850,8 +1682,8 @@
           }
         },
         {
-          "$type": "RPG.GameCore.WaitSecond",
-          "WaitTime": 3.1
+          "$type": "RPG.GameCore.TriggerAdditiveAnimState",
+          "AnimStateName": "FullMoon"
         },
         {
           "$type": "RPG.GameCore.SetEnergyBarState",
@@ -1887,7 +1719,138 @@
           },
           "PrefabPath": "UI/Battle/Widget/PassiveSkill/SpecialPassive1212.prefab",
           "EnergyDotPrefabPaths": [
-            "UI/Battle/Widget/PassiveSkill/SkillDotPoint1212_05.prefab"
+            "UI/Battle/Widget/PassiveSkill/SkillDotPoint1212_03.prefab"
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "MWAvatar_Jingliu_Attack_Transfer",
+          "DynamicValues": {
+            "SkillP01_P1_HpConsumption": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAJ",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  1891038727
+                ]
+              }
+            },
+            "SkillP01_P3_ATKRatioUp": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAJ",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  -835316230
+                ]
+              }
+            },
+            "SkillP01_P2_HpConsumption": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAJ",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  1572560642
+                ]
+              }
+            },
+            "SkillP01_P4_JingliuAttackBase": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAJ",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  1710402074
+                ]
+              }
+            },
+            "SkillRank_Rank04_P1_DamageUpRatio": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAJ",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  1967778363
+                ]
+              }
+            },
+            "SkillRank_Rank04_P2_DamageUpLimit": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAJ",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  1750757588
+                ]
+              }
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByIsTurnOwnerEntity",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            }
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.ModifyCurrentSkillDelayCost",
+              "NormalizedValue": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAGCQ==",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    -1076723615
+                  ]
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.ModifyActionDelay",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AddNormalizedValue": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAGCQ==",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    -1076723615
+                  ]
+                }
+              }
+            }
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.ModifyActionDelay",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AddNormalizedValue": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAGCQ==",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    -1076723615
+                  ]
+                }
+              }
+            }
           ]
         },
         {
@@ -1905,8 +1868,9 @@
           "BehaviorFlagList": [
             "STAT_AnimStop"
           ],
-          "_CallbackList": {
-            "OnDestroy": {
+          "_CallbackList": [
+            {
+              "Event": "OnDestroy",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -1945,7 +1909,8 @@
                 }
               ]
             },
-            "OnStack": {
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.ModifierAttachEffect",
@@ -1978,7 +1943,7 @@
                 }
               ]
             }
-          },
+          ],
           "Priority": 9
         }
       },
@@ -1999,57 +1964,6 @@
           },
           "AbilityName": "Avatar_Jingliu_PassiveAtk_Camera",
           "IsSkillPerform": true
-        },
-        {
-          "$type": "RPG.GameCore.PredicateTaskList",
-          "Predicate": {
-            "$type": "RPG.GameCore.BySkillPointActivated",
-            "PointTriggerKey": {
-              "Hash": 1455742903
-            }
-          },
-          "SuccessTaskList": [
-            {
-              "$type": "RPG.GameCore.AddModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "Caster"
-              },
-              "ModifierName": "MAvatar_Jingliu_SkillTree_B1_Freeze",
-              "DynamicValues": {
-                "SkillTree_PointB1_P2_DamageRatio": {
-                  "IsDynamic": true,
-                  "PostfixExpr": {
-                    "OpCodes": "AQAJ",
-                    "FixedValues": [],
-                    "DynamicHashes": [
-                      -1906128664
-                    ]
-                  }
-                },
-                "SkillTree_PointB1_P1_Chance": {
-                  "IsDynamic": true,
-                  "PostfixExpr": {
-                    "OpCodes": "AQAJ",
-                    "FixedValues": [],
-                    "DynamicHashes": [
-                      -1761699449
-                    ]
-                  }
-                },
-                "SkillTree_PointB1_P3_LifeTime": {
-                  "IsDynamic": true,
-                  "PostfixExpr": {
-                    "OpCodes": "AQAJ",
-                    "FixedValues": [],
-                    "DynamicHashes": [
-                      -823027098
-                    ]
-                  }
-                }
-              }
-            }
-          ]
         },
         {
           "$type": "RPG.GameCore.TriggerAnimStateWithMove",
@@ -2163,7 +2077,7 @@
           },
           "PrefabPath": "UI/Battle/Widget/PassiveSkill/SpecialPassive1212.prefab",
           "EnergyDotPrefabPaths": [
-            "UI/Battle/Widget/PassiveSkill/SkillDotPoint1212_05.prefab"
+            "UI/Battle/Widget/PassiveSkill/SkillDotPoint1212_03.prefab"
           ]
         },
         {
@@ -2188,6 +2102,70 @@
           "Iteration": 2,
           "BlurStart": 0.005,
           "BlurFeather": 0.01
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill02_01",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.11599999968893826
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Jingliu/Eff_Avatar_Jingliu_00_StandBy_Transfer_01.prefab",
+          "IsNeedFadeOut": false
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByRankActivated",
+            "TriggerKey": {
+              "Hash": 2089636447
+            }
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "ModifierName": "MAvatar_Jingliu_Rank01_CriticalDamage",
+              "LifeTime": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAJ",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    -1118347224
+                  ]
+                }
+              },
+              "DynamicValues": {
+                "MDF_PropertyValue": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAJ",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      -762867411
+                    ]
+                  }
+                }
+              }
+            }
+          ]
         },
         {
           "$type": "RPG.GameCore.WaitAnimState",
@@ -2392,11 +2370,10 @@
                         "DamagePercentage": {
                           "IsDynamic": true,
                           "PostfixExpr": {
-                            "OpCodes": "AQABAQQJ",
+                            "OpCodes": "AQAJ",
                             "FixedValues": [],
                             "DynamicHashes": [
-                              -1693091303,
-                              -1523833017
+                              79718518
                             ]
                           }
                         },
@@ -2663,11 +2640,10 @@
                         "DamagePercentage": {
                           "IsDynamic": true,
                           "PostfixExpr": {
-                            "OpCodes": "AQABAQQJ",
+                            "OpCodes": "AQAJ",
                             "FixedValues": [],
                             "DynamicHashes": [
-                              -1693091303,
-                              -1523833017
+                              79718518
                             ]
                           }
                         },
@@ -2934,11 +2910,10 @@
                         "DamagePercentage": {
                           "IsDynamic": true,
                           "PostfixExpr": {
-                            "OpCodes": "AQABAQQJ",
+                            "OpCodes": "AQAJ",
                             "FixedValues": [],
                             "DynamicHashes": [
-                              -1693091303,
-                              -1523833017
+                              79718518
                             ]
                           }
                         },
@@ -3205,11 +3180,10 @@
                         "DamagePercentage": {
                           "IsDynamic": true,
                           "PostfixExpr": {
-                            "OpCodes": "AQABAQQJ",
+                            "OpCodes": "AQAJ",
                             "FixedValues": [],
                             "DynamicHashes": [
-                              -1693091303,
-                              -1523833017
+                              79718518
                             ]
                           }
                         },
@@ -3271,7 +3245,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "WaitProjectileFinish": true
         },
         {
           "$type": "RPG.GameCore.WaitAnimState",
@@ -3573,11 +3548,10 @@
                     "DamagePercentage": {
                       "IsDynamic": true,
                       "PostfixExpr": {
-                        "OpCodes": "AQABAQQJ",
+                        "OpCodes": "AQAJ",
                         "FixedValues": [],
                         "DynamicHashes": [
-                          -1693091303,
-                          -1523833017
+                          79718518
                         ]
                       }
                     },
@@ -3643,6 +3617,14 @@
           "$type": "RPG.GameCore.DamagePerformFinish"
         },
         {
+          "$type": "RPG.GameCore.RemoveModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "MAvatar_Jingliu_Rank02"
+        },
+        {
           "$type": "RPG.GameCore.WaitAnimState",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
@@ -3663,14 +3645,6 @@
             "Alias": "AbilityTargetEntity"
           },
           "Active": false
-        },
-        {
-          "$type": "RPG.GameCore.RemoveModifier",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "ModifierName": "MAvatar_Jingliu_SkillTree_B1_Freeze"
         },
         {
           "$type": "RPG.GameCore.GlobalMainIntensityEffect",
@@ -3801,8 +3775,9 @@
       "Modifiers": {
         "SkillMaze_Jingliu_Modifier": {
           "EnterBattlePriority": "CharacterBuff",
-          "_CallbackList": {
-            "OnEnterBattle": {
+          "_CallbackList": [
+            {
+              "Event": "OnEnterBattle",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -3826,36 +3801,101 @@
                       },
                       "ModifierName": "MCommon_CTRL_Frozen",
                       "Chance": {
-                        "IsDynamic": false,
-                        "FixedValue": {
-                          "Value": 1
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAJ",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            -836907423
+                          ]
                         }
                       },
                       "LifeTime": {
-                        "IsDynamic": false,
-                        "FixedValue": {
-                          "Value": 2
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAJ",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            -421248890
+                          ]
                         }
                       },
                       "DynamicValues": {
                         "Modifier_Frozen_DamagePercentage": {
-                          "IsDynamic": false,
-                          "FixedValue": {
-                            "Value": 0.5000000004656613
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAJ",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              -1948009125
+                            ]
                           }
                         }
                       }
                     }
                   ],
                   "FailedTaskList": []
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareWaveCount",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 1
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.ModifySPNew",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "AddValue": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAJ",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            -1383981783
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "ModifierName": "MAvatar_Jingliu_00_MazeSkill",
+                      "DynamicValues": {
+                        "MDF_MazeMoonFlag": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAJ",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              -1092603944
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  ]
                 }
               ]
             }
-          }
+          ]
         },
         "MAvatar_Jingliu_00_MazeSkill": {
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.SetDynamicValue",
@@ -3906,15 +3946,12 @@
                   },
                   "PrefabPath": "UI/Battle/Widget/PassiveSkill/SpecialPassive1212.prefab",
                   "EnergyDotPrefabPaths": [
-                    "UI/Battle/Widget/PassiveSkill/SkillDotPoint1212_01.prefab",
-                    "UI/Battle/Widget/PassiveSkill/SkillDotPoint1212_02.prefab",
-                    "UI/Battle/Widget/PassiveSkill/SkillDotPoint1212_03.prefab",
-                    "UI/Battle/Widget/PassiveSkill/SkillDotPoint1212_04.prefab"
+                    "UI/Battle/Widget/PassiveSkill/SkillDotPoint1212_01.prefab"
                   ]
                 }
               ]
             }
-          },
+          ],
           "Stacking": "ReplaceByCaster",
           "DynamicValues": {
             "Values": {
@@ -3939,159 +3976,318 @@
       ]
     },
     {
-      "Modifiers": {
-        "M_Jingliu_Tree03": {
-          "_CallbackList": {
-            "OnStack": {
-              "CallbackConfig": [
+      "Modifiers": {},
+      "Name": "Avatar_Jingliu_SkillTree03",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": []
+    }
+  ],
+  "GlobalModifiers": {
+    "MAvatar_Jingliu_SkillTree02_ModifyAction": {
+      "ModifierAffectedPreshowConfig": {
+        "SkillTypes": [
+          "Skill"
+        ],
+        "TargetType": {
+          "$type": "RPG.GameCore.TargetAlias",
+          "Alias": "ModifierOwnerEntity"
+        },
+        "ActionDelayPreshowConfig": {
+          "AddDelayRatio": {
+            "IsDynamic": true,
+            "PostfixExpr": {
+              "OpCodes": "AQAGCQ==",
+              "FixedValues": [],
+              "DynamicHashes": [
+                537016579
+              ]
+            }
+          }
+        }
+      },
+      "_CallbackList": [
+        {
+          "Event": "OnListenTurnEnd",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.ModifyActionDelay",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "AddNormalizedValue": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAGCQ==",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    537016579
+                  ]
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.RemoveSelfModifier"
+            }
+          ]
+        }
+      ],
+      "Stacking": "Multiple"
+    },
+    "MAvatar_Jingliu_SkillPreShow": {
+      "ModifierAffectedPreshowConfig": {
+        "SkillTypes": [
+          "Skill"
+        ],
+        "TargetType": {
+          "$type": "RPG.GameCore.TargetAlias",
+          "Alias": "ModifierOwnerEntity"
+        },
+        "ActionDelayPreshowConfig": {
+          "AddDelayRatio": {
+            "IsDynamic": true,
+            "PostfixExpr": {
+              "OpCodes": "AQAGCQ==",
+              "FixedValues": [],
+              "DynamicHashes": [
+                537016579
+              ]
+            }
+          }
+        }
+      }
+    },
+    "MAvatar_Jingliu_Transfer_PreShow": {
+      "ModifierAffectedPreshowConfig": {
+        "SkillTypes": [
+          "Skill",
+          "Ultra"
+        ],
+        "TargetType": {
+          "$type": "RPG.GameCore.TargetAlias",
+          "Alias": "ModifierOwnerEntity"
+        },
+        "ActionDelayPreshowConfig": {
+          "AddDelayRatio": {
+            "IsDynamic": true,
+            "PostfixExpr": {
+              "OpCodes": "AQAGCQ==",
+              "FixedValues": [],
+              "DynamicHashes": [
+                -1076723615
+              ]
+            }
+          }
+        }
+      }
+    },
+    "MAvatar_Jingliu_Passive": {
+      "OnDynamicValueChange": [
+        {
+          "Key": {
+            "Hash": -33614224
+          },
+          "Ranges": [
+            {
+              "Min": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1
+                }
+              },
+              "Max": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1
+                }
+              },
+              "MaxInclusive": true,
+              "OnEnterRange": [
                 {
                   "$type": "RPG.GameCore.AddModifier",
                   "TargetType": {
                     "$type": "RPG.GameCore.TargetAlias",
                     "Alias": "Caster"
                   },
-                  "ModifierName": "MAvatar_Jingliu_SkillTree03",
-                  "DynamicValues": {
-                    "SkillTree_PointB3_P1_Chance": {
+                  "ModifierName": "MAvatar_Jingliu_Transfer_PreShow"
+                }
+              ],
+              "OnExitRange": [
+                {
+                  "$type": "RPG.GameCore.RemoveModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "MAvatar_Jingliu_Transfer_PreShow"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "_CallbackList": [
+        {
+          "Event": "OnBeingLimbo",
+          "CallbackConfig": []
+        },
+        {
+          "Event": "OnAfterSkillUse",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "DynamicKey": "Jingliu_MoonFlag",
+                    "CompareType": "Equal",
+                    "CompareValue": {
                       "IsDynamic": true,
                       "PostfixExpr": {
                         "OpCodes": "AQAJ",
                         "FixedValues": [],
                         "DynamicHashes": [
-                          -728187887
+                          1402962806
                         ]
                       }
+                    }
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByHaveEnemyAlive",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "Caster"
+                    }
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "MAvatar_Jingliu_Passive_ATK"
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByRankActivated",
+                    "TriggerKey": {
+                      "Hash": -1445815962
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "DynamicKey": "Jingliu_FullMoonFlag",
+                      "Value": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQABAQIJ",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            -33614224,
+                            -1222495635
+                          ]
+                        }
+                      }
+                    }
+                  ],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "DynamicKey": "Jingliu_FullMoonFlag",
+                      "Value": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAJ",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            -33614224
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "DynamicKey": "Jingliu_MoonFlag",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0
                     }
                   }
                 }
               ]
             }
-          }
-        }
-      },
-      "Name": "Avatar_Jingliu_SkillTree03",
-      "TargetInfo": {
-        "TargetType": "Caster"
-      },
-      "OnStart": [
+          ]
+        },
         {
-          "$type": "RPG.GameCore.AddModifier",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "ModifierName": "M_Jingliu_Tree03"
-        }
-      ]
-    }
-  ],
-  "GlobalModifiers": {
-    "MAvatar_Jingliu_SkillTree03": {
-      "_CallbackList": {
-        "OnBeforeHitAll": {
+          "Event": "OnUltraSkillPrepare",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
               "Predicate": {
-                "$type": "RPG.GameCore.ByHasStanceWeak",
+                "$type": "RPG.GameCore.ByIsContainModifier",
                 "TargetType": {
                   "$type": "RPG.GameCore.TargetAlias",
-                  "Alias": "ParamEntity"
+                  "Alias": "Caster"
                 },
-                "WeakType": "Ice"
+                "ModifierName": "MWAvatar_Jingliu_Attack_Transfer"
               },
               "SuccessTaskList": [
                 {
-                  "$type": "RPG.GameCore.ModifyDamageData",
-                  "Attacker_CriticalChance": {
-                    "IsDynamic": true,
-                    "PostfixExpr": {
-                      "OpCodes": "AQAJ",
-                      "FixedValues": [],
-                      "DynamicHashes": [
-                        1925725206
-                      ]
-                    }
+                  "$type": "RPG.GameCore.CharacterChangePhase",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "PhaseName": "Phase2",
+                  "PhaseAnimConfig": {
+                    "StandBy": "StandBy_Transfer",
+                    "StandByLowHP": "StandBy_Transfer",
+                    "Revive": "Revive_Transfer",
+                    "ModifierBehaviorVisuals": [
+                      {
+                        "Flag": "STAT_CTRL_Stun",
+                        "AnimOccur": "Stun_Occur_Transfer",
+                        "AnimLoop": "Stun_Loop_Transfer",
+                        "AnimRecover": "Stun_Recover_Transfer"
+                      },
+                      {
+                        "Flag": "AvatarBreak",
+                        "AnimOccur": "Stagger_Transfer",
+                        "AnimLoop": "Stagger_Loop_Transfer",
+                        "AnimRecover": "Stagger_Recover_Transfer",
+                        "ReactionAnims": {
+                          "$type": "RPG.GameCore.CharacterReactionAnimConfig",
+                          "Hit": "Hit_Stun_Transfer",
+                          "HitH": "Stagger_Transfer"
+                        }
+                      }
+                    ],
+                    "Hit": "Hit_Transfer",
+                    "HitH": "Hit_H_Transfer",
+                    "Die": "Die_Transfer",
+                    "DieHit": "Die_Hit_Transfer",
+                    "DieLimbo": "Die_Limbo_Transfer"
                   }
                 }
               ],
               "FailedTaskList": []
             }
           ]
-        }
-      }
-    },
-    "MAvatar_Jingliu_Passive": {
-      "_CallbackList": {
-        "OnBeingLimbo": {
-          "CallbackConfig": [
-            {
-              "$type": "RPG.GameCore.SetDynamicValue",
-              "DynamicKey": "Jingliu_FullMoonFlag",
-              "Value": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 0
-                }
-              }
-            },
-            {
-              "$type": "RPG.GameCore.SetDynamicValue",
-              "DynamicKey": "Jingliu_MoonFlag",
-              "Value": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 0
-                }
-              }
-            },
-            {
-              "$type": "RPG.GameCore.SetEnergyBarState",
-              "Active": "True",
-              "BarType": 3,
-              "CurrentState": "Normal",
-              "CD": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 0
-                }
-              },
-              "IconPath": "SpriteOutput/BuffIcon/Inlevel/Icon1212EnergyBar.png",
-              "MaxCount": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQAJ",
-                  "FixedValues": [],
-                  "DynamicHashes": [
-                    1402962806
-                  ]
-                }
-              },
-              "CurrentCount": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 0
-                }
-              },
-              "PrefabPath": "UI/Battle/Widget/PassiveSkill/SpecialPassive1212.prefab",
-              "EnergyDotPrefabPaths": [
-                "UI/Battle/Widget/PassiveSkill/SkillDotPoint1212_01.prefab",
-                "UI/Battle/Widget/PassiveSkill/SkillDotPoint1212_02.prefab",
-                "UI/Battle/Widget/PassiveSkill/SkillDotPoint1212_03.prefab",
-                "UI/Battle/Widget/PassiveSkill/SkillDotPoint1212_04.prefab"
-              ]
-            },
-            {
-              "$type": "RPG.GameCore.RemoveModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "Caster"
-              },
-              "ModifierName": "MWAvatar_Jingliu_Attack_Transfer"
-            }
-          ]
         },
-        "OnAfterSkillUse": {
+        {
+          "Event": "OnWaveMonster",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -4117,34 +4313,49 @@
                     "$type": "RPG.GameCore.TargetAlias",
                     "Alias": "Caster"
                   },
-                  "ModifierName": "MAvatar_Jingliu_Passive_ATK",
-                  "DynamicValues": {
-                    "SkillRank_Rank02_P1_DamageUpRatio": {
-                      "IsDynamic": true,
-                      "PostfixExpr": {
-                        "OpCodes": "AQAJ",
-                        "FixedValues": [],
-                        "DynamicHashes": [
-                          200972853
-                        ]
-                      }
-                    },
-                    "SkillRank_Rank02_P2_DamageUpLimit": {
-                      "IsDynamic": true,
-                      "PostfixExpr": {
-                        "OpCodes": "AQAJ",
-                        "FixedValues": [],
-                        "DynamicHashes": [
-                          -16047922
-                        ]
-                      }
-                    }
-                  }
+                  "ModifierName": "MAvatar_Jingliu_Passive_ATK"
                 },
                 {
-                  "$type": "RPG.GameCore.DebugLog",
-                  "Level": "Warn",
-                  "Message": "==============MAvatar_Jingliu_Passive======================"
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByRankActivated",
+                    "TriggerKey": {
+                      "Hash": -1445815962
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "DynamicKey": "Jingliu_FullMoonFlag",
+                      "Value": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQABAQIJ",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            -33614224,
+                            -1222495635
+                          ]
+                        }
+                      }
+                    }
+                  ],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "DynamicKey": "Jingliu_FullMoonFlag",
+                      "Value": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAJ",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            -33614224
+                          ]
+                        }
+                      }
+                    }
+                  ]
                 },
                 {
                   "$type": "RPG.GameCore.SetDynamicValue",
@@ -4155,23 +4366,115 @@
                       "Value": 0
                     }
                   }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Event": "OnListenInsertAbilityFinish",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "DynamicKey": "Jingliu_MoonFlag",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAJ",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          1402962806
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByHaveEnemyAlive",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "Caster"
+                    }
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "MAvatar_Jingliu_Passive_ATK"
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByRankActivated",
+                    "TriggerKey": {
+                      "Hash": -1445815962
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "DynamicKey": "Jingliu_FullMoonFlag",
+                      "Value": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQABAQIJ",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            -33614224,
+                            -1222495635
+                          ]
+                        }
+                      }
+                    }
+                  ],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "DynamicKey": "Jingliu_FullMoonFlag",
+                      "Value": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAJ",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            -33614224
+                          ]
+                        }
+                      }
+                    }
+                  ]
                 },
                 {
                   "$type": "RPG.GameCore.SetDynamicValue",
-                  "DynamicKey": "Jingliu_FullMoonFlag",
+                  "DynamicKey": "Jingliu_MoonFlag",
                   "Value": {
-                    "IsDynamic": true,
-                    "PostfixExpr": {
-                      "OpCodes": "AQAJ",
-                      "FixedValues": [],
-                      "DynamicHashes": [
-                        1592036301
-                      ]
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0
                     }
                   }
                 }
               ]
-            },
+            }
+          ]
+        }
+      ]
+    },
+    "MAvatar_Jingliu_Passive2": {
+      "_CallbackList": [
+        {
+          "Event": "OnPhase2",
+          "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
               "Predicate": {
@@ -4231,10 +4534,7 @@
                       },
                       "PrefabPath": "UI/Battle/Widget/PassiveSkill/SpecialPassive1212.prefab",
                       "EnergyDotPrefabPaths": [
-                        "UI/Battle/Widget/PassiveSkill/SkillDotPoint1212_01.prefab",
-                        "UI/Battle/Widget/PassiveSkill/SkillDotPoint1212_02.prefab",
-                        "UI/Battle/Widget/PassiveSkill/SkillDotPoint1212_03.prefab",
-                        "UI/Battle/Widget/PassiveSkill/SkillDotPoint1212_04.prefab"
+                        "UI/Battle/Widget/PassiveSkill/SkillDotPoint1212_01.prefab"
                       ]
                     }
                   ]
@@ -4264,41 +4564,193 @@
                     "Alias": "Caster"
                   },
                   "ModifierName": "MWAvatar_Jingliu_Attack_Transfer"
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveSelfModifier"
+                },
+                {
+                  "$type": "RPG.GameCore.TriggerAdditiveAnimState",
+                  "AnimStateName": "MoonSpeed"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Event": "OnBeforeInsertActionPrepare",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                "DynamicKey": "Jingliu_FullMoonFlag",
+                "CompareType": "Equal",
+                "CompareValue": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 0
+                  }
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByIsContainModifier",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "Caster"
+                    },
+                    "ModifierName": "MWAvatar_Jingliu_Attack_Transfer"
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetEnergyBarState",
+                      "Active": "True",
+                      "BarType": 3,
+                      "CurrentState": "Normal",
+                      "CD": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 0
+                        }
+                      },
+                      "IconPath": "SpriteOutput/BuffIcon/Inlevel/Icon1212EnergyBar.png",
+                      "MaxCount": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAJ",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            1402962806
+                          ]
+                        }
+                      },
+                      "CurrentCount": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAJ",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            -33614224
+                          ]
+                        }
+                      },
+                      "PrefabPath": "UI/Battle/Widget/PassiveSkill/SpecialPassive1212.prefab",
+                      "EnergyDotPrefabPaths": [
+                        "UI/Battle/Widget/PassiveSkill/SkillDotPoint1212_01.prefab"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "MAvatar_Jingliu_Passive_ATK"
+                },
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "DynamicKey": "HpConsumption",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "MWAvatar_Jingliu_Attack_Transfer"
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveSelfModifier"
+                },
+                {
+                  "$type": "RPG.GameCore.TriggerAdditiveAnimState",
+                  "AnimStateName": "MoonSpeed"
                 }
               ]
             }
           ]
         }
+      ]
+    },
+    "MAvatar_Jingliu_Rank01_CriticalDamage": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.StackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "Property": "CriticalDamageBase",
+              "PropertyValue": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAJ",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    2128130574
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "Stacking": "ReplaceByCaster",
+      "DynamicValues": {
+        "Values": {
+          "2128130574": {}
+        }
       }
     },
-    "MAvatar_Jingliu_Rank04": {
-      "_CallbackList": {
-        "OnStack": {
+    "MAvatar_Jingliu_Rank02": {
+      "_CallbackList": [
+        {
+          "Event": "OnBeforeHit",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
               "Predicate": {
-                "$type": "RPG.GameCore.ByRankActivated",
-                "TriggerKey": {
-                  "Hash": 1686351920
-                }
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByAttackType",
+                    "AttackTypes": [
+                      "BPSkill"
+                    ]
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByIsContainModifier",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "Caster"
+                    },
+                    "ModifierName": "MWAvatar_Jingliu_Attack_Transfer"
+                  }
+                ]
               },
               "SuccessTaskList": [
                 {
-                  "$type": "RPG.GameCore.StackProperty",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "Caster"
-                  },
-                  "Property": "AllDamageTypeAddedRatio",
-                  "PropertyValue": {
+                  "$type": "RPG.GameCore.ModifyDamageData",
+                  "Attacker_AllDamageTypeAddedRatio": {
                     "IsDynamic": true,
                     "PostfixExpr": {
-                      "OpCodes": "AQABAQQJ",
+                      "OpCodes": "AQAJ",
                       "FixedValues": [],
                       "DynamicHashes": [
-                        1810834425,
-                        1592036301
+                        2128130574
                       ]
                     }
                   }
@@ -4307,12 +4759,80 @@
             }
           ]
         }
+      ],
+      "DynamicValues": {
+        "Values": {
+          "2128130574": {}
+        }
+      }
+    },
+    "MAvatar_Jingliu_Rank06": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.StackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "Property": "CriticalDamageBase",
+              "PropertyValue": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAJ",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    -62305284
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "DynamicValues": {
+        "Values": {
+          "-62305284": {}
+        }
       }
     },
     "MWAvatar_Jingliu_Attack_Transfer": {
-      "_CallbackList": {
-        "OnDestroy": {
+      "_CallbackList": [
+        {
+          "Event": "OnDestroy",
           "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.BySkillPointActivated",
+                "PointTriggerKey": {
+                  "Hash": 1455742904
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "MAvatar_Jingliu_SkillPreShow"
+                }
+              ]
+            },
+            {
+              "$type": "RPG.GameCore.SetDynamicValue",
+              "DynamicKey": "BPSkillForFree",
+              "ContextScope": "AITag",
+              "Value": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0
+                }
+              }
+            },
             {
               "$type": "RPG.GameCore.SetControlSkillMapping",
               "TargetType": {
@@ -4321,6 +4841,22 @@
               },
               "ControlSkillType": "ControlSkill02",
               "SkillTriggerKey": "Skill02"
+            },
+            {
+              "$type": "RPG.GameCore.SetControlSkillMapping",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "SkillTriggerKey": "Skill01"
+            },
+            {
+              "$type": "RPG.GameCore.ShowBattleSkillEnhanced",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "SkillType": "Skill"
             },
             {
               "$type": "RPG.GameCore.AnimSetParameter",
@@ -4341,7 +4877,15 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "Caster"
               },
-              "ModifierName": "MAvatar_Jingliu_Rank04"
+              "ModifierName": "MAvatar_Jingliu_Rank06"
+            },
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Jingliu/Eff_Avatar_Jingliu_00_StandBy_Transfer_01.prefab"
             },
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -4360,9 +4904,12 @@
                     "$type": "RPG.GameCore.TargetAlias",
                     "Alias": "Caster"
                   },
+                  "OnlyAlive": false,
                   "PhaseName": "Phase3",
                   "PhaseAnimConfig": {
                     "StandBy": "StandBy",
+                    "StandByLowHP": "StandBy",
+                    "Revive": "Revive",
                     "ModifierBehaviorVisuals": [
                       {
                         "Flag": "STAT_CTRL_Stun",
@@ -4397,9 +4944,12 @@
                     "$type": "RPG.GameCore.TargetAlias",
                     "Alias": "Caster"
                   },
+                  "OnlyAlive": false,
                   "PhaseName": "Phase1",
                   "PhaseAnimConfig": {
                     "StandBy": "StandBy",
+                    "StandByLowHP": "StandBy",
+                    "Revive": "Revive",
                     "ModifierBehaviorVisuals": [
                       {
                         "Flag": "STAT_CTRL_Stun",
@@ -4441,15 +4991,52 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "Caster"
               },
+              "ModifierName": "MAvatar_Jingliu_SkillTree_B1_Resist"
+            },
+            {
+              "$type": "RPG.GameCore.RemoveModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
               "ModifierName": "MAvatar_Jingliu_SkillTree_B2_SpeedUp"
+            },
+            {
+              "$type": "RPG.GameCore.RemoveModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "ModifierName": "MWAvatar_Jingliu_PointB3"
+            },
+            {
+              "$type": "RPG.GameCore.RemoveModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "ModifierName": "MAvatar_Jingliu_Passive_CriticalUp"
             }
           ]
         },
-        "OnActionEnd": {
+        {
+          "Event": "OnActionEnd",
           "CallbackConfig": []
         },
-        "OnStack": {
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValue",
+              "DynamicKey": "BPSkillForFree",
+              "ContextScope": "AITag",
+              "Value": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1
+                }
+              }
+            },
             {
               "$type": "RPG.GameCore.AnimSetParameter",
               "ParameterName": "Jingliu_Transfer",
@@ -4476,24 +5063,44 @@
               ]
             },
             {
-              "$type": "RPG.GameCore.AddModifier",
+              "$type": "RPG.GameCore.ShowBattleSkillEnhanced",
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "Caster"
+                "Alias": "ModifierOwnerEntity"
               },
-              "ModifierName": "MAvatar_Jingliu_Rank04",
-              "DynamicValues": {
-                "SkillRank_Rank04_P1_DamageUp": {
-                  "IsDynamic": true,
-                  "PostfixExpr": {
-                    "OpCodes": "AQAJ",
-                    "FixedValues": [],
-                    "DynamicHashes": [
-                      -1127887994
-                    ]
+              "SkillType": "Skill",
+              "IsShow": true
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByRankActivated",
+                "TriggerKey": {
+                  "Hash": -1445815962
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "MAvatar_Jingliu_Rank06",
+                  "DynamicValues": {
+                    "MDF_CriticalDamage": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAJ",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          -249452479
+                        ]
+                      }
+                    }
                   }
                 }
-              }
+              ]
             },
             {
               "$type": "RPG.GameCore.CharacterChangePhase",
@@ -4504,6 +5111,8 @@
               "PhaseName": "Phase2",
               "PhaseAnimConfig": {
                 "StandBy": "StandBy_Transfer",
+                "StandByLowHP": "StandBy_Transfer",
+                "Revive": "Revive_Transfer",
                 "ModifierBehaviorVisuals": [
                   {
                     "Flag": "STAT_CTRL_Stun",
@@ -4542,7 +5151,7 @@
               "Predicate": {
                 "$type": "RPG.GameCore.BySkillPointActivated",
                 "PointTriggerKey": {
-                  "Hash": 1455742904
+                  "Hash": 1455742903
                 }
               },
               "SuccessTaskList": [
@@ -4552,25 +5161,85 @@
                     "$type": "RPG.GameCore.TargetAlias",
                     "Alias": "Caster"
                   },
-                  "ModifierName": "MAvatar_Jingliu_SkillTree_B2_SpeedUp",
+                  "ModifierName": "MAvatar_Jingliu_SkillTree_B1_Resist",
                   "DynamicValues": {
-                    "SkillTree_PointB2_P1_SpeedUp": {
+                    "MDF_PropertyValue": {
                       "IsDynamic": true,
                       "PostfixExpr": {
                         "OpCodes": "AQAJ",
                         "FixedValues": [],
                         "DynamicHashes": [
-                          -1479187452
+                          1155113222
                         ]
                       }
                     }
                   }
                 }
               ]
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.BySkillPointActivated",
+                "PointTriggerKey": {
+                  "Hash": 1455742905
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "MWAvatar_Jingliu_PointB3",
+                  "DynamicValues": {
+                    "MDF_PropertyValue": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAJ",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          -1332844579
+                        ]
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "ModifierName": "MAvatar_Jingliu_Passive_CriticalUp",
+              "DynamicValues": {
+                "MDF_CriticalRatio": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAJ",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      -1520595122
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.RemoveModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "ModifierName": "MAvatar_Jingliu_SkillPreShow"
             }
           ]
         },
-        "OnBeforeSkillUse": {
+        {
+          "Event": "OnBeforeSkillUse",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.Retarget",
@@ -4626,6 +5295,10 @@
                           ]
                         }
                       }
+                    },
+                    {
+                      "$type": "RPG.GameCore.TriggerUINotify",
+                      "NotifyTypeName": "BattleSkillFinishForHPBarTick"
                     },
                     {
                       "$type": "RPG.GameCore.SetDynamicValue",
@@ -4704,7 +5377,7 @@
               "Predicate": {
                 "$type": "RPG.GameCore.ByRankActivated",
                 "TriggerKey": {
-                  "Hash": 523552506
+                  "Hash": 1686351920
                 }
               },
               "SuccessTaskList": [
@@ -4719,7 +5392,7 @@
                       "DynamicHashes": [
                         427588765,
                         -1280342851,
-                        -1389303488
+                        -404690166
                       ]
                     }
                   }
@@ -4738,7 +5411,7 @@
                         "DynamicHashes": [
                           -1063157397,
                           1570219357,
-                          369772197
+                          1354385519
                         ]
                       }
                     }
@@ -4755,7 +5428,7 @@
                           "DynamicHashes": [
                             -1063157397,
                             1570219357,
-                            -1389303488
+                            1354385519
                           ]
                         }
                       }
@@ -4856,7 +5529,8 @@
             }
           ]
         },
-        "OnModifierAdd": {
+        {
+          "Event": "OnModifierAdd",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -4870,68 +5544,12 @@
               },
               "SuccessTaskList": [
                 {
-                  "$type": "RPG.GameCore.SetDynamicValue",
-                  "DynamicKey": "Jingliu_FullMoonFlag",
-                  "Value": {
-                    "IsDynamic": false,
-                    "FixedValue": {
-                      "Value": 0
-                    }
-                  }
-                },
-                {
-                  "$type": "RPG.GameCore.SetDynamicValue",
-                  "DynamicKey": "Jingliu_MoonFlag",
-                  "Value": {
-                    "IsDynamic": false,
-                    "FixedValue": {
-                      "Value": 0
-                    }
-                  }
-                },
-                {
-                  "$type": "RPG.GameCore.SetEnergyBarState",
-                  "Active": "True",
-                  "BarType": 3,
-                  "CurrentState": "Normal",
-                  "CD": {
-                    "IsDynamic": false,
-                    "FixedValue": {
-                      "Value": 0
-                    }
-                  },
-                  "IconPath": "SpriteOutput/BuffIcon/Inlevel/Icon1212EnergyBar.png",
-                  "MaxCount": {
-                    "IsDynamic": true,
-                    "PostfixExpr": {
-                      "OpCodes": "AQAJ",
-                      "FixedValues": [],
-                      "DynamicHashes": [
-                        1402962806
-                      ]
-                    }
-                  },
-                  "CurrentCount": {
-                    "IsDynamic": false,
-                    "FixedValue": {
-                      "Value": 0
-                    }
-                  },
-                  "PrefabPath": "UI/Battle/Widget/PassiveSkill/SpecialPassive1212.prefab",
-                  "EnergyDotPrefabPaths": [
-                    "UI/Battle/Widget/PassiveSkill/SkillDotPoint1212_01.prefab",
-                    "UI/Battle/Widget/PassiveSkill/SkillDotPoint1212_02.prefab",
-                    "UI/Battle/Widget/PassiveSkill/SkillDotPoint1212_03.prefab",
-                    "UI/Battle/Widget/PassiveSkill/SkillDotPoint1212_04.prefab"
-                  ]
-                },
-                {
-                  "$type": "RPG.GameCore.RemoveModifier",
+                  "$type": "RPG.GameCore.SetControlSkillMapping",
                   "TargetType": {
                     "$type": "RPG.GameCore.TargetAlias",
                     "Alias": "Caster"
                   },
-                  "ModifierName": "MAvatar_Jingliu_Passive_ATK"
+                  "SkillTriggerKey": "Skill21"
                 },
                 {
                   "$type": "RPG.GameCore.SetDynamicValue",
@@ -4942,26 +5560,109 @@
                       "Value": 0
                     }
                   }
-                },
-                {
-                  "$type": "RPG.GameCore.RemoveModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "Caster"
-                  },
-                  "ModifierName": "MWAvatar_Jingliu_Attack_Transfer"
                 }
               ],
               "FailedTaskList": []
             }
           ]
+        },
+        {
+          "Event": "OnModifierRemove",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "Caster"
+                },
+                "Flag": "Charm",
+                "Inverse": true
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetControlSkillMapping",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "SkillTriggerKey": "Skill01"
+                },
+                {
+                  "$type": "RPG.GameCore.SetControlSkillMapping",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ControlSkillType": "ControlSkill02",
+                  "SkillTriggerKey": "Skill21"
+                },
+                {
+                  "$type": "RPG.GameCore.AttachSkillTypeDisable",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "Types": [
+                    "Normal"
+                  ]
+                }
+              ]
+            }
+          ]
         }
-      },
+      ],
       "Stacking": "ReplaceByCaster"
     },
+    "MWAvatar_Jingliu_PointB3": {
+      "_CallbackList": [
+        {
+          "Event": "OnBeforeHitAll",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByAttackType",
+                    "AttackTypes": [
+                      "Ultra"
+                    ]
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.ModifyDamageData",
+                  "Attacker_AllDamageTypeAddedRatio": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAJ",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        2128130574
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "Stacking": "ReplaceByCaster",
+      "DynamicValues": {
+        "Values": {
+          "2128130574": {}
+        }
+      }
+    },
     "MWAvatar_Jingliu_Attack_Transfer_AddATK": {
-      "_CallbackList": {
-        "OnStack": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.StackProperty",
@@ -4983,14 +5684,25 @@
             }
           ]
         },
-        "OnAfterAttack": {
+        {
+          "Event": "OnAfterAttack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.RemoveSelfModifier"
+            },
+            {
+              "$type": "RPG.GameCore.SetDynamicValue",
+              "DynamicKey": "HpConsumption",
+              "Value": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0
+                }
+              }
             }
           ]
         }
-      },
+      ],
       "DynamicValues": {
         "Values": {
           "-1918324271": {}
@@ -4998,66 +5710,27 @@
       }
     },
     "MAvatar_Jingliu_Passive_ATK": {
-      "LifeStepMoment": "ModifierPhase1End",
-      "_CallbackList": {
-        "OnStack": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
-              "$type": "RPG.GameCore.TurnInsertAction",
-              "PrepareAbilityName": "Avatar_Jingliu_00_PassiveAtkReady_EnterReady",
-              "SkillType": "ControlSkill02",
-              "PlayReadyCamera": true,
-              "SkillTypeWhenDelayed": "ControlSkill02"
-            },
-            {
-              "$type": "RPG.GameCore.AddModifier",
+              "$type": "RPG.GameCore.TurnInsertAbility",
+              "AbilityName": "Avatar_Jingliu_00_PassiveAtkReady_Phase01",
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "Caster"
               },
-              "ModifierName": "MWAvatar_Jingliu_Attack_Transfer",
-              "DynamicValues": {
-                "SkillP01_P1_HpConsumption": {
-                  "IsDynamic": true,
-                  "PostfixExpr": {
-                    "OpCodes": "AQAJ",
-                    "FixedValues": [],
-                    "DynamicHashes": [
-                      1891038727
-                    ]
-                  }
-                },
-                "SkillP01_P3_ATKRatioUp": {
-                  "IsDynamic": true,
-                  "PostfixExpr": {
-                    "OpCodes": "AQAJ",
-                    "FixedValues": [],
-                    "DynamicHashes": [
-                      -835316230
-                    ]
-                  }
-                },
-                "SkillP01_P2_HpConsumption": {
-                  "IsDynamic": true,
-                  "PostfixExpr": {
-                    "OpCodes": "AQAJ",
-                    "FixedValues": [],
-                    "DynamicHashes": [
-                      1572560642
-                    ]
-                  }
-                },
-                "SkillP01_P4_JingliuAttackBase": {
-                  "IsDynamic": true,
-                  "PostfixExpr": {
-                    "OpCodes": "AQAJ",
-                    "FixedValues": [],
-                    "DynamicHashes": [
-                      1710402074
-                    ]
-                  }
-                }
-              }
+              "AbilityTarget": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AbortBehaviorFlags": [
+                "STAT_CTRL",
+                "DisableAction"
+              ],
+              "InsertAbilityPriority": "AvatarBuffSelf",
+              "ShowInActionBar": true
             },
             {
               "$type": "RPG.GameCore.SetDynamicValueByProperty",
@@ -5067,65 +5740,167 @@
                 "Alias": "Caster"
               },
               "Value": "MaxHP"
-            }
-          ]
-        }
-      },
-      "DynamicValues": {
-        "Values": {}
-      }
-    },
-    "MAvatar_Jingliu_SkillTree_B1_Freeze": {
-      "_CallbackList": {
-        "OnAfterAttack": {
-          "CallbackConfig": [
+            },
             {
               "$type": "RPG.GameCore.AddModifier",
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "TurnActionEntitySkillTarget"
+                "Alias": "Caster"
               },
-              "ModifierName": "MCommon_CTRL_Frozen",
-              "Chance": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQAJ",
-                  "FixedValues": [],
-                  "DynamicHashes": [
-                    1695660884
-                  ]
-                }
-              },
-              "LifeTime": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQAJ",
-                  "FixedValues": [],
-                  "DynamicHashes": [
-                    1389444775
-                  ]
-                }
-              },
-              "DynamicValues": {
-                "Modifier_Frozen_DamagePercentage": {
-                  "IsDynamic": true,
-                  "PostfixExpr": {
-                    "OpCodes": "AQAJ",
-                    "FixedValues": [],
-                    "DynamicHashes": [
-                      47591091
-                    ]
-                  }
-                }
-              }
+              "ModifierName": "MAvatar_Jingliu_Passive2"
             }
           ]
         }
+      ],
+      "DynamicValues": {
+        "Values": {
+          "-404690166": {},
+          "1354385519": {}
+        }
       }
     },
-    "MAvatar_Jingliu_SkillTree_B2_SpeedUp": {
-      "_CallbackList": {
-        "OnStack": {
+    "MAvatar_Jingliu_SkillTree01": {
+      "_CallbackList": [
+        {
+          "Event": "OnListenActionEnd",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.DefineDynamicValue",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              },
+              "DynamicKey": "MDF_PointB1Trigger",
+              "ContextScope": "TargetEntity"
+            }
+          ]
+        },
+        {
+          "Event": "OnListenHPChange",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValueByVariateType",
+              "DynamicKey": "HPChangeValue",
+              "VariateType": "ParamValue"
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByTargetListIntersects",
+                    "FirstTargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "FirstTargetAliveOnly": false,
+                    "SecondTargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "AllTeammate"
+                    },
+                    "SecondTargetAliveOnly": false
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByTargetTeam",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity2"
+                    },
+                    "Team": "TeamDark",
+                    "Inverse": true
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "DynamicKey": "HPChangeValue",
+                    "CompareType": "Less",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    }
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "DynamicKey": "MDF_PointB1Trigger",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 1
+                      }
+                    },
+                    "Inverse": true
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.ModifySPNew",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "AddValue": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAJ",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        -1368179092
+                      ]
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.DefineDynamicValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "DynamicKey": "MDF_PointB1Trigger",
+                  "ResetValue": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  },
+                  "ContextScope": "TargetEntity"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Event": "OnListenAfterAttackEnd",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.DefineDynamicValue",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              },
+              "DynamicKey": "MDF_PointB1Trigger",
+              "ContextScope": "TargetEntity"
+            }
+          ]
+        }
+      ],
+      "DynamicValues": {
+        "Values": {
+          "741240385": {}
+        }
+      }
+    },
+    "MAvatar_Jingliu_SkillTree_B1_Resist": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.StackProperty",
@@ -5133,19 +5908,154 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "Caster"
               },
-              "Property": "SpeedAddedRatio",
+              "Property": "StatusResistanceBase",
               "PropertyValue": {
                 "IsDynamic": true,
                 "PostfixExpr": {
                   "OpCodes": "AQAJ",
                   "FixedValues": [],
                   "DynamicHashes": [
-                    954584291
+                    2128130574
                   ]
                 }
               }
             }
           ]
+        }
+      ],
+      "DynamicValues": {
+        "Values": {
+          "2128130574": {}
+        }
+      }
+    },
+    "MAvatar_Jingliu_Passive_CriticalUp": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.StackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "Property": "CriticalChanceBase",
+              "PropertyValue": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAJ",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    1602680128
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "DynamicValues": {
+        "Values": {
+          "1602680128": {}
+        }
+      }
+    },
+    "MAvatar_Jingliu_LoseHPPreShow": {
+      "_CallbackList": [
+        {
+          "Event": "OnListenSetActiveSkill",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCompareTarget",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "CompareType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "Caster"
+                    }
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByIsContainModifier",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "Caster"
+                    },
+                    "ModifierName": "MWAvatar_Jingliu_Attack_Transfer"
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.Retarget",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllTeammate"
+                  },
+                  "ByRandom": false,
+                  "MaxNumber": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 3
+                    }
+                  },
+                  "TaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValueByProperty",
+                      "DynamicKey": "MDF_MaxHP",
+                      "ReadTargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "Value": "MaxHP"
+                    },
+                    {
+                      "$type": "RPG.GameCore.ToggleSkillPreShow",
+                      "Enable": true,
+                      "AllowSkillType": [
+                        "Skill",
+                        "Ultra"
+                      ],
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ChangeValue": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQABAQQJ",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            -1610876898,
+                            1572560642
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "DynamicValues": {
+        "Values": {
+          "-1610876898": {}
+        }
+      }
+    },
+    "MAvatar_Jingliu_LoseHPPreShow_RealShow": {
+      "DynamicValues": {
+        "Values": {
+          "-1610876898": {}
         }
       }
     }

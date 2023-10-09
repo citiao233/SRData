@@ -1186,6 +1186,7 @@
             "Alias": "AllEnemy"
           },
           "ModifierName": "MCommon_DOT_Electric",
+          "StackingFlag": "CharacterSkill",
           "Chance": {
             "IsDynamic": true,
             "PostfixExpr": {
@@ -1297,8 +1298,9 @@
     {
       "Modifiers": {
         "MAvatar_Kafka_Passive_DotSpecialMark_Listen": {
-          "_CallbackList": {
-            "OnDestroy": {
+          "_CallbackList": [
+            {
+              "Event": "OnDestroy",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.RemoveModifier",
@@ -1318,7 +1320,8 @@
                 }
               ]
             },
-            "OnListenModifierAdd": {
+            {
+              "Event": "OnListenModifierAdd",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -1364,7 +1367,8 @@
                 }
               ]
             },
-            "OnListenModifierRemove": {
+            {
+              "Event": "OnListenModifierRemove",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -1411,21 +1415,26 @@
                 }
               ]
             }
-          }
+          ]
         },
         "MAvatar_Kafka_Passive_DotSpecialMark": {
+          "BehaviorFlagList": [
+            "ListenBattleEventSkill"
+          ],
           "UIConfig": {
             "UIEffectPath": "UI/Battle/Widget/SpecialSkilMarkEff/SpecialSkillMark_Kafka_DotHint.prefab"
           },
-          "_CallbackList": {
-            "OnDestroy": {
+          "_CallbackList": [
+            {
+              "Event": "OnDestroy",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.ToggleSpecialSkillMark"
                 }
               ]
             },
-            "OnListenBeforeSkillUse": {
+            {
+              "Event": "OnListenBeforeSkillUse",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -1448,7 +1457,8 @@
                 }
               ]
             },
-            "OnListenAimAtTargetsRefresh_CL": {
+            {
+              "Event": "OnListenAimAtTargetsRefresh_CL",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -1505,7 +1515,8 @@
                 }
               ]
             },
-            "OnListenSetActiveSkill": {
+            {
+              "Event": "OnListenSetActiveSkill",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -1591,22 +1602,27 @@
                 }
               ]
             }
-          },
+          ],
           "Stacking": "ReplaceByCaster"
         },
         "MAvatar_Kafka_Passive_DotSpecialMarkTrigger": {
+          "BehaviorFlagList": [
+            "ListenBattleEventSkill"
+          ],
           "UIConfig": {
             "UIEffectPath": "UI/Battle/Widget/SpecialSkilMarkEff/SpecialSkillMark_Kafka.prefab"
           },
-          "_CallbackList": {
-            "OnDestroy": {
+          "_CallbackList": [
+            {
+              "Event": "OnDestroy",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.ToggleSpecialSkillMark"
                 }
               ]
             },
-            "OnListenBeforeSkillUse": {
+            {
+              "Event": "OnListenBeforeSkillUse",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -1629,7 +1645,8 @@
                 }
               ]
             },
-            "OnListenAimAtTargetsRefresh_CL": {
+            {
+              "Event": "OnListenAimAtTargetsRefresh_CL",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -1715,7 +1732,8 @@
                 }
               ]
             },
-            "OnListenSetActiveSkill": {
+            {
+              "Event": "OnListenSetActiveSkill",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -1793,29 +1811,35 @@
                 }
               ]
             }
-          },
+          ],
           "Stacking": "ReplaceByCaster"
         },
         "MAvatar_Kafka_Passive_UltraSpecialMarkTrigger": {
+          "BehaviorFlagList": [
+            "ListenBattleEventSkill"
+          ],
           "UIConfig": {
             "UIEffectPath": "UI/Battle/Widget/SpecialSkilMarkEff/SpecialSkillMark_Kafka_Shock.prefab"
           },
-          "_CallbackList": {
-            "OnDestroy": {
+          "_CallbackList": [
+            {
+              "Event": "OnDestroy",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.ToggleSpecialSkillMark"
                 }
               ]
             },
-            "OnListenBeforeSkillUse": {
+            {
+              "Event": "OnListenBeforeSkillUse",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.ToggleSpecialSkillMark"
                 }
               ]
             },
-            "OnListenSetActiveSkill": {
+            {
+              "Event": "OnListenSetActiveSkill",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -1877,12 +1901,16 @@
                 }
               ]
             }
-          },
+          ],
           "Stacking": "ReplaceByCaster"
         },
         "M_Kafka_Passive": {
-          "_CallbackList": {
-            "OnPhase2": {
+          "BehaviorFlagList": [
+            "ListenBattleEventSkill"
+          ],
+          "_CallbackList": [
+            {
+              "Event": "OnPhase2",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.AddModifier",
@@ -1931,7 +1959,8 @@
                 }
               ]
             },
-            "OnListenAfterSkillUse": {
+            {
+              "Event": "OnListenAfterSkillUse",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -2002,7 +2031,7 @@
                 }
               ]
             }
-          }
+          ]
         },
         "MAvatar_Kafka_00_Passive_CanAttack": {
           "UIConfig": {
@@ -2130,8 +2159,9 @@
     {
       "Modifiers": {
         "MAvatar_Kafka_PassiveDotDamage_Rank01": {
-          "_CallbackList": {
-            "OnBeforeBeingHitAll": {
+          "_CallbackList": [
+            {
+              "Event": "OnBeforeBeingHitAll",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -2159,7 +2189,7 @@
                 }
               ]
             }
-          },
+          ],
           "Stacking": "ReplaceByCaster",
           "DynamicValues": {
             "Values": {
@@ -2769,6 +2799,7 @@
             "Alias": "AbilityTargetEntity"
           },
           "ModifierName": "MCommon_DOT_Electric",
+          "StackingFlag": "CharacterSkill",
           "Chance": {
             "IsDynamic": true,
             "PostfixExpr": {
@@ -2861,8 +2892,9 @@
     {
       "Modifiers": {
         "MAvatar_Kafka_Tree02": {
-          "_CallbackList": {
-            "OnListenCharacterDie": {
+          "_CallbackList": [
+            {
+              "Event": "OnListenCharacterDie",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -2932,7 +2964,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "Avatar_Kafka_SkillTree02",
@@ -2961,8 +2993,9 @@
     {
       "Modifiers": {
         "MAvatar_Kafka_Rank02": {
-          "_CallbackList": {
-            "OnDestroy": {
+          "_CallbackList": [
+            {
+              "Event": "OnDestroy",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.RemoveModifier",
@@ -2983,7 +3016,8 @@
                 }
               ]
             },
-            "OnStack": {
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.AddModifier",
@@ -3007,7 +3041,8 @@
                 }
               ]
             },
-            "OnListenCharacterCreate": {
+            {
+              "Event": "OnListenCharacterCreate",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.AddModifier",
@@ -3031,11 +3066,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "MAvatar_Kafka_Rank02_Sub": {
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.StackProperty",
@@ -3057,7 +3093,7 @@
                 }
               ]
             }
-          },
+          ],
           "DynamicValues": {
             "Values": {
               "2128130574": {}
@@ -3084,8 +3120,9 @@
       "Modifiers": {
         "StageAbility_Maze_Kafka_Modifier": {
           "EnterBattlePriority": "AvatarInsertAbility",
-          "_CallbackList": {
-            "OnEnterBattle": {
+          "_CallbackList": [
+            {
+              "Event": "OnEnterBattle",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -3256,6 +3293,7 @@
                         "Alias": "AllEnemy"
                       },
                       "ModifierName": "MCommon_DOT_Electric",
+                      "StackingFlag": "CharacterSkill",
                       "Chance": {
                         "IsDynamic": true,
                         "PostfixExpr": {
@@ -3294,7 +3332,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "Avatar_Kafka_00_SkillMazeInLevel",
@@ -3321,8 +3359,9 @@
       }
     },
     "MAvatar_Kafka_00_Rank04": {
-      "_CallbackList": {
-        "OnListenCharacterCreate": {
+      "_CallbackList": [
+        {
+          "Event": "OnListenCharacterCreate",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -3347,14 +3386,15 @@
             }
           ]
         }
-      }
+      ]
     },
     "MAvatar_Kafka_00_Rank04_Sub": {
       "BehaviorFlagList": [
         "RemoveWhenCasterDead"
       ],
-      "_CallbackList": {
-        "OnAfterBeingHitAll": {
+      "_CallbackList": [
+        {
+          "Event": "OnAfterBeingHitAll",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -3422,7 +3462,7 @@
             }
           ]
         }
-      },
+      ],
       "Stacking": "ReplaceByCaster"
     }
   }

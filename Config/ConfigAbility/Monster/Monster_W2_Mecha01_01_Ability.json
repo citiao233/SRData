@@ -3,11 +3,12 @@
     {
       "Modifiers": {
         "MMonster_W2_Mecha01_01_StandByLoopEffect": {
-          "_CallbackList": {
-            "OnCreate": {
+          "_CallbackList": [
+            {
+              "Event": "OnCreate",
               "CallbackConfig": []
             }
-          }
+          ]
         }
       },
       "Name": "Monster_W2_Mecha01_01_PassiveSkillInitiate",
@@ -181,7 +182,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "AbilityTargetEntity"
           },
-          "ModifierName": "MCommon_SpeedDown",
+          "ModifierName": "Monster_Common_SpeedRatioDown",
           "Chance": {
             "IsDynamic": true,
             "PostfixExpr": {
@@ -223,5 +224,47 @@
         }
       ]
     }
-  ]
+  ],
+  "GlobalModifiers": {
+    "Monster_Common_SpeedRatioDown": {
+      "BehaviorFlagList": [
+        "STAT_SpeedDown"
+      ],
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.StackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "Property": "SpeedAddedRatio",
+              "PropertyValue": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AAABAAMJ",
+                  "FixedValues": [
+                    {
+                      "Value": 0
+                    }
+                  ],
+                  "DynamicHashes": [
+                    2128130574
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "Stacking": "ReplaceByCaster",
+      "DynamicValues": {
+        "Values": {
+          "2128130574": {}
+        }
+      }
+    }
+  }
 }

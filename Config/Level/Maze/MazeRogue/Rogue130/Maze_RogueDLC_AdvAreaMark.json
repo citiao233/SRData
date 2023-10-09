@@ -13,6 +13,32 @@
       "TaskList": [
         {
           "$type": "RPG.GameCore.RogueDLC1Dot3AdventureRoomProcess",
+          "OnSettleStart": [
+            {
+              "$type": "RPG.GameCore.PlayScreenTransfer",
+              "Mode": "DirectlySet",
+              "MaskAlpha": 1
+            },
+            {
+              "$type": "RPG.GameCore.AdventureGameplayLock",
+              "IsLock": true,
+              "LockSource": "UI"
+            }
+          ],
+          "OnSettleResponse": [
+            {
+              "$type": "RPG.GameCore.WaitSecond",
+              "WaitTime": 0.16,
+              "IsRealtime": true
+            },
+            {
+              "$type": "RPG.GameCore.AdventureGameplayLock",
+              "LockSource": "UI"
+            },
+            {
+              "$type": "RPG.GameCore.PlayScreenTransfer"
+            }
+          ],
           "OnSettleFinish": [
             {
               "$type": "RPG.GameCore.RogueDLCADVRoomHideTrotter"
@@ -27,7 +53,14 @@
               }
             }
           ],
-          "OnLoginFinished": []
+          "OnLoginFinished": [
+            {
+              "$type": "RPG.GameCore.TriggerCustomString",
+              "CustomString": {
+                "Value": "OnLoginFinished"
+              }
+            }
+          ]
         }
       ]
     },
@@ -45,6 +78,12 @@
         },
         {
           "$type": "RPG.GameCore.RogueDLCADVRoomHideDestruct"
+        },
+        {
+          "$type": "RPG.GameCore.TriggerCustomString",
+          "CustomString": {
+            "Value": "OnSettleFinish"
+          }
         }
       ]
     }

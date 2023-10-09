@@ -58,8 +58,9 @@
               ]
             }
           ],
-          "_CallbackList": {
-            "OnActionEnd": {
+          "_CallbackList": [
+            {
+              "Event": "OnActionEnd",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -128,7 +129,8 @@
                 }
               ]
             },
-            "OnBeingBreak": {
+            {
+              "Event": "OnBeingBreak",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -389,18 +391,39 @@
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
                   "Predicate": {
-                    "$type": "RPG.GameCore.ByCompareMonsterPhase",
-                    "TargetType": {
-                      "$type": "RPG.GameCore.TargetAlias",
-                      "Alias": "ModifierOwnerEntity"
-                    },
-                    "CompareType": "Equal",
-                    "CompareValue": {
-                      "IsDynamic": false,
-                      "FixedValue": {
-                        "Value": 3
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByCompareMonsterPhase",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "CompareType": "Equal",
+                        "CompareValue": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 3
+                          }
+                        }
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "DynamicKey": "FinalPhase",
+                        "ContextScope": "TargetEntity",
+                        "CompareType": "Equal",
+                        "CompareValue": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 0
+                          }
+                        }
                       }
-                    }
+                    ]
                   },
                   "SuccessTaskList": [
                     {
@@ -578,14 +601,70 @@
                       "FailedTaskList": []
                     }
                   ]
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByCompareMonsterPhase",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "CompareType": "Equal",
+                        "CompareValue": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 3
+                          }
+                        }
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "DynamicKey": "FinalPhase",
+                        "ContextScope": "TargetEntity",
+                        "CompareType": "Equal",
+                        "CompareValue": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 1
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.DefineDynamicValue",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "DynamicKey": "AIFlag",
+                      "ResetValue": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1
+                        }
+                      },
+                      "ContextScope": "TargetEntity"
+                    }
+                  ]
                 }
               ]
             }
-          }
+          ]
         },
         "MMonster_W2_Xuanlu_10_Default": {
-          "_CallbackList": {
-            "OnDestroy": {
+          "_CallbackList": [
+            {
+              "Event": "OnDestroy",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.MakeCharacterHUDVisible",
@@ -605,12 +684,13 @@
                 }
               ]
             }
-          }
+          ]
         },
         "MMonsterW2_Xuanlu_10_EnterBattleToast": {
           "EnterBattlePriority": "AfterAllEnterBattle",
-          "_CallbackList": {
-            "OnEnterBattle": {
+          "_CallbackList": [
+            {
+              "Event": "OnEnterBattle",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.ShowUIPage",
@@ -627,14 +707,15 @@
                 }
               ]
             }
-          }
+          ]
         },
         "MMonster_W2_Xuanlu_10_Break": {
-          "_CallbackList": {
-            "OnBeingBreak": {
+          "_CallbackList": [
+            {
+              "Event": "OnBeingBreak",
               "CallbackConfig": []
             }
-          }
+          ]
         }
       },
       "Name": "Monster_W2_Xuanlu_10_PassiveSkill_Initiate",
@@ -748,6 +829,26 @@
             }
           },
           "ContextScope": "TargetEntity"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "Monster_W2_Xuanlu_10_RL_LowHP",
+          "DynamicValues": {
+            "MDF_LowHPRatio": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAJ",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  1697555068
+                ]
+              }
+            }
+          }
         }
       ]
     },
@@ -3067,7 +3168,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.5200000004842877
+              "Value": 0.4777777201961726
             }
           }
         },
@@ -3637,8 +3738,9 @@
   ],
   "GlobalModifiers": {
     "MMonster_W2_Xuanlu_10_RL_RageHandler": {
-      "_CallbackList": {
-        "OnListenCharacterCreate": {
+      "_CallbackList": [
+        {
+          "Event": "OnListenCharacterCreate",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -3718,7 +3820,8 @@
             }
           ]
         },
-        "OnModifierOnStack": {
+        {
+          "Event": "OnModifierOnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -3751,7 +3854,7 @@
             }
           ]
         }
-      },
+      ],
       "DynamicValues": {
         "Values": {
           "-945261968": {}
@@ -3765,8 +3868,9 @@
           "Value": 1
         }
       },
-      "_CallbackList": {
-        "OnStack": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
@@ -3808,7 +3912,7 @@
             }
           ]
         }
-      },
+      ],
       "Stacking": "Replace",
       "DynamicValues": {
         "Values": {
@@ -3825,8 +3929,9 @@
           "Value": 1
         }
       },
-      "_CallbackList": {
-        "OnPhase1": {
+      "_CallbackList": [
+        {
+          "Event": "OnPhase1",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.TriggerEffect",
@@ -3856,7 +3961,8 @@
             }
           ]
         },
-        "OnStack": {
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
@@ -3909,7 +4015,7 @@
             }
           ]
         }
-      },
+      ],
       "Stacking": "Replace",
       "DynamicValues": {
         "Values": {
@@ -3921,8 +4027,9 @@
       }
     },
     "MMonster_W2_Xuanlu_10_MinionMark_1": {
-      "_CallbackList": {
-        "OnDestroy": {
+      "_CallbackList": [
+        {
+          "Event": "OnDestroy",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetDynamicValueByAddValue",
@@ -3988,7 +4095,8 @@
             }
           ]
         },
-        "OnStack": {
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetDynamicValueByAddValue",
@@ -4054,7 +4162,7 @@
             }
           ]
         }
-      },
+      ],
       "DynamicValues": {
         "Values": {
           "-911949591": {}
@@ -4062,8 +4170,9 @@
       }
     },
     "MMonster_W2_Xuanlu_10_MinionMark_2": {
-      "_CallbackList": {
-        "OnDestroy": {
+      "_CallbackList": [
+        {
+          "Event": "OnDestroy",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetDynamicValueByAddValue",
@@ -4129,7 +4238,8 @@
             }
           ]
         },
-        "OnStack": {
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetDynamicValueByAddValue",
@@ -4195,7 +4305,7 @@
             }
           ]
         }
-      },
+      ],
       "DynamicValues": {
         "Values": {
           "-911949591": {}
@@ -4203,8 +4313,9 @@
       }
     },
     "MMonster_W2_Xuanlu_10_MinionMark_3": {
-      "_CallbackList": {
-        "OnDestroy": {
+      "_CallbackList": [
+        {
+          "Event": "OnDestroy",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetDynamicValueByAddValue",
@@ -4270,7 +4381,8 @@
             }
           ]
         },
-        "OnStack": {
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetDynamicValueByAddValue",
@@ -4336,7 +4448,7 @@
             }
           ]
         }
-      },
+      ],
       "DynamicValues": {
         "Values": {
           "-911949591": {}
@@ -4344,8 +4456,9 @@
       }
     },
     "MMonster_W2_Xuanlu_10_MinionMark_4": {
-      "_CallbackList": {
-        "OnDestroy": {
+      "_CallbackList": [
+        {
+          "Event": "OnDestroy",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetDynamicValueByAddValue",
@@ -4411,7 +4524,8 @@
             }
           ]
         },
-        "OnStack": {
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetDynamicValueByAddValue",
@@ -4477,7 +4591,7 @@
             }
           ]
         }
-      },
+      ],
       "DynamicValues": {
         "Values": {
           "-911949591": {}
@@ -4486,8 +4600,9 @@
     },
     "MMonster_W2_Xuanlu_10_PhaseController_LockHP": {
       "LimboWaitHealPriority": "ChangePhase",
-      "_CallbackList": {
-        "OnLimboWaitHeal": {
+      "_CallbackList": [
+        {
+          "Event": "OnLimboWaitHeal",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -4584,6 +4699,33 @@
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
                   "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareCharacterNumber",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "CasterSummonedMinions"
+                    },
+                    "CompareType": "GreaterEqual",
+                    "CompareNumber": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 1
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "CasterSummonedMinions"
+                      },
+                      "ModifierName": "MMonster_W2_Xuanlu_00_DisableAction"
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
                     "$type": "RPG.GameCore.ByCompareMonsterPhase",
                     "CompareType": "Equal",
                     "CompareValue": {
@@ -4631,11 +4773,12 @@
             }
           ]
         }
-      }
+      ]
     },
     "MMonster_W2_Xuanlu_10_SecondPhase": {
-      "_CallbackList": {
-        "OnStack": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.ModifierAttachEffect",
@@ -4647,6 +4790,142 @@
               "AttachPoint": "SelectRoot"
             }
           ]
+        }
+      ]
+    },
+    "Monster_W2_Xuanlu_10_RL_LowHP": {
+      "_CallbackList": [
+        {
+          "Event": "OnHPChange",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCompareHPRatio",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "CompareType": "LessEqual",
+                    "CompareValue": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAJ",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          -71259139
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByCompareMonsterPhase",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 3
+                      }
+                    }
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.DefineDynamicValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "DynamicKey": "FinalPhase",
+                  "ResetValue": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  },
+                  "ContextScope": "TargetEntity"
+                },
+                {
+                  "$type": "RPG.GameCore.DefineDynamicValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "DynamicKey": "AIFlag",
+                  "ResetValue": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  },
+                  "ContextScope": "TargetEntity"
+                },
+                {
+                  "$type": "RPG.GameCore.SetActionDelay",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "NormalizedValue": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareHPRatio",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "CompareType": "LessEqual",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.ShowUIPage",
+                      "AssetPath": "UI/Common/Widget/ShowBattleHint.prefab",
+                      "UITextNodes": [
+                        {
+                          "TextPath": "AreaInfoPanel/Title/Text",
+                          "TextContent": {
+                            "Hash": 1203385671
+                          }
+                        }
+                      ],
+                      "LifeTime": 2
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveSelfModifier"
+                }
+              ],
+              "FailedTaskList": []
+            }
+          ]
+        }
+      ],
+      "DynamicValues": {
+        "Values": {
+          "-71259139": {}
         }
       }
     }

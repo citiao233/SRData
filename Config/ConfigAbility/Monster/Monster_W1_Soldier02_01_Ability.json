@@ -169,9 +169,53 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "ModifierName": "WMonster_W1_Soldier02_01_CoinPassive"
+          "ModifierName": "Monster_W1_Soldier02_01_CoinPassive"
         }
       ]
     }
-  ]
+  ],
+  "GlobalModifiers": {
+    "Monster_W1_Soldier02_01_CoinPassive": {
+      "_CallbackList": [
+        {
+          "Event": "OnAfterAttack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByIsContainModifier",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ModifierOwnerEntity"
+                },
+                "ModifierName": "Monster_Company_Coin"
+              },
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "ModifierName": "Monster_Company_Coin",
+                  "DynamicValues": {
+                    "MDF_DamageUpRatio": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAJ",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          889233808
+                        ]
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
 }

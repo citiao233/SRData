@@ -779,6 +779,7 @@
         },
         {
           "$type": "RPG.GameCore.GlobalMainIntensityEffect",
+          "IsRevert": true,
           "TargetIntensity": 1,
           "FadeDuration": 0.5
         },
@@ -1240,6 +1241,7 @@
         },
         {
           "$type": "RPG.GameCore.GlobalMainIntensityEffect",
+          "IsRevert": true,
           "TargetIntensity": 1,
           "FadeDuration": 1
         },
@@ -1835,10 +1837,35 @@
                   ]
                 }
               ]
+            },
+            {
+              "Property": "CurrentHP",
+              "Ranges": [
+                {
+                  "Min": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  },
+                  "OnChange": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValueByProperty",
+                      "DynamicKey": "CasterCurrentHP",
+                      "ReadTargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "Value": "CurrentHP"
+                    }
+                  ]
+                }
+              ]
             }
           ],
-          "_CallbackList": {
-            "OnAllowAction": {
+          "_CallbackList": [
+            {
+              "Event": "OnAllowAction",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.SetDynamicValue",
@@ -1852,7 +1879,8 @@
                 }
               ]
             },
-            "OnListenCharmMakeDamage": {
+            {
+              "Event": "OnListenCharmMakeDamage",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -1894,7 +1922,8 @@
                 }
               ]
             },
-            "OnListenCharmDamagePerformFinish": {
+            {
+              "Event": "OnListenCharmDamagePerformFinish",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.SetDynamicValue",
@@ -1918,7 +1947,8 @@
                 }
               ]
             },
-            "OnListenTurnEnd": {
+            {
+              "Event": "OnListenTurnEnd",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.SetDynamicValue",
@@ -1942,7 +1972,8 @@
                 }
               ]
             },
-            "OnBeforeBeingHitAll": {
+            {
+              "Event": "OnBeforeBeingHitAll",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.SetDynamicValueByProperty",
@@ -1965,7 +1996,8 @@
                 }
               ]
             },
-            "OnAfterBeingHitAll": {
+            {
+              "Event": "OnAfterBeingHitAll",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -2067,7 +2099,8 @@
                 }
               ]
             },
-            "OnBeforeBeingHeal": {
+            {
+              "Event": "OnBeforeBeingHeal",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.SetDynamicValue",
@@ -2081,7 +2114,8 @@
                 }
               ]
             },
-            "OnAfterBeingHeal": {
+            {
+              "Event": "OnAfterBeingHeal",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.SetDynamicValue",
@@ -2095,14 +2129,16 @@
                 }
               ]
             },
-            "OnBeforeDying": {
+            {
+              "Event": "OnBeforeDying",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.RemoveSelfModifier"
                 }
               ]
             },
-            "OnHPChange": {
+            {
+              "Event": "OnHPChange",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -2457,7 +2493,8 @@
                 }
               ]
             },
-            "OnBeforeBeingAttacked": {
+            {
+              "Event": "OnBeforeBeingAttacked",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.SetDynamicValue",
@@ -2471,7 +2508,8 @@
                 }
               ]
             },
-            "OnListenAfterAttack": {
+            {
+              "Event": "OnListenAfterAttack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.SetDynamicValue",
@@ -2495,7 +2533,8 @@
                 }
               ]
             },
-            "OnEnterBattle": {
+            {
+              "Event": "OnEnterBattle",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.SetDynamicValue",
@@ -2559,7 +2598,8 @@
                 }
               ]
             },
-            "OnCustomEvent": {
+            {
+              "Event": "OnCustomEvent",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -2648,7 +2688,8 @@
                 }
               ]
             },
-            "OnModifierAdd": {
+            {
+              "Event": "OnModifierAdd",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -2675,7 +2716,8 @@
                 }
               ]
             },
-            "OnModifierRemove": {
+            {
+              "Event": "OnModifierRemove",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -2806,7 +2848,8 @@
                 }
               ]
             },
-            "OnWaveMonster": {
+            {
+              "Event": "OnWaveMonster",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -2895,7 +2938,7 @@
                 }
               ]
             }
-          },
+          ],
           "TaskListTemplate": [
             {
               "Name": "Ren_CheckHPChange",
@@ -3020,6 +3063,14 @@
             "Alias": "Caster"
           },
           "ModifierName": "MWAvatar_Ren_Passive"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "MWAvatar_Ren_LoseHPPreShow"
         },
         {
           "$type": "RPG.GameCore.SetDynamicValue",
@@ -3287,6 +3338,7 @@
             },
             {
               "$type": "RPG.GameCore.GlobalMainIntensityEffect",
+              "IsRevert": true,
               "TargetIntensity": 1,
               "FadeDuration": 1
             },
@@ -3724,8 +3776,9 @@
       "Modifiers": {
         "MAvatar_Ren_00_MazeSkill_AOE": {
           "EnterBattlePriority": "AvatarInsertAbility",
-          "_CallbackList": {
-            "OnEnterBattle": {
+          "_CallbackList": [
+            {
+              "Event": "OnEnterBattle",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -3856,7 +3909,7 @@
                 }
               ]
             }
-          },
+          ],
           "DynamicValues": {
             "Values": {
               "1961294644": {}
@@ -3892,8 +3945,9 @@
       "UIConfig": {
         "ModifierUIPriority": "HardControl"
       },
-      "_CallbackList": {
-        "OnDestroy": {
+      "_CallbackList": [
+        {
+          "Event": "OnDestroy",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetControlSkillMapping",
@@ -3936,7 +3990,8 @@
             }
           ]
         },
-        "OnStack": {
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetControlSkillMapping",
@@ -3985,13 +4040,14 @@
             }
           ]
         }
-      },
+      ],
       "Stacking": "ReplaceByCaster"
     },
     "MWAvatar_Ren_Attack": {
       "MaxLayer": 1,
-      "_CallbackList": {
-        "OnStack": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.StackProperty",
@@ -4013,7 +4069,7 @@
             }
           ]
         }
-      },
+      ],
       "Stacking": "ReplaceByCaster"
     },
     "MWAvatar_Ren_Qi": {
@@ -4026,8 +4082,9 @@
       "UIConfig": {
         "UIPosition": "UI_Middle"
       },
-      "_CallbackList": {
-        "OnDestroy": {
+      "_CallbackList": [
+        {
+          "Event": "OnDestroy",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetEnergyBarState",
@@ -4066,7 +4123,8 @@
             }
           ]
         },
-        "OnStack": {
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
@@ -4294,16 +4352,17 @@
             }
           ]
         }
-      },
+      ],
       "Stacking": "ReplaceByCaster"
     },
     "MWAvatar_Ren_Skill03_Listen": {
       "MaxLayer": 1,
-      "_CallbackList": {
-        "OnStack": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
           "CallbackConfig": []
         }
-      },
+      ],
       "Stacking": "ReplaceByCaster",
       "DynamicValues": {
         "Values": {
@@ -4313,8 +4372,9 @@
     },
     "MWAvatar_Ren_SkillTree01": {
       "MaxLayer": 1,
-      "_CallbackList": {
-        "OnStack": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.StackProperty",
@@ -4336,11 +4396,12 @@
             }
           ]
         }
-      }
+      ]
     },
     "MWAvatar_Ren_SkillTree02": {
-      "_CallbackList": {
-        "OnAfterHit": {
+      "_CallbackList": [
+        {
+          "Event": "OnAfterHit",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -4367,7 +4428,8 @@
             }
           ]
         },
-        "OnAfterAttack": {
+        {
+          "Event": "OnAfterAttack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -4421,7 +4483,7 @@
             }
           ]
         }
-      },
+      ],
       "Stacking": "ReplaceByCaster",
       "DynamicValues": {
         "Values": {
@@ -4430,8 +4492,9 @@
       }
     },
     "MWAvatar_Ren_SkillTree03": {
-      "_CallbackList": {
-        "OnBeforeHit": {
+      "_CallbackList": [
+        {
+          "Event": "OnBeforeHit",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -4459,7 +4522,7 @@
             }
           ]
         }
-      },
+      ],
       "Stacking": "ReplaceByCaster"
     },
     "MWAvatar_Ren_Rank04": {
@@ -4470,8 +4533,9 @@
           "Value": 1
         }
       },
-      "_CallbackList": {
-        "OnStack": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
@@ -4523,7 +4587,7 @@
             }
           ]
         }
-      },
+      ],
       "Stacking": "ReplaceByCaster",
       "DynamicValues": {
         "Values": {
@@ -4533,8 +4597,9 @@
       }
     },
     "MWAvatar_Ren_Rank04_Add": {
-      "_CallbackList": {
-        "OnStack": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.AddModifier",
@@ -4570,11 +4635,12 @@
             }
           ]
         }
-      }
+      ]
     },
     "MWAvatar_Ren_Rank02": {
-      "_CallbackList": {
-        "OnStack": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetDynamicValue",
@@ -4610,7 +4676,7 @@
             }
           ]
         }
-      },
+      ],
       "Stacking": "ReplaceByCaster",
       "DynamicValues": {
         "Values": {
@@ -4619,8 +4685,9 @@
       }
     },
     "MAvatar_Ren_CastPassive": {
-      "_CallbackList": {
-        "OnStack": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.TurnInsertAbility",
@@ -4641,6 +4708,156 @@
               "ShowInActionBar": true
             }
           ]
+        }
+      ]
+    },
+    "MWAvatar_Ren_LoseHPPreShow": {
+      "_CallbackList": [
+        {
+          "Event": "OnListenSetActiveSkill",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareTarget",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "CompareType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "Caster"
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValueByProperty",
+                  "DynamicKey": "MDF_MaxHP",
+                  "ReadTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "Value": "MaxHP"
+                },
+                {
+                  "$type": "RPG.GameCore.ToggleSkillPreShow",
+                  "Enable": true,
+                  "AllowSkillType": [
+                    "Skill"
+                  ],
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ChangeValue": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQABAQQJ",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        -1610876898,
+                        -1784868094
+                      ]
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByIsContainModifier",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "ModifierName": "MWAvatar_Ren_Attack_Transfer"
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.ToggleSkillPreShow",
+                      "Enable": true,
+                      "AllowSkillType": [
+                        "Normal"
+                      ],
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "ChangeValue": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQABAQQJ",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            -1610876898,
+                            2145770118
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareHPRatio",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "CompareType": "GreaterEqual",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0.5000000004656613
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValueByHPRatio",
+                      "DynamicKey": "MDF_CurrentHP",
+                      "ReadTargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.ToggleSkillPreShow",
+                      "Enable": true,
+                      "AllowSkillType": [
+                        "Ultra"
+                      ],
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ChangeValue": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQABAQAAAwQJ",
+                          "FixedValues": [
+                            {
+                              "Value": 0.5000000004656613
+                            }
+                          ],
+                          "DynamicHashes": [
+                            -1610876898,
+                            1814067545
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "DynamicValues": {
+        "Values": {
+          "-1610876898": {},
+          "1814067545": {}
         }
       }
     }

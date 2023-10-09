@@ -413,8 +413,9 @@
       "Modifiers": {
         "MMonster_W1_Soldier04_00_SkillP01_EnterBattle": {
           "EnterBattlePriority": "AvatarInsertAbility",
-          "_CallbackList": {
-            "OnEnterBattle": {
+          "_CallbackList": [
+            {
+              "Event": "OnEnterBattle",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -457,11 +458,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "MMonster_W1_Soldier04_00_SkillP01_ListenTeamMateAttack": {
-          "_CallbackList": {
-            "OnListenAfterAttack": {
+          "_CallbackList": [
+            {
+              "Event": "OnListenAfterAttack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -670,11 +672,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "MMonster_W1_Soldier04_00_SkillP01_ListenTeamMateDie": {
-          "_CallbackList": {
-            "OnListenCharacterDie": {
+          "_CallbackList": [
+            {
+              "Event": "OnListenCharacterDie",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.IncludeTaskListTemplate",
@@ -682,7 +685,8 @@
                 }
               ]
             },
-            "OnListenCharacterEscape": {
+            {
+              "Event": "OnListenCharacterEscape",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.IncludeTaskListTemplate",
@@ -690,7 +694,7 @@
                 }
               ]
             }
-          },
+          ],
           "TaskListTemplate": [
             {
               "Name": "TaskList_W1_Soldier04_00_SkillP01_OnDieOrEscape",
@@ -789,8 +793,9 @@
           ]
         },
         "MMonster_W1_Soldier04_00_SkillP01_ListenSelfDie": {
-          "_CallbackList": {
-            "OnBeingLimbo": {
+          "_CallbackList": [
+            {
+              "Event": "OnBeingLimbo",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.RemoveModifier",
@@ -803,11 +808,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "MMonster_W1_Soldier04_00_SkillP01_ListenSelfBreak": {
-          "_CallbackList": {
-            "OnBeingBreak": {
+          "_CallbackList": [
+            {
+              "Event": "OnBeingBreak",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.RemoveModifier",
@@ -837,7 +843,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "Monster_W1_Soldier04_00_SkillP01_Initiate",
@@ -846,12 +852,48 @@
       },
       "OnStart": [
         {
-          "$type": "RPG.GameCore.AddModifier",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByAny",
+            "PredicateList": [
+              {
+                "$type": "RPG.GameCore.ByCompareMonsterID",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "Caster"
+                },
+                "TargetMonsterID": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 100203010
+                  }
+                }
+              },
+              {
+                "$type": "RPG.GameCore.ByCompareMonsterID",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "Caster"
+                },
+                "TargetMonsterID": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 100203011
+                  }
+                }
+              }
+            ]
           },
-          "ModifierName": "MMonster_W1_Soldier04_00_SkillP01_EnterBattle"
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "ModifierName": "MMonster_W1_Soldier04_00_SkillP01_EnterBattle"
+            }
+          ]
         },
         {
           "$type": "RPG.GameCore.AddModifier",
@@ -1710,8 +1752,9 @@
   ],
   "GlobalModifiers": {
     "MMonster_W1_Soldier04_00_SkillP01_Supporting": {
-      "_CallbackList": {
-        "OnCreate": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.ModifierAttachEffect",
@@ -1728,11 +1771,12 @@
             }
           ]
         }
-      }
+      ]
     },
     "MMonster_W1_Soldier04_00_SkillP01_Supported": {
-      "_CallbackList": {
-        "OnCreate": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.ModifierAttachEffect",
@@ -1764,7 +1808,8 @@
             }
           ]
         },
-        "OnPhase1": {
+        {
+          "Event": "OnPhase1",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.DefineDynamicValue",
@@ -1783,7 +1828,8 @@
             }
           ]
         },
-        "OnPhase2": {
+        {
+          "Event": "OnPhase2",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.DefineDynamicValue",
@@ -1811,7 +1857,8 @@
             }
           ]
         },
-        "OnAfterHit": {
+        {
+          "Event": "OnAfterHit",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -1868,12 +1915,13 @@
             }
           ]
         }
-      },
+      ],
       "Stacking": "ReplaceByCaster"
     },
     "MMonster_W1_Soldier04_00_SkillP01_Supported_Effect": {
-      "_CallbackList": {
-        "OnCreate": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.TriggerEffect",
@@ -1885,14 +1933,15 @@
             }
           ]
         }
-      }
+      ]
     },
     "MMonster_W1_Soldier04_00_SkillP01_SupportAttackTarget": {
-      "_CallbackList": {
-        "OnCreate": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
           "CallbackConfig": []
         }
-      }
+      ]
     }
   }
 }

@@ -501,27 +501,45 @@
           }
         },
         {
-          "$type": "RPG.GameCore.SetActionDelay",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AbilityTargetEntity"
-          },
-          "Value": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareMonsterID",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "TargetMonsterID": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 100202101
+              }
             }
-          }
-        },
-        {
-          "$type": "RPG.GameCore.ShowEntityFloatMessage",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AbilityTargetEntity"
           },
-          "ContentID": {
-            "Hash": -1623850663
-          }
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.SetActionDelay",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "Value": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.ShowEntityFloatMessage",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "ContentID": {
+                "Hash": -1623850663
+              }
+            }
+          ]
         },
         {
           "$type": "RPG.GameCore.WaitAnimState",

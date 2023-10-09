@@ -3,8 +3,9 @@
     {
       "Modifiers": {
         "Monster_W1_Mecha03_02_ResetAI": {
-          "_CallbackList": {
-            "OnBeingBreak": {
+          "_CallbackList": [
+            {
+              "Event": "OnBeingBreak",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -16,7 +17,7 @@
                     },
                     "DynamicKey": "AIFlag",
                     "ContextScope": "TargetEntity",
-                    "CompareType": "GreaterEqual",
+                    "CompareType": "LessEqual",
                     "CompareValue": {
                       "IsDynamic": false,
                       "FixedValue": {
@@ -35,7 +36,7 @@
                       "ResetValue": {
                         "IsDynamic": false,
                         "FixedValue": {
-                          "Value": 5
+                          "Value": 9
                         }
                       },
                       "ContextScope": "TargetEntity"
@@ -52,7 +53,7 @@
                       "ResetValue": {
                         "IsDynamic": false,
                         "FixedValue": {
-                          "Value": 1
+                          "Value": 10
                         }
                       },
                       "ContextScope": "TargetEntity"
@@ -61,7 +62,7 @@
                 }
               ]
             }
-          }
+          ]
         },
         "Monster_W1_Mecha03_02_MuteHitFly": {
           "BehaviorFlagList": [
@@ -863,6 +864,42 @@
               "Value": 0.1049999997485429
             }
           }
+        },
+        {
+          "$type": "RPG.GameCore.Retarget",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllTeammate"
+          },
+          "Predicate": {
+            "$type": "RPG.GameCore.ByIsContainModifier",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "ParamEntity"
+            },
+            "ModifierName": "Monster_Company_Coin"
+          },
+          "MaxNumber": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          },
+          "TaskList": [
+            {
+              "$type": "RPG.GameCore.ShowUIPage",
+              "AssetPath": "UI/Common/Widget/BattleAlertHint.prefab",
+              "UITextNodes": [
+                {
+                  "TextPath": "AreaInfoPanel/Title/Text",
+                  "TextContent": {
+                    "Hash": 1993445871
+                  }
+                }
+              ],
+              "LifeTime": 2
+            }
+          ]
         },
         {
           "$type": "RPG.GameCore.VCameraConfigChange",
@@ -1769,13 +1806,13 @@
         {
           "$type": "RPG.GameCore.PredicateTaskList",
           "Predicate": {
-            "$type": "RPG.GameCore.ByRandomChance",
-            "Chance": {
-              "IsDynamic": false,
-              "FixedValue": {
-                "Value": 0
-              }
-            }
+            "$type": "RPG.GameCore.ByIsTeamLocationIndexType",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "TeamType": "TeamDark",
+            "Type": "Left"
           },
           "SuccessTaskList": [
             {
@@ -1785,10 +1822,10 @@
                   "MonsterID": {
                     "IsDynamic": false,
                     "FixedValue": {
-                      "Value": 8032010
+                      "Value": 8032020
                     }
                   },
-                  "LocationType": "AfterCaster",
+                  "LocationType": "First",
                   "InitAnimStateName": "Appear"
                 }
               ],
@@ -1798,7 +1835,7 @@
                   "OpCodes": "AQAJ",
                   "FixedValues": [],
                   "DynamicHashes": [
-                    -971765574
+                    -1093699943
                   ]
                 }
               },
@@ -1816,7 +1853,7 @@
                       "Value": 8032020
                     }
                   },
-                  "LocationType": "AfterCaster",
+                  "LocationType": "Last",
                   "InitAnimStateName": "Appear"
                 }
               ],
@@ -1837,13 +1874,13 @@
         {
           "$type": "RPG.GameCore.PredicateTaskList",
           "Predicate": {
-            "$type": "RPG.GameCore.ByRandomChance",
-            "Chance": {
-              "IsDynamic": false,
-              "FixedValue": {
-                "Value": 1
-              }
-            }
+            "$type": "RPG.GameCore.ByIsTeamLocationIndexType",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "TeamType": "TeamDark",
+            "Type": "Left"
           },
           "SuccessTaskList": [
             {
@@ -1856,7 +1893,7 @@
                       "Value": 8032010
                     }
                   },
-                  "LocationType": "BeforeCaster",
+                  "LocationType": "First",
                   "InitAnimStateName": "Appear"
                 }
               ],
@@ -1881,10 +1918,10 @@
                   "MonsterID": {
                     "IsDynamic": false,
                     "FixedValue": {
-                      "Value": 8032020
+                      "Value": 8032010
                     }
                   },
-                  "LocationType": "BeforeCaster",
+                  "LocationType": "Last",
                   "InitAnimStateName": "Appear"
                 }
               ],
@@ -1894,7 +1931,7 @@
                   "OpCodes": "AQAJ",
                   "FixedValues": [],
                   "DynamicHashes": [
-                    -1093699943
+                    -971765574
                   ]
                 }
               },
@@ -1915,58 +1952,142 @@
           },
           "SuccessTaskList": [
             {
-              "$type": "RPG.GameCore.SummonMonster",
-              "SummonMonsterDataList": [
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByIsTeamLocationIndexType",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "Caster"
+                },
+                "TeamType": "TeamDark",
+                "Type": "Left"
+              },
+              "SuccessTaskList": [
                 {
-                  "MonsterID": {
-                    "IsDynamic": false,
-                    "FixedValue": {
-                      "Value": 8032010
+                  "$type": "RPG.GameCore.SummonMonster",
+                  "SummonMonsterDataList": [
+                    {
+                      "MonsterID": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 8032010
+                        }
+                      },
+                      "LocationType": "First",
+                      "InitAnimStateName": "Appear"
+                    }
+                  ],
+                  "DelayRatio": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAJ",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        -971765574
+                      ]
                     }
                   },
-                  "LocationType": "First",
-                  "InitAnimStateName": "Appear"
+                  "AlignYawWithCaster": true
                 }
               ],
-              "DelayRatio": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQAJ",
-                  "FixedValues": [],
-                  "DynamicHashes": [
-                    -971765574
-                  ]
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.SummonMonster",
+                  "SummonMonsterDataList": [
+                    {
+                      "MonsterID": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 8032010
+                        }
+                      },
+                      "LocationType": "Last",
+                      "InitAnimStateName": "Appear"
+                    }
+                  ],
+                  "DelayRatio": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAJ",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        -971765574
+                      ]
+                    }
+                  },
+                  "AlignYawWithCaster": true
                 }
-              },
-              "AlignYawWithCaster": true
+              ]
             }
           ],
           "FailedTaskList": [
             {
-              "$type": "RPG.GameCore.SummonMonster",
-              "SummonMonsterDataList": [
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByIsTeamLocationIndexType",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "Caster"
+                },
+                "TeamType": "TeamDark",
+                "Type": "Left"
+              },
+              "SuccessTaskList": [
                 {
-                  "MonsterID": {
-                    "IsDynamic": false,
-                    "FixedValue": {
-                      "Value": 8032020
+                  "$type": "RPG.GameCore.SummonMonster",
+                  "SummonMonsterDataList": [
+                    {
+                      "MonsterID": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 8032020
+                        }
+                      },
+                      "LocationType": "First",
+                      "InitAnimStateName": "Appear"
+                    }
+                  ],
+                  "DelayRatio": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAJ",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        -1093699943
+                      ]
                     }
                   },
-                  "LocationType": "First",
-                  "InitAnimStateName": "Appear"
+                  "AlignYawWithCaster": true
                 }
               ],
-              "DelayRatio": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQAJ",
-                  "FixedValues": [],
-                  "DynamicHashes": [
-                    -1093699943
-                  ]
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.SummonMonster",
+                  "SummonMonsterDataList": [
+                    {
+                      "MonsterID": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 8032020
+                        }
+                      },
+                      "LocationType": "Last",
+                      "InitAnimStateName": "Appear"
+                    }
+                  ],
+                  "DelayRatio": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAJ",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        -1093699943
+                      ]
+                    }
+                  },
+                  "AlignYawWithCaster": true
                 }
-              },
-              "AlignYawWithCaster": true
+              ]
             }
           ]
         },
@@ -2040,16 +2161,40 @@
           "$type": "RPG.GameCore.Retarget",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "CasterSummonedMinions"
+            "Alias": "AllTeammate"
           },
           "Predicate": {
-            "$type": "RPG.GameCore.ByIsContainModifier",
-            "TargetType": {
-              "$type": "RPG.GameCore.TargetAlias",
-              "Alias": "ParamEntity"
-            },
-            "ModifierName": "Monster_Company_Coin",
-            "Inverse": true
+            "$type": "RPG.GameCore.ByAnd",
+            "PredicateList": [
+              {
+                "$type": "RPG.GameCore.ByCheckCustomValueBool",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "Key": {
+                  "Hash": 642177943
+                }
+              },
+              {
+                "$type": "RPG.GameCore.ByIsContainModifier",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "ModifierName": "Monster_Company_Coin",
+                "Inverse": true
+              },
+              {
+                "$type": "RPG.GameCore.ByCompareMonsterRank",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "CompareType": "Less",
+                "CompareValue": 3
+              }
+            ]
           },
           "TaskList": [
             {
@@ -2073,6 +2218,19 @@
               }
             }
           ]
+        },
+        {
+          "$type": "RPG.GameCore.ShowUIPage",
+          "AssetPath": "UI/Common/Widget/ShowBattleHint.prefab",
+          "UITextNodes": [
+            {
+              "TextPath": "AreaInfoPanel/Title/Text",
+              "TextContent": {
+                "Hash": -1150783133
+              }
+            }
+          ],
+          "LifeTime": 2
         },
         {
           "$type": "RPG.GameCore.SkillPerformFinish"
@@ -2505,8 +2663,9 @@
   ],
   "GlobalModifiers": {
     "Monster_W1_Mecha03_02_CoinPassive": {
-      "_CallbackList": {
-        "OnAfterAttack": {
+      "_CallbackList": [
+        {
+          "Event": "OnAfterAttack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -2551,11 +2710,12 @@
             }
           ]
         }
-      }
+      ]
     },
     "Monster_W1_Mecha03_02_ChargeEffect": {
-      "_CallbackList": {
-        "OnCreate": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.ModifierAttachEffect",
@@ -2569,18 +2729,20 @@
             }
           ]
         },
-        "OnBeingBreak": {
+        {
+          "Event": "OnBeingBreak",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.RemoveSelfModifier"
             }
           ]
         }
-      }
+      ]
     },
     "Monster_W1_Mecha03_02_EffectController": {
-      "_CallbackList": {
-        "OnAllowAction": {
+      "_CallbackList": [
+        {
+          "Event": "OnAllowAction",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -2636,7 +2798,8 @@
             }
           ]
         },
-        "OnBeingBreak": {
+        {
+          "Event": "OnBeingBreak",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.RemoveModifier",
@@ -2656,7 +2819,8 @@
             }
           ]
         },
-        "OnEndBreak": {
+        {
+          "Event": "OnEndBreak",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetDynamicValue",
@@ -2675,11 +2839,12 @@
             }
           ]
         }
-      }
+      ]
     },
     "Monster_W1_Mecha03_02_Effect": {
-      "_CallbackList": {
-        "OnCreate": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.ModifierAttachEffect",
@@ -2703,9 +2868,114 @@
             }
           ]
         }
-      }
+      ]
     },
     "Monster_W1_Mecha03_02_Skill04Mark": {},
+    "Monster_Company_Coin_Monster_EnergyBar": {
+      "_CallbackList": [
+        {
+          "Event": "OnListenSetActiveSkill",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.SetMonsterEnergyBarState",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "Active": "True",
+              "CenterStyle": 3,
+              "OuterState": 2,
+              "IconPath": "SpriteOutput/BuffIcon/Inlevel/IconMonsterPerformance.png",
+              "MaxCount": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1
+                }
+              },
+              "CurrentCount": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.RemoveSelfModifier"
+            }
+          ]
+        }
+      ]
+    },
+    "Monster_Company_Coin_Monster_EnergyBar2": {
+      "_CallbackList": [
+        {
+          "Event": "OnListenSetActiveSkill",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.SetMonsterEnergyBarState",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "Active": "True",
+              "CenterStyle": 3,
+              "OuterState": 2,
+              "IconPath": "SpriteOutput/BuffIcon/Inlevel/IconMonsterPerformance.png",
+              "MaxCount": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 2
+                }
+              },
+              "CurrentCount": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 2
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.RemoveSelfModifier"
+            }
+          ]
+        }
+      ]
+    },
+    "Monster_Company_Coin_Monster_EnergyBar3": {
+      "_CallbackList": [
+        {
+          "Event": "OnListenSetActiveSkill",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.SetMonsterEnergyBarState",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "Active": "True",
+              "CenterStyle": 3,
+              "OuterState": 2,
+              "IconPath": "SpriteOutput/BuffIcon/Inlevel/IconMonsterPerformance.png",
+              "MaxCount": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 3
+                }
+              },
+              "CurrentCount": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 3
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.RemoveSelfModifier"
+            }
+          ]
+        }
+      ]
+    },
     "Monster_Company_Coin": {
       "MaxLayer": 1,
       "LayerAddWhenStack": {
@@ -2718,8 +2988,9 @@
           ]
         }
       },
-      "_CallbackList": {
-        "OnCreate": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.TriggerEffect",
@@ -2733,6 +3004,14 @@
                 "Y": -1,
                 "Z": 0
               }
+            },
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ModifierName": "Monster_Company_Coin_Monster_EnergyBar"
             },
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -2814,66 +3093,161 @@
             }
           ]
         },
-        "OnDestroy": {
-          "CallbackConfig": []
+        {
+          "Event": "OnDestroy",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.SetMonsterEnergyBarState",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "Active": "False"
+            },
+            {
+              "$type": "RPG.GameCore.RemoveModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ModifierName": "Monster_Company_Coin_Monster_EnergyBar"
+            }
+          ]
         },
-        "OnBeingLimbo": {
+        {
+          "Event": "OnBeingLimbo",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
               "Predicate": {
-                "$type": "RPG.GameCore.ByIsContainModifier",
-                "TargetType": {
-                  "$type": "RPG.GameCore.TargetAlias",
-                  "Alias": "ParamEntity"
-                },
-                "ModifierName": "Monster_Company_Coin_Avater_Mark"
+                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                "DynamicKey": "MDF_AttackType",
+                "CompareType": "Equal",
+                "CompareValue": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 1
+                  }
+                }
               },
               "SuccessTaskList": [
                 {
-                  "$type": "RPG.GameCore.RemoveModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "DynamicKey": "MDF_AttackType",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0
+                    }
+                  }
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByIsContainModifier",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntityActualOwner"
+                    },
+                    "ModifierName": "Monster_Company_Coin_Avater_Mark"
                   },
-                  "ModifierName": "Monster_Company_Coin_Avater"
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.RemoveModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntityActualOwner"
+                      },
+                      "ModifierName": "Monster_Company_Coin_Avater"
+                    }
+                  ]
                 }
               ]
             },
             {
-              "$type": "RPG.GameCore.AddModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ParamEntity"
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "DynamicKey": "AlreadyAdd",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    }
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByTargetTeam",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntityActualOwner"
+                    },
+                    "Team": "TeamLight"
+                  }
+                ]
               },
-              "ModifierName": "Monster_Company_Coin_Avater",
-              "LayerAddWhenStack": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQAJ",
-                  "FixedValues": [],
-                  "DynamicHashes": [
-                    1458882163
-                  ]
-                }
-              },
-              "DynamicValues": {
-                "MDF_DamageUpRatio_PerLayer": {
-                  "IsDynamic": true,
-                  "PostfixExpr": {
-                    "OpCodes": "AQAJ",
-                    "FixedValues": [],
-                    "DynamicHashes": [
-                      -273776885
-                    ]
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntityActualOwner"
+                  },
+                  "ModifierName": "Monster_Company_Coin_Avater",
+                  "LayerAddWhenStack": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAJ",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        1458882163
+                      ]
+                    }
+                  },
+                  "DynamicValues": {
+                    "MDF_DamageUpRatio_PerLayer": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAJ",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          -273776885
+                        ]
+                      }
+                    }
+                  },
+                  "InheritCaster": "TargetSelf"
+                },
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "DynamicKey": "AlreadyAdd",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
                   }
                 }
-              },
-              "InheritCaster": "TargetSelf"
+              ]
             }
           ]
         },
-        "OnStack": {
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
@@ -2915,7 +3289,8 @@
             }
           ]
         },
-        "OnBeforeDying": {
+        {
+          "Event": "OnBeforeDying",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.TriggerEffect",
@@ -2932,66 +3307,191 @@
             }
           ]
         },
-        "OnAfterAttack": {
+        {
+          "Event": "OnBeforeBeingAttacked",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAny",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCurrentSkillType"
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByCurrentSkillType",
+                    "SkillType": "Skill"
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByCurrentSkillType",
+                    "SkillType": "Ultra"
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "DynamicKey": "MDF_AttackType",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0
+                    }
+                  }
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "DynamicKey": "MDF_AttackType",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Event": "OnAfterAttack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.RemoveSelfModifier"
             }
           ]
         },
-        "OnBeingBreak": {
+        {
+          "Event": "OnBeingBreak",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
               "Predicate": {
-                "$type": "RPG.GameCore.ByIsContainModifier",
-                "TargetType": {
-                  "$type": "RPG.GameCore.TargetAlias",
-                  "Alias": "ParamEntity"
-                },
-                "ModifierName": "Monster_Company_Coin_Avater_Mark"
+                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                "DynamicKey": "MDF_AttackType",
+                "CompareType": "Equal",
+                "CompareValue": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 1
+                  }
+                }
               },
               "SuccessTaskList": [
                 {
-                  "$type": "RPG.GameCore.RemoveModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "DynamicKey": "MDF_AttackType",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0
+                    }
+                  }
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByIsContainModifier",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "ModifierName": "Monster_Company_Coin_Avater_Mark"
                   },
-                  "ModifierName": "Monster_Company_Coin_Avater"
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.RemoveModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "Monster_Company_Coin_Avater"
+                    }
+                  ]
                 }
               ]
             },
             {
-              "$type": "RPG.GameCore.AddModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ParamEntity"
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "DynamicKey": "AlreadyAdd",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    }
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByTargetTeam",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "Team": "TeamLight"
+                  }
+                ]
               },
-              "ModifierName": "Monster_Company_Coin_Avater",
-              "LayerAddWhenStack": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQAJ",
-                  "FixedValues": [],
-                  "DynamicHashes": [
-                    1458882163
-                  ]
-                }
-              },
-              "DynamicValues": {
-                "MDF_DamageUpRatio_PerLayer": {
-                  "IsDynamic": true,
-                  "PostfixExpr": {
-                    "OpCodes": "AQAJ",
-                    "FixedValues": [],
-                    "DynamicHashes": [
-                      -273776885
-                    ]
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "ModifierName": "Monster_Company_Coin_Avater",
+                  "LayerAddWhenStack": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAJ",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        1458882163
+                      ]
+                    }
+                  },
+                  "DynamicValues": {
+                    "MDF_DamageUpRatio_PerLayer": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAJ",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          -273776885
+                        ]
+                      }
+                    }
+                  },
+                  "InheritCaster": "TargetSelf"
+                },
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "DynamicKey": "AlreadyAdd",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
                   }
                 }
-              },
-              "InheritCaster": "TargetSelf"
+              ]
             },
             {
               "$type": "RPG.GameCore.AddModifier",
@@ -3006,7 +3506,7 @@
             }
           ]
         }
-      },
+      ],
       "Stacking": "Replace",
       "DynamicValues": {
         "Values": {
@@ -3016,14 +3516,17 @@
           "-90446228": {},
           "-797864550": {},
           "-273776885": {},
-          "-1882231037": {}
+          "-1882231037": {},
+          "62505416": {},
+          "89506955": {}
         }
       }
     },
     "Monster_Company_Coin_RemoveEffect": {
       "LifeTime": 1,
-      "_CallbackList": {
-        "OnAfterBeingAttacked": {
+      "_CallbackList": [
+        {
+          "Event": "OnAfterBeingAttacked",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.TriggerEffect",
@@ -3043,7 +3546,7 @@
             }
           ]
         }
-      }
+      ]
     },
     "Monster_Company_Coin_Elite": {
       "MaxLayer": 3,
@@ -3057,8 +3560,9 @@
           ]
         }
       },
-      "_CallbackList": {
-        "OnCreate": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.TriggerEffect",
@@ -3078,7 +3582,8 @@
             }
           ]
         },
-        "OnDestroy": {
+        {
+          "Event": "OnDestroy",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.RemoveEffect",
@@ -3095,66 +3600,175 @@
                 "Alias": "ModifierOwnerEntity"
               },
               "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W1_Mecha03_02/Eff_Monster_W1_Mecha03_02_IntensifierBuff_Loop02.prefab"
+            },
+            {
+              "$type": "RPG.GameCore.SetMonsterEnergyBarState",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "Active": "False"
+            },
+            {
+              "$type": "RPG.GameCore.RemoveModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ModifierName": "Monster_Company_Coin_Monster_EnergyBar"
+            },
+            {
+              "$type": "RPG.GameCore.RemoveModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ModifierName": "Monster_Company_Coin_Monster_EnergyBar2"
+            },
+            {
+              "$type": "RPG.GameCore.RemoveModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ModifierName": "Monster_Company_Coin_Monster_EnergyBar3"
             }
           ]
         },
-        "OnBeingLimbo": {
+        {
+          "Event": "OnBeingLimbo",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
               "Predicate": {
-                "$type": "RPG.GameCore.ByIsContainModifier",
-                "TargetType": {
-                  "$type": "RPG.GameCore.TargetAlias",
-                  "Alias": "ParamEntity"
-                },
-                "ModifierName": "Monster_Company_Coin_Avater_Mark"
+                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                "DynamicKey": "MDF_AttackType",
+                "CompareType": "Equal",
+                "CompareValue": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 1
+                  }
+                }
               },
               "SuccessTaskList": [
                 {
-                  "$type": "RPG.GameCore.RemoveModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "DynamicKey": "MDF_AttackType",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0
+                    }
+                  }
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByIsContainModifier",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntityActualOwner"
+                    },
+                    "ModifierName": "Monster_Company_Coin_Avater_Mark"
                   },
-                  "ModifierName": "Monster_Company_Coin_Avater"
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.RemoveModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntityActualOwner"
+                      },
+                      "ModifierName": "Monster_Company_Coin_Avater"
+                    }
+                  ]
                 }
               ]
             },
             {
-              "$type": "RPG.GameCore.AddModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ParamEntity"
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "DynamicKey": "AlreadyAdd",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    }
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByTargetTeam",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntityActualOwner"
+                    },
+                    "Team": "TeamLight"
+                  }
+                ]
               },
-              "ModifierName": "Monster_Company_Coin_Avater",
-              "LayerAddWhenStack": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQAJ",
-                  "FixedValues": [],
-                  "DynamicHashes": [
-                    1458882163
-                  ]
-                }
-              },
-              "DynamicValues": {
-                "MDF_DamageUpRatio_PerLayer": {
-                  "IsDynamic": true,
-                  "PostfixExpr": {
-                    "OpCodes": "AQAJ",
-                    "FixedValues": [],
-                    "DynamicHashes": [
-                      -945261968
-                    ]
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntityActualOwner"
+                  },
+                  "ModifierName": "Monster_Company_Coin_Avater",
+                  "LayerAddWhenStack": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAJ",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        1458882163
+                      ]
+                    }
+                  },
+                  "DynamicValues": {
+                    "MDF_DamageUpRatio_PerLayer": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAJ",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          -945261968
+                        ]
+                      }
+                    }
+                  },
+                  "InheritCaster": "TargetSelf"
+                },
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "DynamicKey": "AlreadyAdd",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
                   }
                 }
-              },
-              "InheritCaster": "TargetSelf"
+              ]
             }
           ]
         },
-        "OnStack": {
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
@@ -3166,6 +3780,94 @@
                 }
               },
               "DynamicKey": "ModifierLayers"
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ModifierOwnerEntity"
+                },
+                "DynamicKey": "ModifierLayers",
+                "CompareType": "Equal",
+                "CompareValue": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 1
+                  }
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "ModifierName": "Monster_Company_Coin_Monster_EnergyBar"
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "DynamicKey": "ModifierLayers",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 2
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "ModifierName": "Monster_Company_Coin_Monster_EnergyBar2"
+                    }
+                  ],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "DynamicKey": "ModifierLayers",
+                        "CompareType": "Equal",
+                        "CompareValue": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 3
+                          }
+                        }
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.AddModifier",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "ModifierName": "Monster_Company_Coin_Monster_EnergyBar3"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
             },
             {
               "$type": "RPG.GameCore.TriggerEffect",
@@ -3201,7 +3903,8 @@
             }
           ]
         },
-        "OnBeforeDying": {
+        {
+          "Event": "OnBeforeDying",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -3281,66 +3984,191 @@
             }
           ]
         },
-        "OnAfterAttack": {
+        {
+          "Event": "OnBeforeBeingAttacked",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAny",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCurrentSkillType"
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByCurrentSkillType",
+                    "SkillType": "Skill"
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByCurrentSkillType",
+                    "SkillType": "Ultra"
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "DynamicKey": "MDF_AttackType",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0
+                    }
+                  }
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "DynamicKey": "MDF_AttackType",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Event": "OnAfterAttack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.RemoveSelfModifier"
             }
           ]
         },
-        "OnBeingBreak": {
+        {
+          "Event": "OnBeingBreak",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
               "Predicate": {
-                "$type": "RPG.GameCore.ByIsContainModifier",
-                "TargetType": {
-                  "$type": "RPG.GameCore.TargetAlias",
-                  "Alias": "ParamEntity"
-                },
-                "ModifierName": "Monster_Company_Coin_Avater_Mark"
+                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                "DynamicKey": "MDF_AttackType",
+                "CompareType": "Equal",
+                "CompareValue": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 1
+                  }
+                }
               },
               "SuccessTaskList": [
                 {
-                  "$type": "RPG.GameCore.RemoveModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "DynamicKey": "MDF_AttackType",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0
+                    }
+                  }
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByIsContainModifier",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "ModifierName": "Monster_Company_Coin_Avater_Mark"
                   },
-                  "ModifierName": "Monster_Company_Coin_Avater"
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.RemoveModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "Monster_Company_Coin_Avater"
+                    }
+                  ]
                 }
               ]
             },
             {
-              "$type": "RPG.GameCore.AddModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ParamEntity"
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "DynamicKey": "AlreadyAdd",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    }
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByTargetTeam",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "Team": "TeamLight"
+                  }
+                ]
               },
-              "ModifierName": "Monster_Company_Coin_Avater",
-              "LayerAddWhenStack": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQAJ",
-                  "FixedValues": [],
-                  "DynamicHashes": [
-                    1458882163
-                  ]
-                }
-              },
-              "DynamicValues": {
-                "MDF_DamageUpRatio_PerLayer": {
-                  "IsDynamic": true,
-                  "PostfixExpr": {
-                    "OpCodes": "AQAJ",
-                    "FixedValues": [],
-                    "DynamicHashes": [
-                      -945261968
-                    ]
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "ModifierName": "Monster_Company_Coin_Avater",
+                  "LayerAddWhenStack": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAJ",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        1458882163
+                      ]
+                    }
+                  },
+                  "DynamicValues": {
+                    "MDF_DamageUpRatio_PerLayer": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAJ",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          -945261968
+                        ]
+                      }
+                    }
+                  },
+                  "InheritCaster": "TargetSelf"
+                },
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "DynamicKey": "AlreadyAdd",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
                   }
                 }
-              },
-              "InheritCaster": "TargetSelf"
+              ]
             },
             {
               "$type": "RPG.GameCore.AddModifier",
@@ -3367,7 +4195,7 @@
             }
           ]
         }
-      },
+      ],
       "Stacking": "Replace",
       "DynamicValues": {
         "Values": {
@@ -3377,14 +4205,17 @@
           "-90446228": {},
           "-797864550": {},
           "-945261968": {},
-          "-1882231037": {}
+          "-1882231037": {},
+          "62505416": {},
+          "89506955": {}
         }
       }
     },
     "Monster_Company_Coin_Elite_RemoveEffect": {
       "LifeTime": 1,
-      "_CallbackList": {
-        "OnAfterBeingAttacked": {
+      "_CallbackList": [
+        {
+          "Event": "OnAfterBeingAttacked",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -3467,7 +4298,7 @@
             }
           ]
         }
-      },
+      ],
       "DynamicValues": {
         "Values": {
           "1458882163": {}
@@ -3490,8 +4321,9 @@
       "UIConfig": {
         "ModifierUIPriority": "Buff"
       },
-      "_CallbackList": {
-        "OnDestroy": {
+      "_CallbackList": [
+        {
+          "Event": "OnDestroy",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.RemoveModifier",
@@ -3503,46 +4335,88 @@
             }
           ]
         },
-        "OnBeingLimbo": {
+        {
+          "Event": "OnBeingLimbo",
           "CallbackConfig": [
             {
-              "$type": "RPG.GameCore.AddModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ParamEntity"
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByTargetTeam",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "Team": "TeamDark"
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByCheckCustomValueBool",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "Key": {
+                      "Hash": 642177943
+                    }
+                  }
+                ]
               },
-              "ModifierName": "Monster_Company_Coin",
-              "LayerAddWhenStack": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQAJ",
-                  "FixedValues": [],
-                  "DynamicHashes": [
-                    1458882163
-                  ]
-                }
-              },
-              "DynamicValues": {
-                "MDF_DamageUpRatio_PerLayer": {
-                  "IsDynamic": true,
-                  "PostfixExpr": {
-                    "OpCodes": "AQAJ",
-                    "FixedValues": [],
-                    "DynamicHashes": [
-                      -945261968
-                    ]
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "ModifierName": "Monster_Company_Coin_Monster_Mark",
+                  "DynamicValues": {
+                    "MDF_DamageUpRatio_PerLayer": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAJ",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          -945261968
+                        ]
+                      }
+                    },
+                    "ModifierLayers": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAJ",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          1458882163
+                        ]
+                      }
+                    }
                   }
                 }
-              },
-              "InheritCaster": "TargetSelf"
+              ]
             },
             {
               "$type": "RPG.GameCore.RemoveSelfModifier"
             }
           ]
         },
-        "OnStack": {
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.ShowUIPage",
+              "AssetPath": "UI/Common/Widget/BattleSelfStatusHint.prefab",
+              "UITextNodes": [
+                {
+                  "TextPath": "AreaInfoPanel/Title/Text",
+                  "TextContent": {
+                    "Hash": -425787718
+                  }
+                }
+              ],
+              "LifeTime": 2
+            },
             {
               "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
               "ValueType": "Layer",
@@ -3564,21 +4438,266 @@
             }
           ]
         },
-        "OnAfterAttack": {
+        {
+          "Event": "OnAfterAttack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
               "Predicate": {
-                "$type": "RPG.GameCore.ByIsContainModifier",
+                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                "DynamicKey": "MDF_AttackType",
+                "CompareType": "Equal",
+                "CompareValue": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 1
+                  }
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByIsContainModifier",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "ModifierName": "Monster_Company_Coin_Avater_Mark"
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.RemoveSelfModifier"
+                    }
+                  ],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "ModifierName": "Monster_Company_Coin_Avater_Mark"
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "ModifierName": "Monster_Company_Coin_Avater_Effect"
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByIsContainModifier",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "ModifierName": "Monster_Company_Coin_Avater_Mark"
+                  },
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "ModifierName": "Monster_Company_Coin_Avater_Mark"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Event": "OnBeforeSkillUse",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAny",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCurrentSkillType"
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByCurrentSkillType",
+                    "SkillType": "Skill"
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByCurrentSkillType",
+                    "SkillType": "Ultra"
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "DynamicKey": "MDF_AttackType",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "Stacking": "Replace",
+      "DynamicValues": {
+        "Values": {
+          "1458882163": {},
+          "-797864550": {},
+          "-945261968": {},
+          "-273776885": {},
+          "-1882231037": {},
+          "-1937709680": {},
+          "62505416": {}
+        }
+      }
+    },
+    "Monster_Company_Coin_Monster_Mark": {
+      "LifeTime": 1,
+      "_CallbackList": [
+        {
+          "Event": "OnAfterAttackEnd",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareMonsterRank",
                 "TargetType": {
                   "$type": "RPG.GameCore.TargetAlias",
                   "Alias": "ModifierOwnerEntity"
                 },
-                "ModifierName": "Monster_Company_Coin_Avater_Mark"
+                "CompareType": "GreaterEqual",
+                "CompareValue": 3
               },
               "SuccessTaskList": [
                 {
-                  "$type": "RPG.GameCore.RemoveSelfModifier"
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "ModifierName": "Monster_Company_Coin_Elite",
+                  "LayerAddWhenStack": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAJ",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        1458882163
+                      ]
+                    }
+                  },
+                  "DynamicValues": {
+                    "MDF_DamageUpRatio_PerLayer": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAJ",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          -945261968
+                        ]
+                      }
+                    }
+                  },
+                  "InheritCaster": "TargetSelf"
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareModifierValue",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "ModifierName": "Monster_Company_Coin_Elite",
+                    "ValueType": "Layer",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 2
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.RemoveEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W1_Mecha03_02/Eff_Monster_W1_Mecha03_02_LogoBuff_01.prefab"
+                    },
+                    {
+                      "$type": "RPG.GameCore.TriggerEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W1_Mecha03_02/Eff_Monster_W1_Mecha03_02_LogoBuff_02.prefab"
+                    }
+                  ],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareModifierValue",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "ModifierName": "Monster_Company_Coin_Elite",
+                        "ValueType": "Layer",
+                        "CompareType": "Equal",
+                        "CompareValue": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 3
+                          }
+                        }
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.RemoveEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W1_Mecha03_02/Eff_Monster_W1_Mecha03_02_LogoBuff_01.prefab"
+                        },
+                        {
+                          "$type": "RPG.GameCore.RemoveEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W1_Mecha03_02/Eff_Monster_W1_Mecha03_02_LogoBuff_02.prefab"
+                        },
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W1_Mecha03_02/Eff_Monster_W1_Mecha03_02_LogoBuff_03.prefab"
+                        }
+                      ]
+                    }
+                  ]
                 }
               ],
               "FailedTaskList": [
@@ -3588,60 +4707,43 @@
                     "$type": "RPG.GameCore.TargetAlias",
                     "Alias": "ModifierOwnerEntity"
                   },
-                  "ModifierName": "Monster_Company_Coin_Avater_Mark"
+                  "ModifierName": "Monster_Company_Coin",
+                  "LayerAddWhenStack": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAJ",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        1458882163
+                      ]
+                    }
+                  },
+                  "DynamicValues": {
+                    "MDF_DamageUpRatio": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAJ",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          -945261968
+                        ]
+                      }
+                    }
+                  },
+                  "InheritCaster": "TargetSelf"
                 }
               ]
             },
             {
-              "$type": "RPG.GameCore.RemoveModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "ModifierName": "Monster_Company_Coin_Avater_Effect"
-            },
-            {
-              "$type": "RPG.GameCore.AddModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "ModifierName": "Monster_Company_Coin_Avater_Effect",
-              "LayerAddWhenStack": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQAJ",
-                  "FixedValues": [],
-                  "DynamicHashes": [
-                    1458882163
-                  ]
-                }
-              },
-              "DynamicValues": {
-                "MDF_DamageUpRatio_PerLayer": {
-                  "IsDynamic": true,
-                  "PostfixExpr": {
-                    "OpCodes": "AQAJ",
-                    "FixedValues": [],
-                    "DynamicHashes": [
-                      -945261968
-                    ]
-                  }
-                }
-              }
+              "$type": "RPG.GameCore.RemoveSelfModifier"
             }
           ]
         }
-      },
-      "Stacking": "Replace",
+      ],
       "DynamicValues": {
         "Values": {
-          "1458882163": {},
-          "-797864550": {},
           "-945261968": {},
-          "-273776885": {},
-          "-1882231037": {},
-          "-1937709680": {}
+          "1458882163": {}
         }
       }
     },
@@ -3658,8 +4760,9 @@
           ]
         }
       },
-      "_CallbackList": {
-        "OnStack": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
@@ -3785,19 +4888,6 @@
               ]
             },
             {
-              "$type": "RPG.GameCore.ShowUIPage",
-              "AssetPath": "UI/Common/Widget/BattleSelfStatusHint.prefab",
-              "UITextNodes": [
-                {
-                  "TextPath": "AreaInfoPanel/Title/Text",
-                  "TextContent": {
-                    "Hash": -425787718
-                  }
-                }
-              ],
-              "LifeTime": 2
-            },
-            {
               "$type": "RPG.GameCore.StackProperty",
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
@@ -3818,7 +4908,7 @@
             }
           ]
         }
-      },
+      ],
       "Stacking": "Replace",
       "DynamicValues": {
         "Values": {

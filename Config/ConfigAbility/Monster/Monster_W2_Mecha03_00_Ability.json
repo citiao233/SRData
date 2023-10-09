@@ -1647,8 +1647,12 @@
   ],
   "GlobalModifiers": {
     "MMonster_W2_Mecha03_00_Overdrive_Controller": {
-      "_CallbackList": {
-        "OnCreate": {
+      "BehaviorFlagList": [
+        "ListenBattleEventSkill"
+      ],
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.TriggerEffect",
@@ -1682,7 +1686,8 @@
             }
           ]
         },
-        "OnDestroy": {
+        {
+          "Event": "OnDestroy",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.RemoveEffect",
@@ -1694,7 +1699,8 @@
             }
           ]
         },
-        "OnListenBeforeAttack": {
+        {
+          "Event": "OnListenBeforeAttack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -1752,7 +1758,8 @@
             }
           ]
         },
-        "OnListenAfterAttack": {
+        {
+          "Event": "OnListenAfterAttack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -1853,7 +1860,8 @@
             }
           ]
         },
-        "OnListenAfterSkillUse": {
+        {
+          "Event": "OnListenAfterSkillUse",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -1951,24 +1959,30 @@
             }
           ]
         }
-      }
+      ]
     },
     "MMonster_W2_Mecha03_00_Overdrive_Hint": {
       "BehaviorFlagList": [
         "RemoveWhenCasterDead"
       ],
-      "_CallbackList": {
-        "OnBeforeSkillUse": {
+      "_CallbackList": [
+        {
+          "Event": "OnBeforeSkillUse",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetEffectAnimatorParameter",
               "UniqueEffectName": "OverdriveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
               "ParameterName": "BoolPreviewOn",
               "ParameterType": "Bool"
             }
           ]
         },
-        "OnAimAtTargetsRefresh_CL": {
+        {
+          "Event": "OnAimAtTargetsRefresh_CL",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -2044,6 +2058,10 @@
                 {
                   "$type": "RPG.GameCore.SetEffectAnimatorParameter",
                   "UniqueEffectName": "OverdriveEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
                   "ParameterName": "BoolPreviewOn",
                   "ParameterType": "Bool",
                   "BoolValue": true
@@ -2053,6 +2071,10 @@
                 {
                   "$type": "RPG.GameCore.SetEffectAnimatorParameter",
                   "UniqueEffectName": "OverdriveEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
                   "ParameterName": "BoolPreviewOn",
                   "ParameterType": "Bool"
                 }
@@ -2060,12 +2082,14 @@
             }
           ]
         }
-      }
+      ],
+      "Stacking": "ReplaceByCaster"
     },
     "MMonster_W2_Mecha03_00_Overdrive_Accumulate": {
       "MaxLayer": 3,
-      "_CallbackList": {
-        "OnStack": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -2095,6 +2119,10 @@
                 },
                 {
                   "$type": "RPG.GameCore.SetEffectAnimatorTrigger",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
                   "UniqueEffectName": "OverdriveEffect",
                   "TriggerName": "TriggerOverdriveCharging"
                 }
@@ -2137,6 +2165,10 @@
                 },
                 {
                   "$type": "RPG.GameCore.SetEffectAnimatorTrigger",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
                   "UniqueEffectName": "OverdriveEffect",
                   "TriggerName": "TriggerOverdriveCharging"
                 }
@@ -2179,6 +2211,10 @@
                 },
                 {
                   "$type": "RPG.GameCore.SetEffectAnimatorTrigger",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
                   "UniqueEffectName": "OverdriveEffect",
                   "TriggerName": "TriggerOverdriveCharging"
                 },
@@ -2309,7 +2345,7 @@
             }
           ]
         }
-      },
+      ],
       "Stacking": "ReplaceByCaster"
     },
     "MMonster_W2_Mecha03_00_Overdrive_Accumulate_Display1": {},
@@ -2317,8 +2353,9 @@
     "MMonster_W2_Mecha03_00_Overdrive_Accumulate_Display3": {},
     "MMonster_W2_Mecha03_00_Overdrive_Accumulate_Toast": {
       "MaxLayer": 3,
-      "_CallbackList": {
-        "OnStack": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -2457,12 +2494,13 @@
             }
           ]
         }
-      },
+      ],
       "Stacking": "ReplaceByCaster"
     },
     "MMonster_W2_Mecha03_00_Overdrive_Effect_Accumulating": {
-      "_CallbackList": {
-        "OnCreate": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.ModifierAttachEffect",
@@ -2474,11 +2512,12 @@
             }
           ]
         }
-      }
+      ]
     },
     "MMonster_W2_Mecha03_00_Overdrive_Effect_Accumulated": {
-      "_CallbackList": {
-        "OnCreate": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.ModifierAttachEffect",
@@ -2490,33 +2529,44 @@
             }
           ]
         }
-      }
+      ]
     },
     "MMonster_W2_Mecha03_00_Overdrive_Alert": {
-      "_CallbackList": {
-        "OnCreate": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetEffectAnimatorTrigger",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
               "UniqueEffectName": "OverdriveEffect",
               "TriggerName": "TriggerPreviewOn"
             }
           ]
         },
-        "OnDestroy": {
+        {
+          "Event": "OnDestroy",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetEffectAnimatorTrigger",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
               "UniqueEffectName": "OverdriveEffect",
               "TriggerName": "TriggerPreviewOff"
             }
           ]
         }
-      }
+      ]
     },
     "MMonster_W2_Mecha03_00_Overdrive_Effect_Charge_1_3": {
-      "_CallbackList": {
-        "OnCreate": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.ModifierAttachEffect",
@@ -2534,11 +2584,12 @@
             }
           ]
         }
-      }
+      ]
     },
     "MMonster_W2_Mecha03_00_Overdrive_Effect_Charge_2_3": {
-      "_CallbackList": {
-        "OnCreate": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.ModifierAttachEffect",
@@ -2556,11 +2607,12 @@
             }
           ]
         }
-      }
+      ]
     },
     "MMonster_W2_Mecha03_00_Overdrive_Effect_Charge_3_3": {
-      "_CallbackList": {
-        "OnCreate": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.ModifierAttachEffect",
@@ -2578,11 +2630,12 @@
             }
           ]
         }
-      }
+      ]
     },
     "MMonster_W2_Mecha03_00_Overdrive_DelayActive_Controller": {
-      "_CallbackList": {
-        "OnModifierAdd": {
+      "_CallbackList": [
+        {
+          "Event": "OnModifierAdd",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -2629,11 +2682,12 @@
             }
           ]
         }
-      }
+      ]
     },
     "MMonster_W2_Mecha03_00_Overdrive_DelayActive": {
-      "_CallbackList": {
-        "OnModifierRemove": {
+      "_CallbackList": [
+        {
+          "Event": "OnModifierRemove",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -2713,12 +2767,13 @@
             }
           ]
         }
-      }
+      ]
     },
     "MMonster_W2_Mecha03_00_Overdrive_On": {
       "LifeTime": 2,
-      "_CallbackList": {
-        "OnCreate": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.ModifierAttachEffect",
@@ -2785,10 +2840,15 @@
             }
           ]
         },
-        "OnDestroy": {
+        {
+          "Event": "OnDestroy",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetEffectAnimatorTrigger",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
               "UniqueEffectName": "OverdriveEffect",
               "TriggerName": "TriggerOverdriveEnd"
             },
@@ -2839,7 +2899,8 @@
             }
           ]
         },
-        "OnStack": {
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.StackWeakness",
@@ -2916,7 +2977,7 @@
             }
           ]
         }
-      },
+      ],
       "DynamicValues": {
         "Values": {
           "478542392": {},
@@ -2926,8 +2987,9 @@
     },
     "Monster_W2_Mecha03_00_Overdrive_On_RLElite": {
       "LifeTime": 3,
-      "_CallbackList": {
-        "OnCreate": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.ModifierAttachEffect",
@@ -2994,10 +3056,15 @@
             }
           ]
         },
-        "OnDestroy": {
+        {
+          "Event": "OnDestroy",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetEffectAnimatorTrigger",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
               "UniqueEffectName": "OverdriveEffect",
               "TriggerName": "TriggerOverdriveEnd"
             },
@@ -3048,7 +3115,8 @@
             }
           ]
         },
-        "OnStack": {
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.StackWeakness",
@@ -3087,7 +3155,7 @@
             }
           ]
         }
-      },
+      ],
       "DynamicValues": {
         "Values": {
           "-471811337": {}

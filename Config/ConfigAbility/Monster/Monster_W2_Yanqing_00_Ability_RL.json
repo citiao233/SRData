@@ -2488,6 +2488,20 @@
           "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Yanqing_00/Eff_Monster_W2_Yanqing_00_Skill08_Hit_Weapon_01.prefab"
         },
         {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill08",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.6315789590589702
+            }
+          }
+        },
+        {
           "$type": "RPG.GameCore.TriggerEffect",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
@@ -4151,8 +4165,9 @@
     {
       "Modifiers": {
         "MMonster_W2_Yanqing_00_RemoveOneMore_RL": {
-          "_CallbackList": {
-            "OnActionEnd": {
+          "_CallbackList": [
+            {
+              "Event": "OnActionEnd",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -4356,7 +4371,8 @@
                 }
               ]
             },
-            "OnBeingBreak": {
+            {
+              "Event": "OnBeingBreak",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -4917,7 +4933,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "Monster_W2_Yanqing_00_PassiveSkillInitiate_RL",
@@ -4948,6 +4964,30 @@
             "Alias": "Caster"
           },
           "ModifierName": "W2_YanQing_00_BattleScore3"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "W2_YanQing_00_BattleScore4"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "W2_YanQing_00_BattleScore5"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "W2_YanQing_00_BattleScore6"
         },
         {
           "$type": "RPG.GameCore.AddModifier",
@@ -5095,8 +5135,9 @@
   ],
   "GlobalModifiers": {
     "MMonster_W2_Yanqing_00_StandByEffect_Phase03": {
-      "_CallbackList": {
-        "OnCreate": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.ModifierAttachEffect",
@@ -5133,7 +5174,7 @@
             }
           ]
         }
-      }
+      ]
     },
     "MMonster_W2_Yanqing_00_Skill07_Overdrive": {
       "LayerAddWhenStack": {
@@ -5142,8 +5183,9 @@
           "Value": 1
         }
       },
-      "_CallbackList": {
-        "OnStack": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
@@ -5199,7 +5241,7 @@
             }
           ]
         }
-      },
+      ],
       "Stacking": "ReplaceByCaster",
       "DynamicValues": {
         "Values": {
@@ -5219,11 +5261,13 @@
         }
       },
       "BehaviorFlagList": [],
-      "_CallbackList": {
-        "OnCreate": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
           "CallbackConfig": []
         },
-        "OnStack": {
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
@@ -5271,7 +5315,7 @@
             }
           ]
         }
-      },
+      ],
       "Stacking": "Replace",
       "DynamicValues": {
         "Values": {
@@ -5287,8 +5331,9 @@
         "MuteBreak",
         "MuteHitH"
       ],
-      "_CallbackList": {
-        "OnCreate": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.ModifierOverrideOnHitEffect",
@@ -5299,7 +5344,8 @@
             }
           ]
         },
-        "OnAfterBeingHit": {
+        {
+          "Event": "OnAfterBeingHit",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.TriggerSound",
@@ -5307,7 +5353,8 @@
             }
           ]
         },
-        "OnStack": {
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.StackWeakness",
@@ -5346,7 +5393,8 @@
             }
           ]
         },
-        "OnListenCharacterDie": {
+        {
+          "Event": "OnListenCharacterDie",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -5482,7 +5530,7 @@
             }
           ]
         }
-      },
+      ],
       "DynamicValues": {
         "Values": {
           "1644670423": {}
@@ -5505,8 +5553,9 @@
       "BehaviorFlagList": [
         "MuteHitH"
       ],
-      "_CallbackList": {
-        "OnCreate": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetResilience",
@@ -5533,7 +5582,8 @@
             }
           ]
         },
-        "OnDestroy": {
+        {
+          "Event": "OnDestroy",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.TriggerEffect",
@@ -5549,7 +5599,8 @@
             }
           ]
         },
-        "OnBeingBreak": {
+        {
+          "Event": "OnBeingBreak",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -5607,12 +5658,13 @@
             }
           ]
         }
-      }
+      ]
     },
     "MMonster_W2_Yanqing_00_SwordPowerUp": {
       "UseSnapshotEntity": true,
-      "_CallbackList": {
-        "OnCreate": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.AddModifier",
@@ -5624,10 +5676,12 @@
             }
           ]
         },
-        "OnBeingLimbo": {
+        {
+          "Event": "OnBeingLimbo",
           "CallbackConfig": []
         },
-        "OnStack": {
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.StackProperty",
@@ -5659,11 +5713,12 @@
             }
           ]
         }
-      }
+      ]
     },
     "MMonster_W2_Yanqing_01_SwordPowerUp_StandByEffect": {
-      "_CallbackList": {
-        "OnCreate": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.ModifierAttachEffect",
@@ -5678,11 +5733,12 @@
             }
           ]
         }
-      }
+      ]
     },
     "MMonster_W2_Yanqing_00_SkillP01_EnterBattleToast": {
-      "_CallbackList": {
-        "OnCreate": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.ShowUIPage",
@@ -5699,12 +5755,13 @@
             }
           ]
         }
-      }
+      ]
     },
     "MMonster_W2_Yanqing_00_SkillP01_ChangePhaseController": {
       "LimboWaitHealPriority": "ChangePhase",
-      "_CallbackList": {
-        "OnLimboWaitHeal": {
+      "_CallbackList": [
+        {
+          "Event": "OnLimboWaitHeal",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.RemoveModifier",
@@ -5971,7 +6028,7 @@
             }
           ]
         }
-      }
+      ]
     },
     "MMonster_W2_Yanqing_00_IceDot": {
       "MaxLayer": 1,
@@ -5992,8 +6049,9 @@
         "STAT_DOT"
       ],
       "UseSnapshotEntity": true,
-      "_CallbackList": {
-        "OnCreate": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -6030,7 +6088,8 @@
             }
           ]
         },
-        "OnPhase1": {
+        {
+          "Event": "OnPhase1",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.TriggerEffect",
@@ -6085,7 +6144,8 @@
             }
           ]
         },
-        "OnCustomEvent": {
+        {
+          "Event": "OnCustomEvent",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.ModifierAttachEffect",
@@ -6136,7 +6196,7 @@
             }
           ]
         }
-      },
+      ],
       "Stacking": "ReplaceByCaster",
       "DynamicValues": {
         "Values": {
@@ -6147,8 +6207,9 @@
       }
     },
     "MMonster_W2_Yanqing_00_SkillP01_Phase03SpeedUp": {
-      "_CallbackList": {
-        "OnStack": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.StackProperty",
@@ -6170,7 +6231,7 @@
             }
           ]
         }
-      },
+      ],
       "DynamicValues": {
         "Values": {
           "1644670423": {}
@@ -6178,8 +6239,9 @@
       }
     },
     "MMonster_W2_Yanqing_01_ChangePhaseDestroy": {
-      "_CallbackList": {
-        "OnCreate": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.CharacterChangePhase",
@@ -6196,7 +6258,7 @@
             }
           ]
         }
-      }
+      ]
     }
   }
 }

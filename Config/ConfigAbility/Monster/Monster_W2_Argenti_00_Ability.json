@@ -4,11 +4,16 @@
       "Modifiers": {
         "Monster_W2_Argenti_00_Initiate": {
           "BehaviorFlagList": [],
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
+              "CallbackConfig": []
+            },
+            {
+              "Event": "OnBeforeDying",
               "CallbackConfig": []
             }
-          }
+          ]
         }
       },
       "Name": "Monster_W2_Argenti_00_Passive01",
@@ -31,13 +36,23 @@
       "TargetInfo": {
         "TargetType": "Caster"
       },
-      "OnStart": []
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "OneMorePerTurn"
+        }
+      ]
     },
     {
       "Modifiers": {
         "MMonster_W2_Argenti_00_AIController": {
-          "_CallbackList": {
-            "OnHPChange": {
+          "_CallbackList": [
+            {
+              "Event": "OnHPChange",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -123,7 +138,111 @@
                 }
               ]
             }
-          }
+          ]
+        },
+        "Monster_W2_GS_Argenti_SpecialVictory_LockHP": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.LockHP",
+                  "Threshold": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0.7000000006519258
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "Event": "OnLockHPThresholdReached",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "DynamicKey": "Argenti_SpecialVictory_Flag",
+                    "ContextScope": "TargetEntity",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.DispelStatus",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "IsSlientDispel": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.DefineDynamicValue",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "DynamicKey": "AIFlag",
+                      "ResetValue": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 13
+                        }
+                      },
+                      "ContextScope": "TargetEntity"
+                    },
+                    {
+                      "$type": "RPG.GameCore.SetActionDelay",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "NormalizedValue": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 0
+                        }
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AllEnemy"
+                      },
+                      "ModifierName": "Monster_Common_DisableAction"
+                    },
+                    {
+                      "$type": "RPG.GameCore.DefineDynamicValue",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "DynamicKey": "Argenti_SpecialVictory_Flag",
+                      "ResetValue": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1
+                        }
+                      },
+                      "ContextScope": "TargetEntity"
+                    }
+                  ],
+                  "FailedTaskList": []
+                }
+              ]
+            }
+          ]
         }
       },
       "Name": "Monster_W2_Argenti_00_PassiveSkillInitiate",
@@ -201,6 +320,32 @@
             "Alias": "Caster"
           },
           "ModifierName": "MMonster_W2_Argenti_00_AIController"
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareMonsterID",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "TargetMonsterID": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 302401001
+              }
+            }
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "ModifierName": "Monster_W2_GS_Argenti_SpecialVictory_LockHP"
+            }
+          ]
         }
       ]
     },
@@ -330,7 +475,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.1229999999050051
+              "Value": 0.11000000010244548
             }
           }
         },
@@ -359,6 +504,7 @@
             },
             "AttackType": "Normal",
             "HitAnimation": "Hit",
+            "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Argenti_00/Eff_Monster_W2_Argenti_00_Skill01_Hit.prefab",
             "HitTimeSlowType": "Impact"
           },
           "SpecialHitSoundEvent": "Ev_sfx_boss_skill_01_hit_gepard",
@@ -438,19 +584,19 @@
               "OffsetTargetDistance": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 3.5000000004656613
+                  "Value": 4.500000000465661
                 }
               },
               "NormalizedTimeStart": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.20399999991059303
+                  "Value": 0.1359999997075647
                 }
               },
               "NormalizedTimeEnd": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.27200000011362135
+                  "Value": 0.18899999954737723
                 }
               }
             },
@@ -530,7 +676,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.4150000000372529
+              "Value": 0.40699999989010394
             }
           }
         },
@@ -541,7 +687,6 @@
             "Alias": "AbilityTargetEntity"
           },
           "AttackProperty": {
-            "DamageType": "Thunder",
             "DamagePercentage": {
               "IsDynamic": true,
               "PostfixExpr": {
@@ -560,6 +705,7 @@
             },
             "AttackType": "Normal",
             "HitAnimation": "Hit_H",
+            "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Argenti_00/Eff_Monster_W2_Argenti_00_Skill02_Hit02.prefab",
             "HitEffectHeight": 0.7
           },
           "TriggerHitSound": true,
@@ -576,7 +722,6 @@
             "Alias": "AbilityTargetAdjoinEntity"
           },
           "AttackProperty": {
-            "DamageType": "Thunder",
             "DamagePercentage": {
               "IsDynamic": true,
               "PostfixExpr": {
@@ -595,6 +740,7 @@
             },
             "AttackType": "Normal",
             "HitAnimation": "Hit_H",
+            "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Argenti_00/Eff_Monster_W2_Argenti_00_Skill02_Hit02.prefab",
             "HitEffectHeight": 0.7
           },
           "TriggerHitSound": true,
@@ -656,6 +802,12 @@
             "FixedValue": {
               "Value": 1
             }
+          },
+          "NormalizedTimeWait": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.7500000006984919
+            }
           }
         },
         {
@@ -700,7 +852,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.3900000003632158
+              "Value": 0.32799999974668026
             }
           }
         },
@@ -749,7 +901,7 @@
                           "OpCodes": "AQAJ",
                           "FixedValues": [],
                           "DynamicHashes": [
-                            872838689
+                            -289960725
                           ]
                         }
                       },
@@ -777,7 +929,7 @@
                           "OpCodes": "AQAJ",
                           "FixedValues": [],
                           "DynamicHashes": [
-                            872838689
+                            -289960725
                           ]
                         }
                       },
@@ -813,7 +965,7 @@
                     "OpCodes": "AQAJ",
                     "FixedValues": [],
                     "DynamicHashes": [
-                      2035638103
+                      -1856044666
                     ]
                   }
                 }
@@ -847,7 +999,7 @@
                               "OpCodes": "AQAJ",
                               "FixedValues": [],
                               "DynamicHashes": [
-                                872838689
+                                -289960725
                               ]
                             }
                           },
@@ -875,7 +1027,7 @@
                               "OpCodes": "AQAJ",
                               "FixedValues": [],
                               "DynamicHashes": [
-                                872838689
+                                -289960725
                               ]
                             }
                           },
@@ -917,7 +1069,7 @@
                               "OpCodes": "AQAJ",
                               "FixedValues": [],
                               "DynamicHashes": [
-                                2035638103
+                                -1856044666
                               ]
                             }
                           },
@@ -945,7 +1097,7 @@
                               "OpCodes": "AQAJ",
                               "FixedValues": [],
                               "DynamicHashes": [
-                                2035638103
+                                -1856044666
                               ]
                             }
                           },
@@ -983,7 +1135,7 @@
                     "OpCodes": "AQAJ",
                     "FixedValues": [],
                     "DynamicHashes": [
-                      469554162
+                      872838689
                     ]
                   }
                 }
@@ -1017,7 +1169,7 @@
                               "OpCodes": "AQAJ",
                               "FixedValues": [],
                               "DynamicHashes": [
-                                872838689
+                                -289960725
                               ]
                             }
                           },
@@ -1045,7 +1197,7 @@
                               "OpCodes": "AQAJ",
                               "FixedValues": [],
                               "DynamicHashes": [
-                                872838689
+                                -289960725
                               ]
                             }
                           },
@@ -1087,7 +1239,7 @@
                               "OpCodes": "AQAJ",
                               "FixedValues": [],
                               "DynamicHashes": [
-                                469554162
+                                872838689
                               ]
                             }
                           },
@@ -1115,7 +1267,7 @@
                               "OpCodes": "AQAJ",
                               "FixedValues": [],
                               "DynamicHashes": [
-                                469554162
+                                872838689
                               ]
                             }
                           },
@@ -1224,6 +1376,19 @@
       },
       "OnStart": [
         {
+          "$type": "RPG.GameCore.SetAttachmentVisibility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AttachPoints": [
+            {
+              "Name": "Effect_Flower"
+            }
+          ],
+          "Visibility": true
+        },
+        {
           "$type": "RPG.GameCore.WaitAnimState",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
@@ -1250,7 +1415,33 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.3789999997243285
+              "Value": 0.5000000004656613
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.SetAttachmentVisibility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AttachPoints": [
+            {
+              "Name": "Effect_Flower"
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill04",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.5340000002179295
             }
           }
         },
@@ -1274,13 +1465,28 @@
             "Alias": "AllTeammate"
           },
           "Predicate": {
-            "$type": "RPG.GameCore.ByIsContainModifier",
-            "TargetType": {
-              "$type": "RPG.GameCore.TargetAlias",
-              "Alias": "ParamEntity"
-            },
-            "ModifierName": "MMonster_W2_Argenti_00_Power",
-            "Inverse": true
+            "$type": "RPG.GameCore.ByAnd",
+            "PredicateList": [
+              {
+                "$type": "RPG.GameCore.ByIsContainModifier",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "ModifierName": "MMonster_W2_Argenti_00_Power",
+                "Inverse": true
+              },
+              {
+                "$type": "RPG.GameCore.ByCheckCustomValueBool",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "Key": {
+                  "Hash": 363068616
+                }
+              }
+            ]
           },
           "MaxNumber": {
             "IsDynamic": false,
@@ -1302,10 +1508,60 @@
                   "OpCodes": "AQAJ",
                   "FixedValues": [],
                   "DynamicHashes": [
-                    1545083806
+                    -1748310060
                   ]
                 }
               }
+            }
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.Retarget",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllTeammate"
+              },
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCheckCustomValueBool",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "Key": {
+                      "Hash": 363068616
+                    }
+                  }
+                ]
+              },
+              "MaxNumber": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1
+                }
+              },
+              "TaskList": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "ModifierName": "MMonster_W2_Argenti_00_Power",
+                  "LifeTime": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAJ",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        -1748310060
+                      ]
+                    }
+                  }
+                }
+              ]
             }
           ]
         },
@@ -1375,7 +1631,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 1
+              "Value": 0.9900000009220093
             }
           }
         },
@@ -1411,8 +1667,12 @@
       "OnStart": [
         {
           "$type": "RPG.GameCore.GlobalMainIntensityEffect",
-          "TargetIntensity": 0.4,
+          "TargetIntensity": 0.1,
           "FadeDuration": 0.3
+        },
+        {
+          "$type": "RPG.GameCore.HideLevelStage",
+          "IsHide": true
         },
         {
           "$type": "RPG.GameCore.WaitAnimState",
@@ -1462,9 +1722,17 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.6000000005587935
+              "Value": 0.5450000001583248
             }
           }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllEnemy"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Argenti_00/Eff_Monster_W2_Argenti_00_Skill05_Hit01.prefab"
         },
         {
           "$type": "RPG.GameCore.DamageByAttackProperty",
@@ -1473,14 +1741,17 @@
             "Alias": "AllEnemy"
           },
           "AttackProperty": {
-            "DamageType": "Fire",
             "DamagePercentage": {
               "IsDynamic": true,
               "PostfixExpr": {
-                "OpCodes": "AQAJ",
-                "FixedValues": [],
+                "OpCodes": "AQAAAAQJ",
+                "FixedValues": [
+                  {
+                    "Value": 0.20000000018626451
+                  }
+                ],
                 "DynamicHashes": [
-                  -190305622
+                  -402291451
                 ]
               }
             },
@@ -1501,13 +1772,6 @@
           }
         },
         {
-          "$type": "RPG.GameCore.RadialBlurEffect",
-          "BlurRadius": 1,
-          "Iteration": 10,
-          "BlurStart": 0.01,
-          "BlurFeather": 0.01
-        },
-        {
           "$type": "RPG.GameCore.WaitAnimState",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
@@ -1517,9 +1781,53 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.4769999999552965
+              "Value": 0.7740000004414469
             }
           }
+        },
+        {
+          "$type": "RPG.GameCore.DamageByAttackProperty",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllEnemy"
+          },
+          "AttackProperty": {
+            "DamagePercentage": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAAAAQJ",
+                "FixedValues": [
+                  {
+                    "Value": 0.8000000007450581
+                  }
+                ],
+                "DynamicHashes": [
+                  -402291451
+                ]
+              }
+            },
+            "SPHitRatio": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 1
+              }
+            },
+            "AttackType": "Normal",
+            "HitAnimation": "Hit_H",
+            "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Argenti_00/Eff_Monster_W2_Argenti_00_Skill05_Hit.prefab",
+            "HitTimeSlowType": "Slash",
+            "HitTimeSlowIntensity": "Heavy"
+          },
+          "DisplayData": {
+            "UIMessageHeight": 1
+          }
+        },
+        {
+          "$type": "RPG.GameCore.RadialBlurEffect",
+          "BlurRadius": 1,
+          "Iteration": 10,
+          "BlurStart": 0.01,
+          "BlurFeather": 0.01
         },
         {
           "$type": "RPG.GameCore.DamagePerformFinish"
@@ -1534,7 +1842,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.5189999998547137
+              "Value": 0.8770000003278255
             }
           }
         },
@@ -1557,9 +1865,36 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.9900000009220093
+              "Value": 1
             }
           }
+        },
+        {
+          "$type": "RPG.GameCore.HideLevelStage"
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareMonsterID",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "TargetMonsterID": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 302401001
+              }
+            }
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.TriggerCustomString",
+              "CustomString": {
+                "Value": "Level_SpecialWin"
+              }
+            }
+          ]
         },
         {
           "$type": "RPG.GameCore.SkillPerformFinish"
@@ -1666,7 +2001,7 @@
                       "OpCodes": "AQAJ",
                       "FixedValues": [],
                       "DynamicHashes": [
-                        872838689
+                        -289960725
                       ]
                     }
                   },
@@ -1694,7 +2029,7 @@
                       "OpCodes": "AQAJ",
                       "FixedValues": [],
                       "DynamicHashes": [
-                        872838689
+                        -289960725
                       ]
                     }
                   },
@@ -1730,7 +2065,7 @@
                 "OpCodes": "AQAJ",
                 "FixedValues": [],
                 "DynamicHashes": [
-                  2035638103
+                  -1856044666
                 ]
               }
             }
@@ -1764,7 +2099,7 @@
                           "OpCodes": "AQAJ",
                           "FixedValues": [],
                           "DynamicHashes": [
-                            872838689
+                            -289960725
                           ]
                         }
                       },
@@ -1792,7 +2127,7 @@
                           "OpCodes": "AQAJ",
                           "FixedValues": [],
                           "DynamicHashes": [
-                            872838689
+                            -289960725
                           ]
                         }
                       },
@@ -1834,7 +2169,7 @@
                           "OpCodes": "AQAJ",
                           "FixedValues": [],
                           "DynamicHashes": [
-                            2035638103
+                            -1856044666
                           ]
                         }
                       },
@@ -1862,7 +2197,7 @@
                           "OpCodes": "AQAJ",
                           "FixedValues": [],
                           "DynamicHashes": [
-                            2035638103
+                            -1856044666
                           ]
                         }
                       },
@@ -1900,7 +2235,7 @@
                 "OpCodes": "AQAJ",
                 "FixedValues": [],
                 "DynamicHashes": [
-                  469554162
+                  872838689
                 ]
               }
             }
@@ -1934,7 +2269,7 @@
                           "OpCodes": "AQAJ",
                           "FixedValues": [],
                           "DynamicHashes": [
-                            469554162
+                            872838689
                           ]
                         }
                       },
@@ -1962,7 +2297,7 @@
                           "OpCodes": "AQAJ",
                           "FixedValues": [],
                           "DynamicHashes": [
-                            469554162
+                            872838689
                           ]
                         }
                       },
@@ -2109,7 +2444,7 @@
                       "OpCodes": "AQAJ",
                       "FixedValues": [],
                       "DynamicHashes": [
-                        872838689
+                        -289960725
                       ]
                     }
                   },
@@ -2137,7 +2472,7 @@
                       "OpCodes": "AQAJ",
                       "FixedValues": [],
                       "DynamicHashes": [
-                        872838689
+                        -289960725
                       ]
                     }
                   },
@@ -2173,7 +2508,7 @@
                 "OpCodes": "AQAJ",
                 "FixedValues": [],
                 "DynamicHashes": [
-                  2035638103
+                  -1856044666
                 ]
               }
             }
@@ -2207,7 +2542,7 @@
                           "OpCodes": "AQAJ",
                           "FixedValues": [],
                           "DynamicHashes": [
-                            872838689
+                            -289960725
                           ]
                         }
                       },
@@ -2235,7 +2570,7 @@
                           "OpCodes": "AQAJ",
                           "FixedValues": [],
                           "DynamicHashes": [
-                            872838689
+                            -289960725
                           ]
                         }
                       },
@@ -2277,7 +2612,7 @@
                           "OpCodes": "AQAJ",
                           "FixedValues": [],
                           "DynamicHashes": [
-                            2035638103
+                            -1856044666
                           ]
                         }
                       },
@@ -2305,7 +2640,7 @@
                           "OpCodes": "AQAJ",
                           "FixedValues": [],
                           "DynamicHashes": [
-                            2035638103
+                            -1856044666
                           ]
                         }
                       },
@@ -2343,7 +2678,7 @@
                 "OpCodes": "AQAJ",
                 "FixedValues": [],
                 "DynamicHashes": [
-                  469554162
+                  872838689
                 ]
               }
             }
@@ -2377,7 +2712,7 @@
                           "OpCodes": "AQAJ",
                           "FixedValues": [],
                           "DynamicHashes": [
-                            469554162
+                            872838689
                           ]
                         }
                       },
@@ -2405,7 +2740,7 @@
                           "OpCodes": "AQAJ",
                           "FixedValues": [],
                           "DynamicHashes": [
-                            469554162
+                            872838689
                           ]
                         }
                       },
@@ -2477,8 +2812,9 @@
       "UIConfig": {
         "UIEffectPath": "UI/Battle/Widget/SpecialSkilMarkEff/SpecialSkillMark_Klara.prefab"
       },
-      "_CallbackList": {
-        "OnCreate": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -2515,7 +2851,8 @@
             }
           ]
         },
-        "OnPhase1": {
+        {
+          "Event": "OnPhase1",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.TriggerEffect",
@@ -2553,7 +2890,7 @@
             }
           ]
         }
-      },
+      ],
       "Stacking": "ReplaceByCaster",
       "DynamicValues": {
         "Values": {
@@ -2562,20 +2899,13 @@
       }
     },
     "MMonster_W2_Argenti_00_Power": {
-      "_CallbackList": {
-        "OnDestroy": {
-          "CallbackConfig": [
-            {
-              "$type": "RPG.GameCore.RemoveEffect",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Argenti_00/Eff_Monster_W2_ArgentiTotem_00_Power.prefab"
-            }
-          ]
+      "_CallbackList": [
+        {
+          "Event": "OnDestroy",
+          "CallbackConfig": []
         },
-        "OnStack": {
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.TriggerEffect",
@@ -2583,11 +2913,11 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "ModifierOwnerEntity"
               },
-              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Argenti_00/Eff_Monster_W2_ArgentiTotem_00_Power.prefab"
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Argenti_00/Eff_Monster_W2_ArgentiTotem_All_Power_Strat.prefab"
             }
           ]
         }
-      },
+      ],
       "Stacking": "Refresh",
       "DynamicValues": {
         "Values": {

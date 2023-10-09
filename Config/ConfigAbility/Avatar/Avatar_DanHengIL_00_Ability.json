@@ -63,11 +63,6 @@
               "Value": 0.9500000008847564
             }
           }
-        },
-        {
-          "$type": "RPG.GameCore.TriggerAnimState",
-          "AnimLogicState": "Idle",
-          "AnimStateName": "StandBy"
         }
       ]
     },
@@ -1060,6 +1055,7 @@
         },
         {
           "$type": "RPG.GameCore.GlobalMainIntensityEffect",
+          "IsRevert": true,
           "TargetIntensity": 1,
           "FadeDuration": 0.3
         },
@@ -3687,8 +3683,9 @@
     {
       "Modifiers": {
         "MAvatar_DanHengIL_00_BPCost_1": {
-          "_CallbackList": {
-            "OnDestroy": {
+          "_CallbackList": [
+            {
+              "Event": "OnDestroy",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.SetControlSkillMapping",
@@ -3729,7 +3726,8 @@
                 }
               ]
             },
-            "OnStack": {
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.SetControlSkillMapping",
@@ -3782,11 +3780,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "MAvatar_DanHengIL_00_BPCost_2": {
-          "_CallbackList": {
-            "OnDestroy": {
+          "_CallbackList": [
+            {
+              "Event": "OnDestroy",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.SetControlSkillMapping",
@@ -3827,7 +3826,8 @@
                 }
               ]
             },
-            "OnStack": {
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.SetControlSkillMapping",
@@ -3880,11 +3880,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "MAvatar_DanHengIL_00_BPCost_3": {
-          "_CallbackList": {
-            "OnDestroy": {
+          "_CallbackList": [
+            {
+              "Event": "OnDestroy",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.SetControlSkillMapping",
@@ -3925,7 +3926,8 @@
                 }
               ]
             },
-            "OnStack": {
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.AttachSkillTypeDisable",
@@ -3991,11 +3993,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "MAvatar_DanHengIL_00_CancelSkill": {
-          "_CallbackList": {
-            "OnDestroy": {
+          "_CallbackList": [
+            {
+              "Event": "OnDestroy",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.SetControlSkillMapping",
@@ -4023,7 +4026,8 @@
                 }
               ]
             },
-            "OnStack": {
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.SetControlSkillMapping",
@@ -4036,7 +4040,7 @@
                 }
               ]
             }
-          },
+          ],
           "Stacking": "ReplaceByCaster"
         }
       },
@@ -5501,6 +5505,9 @@
           }
         },
         "MAvatar_DanHengIL_PassiveModifier": {
+          "BehaviorFlagList": [
+            "ListenBattleEventSkill"
+          ],
           "EnterBattlePriority": "CharacterBuff",
           "OnDynamicValueChange": [
             {
@@ -5645,8 +5652,9 @@
               ]
             }
           ],
-          "_CallbackList": {
-            "OnPhase1": {
+          "_CallbackList": [
+            {
+              "Event": "OnAllowAction",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.SetSkillButtonAdditionalStatus",
@@ -5655,11 +5663,7 @@
                   "IsActive": true,
                   "PrefabPath": "UI/Battle/SkillButton/BattleCancelStatusInfo.prefab",
                   "AnimStateName": "SkillButtonStatus_Enhance_ResetA"
-                }
-              ]
-            },
-            "OnAllowAction": {
-              "CallbackConfig": [
+                },
                 {
                   "$type": "RPG.GameCore.SetDynamicValue",
                   "TargetType": {
@@ -5717,24 +5721,8 @@
                 }
               ]
             },
-            "OnPhase2": {
-              "CallbackConfig": [
-                {
-                  "$type": "RPG.GameCore.SetSkillButtonAdditionalStatus",
-                  "Type": 1,
-                  "PrefabPath": "UI/Battle/SkillButton/SkillBtnEff/EnhanceEff_Lv3.prefab",
-                  "AnimStateName": "SkillButtonStatus_Enhance_1B"
-                },
-                {
-                  "$type": "RPG.GameCore.SetSkillButtonAdditionalStatus",
-                  "ControlSkillType": "ControlSkill02",
-                  "Type": 1,
-                  "PrefabPath": "UI/Battle/SkillButton/BattleCancelStatusInfo.prefab",
-                  "AnimStateName": "SkillButtonStatus_Enhance_1A"
-                }
-              ]
-            },
-            "OnStack": {
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -5774,7 +5762,8 @@
                 }
               ]
             },
-            "OnListenBeforeSkillUse": {
+            {
+              "Event": "OnListenBeforeSkillUse",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -5822,7 +5811,26 @@
                 }
               ]
             },
-            "OnEnterBattle": {
+            {
+              "Event": "OnListenAfterSkillUse",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SetSkillButtonAdditionalStatus",
+                  "Type": 1,
+                  "PrefabPath": "UI/Battle/SkillButton/SkillBtnEff/EnhanceEff_Lv3.prefab",
+                  "AnimStateName": "SkillButtonStatus_Enhance_1B"
+                },
+                {
+                  "$type": "RPG.GameCore.SetSkillButtonAdditionalStatus",
+                  "ControlSkillType": "ControlSkill02",
+                  "Type": 1,
+                  "PrefabPath": "UI/Battle/SkillButton/BattleCancelStatusInfo.prefab",
+                  "AnimStateName": "SkillButtonStatus_Enhance_1A"
+                }
+              ]
+            },
+            {
+              "Event": "OnEnterBattle",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -5877,7 +5885,8 @@
                 }
               ]
             },
-            "OnListenUltraSkillPrepare": {
+            {
+              "Event": "OnListenUltraSkillPrepare",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.SetEnergyBarState",
@@ -5889,8 +5898,53 @@
                   }
                 }
               ]
+            },
+            {
+              "Event": "OnListenInsertActionStart",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareTarget",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "CompareType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "Inverse": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetSkillButtonAdditionalStatus",
+                      "Type": 1,
+                      "PrefabPath": "UI/Battle/SkillButton/SkillBtnEff/EnhanceEff_Lv3.prefab",
+                      "AnimStateName": "SkillButtonStatus_Enhance_1B"
+                    },
+                    {
+                      "$type": "RPG.GameCore.SetSkillButtonAdditionalStatus",
+                      "ControlSkillType": "ControlSkill02",
+                      "Type": 1,
+                      "PrefabPath": "UI/Battle/SkillButton/BattleCancelStatusInfo.prefab",
+                      "AnimStateName": "SkillButtonStatus_Enhance_1A"
+                    }
+                  ],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetSkillButtonAdditionalStatus",
+                      "ControlSkillType": "ControlSkill02",
+                      "Type": 1,
+                      "IsActive": true,
+                      "PrefabPath": "UI/Battle/SkillButton/BattleCancelStatusInfo.prefab",
+                      "AnimStateName": "SkillButtonStatus_Enhance_ResetA"
+                    }
+                  ]
+                }
+              ]
             }
-          },
+          ],
           "DynamicValues": {
             "Values": {
               "2093666774": {},
@@ -5906,15 +5960,17 @@
               "Value": 1
             }
           },
-          "_CallbackList": {
-            "OnPhase2": {
+          "_CallbackList": [
+            {
+              "Event": "OnPhase2",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.RemoveSelfModifier"
                 }
               ]
             },
-            "OnStack": {
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
@@ -5953,7 +6009,7 @@
                 }
               ]
             }
-          },
+          ],
           "Stacking": "ReplaceByCaster",
           "DynamicValues": {
             "Values": {
@@ -6113,8 +6169,9 @@
       "Modifiers": {
         "StageAbility_Maze_DanHengIL_Modifier": {
           "EnterBattlePriority": "CharacterBuff",
-          "_CallbackList": {
-            "OnEnterBattle": {
+          "_CallbackList": [
+            {
+              "Event": "OnEnterBattle",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -6269,12 +6326,13 @@
                 }
               ]
             }
-          }
+          ]
         },
         "StageAbility_Maze_DanHengILDamage_Modifier": {
           "EnterBattlePriority": "AvatarInsertAbility",
-          "_CallbackList": {
-            "OnEnterBattle": {
+          "_CallbackList": [
+            {
+              "Event": "OnEnterBattle",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -6341,7 +6399,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "Avatar_DanHengIL_00_SkillMazeInLevel",
@@ -6370,8 +6428,9 @@
     {
       "Modifiers": {
         "MAvatar_DanHengIL_SkillTree02_Resistance": {
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.StackStatusResistance",
@@ -6393,7 +6452,7 @@
                 }
               ]
             }
-          },
+          ],
           "DynamicValues": {
             "Values": {
               "741349151": {}
@@ -6434,8 +6493,9 @@
           "BehaviorFlagList": [
             "ModifyDotDamageData"
           ],
-          "_CallbackList": {
-            "OnBeforeHitAll": {
+          "_CallbackList": [
+            {
+              "Event": "OnBeforeHitAll",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -6466,7 +6526,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "Avatar_DanHengIL_00_SkillTree03",
@@ -6491,11 +6551,12 @@
         "UIPosition": "UI_Middle",
         "ModifierUIPriority": "HardControl"
       },
-      "_CallbackList": {
-        "OnStack": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
           "CallbackConfig": []
         }
-      },
+      ],
       "Count": 0,
       "DynamicValues": {
         "Values": {
@@ -6511,8 +6572,9 @@
           "Value": 1
         }
       },
-      "_CallbackList": {
-        "OnStack": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
@@ -6550,7 +6612,7 @@
             }
           ]
         }
-      },
+      ],
       "Stacking": "ReplaceByCaster",
       "DynamicValues": {
         "Values": {
@@ -6561,8 +6623,9 @@
       }
     },
     "Avatar_DanHengIL_00_BPDisable": {
-      "_CallbackList": {
-        "OnStack": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.AttachSkillTypeDisable",
@@ -6579,7 +6642,8 @@
             }
           ]
         },
-        "OnListenBpChange": {
+        {
+          "Event": "OnListenBpChange",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetDynamicValue",
@@ -6619,7 +6683,8 @@
             }
           ]
         },
-        "OnInsertActionStart": {
+        {
+          "Event": "OnInsertActionStart",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetDynamicValue",
@@ -6659,12 +6724,16 @@
             }
           ]
         }
-      },
+      ],
       "Stacking": "ReplaceByCaster"
     },
     "Avatar_DanHengIL_00_Rank06": {
-      "_CallbackList": {
-        "OnListenAfterSkillUse": {
+      "BehaviorFlagList": [
+        "ListenBattleEventSkill"
+      ],
+      "_CallbackList": [
+        {
+          "Event": "OnListenAfterSkillUse",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -6732,7 +6801,7 @@
             }
           ]
         }
-      }
+      ]
     },
     "MAvatar_DanHengIL_00_Rank06_ImaginaryPenetrate": {
       "MaxLayer": 3,
@@ -6742,8 +6811,9 @@
           "Value": 1
         }
       },
-      "_CallbackList": {
-        "OnBeforeHitAll": {
+      "_CallbackList": [
+        {
+          "Event": "OnBeforeHitAll",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -6770,7 +6840,8 @@
             }
           ]
         },
-        "OnStack": {
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
@@ -6789,7 +6860,8 @@
             }
           ]
         },
-        "OnAfterSkillUse": {
+        {
+          "Event": "OnAfterSkillUse",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -6805,7 +6877,7 @@
             }
           ]
         }
-      },
+      ],
       "Stacking": "ReplaceByCaster",
       "DynamicValues": {
         "Values": {
@@ -6815,8 +6887,12 @@
       }
     },
     "MAvatar_DanHengIL_00_CancelCamera": {
-      "_CallbackList": {
-        "OnListenSetActiveSkill": {
+      "BehaviorFlagList": [
+        "ListenBattleEventSkill"
+      ],
+      "_CallbackList": [
+        {
+          "Event": "OnListenSetActiveSkill",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -6879,7 +6955,7 @@
             }
           ]
         }
-      }
+      ]
     }
   }
 }

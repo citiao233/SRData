@@ -1470,8 +1470,9 @@
     {
       "Modifiers": {
         "MAvatar_Arlan_00_Rank06": {
-          "_CallbackList": {
-            "OnBeforeHitAll": {
+          "_CallbackList": [
+            {
+              "Event": "OnBeforeHitAll",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -1522,11 +1523,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "MAvatar_Arlan_00_Rank01": {
-          "_CallbackList": {
-            "OnBeforeHitAll": {
+          "_CallbackList": [
+            {
+              "Event": "OnBeforeHitAll",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -1577,11 +1579,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "M_Arlan_Passive": {
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -1637,7 +1640,8 @@
                 }
               ]
             },
-            "OnHPChange": {
+            {
+              "Event": "OnHPChange",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -1704,12 +1708,13 @@
                 }
               ]
             }
-          }
+          ]
         },
         "MAvatar_Arlan_00_PassiveSkill_UnDead": {
           "LimboWaitHealPriority": "AvatarReviveSelf",
-          "_CallbackList": {
-            "OnCreate": {
+          "_CallbackList": [
+            {
+              "Event": "OnCreate",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.DefineDynamicValue",
@@ -1745,7 +1750,8 @@
                 }
               ]
             },
-            "OnLimboWaitHeal": {
+            {
+              "Event": "OnLimboWaitHeal",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -1860,11 +1866,72 @@
                 }
               ]
             }
-          },
+          ],
           "Count": 1,
           "DynamicValues": {
             "Values": {
               "528302351": {}
+            }
+          }
+        },
+        "M_Arlan_Skill02_LoseHPPreShow": {
+          "_CallbackList": [
+            {
+              "Event": "OnListenSetActiveSkill",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareTarget",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "CompareType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "Caster"
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValueByProperty",
+                      "DynamicKey": "MDF_MaxHP",
+                      "ReadTargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "Value": "MaxHP"
+                    },
+                    {
+                      "$type": "RPG.GameCore.ToggleSkillPreShow",
+                      "Enable": true,
+                      "AllowSkillType": [
+                        "Skill"
+                      ],
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "ChangeValue": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQABAQQJ",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            -1610876898,
+                            -1784868094
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "DynamicValues": {
+            "Values": {
+              "-1610876898": {}
             }
           }
         }
@@ -1881,6 +1948,14 @@
             "Alias": "Caster"
           },
           "ModifierName": "M_Arlan_Passive"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "M_Arlan_Skill02_LoseHPPreShow"
         },
         {
           "$type": "RPG.GameCore.AddModifier",
@@ -1938,8 +2013,9 @@
       "Modifiers": {
         "MAvatar_Arlan_00_MazeSkill_Proc": {
           "EnterBattlePriority": "AvatarInsertAbility",
-          "_CallbackList": {
-            "OnEnterBattle": {
+          "_CallbackList": [
+            {
+              "Event": "OnEnterBattle",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -2005,7 +2081,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "Avatar_Arlan_00_SkillMazeInLevel",
@@ -2026,8 +2102,9 @@
     {
       "Modifiers": {
         "M_Arlan_Tree01": {
-          "_CallbackList": {
-            "OnTriggerDeath": {
+          "_CallbackList": [
+            {
+              "Event": "OnTriggerDeath",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -2072,7 +2149,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "Avatar_Arlan_SkillTree01",

@@ -1281,8 +1281,9 @@
     {
       "Modifiers": {
         "MAvatar_Sampo_Passive": {
-          "_CallbackList": {
-            "OnAfterHit": {
+          "_CallbackList": [
+            {
+              "Event": "OnAfterHit",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -1365,6 +1366,7 @@
                     "Alias": "DamageDefenderEntity"
                   },
                   "ModifierName": "MCommon_DOT_Poison",
+                  "StackingFlag": "CharacterSkill",
                   "Chance": {
                     "IsDynamic": true,
                     "PostfixExpr": {
@@ -1411,8 +1413,32 @@
                   }
                 }
               ]
+            },
+            {
+              "Event": "OnStack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByRankActivated",
+                    "TriggerKey": {
+                      "Hash": 2089636447
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.StackSkillDesc",
+                      "SkillName": "Skill02",
+                      "OverrideSimpleDescTextID": {
+                        "Hash": -4898576
+                      }
+                    }
+                  ],
+                  "FailedTaskList": []
+                }
+              ]
             }
-          }
+          ]
         }
       },
       "Name": "Avatar_Sampo_00_PassiveSkill01",
@@ -1434,8 +1460,9 @@
       "Modifiers": {
         "StageAbility_Maze_Sampo_Modifier": {
           "EnterBattlePriority": "CharacterBuff",
-          "_CallbackList": {
-            "OnEnterBattle": {
+          "_CallbackList": [
+            {
+              "Event": "OnEnterBattle",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -1497,7 +1524,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "Avatar_Sampo_00_SkillMazeInLevel",
@@ -1546,8 +1573,9 @@
     {
       "Modifiers": {
         "M_Sampo_Tree03": {
-          "_CallbackList": {
-            "OnBeforeBeingHitAll": {
+          "_CallbackList": [
+            {
+              "Event": "OnBeforeBeingHitAll",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -1590,7 +1618,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "Avatar_Sampo_SkillTree03",
@@ -1611,8 +1639,9 @@
     {
       "Modifiers": {
         "MAvatar_Sampo_Rank02": {
-          "_CallbackList": {
-            "OnListenCharacterDie": {
+          "_CallbackList": [
+            {
+              "Event": "OnListenCharacterDie",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -1740,6 +1769,7 @@
                             "Alias": "AllEnemy"
                           },
                           "ModifierName": "MCommon_DOT_Poison",
+                          "StackingFlag": "CharacterSkill",
                           "Chance": {
                             "IsDynamic": true,
                             "PostfixExpr": {
@@ -1801,7 +1831,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "Avatar_Sampo_Rank02",

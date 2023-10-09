@@ -3,8 +3,9 @@
     {
       "Modifiers": {
         "Monster_W1_CocoliaP1_00_RL_LowHP": {
-          "_CallbackList": {
-            "OnHPChange": {
+          "_CallbackList": [
+            {
+              "Event": "OnHPChange",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -88,7 +89,12 @@
                     },
                     {
                       "$type": "RPG.GameCore.CreateBattleEvent",
-                      "EventID": 20001,
+                      "EventID": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 20001
+                        }
+                      },
                       "PropertyFromTarget": {
                         "$type": "RPG.GameCore.TargetAlias",
                         "Alias": "Caster"
@@ -147,7 +153,8 @@
                           }
                         }
                       },
-                      "Team": "TeamDark"
+                      "Team": "TeamDark",
+                      "DuplicateOption": "Coexist"
                     },
                     {
                       "$type": "RPG.GameCore.PredicateTaskList",
@@ -187,7 +194,7 @@
                 }
               ]
             }
-          },
+          ],
           "DynamicValues": {
             "Values": {
               "-71259139": {}
@@ -195,8 +202,9 @@
           }
         },
         "Boss_Cocolia_IceValueManage": {
-          "_CallbackList": {
-            "OnCreate": {
+          "_CallbackList": [
+            {
+              "Event": "OnCreate",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.AddModifier",
@@ -208,7 +216,8 @@
                 }
               ]
             },
-            "OnBeforeDying": {
+            {
+              "Event": "OnBeforeDying",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.WriteCustomValueToStatistic",
@@ -226,7 +235,8 @@
                 }
               ]
             },
-            "OnBeingBreak": {
+            {
+              "Event": "OnBeingBreak",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.GlobalMainIntensityEffect",
@@ -452,7 +462,8 @@
                 }
               ]
             },
-            "OnEndBreak": {
+            {
+              "Event": "OnEndBreak",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.CharacterChangePhase",
@@ -495,7 +506,7 @@
                 }
               ]
             }
-          },
+          ],
           "Count": 1
         }
       },
@@ -597,8 +608,9 @@
     {
       "Modifiers": {
         "Monster_W1_CocoliaP1_00_RL_LockHP": {
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.LockHP",
@@ -628,7 +640,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "Boss_Cocolia_RL_PassiveSkill_Initiate",
@@ -649,8 +661,9 @@
     {
       "Modifiers": {
         "M_Monster_W1_CocoliaP1_00_LimboHandleEffect": {
-          "_CallbackList": {
-            "OnBeingLimbo": {
+          "_CallbackList": [
+            {
+              "Event": "OnBeingLimbo",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.RemoveEffect",
@@ -676,7 +689,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "Boss_Cocolia_RL_AIControlAndHPLock",
@@ -3245,7 +3258,12 @@
             },
             {
               "$type": "RPG.GameCore.CreateBattleEvent",
-              "EventID": 20001,
+              "EventID": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 20001
+                }
+              },
               "PropertyFromTarget": {
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "Caster"
@@ -3442,7 +3460,12 @@
             },
             {
               "$type": "RPG.GameCore.CreateBattleEvent",
-              "EventID": 20001,
+              "EventID": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 20001
+                }
+              },
               "PropertyFromTarget": {
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "Caster"
@@ -3560,8 +3583,9 @@
     {
       "Modifiers": {
         "Modifier_CocoliaP1_00_RL_BattleEvent_BaseSpeed": {
-          "_CallbackList": {
-            "OnStack": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.StackProperty",
@@ -3583,7 +3607,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "BattleEventAbility_CocoliaP1_00_RL",
@@ -4263,8 +4287,9 @@
   "GlobalModifiers": {
     "Monster_W1_CocoliaP1_00_RL_Revive": {
       "LimboWaitHealPriority": "ChangePhase",
-      "_CallbackList": {
-        "OnLimboWaitHeal": {
+      "_CallbackList": [
+        {
+          "Event": "OnLimboWaitHeal",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -4452,12 +4477,13 @@
             }
           ]
         }
-      }
+      ]
     },
     "Monster_W1_CocoliaP1_00_RL_Skill05_Buff": {
       "LifeTime": 1,
-      "_CallbackList": {
-        "OnStack": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.StackProperty",
@@ -4479,14 +4505,15 @@
             }
           ]
         },
-        "OnBeingBreak": {
+        {
+          "Event": "OnBeingBreak",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.RemoveSelfModifier"
             }
           ]
         }
-      },
+      ],
       "DynamicValues": {
         "Values": {
           "-1572395288": {}
@@ -4494,11 +4521,15 @@
       }
     },
     "Monster_W1_CocoliaP1_00_RL_IcePower": {
+      "BehaviorFlagList": [
+        "ListenBattleEventSkill"
+      ],
       "UIConfig": {
         "ModifierUIPriority": "HardControl"
       },
-      "_CallbackList": {
-        "OnListenTurnEnd": {
+      "_CallbackList": [
+        {
+          "Event": "OnListenTurnEnd",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -4567,7 +4598,8 @@
             }
           ]
         },
-        "OnListenAfterSkillUse": {
+        {
+          "Event": "OnListenAfterSkillUse",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -4636,7 +4668,8 @@
             }
           ]
         },
-        "OnListenModifierAdd": {
+        {
+          "Event": "OnListenModifierAdd",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -4680,7 +4713,7 @@
             }
           ]
         }
-      },
+      ],
       "DynamicValues": {
         "Values": {
           "-945261968": {},
@@ -4691,8 +4724,12 @@
       }
     },
     "Monster_W1_CocoliaP1_00_RL_IcePower_Summon": {
-      "_CallbackList": {
-        "OnListenTurnEnd": {
+      "BehaviorFlagList": [
+        "ListenBattleEventSkill"
+      ],
+      "_CallbackList": [
+        {
+          "Event": "OnListenTurnEnd",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -4761,7 +4798,8 @@
             }
           ]
         },
-        "OnListenAfterSkillUse": {
+        {
+          "Event": "OnListenAfterSkillUse",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -4830,7 +4868,8 @@
             }
           ]
         },
-        "OnListenModifierAdd": {
+        {
+          "Event": "OnListenModifierAdd",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -4874,7 +4913,7 @@
             }
           ]
         }
-      },
+      ],
       "DynamicValues": {
         "Values": {
           "411315149": {},
@@ -4899,8 +4938,9 @@
       "UIConfig": {
         "ModifierUIPriority": "HardControl"
       },
-      "_CallbackList": {
-        "OnStack": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
@@ -5016,7 +5056,7 @@
             }
           ]
         }
-      },
+      ],
       "Stacking": "Replace",
       "DynamicValues": {
         "Values": {
@@ -5036,8 +5076,9 @@
           "Value": 1
         }
       },
-      "_CallbackList": {
-        "OnStack": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
@@ -5079,7 +5120,7 @@
             }
           ]
         }
-      },
+      ],
       "Stacking": "Replace",
       "DynamicValues": {
         "Values": {
@@ -5092,8 +5133,9 @@
       "BehaviorFlagList": [
         "Endurance"
       ],
-      "_CallbackList": {
-        "OnStack": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.StackStatusResistance",
@@ -5111,12 +5153,13 @@
             }
           ]
         }
-      }
+      ]
     },
     "Modifier_CocoliaP1_00_RL_BattleEvent": {
       "LifeStepMoment": "ModifierPhase1End",
-      "_CallbackList": {
-        "OnPhase1": {
+      "_CallbackList": [
+        {
+          "Event": "OnPhase1",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.TurnInsertAbility",
@@ -5133,7 +5176,7 @@
             }
           ]
         }
-      }
+      ]
     }
   }
 }

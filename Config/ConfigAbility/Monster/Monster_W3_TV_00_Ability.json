@@ -3,9 +3,101 @@
     {
       "Modifiers": {
         "Monster_W3_TV_00_FlopHandler": {
-          "_CallbackList": {
-            "OnBeforeBeingAttacked": {
+          "_CallbackList": [
+            {
+              "Event": "OnAfterBeingHit",
               "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.TriggerEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_TV_00/Eff_Monster_W3_TV_00_BeingHit01.prefab"
+                }
+              ]
+            },
+            {
+              "Event": "OnBeforeBeingAttacked",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAny",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "Caster"
+                        },
+                        "Flag": "STAT_CTRL"
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "Caster"
+                        },
+                        "Flag": "STAT_CTRL_Stun"
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "Caster"
+                        },
+                        "Flag": "STAT_CTRL_Frozen"
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "Caster"
+                        },
+                        "Flag": "STAT_Confine"
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "Caster"
+                        },
+                        "Flag": "Break"
+                      }
+                    ]
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "DynamicKey": "FlopSide",
+                      "ContextScope": "TargetEntity",
+                      "Value": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": -1
+                        }
+                      }
+                    }
+                  ],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "DynamicKey": "FlopSide",
+                      "ContextScope": "TargetEntity",
+                      "Value": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAGCQ==",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            1675480356
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                },
                 {
                   "$type": "RPG.GameCore.TriggerAbility",
                   "TargetType": {
@@ -15,8 +107,131 @@
                   "AbilityName": "Monster_W3_TV_00_Flop"
                 }
               ]
+            },
+            {
+              "Event": "OnModifierAdd",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAny",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByCheckModifierCallBackBehaviorFlag",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "Flag": "STAT_CTRL"
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCheckModifierCallBackBehaviorFlag",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "Flag": "Break"
+                      }
+                    ]
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "DynamicKey": "FlopSide",
+                      "ContextScope": "TargetEntity",
+                      "Value": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": -1
+                        }
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.TriggerAbility",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "AbilityName": "Monster_W3_TV_00_Flop"
+                    },
+                    {
+                      "$type": "RPG.GameCore.TriggerEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_TV_00/Eff_Monster_W3_TV_00_Break_Occur_Blank.prefab"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Event": "OnModifierRemove",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAny",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByCheckModifierCallBackBehaviorFlag",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "Flag": "STAT_CTRL"
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCheckModifierCallBackBehaviorFlag",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "Flag": "Break"
+                      }
+                    ]
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByAny",
+                        "PredicateList": [
+                          {
+                            "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "ModifierOwnerEntity"
+                            },
+                            "Flag": "STAT_CTRL"
+                          },
+                          {
+                            "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "ModifierOwnerEntity"
+                            },
+                            "Flag": "Break"
+                          }
+                        ]
+                      },
+                      "FailedTaskList": [
+                        {
+                          "$type": "RPG.GameCore.RemoveEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "Caster"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_TV_00/Eff_Monster_W3_TV_00_Break_Occur_Blank.prefab"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
             }
-          }
+          ]
         }
       },
       "Name": "Monster_W3_TV_00_PassiveSkillInitiate",
@@ -54,60 +269,6 @@
         {
           "$type": "RPG.GameCore.PredicateTaskList",
           "Predicate": {
-            "$type": "RPG.GameCore.ByAny",
-            "PredicateList": [
-              {
-                "$type": "RPG.GameCore.ByContainBehaviorFlag",
-                "TargetType": {
-                  "$type": "RPG.GameCore.TargetAlias",
-                  "Alias": "ModifierOwnerEntity"
-                },
-                "Flag": "STAT_CTRL"
-              },
-              {
-                "$type": "RPG.GameCore.ByContainBehaviorFlag",
-                "TargetType": {
-                  "$type": "RPG.GameCore.TargetAlias",
-                  "Alias": "ModifierOwnerEntity"
-                },
-                "Flag": "Break"
-              }
-            ]
-          },
-          "SuccessTaskList": [
-            {
-              "$type": "RPG.GameCore.SetDynamicValue",
-              "DynamicKey": "FlopSide",
-              "ContextScope": "TargetEntity",
-              "Value": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": -1
-                }
-              }
-            }
-          ],
-          "FailedTaskList": [
-            {
-              "$type": "RPG.GameCore.SetDynamicValue",
-              "DynamicKey": "FlopSide",
-              "ContextScope": "TargetEntity",
-              "Value": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQAGCQ==",
-                  "FixedValues": [],
-                  "DynamicHashes": [
-                    1675480356
-                  ]
-                }
-              }
-            }
-          ]
-        },
-        {
-          "$type": "RPG.GameCore.PredicateTaskList",
-          "Predicate": {
             "$type": "RPG.GameCore.ByCompareDynamicValue",
             "DynamicKey": "FlopSide",
             "ContextScope": "TargetEntity",
@@ -125,6 +286,11 @@
               "Name": {
                 "Value": "Override1"
               }
+            },
+            {
+              "$type": "RPG.GameCore.AnimSetParameter",
+              "ParameterName": "Side",
+              "ParameterType": "Int"
             }
           ]
         },
@@ -148,6 +314,12 @@
               "Name": {
                 "Value": "Override2"
               }
+            },
+            {
+              "$type": "RPG.GameCore.AnimSetParameter",
+              "ParameterName": "Side",
+              "ParameterType": "Int",
+              "Value": 1
             }
           ]
         }
@@ -266,7 +438,30 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.4630000002216548
+              "Value": 0.4110000003129244
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "AliveOnly": true,
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_TV_00/Eff_Monster_W3_TV_00_Skill01_Hit.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill01",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.5960000001359731
             }
           }
         },
@@ -370,6 +565,34 @@
           "CustomFormationIgnoreDying": false
         },
         {
+          "$type": "RPG.GameCore.MoveToTargetPosition",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "DarkTeamCenter"
+          },
+          "IgnoreRadius": true,
+          "OffsetTargetDistance": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.MoveToTargetPosition",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "LightTeamCenter"
+          },
+          "IgnoreRadius": true,
+          "OffsetTargetDistance": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 6
+            }
+          }
+        },
+        {
           "$type": "RPG.GameCore.WaitAnimState",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
@@ -396,29 +619,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.473000000230968
-            }
-          }
-        },
-        {
-          "$type": "RPG.GameCore.TriggerEffect",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "LightTeamCenter"
-          },
-          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Kafka_00/Eff_Monster_W2_Kafka_00_Skill03_Bomb.prefab"
-        },
-        {
-          "$type": "RPG.GameCore.WaitAnimState",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "AnimStateName": "Skill02",
-          "NormalizedTimeEnd": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0.5079999999143183
+              "Value": 0.5189999998547137
             }
           }
         },
@@ -448,9 +649,37 @@
             },
             "AttackType": "Normal",
             "HitAnimation": "Hit_H",
-            "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Kafka_00/Eff_Monster_W2_Kafka_00_Skill03_Hit01.prefab"
+            "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_TV_00/Eff_Monster_W3_TV_00_Skill02_Hit01.prefab"
           },
           "CanTriggerLastKill": true
+        },
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "ShakeTemplateName": "Common_Explode_Big"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill02",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.5750000001862645
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllEnemy"
+          },
+          "ModifierName": "MModifier_Monster_W3_TV_00_ReduceSPEffect"
         },
         {
           "$type": "RPG.GameCore.DamagePerformFinish"
@@ -481,21 +710,6 @@
           "AliveOnly": true,
           "ContentID": {
             "Hash": 1705296780
-          }
-        },
-        {
-          "$type": "RPG.GameCore.TriggerEffect",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AllEnemy"
-          },
-          "AliveOnly": true,
-          "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Temp/Eff_Temp_ReduceSP.prefab"
-        },
-        {
-          "$type": "RPG.GameCore.VCameraConfigChange",
-          "CameraConfig": {
-            "ShakeTemplateName": "Common_Explode_Big"
           }
         },
         {
@@ -599,7 +813,27 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.3140000000130385
+              "Value": 0.30200000014156103
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.AnimSetParameter",
+          "ParameterName": "Side",
+          "ParameterType": "Int",
+          "Value": 1
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill03",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.0408888878300786
             }
           }
         },
@@ -613,7 +847,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.9900000009220093
+              "Value": 0.6700000006239861
             }
           }
         },
@@ -646,5 +880,26 @@
       ]
     }
   ],
-  "GlobalModifiers": {}
+  "GlobalModifiers": {
+    "MModifier_Monster_W3_TV_00_ReduceSPEffect": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.ModifierAttachEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_MAZ_ReduceSP.prefab",
+              "MinMutexTime": -1,
+              "MutexType": "Entity"
+            }
+          ]
+        }
+      ],
+      "Stacking": "Replace"
+    }
+  }
 }

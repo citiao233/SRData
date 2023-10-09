@@ -8,8 +8,9 @@
           ]
         },
         "Monster_SW_Boss_00_AIChange": {
-          "_CallbackList": {
-            "OnBeingBreak": {
+          "_CallbackList": [
+            {
+              "Event": "OnBeingBreak",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -66,14 +67,15 @@
                 }
               ]
             }
-          }
+          ]
         },
         "Monster_SW_Boss_00_Deathrattle": {
           "BehaviorFlagList": [
             "Deathrattle"
           ],
-          "_CallbackList": {
-            "OnDeathrattle": {
+          "_CallbackList": [
+            {
+              "Event": "OnDeathrattle",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.DispelStatus",
@@ -100,7 +102,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "Monster_SW_Boss_00_Passive01",
@@ -2218,34 +2220,52 @@
               },
               "TaskList": [
                 {
-                  "$type": "RPG.GameCore.AddModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  },
-                  "ModifierName": "Monster_SW_Boss_00_DamageUp",
-                  "LayerAddWhenStack": {
-                    "IsDynamic": true,
-                    "PostfixExpr": {
-                      "OpCodes": "AQAJ",
-                      "FixedValues": [],
-                      "DynamicHashes": [
-                        1054679069
-                      ]
-                    }
-                  },
-                  "DynamicValues": {
-                    "MDF_DamageUpRatio_PerLayer": {
-                      "IsDynamic": true,
-                      "PostfixExpr": {
-                        "OpCodes": "AQAJ",
-                        "FixedValues": [],
-                        "DynamicHashes": [
-                          1720276700
-                        ]
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareMonsterID",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "Caster"
+                    },
+                    "TargetMonsterID": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 8024010
                       }
                     }
-                  }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "Monster_SW_Boss_00_DamageUp",
+                      "LayerAddWhenStack": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAJ",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            1054679069
+                          ]
+                        }
+                      },
+                      "DynamicValues": {
+                        "MDF_DamageUpRatio_PerLayer": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAJ",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              1720276700
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  ]
                 }
               ]
             }
@@ -2311,34 +2331,52 @@
               ]
             },
             {
-              "$type": "RPG.GameCore.AddModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "AllDarkTeam"
-              },
-              "ModifierName": "Monster_SW_Boss_00_DamageUp",
-              "LayerAddWhenStack": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQAJ",
-                  "FixedValues": [],
-                  "DynamicHashes": [
-                    1816857103
-                  ]
-                }
-              },
-              "DynamicValues": {
-                "MDF_DamageUpRatio_PerLayer": {
-                  "IsDynamic": true,
-                  "PostfixExpr": {
-                    "OpCodes": "AQAJ",
-                    "FixedValues": [],
-                    "DynamicHashes": [
-                      1720276700
-                    ]
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareMonsterID",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "Caster"
+                },
+                "TargetMonsterID": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 8024010
                   }
                 }
-              }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllDarkTeam"
+                  },
+                  "ModifierName": "Monster_SW_Boss_00_DamageUp",
+                  "LayerAddWhenStack": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAJ",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        1816857103
+                      ]
+                    }
+                  },
+                  "DynamicValues": {
+                    "MDF_DamageUpRatio_PerLayer": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAJ",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          1720276700
+                        ]
+                      }
+                    }
+                  }
+                }
+              ]
             }
           ]
         },
@@ -5133,34 +5171,52 @@
               },
               "TaskList": [
                 {
-                  "$type": "RPG.GameCore.AddModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  },
-                  "ModifierName": "Monster_SW_Boss_00_DamageUp",
-                  "LayerAddWhenStack": {
-                    "IsDynamic": true,
-                    "PostfixExpr": {
-                      "OpCodes": "AQAJ",
-                      "FixedValues": [],
-                      "DynamicHashes": [
-                        1054679069
-                      ]
-                    }
-                  },
-                  "DynamicValues": {
-                    "MDF_DamageUpRatio_PerLayer": {
-                      "IsDynamic": true,
-                      "PostfixExpr": {
-                        "OpCodes": "AQAJ",
-                        "FixedValues": [],
-                        "DynamicHashes": [
-                          1720276700
-                        ]
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareMonsterID",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "Caster"
+                    },
+                    "TargetMonsterID": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 8024010
                       }
                     }
-                  }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "Monster_SW_Boss_00_DamageUp",
+                      "LayerAddWhenStack": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAJ",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            1054679069
+                          ]
+                        }
+                      },
+                      "DynamicValues": {
+                        "MDF_DamageUpRatio_PerLayer": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAJ",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              1720276700
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  ]
                 }
               ]
             }
@@ -5194,34 +5250,52 @@
           },
           "FailedTaskList": [
             {
-              "$type": "RPG.GameCore.AddModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "AllDarkTeam"
-              },
-              "ModifierName": "Monster_SW_Boss_00_DamageUp",
-              "LayerAddWhenStack": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQAJ",
-                  "FixedValues": [],
-                  "DynamicHashes": [
-                    1816857103
-                  ]
-                }
-              },
-              "DynamicValues": {
-                "MDF_DamageUpRatio_PerLayer": {
-                  "IsDynamic": true,
-                  "PostfixExpr": {
-                    "OpCodes": "AQAJ",
-                    "FixedValues": [],
-                    "DynamicHashes": [
-                      1720276700
-                    ]
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareMonsterID",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "Caster"
+                },
+                "TargetMonsterID": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 8024010
                   }
                 }
-              }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllDarkTeam"
+                  },
+                  "ModifierName": "Monster_SW_Boss_00_DamageUp",
+                  "LayerAddWhenStack": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAJ",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        1816857103
+                      ]
+                    }
+                  },
+                  "DynamicValues": {
+                    "MDF_DamageUpRatio_PerLayer": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAJ",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          1720276700
+                        ]
+                      }
+                    }
+                  }
+                }
+              ]
             }
           ]
         },
@@ -5726,6 +5800,32 @@
           "ContextScope": "TargetEntity"
         },
         {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareMonsterID",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "TargetMonsterID": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 8024011
+              }
+            }
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.RemoveModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "ModifierName": "Monster_SW_Boss_00_PhaseController"
+            }
+          ]
+        },
+        {
           "$type": "RPG.GameCore.TriggerAnimState",
           "AnimLogicState": "Idle"
         }
@@ -6044,8 +6144,9 @@
   "GlobalModifiers": {
     "Monster_SW_Boss_00_PhaseController": {
       "LimboWaitHealPriority": "ChangePhase",
-      "_CallbackList": {
-        "OnLimboWaitHeal": {
+      "_CallbackList": [
+        {
+          "Event": "OnLimboWaitHeal",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -6198,14 +6299,15 @@
             }
           ]
         }
-      }
+      ]
     },
     "Monster_SW_Boss_00_Endurance": {
       "BehaviorFlagList": [
         "Endurance"
       ],
-      "_CallbackList": {
-        "OnStack": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.StackStatusResistance",
@@ -6223,12 +6325,13 @@
             }
           ]
         }
-      }
+      ]
     },
     "Monster_SW_Boss_00_PoisonCount": {
       "MaxLayer": 5,
-      "_CallbackList": {
-        "OnDestroy": {
+      "_CallbackList": [
+        {
+          "Event": "OnDestroy",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.AddModifier",
@@ -6288,7 +6391,8 @@
             }
           ]
         },
-        "OnStack": {
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
@@ -6303,7 +6407,7 @@
             }
           ]
         }
-      },
+      ],
       "Stacking": "Replace",
       "DynamicValues": {
         "Values": {
@@ -6316,8 +6420,9 @@
     },
     "Monster_SW_Boss_00_PoisonDamage": {
       "LifeTime": 1,
-      "_CallbackList": {
-        "OnStack": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.HideModifierEffect",
@@ -6357,12 +6462,13 @@
             }
           ]
         }
-      }
+      ]
     },
     "Monster_SW_Boss_00_DOTExtra": {
       "LifeTime": 1,
-      "_CallbackList": {
-        "OnBeforeBeingHitAll": {
+      "_CallbackList": [
+        {
+          "Event": "OnBeforeBeingHitAll",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -6394,7 +6500,7 @@
             }
           ]
         }
-      },
+      ],
       "DynamicValues": {
         "Values": {
           "-1118833381": {}
@@ -6421,8 +6527,9 @@
         "STAT_DOT_Poison"
       ],
       "UseSnapshotEntity": true,
-      "_CallbackList": {
-        "OnCreate": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.AddBuffPerform",
@@ -6450,7 +6557,8 @@
             }
           ]
         },
-        "OnPhase1": {
+        {
+          "Event": "OnPhase1",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.TriggerEffect",
@@ -6507,7 +6615,8 @@
             }
           ]
         },
-        "OnCustomEvent": {
+        {
+          "Event": "OnCustomEvent",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.ModifierAttachEffect",
@@ -6563,7 +6672,7 @@
             }
           ]
         }
-      },
+      ],
       "Stacking": "Replace",
       "DynamicValues": {
         "Values": {
@@ -6575,8 +6684,9 @@
     },
     "Monster_SW_Boss_00_Skill07_Mark": {},
     "Monster_SW_Boss_00_Powerful_Modifier": {
-      "_CallbackList": {
-        "OnCreate": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.ModifierAttachEffect",
@@ -6636,7 +6746,7 @@
             }
           ]
         }
-      }
+      ]
     },
     "Monster_SW_Boss_00_DamageUp": {
       "LayerAddWhenStack": {
@@ -6645,8 +6755,9 @@
           "Value": 1
         }
       },
-      "_CallbackList": {
-        "OnStack": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
@@ -6688,7 +6799,7 @@
             }
           ]
         }
-      },
+      ],
       "Stacking": "Replace",
       "DynamicValues": {
         "Values": {
@@ -6704,8 +6815,9 @@
           "Value": 1
         }
       },
-      "_CallbackList": {
-        "OnStack": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
@@ -6747,7 +6859,7 @@
             }
           ]
         }
-      },
+      ],
       "Stacking": "Replace",
       "DynamicValues": {
         "Values": {
@@ -6761,8 +6873,9 @@
     "Monster_SW_Boss_00_Skill04Target": {},
     "Monster_SW_Boss_00_Skill04Mark": {},
     "Monster_SW_Boss_00_Skill05Charge": {
-      "_CallbackList": {
-        "OnCreate": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.ModifierAttachEffect",
@@ -6770,23 +6883,21 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "ModifierOwnerEntity"
               },
-              "Flags": [
-                "Resident"
-              ],
               "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_SW_Boss_00/Eff_Monster_SW_Boss_Skill05_Body.prefab",
               "MinMutexTime": -1,
               "MutexType": "Entity"
             }
           ]
         },
-        "OnBeingBreak": {
+        {
+          "Event": "OnBeingBreak",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.RemoveSelfModifier"
             }
           ]
         }
-      }
+      ]
     }
   }
 }
