@@ -1,11 +1,16 @@
 {
-  "AIName": "ST_NPCMonster_Master_Escape",
+  "AIName": "ST_NPCMonster_XP_Minion04_Master",
   "VariableList": [],
   "DecisionList": [],
   "TransitionTable": [],
   "RootState": {
     "Name": "Root",
-    "TaskList": [],
+    "TaskList": [
+      {
+        "$type": "RPG.GameCore.ST_Side_RegisterSpecialEvent",
+        "AiEventWhenNotify": "ZhangZhangArrive"
+      }
+    ],
     "TransitionList": [],
     "SubStateList": [
       {
@@ -86,7 +91,7 @@
               {
                 "Trigger": "OnEvent",
                 "UserDefineEvent": "ZhangZhangArrive",
-                "TransitionToState": "Attracted"
+                "TransitionToState": "AttractedState"
               }
             ],
             "SubStateList": [
@@ -119,28 +124,17 @@
               },
               {
                 "$type": "RPG.GameCore.StateTreeStateConfig",
-                "TaskList": [
-                  {
-                    "$type": "RPG.GameCore.ST_Main_Wait",
-                    "Time": -1
-                  }
-                ],
-                "Name": "Idle"
-              },
-              {
-                "$type": "RPG.GameCore.StateTreeStateConfig",
                 "TaskList": [],
-                "TransitionList": [],
                 "SubStateList": [
                   {
                     "$type": "RPG.GameCore.StateTreeStateConfig",
                     "TaskList": [
                       {
-                        "$type": "RPG.GameCore.ST_Main_MoveToTarget",
-                        "TargetType": "NotifyTarget",
+                        "$type": "RPG.GameCore.ST_Main_MoveToPosition",
+                        "PositionType": "BornPos",
                         "MoveStance": "Walk",
-                        "Tolerance": 2,
-                        "AngleTolerance": 90
+                        "FinishAfterStop": true,
+                        "AlignRotation": true
                       }
                     ],
                     "TransitionList": [
@@ -149,22 +143,98 @@
                         "TransitionToType": "NextState"
                       }
                     ],
-                    "Name": "AttractedMove"
+                    "Name": "IdleMove"
                   },
                   {
                     "$type": "RPG.GameCore.StateTreeStateConfig",
                     "TaskList": [
                       {
                         "$type": "RPG.GameCore.ST_Main_Wait",
-                        "Time": 5
+                        "Time": -1
+                      }
+                    ],
+                    "Name": "IdleWait"
+                  }
+                ],
+                "Name": "Idle"
+              },
+              {
+                "$type": "RPG.GameCore.StateTreeStateConfig",
+                "TaskList": [
+                  {
+                    "$type": "RPG.GameCore.ST_Side_RegisterSpecialEvent",
+                    "SpecialEventType": "ZhangZhangLeft",
+                    "AiEventWhenNotify": "ZhangZhangLeft"
+                  }
+                ],
+                "TransitionList": [],
+                "SubStateList": [
+                  {
+                    "$type": "RPG.GameCore.StateTreeStateConfig",
+                    "TaskList": [],
+                    "TransitionList": [
+                      {
+                        "Trigger": "OnEvent",
+                        "UserDefineEvent": "ZhangZhangLeft",
+                        "TransitionToState": "AttractedExit"
+                      }
+                    ],
+                    "SubStateList": [
+                      {
+                        "$type": "RPG.GameCore.StateTreeStateConfig",
+                        "TaskList": [
+                          {
+                            "$type": "RPG.GameCore.ST_Main_MoveToTarget",
+                            "TargetType": "NotifyTarget",
+                            "MoveStance": "Walk",
+                            "Tolerance": 2,
+                            "AngleTolerance": 90
+                          }
+                        ],
+                        "TransitionList": [
+                          {
+                            "Trigger": "OnStateSucceeded",
+                            "TransitionToType": "NextState"
+                          }
+                        ],
+                        "Name": "AttractedMove"
+                      },
+                      {
+                        "$type": "RPG.GameCore.StateTreeStateConfig",
+                        "TaskList": [
+                          {
+                            "$type": "RPG.GameCore.ST_Main_DoSkill",
+                            "Name": "Maze_Attracted"
+                          },
+                          {
+                            "$type": "RPG.GameCore.ST_Side_TriggerInstantAbility",
+                            "TriggerOnExit": true,
+                            "ExitAbilityName": "MazeMonster_XP_Minion04_Interact_ZhangZhangLeft"
+                          }
+                        ],
+                        "TransitionList": [],
+                        "Name": "AttractedAction"
+                      }
+                    ],
+                    "Name": "AttractedEnter"
+                  },
+                  {
+                    "$type": "RPG.GameCore.StateTreeStateConfig",
+                    "TaskList": [
+                      {
+                        "$type": "RPG.GameCore.ST_Main_Wait",
+                        "Time": 1.5
                       }
                     ],
                     "TransitionList": [
                       {
-                        "TransitionToType": "TreeSucceed"
+                        "Trigger": "OnStateSucceeded",
+                        "TransitionToType": "TreeSucceed",
+                        "TransitionToState": "AttractedGoBack"
                       }
                     ],
-                    "Name": "AttractedAction"
+                    "SubStateList": [],
+                    "Name": "AttractedExit"
                   }
                 ],
                 "Name": "AttractedState"

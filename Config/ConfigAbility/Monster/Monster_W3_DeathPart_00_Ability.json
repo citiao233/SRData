@@ -40,7 +40,7 @@
                       "Ratio": {
                         "IsDynamic": true,
                         "PostfixExpr": {
-                          "OpCodes": "AAABAAUJ",
+                          "OpCodes": "AAABAAUK",
                           "FixedValues": [
                             {
                               "Value": 1.1000000000931323
@@ -90,7 +90,7 @@
                       "Ratio": {
                         "IsDynamic": true,
                         "PostfixExpr": {
-                          "OpCodes": "AAABAAUJ",
+                          "OpCodes": "AAABAAUK",
                           "FixedValues": [
                             {
                               "Value": 1.1000000000931323
@@ -172,7 +172,7 @@
                       "Ratio": {
                         "IsDynamic": true,
                         "PostfixExpr": {
-                          "OpCodes": "AAABAAUJ",
+                          "OpCodes": "AAABAAUK",
                           "FixedValues": [
                             {
                               "Value": 1.1000000000931323
@@ -236,6 +236,14 @@
       },
       "OnStart": [
         {
+          "$type": "RPG.GameCore.SetCharacterAlwaysIdleState",
+          "On": true,
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          }
+        },
+        {
           "$type": "RPG.GameCore.DefineDynamicValue",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
@@ -255,7 +263,7 @@
             "MDF_ShowValue": {
               "IsDynamic": true,
               "PostfixExpr": {
-                "OpCodes": "AQAJ",
+                "OpCodes": "AQAK",
                 "FixedValues": [],
                 "DynamicHashes": [
                   235146001
@@ -288,8 +296,16 @@
                   "$type": "RPG.GameCore.TargetAlias",
                   "Alias": "ParamEntity"
                 },
-                "ModifierName": "MMonster_W3_Death_00_IsSummoner",
+                "ModifierName": "Monster_W3_Death_00_IsSummoner",
                 "Inverse": true
+              },
+              {
+                "$type": "RPG.GameCore.ByTargetTeam",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "Team": "TeamLight"
               }
             ]
           },
@@ -323,6 +339,19 @@
               }
             }
           ]
+        },
+        {
+          "$type": "RPG.GameCore.TurnInsertAbility",
+          "AbilityName": "Monster_W3_DeathPart_00_Skill03_Insert",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityTarget": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "InsertAbilityPriority": "MonsterBattleCry"
         }
       ]
     },
@@ -356,16 +385,6 @@
           },
           "AbilityName": "Monster_W3_DeathPart_00_Skill01_Camera",
           "IsSkillPerform": true
-        },
-        {
-          "$type": "RPG.GameCore.TriggerAnimState",
-          "AnimStateName": "Skill05",
-          "NormalizedTimeEnd": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 1
-            }
-          }
         }
       ]
     },
@@ -394,22 +413,8 @@
           "FormationType": "LightTeamNormal"
         },
         {
-          "$type": "RPG.GameCore.WaitAnimState",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "AnimStateName": "Skill05",
-          "NormalizedTimeEnd": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0.5500000005122274
-            }
-          }
-        },
-        {
           "$type": "RPG.GameCore.WaitSecond",
-          "WaitTime": 1
+          "WaitTime": 2
         },
         {
           "$type": "RPG.GameCore.RemoveModifier",
@@ -475,14 +480,6 @@
       },
       "OnStart": [
         {
-          "$type": "RPG.GameCore.RemoveModifier",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "ModifierName": "OneMore"
-        },
-        {
           "$type": "RPG.GameCore.TriggerAbility",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
@@ -531,6 +528,61 @@
         },
         {
           "$type": "RPG.GameCore.SkillPerformFinish"
+        }
+      ]
+    },
+    {
+      "Name": "Monster_W3_DeathPart_00_Skill03_Insert",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityName": "Monster_W3_DeathPart_00_Skill03_Phase02",
+          "IsSkillPerform": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityName": "Monster_W3_DeathPart_00_Skill03_Camera",
+          "IsSkillPerform": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAnimState",
+          "AnimLogicState": "Idle"
+        }
+      ]
+    },
+    {
+      "Name": "Monster_W3_DeathPart_00_Skill03_Phase02",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.ShowUIPage",
+          "AssetPath": "UI/Common/Widget/BattleAlertHint.prefab",
+          "UITextNodes": [
+            {
+              "TextPath": "AreaInfoPanel/Title/Text",
+              "TextContent": {
+                "Hash": -482185380
+              }
+            }
+          ],
+          "LifeTime": 3
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": 1.5
         }
       ]
     }

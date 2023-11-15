@@ -396,6 +396,56 @@
     },
     {
       "Modifiers": {
+        "MMonster_SpecialDieEffect": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SaveModelWhenDead"
+                }
+              ]
+            },
+            {
+              "Event": "OnBeforeDying",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.CharacterChangePhase",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "OnlyAlive": false,
+                  "PhaseName": "Phase_SpecialDieEffect",
+                  "PhaseAnimConfig": {
+                    "Die": "Die_Special",
+                    "DieHit": "Die_Special",
+                    "DieFly": "Die_Special",
+                    "DieLimbo": "Die_Special"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "Name": "Monster_Common_SpecialDieEffect2",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "MMonster_SpecialDieEffect"
+        }
+      ]
+    },
+    {
+      "Modifiers": {
         "WMMonster_Common_HitAddStun": {
           "_CallbackList": [
             {

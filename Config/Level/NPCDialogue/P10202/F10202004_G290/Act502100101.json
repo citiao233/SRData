@@ -4,6 +4,16 @@
     {
       "TaskList": [
         {
+          "$type": "RPG.GameCore.CollectDataConditions",
+          "TaskIDList": [],
+          "MainMissionIDList": [
+            8015104
+          ],
+          "PerformanceIDList": [],
+          "PerformanceIDDsList": [],
+          "CustomValueMainMissionIDList": []
+        },
+        {
           "$type": "RPG.GameCore.LevelPerformanceInitialize",
           "PerformanceType": "E",
           "HideMunicipalCrowd": false,
@@ -13,20 +23,38 @@
           "$type": "RPG.GameCore.AdvNpcFaceToPlayer"
         },
         {
-          "$type": "RPG.GameCore.PlayMultiVoiceTalk",
-          "TalkSentenceID": 502100101
-        },
-        {
-          "$type": "RPG.GameCore.PlayAndWaitSimpleTalk",
-          "SimpleTalkList": [
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareMainMissionState",
+            "MainMissionID": 8015104
+          },
+          "SuccessTaskList": [
             {
-              "TalkSentenceID": 502100102,
-              "ProtectTime": 0.3
+              "$type": "RPG.GameCore.PlayMultiVoiceTalk",
+              "TalkSentenceID": 502100103
+            },
+            {
+              "$type": "RPG.GameCore.EndPerformance"
+            }
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.PlayMultiVoiceTalk",
+              "TalkSentenceID": 502100101
+            },
+            {
+              "$type": "RPG.GameCore.PlayAndWaitSimpleTalk",
+              "SimpleTalkList": [
+                {
+                  "TalkSentenceID": 502100102,
+                  "ProtectTime": 0.3
+                }
+              ]
+            },
+            {
+              "$type": "RPG.GameCore.EndPerformance"
             }
           ]
-        },
-        {
-          "$type": "RPG.GameCore.EndPerformance"
         }
       ]
     },

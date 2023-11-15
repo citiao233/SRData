@@ -37,7 +37,8 @@
         "EnterCondition": {
           "$type": "RPG.GameCore.ST_ByHasAbnormalState",
           "States": [
-            "Taunt"
+            "Taunt",
+            "Fear"
           ]
         },
         "SubStateList": [
@@ -56,6 +57,22 @@
             ],
             "FilePath": "Config/ConfigAI/Adventure/NPCMonster/ST_NPCMonster_Sub_Taunt_Steer.json",
             "Name": "TauntState"
+          },
+          {
+            "$type": "RPG.GameCore.StateTreeSubTreeConfig",
+            "EnterCondition": {
+              "$type": "RPG.GameCore.ST_ByHasAbnormalState",
+              "States": [
+                "Fear"
+              ]
+            },
+            "TransitionList": [
+              {
+                "TransitionToState": "ExitCombatState"
+              }
+            ],
+            "FilePath": "Config/ConfigAI/Adventure/NPCMonster/ST_NPCMonster_Sub_Fear.json",
+            "Name": "FearState"
           }
         ],
         "Name": "AbnormalState"
@@ -81,8 +98,7 @@
                   "AlertLevel": "Alert"
                 },
                 {
-                  "$type": "RPG.GameCore.ST_ByAlertLevel",
-                  "AlertLevel": "Chase"
+                  "$type": "RPG.GameCore.ST_ByEnterCombat"
                 }
               ]
             }
@@ -93,7 +109,8 @@
             "Condition": {
               "$type": "RPG.GameCore.ST_ByHasAbnormalState",
               "States": [
-                "Taunt"
+                "Taunt",
+                "Fear"
               ]
             }
           }
@@ -115,7 +132,8 @@
                   "$type": "RPG.GameCore.ST_ByHasAbnormalState",
                   "States": [
                     "Taunt",
-                    "HangUp"
+                    "HangUp",
+                    "Fear"
                   ]
                 },
                 {
@@ -143,16 +161,7 @@
                 "Trigger": "OnTick",
                 "TransitionToState": "CombatState",
                 "Condition": {
-                  "$type": "RPG.GameCore.ByAnd",
-                  "PredicateList": [
-                    {
-                      "$type": "RPG.GameCore.ST_ByAlertLevel",
-                      "AlertLevel": "Chase"
-                    },
-                    {
-                      "$type": "RPG.GameCore.ST_ByHasTarget"
-                    }
-                  ]
+                  "$type": "RPG.GameCore.ST_ByEnterCombat"
                 }
               },
               {
@@ -178,16 +187,7 @@
                 "Trigger": "OnTick",
                 "TransitionToState": "CombatState",
                 "Condition": {
-                  "$type": "RPG.GameCore.ByAnd",
-                  "PredicateList": [
-                    {
-                      "$type": "RPG.GameCore.ST_ByAlertLevel",
-                      "AlertLevel": "Chase"
-                    },
-                    {
-                      "$type": "RPG.GameCore.ST_ByHasTarget"
-                    }
-                  ]
+                  "$type": "RPG.GameCore.ST_ByEnterCombat"
                 }
               },
               {
@@ -204,16 +204,7 @@
           {
             "$type": "RPG.GameCore.StateTreeSubTreeConfig",
             "EnterCondition": {
-              "$type": "RPG.GameCore.ByAnd",
-              "PredicateList": [
-                {
-                  "$type": "RPG.GameCore.ST_ByHasTarget"
-                },
-                {
-                  "$type": "RPG.GameCore.ST_ByAlertLevel",
-                  "AlertLevel": "Chase"
-                }
-              ]
+              "$type": "RPG.GameCore.ST_ByEnterCombat"
             },
             "TransitionList": [
               {

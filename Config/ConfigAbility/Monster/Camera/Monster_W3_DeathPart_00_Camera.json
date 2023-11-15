@@ -7,78 +7,32 @@
       },
       "OnStart": [
         {
-          "$type": "RPG.GameCore.GlobalMainIntensityEffect",
-          "TargetIntensity": 0.3,
-          "FadeDuration": 0.5
-        },
-        {
           "$type": "RPG.GameCore.VCameraConfigChange",
           "CameraConfig": {
             "NormalConfig": {
-              "CameraState": "CasterToTargetPerform",
-              "AnchorTargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "LightTeamCenter"
-              },
-              "IsLocalOffset": true,
-              "AnchorOffset": {
-                "X": 3.5,
-                "Y": 0.8,
-                "Z": -12
-              },
-              "AnchorRatio": 0.99,
+              "CameraState": "CastAnimation",
               "AimTargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "DarkTeamCenter"
-              },
+                "Alias": "Caster"
+              }
+            },
+            "AdditiveNormalConfig": {
               "AimOffset": {
-                "X": -2,
-                "Y": 1.8,
-                "Z": 0.001
-              },
-              "AimRatio": 1
+                "X": 0,
+                "Y": -0.67,
+                "Z": 0
+              }
             },
             "BlendConfig": {
-              "BlendType": "Cut"
-            }
-          }
-        },
-        {
-          "$type": "RPG.GameCore.WaitSecond",
-          "WaitTime": 0.01
-        },
-        {
-          "$type": "RPG.GameCore.VCameraConfigChange",
-          "CameraConfig": {
-            "NormalConfig": {
-              "CameraState": "CasterToTargetPerform",
-              "AnchorTargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "LightTeamCenter"
-              },
-              "IsLocalOffset": true,
-              "AnchorOffset": {
-                "X": 3.8,
-                "Y": 0.8,
-                "Z": -12
-              },
-              "AnchorRatio": 0.99,
-              "AimTargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "DarkTeamCenter"
-              },
-              "AimOffset": {
-                "X": -2,
-                "Y": 1.8,
-                "Z": 0.001
-              },
-              "AimRatio": 1,
-              "FollowDamp": 1,
-              "AimDamp": 0.001
+              "BlendType": "Custom",
+              "CustomCurveName": "Blend_FastToSlow",
+              "BlendTime": 0.663876
             },
-            "BlendConfig": {
-              "BlendType": "Linear",
-              "BlendTime": 2
+            "ShowEntityConfig": {
+              "ShowTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllTeamMember"
+              }
             }
           }
         },
@@ -256,6 +210,61 @@
                 "X": 0,
                 "Y": -0.5,
                 "Z": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Monster_W3_DeathPart_00_Skill03_Camera",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "NormalConfig": {
+              "CameraState": "UseSkillPerform",
+              "IsLocalOffset": true,
+              "AnchorOffset": {
+                "X": 0,
+                "Y": 0,
+                "Z": 6.43
+              },
+              "AimTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AimOffset": {
+                "X": 0,
+                "Y": -0.89,
+                "Z": 0.01
+              },
+              "FollowPoleAngle": 90,
+              "FollowRadius": 2.45
+            },
+            "AdditiveNormalConfig": {
+              "AnchorOffset": {
+                "X": 0,
+                "Y": 0.86,
+                "Z": -4.12
+              },
+              "AimTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AimOffset": {
+                "X": 0,
+                "Y": 1.41,
+                "Z": 0
+              }
+            },
+            "ShowEntityConfig": {
+              "ShowTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
               }
             }
           }

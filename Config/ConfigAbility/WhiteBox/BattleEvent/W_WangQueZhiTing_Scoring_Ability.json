@@ -174,7 +174,7 @@
                       "Value": {
                         "IsDynamic": true,
                         "PostfixExpr": {
-                          "OpCodes": "AQAJ",
+                          "OpCodes": "AQAK",
                           "FixedValues": [],
                           "DynamicHashes": [
                             -347003192
@@ -234,7 +234,7 @@
                           "Value": {
                             "IsDynamic": true,
                             "PostfixExpr": {
-                              "OpCodes": "AQAJ",
+                              "OpCodes": "AQAK",
                               "FixedValues": [],
                               "DynamicHashes": [
                                 -347003192
@@ -294,7 +294,7 @@
                               "Value": {
                                 "IsDynamic": true,
                                 "PostfixExpr": {
-                                  "OpCodes": "AQAJ",
+                                  "OpCodes": "AQAK",
                                   "FixedValues": [],
                                   "DynamicHashes": [
                                     -347003192
@@ -326,8 +326,8 @@
                                   "$type": "RPG.GameCore.TargetAlias",
                                   "Alias": "ParamEntity"
                                 },
-                                "CompareType": "Greater",
-                                "CompareValue": 2
+                                "CompareType": "Equal",
+                                "CompareValue": 3
                               },
                               "SuccessTaskList": [
                                 {
@@ -340,7 +340,7 @@
                                   "Value": {
                                     "IsDynamic": false,
                                     "FixedValue": {
-                                      "Value": 1000
+                                      "Value": 2000
                                     }
                                   }
                                 },
@@ -354,7 +354,7 @@
                                   "Value": {
                                     "IsDynamic": true,
                                     "PostfixExpr": {
-                                      "OpCodes": "AQAJ",
+                                      "OpCodes": "AQAK",
                                       "FixedValues": [],
                                       "DynamicHashes": [
                                         -347003192
@@ -372,9 +372,71 @@
                                   "Value": {
                                     "IsDynamic": false,
                                     "FixedValue": {
-                                      "Value": 1000
+                                      "Value": 2000
                                     }
                                   }
+                                }
+                              ],
+                              "FailedTaskList": [
+                                {
+                                  "$type": "RPG.GameCore.PredicateTaskList",
+                                  "Predicate": {
+                                    "$type": "RPG.GameCore.ByCompareMonsterRank",
+                                    "TargetType": {
+                                      "$type": "RPG.GameCore.TargetAlias",
+                                      "Alias": "ParamEntity"
+                                    },
+                                    "CompareType": "GreaterEqual",
+                                    "CompareValue": 4
+                                  },
+                                  "SuccessTaskList": [
+                                    {
+                                      "$type": "RPG.GameCore.SetDynamicValue",
+                                      "TargetType": {
+                                        "$type": "RPG.GameCore.TargetAlias",
+                                        "Alias": "ModifierOwnerEntity"
+                                      },
+                                      "DynamicKey": "HPScore",
+                                      "Value": {
+                                        "IsDynamic": false,
+                                        "FixedValue": {
+                                          "Value": 10000
+                                        }
+                                      }
+                                    },
+                                    {
+                                      "$type": "RPG.GameCore.SetDynamicValue",
+                                      "TargetType": {
+                                        "$type": "RPG.GameCore.TargetAlias",
+                                        "Alias": "ModifierOwnerEntity"
+                                      },
+                                      "DynamicKey": "RemainingScore",
+                                      "Value": {
+                                        "IsDynamic": true,
+                                        "PostfixExpr": {
+                                          "OpCodes": "AQAK",
+                                          "FixedValues": [],
+                                          "DynamicHashes": [
+                                            -347003192
+                                          ]
+                                        }
+                                      }
+                                    },
+                                    {
+                                      "$type": "RPG.GameCore.SetDynamicValue",
+                                      "TargetType": {
+                                        "$type": "RPG.GameCore.TargetAlias",
+                                        "Alias": "ModifierOwnerEntity"
+                                      },
+                                      "DynamicKey": "KillScore",
+                                      "Value": {
+                                        "IsDynamic": false,
+                                        "FixedValue": {
+                                          "Value": 5000
+                                        }
+                                      }
+                                    }
+                                  ]
                                 }
                               ]
                             }
@@ -387,80 +449,81 @@
               ]
             },
             {
-              "Event": "OnAfterBeingHitAll",
+              "Event": "OnBeforeDying",
               "CallbackConfig": [
                 {
-                  "$type": "RPG.GameCore.SetDynamicValueByHPRatio",
-                  "DynamicKey": "CurrentHPPercentage",
-                  "ReadTargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
-                  }
-                },
+                  "$type": "RPG.GameCore.SetBattleScoringItem",
+                  "ScoringID": 90002,
+                  "ModifyValue": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQABAQECBAkBCg==",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        -1226284721,
+                        1676004912,
+                        1149214361
+                      ]
+                    }
+                  },
+                  "ShowType": "Special"
+                }
+              ]
+            },
+            {
+              "Event": "OnHPChange",
+              "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
                   "Predicate": {
-                    "$type": "RPG.GameCore.ByCompareDynamicValue",
-                    "TargetType": {
-                      "$type": "RPG.GameCore.TargetAlias",
-                      "Alias": "ModifierOwnerEntity"
-                    },
-                    "DynamicKey": "CurrentHPPercentage",
+                    "$type": "RPG.GameCore.ByCompareParamValue",
                     "CompareType": "Less",
                     "CompareValue": {
-                      "IsDynamic": true,
-                      "PostfixExpr": {
-                        "OpCodes": "AQABAQUJ",
-                        "FixedValues": [],
-                        "DynamicHashes": [
-                          472928100,
-                          -347003192
-                        ]
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
                       }
                     }
                   },
                   "SuccessTaskList": [
                     {
+                      "$type": "RPG.GameCore.SetDynamicValueByHPRatio",
+                      "DynamicKey": "CurrentHPPercentage",
+                      "ReadTargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      }
+                    },
+                    {
                       "$type": "RPG.GameCore.PredicateTaskList",
                       "Predicate": {
-                        "$type": "RPG.GameCore.ByAttackType",
-                        "AttackTypes": [
-                          "Insert"
-                        ]
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "DynamicKey": "CurrentHPPercentage",
+                        "CompareType": "Less",
+                        "CompareValue": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQABAQUK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              472928100,
+                              -347003192
+                            ]
+                          }
+                        }
                       },
                       "SuccessTaskList": [
                         {
                           "$type": "RPG.GameCore.SetBattleScoringItem",
-                          "ScoringID": 90001,
+                          "ScoringID": 90002,
                           "ModifyValue": {
                             "IsDynamic": true,
                             "PostfixExpr": {
-                              "OpCodes": "AQABAQECAQMEAwAABAEEBAgBCQ==",
-                              "FixedValues": [
-                                {
-                                  "Value": 1.5000000004656613
-                                }
-                              ],
-                              "DynamicHashes": [
-                                -1226284721,
-                                472928100,
-                                -1420706775,
-                                -347003192,
-                                1149214361
-                              ]
-                            }
-                          },
-                          "ShowType": "Special"
-                        }
-                      ],
-                      "FailedTaskList": [
-                        {
-                          "$type": "RPG.GameCore.SetBattleScoringItem",
-                          "ScoringID": 90001,
-                          "ModifyValue": {
-                            "IsDynamic": true,
-                            "PostfixExpr": {
-                              "OpCodes": "AQABAQECAQMEAwEEBAgBCQ==",
+                              "OpCodes": "AQABAQECAQMEAwEEBAkBCg==",
                               "FixedValues": [],
                               "DynamicHashes": [
                                 -1226284721,
@@ -471,84 +534,27 @@
                               ]
                             }
                           }
+                        },
+                        {
+                          "$type": "RPG.GameCore.SetDynamicValue",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "DynamicKey": "RemainingScore",
+                          "Value": {
+                            "IsDynamic": true,
+                            "PostfixExpr": {
+                              "OpCodes": "AQABAQQK",
+                              "FixedValues": [],
+                              "DynamicHashes": [
+                                -1420706775,
+                                -347003192
+                              ]
+                            }
+                          }
                         }
                       ]
-                    },
-                    {
-                      "$type": "RPG.GameCore.SetDynamicValue",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "ModifierOwnerEntity"
-                      },
-                      "DynamicKey": "RemainingScore",
-                      "Value": {
-                        "IsDynamic": true,
-                        "PostfixExpr": {
-                          "OpCodes": "AQABAQQJ",
-                          "FixedValues": [],
-                          "DynamicHashes": [
-                            -1420706775,
-                            -347003192
-                          ]
-                        }
-                      }
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "Event": "OnBeforeDying",
-              "CallbackConfig": [
-                {
-                  "$type": "RPG.GameCore.PredicateTaskList",
-                  "Predicate": {
-                    "$type": "RPG.GameCore.ByIsContainModifier",
-                    "TargetType": {
-                      "$type": "RPG.GameCore.TargetAlias",
-                      "Alias": "ParamEntity"
-                    },
-                    "ModifierName": "WModifier_BattleEventAbility_Challenge_InsertKillMark"
-                  },
-                  "SuccessTaskList": [
-                    {
-                      "$type": "RPG.GameCore.SetBattleScoringItem",
-                      "ScoringID": 90001,
-                      "ModifyValue": {
-                        "IsDynamic": true,
-                        "PostfixExpr": {
-                          "OpCodes": "AQABAQAABAECBAgBCQ==",
-                          "FixedValues": [
-                            {
-                              "Value": 1.5000000004656613
-                            }
-                          ],
-                          "DynamicHashes": [
-                            -1226284721,
-                            1676004912,
-                            1149214361
-                          ]
-                        }
-                      },
-                      "ShowType": "Special"
-                    }
-                  ],
-                  "FailedTaskList": [
-                    {
-                      "$type": "RPG.GameCore.SetBattleScoringItem",
-                      "ScoringID": 90001,
-                      "ModifyValue": {
-                        "IsDynamic": true,
-                        "PostfixExpr": {
-                          "OpCodes": "AQABAQECBAgBCQ==",
-                          "FixedValues": [],
-                          "DynamicHashes": [
-                            -1226284721,
-                            1676004912,
-                            1149214361
-                          ]
-                        }
-                      }
                     }
                   ]
                 }

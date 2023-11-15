@@ -34,7 +34,7 @@
               "SteerNormalizedTimeEnd": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.1900000001769513
+                  "Value": 0.20000000018626451
                 }
               },
               "MaxSteerSpeed": {
@@ -56,7 +56,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.4200000003911555
+              "Value": 0.10399999981746078
             }
           }
         },
@@ -66,34 +66,73 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_TV_00/Eff_Monster_W3_TV_00_MazeAttack_Attack01.prefab",
-          "PositionOffset": {
-            "X": 0,
-            "Y": 0,
-            "Z": 7
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_TV_00/Eff_Monster_W3_TV_00_MazeAttack_Attack_00.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Attack",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.20000000018626451
+            }
           }
         },
         {
-          "$type": "RPG.GameCore.AdventureTriggerAttack",
-          "AttackTargetType": {
+          "$type": "RPG.GameCore.AdventureFireProjectile",
+          "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AllEnemy"
+            "Alias": "AdvLocalPlayer"
           },
-          "TriggerBattleDelay": 0.1,
-          "AttackDetectConfig": {
-            "$type": "RPG.GameCore.AdventureAttackDetectCircleConfig",
-            "MaxRadius": 1,
-            "FanAngle": 360,
-            "Offset": {
-              "X": 0,
-              "Y": 0,
-              "Z": 7
-            }
-          },
-          "HitConfig": {
-            "HitAnimation": "Hit",
-            "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W1_Soldier01_01/Eff_Monster_W1_Soldier01_01_MazeAttack_Hit.prefab"
+          "Projectile": {
+            "Behavior": "Static",
+            "FlyEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_TV_00/Eff_Monster_W3_TV_00_MazeAttack_Attack01.prefab"
           }
+        },
+        {
+          "$type": "RPG.GameCore.AdventureFireProjectile",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AdvLocalPlayer"
+          },
+          "Projectile": {
+            "Behavior": "Static",
+            "MaxLifeTime": 0.583
+          },
+          "OnProjectileLifetimeFinish": [
+            {
+              "$type": "RPG.GameCore.AdventureTriggerAttack",
+              "AttackTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllEnemy"
+              },
+              "AttackRootTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ProjectileHitEntity"
+              },
+              "TriggerBattleDelay": 0.1,
+              "AttackDetectConfig": {
+                "$type": "RPG.GameCore.AdventureAttackDetectCircleConfig",
+                "MaxRadius": 0.8,
+                "FanAngle": 360
+              },
+              "HitConfig": {
+                "HitAnimation": "Hit",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_TV_00/Eff_Monster_W3_TV_00_MazeAttack_Attack01_Hit.prefab",
+                "HitEffectHeight": 1
+              }
+            },
+            {
+              "$type": "RPG.GameCore.VCameraConfigChange",
+              "CameraConfig": {
+                "ShakeTemplateName": "Impact_Heavy"
+              }
+            }
+          ]
         },
         {
           "$type": "RPG.GameCore.WaitAnimState",

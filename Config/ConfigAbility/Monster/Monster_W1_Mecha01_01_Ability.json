@@ -89,10 +89,6 @@
           "TargetType": "AbilityTargetEntity"
         },
         {
-          "$type": "RPG.GameCore.WaitSecond",
-          "WaitTime": 0.1
-        },
-        {
           "$type": "RPG.GameCore.MoveToTargetList",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
@@ -103,12 +99,6 @@
             "IsDynamic": false,
             "FixedValue": {
               "Value": 1
-            }
-          },
-          "NormalizedTransitionDuration": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0.1500000001396984
             }
           },
           "NormalizedTimeWait": {
@@ -172,13 +162,7 @@
         },
         {
           "$type": "RPG.GameCore.TriggerAnimState",
-          "AnimLogicState": "Idle",
-          "NormalizedTransitionDuration": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0.25000000023283064
-            }
-          }
+          "AnimLogicState": "Idle"
         }
       ]
     },
@@ -189,15 +173,29 @@
       },
       "OnStart": [
         {
-          "$type": "RPG.GameCore.SkillExecutionStart"
-        },
-        {
           "$type": "RPG.GameCore.AddModifier",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
           "ModifierName": "MMonster_Mecha_BlockDamage"
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill01",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.10000000009313226
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.SkillExecutionStart"
         },
         {
           "$type": "RPG.GameCore.WaitAnimState",
@@ -244,7 +242,7 @@
             "DamagePercentage": {
               "IsDynamic": true,
               "PostfixExpr": {
-                "OpCodes": "AQAJ",
+                "OpCodes": "AQAK",
                 "FixedValues": [],
                 "DynamicHashes": [
                   -1126825319
@@ -272,14 +270,6 @@
         },
         {
           "$type": "RPG.GameCore.DamagePerformFinish"
-        },
-        {
-          "$type": "RPG.GameCore.WaitSecond",
-          "WaitTime": 0.05
-        },
-        {
-          "$type": "RPG.GameCore.WaitSecond",
-          "WaitTime": 1
         },
         {
           "$type": "RPG.GameCore.SkillPerformFinish"

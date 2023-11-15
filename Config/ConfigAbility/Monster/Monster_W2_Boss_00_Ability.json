@@ -3,8 +3,9 @@
     {
       "Modifiers": {
         "Monster_W1_GS_Svarog_Break": {
-          "_CallbackList": {
-            "OnBeingBreak": {
+          "_CallbackList": [
+            {
+              "Event": "OnBeingBreak",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.RemoveModifier",
@@ -16,7 +17,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "Monster_W2_Boss_00_PassiveSkillInitiate",
@@ -243,7 +244,7 @@
             "DamagePercentage": {
               "IsDynamic": true,
               "PostfixExpr": {
-                "OpCodes": "AQAJ",
+                "OpCodes": "AQAK",
                 "FixedValues": [],
                 "DynamicHashes": [
                   -1126825319
@@ -289,7 +290,7 @@
                 "MDF_DirtyHPRatio_PerLayer": {
                   "IsDynamic": true,
                   "PostfixExpr": {
-                    "OpCodes": "AQAJ",
+                    "OpCodes": "AQAK",
                     "FixedValues": [],
                     "DynamicHashes": [
                       -2011446390
@@ -494,7 +495,7 @@
             "DamagePercentage": {
               "IsDynamic": true,
               "PostfixExpr": {
-                "OpCodes": "AQAJ",
+                "OpCodes": "AQAK",
                 "FixedValues": [],
                 "DynamicHashes": [
                   -1847083384
@@ -542,7 +543,7 @@
                 "MDF_DirtyHPRatio_PerLayer": {
                   "IsDynamic": true,
                   "PostfixExpr": {
-                    "OpCodes": "AQAJ",
+                    "OpCodes": "AQAK",
                     "FixedValues": [],
                     "DynamicHashes": [
                       -2011446390
@@ -576,7 +577,7 @@
           "AddNormalizedValue": {
             "IsDynamic": true,
             "PostfixExpr": {
-              "OpCodes": "AQAJ",
+              "OpCodes": "AQAK",
               "FixedValues": [],
               "DynamicHashes": [
                 -176140990
@@ -937,7 +938,7 @@
               "DamagePercentage": {
                 "IsDynamic": true,
                 "PostfixExpr": {
-                  "OpCodes": "AQAJ",
+                  "OpCodes": "AQAK",
                   "FixedValues": [],
                   "DynamicHashes": [
                     -190305622
@@ -997,7 +998,7 @@
                 "MDF_DirtyHPRatio_PerLayer": {
                   "IsDynamic": true,
                   "PostfixExpr": {
-                    "OpCodes": "AQAJ",
+                    "OpCodes": "AQAK",
                     "FixedValues": [],
                     "DynamicHashes": [
                       -2011446390
@@ -1395,7 +1396,7 @@
           "Ratio": {
             "IsDynamic": true,
             "PostfixExpr": {
-              "OpCodes": "AQAJ",
+              "OpCodes": "AQAK",
               "FixedValues": [],
               "DynamicHashes": [
                 1027595683
@@ -1425,7 +1426,7 @@
                 "MDF_DirtyHPRatio_PerLayer": {
                   "IsDynamic": true,
                   "PostfixExpr": {
-                    "OpCodes": "AQAJ",
+                    "OpCodes": "AQAK",
                     "FixedValues": [],
                     "DynamicHashes": [
                       -2011446390
@@ -1726,7 +1727,7 @@
           "ModifyValue": {
             "IsDynamic": true,
             "PostfixExpr": {
-              "OpCodes": "AQAJ",
+              "OpCodes": "AQAK",
               "FixedValues": [],
               "DynamicHashes": [
                 1396040819
@@ -1963,7 +1964,7 @@
               "ModifyValue": {
                 "IsDynamic": true,
                 "PostfixExpr": {
-                  "OpCodes": "AQAJ",
+                  "OpCodes": "AQAK",
                   "FixedValues": [],
                   "DynamicHashes": [
                     1396040819
@@ -2126,15 +2127,16 @@
       "LayerAddWhenStack": {
         "IsDynamic": true,
         "PostfixExpr": {
-          "OpCodes": "AQAJ",
+          "OpCodes": "AQAK",
           "FixedValues": [],
           "DynamicHashes": [
             -797864550
           ]
         }
       },
-      "_CallbackList": {
-        "OnStack": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
@@ -2157,7 +2159,7 @@
               "PropertyValue": {
                 "IsDynamic": true,
                 "PostfixExpr": {
-                  "OpCodes": "AQABAQQJ",
+                  "OpCodes": "AQABAQQK",
                   "FixedValues": [],
                   "DynamicHashes": [
                     -39687848,
@@ -2168,7 +2170,7 @@
             }
           ]
         }
-      },
+      ],
       "Stacking": "Replace",
       "DynamicValues": {
         "Values": {
@@ -2179,9 +2181,9 @@
       }
     },
     "Monster_W2_Boss_00_Revive": {
-      "LimboWaitHealPriority": "MonsterReviveSelf",
-      "_CallbackList": {
-        "OnLimboWaitHeal": {
+      "_CallbackList": [
+        {
+          "Event": "OnLimboWaitHeal",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -2246,7 +2248,13 @@
             }
           ]
         }
-      }
+      ],
+      "_PriorityList": [
+        {
+          "PriorityName": "LimboWaitHealPriority",
+          "Key": "MonsterReviveSelf"
+        }
+      ]
     },
     "Monster_W2_Boss_00_Endurance": {
       "BehaviorFlagList": [
@@ -2264,8 +2272,9 @@
         "UIPosition": "UI_TOP",
         "ModifierUIPriority": "Debuff"
       },
-      "_CallbackList": {
-        "OnCreate": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.TriggerEffect",
@@ -2277,7 +2286,7 @@
             }
           ]
         }
-      }
+      ]
     }
   }
 }

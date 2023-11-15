@@ -342,7 +342,7 @@
                 "MDF_SpeedUpRatio": {
                   "IsDynamic": true,
                   "PostfixExpr": {
-                    "OpCodes": "AQAJ",
+                    "OpCodes": "AQAK",
                     "FixedValues": [],
                     "DynamicHashes": [
                       -1446783148
@@ -364,7 +364,7 @@
                 "MDF_SpeedAddedValue": {
                   "IsDynamic": true,
                   "PostfixExpr": {
-                    "OpCodes": "AQAJ",
+                    "OpCodes": "AQAK",
                     "FixedValues": [],
                     "DynamicHashes": [
                       -1446783148
@@ -882,7 +882,7 @@
             "DamagePercentage": {
               "IsDynamic": true,
               "PostfixExpr": {
-                "OpCodes": "AQAJ",
+                "OpCodes": "AQAK",
                 "FixedValues": [],
                 "DynamicHashes": [
                   -1126825319
@@ -912,7 +912,7 @@
           "Chance": {
             "IsDynamic": true,
             "PostfixExpr": {
-              "OpCodes": "AQAJ",
+              "OpCodes": "AQAK",
               "FixedValues": [],
               "DynamicHashes": [
                 1511385380
@@ -922,7 +922,7 @@
           "LifeTime": {
             "IsDynamic": true,
             "PostfixExpr": {
-              "OpCodes": "AQAJ",
+              "OpCodes": "AQAK",
               "FixedValues": [],
               "DynamicHashes": [
                 924084005
@@ -933,7 +933,7 @@
             "MDF_PropertyValue": {
               "IsDynamic": true,
               "PostfixExpr": {
-                "OpCodes": "AQAJ",
+                "OpCodes": "AQAK",
                 "FixedValues": [],
                 "DynamicHashes": [
                   1295707830
@@ -1125,7 +1125,7 @@
             "DamagePercentage": {
               "IsDynamic": true,
               "PostfixExpr": {
-                "OpCodes": "AQAJ",
+                "OpCodes": "AQAK",
                 "FixedValues": [],
                 "DynamicHashes": [
                   -1847083384
@@ -1357,7 +1357,7 @@
             "DamagePercentage": {
               "IsDynamic": true,
               "PostfixExpr": {
-                "OpCodes": "AQAAAAQJ",
+                "OpCodes": "AQAAAAQK",
                 "FixedValues": [
                   {
                     "Value": 0.20000000018626451
@@ -1464,7 +1464,7 @@
             "DamagePercentage": {
               "IsDynamic": true,
               "PostfixExpr": {
-                "OpCodes": "AQAAAAQJ",
+                "OpCodes": "AQAAAAQK",
                 "FixedValues": [
                   {
                     "Value": 0.8000000007450581
@@ -1516,7 +1516,7 @@
           "Chance": {
             "IsDynamic": true,
             "PostfixExpr": {
-              "OpCodes": "AQAJ",
+              "OpCodes": "AQAK",
               "FixedValues": [],
               "DynamicHashes": [
                 -992332096
@@ -1526,7 +1526,7 @@
           "LifeTime": {
             "IsDynamic": true,
             "PostfixExpr": {
-              "OpCodes": "AQAJ",
+              "OpCodes": "AQAK",
               "FixedValues": [],
               "DynamicHashes": [
                 759100898
@@ -1537,7 +1537,7 @@
             "MDF_ActionDelayRatio": {
               "IsDynamic": true,
               "PostfixExpr": {
-                "OpCodes": "AQAJ",
+                "OpCodes": "AQAK",
                 "FixedValues": [],
                 "DynamicHashes": [
                   159611950
@@ -1655,7 +1655,7 @@
           "Event": "OnCreate",
           "CallbackConfig": [
             {
-              "$type": "RPG.GameCore.TriggerEffect",
+              "$type": "RPG.GameCore.ModifierAttachEffect",
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "ModifierOwnerEntity"
@@ -1683,19 +1683,6 @@
               },
               "DynamicKey": "W2_Mecha03_00_CTRLState",
               "ContextScope": "TargetEntity"
-            }
-          ]
-        },
-        {
-          "Event": "OnDestroy",
-          "CallbackConfig": [
-            {
-              "$type": "RPG.GameCore.RemoveEffect",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Mecha03_00/Eff_Monster_W2_Mecha03_00_SkillP01_Charging.prefab"
             }
           ]
         },
@@ -1773,6 +1760,14 @@
                       "Alias": "ParamEntity"
                     },
                     "Team": "TeamLight"
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByIsBattleEventEntity",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "Inverse": true
                   },
                   {
                     "$type": "RPG.GameCore.ByAny",
@@ -2088,6 +2083,223 @@
     "MMonster_W2_Mecha03_00_Overdrive_Accumulate": {
       "MaxLayer": 3,
       "_CallbackList": [
+        {
+          "Event": "OnStage",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareModifierValue",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ModifierOwnerEntity"
+                },
+                "ValueType": "Layer",
+                "CompareType": "Equal",
+                "CompareValue": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 1
+                  }
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetEffectAnimatorTrigger",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "UniqueEffectName": "OverdriveEffect",
+                  "TriggerName": "TriggerOnStage01"
+                }
+              ],
+              "FailedTaskList": []
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareModifierValue",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ModifierOwnerEntity"
+                },
+                "ValueType": "Layer",
+                "CompareType": "Equal",
+                "CompareValue": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 2
+                  }
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetEffectAnimatorTrigger",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "UniqueEffectName": "OverdriveEffect",
+                  "TriggerName": "TriggerOnStage02"
+                }
+              ],
+              "FailedTaskList": []
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareModifierValue",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ModifierOwnerEntity"
+                },
+                "ValueType": "Layer",
+                "CompareType": "Equal",
+                "CompareValue": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 3
+                  }
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetEffectAnimatorTrigger",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "UniqueEffectName": "OverdriveEffect",
+                  "TriggerName": "TriggerOnStage03"
+                },
+                {
+                  "$type": "RPG.GameCore.DefineDynamicValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "DynamicKey": "W2_Mecha03_00_Overdrive_State",
+                  "ResetValue": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  },
+                  "ContextScope": "TargetEntity"
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareMonsterID",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "TargetMonsterID": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 2013011
+                      }
+                    }
+                  },
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "ModifierName": "OneMorePerTurn"
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAny",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "Flag": "STAT_CTRL"
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "Flag": "Break"
+                      }
+                    ]
+                  },
+                  "SuccessTaskList": [],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "ModifierName": "MMonster_W2_Mecha03_00_Overdrive_DelayActive_Controller"
+                    },
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "DynamicKey": "W2_Mecha03_00_Overdrive_InsertFlag",
+                        "ContextScope": "TargetEntity",
+                        "CompareType": "Equal",
+                        "CompareValue": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 0
+                          }
+                        }
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.TurnInsertAbility",
+                          "AbilityName": "Monster_W2_Mecha03_00_SkillP01_Insert",
+                          "AbortBehaviorFlags": [
+                            "STAT_CTRL",
+                            "Break"
+                          ],
+                          "InsertAbilityPriority": "MonsterChangeState",
+                          "ShowInActionBar": true
+                        },
+                        {
+                          "$type": "RPG.GameCore.DefineDynamicValue",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "DynamicKey": "W2_Mecha03_00_Overdrive_InsertFlag",
+                          "ResetValue": {
+                            "IsDynamic": false,
+                            "FixedValue": {
+                              "Value": 1
+                            }
+                          },
+                          "ContextScope": "TargetEntity"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "FailedTaskList": []
+            }
+          ]
+        },
         {
           "Event": "OnStack",
           "CallbackConfig": [
@@ -2945,7 +3157,7 @@
                   "PropertyValue": {
                     "IsDynamic": true,
                     "PostfixExpr": {
-                      "OpCodes": "AQAJ",
+                      "OpCodes": "AQAK",
                       "FixedValues": [],
                       "DynamicHashes": [
                         -471811337
@@ -2965,7 +3177,7 @@
                   "PropertyValue": {
                     "IsDynamic": true,
                     "PostfixExpr": {
-                      "OpCodes": "AQAJ",
+                      "OpCodes": "AQAK",
                       "FixedValues": [],
                       "DynamicHashes": [
                         478542392
@@ -3145,7 +3357,7 @@
               "PropertyValue": {
                 "IsDynamic": true,
                 "PostfixExpr": {
-                  "OpCodes": "AQAJ",
+                  "OpCodes": "AQAK",
                   "FixedValues": [],
                   "DynamicHashes": [
                     -471811337

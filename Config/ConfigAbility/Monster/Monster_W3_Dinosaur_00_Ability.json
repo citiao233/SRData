@@ -54,21 +54,20 @@
           "ModifierName": "MModifier_Monster_W3_Dinosaur_00_ActionCheck"
         },
         {
-          "$type": "RPG.GameCore.AddModifier",
+          "$type": "RPG.GameCore.SetAttachmentScale",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "ModifierName": "MModifier_Monster_W3_Dinosaur_00_AttackUpRatio",
-          "MaxLayer": {
-            "IsDynamic": true,
-            "PostfixExpr": {
-              "OpCodes": "AQAJ",
-              "FixedValues": [],
-              "DynamicHashes": [
-                -1984939615
-              ]
+          "AttachPoints": [
+            {
+              "Name": "Lighter"
             }
+          ],
+          "Scale": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
           }
         },
         {
@@ -132,19 +131,19 @@
               "OffsetTargetDistance": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 2.5000000004656613
+                  "Value": 8
                 }
               },
               "NormalizedTimeStart": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.3200000002980232
+                  "Value": 0.15799999958835542
                 }
               },
               "NormalizedTimeEnd": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.4700000004377216
+                  "Value": 0.22899999958463013
                 }
               }
             },
@@ -206,103 +205,44 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.3620000001974404
+              "Value": 0.3569999998435378
             }
           }
         },
         {
-          "$type": "RPG.GameCore.VCameraConfigChange",
-          "CameraConfig": {
-            "ShakeTemplateName": "Unique_W1_Mecha02_P1_Run"
-          }
-        },
-        {
-          "$type": "RPG.GameCore.WaitAnimState",
-          "AnimStateName": "Skill01",
-          "NormalizedTimeEnd": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0.42599999997764826
-            }
-          }
-        },
-        {
-          "$type": "RPG.GameCore.VCameraConfigChange",
-          "CameraConfig": {
-            "ShakeTemplateName": "Unique_W1_Mecha02_P1_Run"
-          }
-        },
-        {
-          "$type": "RPG.GameCore.WaitAnimState",
-          "AnimStateName": "Skill01",
-          "NormalizedTimeEnd": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0.47500000009313226
-            }
-          }
-        },
-        {
-          "$type": "RPG.GameCore.LoopExecuteTaskListWithInterval",
-          "MaxLoopCount": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 5
-            }
+          "$type": "RPG.GameCore.DamageByAttackProperty",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
           },
-          "TaskList": [
-            {
-              "$type": "RPG.GameCore.DamageByAttackProperty",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "AbilityTargetEntity"
-              },
-              "AttackProperty": {
-                "DamageType": "Fire",
-                "DamagePercentage": {
-                  "IsDynamic": true,
-                  "PostfixExpr": {
-                    "OpCodes": "AQAJ",
-                    "FixedValues": [],
-                    "DynamicHashes": [
-                      -1126825319
-                    ]
-                  }
-                },
-                "HitSplitRatio": {
-                  "IsDynamic": false,
-                  "FixedValue": {
-                    "Value": 0.20000000018626451
-                  }
-                },
-                "SPHitRatio": {
-                  "IsDynamic": false,
-                  "FixedValue": {
-                    "Value": 0.20000000018626451
-                  }
-                },
-                "AttackType": "Normal",
-                "HitAnimation": "Hit",
-                "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W1_Mecha03_00/Eff_Monster_W1_Mecha03_00_Skill01_Hit.prefab"
-              },
-              "SpecialHitSoundEvent": "Ev_sfx_monster_skill_01_hit_mechabear",
-              "DisplayData": {
-                "UIMessageHeight": 1,
-                "DitherRangeX": 0.03,
-                "DitherRangeY": 0.03
+          "AttackProperty": {
+            "DamageType": "Fire",
+            "DamagePercentage": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  -1126825319
+                ]
               }
             },
-            {
-              "$type": "RPG.GameCore.VCameraConfigChange",
-              "CameraConfig": {
-                "ShakeTemplateName": "Common_Rapid_Light"
+            "SPHitRatio": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 1
               }
             },
-            {
-              "$type": "RPG.GameCore.WaitSecond",
-              "WaitTime": 0.2
-            }
-          ]
+            "AttackType": "Normal",
+            "HitAnimation": "Hit",
+            "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W1_Mecha03_00/Eff_Monster_W1_Mecha03_00_Skill01_Hit.prefab",
+            "HitTimeSlowType": "Impact"
+          },
+          "DisplayData": {
+            "UIMessageHeight": 1,
+            "DitherRangeX": 0.03,
+            "DitherRangeY": 0.03
+          }
         },
         {
           "$type": "RPG.GameCore.AddModifier",
@@ -314,7 +254,7 @@
           "Chance": {
             "IsDynamic": true,
             "PostfixExpr": {
-              "OpCodes": "AQAJ",
+              "OpCodes": "AQAK",
               "FixedValues": [],
               "DynamicHashes": [
                 892515203
@@ -324,7 +264,7 @@
           "LifeTime": {
             "IsDynamic": true,
             "PostfixExpr": {
-              "OpCodes": "AQAJ",
+              "OpCodes": "AQAK",
               "FixedValues": [],
               "DynamicHashes": [
                 150600696
@@ -335,7 +275,7 @@
             "MDF_PropertyValue": {
               "IsDynamic": true,
               "PostfixExpr": {
-                "OpCodes": "AQAJ",
+                "OpCodes": "AQAK",
                 "FixedValues": [],
                 "DynamicHashes": [
                   45163181
@@ -346,26 +286,6 @@
         },
         {
           "$type": "RPG.GameCore.DamagePerformFinish"
-        },
-        {
-          "$type": "RPG.GameCore.WaitAnimState",
-          "AnimStateName": "Skill01",
-          "NormalizedTimeEnd": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0.8360000003594905
-            }
-          }
-        },
-        {
-          "$type": "RPG.GameCore.VCameraConfigChange",
-          "CameraConfig": {
-            "ShakeTemplateName": "Unique_W1_Mecha02_P1_Jump"
-          }
-        },
-        {
-          "$type": "RPG.GameCore.WaitSecond",
-          "WaitTime": 0.3
         },
         {
           "$type": "RPG.GameCore.SkillPerformFinish"
@@ -407,7 +327,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "AnimStateName": "Skill10",
+          "AnimStateName": "Skill02",
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
@@ -424,19 +344,19 @@
               "OffsetTargetDistance": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 2.5000000004656613
+                  "Value": 6
                 }
               },
               "NormalizedTimeStart": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.12000000011175871
+                  "Value": 0.20200000004842877
                 }
               },
               "NormalizedTimeEnd": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.3400000003166497
+                  "Value": 0.3379999997559935
                 }
               }
             },
@@ -455,13 +375,13 @@
               "NormalizedTimeStart": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.5700000005308539
+                  "Value": 0.5689999999012798
                 }
               },
               "NormalizedTimeEnd": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.7500000006984919
+                  "Value": 0.6740000003483146
                 }
               }
             }
@@ -482,7 +402,7 @@
       "OnStart": [
         {
           "$type": "RPG.GameCore.WaitAnimState",
-          "AnimStateName": "Skill10",
+          "AnimStateName": "Skill02",
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
@@ -495,11 +415,11 @@
         },
         {
           "$type": "RPG.GameCore.WaitAnimState",
-          "AnimStateName": "Skill10",
+          "AnimStateName": "Skill02",
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.3600000003352761
+              "Value": 0.276999999769032
             }
           }
         },
@@ -514,7 +434,7 @@
             "DamagePercentage": {
               "IsDynamic": true,
               "PostfixExpr": {
-                "OpCodes": "AQAJ",
+                "OpCodes": "AQAK",
                 "FixedValues": [],
                 "DynamicHashes": [
                   1804332553
@@ -528,7 +448,7 @@
               }
             },
             "AttackType": "Normal",
-            "HitAnimation": "Hit",
+            "HitAnimation": "Hit_H",
             "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W1_Mecha03_00/Eff_Monster_W1_Mecha03_00_Skill01_Hit.prefab"
           },
           "SpecialHitSoundEvent": "Ev_sfx_monster_skill_01_hit_mechabear",
@@ -548,7 +468,7 @@
           "Chance": {
             "IsDynamic": true,
             "PostfixExpr": {
-              "OpCodes": "AQAJ",
+              "OpCodes": "AQAK",
               "FixedValues": [],
               "DynamicHashes": [
                 892515203
@@ -558,7 +478,7 @@
           "LifeTime": {
             "IsDynamic": true,
             "PostfixExpr": {
-              "OpCodes": "AQAJ",
+              "OpCodes": "AQAK",
               "FixedValues": [],
               "DynamicHashes": [
                 150600696
@@ -569,7 +489,7 @@
             "MDF_PropertyValue": {
               "IsDynamic": true,
               "PostfixExpr": {
-                "OpCodes": "AQAJ",
+                "OpCodes": "AQAK",
                 "FixedValues": [],
                 "DynamicHashes": [
                   45163181
@@ -589,7 +509,7 @@
             "DamagePercentage": {
               "IsDynamic": true,
               "PostfixExpr": {
-                "OpCodes": "AQAJ",
+                "OpCodes": "AQAK",
                 "FixedValues": [],
                 "DynamicHashes": [
                   1974125064
@@ -603,7 +523,7 @@
               }
             },
             "AttackType": "Normal",
-            "HitAnimation": "Hit",
+            "HitAnimation": "Hit_H",
             "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W1_Mecha03_00/Eff_Monster_W1_Mecha03_00_Skill01_Hit.prefab"
           },
           "SpecialHitSoundEvent": "Ev_sfx_monster_skill_01_hit_mechabear",
@@ -623,7 +543,7 @@
           "Chance": {
             "IsDynamic": true,
             "PostfixExpr": {
-              "OpCodes": "AQAJ",
+              "OpCodes": "AQAK",
               "FixedValues": [],
               "DynamicHashes": [
                 892515203
@@ -633,7 +553,7 @@
           "LifeTime": {
             "IsDynamic": true,
             "PostfixExpr": {
-              "OpCodes": "AQAJ",
+              "OpCodes": "AQAK",
               "FixedValues": [],
               "DynamicHashes": [
                 150600696
@@ -644,7 +564,7 @@
             "MDF_PropertyValue": {
               "IsDynamic": true,
               "PostfixExpr": {
-                "OpCodes": "AQAJ",
+                "OpCodes": "AQAK",
                 "FixedValues": [],
                 "DynamicHashes": [
                   45163181
@@ -687,7 +607,7 @@
         },
         {
           "$type": "RPG.GameCore.TriggerAnimState",
-          "AnimStateName": "Skill02",
+          "AnimStateName": "Skill03",
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
@@ -727,7 +647,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "AnimStateName": "Skill02",
+          "AnimStateName": "Skill03",
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
@@ -752,7 +672,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "AnimStateName": "Skill02",
+          "AnimStateName": "Skill03",
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
@@ -766,21 +686,23 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "AnimStateName": "Skill02",
+          "AnimStateName": "Skill03",
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.29699999978765845
+              "Value": 0.49699999997392297
             }
           }
         },
         {
           "$type": "RPG.GameCore.RadialBlurCurveEffect",
+          "BlurX": 0.45,
+          "BlurY": 0.9,
           "BlurRadius": 0.6,
           "Iteration": 8,
           "BlurStart": 0.01,
           "BlurFeather": 0.015,
-          "Duration": 2.283,
+          "Duration": 1.1,
           "CurveName": "ChargeBlurCurve"
         },
         {
@@ -789,7 +711,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "AnimStateName": "Skill02",
+          "AnimStateName": "Skill03",
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
@@ -803,11 +725,11 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "AnimStateName": "Skill02",
+          "AnimStateName": "Skill03",
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.7170000001788139
+              "Value": 0.9500000008847564
             }
           }
         },
@@ -851,12 +773,8 @@
           "TargetType": "EnemyTeamCenter"
         },
         {
-          "$type": "RPG.GameCore.MoveToTargetList",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "AnimStateName": "Skill03",
+          "$type": "RPG.GameCore.TriggerAnimState",
+          "AnimStateName": "Skill04",
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
@@ -868,84 +786,7 @@
             "FixedValue": {
               "Value": 1
             }
-          },
-          "MovingRangeList": [
-            {
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "EnemyTeamCenter"
-              },
-              "IgnoreRadius": true,
-              "OffsetTargetDistance": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 4.500000000465661
-                }
-              },
-              "NormalizedTimeStart": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 0.2149999998509884
-                }
-              },
-              "NormalizedTimeEnd": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 0.3620000001974404
-                }
-              }
-            },
-            {
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "EnemyTeamCenter"
-              },
-              "IgnoreRadius": true,
-              "OffsetTargetDistance": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 3.5000000004656613
-                }
-              },
-              "NormalizedTimeStart": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 0.3630000001285225
-                }
-              },
-              "NormalizedTimeEnd": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 0.4340000001247972
-                }
-              }
-            },
-            {
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "TeamFormation"
-              },
-              "IgnoreRadius": true,
-              "OffsetTargetDistance": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 0
-                }
-              },
-              "NormalizedTimeStart": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 0.7130000004544854
-                }
-              },
-              "NormalizedTimeEnd": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 0.8250000004190952
-                }
-              }
-            }
-          ]
+          }
         },
         {
           "$type": "RPG.GameCore.TriggerAnimState",
@@ -977,7 +818,7 @@
           "FailedTaskList": [
             {
               "$type": "RPG.GameCore.WaitAnimState",
-              "AnimStateName": "Skill03",
+              "AnimStateName": "Skill04",
               "NormalizedTimeEnd": {
                 "IsDynamic": false,
                 "FixedValue": {
@@ -990,7 +831,7 @@
             },
             {
               "$type": "RPG.GameCore.WaitAnimState",
-              "AnimStateName": "Skill03",
+              "AnimStateName": "Skill04",
               "NormalizedTimeEnd": {
                 "IsDynamic": false,
                 "FixedValue": {
@@ -1017,7 +858,7 @@
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
-                    "OpCodes": "AQAJ",
+                    "OpCodes": "AQAK",
                     "FixedValues": [],
                     "DynamicHashes": [
                       -190305622
@@ -1027,7 +868,7 @@
                 "HitSplitRatio": {
                   "IsDynamic": false,
                   "FixedValue": {
-                    "Value": 0.7000000006519258
+                    "Value": 0.3000000002793968
                   }
                 },
                 "SPHitRatio": {
@@ -1038,8 +879,7 @@
                 },
                 "HitAnimation": "Hit",
                 "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W1_Mecha03_00/Eff_Monster_W1_Mecha03_00_Skill01_Hit.prefab",
-                "HitTimeSlowType": "Impact",
-                "HitTimeSlowIntensity": "Heavy"
+                "HitTimeSlowType": "Impact"
               },
               "DisplayData": {
                 "UIMessageHeight": 1,
@@ -1049,7 +889,7 @@
             },
             {
               "$type": "RPG.GameCore.WaitAnimState",
-              "AnimStateName": "Skill03",
+              "AnimStateName": "Skill04",
               "NormalizedTimeEnd": {
                 "IsDynamic": false,
                 "FixedValue": {
@@ -1058,16 +898,8 @@
               }
             },
             {
-              "$type": "RPG.GameCore.TriggerEffect",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "Caster"
-              },
-              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W1_Mecha03_00/Eff_Monster_W1_Mecha03_00_Skill02_Charged_Loop_End.prefab"
-            },
-            {
               "$type": "RPG.GameCore.WaitAnimState",
-              "AnimStateName": "Skill03",
+              "AnimStateName": "Skill04",
               "NormalizedTimeEnd": {
                 "IsDynamic": false,
                 "FixedValue": {
@@ -1086,7 +918,7 @@
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
-                    "OpCodes": "AQAJ",
+                    "OpCodes": "AQAK",
                     "FixedValues": [],
                     "DynamicHashes": [
                       -190305622
@@ -1116,6 +948,56 @@
               }
             },
             {
+              "$type": "RPG.GameCore.WaitAnimState",
+              "AnimStateName": "Skill04",
+              "NormalizedTimeEnd": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0.6000000005587935
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.DamageByAttackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllEnemy"
+              },
+              "AttackProperty": {
+                "DamageType": "Fire",
+                "DamagePercentage": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAK",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      -190305622
+                    ]
+                  }
+                },
+                "HitSplitRatio": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 0.40000000037252903
+                  }
+                },
+                "SPHitRatio": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 0.3000000002793968
+                  }
+                },
+                "HitAnimation": "Hit_H",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W1_Mecha03_00/Eff_Monster_W1_Mecha03_00_Skill01_Hit.prefab",
+                "HitTimeSlowType": "Impact"
+              },
+              "DisplayData": {
+                "UIMessageHeight": 1,
+                "DitherRangeX": 0.02,
+                "DitherRangeY": 0.02
+              }
+            },
+            {
               "$type": "RPG.GameCore.AddModifier",
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
@@ -1125,7 +1007,7 @@
               "Chance": {
                 "IsDynamic": true,
                 "PostfixExpr": {
-                  "OpCodes": "AQAJ",
+                  "OpCodes": "AQAK",
                   "FixedValues": [],
                   "DynamicHashes": [
                     892515203
@@ -1135,7 +1017,7 @@
               "LifeTime": {
                 "IsDynamic": true,
                 "PostfixExpr": {
-                  "OpCodes": "AQAJ",
+                  "OpCodes": "AQAK",
                   "FixedValues": [],
                   "DynamicHashes": [
                     150600696
@@ -1146,7 +1028,7 @@
                 "MDF_PropertyValue": {
                   "IsDynamic": true,
                   "PostfixExpr": {
-                    "OpCodes": "AQAJ",
+                    "OpCodes": "AQAK",
                     "FixedValues": [],
                     "DynamicHashes": [
                       45163181
@@ -1177,58 +1059,46 @@
               "ContextScope": "TargetEntity"
             },
             {
+              "$type": "RPG.GameCore.RemoveModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "ModifierName": "MModifier_Monster_W3_Dinosaur_00_AttackUpRatio"
+            },
+            {
+              "$type": "RPG.GameCore.RemoveModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "ModifierName": "MModifier_Monster_W3_Dinosaur_00_OverHit"
+            },
+            {
               "$type": "RPG.GameCore.AddModifier",
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
+                "Alias": "Caster"
               },
-              "ModifierName": "MModifier_Monster_W3_Dinosaur_00_AttackUpRatio",
+              "ModifierName": "MModifier_Monster_W3_Dinosaur_00_MonsterEnergyBar",
               "DynamicValues": {
-                "Modifier_AttackUp_AttackUpLayer": {
+                "MDF_MaxCount": {
                   "IsDynamic": true,
                   "PostfixExpr": {
-                    "OpCodes": "AQAJ",
+                    "OpCodes": "AQAK",
                     "FixedValues": [],
                     "DynamicHashes": [
-                      764573275
+                      -1984939615
                     ]
+                  }
+                },
+                "MDF_PhaseFlag": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 0
                   }
                 }
               }
-            },
-            {
-              "$type": "RPG.GameCore.AddModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "Caster"
-              },
-              "ModifierName": "MModifier_Monster_W3_Dinosaur_00_MonsterEnergyBar"
-            },
-            {
-              "$type": "RPG.GameCore.RemoveModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "Caster"
-              },
-              "ModifierName": "W1_Mecha02_AttackBuff_Effect"
-            },
-            {
-              "$type": "RPG.GameCore.WaitAnimState",
-              "AnimStateName": "Skill03",
-              "NormalizedTimeEnd": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 0.44000000040978193
-                }
-              }
-            },
-            {
-              "$type": "RPG.GameCore.RemoveModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "Caster"
-              },
-              "ModifierName": "W1_Mecha02_AttackBuff_Effect"
             }
           ]
         },
@@ -1267,7 +1137,7 @@
         },
         {
           "$type": "RPG.GameCore.TriggerAnimState",
-          "AnimStateName": "Skill12",
+          "AnimStateName": "Skill05",
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
@@ -1293,7 +1163,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "AnimStateName": "Skill12",
+          "AnimStateName": "Skill05",
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
@@ -1310,11 +1180,11 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "AnimStateName": "Skill12",
+          "AnimStateName": "Skill05",
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.2730000000447035
+              "Value": 0.7970000002533197
             }
           }
         },
@@ -1351,24 +1221,20 @@
           "ContextScope": "TargetEntity"
         },
         {
-          "$type": "RPG.GameCore.AddModifier",
+          "$type": "RPG.GameCore.RemoveModifier",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "ModifierOwnerEntity"
+            "Alias": "Caster"
           },
-          "ModifierName": "MModifier_Monster_W3_Dinosaur_00_AttackUpRatio",
-          "DynamicValues": {
-            "Modifier_AttackUp_AttackUpLayer": {
-              "IsDynamic": true,
-              "PostfixExpr": {
-                "OpCodes": "AQAJ",
-                "FixedValues": [],
-                "DynamicHashes": [
-                  764573275
-                ]
-              }
-            }
-          }
+          "ModifierName": "MModifier_Monster_W3_Dinosaur_00_AttackUpRatio"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "MModifier_Monster_W3_Dinosaur_00_OverHit"
         },
         {
           "$type": "RPG.GameCore.AddModifier",
@@ -1376,7 +1242,25 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "ModifierName": "MModifier_Monster_W3_Dinosaur_00_MonsterEnergyBar"
+          "ModifierName": "MModifier_Monster_W3_Dinosaur_00_MonsterEnergyBar",
+          "DynamicValues": {
+            "MDF_MaxCount": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  -1984939615
+                ]
+              }
+            },
+            "MDF_PhaseFlag": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 0
+              }
+            }
+          }
         },
         {
           "$type": "RPG.GameCore.DamageByAttackProperty",
@@ -1390,17 +1274,16 @@
             "DamagePercentage": {
               "IsDynamic": true,
               "PostfixExpr": {
-                "OpCodes": "AQAJ",
+                "OpCodes": "AQAK",
                 "FixedValues": [],
                 "DynamicHashes": [
-                  600850859
+                  388865030
                 ]
               }
             },
             "HitAnimation": "Hit",
             "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W1_Mecha03_00/Eff_Monster_W1_Mecha03_00_Skill01_Hit.prefab",
-            "HitTimeSlowType": "Impact",
-            "HitTimeSlowIntensity": "Heavy"
+            "HitTimeSlowType": "Impact"
           },
           "DisplayData": {
             "UIMessageHeight": 1,
@@ -1434,10 +1317,10 @@
             "MDF_PropertyValue": {
               "IsDynamic": true,
               "PostfixExpr": {
-                "OpCodes": "AQAJ",
+                "OpCodes": "AQAK",
                 "FixedValues": [],
                 "DynamicHashes": [
-                  -1110493838
+                  -1786784115
                 ]
               }
             }
@@ -1462,56 +1345,12 @@
           "ContextScope": "TargetEntity"
         },
         {
-          "$type": "RPG.GameCore.RemoveModifier",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "ModifierName": "W1_Mecha02_AttackBuff_Effect"
-        },
-        {
-          "$type": "RPG.GameCore.WaitAnimState",
-          "AnimStateName": "Skill12",
-          "NormalizedTimeEnd": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0.4200000003911555
-            }
-          }
-        },
-        {
-          "$type": "RPG.GameCore.TriggerEffect",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W1_Mecha03_00/Eff_Monster_W1_Mecha03_00_Skill02_Charged_Loop_End.prefab"
-        },
-        {
-          "$type": "RPG.GameCore.WaitAnimState",
-          "AnimStateName": "Skill12",
-          "NormalizedTimeEnd": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0.4340000001247972
-            }
-          }
-        },
-        {
-          "$type": "RPG.GameCore.TriggerEffect",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AllTeamMemberIncludeCaster"
-          },
-          "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Buff_Common_Increased_attack_power.prefab"
-        },
-        {
           "$type": "RPG.GameCore.WaitAnimState",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "AnimStateName": "Skill12",
+          "AnimStateName": "Skill05",
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
@@ -1550,7 +1389,7 @@
         },
         {
           "$type": "RPG.GameCore.TriggerAnimState",
-          "AnimStateName": "Skill02",
+          "AnimStateName": "Skill03",
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
@@ -1585,35 +1424,27 @@
       },
       "OnStart": [
         {
-          "$type": "RPG.GameCore.WaitAnimState",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "AnimStateName": "Skill02",
-          "NormalizedTimeEnd": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0.2339999999385327
-            }
-          }
-        },
-        {
           "$type": "RPG.GameCore.SkillExecutionStart"
         },
         {
-          "$type": "RPG.GameCore.WaitAnimState",
+          "$type": "RPG.GameCore.SetAttachmentScale",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "AnimStateName": "Skill02",
-          "NormalizedTimeEnd": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0.26300000003539026
+          "AttachPoints": [
+            {
+              "Name": "Lighter"
             }
-          }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.RemoveModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "OneMore"
         },
         {
           "$type": "RPG.GameCore.WaitAnimState",
@@ -1621,11 +1452,64 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "AnimStateName": "Skill02",
+          "AnimStateName": "Skill03",
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.29699999978765845
+              "Value": 0.30899999965913594
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.SetAttachmentScale",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AttachPoints": [
+            {
+              "Name": "Lighter"
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill03",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.49699999997392297
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.ShowUIPage",
+          "AssetPath": "UI/Common/Widget/BattleAlertHint.prefab",
+          "UITextNodes": [
+            {
+              "TextPath": "AreaInfoPanel/Title/Text",
+              "TextContent": {
+                "Hash": -193686064
+              }
+            }
+          ],
+          "LifeTime": 2
+        },
+        {
+          "$type": "RPG.GameCore.SetDynamicValue",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "DynamicKey": "Vibrate_Count",
+          "Value": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0
             }
           }
         },
@@ -1635,37 +1519,48 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "ModifierName": "W1_Mecha02_AttackBuff_Effect"
-        },
-        {
-          "$type": "RPG.GameCore.ShowUIPage",
-          "AssetPath": "UI/Common/Widget/BattleAlertHint.prefab",
-          "UITextNodes": [
-            {
-              "TextPath": "AreaInfoPanel/Title/Text",
-              "TextContent": {
-                "Hash": -1405618695
+          "ModifierName": "MModifier_Monster_W3_Dinosaur_00_MonsterEnergyBar",
+          "DynamicValues": {
+            "MDF_MaxCount": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  -1699655567
+                ]
+              }
+            },
+            "MDF_PhaseFlag": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 1
               }
             }
-          ],
-          "LifeTime": 2
+          }
         },
         {
           "$type": "RPG.GameCore.ModifyCurrentSkillDelayCost",
           "NormalizedValue": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0.3000000002793968
+            "IsDynamic": true,
+            "PostfixExpr": {
+              "OpCodes": "AQAK",
+              "FixedValues": [],
+              "DynamicHashes": [
+                -1345159948
+              ]
             }
           }
         },
         {
           "$type": "RPG.GameCore.RadialBlurCurveEffect",
+          "BlurX": 0.45,
+          "BlurY": 0.9,
           "BlurRadius": 0.6,
           "Iteration": 8,
           "BlurStart": 0.01,
           "BlurFeather": 0.015,
-          "Duration": 2.283,
+          "Duration": 1.1,
           "CurveName": "ChargeBlurCurve"
         },
         {
@@ -1674,7 +1569,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "AnimStateName": "Skill02",
+          "AnimStateName": "Skill03",
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
@@ -1688,7 +1583,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "AnimStateName": "Skill02",
+          "AnimStateName": "Skill03",
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
@@ -1721,7 +1616,7 @@
               "PropertyValue": {
                 "IsDynamic": true,
                 "PostfixExpr": {
-                  "OpCodes": "AAABAAMJ",
+                  "OpCodes": "AAABAAMK",
                   "FixedValues": [
                     {
                       "Value": 0
@@ -1732,6 +1627,14 @@
                   ]
                 }
               }
+            },
+            {
+              "$type": "RPG.GameCore.TriggerEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Debuff_Common_SpeedDown.prefab"
             }
           ]
         }
@@ -1744,6 +1647,12 @@
       }
     },
     "MModifier_Monster_W3_Dinosaur_00_AttackUpRatio": {
+      "LayerAddWhenStack": {
+        "IsDynamic": false,
+        "FixedValue": {
+          "Value": 1
+        }
+      },
       "_CallbackList": [
         {
           "Event": "OnStack",
@@ -1754,11 +1663,10 @@
               "Value": {
                 "IsDynamic": true,
                 "PostfixExpr": {
-                  "OpCodes": "AQABAQQJ",
+                  "OpCodes": "AQAK",
                   "FixedValues": [],
                   "DynamicHashes": [
-                    -391359801,
-                    1541404608
+                    -391359801
                   ]
                 }
               }
@@ -1773,10 +1681,11 @@
               "PropertyValue": {
                 "IsDynamic": true,
                 "PostfixExpr": {
-                  "OpCodes": "AQAJ",
+                  "OpCodes": "AQABAQQK",
                   "FixedValues": [],
                   "DynamicHashes": [
-                    2128130574
+                    -391359801,
+                    1541404608
                   ]
                 }
               }
@@ -1792,36 +1701,106 @@
         }
       }
     },
+    "MModifier_Monster_W3_Dinosaur_00_OverHit": {
+      "LayerAddWhenStack": {
+        "IsDynamic": false,
+        "FixedValue": {
+          "Value": 1
+        }
+      },
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
+          "CallbackConfig": []
+        }
+      ],
+      "Stacking": "ReplaceByCaster",
+      "DynamicValues": {
+        "Values": {
+          "1546955328": {}
+        }
+      }
+    },
     "MModifier_Monster_W3_Dinosaur_00_MonsterEnergyBar": {
       "_CallbackList": [
         {
           "Event": "OnStack",
           "CallbackConfig": [
             {
-              "$type": "RPG.GameCore.SetMonsterEnergyBarState",
-              "Active": "True",
-              "CenterStyle": 1,
-              "IconPath": "SpriteOutput/BuffIcon/Inlevel/IconMonster_W1_Gepard_00_EnergyBar.png",
-              "MaxCount": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQAJ",
-                  "FixedValues": [],
-                  "DynamicHashes": [
-                    -1984939615
-                  ]
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ModifierOwnerEntity"
+                },
+                "DynamicKey": "MDF_PhaseFlag",
+                "CompareType": "Equal",
+                "CompareValue": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 0
+                  }
                 }
               },
-              "CurrentCount": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQAJ",
-                  "FixedValues": [],
-                  "DynamicHashes": [
-                    764573275
-                  ]
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetMonsterEnergyBarState",
+                  "Active": "True",
+                  "CenterStyle": 3,
+                  "OuterState": 2,
+                  "IconPath": "SpriteOutput/BuffIcon/Inlevel/IconBuffAttackUp.png",
+                  "MaxCount": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        -769102293
+                      ]
+                    }
+                  },
+                  "CurrentCount": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        764573275
+                      ]
+                    }
+                  }
                 }
-              }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetMonsterEnergyBarState",
+                  "Active": "True",
+                  "CenterStyle": 3,
+                  "OuterState": 2,
+                  "IconPath": "SpriteOutput/BuffIcon/Inlevel/IconMonsterEnhance.png",
+                  "MaxCount": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        -769102293
+                      ]
+                    }
+                  },
+                  "CurrentCount": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        764573275
+                      ]
+                    }
+                  }
+                }
+              ]
             },
             {
               "$type": "RPG.GameCore.TriggerEnergyBarEffect"
@@ -1829,7 +1808,13 @@
           ]
         }
       ],
-      "Stacking": "ReplaceByCaster"
+      "Stacking": "ReplaceByCaster",
+      "DynamicValues": {
+        "Values": {
+          "-769102293": {},
+          "1144691515": {}
+        }
+      }
     },
     "MModifier_Monster_W3_Dinosaur_00_DOT_Listener": {
       "_CallbackList": [
@@ -1885,7 +1870,7 @@
                       "Max": {
                         "IsDynamic": true,
                         "PostfixExpr": {
-                          "OpCodes": "AQAJ",
+                          "OpCodes": "AQAK",
                           "FixedValues": [],
                           "DynamicHashes": [
                             -1984939615
@@ -1893,6 +1878,52 @@
                         }
                       },
                       "ContextScope": "TargetEntity"
+                    },
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "ModifierName": "MModifier_Monster_W3_Dinosaur_00_AttackUpRatio",
+                      "DynamicValues": {
+                        "Modifier_AttackUp_AttackUpLayer": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              764573275
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "ModifierName": "MModifier_Monster_W3_Dinosaur_00_MonsterEnergyBar",
+                      "DynamicValues": {
+                        "MDF_MaxCount": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              -1984939615
+                            ]
+                          }
+                        },
+                        "MDF_PhaseFlag": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 0
+                          }
+                        }
+                      }
                     },
                     {
                       "$type": "RPG.GameCore.PredicateTaskList",
@@ -1908,7 +1939,7 @@
                         "CompareValue": {
                           "IsDynamic": true,
                           "PostfixExpr": {
-                            "OpCodes": "AQAJ",
+                            "OpCodes": "AQAK",
                             "FixedValues": [],
                             "DynamicHashes": [
                               -1984939615
@@ -2003,9 +2034,13 @@
                             "ContextScope": "TargetEntity",
                             "CompareType": "Equal",
                             "CompareValue": {
-                              "IsDynamic": false,
-                              "FixedValue": {
-                                "Value": 0
+                              "IsDynamic": true,
+                              "PostfixExpr": {
+                                "OpCodes": "AQAK",
+                                "FixedValues": [],
+                                "DynamicHashes": [
+                                  -1699655567
+                                ]
                               }
                             }
                           }
@@ -2023,7 +2058,7 @@
                           "AddValue": {
                             "IsDynamic": false,
                             "FixedValue": {
-                              "Value": -1
+                              "Value": 1
                             }
                           },
                           "Min": {
@@ -2035,139 +2070,147 @@
                           "Max": {
                             "IsDynamic": true,
                             "PostfixExpr": {
-                              "OpCodes": "AQAJ",
+                              "OpCodes": "AQAK",
                               "FixedValues": [],
                               "DynamicHashes": [
-                                -1984939615
+                                -1699655567
                               ]
                             }
                           },
                           "ContextScope": "TargetEntity"
                         },
                         {
-                          "$type": "RPG.GameCore.ShowUIPage",
-                          "AssetPath": "UI/Common/Widget/BattleSelfStatusHint.prefab",
-                          "UITextNodes": [
-                            {
-                              "TextPath": "AreaInfoPanel/Title/Text",
-                              "TextContent": {
-                                "Hash": 1811522500
+                          "$type": "RPG.GameCore.AddModifier",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "ModifierName": "MModifier_Monster_W3_Dinosaur_00_OverHit",
+                          "DynamicValues": {
+                            "MDF_OverHitLayer": {
+                              "IsDynamic": true,
+                              "PostfixExpr": {
+                                "OpCodes": "AQAK",
+                                "FixedValues": [],
+                                "DynamicHashes": [
+                                  764573275
+                                ]
                               }
                             }
-                          ],
-                          "LifeTime": 2
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.AddModifier",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "Caster"
+                          },
+                          "ModifierName": "MModifier_Monster_W3_Dinosaur_00_MonsterEnergyBar",
+                          "DynamicValues": {
+                            "MDF_MaxCount": {
+                              "IsDynamic": true,
+                              "PostfixExpr": {
+                                "OpCodes": "AQAK",
+                                "FixedValues": [],
+                                "DynamicHashes": [
+                                  -1699655567
+                                ]
+                              }
+                            },
+                            "MDF_PhaseFlag": {
+                              "IsDynamic": false,
+                              "FixedValue": {
+                                "Value": 1
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.PredicateTaskList",
+                          "Predicate": {
+                            "$type": "RPG.GameCore.ByAnd",
+                            "PredicateList": [
+                              {
+                                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                                "DynamicKey": "Vibrate_Count",
+                                "ContextScope": "TargetEntity",
+                                "CompareType": "Equal",
+                                "CompareValue": {
+                                  "IsDynamic": true,
+                                  "PostfixExpr": {
+                                    "OpCodes": "AQAK",
+                                    "FixedValues": [],
+                                    "DynamicHashes": [
+                                      -1699655567
+                                    ]
+                                  }
+                                }
+                              },
+                              {
+                                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                                "DynamicKey": "ExlpodeFlag",
+                                "ContextScope": "TargetEntity",
+                                "CompareType": "Equal",
+                                "CompareValue": {
+                                  "IsDynamic": false,
+                                  "FixedValue": {
+                                    "Value": 0
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "SuccessTaskList": [
+                            {
+                              "$type": "RPG.GameCore.DefineDynamicValue",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "Caster"
+                              },
+                              "DynamicKey": "AIFlag",
+                              "ResetValue": {
+                                "IsDynamic": false,
+                                "FixedValue": {
+                                  "Value": 6
+                                }
+                              },
+                              "ContextScope": "TargetEntity"
+                            },
+                            {
+                              "$type": "RPG.GameCore.DefineDynamicValue",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "Caster"
+                              },
+                              "DynamicKey": "ExlpodeFlag",
+                              "ResetValue": {
+                                "IsDynamic": false,
+                                "FixedValue": {
+                                  "Value": 1
+                                }
+                              },
+                              "ContextScope": "TargetEntity"
+                            },
+                            {
+                              "$type": "RPG.GameCore.DefineDynamicValue",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "Caster"
+                              },
+                              "DynamicKey": "Action_Flag",
+                              "ResetValue": {
+                                "IsDynamic": false,
+                                "FixedValue": {
+                                  "Value": 1
+                                }
+                              },
+                              "ContextScope": "TargetEntity"
+                            }
+                          ]
                         }
                       ]
                     }
                   ]
-                },
-                {
-                  "$type": "RPG.GameCore.AddModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
-                  },
-                  "ModifierName": "MModifier_Monster_W3_Dinosaur_00_AttackUpRatio",
-                  "DynamicValues": {
-                    "Modifier_AttackUp_AttackUpLayer": {
-                      "IsDynamic": true,
-                      "PostfixExpr": {
-                        "OpCodes": "AQAJ",
-                        "FixedValues": [],
-                        "DynamicHashes": [
-                          764573275
-                        ]
-                      }
-                    }
-                  }
-                },
-                {
-                  "$type": "RPG.GameCore.AddModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "Caster"
-                  },
-                  "ModifierName": "MModifier_Monster_W3_Dinosaur_00_MonsterEnergyBar"
-                },
-                {
-                  "$type": "RPG.GameCore.PredicateTaskList",
-                  "Predicate": {
-                    "$type": "RPG.GameCore.ByAnd",
-                    "PredicateList": [
-                      {
-                        "$type": "RPG.GameCore.ByCompareDynamicValue",
-                        "DynamicKey": "Vibrate_Count",
-                        "ContextScope": "TargetEntity",
-                        "CompareType": "Equal",
-                        "CompareValue": {
-                          "IsDynamic": false,
-                          "FixedValue": {
-                            "Value": 0
-                          }
-                        }
-                      },
-                      {
-                        "$type": "RPG.GameCore.ByCompareDynamicValue",
-                        "DynamicKey": "ExlpodeFlag",
-                        "ContextScope": "TargetEntity",
-                        "CompareType": "Equal",
-                        "CompareValue": {
-                          "IsDynamic": false,
-                          "FixedValue": {
-                            "Value": 0
-                          }
-                        }
-                      }
-                    ]
-                  },
-                  "SuccessTaskList": [
-                    {
-                      "$type": "RPG.GameCore.DefineDynamicValue",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "Caster"
-                      },
-                      "DynamicKey": "AIFlag",
-                      "ResetValue": {
-                        "IsDynamic": false,
-                        "FixedValue": {
-                          "Value": 6
-                        }
-                      },
-                      "ContextScope": "TargetEntity"
-                    },
-                    {
-                      "$type": "RPG.GameCore.DefineDynamicValue",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "Caster"
-                      },
-                      "DynamicKey": "ExlpodeFlag",
-                      "ResetValue": {
-                        "IsDynamic": false,
-                        "FixedValue": {
-                          "Value": 1
-                        }
-                      },
-                      "ContextScope": "TargetEntity"
-                    },
-                    {
-                      "$type": "RPG.GameCore.DefineDynamicValue",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "Caster"
-                      },
-                      "DynamicKey": "Action_Flag",
-                      "ResetValue": {
-                        "IsDynamic": false,
-                        "FixedValue": {
-                          "Value": 1
-                        }
-                      },
-                      "ContextScope": "TargetEntity"
-                    }
-                  ],
-                  "FailedTaskList": []
                 }
               ]
             }
@@ -2195,7 +2238,25 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "Caster"
               },
-              "ModifierName": "MModifier_Monster_W3_Dinosaur_00_MonsterEnergyBar"
+              "ModifierName": "MModifier_Monster_W3_Dinosaur_00_MonsterEnergyBar",
+              "DynamicValues": {
+                "MDF_MaxCount": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAK",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      -1984939615
+                    ]
+                  }
+                },
+                "MDF_PhaseFlag": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 0
+                  }
+                }
+              }
             }
           ]
         },
@@ -2239,7 +2300,7 @@
                       "$type": "RPG.GameCore.SetDynamicValueByAddValue",
                       "TargetType": {
                         "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "Caster"
+                        "Alias": "ModifierOwnerEntity"
                       },
                       "Key": "Vibrate_Count",
                       "AddValue": {
@@ -2257,7 +2318,7 @@
                       "Max": {
                         "IsDynamic": true,
                         "PostfixExpr": {
-                          "OpCodes": "AQAJ",
+                          "OpCodes": "AQAK",
                           "FixedValues": [],
                           "DynamicHashes": [
                             -1984939615
@@ -2267,16 +2328,66 @@
                       "ContextScope": "TargetEntity"
                     },
                     {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "ModifierName": "MModifier_Monster_W3_Dinosaur_00_AttackUpRatio",
+                      "DynamicValues": {
+                        "Modifier_AttackUp_AttackUpLayer": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              764573275
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "ModifierName": "MModifier_Monster_W3_Dinosaur_00_MonsterEnergyBar",
+                      "DynamicValues": {
+                        "MDF_MaxCount": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              -1984939615
+                            ]
+                          }
+                        },
+                        "MDF_PhaseFlag": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 0
+                          }
+                        }
+                      }
+                    },
+                    {
                       "$type": "RPG.GameCore.PredicateTaskList",
                       "Predicate": {
                         "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
                         "DynamicKey": "Vibrate_Count",
                         "ContextScope": "TargetEntity",
-                        "CompareType": "GreaterEqual",
+                        "CompareType": "Equal",
                         "CompareValue": {
                           "IsDynamic": true,
                           "PostfixExpr": {
-                            "OpCodes": "AQAJ",
+                            "OpCodes": "AQAK",
                             "FixedValues": [],
                             "DynamicHashes": [
                               -1984939615
@@ -2304,7 +2415,7 @@
                           "$type": "RPG.GameCore.DefineDynamicValue",
                           "TargetType": {
                             "$type": "RPG.GameCore.TargetAlias",
-                            "Alias": "Caster"
+                            "Alias": "ModifierOwnerEntity"
                           },
                           "DynamicKey": "AIFlag",
                           "ResetValue": {
@@ -2319,7 +2430,7 @@
                           "$type": "RPG.GameCore.DefineDynamicValue",
                           "TargetType": {
                             "$type": "RPG.GameCore.TargetAlias",
-                            "Alias": "Caster"
+                            "Alias": "ModifierOwnerEntity"
                           },
                           "DynamicKey": "Action_Flag",
                           "ResetValue": {
@@ -2375,7 +2486,7 @@
                           "AddValue": {
                             "IsDynamic": false,
                             "FixedValue": {
-                              "Value": -1
+                              "Value": 1
                             }
                           },
                           "Min": {
@@ -2387,139 +2498,147 @@
                           "Max": {
                             "IsDynamic": true,
                             "PostfixExpr": {
-                              "OpCodes": "AQAJ",
+                              "OpCodes": "AQAK",
                               "FixedValues": [],
                               "DynamicHashes": [
-                                -1984939615
+                                -1699655567
                               ]
                             }
                           },
                           "ContextScope": "TargetEntity"
                         },
                         {
-                          "$type": "RPG.GameCore.ShowUIPage",
-                          "AssetPath": "UI/Common/Widget/BattleSelfStatusHint.prefab",
-                          "UITextNodes": [
-                            {
-                              "TextPath": "AreaInfoPanel/Title/Text",
-                              "TextContent": {
-                                "Hash": 1811522500
+                          "$type": "RPG.GameCore.AddModifier",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "ModifierName": "MModifier_Monster_W3_Dinosaur_00_OverHit",
+                          "DynamicValues": {
+                            "MDF_OverHitLayer": {
+                              "IsDynamic": true,
+                              "PostfixExpr": {
+                                "OpCodes": "AQAK",
+                                "FixedValues": [],
+                                "DynamicHashes": [
+                                  764573275
+                                ]
                               }
                             }
-                          ],
-                          "LifeTime": 2
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.AddModifier",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "Caster"
+                          },
+                          "ModifierName": "MModifier_Monster_W3_Dinosaur_00_MonsterEnergyBar",
+                          "DynamicValues": {
+                            "MDF_MaxCount": {
+                              "IsDynamic": true,
+                              "PostfixExpr": {
+                                "OpCodes": "AQAK",
+                                "FixedValues": [],
+                                "DynamicHashes": [
+                                  -1699655567
+                                ]
+                              }
+                            },
+                            "MDF_PhaseFlag": {
+                              "IsDynamic": false,
+                              "FixedValue": {
+                                "Value": 1
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.PredicateTaskList",
+                          "Predicate": {
+                            "$type": "RPG.GameCore.ByAnd",
+                            "PredicateList": [
+                              {
+                                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                                "DynamicKey": "Vibrate_Count",
+                                "ContextScope": "TargetEntity",
+                                "CompareType": "Equal",
+                                "CompareValue": {
+                                  "IsDynamic": true,
+                                  "PostfixExpr": {
+                                    "OpCodes": "AQAK",
+                                    "FixedValues": [],
+                                    "DynamicHashes": [
+                                      -1699655567
+                                    ]
+                                  }
+                                }
+                              },
+                              {
+                                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                                "DynamicKey": "ExlpodeFlag",
+                                "ContextScope": "TargetEntity",
+                                "CompareType": "Equal",
+                                "CompareValue": {
+                                  "IsDynamic": false,
+                                  "FixedValue": {
+                                    "Value": 0
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "SuccessTaskList": [
+                            {
+                              "$type": "RPG.GameCore.DefineDynamicValue",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "Caster"
+                              },
+                              "DynamicKey": "AIFlag",
+                              "ResetValue": {
+                                "IsDynamic": false,
+                                "FixedValue": {
+                                  "Value": 6
+                                }
+                              },
+                              "ContextScope": "TargetEntity"
+                            },
+                            {
+                              "$type": "RPG.GameCore.DefineDynamicValue",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "Caster"
+                              },
+                              "DynamicKey": "ExlpodeFlag",
+                              "ResetValue": {
+                                "IsDynamic": false,
+                                "FixedValue": {
+                                  "Value": 1
+                                }
+                              },
+                              "ContextScope": "TargetEntity"
+                            },
+                            {
+                              "$type": "RPG.GameCore.DefineDynamicValue",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "Caster"
+                              },
+                              "DynamicKey": "Action_Flag",
+                              "ResetValue": {
+                                "IsDynamic": false,
+                                "FixedValue": {
+                                  "Value": 1
+                                }
+                              },
+                              "ContextScope": "TargetEntity"
+                            }
+                          ]
                         }
                       ]
                     }
                   ]
-                },
-                {
-                  "$type": "RPG.GameCore.AddModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
-                  },
-                  "ModifierName": "MModifier_Monster_W3_Dinosaur_00_AttackUpRatio",
-                  "DynamicValues": {
-                    "Modifier_AttackUp_AttackUpLayer": {
-                      "IsDynamic": true,
-                      "PostfixExpr": {
-                        "OpCodes": "AQAJ",
-                        "FixedValues": [],
-                        "DynamicHashes": [
-                          764573275
-                        ]
-                      }
-                    }
-                  }
-                },
-                {
-                  "$type": "RPG.GameCore.AddModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "Caster"
-                  },
-                  "ModifierName": "MModifier_Monster_W3_Dinosaur_00_MonsterEnergyBar"
-                },
-                {
-                  "$type": "RPG.GameCore.PredicateTaskList",
-                  "Predicate": {
-                    "$type": "RPG.GameCore.ByAnd",
-                    "PredicateList": [
-                      {
-                        "$type": "RPG.GameCore.ByCompareDynamicValue",
-                        "DynamicKey": "Vibrate_Count",
-                        "ContextScope": "TargetEntity",
-                        "CompareType": "Equal",
-                        "CompareValue": {
-                          "IsDynamic": false,
-                          "FixedValue": {
-                            "Value": 0
-                          }
-                        }
-                      },
-                      {
-                        "$type": "RPG.GameCore.ByCompareDynamicValue",
-                        "DynamicKey": "ExlpodeFlag",
-                        "ContextScope": "TargetEntity",
-                        "CompareType": "Equal",
-                        "CompareValue": {
-                          "IsDynamic": false,
-                          "FixedValue": {
-                            "Value": 0
-                          }
-                        }
-                      }
-                    ]
-                  },
-                  "SuccessTaskList": [
-                    {
-                      "$type": "RPG.GameCore.DefineDynamicValue",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "Caster"
-                      },
-                      "DynamicKey": "AIFlag",
-                      "ResetValue": {
-                        "IsDynamic": false,
-                        "FixedValue": {
-                          "Value": 6
-                        }
-                      },
-                      "ContextScope": "TargetEntity"
-                    },
-                    {
-                      "$type": "RPG.GameCore.DefineDynamicValue",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "Caster"
-                      },
-                      "DynamicKey": "ExlpodeFlag",
-                      "ResetValue": {
-                        "IsDynamic": false,
-                        "FixedValue": {
-                          "Value": 1
-                        }
-                      },
-                      "ContextScope": "TargetEntity"
-                    },
-                    {
-                      "$type": "RPG.GameCore.DefineDynamicValue",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "Caster"
-                      },
-                      "DynamicKey": "Action_Flag",
-                      "ResetValue": {
-                        "IsDynamic": false,
-                        "FixedValue": {
-                          "Value": 1
-                        }
-                      },
-                      "ContextScope": "TargetEntity"
-                    }
-                  ],
-                  "FailedTaskList": []
                 }
               ]
             }
@@ -2704,6 +2823,22 @@
               "ContextScope": "TargetEntity"
             },
             {
+              "$type": "RPG.GameCore.RemoveModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "ModifierName": "MModifier_Monster_W3_Dinosaur_00_AttackUpRatio"
+            },
+            {
+              "$type": "RPG.GameCore.RemoveModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "ModifierName": "MModifier_Monster_W3_Dinosaur_00_OverHit"
+            },
+            {
               "$type": "RPG.GameCore.TriggerEnergyBarEffect"
             },
             {
@@ -2745,7 +2880,25 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "Caster"
               },
-              "ModifierName": "MModifier_Monster_W3_Dinosaur_00_MonsterEnergyBar"
+              "ModifierName": "MModifier_Monster_W3_Dinosaur_00_MonsterEnergyBar",
+              "DynamicValues": {
+                "MDF_MaxCount": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAK",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      -1984939615
+                    ]
+                  }
+                },
+                "MDF_PhaseFlag": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 0
+                  }
+                }
+              }
             },
             {
               "$type": "RPG.GameCore.DefineDynamicValue",

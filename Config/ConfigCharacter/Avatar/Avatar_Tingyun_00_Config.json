@@ -14,7 +14,8 @@
   "AnimEventConfigList": [
     "Config/ConfigAnimEvents/Avatar/Designer/Avatar_Tingyun_00_Designer_AnimEvent.json",
     "Config/ConfigAnimEvents/Avatar/Effect/Avatar_Tingyun_00_Effect_AnimEvent.json",
-    "Config/ConfigAnimEvents/Avatar/Audio/Avatar_Tingyun_00_Audio_AnimEvent.json"
+    "Config/ConfigAnimEvents/Avatar/Audio/Avatar_Tingyun_00_Audio_AnimEvent.json",
+    "Config/ConfigAnimEvents/Avatar/Audio/Avatar_Common_ControllerVibration_AnimEvent.json"
   ],
   "SkillList": [
     {
@@ -70,8 +71,30 @@
       },
       "FormationType": "LightTeamSelectTarget",
       "EntryAbility": "Avatar_TingYun_Skill01_Phase01",
+      "ComplexSkillAIPreCheck": {
+        "Groups": [
+          {
+            "GroupName": "DefaultNormalSkill_PreCheck"
+          },
+          {
+            "GroupName": "BaseWeight",
+            "Weight": {
+              "Value": 0.3000000002793968
+            }
+          },
+          {
+            "GroupName": "BasePp_Common_SingleAttack",
+            "Weight": {
+              "Value": 0.7000000006519258
+            }
+          }
+        ]
+      },
       "ComplexSkillAI": {
         "Groups": [
+          {
+            "GroupName": "DefaultNormalSkill"
+          },
           {
             "GroupName": "BaseWeight",
             "Weight": {
@@ -92,7 +115,7 @@
       "SkillType": "Skill",
       "UseType": "SelectEntity",
       "AlwaysDoAutoLock": true,
-      "LockType": "HighDPT",
+      "LockType": "HighWEDO_DamageCarry",
       "TargetInfo": {
         "TargetType": "FriendSelect"
       },
@@ -122,8 +145,36 @@
       "FormationType": "LightTeamNormal",
       "TeamFormationConfigTemplateName": "LowSpacing",
       "EntryAbility": "Avatar_TingYun_Skill02_Phase01",
+      "ComplexSkillAIPreCheck": {
+        "Groups": [
+          {
+            "GroupName": "DefaultBPSkill_PreCheck"
+          },
+          {
+            "GroupName": "AddNP_Common_BPSkill",
+            "Weight": {
+              "Value": 0.10000000009313226
+            }
+          },
+          {
+            "GroupName": "Base_Tingyun_CompareDPT",
+            "Weight": {
+              "Value": 0.9000000008381903
+            }
+          },
+          {
+            "GroupName": "Add10_TingYun_BuffBPSkill",
+            "Weight": {
+              "Value": 0.010000000009313226
+            }
+          }
+        ]
+      },
       "ComplexSkillAI": {
         "Groups": [
+          {
+            "GroupName": "DefaultBPSkill"
+          },
           {
             "GroupName": "AddNP_Common_BPSkill",
             "Weight": {
@@ -166,6 +217,9 @@
         },
         "Groups": [
           {
+            "GroupName": "DefaultUltra"
+          },
+          {
             "GroupName": "Ultra_Tingyun_RemoveFullSP"
           },
           {
@@ -176,9 +230,13 @@
           },
           {
             "GroupName": "Base_Common_BaseTypeFactor"
+          },
+          {
+            "GroupName": "Ultra_Tingyun_CheckDamageCarry"
           }
         ]
-      }
+      },
+      "AIUltraSkillPriority": "AddSP"
     },
     {
       "Name": "SkillP01",
@@ -372,5 +430,10 @@
   ],
   "DisableAnimEventLayers": [
     "Riboon Layer"
-  ]
+  ],
+  "AITagList": {
+    "Values": {
+      "-2136914891": {}
+    }
+  }
 }

@@ -6,10 +6,12 @@
         {
           "$type": "RPG.GameCore.CollectDataConditions",
           "TaskIDList": [
+            801520201,
             201072010
           ],
           "MainMissionIDList": [],
           "PerformanceIDList": [],
+          "PerformanceIDDsList": [],
           "CustomValueMainMissionIDList": []
         }
       ]
@@ -79,36 +81,90 @@
               },
               "SuccessTaskList": [
                 {
-                  "$type": "RPG.GameCore.TriggerPerformance",
-                  "ValueSource": {},
-                  "PerformanceType": "D",
-                  "PerformanceID": 201073001
-                },
-                {
-                  "$type": "RPG.GameCore.FinishPerformanceMission",
-                  "Key": "Mission_201073001"
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareSubMissionState",
+                    "SubMissionID": 801520201,
+                    "SubMissionState": "Finish"
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.TriggerPerformance",
+                      "ValueSource": {},
+                      "PerformanceType": "E",
+                      "PerformanceID": 801520203
+                    },
+                    {
+                      "$type": "RPG.GameCore.FinishPerformanceMission",
+                      "Key": "Mission_201073001"
+                    }
+                  ],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.TriggerPerformance",
+                      "ValueSource": {},
+                      "PerformanceType": "D",
+                      "PerformanceID": 201073001
+                    },
+                    {
+                      "$type": "RPG.GameCore.FinishPerformanceMission",
+                      "Key": "Mission_201073001"
+                    }
+                  ]
                 }
               ],
               "FailedTaskList": [
                 {
-                  "$type": "RPG.GameCore.WaitCustomString",
-                  "CustomString": {
-                    "Value": "Performance_201073001"
-                  }
-                },
-                {
-                  "$type": "RPG.GameCore.WaitSecond",
-                  "WaitTime": 0.5
-                },
-                {
-                  "$type": "RPG.GameCore.TriggerPerformance",
-                  "ValueSource": {},
-                  "PerformanceType": "D",
-                  "PerformanceID": 201073001
-                },
-                {
-                  "$type": "RPG.GameCore.FinishPerformanceMission",
-                  "Key": "Mission_201073001"
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareSubMissionState",
+                    "SubMissionID": 801520201,
+                    "SubMissionState": "Finish"
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.WaitCustomString",
+                      "CustomString": {
+                        "Value": "Performance_201073001"
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.WaitSecond",
+                      "WaitTime": 0.5
+                    },
+                    {
+                      "$type": "RPG.GameCore.TriggerPerformance",
+                      "ValueSource": {},
+                      "PerformanceType": "E",
+                      "PerformanceID": 801520203
+                    },
+                    {
+                      "$type": "RPG.GameCore.FinishPerformanceMission",
+                      "Key": "Mission_201073001"
+                    }
+                  ],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.WaitCustomString",
+                      "CustomString": {
+                        "Value": "Performance_201073001"
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.WaitSecond",
+                      "WaitTime": 0.5
+                    },
+                    {
+                      "$type": "RPG.GameCore.TriggerPerformance",
+                      "ValueSource": {},
+                      "PerformanceType": "D",
+                      "PerformanceID": 201073001
+                    },
+                    {
+                      "$type": "RPG.GameCore.FinishPerformanceMission",
+                      "Key": "Mission_201073001"
+                    }
+                  ]
                 }
               ]
             }

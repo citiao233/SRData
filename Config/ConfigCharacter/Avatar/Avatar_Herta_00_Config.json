@@ -14,7 +14,8 @@
   "AnimEventConfigList": [
     "Config/ConfigAnimEvents/Avatar/Designer/Avatar_Herta_00_Designer_AnimEvent.json",
     "Config/ConfigAnimEvents/Avatar/Effect/Avatar_Herta_00_Effect_AnimEvent.json",
-    "Config/ConfigAnimEvents/Avatar/Audio/Avatar_Herta_00_Audio_AnimEvent.json"
+    "Config/ConfigAnimEvents/Avatar/Audio/Avatar_Herta_00_Audio_AnimEvent.json",
+    "Config/ConfigAnimEvents/Avatar/Audio/Avatar_Common_ControllerVibration_AnimEvent.json"
   ],
   "SkillList": [
     {
@@ -72,8 +73,21 @@
         }
       },
       "EntryAbility": "Avatar_Herta_Skill01_Phase01",
+      "ComplexSkillAIPreCheck": {
+        "Groups": [
+          {
+            "GroupName": "DefaultNormalSkill_PreCheck"
+          },
+          {
+            "GroupName": "BasePp_Common_SingleAttack"
+          }
+        ]
+      },
       "ComplexSkillAI": {
         "Groups": [
+          {
+            "GroupName": "DefaultNormalSkill"
+          },
           {
             "GroupName": "BasePp_Common_SingleAttack"
           }
@@ -114,8 +128,30 @@
         }
       },
       "EntryAbility": "Avatar_Herta_Skill02_Phase01",
+      "ComplexSkillAIPreCheck": {
+        "Groups": [
+          {
+            "GroupName": "DefaultBPSkill_PreCheck"
+          },
+          {
+            "GroupName": "BaseWeight",
+            "Weight": {
+              "Value": 0.7000000006519258
+            }
+          },
+          {
+            "GroupName": "AddNP_Common_BPSkill",
+            "Weight": {
+              "Value": 0.20000000018626451
+            }
+          }
+        ]
+      },
       "ComplexSkillAI": {
         "Groups": [
+          {
+            "GroupName": "DefaultBPSkill"
+          },
           {
             "GroupName": "BaseWeight",
             "Weight": {
@@ -144,14 +180,18 @@
       "PrepareAbility": "Avatar_Herta_00_Skill03_EnterReady",
       "ComplexSkillAI": {
         "SkillBasicPower": {
-          "Value": 70
+          "Value": 80
         },
         "Groups": [
+          {
+            "GroupName": "DefaultUltra"
+          },
           {
             "GroupName": "Ultra_Common_ImmediateRelease"
           }
         ]
-      }
+      },
+      "AIUltraSkillPriority": "DamageBeforeHeal"
     },
     {
       "Name": "SkillP01",
@@ -370,5 +410,11 @@
   ],
   "DisableAnimEventLayers": [
     "Riboon Layer"
-  ]
+  ],
+  "AITagList": {
+    "Values": {
+      "762466": {},
+      "-1570322415": {}
+    }
+  }
 }

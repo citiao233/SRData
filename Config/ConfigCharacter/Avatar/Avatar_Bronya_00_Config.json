@@ -14,7 +14,8 @@
   "AnimEventConfigList": [
     "Config/ConfigAnimEvents/Avatar/Designer/Avatar_Bronya_00_Designer_AnimEvent.json",
     "Config/ConfigAnimEvents/Avatar/Effect/Avatar_Bronya_00_Effect_AnimEvent.json",
-    "Config/ConfigAnimEvents/Avatar/Audio/Avatar_Bronya_00_Audio_AnimEvent.json"
+    "Config/ConfigAnimEvents/Avatar/Audio/Avatar_Bronya_00_Audio_AnimEvent.json",
+    "Config/ConfigAnimEvents/Avatar/Audio/Avatar_Common_ControllerVibration_AnimEvent.json"
   ],
   "SkillList": [
     {
@@ -73,8 +74,36 @@
       },
       "FormationType": "LightTeamSelectTarget",
       "EntryAbility": "Bronya_00_Skill01_Phase01",
+      "ComplexSkillAIPreCheck": {
+        "Groups": [
+          {
+            "GroupName": "DefaultNormalSkill_PreCheck"
+          },
+          {
+            "GroupName": "BaseWeight",
+            "Weight": {
+              "Value": 0.40000000037252903
+            }
+          },
+          {
+            "GroupName": "BasePp_Common_SingleAttack",
+            "Weight": {
+              "Value": 0.20000000018626451
+            }
+          },
+          {
+            "GroupName": "BasePp_Common_WeakBreak",
+            "Weight": {
+              "Value": 0.40000000037252903
+            }
+          }
+        ]
+      },
       "ComplexSkillAI": {
         "Groups": [
+          {
+            "GroupName": "DefaultNormalSkill"
+          },
           {
             "GroupName": "BaseWeight",
             "Weight": {
@@ -101,7 +130,7 @@
       "SkillType": "Skill",
       "UseType": "SelectEntity",
       "AlwaysDoAutoLock": true,
-      "LockType": "HighED",
+      "LockType": "HighWEDO_DamageCarry",
       "TargetInfo": {
         "TargetType": "FriendSelect"
       },
@@ -153,10 +182,13 @@
           }
         }
       },
-      "ComplexSkillAI": {
+      "ComplexSkillAIPreCheck": {
         "Groups": [
           {
-            "GroupName": "Base_Bronya_CompareDPT",
+            "GroupName": "DefaultBPSkill_PreCheck"
+          },
+          {
+            "GroupName": "Base_Common_CompareDPTWithDamageCarry",
             "Weight": {
               "Value": 0.8000000007450581
             }
@@ -168,10 +200,17 @@
             }
           },
           {
-            "GroupName": "Add01_Broyan_CompareActionDelay",
-            "Weight": {
-              "Value": 0.010000000009313226
-            }
+            "GroupName": "Mul_Bronya_CheckBPSkill"
+          }
+        ]
+      },
+      "ComplexSkillAI": {
+        "Groups": [
+          {
+            "GroupName": "DefaultBPSkill"
+          },
+          {
+            "GroupName": "Base_Common_CompareDPTWithDamageCarry"
           }
         ]
       }
@@ -193,10 +232,14 @@
         },
         "Groups": [
           {
+            "GroupName": "DefaultUltra"
+          },
+          {
             "GroupName": "Ultra_Common_ImmediateRelease"
           }
         ]
-      }
+      },
+      "AIUltraSkillPriority": "OnlyBuff"
     },
     {
       "Name": "SkillP01",
@@ -411,5 +454,10 @@
   ],
   "DisableAnimEventLayers": [
     "Riboon Layer"
-  ]
+  ],
+  "AITagList": {
+    "Values": {
+      "-2136914891": {}
+    }
+  }
 }

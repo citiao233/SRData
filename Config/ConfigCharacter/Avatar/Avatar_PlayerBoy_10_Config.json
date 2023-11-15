@@ -14,7 +14,8 @@
   "AnimEventConfigList": [
     "Config/ConfigAnimEvents/Avatar/Designer/Avatar_PlayerBoy_10_Designer_AnimEvent.json",
     "Config/ConfigAnimEvents/Avatar/Effect/Avatar_PlayerBoy_10_Effect_AnimEvent.json",
-    "Config/ConfigAnimEvents/Avatar/Audio/Avatar_PlayerBoy_10_Audio_AnimEvent.json"
+    "Config/ConfigAnimEvents/Avatar/Audio/Avatar_PlayerBoy_10_Audio_AnimEvent.json",
+    "Config/ConfigAnimEvents/Avatar/Audio/Avatar_Common_ControllerVibration_AnimEvent.json"
   ],
   "SkillList": [
     {
@@ -73,8 +74,36 @@
       },
       "EntryAbility": "Avatar_PlayerBoy_10_Skill01_Phase01",
       "ParaMapping": [],
+      "ComplexSkillAIPreCheck": {
+        "Groups": [
+          {
+            "GroupName": "DefaultNormalSkill_PreCheck"
+          },
+          {
+            "GroupName": "BaseWeight",
+            "Weight": {
+              "Value": 0.3000000002793968
+            }
+          },
+          {
+            "GroupName": "BasePp_Common_SingleAttack",
+            "Weight": {
+              "Value": 0.40000000037252903
+            }
+          },
+          {
+            "GroupName": "BasePp_Common_WeakBreak",
+            "Weight": {
+              "Value": 0.3000000002793968
+            }
+          }
+        ]
+      },
       "ComplexSkillAI": {
         "Groups": [
+          {
+            "GroupName": "DefaultNormalSkill"
+          },
           {
             "GroupName": "BaseWeight",
             "Weight": {
@@ -178,8 +207,33 @@
       "FormationType": "LightTeamNormal",
       "TeamFormationConfigTemplateName": "LowSpacing",
       "EntryAbility": "Avatar_PlayerBoy_10_Skill02_Phase01",
+      "ComplexSkillAIPreCheck": {
+        "Groups": [
+          {
+            "GroupName": "DefaultBPSkill_PreCheck"
+          },
+          {
+            "GroupName": "BaseWeight",
+            "Weight": {
+              "Value": 0.40000000037252903
+            }
+          },
+          {
+            "GroupName": "AddNP_Common_BPSkill",
+            "Weight": {
+              "Value": 0.3000000002793968
+            }
+          },
+          {
+            "GroupName": "Mul_Player01_BpSkillBuffWeight"
+          }
+        ]
+      },
       "ComplexSkillAI": {
         "Groups": [
+          {
+            "GroupName": "DefaultBPSkill"
+          },
           {
             "GroupName": "BaseWeight",
             "Weight": {
@@ -211,14 +265,18 @@
       "PrepareAbility": "Avatar_PlayerBoy_10_Skill03_EnterReady",
       "ComplexSkillAI": {
         "SkillBasicPower": {
-          "Value": 70
+          "Value": 80
         },
         "Groups": [
+          {
+            "GroupName": "DefaultUltra"
+          },
           {
             "GroupName": "Ultra_Common_ImmediateRelease"
           }
         ]
-      }
+      },
+      "AIUltraSkillPriority": "DamageBeforeHeal"
     },
     {
       "Name": "Skill11",
@@ -277,8 +335,42 @@
       },
       "FormationType": "LightTeamSelectTarget",
       "EntryAbility": "Avatar_PlayerBoy_10_Skill11_Phase01",
+      "ComplexSkillAIPreCheck": {
+        "Groups": [
+          {
+            "GroupName": "DefaultNormalSkill_PreCheck"
+          },
+          {
+            "GroupName": "BaseWeight",
+            "Weight": {
+              "Value": 0.3000000002793968
+            }
+          },
+          {
+            "GroupName": "BasePp_Common_SingleAttack",
+            "Weight": {
+              "Value": 0.10000000009313226
+            }
+          },
+          {
+            "GroupName": "BasePp_Common_WeakBreak",
+            "Weight": {
+              "Value": 0.10000000009313226
+            }
+          },
+          {
+            "GroupName": "Add_Player01_WeaponChargePoint",
+            "Weight": {
+              "Value": 0.5000000004656613
+            }
+          }
+        ]
+      },
       "ComplexSkillAI": {
         "Groups": [
+          {
+            "GroupName": "DefaultNormalSkill"
+          },
           {
             "GroupName": "BaseWeight",
             "Weight": {
@@ -591,5 +683,11 @@
   ],
   "DisableAnimEventLayers": [
     "Riboon Layer"
-  ]
+  ],
+  "AITagList": {
+    "Values": {
+      "-731068780": {},
+      "-833189093": {}
+    }
+  }
 }

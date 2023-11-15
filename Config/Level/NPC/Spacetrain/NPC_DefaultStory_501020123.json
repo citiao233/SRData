@@ -7,12 +7,17 @@
           "$type": "RPG.GameCore.LevelPerformanceInitialize",
           "PerformanceType": "E",
           "CreateCharacterList": [],
+          "CaptureNPCList": [],
           "EntityVisiableList": [],
+          "PropVisiableList": [],
+          "StreamingSourcesInBlackMask": [],
+          "StreamingSourcesAfterBlackMask": [],
           "MarkStreamingItems": [],
           "ResetEnvironment": false
         },
         {
-          "$type": "RPG.GameCore.AdvNpcFaceToPlayer"
+          "$type": "RPG.GameCore.AdvNpcFaceToPlayer",
+          "WaitFinishMode": "WaitAnimFinish"
         },
         {
           "$type": "RPG.GameCore.SetTargetUniqueName",
@@ -68,10 +73,14 @@
           }
         },
         {
-          "$type": "RPG.GameCore.CharacterTriggerAnimGroup",
-          "CharacterUniqueName": "Pam_Unique",
-          "AvatarID": "NPC_Avatar_Maid_Mar_7th_00",
-          "AnimGroupName": "Talk01"
+          "$type": "RPG.GameCore.CharacterTriggerFreeStyleGraph",
+          "TargetAlias": {
+            "$type": "RPG.GameCore.TargetFetchUniqueNameEntity",
+            "UniqueName": "Pam_Unique"
+          },
+          "GraphName": {
+            "Value": "Talk01_StandBy"
+          }
         },
         {
           "$type": "RPG.GameCore.WaitSecond",
@@ -86,6 +95,10 @@
         {
           "$type": "RPG.GameCore.WaitSecond",
           "WaitTime": 2
+        },
+        {
+          "$type": "RPG.GameCore.CharacterStopFreeStyle",
+          "CharacterUniqueName": "Pam_Unique"
         },
         {
           "$type": "RPG.GameCore.CharacterStopAnimGroup",
@@ -105,7 +118,7 @@
           }
         },
         {
-          "$type": "RPG.GameCore.CharacterStopAnimGroup",
+          "$type": "RPG.GameCore.CharacterStopFreeStyle",
           "CharacterUniqueName": "Pam_Unique"
         },
         {

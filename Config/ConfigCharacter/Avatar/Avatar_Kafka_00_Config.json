@@ -14,7 +14,8 @@
   "AnimEventConfigList": [
     "Config/ConfigAnimEvents/Avatar/Designer/Avatar_Kafka_00_Designer_AnimEvent.json",
     "Config/ConfigAnimEvents/Avatar/Effect/Avatar_Kafka_00_Effect_AnimEvent.json",
-    "Config/ConfigAnimEvents/Avatar/Audio/Avatar_Kafka_00_Audio_AnimEvent.json"
+    "Config/ConfigAnimEvents/Avatar/Audio/Avatar_Kafka_00_Audio_AnimEvent.json",
+    "Config/ConfigAnimEvents/Avatar/Audio/Avatar_Common_ControllerVibration_AnimEvent.json"
   ],
   "SkillList": [
     {
@@ -72,8 +73,36 @@
         }
       },
       "EntryAbility": "Avatar_Kafka_00_Skill01_Phase01",
+      "ComplexSkillAIPreCheck": {
+        "Groups": [
+          {
+            "GroupName": "DefaultNormalSkill_PreCheck"
+          },
+          {
+            "GroupName": "BaseWeight",
+            "Weight": {
+              "Value": 0.10000000009313226
+            }
+          },
+          {
+            "GroupName": "BasePp_Common_SingleAttack",
+            "Weight": {
+              "Value": 0.40000000037252903
+            }
+          },
+          {
+            "GroupName": "BasePp_Common_WeakBreak",
+            "Weight": {
+              "Value": 0.5000000004656613
+            }
+          }
+        ]
+      },
       "ComplexSkillAI": {
         "Groups": [
+          {
+            "GroupName": "DefaultNormalSkill"
+          },
           {
             "GroupName": "BaseWeight",
             "Weight": {
@@ -99,6 +128,7 @@
       "Name": "Skill02",
       "SkillType": "Skill",
       "UseType": "SelectEntity",
+      "LockType": "AdjoinDefault",
       "TargetInfo": {
         "TargetType": "EnemySelect",
         "SubTargetType": "TargetAdjoinEntity"
@@ -122,8 +152,48 @@
         }
       },
       "EntryAbility": "Avatar_Kafka_00_Skill02_Phase01",
+      "ComplexSkillAIPreCheck": {
+        "Groups": [
+          {
+            "GroupName": "DefaultBPSkill_PreCheck"
+          },
+          {
+            "GroupName": "BaseWeight",
+            "Weight": {
+              "Value": 0.20000000018626451
+            }
+          },
+          {
+            "GroupName": "BasePp_Common_SingleAttack",
+            "Weight": {
+              "Value": 0.20000000018626451
+            }
+          },
+          {
+            "GroupName": "AddpP_Common_SelfNeighbour",
+            "Weight": {
+              "Value": 0.5000000004656613
+            }
+          },
+          {
+            "GroupName": "AddNP_Common_BPSkill",
+            "Weight": {
+              "Value": 0.10000000009313226
+            }
+          },
+          {
+            "GroupName": "Add01_Common_BuffDOT",
+            "Weight": {
+              "Value": 0.5000000004656613
+            }
+          }
+        ]
+      },
       "ComplexSkillAI": {
         "Groups": [
+          {
+            "GroupName": "DefaultBPSkill"
+          },
           {
             "GroupName": "BaseWeight",
             "Weight": {
@@ -176,10 +246,14 @@
         },
         "Groups": [
           {
+            "GroupName": "DefaultUltra"
+          },
+          {
             "GroupName": "Ultra_Common_ImmediateRelease"
           }
         ]
-      }
+      },
+      "AIUltraSkillPriority": "DamageBeforeHeal"
     },
     {
       "Name": "SkillP01",
@@ -437,7 +511,9 @@
   ],
   "AITagList": {
     "Values": {
-      "1625465549": {}
+      "762466": {},
+      "-447313187": {},
+      "-1570322415": {}
     }
   }
 }

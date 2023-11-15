@@ -14,7 +14,8 @@
   "AnimEventConfigList": [
     "Config/ConfigAnimEvents/Avatar/Designer/Avatar_Luocha_00_Designer_AnimEvent.json",
     "Config/ConfigAnimEvents/Avatar/Effect/Avatar_Luocha_00_Effect_AnimEvent.json",
-    "Config/ConfigAnimEvents/Avatar/Audio/Avatar_Luocha_00_Audio_AnimEvent.json"
+    "Config/ConfigAnimEvents/Avatar/Audio/Avatar_Luocha_00_Audio_AnimEvent.json",
+    "Config/ConfigAnimEvents/Avatar/Audio/Avatar_Common_ControllerVibration_AnimEvent.json"
   ],
   "SkillList": [
     {
@@ -72,8 +73,36 @@
       },
       "FormationType": "LightTeamSelectTarget",
       "EntryAbility": "Avatar_Luocha_00_Skill01_Phase01",
+      "ComplexSkillAIPreCheck": {
+        "Groups": [
+          {
+            "GroupName": "DefaultNormalSkill_PreCheck"
+          },
+          {
+            "GroupName": "BaseWeight",
+            "Weight": {
+              "Value": 0.3000000002793968
+            }
+          },
+          {
+            "GroupName": "BasePp_Common_SingleAttack",
+            "Weight": {
+              "Value": 0.40000000037252903
+            }
+          },
+          {
+            "GroupName": "BasePp_Common_WeakBreak",
+            "Weight": {
+              "Value": 0.3000000002793968
+            }
+          }
+        ]
+      },
       "ComplexSkillAI": {
         "Groups": [
+          {
+            "GroupName": "DefaultNormalSkill"
+          },
           {
             "GroupName": "BaseWeight",
             "Weight": {
@@ -130,8 +159,21 @@
       "FormationType": "LightTeamNormal",
       "TeamFormationConfigTemplateName": "LowSpacing",
       "EntryAbility": "Avatar_Luocha_00_Skill02_Phase01",
+      "ComplexSkillAIPreCheck": {
+        "Groups": [
+          {
+            "GroupName": "DefaultBPSkill_PreCheck"
+          },
+          {
+            "GroupName": "Base_Natasha_SingleHeal"
+          }
+        ]
+      },
       "ComplexSkillAI": {
         "Groups": [
+          {
+            "GroupName": "DefaultBPSkill"
+          },
           {
             "GroupName": "Base_Natasha_SingleHeal"
           }
@@ -157,10 +199,14 @@
         },
         "Groups": [
           {
+            "GroupName": "DefaultUltra"
+          },
+          {
             "GroupName": "Ultra_Common_ImmediateRelease"
           }
         ]
-      }
+      },
+      "AIUltraSkillPriority": "DamageAndBuff"
     },
     {
       "Name": "SkillP01",
@@ -404,5 +450,10 @@
   ],
   "DisableAnimEventLayers": [
     "Riboon Layer"
-  ]
+  ],
+  "AITagList": {
+    "Values": {
+      "-833189093": {}
+    }
+  }
 }

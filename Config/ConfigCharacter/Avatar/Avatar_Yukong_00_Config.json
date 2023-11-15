@@ -14,7 +14,8 @@
   "AnimEventConfigList": [
     "Config/ConfigAnimEvents/Avatar/Designer/Avatar_Yukong_00_Designer_AnimEvent.json",
     "Config/ConfigAnimEvents/Avatar/Effect/Avatar_Yukong_00_Effect_AnimEvent.json",
-    "Config/ConfigAnimEvents/Avatar/Audio/Avatar_Yukong_00_Audio_AnimEvent.json"
+    "Config/ConfigAnimEvents/Avatar/Audio/Avatar_Yukong_00_Audio_AnimEvent.json",
+    "Config/ConfigAnimEvents/Avatar/Audio/Avatar_Common_ControllerVibration_AnimEvent.json"
   ],
   "SkillList": [
     {
@@ -77,8 +78,36 @@
         "PreCalcAbility": "Avatar_Yukong_00_Skill01_StanceDamageUP",
         "ResultDynamicKey": "Skill01_StanceDamage"
       },
+      "ComplexSkillAIPreCheck": {
+        "Groups": [
+          {
+            "GroupName": "DefaultNormalSkill_PreCheck"
+          },
+          {
+            "GroupName": "BaseWeight",
+            "Weight": {
+              "Value": 0.3000000002793968
+            }
+          },
+          {
+            "GroupName": "BasePp_Common_SingleAttack",
+            "Weight": {
+              "Value": 0.40000000037252903
+            }
+          },
+          {
+            "GroupName": "BasePp_Common_WeakBreak",
+            "Weight": {
+              "Value": 0.3000000002793968
+            }
+          }
+        ]
+      },
       "ComplexSkillAI": {
         "Groups": [
+          {
+            "GroupName": "DefaultNormalSkill"
+          },
           {
             "GroupName": "BaseWeight",
             "Weight": {
@@ -133,8 +162,30 @@
       "FormationType": "LightTeamNormal",
       "TeamFormationConfigTemplateName": "LowSpacing",
       "EntryAbility": "Avatar_Yukong_00_Skill02_Phase01",
+      "ComplexSkillAIPreCheck": {
+        "Groups": [
+          {
+            "GroupName": "DefaultBPSkill_PreCheck"
+          },
+          {
+            "GroupName": "AddNP_Common_BPSkill",
+            "Weight": {
+              "Value": 0.25000000023283064
+            }
+          },
+          {
+            "GroupName": "Add01_Yukong_FlowerCheck",
+            "Weight": {
+              "Value": 0.7500000006984919
+            }
+          }
+        ]
+      },
       "ComplexSkillAI": {
         "Groups": [
+          {
+            "GroupName": "DefaultBPSkill"
+          },
           {
             "GroupName": "AddNP_Common_BPSkill",
             "Weight": {
@@ -167,13 +218,17 @@
         },
         "Groups": [
           {
+            "GroupName": "DefaultUltra"
+          },
+          {
             "GroupName": "Ultra_Common_ImmediateRelease"
           },
           {
             "GroupName": "Ultra_Common_SingleAttack"
           }
         ]
-      }
+      },
+      "AIUltraSkillPriority": "DamageAndBuff"
     },
     {
       "Name": "SkillP01",
@@ -378,5 +433,10 @@
   ],
   "DisableAnimEventLayers": [
     "Riboon Layer"
-  ]
+  ],
+  "AITagList": {
+    "Values": {
+      "-2136914891": {}
+    }
+  }
 }

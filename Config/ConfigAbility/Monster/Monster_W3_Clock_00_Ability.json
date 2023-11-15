@@ -1,6 +1,22 @@
 {
   "AbilityList": [
     {
+      "Modifiers": {
+        "MMonster_W3_Clock_00_WatchHandController": {
+          "_CallbackList": [
+            {
+              "Event": "OnBeingBreak",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.AnimSetParameter",
+                  "ParameterName": "TriggerWatchHandBreak",
+                  "ParameterType": "Trigger"
+                }
+              ]
+            }
+          ]
+        }
+      },
       "Name": "Monster_W3_Clock_00_PassiveSkillInitiate",
       "TargetInfo": {
         "TargetType": "Caster"
@@ -12,7 +28,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "ModifierName": "MMonster_W3_Clock_00_CountingDown_Controller"
+          "ModifierName": "MMonster_W3_Clock_00_RemoveOneMore"
         },
         {
           "$type": "RPG.GameCore.AddModifier",
@@ -20,7 +36,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "ModifierName": "MMonster_W3_Clock_00_RemoveOneMore"
+          "ModifierName": "MMonster_W3_Clock_00_WatchHandController"
         }
       ]
     },
@@ -49,18 +65,16 @@
           "IsSkillPerform": true
         },
         {
+          "$type": "RPG.GameCore.LookAt",
+          "TargetType": "TeamFormation"
+        },
+        {
           "$type": "RPG.GameCore.TriggerAnimState",
           "AnimStateName": "Skill01",
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
               "Value": 1
-            }
-          },
-          "NormalizedTransitionDuration": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0.1500000001396984
             }
           }
         },
@@ -77,12 +91,9 @@
       },
       "OnStart": [
         {
-          "$type": "RPG.GameCore.AddModifier",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "ModifierName": "MMonster_W3_Clock_00_CountingDown_Controller"
+          "$type": "RPG.GameCore.AnimSetParameter",
+          "ParameterName": "TriggerWatchHandSkill01",
+          "ParameterType": "Trigger"
         },
         {
           "$type": "RPG.GameCore.WaitAnimState",
@@ -112,26 +123,6 @@
             "IsDynamic": false,
             "FixedValue": {
               "Value": 0.6240000003017485
-            }
-          }
-        },
-        {
-          "$type": "RPG.GameCore.AddModifier",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "ModifierName": "MMonster_W3_Clock_00_Clock_Accumulate",
-          "MaxLayer": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 3
-            }
-          },
-          "LayerAddWhenStack": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 3
             }
           }
         },
@@ -201,6 +192,11 @@
       },
       "OnStart": [
         {
+          "$type": "RPG.GameCore.AnimSetParameter",
+          "ParameterName": "TriggerWatchHandSkill02",
+          "ParameterType": "Trigger"
+        },
+        {
           "$type": "RPG.GameCore.WaitAnimState",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
@@ -227,29 +223,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.3040000000037253
-            }
-          }
-        },
-        {
-          "$type": "RPG.GameCore.RemoveModifier",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "ModifierName": "MMonster_W3_Clock_00_Clock_Accumulate"
-        },
-        {
-          "$type": "RPG.GameCore.WaitAnimState",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "AnimStateName": "Skill02",
-          "NormalizedTimeEnd": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0.5000000004656613
+              "Value": 0.26000000024214387
             }
           }
         },
@@ -259,29 +233,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "AllTeammate"
           },
-          "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Buff_Common_AttackUp.prefab"
-        },
-        {
-          "$type": "RPG.GameCore.RemoveModifier",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "ModifierName": "MMonster_W3_Clock_00_CountingDown_Controller"
-        },
-        {
-          "$type": "RPG.GameCore.WaitAnimState",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "AnimStateName": "Skill02",
-          "NormalizedTimeEnd": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0.7000000006519258
-            }
-          }
+          "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Monster_Common_Immediate.prefab"
         },
         {
           "$type": "RPG.GameCore.SetActionDelay",
@@ -348,12 +300,6 @@
               "Value": 1
             }
           },
-          "NormalizedTransitionDuration": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0.1500000001396984
-            }
-          },
           "NormalizedTimeWait": {
             "IsDynamic": false,
             "FixedValue": {
@@ -370,19 +316,19 @@
               "OffsetTargetDistance": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 1.2500000002328306
+                  "Value": 3.3000000002793968
                 }
               },
               "NormalizedTimeStart": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.44400000013411045
+                  "Value": 0.1659999997355044
                 }
               },
               "NormalizedTimeEnd": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.4589999997988343
+                  "Value": 0.2249999998603016
                 }
               }
             },
@@ -401,13 +347,13 @@
               "NormalizedTimeStart": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.6720000004861504
+                  "Value": 0.5510000004433095
                 }
               },
               "NormalizedTimeEnd": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.8170000002719462
+                  "Value": 0.6750000002793968
                 }
               }
             }
@@ -460,7 +406,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.34599999990314245
+              "Value": 0.30300000007264316
             }
           }
         },
@@ -474,7 +420,7 @@
             "DamagePercentage": {
               "IsDynamic": true,
               "PostfixExpr": {
-                "OpCodes": "AQAJ",
+                "OpCodes": "AQAK",
                 "FixedValues": [],
                 "DynamicHashes": [
                   -56289053
@@ -487,8 +433,7 @@
                 "Value": 1
               }
             },
-            "HitAnimation": "Hit",
-            "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W1_Mecha01_00/Eff_Monster_W1_Mecha01_00_Skill01_Attack.prefab",
+            "HitAnimation": "Hit_H",
             "HitTimeSlowType": "Impact",
             "HitTimeSlowIntensity": "Middle",
             "HitPosHeight": 1
@@ -752,47 +697,6 @@
     },
     "MMonster_W3_Clock_00_Clock_Accumulate_Display1": {},
     "MMonster_W3_Clock_00_Clock_Accumulate_Display2": {},
-    "MMonster_W3_Clock_00_Clock_Accumulate_Display3": {},
-    "MMonster_W3_Clock_00_PowerUp": {
-      "_CallbackList": [
-        {
-          "Event": "OnStack",
-          "CallbackConfig": [
-            {
-              "$type": "RPG.GameCore.TriggerEffect",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Buff_Common_AttackUp.prefab"
-            },
-            {
-              "$type": "RPG.GameCore.StackProperty",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "Property": "AllDamageTypeAddedRatio",
-              "PropertyValue": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQAJ",
-                  "FixedValues": [],
-                  "DynamicHashes": [
-                    -831871865
-                  ]
-                }
-              }
-            }
-          ]
-        }
-      ],
-      "Stacking": "ReplaceByCaster",
-      "DynamicValues": {
-        "Values": {
-          "-831871865": {}
-        }
-      }
-    }
+    "MMonster_W3_Clock_00_Clock_Accumulate_Display3": {}
   }
 }

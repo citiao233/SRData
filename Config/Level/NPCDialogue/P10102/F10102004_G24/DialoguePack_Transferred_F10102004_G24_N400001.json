@@ -6,38 +6,19 @@
         {
           "$type": "RPG.GameCore.CollectDataConditions",
           "TaskIDList": [
-            201070102,
-            201072012,
-            201072001,
-            201072005,
-            201072007,
-            201072009,
-            201072011,
-            201073502,
             201072010,
             201073001,
+            801520201,
             201073402
           ],
-          "PerformanceIDList": []
+          "MainMissionIDList": [],
+          "PerformanceIDList": [],
+          "PerformanceIDDsList": [],
+          "CustomValueMainMissionIDList": []
         },
         {
           "$type": "RPG.GameCore.SwitchCase",
           "TaskList": [
-            {
-              "Predicate": {
-                "$type": "RPG.GameCore.ByCompareSubMissionState",
-                "SubMissionID": 201073502,
-                "SubMissionState": "Finish"
-              },
-              "SuccessTaskList": [
-                {
-                  "$type": "RPG.GameCore.TriggerPerformance",
-                  "ValueSource": {},
-                  "PerformanceType": "D",
-                  "PerformanceID": 201073502
-                }
-              ]
-            },
             {
               "Predicate": {
                 "$type": "RPG.GameCore.ByAnd",
@@ -56,6 +37,12 @@
                   {
                     "$type": "RPG.GameCore.ByCompareSubMissionState",
                     "SubMissionID": 201073001,
+                    "SubMissionState": "Finish",
+                    "Inverse": true
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByCompareSubMissionState",
+                    "SubMissionID": 801520201,
                     "SubMissionState": "Finish",
                     "Inverse": true
                   }
@@ -107,7 +94,14 @@
               ]
             }
           ],
-          "DefaultTask": []
+          "DefaultTask": [
+            {
+              "$type": "RPG.GameCore.TriggerPerformance",
+              "ValueSource": {},
+              "PerformanceType": "E",
+              "PerformanceID": 801520201
+            }
+          ]
         }
       ]
     }
