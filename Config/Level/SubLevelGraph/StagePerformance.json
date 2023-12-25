@@ -155,7 +155,12 @@
             },
             {
               "$type": "RPG.GameCore.WaitSecond",
-              "WaitTime": 1.5
+              "WaitTime": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1.5000000004656613
+                }
+              }
             }
           ]
         },
@@ -367,7 +372,12 @@
             },
             {
               "$type": "RPG.GameCore.WaitSecond",
-              "WaitTime": 1.5
+              "WaitTime": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1.5000000004656613
+                }
+              }
             }
           ],
           "CreateTiming": "DelayCreate"
@@ -419,6 +429,77 @@
             },
             "CloseupShotConfig": {
               "Exit": true
+            },
+            "BlendConfig": {
+              "BlendType": "Cut"
+            },
+            "ShowEntityConfig": {
+              "ShowTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllDarkTeam"
+              }
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamDark",
+          "FormationType": "DarkTeamNormal"
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamRootOffset",
+          "Team": "TeamLight",
+          "Reset": true
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamLight",
+          "FormationType": "LightTeamNormal"
+        }
+      ]
+    },
+    {
+      "IsLoop": true,
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitCustomString",
+          "CustomString": {
+            "Value": "Stage_ShowDefaultCameraWhenAllEnemyDeadButWaveContinue"
+          },
+          "GoNextImmediately": true
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamDark",
+          "FormationType": "DarkTeamNormal",
+          "CustomFormationIgnoreDying": false
+        },
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "NormalConfig": {
+              "CameraState": "CasterToTargetPerform",
+              "AnchorTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "IsLocalOffset": true,
+              "AnchorOffset": {
+                "X": 1,
+                "Y": 1.4,
+                "Z": -3
+              },
+              "AnchorRatio": 0.1,
+              "AimTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "DarkTeamCenter"
+              },
+              "AimOffset": {
+                "X": 0,
+                "Y": 1,
+                "Z": -1
+              },
+              "AimRatio": 1
             },
             "BlendConfig": {
               "BlendType": "Cut"
@@ -562,18 +643,19 @@
             {
               "$type": "RPG.GameCore.PredicateTaskList",
               "Predicate": {
-                "$type": "RPG.GameCore.ByCompareHPRatio",
+                "$type": "RPG.GameCore.ByCompareHP",
                 "TargetType": {
                   "$type": "RPG.GameCore.TargetAlias",
                   "Alias": "BattleDataViewUISelectEnter"
                 },
-                "CompareType": "LessEqual",
+                "CompareType": "Greater",
                 "CompareValue": {
                   "IsDynamic": false,
                   "FixedValue": {
                     "Value": 0
                   }
-                }
+                },
+                "Inverse": true
               },
               "SuccessTaskList": [
                 {
@@ -675,6 +757,22 @@
               "$type": "RPG.GameCore.SetSimulationSpeedEnable"
             },
             {
+              "$type": "RPG.GameCore.MuteTargetTimeSlow",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetConcat",
+                "Targets": [
+                  {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllLightTeam"
+                  },
+                  {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllDarkTeam"
+                  }
+                ]
+              }
+            },
+            {
               "$type": "RPG.GameCore.SyncCharLightAndCameraDir"
             },
             {
@@ -731,18 +829,19 @@
             {
               "$type": "RPG.GameCore.PredicateTaskList",
               "Predicate": {
-                "$type": "RPG.GameCore.ByCompareHPRatio",
+                "$type": "RPG.GameCore.ByCompareHP",
                 "TargetType": {
                   "$type": "RPG.GameCore.TargetAlias",
                   "Alias": "BattleDataViewUISelectEnter"
                 },
-                "CompareType": "LessEqual",
+                "CompareType": "Greater",
                 "CompareValue": {
                   "IsDynamic": false,
                   "FixedValue": {
                     "Value": 0
                   }
-                }
+                },
+                "Inverse": true
               },
               "SuccessTaskList": [
                 {
@@ -847,7 +946,12 @@
             },
             {
               "$type": "RPG.GameCore.WaitSecond",
-              "WaitTime": 0.3
+              "WaitTime": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0.3000000002793968
+                }
+              }
             },
             {
               "$type": "RPG.GameCore.TriggerUINotify",
@@ -878,7 +982,12 @@
         },
         {
           "$type": "RPG.GameCore.WaitSecond",
-          "WaitTime": 0.25
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.25000000023283064
+            }
+          }
         },
         {
           "$type": "RPG.GameCore.SyncCharLightAndCameraDir",
@@ -894,6 +1003,23 @@
         {
           "$type": "RPG.GameCore.TriggerUINotify",
           "NotifyTypeName": "BattleDataViewUILeaveDone"
+        },
+        {
+          "$type": "RPG.GameCore.MuteTargetTimeSlow",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetConcat",
+            "Targets": [
+              {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              },
+              {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllDarkTeam"
+              }
+            ]
+          },
+          "IsMute": false
         },
         {
           "$type": "RPG.GameCore.SetSimulationSpeedEnable",

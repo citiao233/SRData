@@ -12,17 +12,30 @@
               "CallbackConfig": []
             },
             {
-              "Event": "OnActionEnd",
+              "Event": "OnListenTurnEnd",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
                   "Predicate": {
-                    "$type": "RPG.GameCore.ByIsContainModifier",
-                    "TargetType": {
-                      "$type": "RPG.GameCore.TargetAlias",
-                      "Alias": "ModifierOwnerEntity"
-                    },
-                    "ModifierName": "MMonster_W2_Argenti_00_Power",
+                    "$type": "RPG.GameCore.ByAny",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByIsContainModifier",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "Caster"
+                        },
+                        "ModifierName": "MMonster_W2_Argenti_00_Power"
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByIsContainModifier",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "Caster"
+                        },
+                        "ModifierName": "MMonster_W2_Argenti_00_Power_RL"
+                      }
+                    ],
                     "Inverse": true
                   },
                   "SuccessTaskList": [
@@ -52,12 +65,25 @@
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
                   "Predicate": {
-                    "$type": "RPG.GameCore.ByIsContainModifier",
-                    "TargetType": {
-                      "$type": "RPG.GameCore.TargetAlias",
-                      "Alias": "Caster"
-                    },
-                    "ModifierName": "MMonster_W2_Argenti_00_Power"
+                    "$type": "RPG.GameCore.ByAny",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByIsContainModifier",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "Caster"
+                        },
+                        "ModifierName": "MMonster_W2_Argenti_00_Power"
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByIsContainModifier",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "Caster"
+                        },
+                        "ModifierName": "MMonster_W2_Argenti_00_Power_RL"
+                      }
+                    ]
                   },
                   "SuccessTaskList": [
                     {
@@ -85,7 +111,8 @@
                       "$type": "RPG.GameCore.TargetAlias",
                       "Alias": "ParamEntity"
                     },
-                    "Team": "TeamDark"
+                    "Team": "TeamLight",
+                    "Inverse": true
                   },
                   "SuccessTaskList": [
                     {
@@ -123,9 +150,48 @@
                   },
                   "AbilityTarget": {
                     "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
+                    "Alias": "ParamEntityActualOwner"
                   },
+                  "AbortBehaviorFlags": [
+                    "CustomEvent_MonsterChangePhase"
+                  ],
                   "InsertAbilityPriority": "MonsterDeathRattle",
+                  "InsertConditionPriority": {
+                    "OverridePriority": "MonsterForceKill",
+                    "Predicate": {
+                      "$type": "RPG.GameCore.ByCompareAbilityProperty",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetSequence",
+                        "Sequence": [
+                          {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "AllTeamMember"
+                          },
+                          {
+                            "$type": "RPG.GameCore.TargetFilter",
+                            "Predicate": {
+                              "$type": "RPG.GameCore.ByCheckCustomValueBool",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "ParamEntity"
+                              },
+                              "Key": {
+                                "Hash": 1955914817
+                              }
+                            }
+                          }
+                        ]
+                      },
+                      "Property": "CurrentHP",
+                      "CompareType": "LessEqual",
+                      "CompareValue": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 0
+                        }
+                      }
+                    }
+                  },
                   "OwnerAliveState": "Mask_AliveOrLimbo",
                   "TargetAliveState": "Mask_AliveOrLimbo",
                   "ShowInActionBar": true
@@ -138,8 +204,17 @@
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
                   "Predicate": {
-                    "$type": "RPG.GameCore.ByCheckModifierCallBackName",
-                    "ModifierName": "MMonster_W2_Argenti_00_Power"
+                    "$type": "RPG.GameCore.ByAny",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByCheckModifierCallBackName",
+                        "ModifierName": "MMonster_W2_Argenti_00_Power"
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCheckModifierCallBackName",
+                        "ModifierName": "MMonster_W2_Argenti_00_Power_RL"
+                      }
+                    ]
                   },
                   "SuccessTaskList": [
                     {
@@ -182,8 +257,17 @@
                         }
                       },
                       {
-                        "$type": "RPG.GameCore.ByCheckModifierCallBackName",
-                        "ModifierName": "MMonster_W2_Argenti_00_Power"
+                        "$type": "RPG.GameCore.ByAny",
+                        "PredicateList": [
+                          {
+                            "$type": "RPG.GameCore.ByCheckModifierCallBackName",
+                            "ModifierName": "MMonster_W2_Argenti_00_Power"
+                          },
+                          {
+                            "$type": "RPG.GameCore.ByCheckModifierCallBackName",
+                            "ModifierName": "MMonster_W2_Argenti_00_Power_RL"
+                          }
+                        ]
                       }
                     ]
                   },
@@ -339,7 +423,7 @@
           "NormalizedTimeWait": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.8000000007450581
+              "Value": 1
             }
           }
         }
@@ -376,33 +460,56 @@
           "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Argenti_00/Eff_Monster_W2_ArgentiTotem_01_Skill01Start_02.prefab"
         },
         {
-          "$type": "RPG.GameCore.WaitSecond",
-          "WaitTime": 0.833
-        },
-        {
-          "$type": "RPG.GameCore.ShowUIPage",
-          "AssetPath": "UI/Common/Widget/ShowBattleHint.prefab",
-          "UITextNodes": [
-            {
-              "TextPath": "AreaInfoPanel/Title/Text",
-              "TextContent": {
-                "Hash": 1836783583
-              }
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill01",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.3500000003259629
             }
-          ],
-          "LifeTime": 2
+          }
         },
         {
           "$type": "RPG.GameCore.PredicateTaskList",
           "Predicate": {
-            "$type": "RPG.GameCore.ByIsContainModifier",
-            "TargetType": {
-              "$type": "RPG.GameCore.TargetAlias",
-              "Alias": "Caster"
-            },
-            "ModifierName": "MMonster_W2_Argenti_00_Power"
+            "$type": "RPG.GameCore.ByAny",
+            "PredicateList": [
+              {
+                "$type": "RPG.GameCore.ByIsContainModifier",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "Caster"
+                },
+                "ModifierName": "MMonster_W2_Argenti_00_Power"
+              },
+              {
+                "$type": "RPG.GameCore.ByIsContainModifier",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "Caster"
+                },
+                "ModifierName": "MMonster_W2_Argenti_00_Power_RL"
+              }
+            ]
           },
           "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.ShowUIPage",
+              "AssetPath": "UI/Common/Widget/ShowBattleHint.prefab",
+              "UITextNodes": [
+                {
+                  "TextPath": "AreaInfoPanel/Title/Text",
+                  "TextContent": {
+                    "Hash": -1394513184
+                  }
+                }
+              ],
+              "LifeTime": 2
+            },
             {
               "$type": "RPG.GameCore.Retarget",
               "TargetType": {
@@ -477,7 +584,7 @@
                   "LifeTime": {
                     "IsDynamic": true,
                     "PostfixExpr": {
-                      "OpCodes": "AQAJ",
+                      "OpCodes": "AQAK",
                       "FixedValues": [],
                       "DynamicHashes": [
                         -1479582326
@@ -487,8 +594,12 @@
                   "LayerAddWhenStack": {
                     "IsDynamic": true,
                     "PostfixExpr": {
-                      "OpCodes": "AQAJ",
-                      "FixedValues": [],
+                      "OpCodes": "AQAAAAMK",
+                      "FixedValues": [
+                        {
+                          "Value": 1
+                        }
+                      ],
                       "DynamicHashes": [
                         1815596962
                       ]
@@ -498,7 +609,43 @@
                     "MDF_ShowValue1": {
                       "IsDynamic": true,
                       "PostfixExpr": {
-                        "OpCodes": "AQAJ",
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          -1163201804
+                        ]
+                      }
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "ModifierName": "MMonster_Argenti_DamageUP",
+                  "LifeTime": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        -1479582326
+                      ]
+                    }
+                  },
+                  "LayerAddWhenStack": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  },
+                  "DynamicValues": {
+                    "MDF_ShowValue1": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
                         "FixedValues": [],
                         "DynamicHashes": [
                           -1163201804
@@ -511,6 +658,19 @@
             }
           ],
           "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.ShowUIPage",
+              "AssetPath": "UI/Common/Widget/ShowBattleHint.prefab",
+              "UITextNodes": [
+                {
+                  "TextPath": "AreaInfoPanel/Title/Text",
+                  "TextContent": {
+                    "Hash": 1836783583
+                  }
+                }
+              ],
+              "LifeTime": 2
+            },
             {
               "$type": "RPG.GameCore.Retarget",
               "TargetType": {
@@ -544,7 +704,7 @@
                   "LifeTime": {
                     "IsDynamic": true,
                     "PostfixExpr": {
-                      "OpCodes": "AQAJ",
+                      "OpCodes": "AQAK",
                       "FixedValues": [],
                       "DynamicHashes": [
                         -1479582326
@@ -554,7 +714,7 @@
                   "LayerAddWhenStack": {
                     "IsDynamic": true,
                     "PostfixExpr": {
-                      "OpCodes": "AQAJ",
+                      "OpCodes": "AQAK",
                       "FixedValues": [],
                       "DynamicHashes": [
                         1819088995
@@ -565,7 +725,7 @@
                     "MDF_ShowValue1": {
                       "IsDynamic": true,
                       "PostfixExpr": {
-                        "OpCodes": "AQAJ",
+                        "OpCodes": "AQAK",
                         "FixedValues": [],
                         "DynamicHashes": [
                           -1163201804
@@ -579,6 +739,15 @@
           ]
         },
         {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.5000000004656613
+            }
+          }
+        },
+        {
           "$type": "RPG.GameCore.SkillPerformFinish"
         }
       ]
@@ -589,6 +758,13 @@
         "TargetType": "InherentTargetEntity"
       },
       "OnStart": [
+        {
+          "$type": "RPG.GameCore.ShowSkillTextDialog",
+          "SkillName": {
+            "Hash": -1228886263
+          },
+          "IsDark": true
+        },
         {
           "$type": "RPG.GameCore.ExitBreakState",
           "TargetType": {
@@ -625,7 +801,13 @@
         },
         {
           "$type": "RPG.GameCore.TriggerAnimState",
-          "AnimStateName": "Skill02"
+          "AnimStateName": "Skill02",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          }
         }
       ]
     },
@@ -669,7 +851,12 @@
         },
         {
           "$type": "RPG.GameCore.WaitSecond",
-          "WaitTime": 0.367
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.36699999985285103
+            }
+          }
         },
         {
           "$type": "RPG.GameCore.RemoveEffect",
@@ -681,20 +868,12 @@
         },
         {
           "$type": "RPG.GameCore.WaitSecond",
-          "WaitTime": 0.136
-        },
-        {
-          "$type": "RPG.GameCore.ShowUIPage",
-          "AssetPath": "UI/Common/Widget/BattleSelfStatusHint.prefab",
-          "UITextNodes": [
-            {
-              "TextPath": "AreaInfoPanel/Title/Text",
-              "TextContent": {
-                "Hash": 2145959175
-              }
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.3359999998938292
             }
-          ],
-          "LifeTime": 2
+          }
         },
         {
           "$type": "RPG.GameCore.PredicateTaskList",
@@ -711,6 +890,52 @@
             }
           },
           "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.ShowUIPage",
+              "AssetPath": "UI/Common/Widget/BattleSelfStatusHint.prefab",
+              "UITextNodes": [
+                {
+                  "TextPath": "AreaInfoPanel/Title/Text",
+                  "TextContent": {
+                    "Hash": -649143786
+                  }
+                }
+              ],
+              "LifeTime": 2
+            },
+            {
+              "$type": "RPG.GameCore.Retarget",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllTeammate"
+              },
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCheckCustomValueBool",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "Key": {
+                  "Hash": 1955914817
+                }
+              },
+              "MaxNumber": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1
+                }
+              },
+              "TaskList": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "ModifierName": "W2_ArgentiTotem_01_BattleScore1"
+                }
+              ]
+            },
             {
               "$type": "RPG.GameCore.TriggerEffect",
               "TargetType": {
@@ -737,7 +962,7 @@
               "LifeTime": {
                 "IsDynamic": true,
                 "PostfixExpr": {
-                  "OpCodes": "AQAJ",
+                  "OpCodes": "AQAK",
                   "FixedValues": [],
                   "DynamicHashes": [
                     770577398
@@ -747,8 +972,12 @@
               "LayerAddWhenStack": {
                 "IsDynamic": true,
                 "PostfixExpr": {
-                  "OpCodes": "AQAJ",
-                  "FixedValues": [],
+                  "OpCodes": "AQAAAAMK",
+                  "FixedValues": [
+                    {
+                      "Value": 1
+                    }
+                  ],
                   "DynamicHashes": [
                     1146009778
                   ]
@@ -758,7 +987,43 @@
                 "MDF_ShowValue1": {
                   "IsDynamic": true,
                   "PostfixExpr": {
-                    "OpCodes": "AQAJ",
+                    "OpCodes": "AQAK",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      -1654898496
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "ModifierName": "MMonster_Argenti_DamageUP",
+              "LifeTime": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    770577398
+                  ]
+                }
+              },
+              "LayerAddWhenStack": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1
+                }
+              },
+              "DynamicValues": {
+                "MDF_ShowValue1": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAK",
                     "FixedValues": [],
                     "DynamicHashes": [
                       -1654898496
@@ -770,6 +1035,19 @@
           ],
           "FailedTaskList": [
             {
+              "$type": "RPG.GameCore.ShowUIPage",
+              "AssetPath": "UI/Common/Widget/BattleSelfStatusHint.prefab",
+              "UITextNodes": [
+                {
+                  "TextPath": "AreaInfoPanel/Title/Text",
+                  "TextContent": {
+                    "Hash": 2145959175
+                  }
+                }
+              ],
+              "LifeTime": 2
+            },
+            {
               "$type": "RPG.GameCore.AddModifier",
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
@@ -779,7 +1057,7 @@
               "LifeTime": {
                 "IsDynamic": true,
                 "PostfixExpr": {
-                  "OpCodes": "AQAJ",
+                  "OpCodes": "AQAK",
                   "FixedValues": [],
                   "DynamicHashes": [
                     770577398
@@ -789,7 +1067,7 @@
               "LayerAddWhenStack": {
                 "IsDynamic": true,
                 "PostfixExpr": {
-                  "OpCodes": "AQAJ",
+                  "OpCodes": "AQAK",
                   "FixedValues": [],
                   "DynamicHashes": [
                     -1725001641
@@ -800,7 +1078,7 @@
                 "MDF_ShowValue1": {
                   "IsDynamic": true,
                   "PostfixExpr": {
-                    "OpCodes": "AQAJ",
+                    "OpCodes": "AQAK",
                     "FixedValues": [],
                     "DynamicHashes": [
                       -1654898496
@@ -813,7 +1091,28 @@
         },
         {
           "$type": "RPG.GameCore.WaitSecond",
-          "WaitTime": 1
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.SetEntityVisible",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.10000000009313226
+            }
+          }
         }
       ]
     }
@@ -855,7 +1154,7 @@
               "PropertyValue": {
                 "IsDynamic": true,
                 "PostfixExpr": {
-                  "OpCodes": "AQABAQQJ",
+                  "OpCodes": "AQABAQQK",
                   "FixedValues": [],
                   "DynamicHashes": [
                     2136609680,

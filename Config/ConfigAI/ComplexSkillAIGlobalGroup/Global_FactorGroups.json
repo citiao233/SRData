@@ -554,9 +554,6 @@
             "$type": "RPG.GameCore.ComplexSkillAIMapperMultiRange",
             "Ranges": [
               {
-                "ymin": {
-                  "Value": -100
-                },
                 "xmax": {
                   "Value": 0.20000000018626451
                 }
@@ -989,13 +986,13 @@
                   "Value": 0.5000000004656613
                 },
                 "ymin": {
-                  "Value": 30
+                  "Value": 6
                 },
                 "xmax": {
                   "Value": 1.5000000004656613
                 },
                 "ymax": {
-                  "Value": 30
+                  "Value": 6
                 }
               },
               {
@@ -1003,13 +1000,13 @@
                   "Value": 1.5000000004656613
                 },
                 "ymin": {
-                  "Value": 100
+                  "Value": 20
                 },
                 "xmax": {
                   "Value": 2.5000000004656613
                 },
                 "ymax": {
-                  "Value": 100
+                  "Value": 20
                 }
               },
               {
@@ -1017,13 +1014,13 @@
                   "Value": 2.5000000004656613
                 },
                 "ymin": {
-                  "Value": 200
+                  "Value": 40
                 },
                 "xmax": {
                   "Value": 3.5000000004656613
                 },
                 "ymax": {
-                  "Value": 200
+                  "Value": 40
                 }
               },
               {
@@ -1031,20 +1028,19 @@
                   "Value": 3.5000000004656613
                 },
                 "ymin": {
-                  "Value": 500
+                  "Value": 100
                 },
                 "xmax": {
                   "Value": 4
                 },
                 "ymax": {
-                  "Value": 500
+                  "Value": 100
                 }
               }
             ]
           }
         }
-      ],
-      "IsBpGroup": true
+      ]
     },
     "AddNP_DanhengIL_SingleAttack": {
       "Factors": [
@@ -2171,34 +2167,73 @@
         }
       ]
     },
-    "Add10_Pela_BuffPelaBPSkill": {
+    "Add10_Pela_BPPointCheck": {
       "Factors": [
         {
           "Source": {
-            "$type": "RPG.GameCore.ComplexSkillAIContainModifier",
-            "IsTarget": false,
-            "ModifilerName": "MAvatar_Pela_00_BPSkill_Fatigue"
+            "$type": "RPG.GameCore.ComplexSkillAIBattleGlobalData",
+            "DataType": "TeamBoostPoint"
           },
           "Mapper": {
             "$type": "RPG.GameCore.ComplexSkillAIMapperMultiRange",
             "Ranges": [
               {
-                "ymin": {
-                  "Value": 100
-                },
                 "xmax": {
-                  "Value": 0.5000000004656613
+                  "Value": 3.5000000004656613
                 },
                 "ymax": {
-                  "Value": 100
+                  "Value": 30
                 }
               },
               {
                 "xmin": {
-                  "Value": 0.5000000004656613
+                  "Value": 3.5000000004656613
+                },
+                "ymin": {
+                  "Value": 101
                 },
                 "xmax": {
+                  "Value": 5
+                },
+                "ymax": {
+                  "Value": 120
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "Add10_Pela_BuffPelaBPSkill": {
+      "Factors": [
+        {
+          "Source": {
+            "$type": "RPG.GameCore.ComplexSkillAIModifierTypeNumber",
+            "ModifierType": "Buff"
+          },
+          "Mapper": {
+            "$type": "RPG.GameCore.ComplexSkillAIMapperMultiRange",
+            "Ranges": [
+              {
+                "xmax": {
                   "Value": 1
+                },
+                "ymax": {
+                  "Value": 75
+                }
+              },
+              {
+                "xmin": {
+                  "Value": 1
+                },
+                "ymin": {
+                  "Value": 75
+                },
+                "xmax": {
+                  "Value": 5
+                },
+                "ymax": {
+                  "Value": 100
                 }
               }
             ]
@@ -2605,20 +2640,26 @@
             "Ranges": [
               {
                 "ymin": {
-                  "Value": 1
+                  "Value": 0.7500000006984919
                 },
                 "xmax": {
                   "Value": 0.5000000004656613
                 },
                 "ymax": {
-                  "Value": 1
+                  "Value": 0.7500000006984919
                 }
               },
               {
                 "xmin": {
                   "Value": 0.5000000004656613
                 },
+                "ymin": {
+                  "Value": 1
+                },
                 "xmax": {
+                  "Value": 1
+                },
+                "ymax": {
                   "Value": 1
                 }
               }
@@ -2700,6 +2741,85 @@
                 },
                 "ymax": {
                   "Value": 100
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "Add01_Acheron_CheckBuff": {
+      "Factors": [
+        {
+          "Source": {
+            "$type": "RPG.GameCore.ComplexSkillAIModifierTypeNumber",
+            "ModifierType": "Debuff"
+          },
+          "Mapper": {
+            "$type": "RPG.GameCore.ComplexSkillAIMapperMultiRange",
+            "Ranges": [
+              {
+                "xmax": {
+                  "Value": 5
+                },
+                "ymax": {
+                  "Value": 100
+                }
+              }
+            ]
+          }
+        },
+        {
+          "Source": {
+            "$type": "RPG.GameCore.ComplexSkillAIContainModifierLayer",
+            "ModifilerName": "MAvatar_Acheron_00_PassiveFlag01"
+          },
+          "Mapper": {
+            "$type": "RPG.GameCore.ComplexSkillAIMapperMultiRange",
+            "Ranges": [
+              {
+                "xmax": {
+                  "Value": 9
+                },
+                "ymax": {
+                  "Value": 200
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "Add01_Acheron_CheckFlowers": {
+      "Factors": [
+        {
+          "Source": {
+            "$type": "RPG.GameCore.ComplexSkillAIContainModifierLayer",
+            "ModifilerName": "MAvatar_Acheron_00_PassiveFlag01"
+          },
+          "Mapper": {
+            "$type": "RPG.GameCore.ComplexSkillAIMapperMultiRange",
+            "Ranges": [
+              {
+                "xmax": {
+                  "Value": 1
+                },
+                "ymax": {
+                  "Value": 50
+                }
+              },
+              {
+                "xmin": {
+                  "Value": 1
+                },
+                "ymin": {
+                  "Value": 50
+                },
+                "xmax": {
+                  "Value": 9
+                },
+                "ymax": {
+                  "Value": 200
                 }
               }
             ]
@@ -2888,6 +3008,244 @@
               "Value": 10
             },
             "IsOverrideFinalScore": true
+          }
+        }
+      ]
+    },
+    "Add01_Jade_BPSkillCheck": {
+      "Factors": [
+        {
+          "Source": {
+            "$type": "RPG.GameCore.ComplexSkillAIContainModifier",
+            "IsTarget": false,
+            "ModifilerName": "MWAvatar_Jade_00_BPSkillSelf"
+          },
+          "Mapper": {
+            "$type": "RPG.GameCore.ComplexSkillAIMapperMultiRange",
+            "Ranges": [
+              {
+                "ymin": {
+                  "Value": 100
+                },
+                "xmax": {
+                  "Value": 0.5000000004656613
+                },
+                "ymax": {
+                  "Value": 100
+                }
+              },
+              {
+                "xmin": {
+                  "Value": 0.5000000004656613
+                },
+                "xmax": {
+                  "Value": 1
+                }
+              }
+            ]
+          },
+          "PostProcess": {
+            "$type": "RPG.GameCore.ComplexSkillAIPostProcessBreak",
+            "CompareType": "LessEqual",
+            "CompareValue": {
+              "Value": 10
+            },
+            "IsOverrideFinalScore": true
+          }
+        },
+        {
+          "Source": {
+            "$type": "RPG.GameCore.ComplexSkillAIContainModifier",
+            "IsTarget": false,
+            "ModifilerName": "MWAvatar_Jade_00_BPSkillListen"
+          },
+          "Mapper": {
+            "$type": "RPG.GameCore.ComplexSkillAIMapperMultiRange",
+            "Ranges": [
+              {
+                "ymin": {
+                  "Value": 100
+                },
+                "xmax": {
+                  "Value": 0.5000000004656613
+                },
+                "ymax": {
+                  "Value": 100
+                }
+              },
+              {
+                "xmin": {
+                  "Value": 0.5000000004656613
+                },
+                "xmax": {
+                  "Value": 1
+                }
+              }
+            ]
+          },
+          "PostProcess": {
+            "$type": "RPG.GameCore.ComplexSkillAIPostProcessBreak",
+            "CompareType": "LessEqual",
+            "CompareValue": {
+              "Value": 10
+            },
+            "IsOverrideFinalScore": true
+          }
+        }
+      ]
+    },
+    "Add01_Jade_BPSkillSelect": {
+      "Factors": [
+        {
+          "Source": {
+            "$type": "RPG.GameCore.ComplexSkillAIGetAvatarBaseType"
+          },
+          "Mapper": {
+            "$type": "RPG.GameCore.ComplexSkillAIMapperMultiRange",
+            "Ranges": [
+              {
+                "ymin": {
+                  "Value": 1
+                },
+                "xmax": {
+                  "Value": 0.5000000004656613
+                },
+                "ymax": {
+                  "Value": 1
+                }
+              },
+              {
+                "xmin": {
+                  "Value": 0.5000000004656613
+                },
+                "ymin": {
+                  "Value": 90
+                },
+                "xmax": {
+                  "Value": 1.5000000004656613
+                },
+                "ymax": {
+                  "Value": 90
+                }
+              },
+              {
+                "xmin": {
+                  "Value": 1.5000000004656613
+                },
+                "ymin": {
+                  "Value": 50
+                },
+                "xmax": {
+                  "Value": 2.5000000004656613
+                },
+                "ymax": {
+                  "Value": 50
+                }
+              },
+              {
+                "xmin": {
+                  "Value": 2.5000000004656613
+                },
+                "ymin": {
+                  "Value": 100
+                },
+                "xmax": {
+                  "Value": 3.5000000004656613
+                },
+                "ymax": {
+                  "Value": 100
+                }
+              },
+              {
+                "xmin": {
+                  "Value": 3.5000000004656613
+                },
+                "ymin": {
+                  "Value": 20
+                },
+                "xmax": {
+                  "Value": 4.500000000465661
+                },
+                "ymax": {
+                  "Value": 20
+                }
+              },
+              {
+                "xmin": {
+                  "Value": 4.500000000465661
+                },
+                "ymin": {
+                  "Value": 80
+                },
+                "xmax": {
+                  "Value": 5.500000000465661
+                },
+                "ymax": {
+                  "Value": 80
+                }
+              },
+              {
+                "xmin": {
+                  "Value": 5.500000000465661
+                },
+                "ymin": {
+                  "Value": 40
+                },
+                "xmax": {
+                  "Value": 6.500000000465661
+                },
+                "ymax": {
+                  "Value": 40
+                }
+              },
+              {
+                "xmin": {
+                  "Value": 6.500000000465661
+                },
+                "ymin": {
+                  "Value": 30
+                },
+                "xmax": {
+                  "Value": 7.500000000465661
+                },
+                "ymax": {
+                  "Value": 30
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "Add_Jade_SelfSource": {
+      "Factors": [
+        {
+          "Source": {
+            "$type": "RPG.GameCore.ComplexSkillAISourceTargetIsActor"
+          },
+          "Mapper": {
+            "$type": "RPG.GameCore.ComplexSkillAIMapperMultiRange",
+            "Ranges": [
+              {
+                "xmax": {
+                  "Value": 0.5000000004656613
+                }
+              },
+              {
+                "xmin": {
+                  "Value": 0.5000000004656613
+                },
+                "ymin": {
+                  "Value": -30
+                },
+                "xmax": {
+                  "Value": 1
+                },
+                "ymax": {
+                  "Value": -30
+                }
+              }
+            ]
           }
         }
       ]
@@ -3680,7 +4038,8 @@
           "CombineOperator": "Mul",
           "Source": {
             "$type": "RPG.GameCore.ComplexSkillAIContainModifier",
-            "ModifilerName": "RuanMei_Skill02_SpeedUp"
+            "IsTarget": false,
+            "ModifilerName": "RuanMei_Skill02_Area"
           },
           "Mapper": {
             "$type": "RPG.GameCore.ComplexSkillAIMapperMultiRange",
@@ -3701,7 +4060,7 @@
                   "Value": 0.5000000004656613
                 },
                 "xmax": {
-                  "Value": 1
+                  "Value": 5
                 }
               }
             ]
@@ -3739,10 +4098,8 @@
       ]
     },
     "Add100nP_BlackSwan_BleedCheck": {
-      "CombineOperator": "Mul",
       "Factors": [
         {
-          "CombineOperator": "Mul",
           "Source": {
             "$type": "RPG.GameCore.ComplexSkillAISourceContainBehaviorFlag",
             "BehaviorFlag": "STAT_DOT_Bleed"
@@ -3789,10 +4146,8 @@
       ]
     },
     "Add100nP_BlackSwan_BurnCheck": {
-      "CombineOperator": "Mul",
       "Factors": [
         {
-          "CombineOperator": "Mul",
           "Source": {
             "$type": "RPG.GameCore.ComplexSkillAISourceContainBehaviorFlag",
             "BehaviorFlag": "STAT_DOT_Burn"
@@ -3839,10 +4194,8 @@
       ]
     },
     "Add100nP_BlackSwan_ElectricCheck": {
-      "CombineOperator": "Mul",
       "Factors": [
         {
-          "CombineOperator": "Mul",
           "Source": {
             "$type": "RPG.GameCore.ComplexSkillAISourceContainBehaviorFlag",
             "BehaviorFlag": "STAT_DOT_Electric"
@@ -3889,10 +4242,8 @@
       ]
     },
     "Add100nP_BlackSwan_PoisonCheck": {
-      "CombineOperator": "Mul",
       "Factors": [
         {
-          "CombineOperator": "Mul",
           "Source": {
             "$type": "RPG.GameCore.ComplexSkillAISourceContainBehaviorFlag",
             "BehaviorFlag": "STAT_DOT_Poison"
@@ -3942,7 +4293,6 @@
       "CombineOperator": "Mul",
       "Factors": [
         {
-          "CombineOperator": "Mul",
           "Source": {
             "$type": "RPG.GameCore.ComplexSkillAIAllTargetCombine",
             "Evaluator": {
@@ -3999,7 +4349,6 @@
       "CombineOperator": "Mul",
       "Factors": [
         {
-          "CombineOperator": "Mul",
           "Source": {
             "$type": "RPG.GameCore.ComplexSkillAIAllAdjoinCombine",
             "Evaluator": {
@@ -4041,6 +4390,41 @@
                 },
                 "xmax": {
                   "Value": 3
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "Subtract200pP_Misha_Energy": {
+      "Factors": [
+        {
+          "Source": {
+            "$type": "RPG.GameCore.ComplexSkillAISourceDynamicValue",
+            "IsTarget": false,
+            "DynamicValueKey": "EnergyBar_ExtraUltraAttack"
+          },
+          "Mapper": {
+            "$type": "RPG.GameCore.ComplexSkillAIMapperMultiRange",
+            "Ranges": [
+              {
+                "xmax": {
+                  "Value": 5.500000000465661
+                }
+              },
+              {
+                "xmin": {
+                  "Value": 5.500000000465661
+                },
+                "ymin": {
+                  "Value": -200
+                },
+                "xmax": {
+                  "Value": 6.500000000465661
+                },
+                "ymax": {
+                  "Value": -200
                 }
               }
             ]

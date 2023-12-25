@@ -4,15 +4,17 @@
       "Modifiers": {
         "Monster_W2_HuanlongPart_00_MuteHitFly": {
           "BehaviorFlagList": [
-            "MuteHitFly"
+            "MuteHitFly",
+            "KeepOnDeathrattle"
           ]
         },
         "Monster_W2_HuanlongPart_00_Deathrattle": {
           "BehaviorFlagList": [
             "Deathrattle"
           ],
-          "_CallbackList": {
-            "OnDeathrattle": {
+          "_CallbackList": [
+            {
+              "Event": "OnDeathrattle",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.DispelStatus",
@@ -117,11 +119,12 @@
                 }
               ]
             }
-          }
+          ]
         },
         "Monster_W2_HuanlongPart_00_Break": {
-          "_CallbackList": {
-            "OnAllowAction": {
+          "_CallbackList": [
+            {
+              "Event": "OnAllowAction",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.SetDynamicValue",
@@ -140,7 +143,8 @@
                 }
               ]
             },
-            "OnBeingBreak": {
+            {
+              "Event": "OnBeingBreak",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.SetDynamicValue",
@@ -159,7 +163,7 @@
                 }
               ]
             }
-          }
+          ]
         }
       },
       "Name": "Monster_W2_HuanlongPart_00_Passive01",
@@ -220,7 +224,7 @@
                 "MDF_HealRatio": {
                   "IsDynamic": true,
                   "PostfixExpr": {
-                    "OpCodes": "AQAJ",
+                    "OpCodes": "AQAK",
                     "FixedValues": [],
                     "DynamicHashes": [
                       1142900351
@@ -243,7 +247,7 @@
                 "MDF_HealRatio": {
                   "IsDynamic": true,
                   "PostfixExpr": {
-                    "OpCodes": "AQAJ",
+                    "OpCodes": "AQAK",
                     "FixedValues": [],
                     "DynamicHashes": [
                       1142900351
@@ -378,7 +382,7 @@
           "ModifyValue": {
             "IsDynamic": true,
             "PostfixExpr": {
-              "OpCodes": "AAABAAMJ",
+              "OpCodes": "AAABAAMK",
               "FixedValues": [
                 {
                   "Value": 0
@@ -587,7 +591,7 @@
                   "ModifyValue": {
                     "IsDynamic": true,
                     "PostfixExpr": {
-                      "OpCodes": "AQAJ",
+                      "OpCodes": "AQAK",
                       "FixedValues": [],
                       "DynamicHashes": [
                         1450547785
@@ -601,7 +605,12 @@
         },
         {
           "$type": "RPG.GameCore.WaitSecond",
-          "WaitTime": 1
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          }
         }
       ]
     }
@@ -615,8 +624,9 @@
           "Value": 0.3000000002793968
         }
       },
-      "_CallbackList": {
-        "OnPhase1": {
+      "_CallbackList": [
+        {
+          "Event": "OnPhase1",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -681,7 +691,7 @@
                   "HealPercentage": {
                     "IsDynamic": true,
                     "PostfixExpr": {
-                      "OpCodes": "AQAJ",
+                      "OpCodes": "AQAK",
                       "FixedValues": [],
                       "DynamicHashes": [
                         -2118159447
@@ -693,7 +703,7 @@
             }
           ]
         }
-      },
+      ],
       "DynamicValues": {
         "Values": {
           "-2118159447": {}

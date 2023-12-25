@@ -137,7 +137,7 @@
                 {
                   "$type": "RPG.GameCore.TurnInsertAbility",
                   "AbilityName": "Monster_W3_DeathPart_00_SKill01_Insert",
-                  "InsertAbilityPriority": "MonsterDeathRattle",
+                  "InsertAbilityPriority": "AvatarReviveSelf",
                   "OwnerAliveState": "Mask_AliveOrLimbo",
                   "TargetAliveState": "Mask_AliveOrLimbo",
                   "ShowInActionBar": true
@@ -244,6 +244,17 @@
           }
         },
         {
+          "$type": "RPG.GameCore.CharacterChangePhase",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "PhaseName": "PhaseCharge",
+          "PhaseAnimConfig": {
+            "ForceHitH": true
+          }
+        },
+        {
           "$type": "RPG.GameCore.DefineDynamicValue",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
@@ -269,6 +280,351 @@
                   235146001
                 ]
               }
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TurnInsertAbility",
+          "AbilityName": "Monster_W3_DeathPart_00_Skill03_Insert",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityTarget": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "InsertAbilityPriority": "MonsterBattleCry"
+        }
+      ]
+    },
+    {
+      "Name": "Monster_W3_DeathPart_00_SKill01_Insert",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.ShowSkillTextDialog",
+          "SkillName": {
+            "Hash": -1549020483
+          },
+          "IsDark": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityName": "Monster_W3_DeathPart_00_SKill01_Phase02",
+          "IsSkillPerform": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityInherentTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Monster_Death_01_Unselectable"
+          },
+          "AbilityName": "Monster_W3_DeathPart_00_Skill01_Camera",
+          "IsSkillPerform": true
+        }
+      ]
+    },
+    {
+      "Name": "Monster_W3_DeathPart_00_SKill01_Phase02",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_DeathPart_00/Eff_Monster_W3_DeathPart_00_Common_StandBy.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_DeathPart_00/Eff_Monster_W3_DeathPart_00_Common_Die.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_DeathPart_00/Eff_Monster_W3_DeathPart_00_Common_Die_Model.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_DeathPart_00/Eff_Monster_W3_DeathPart_00_Common_SoulOut.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_DeathPart_00/Eff_Monster_W3_DeathPart_00_ModelCapture.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.ExitBreakState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "CancelRecoverAnim": true
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamDark",
+          "FormationType": "DarkTeamNormal"
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamLight",
+          "FormationType": "LightTeamNormal"
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.7000000006519258
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Monster_Death_01_Unselectable"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_DeathPart_00/Eff_Monster_W3_DeathPart_00_Common_SoulBack.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.5000000004656613
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Monster_Death_01_Unselectable"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Death_00/Eff_Monster_W3_Death_00_Highlight.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Monster_Death_01_Unselectable"
+          },
+          "ModifierName": "Death_Control_Modifier"
+        },
+        {
+          "$type": "RPG.GameCore.ShowUIPage",
+          "AssetPath": "UI/Common/Widget/BattleAlertHint.prefab",
+          "UITextNodes": [
+            {
+              "TextPath": "AreaInfoPanel/Title/Text",
+              "TextContent": {
+                "Hash": 2127852562
+              }
+            }
+          ],
+          "LifeTime": 3
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.05000000004656613
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Monster_W3_DeathPart_00_Skill02_Phase01",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityName": "Monster_W3_DeathPart_00_Skill02_Phase02",
+          "IsSkillPerform": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityName": "Monster_W3_DeathPart_00_Skill02_Camera",
+          "IsSkillPerform": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAnimState",
+          "AnimLogicState": "Idle"
+        }
+      ]
+    },
+    {
+      "Name": "Monster_W3_DeathPart_00_Skill02_Phase02",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.20000000018626451
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.ShowUIPage",
+          "AssetPath": "UI/Common/Widget/BattleAlertHint.prefab",
+          "UITextNodes": [
+            {
+              "TextPath": "AreaInfoPanel/Title/Text",
+              "TextContent": {
+                "Hash": 1627976539
+              }
+            }
+          ],
+          "LifeTime": 3
+        },
+        {
+          "$type": "RPG.GameCore.SkillPerformFinish"
+        }
+      ]
+    },
+    {
+      "Name": "Monster_W3_DeathPart_00_Skill03_Insert",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityName": "Monster_W3_DeathPart_00_Skill03_Phase02",
+          "IsSkillPerform": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityName": "Monster_W3_DeathPart_00_Skill03_Camera",
+          "IsSkillPerform": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAnimState",
+          "AnimStateName": "StandBy"
+        }
+      ]
+    },
+    {
+      "Name": "Monster_W3_DeathPart_00_Skill03_Phase02",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_DeathPart_00/Eff_Monster_W3_DeathPart_00_Common_Appear_00.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_DeathPart_00/Eff_Monster_W3_DeathPart_00_Common_StandBy.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.ShowUIPage",
+          "AssetPath": "UI/Common/Widget/BattleAlertHint.prefab",
+          "UITextNodes": [
+            {
+              "TextPath": "AreaInfoPanel/Title/Text",
+              "TextContent": {
+                "Hash": 1627976539
+              }
+            }
+          ],
+          "LifeTime": 3
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.8500000007916242
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_DeathPart_00/Eff_Monster_W3_DeathPart_00_Common_Appear.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.41699999989941716
             }
           }
         },
@@ -341,248 +697,13 @@
           ]
         },
         {
-          "$type": "RPG.GameCore.TurnInsertAbility",
-          "AbilityName": "Monster_W3_DeathPart_00_Skill03_Insert",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "AbilityTarget": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "InsertAbilityPriority": "MonsterBattleCry"
-        }
-      ]
-    },
-    {
-      "Name": "Monster_W3_DeathPart_00_SKill01_Insert",
-      "TargetInfo": {
-        "TargetType": "Caster"
-      },
-      "OnStart": [
-        {
-          "$type": "RPG.GameCore.ShowSkillTextDialog",
-          "SkillName": {
-            "Hash": -1549020483
-          },
-          "IsDark": true
-        },
-        {
-          "$type": "RPG.GameCore.TriggerAbility",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "AbilityName": "Monster_W3_DeathPart_00_SKill01_Phase02",
-          "IsSkillPerform": true
-        },
-        {
-          "$type": "RPG.GameCore.TriggerAbility",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "AbilityName": "Monster_W3_DeathPart_00_Skill01_Camera",
-          "IsSkillPerform": true
-        }
-      ]
-    },
-    {
-      "Name": "Monster_W3_DeathPart_00_SKill01_Phase02",
-      "TargetInfo": {
-        "TargetType": "Caster"
-      },
-      "OnStart": [
-        {
-          "$type": "RPG.GameCore.ExitBreakState",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "CancelRecoverAnim": true
-        },
-        {
-          "$type": "RPG.GameCore.SetTeamFormation",
-          "Team": "TeamDark",
-          "FormationType": "DarkTeamNormal"
-        },
-        {
-          "$type": "RPG.GameCore.SetTeamFormation",
-          "Team": "TeamLight",
-          "FormationType": "LightTeamNormal"
-        },
-        {
           "$type": "RPG.GameCore.WaitSecond",
-          "WaitTime": 2
-        },
-        {
-          "$type": "RPG.GameCore.RemoveModifier",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Monster_Death_01_Unselectable"
-          },
-          "ModifierName": "Death_Control_Modifier"
-        },
-        {
-          "$type": "RPG.GameCore.ShowUIPage",
-          "AssetPath": "UI/Common/Widget/BattleAlertHint.prefab",
-          "UITextNodes": [
-            {
-              "TextPath": "AreaInfoPanel/Title/Text",
-              "TextContent": {
-                "Hash": 2127852562
-              }
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
             }
-          ],
-          "LifeTime": 3
-        },
-        {
-          "$type": "RPG.GameCore.RadialBlurEffect",
-          "BlurRadius": 1,
-          "Iteration": 8,
-          "BlurStart": 0.01,
-          "BlurFeather": 0.15
-        },
-        {
-          "$type": "RPG.GameCore.WaitSecond",
-          "WaitTime": 0.05
-        },
-        {
-          "$type": "RPG.GameCore.SetEntityVisible",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
           }
-        },
-        {
-          "$type": "RPG.GameCore.WaitSecond",
-          "WaitTime": 0.25
-        },
-        {
-          "$type": "RPG.GameCore.RadialBlurEffect",
-          "Active": false
-        },
-        {
-          "$type": "RPG.GameCore.WaitSecond",
-          "WaitTime": 0.75
-        },
-        {
-          "$type": "RPG.GameCore.WaitSecond",
-          "WaitTime": 1
-        }
-      ]
-    },
-    {
-      "Name": "Monster_W3_DeathPart_00_Skill02_Phase01",
-      "TargetInfo": {
-        "TargetType": "Caster"
-      },
-      "OnStart": [
-        {
-          "$type": "RPG.GameCore.TriggerAbility",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "AbilityName": "Monster_W3_DeathPart_00_Skill02_Phase02",
-          "IsSkillPerform": true
-        },
-        {
-          "$type": "RPG.GameCore.TriggerAbility",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "AbilityName": "Monster_W3_DeathPart_00_Skill02_Camera",
-          "IsSkillPerform": true
-        },
-        {
-          "$type": "RPG.GameCore.TriggerAnimState",
-          "AnimLogicState": "Idle"
-        }
-      ]
-    },
-    {
-      "Name": "Monster_W3_DeathPart_00_Skill02_Phase02",
-      "TargetInfo": {
-        "TargetType": "Caster"
-      },
-      "OnStart": [
-        {
-          "$type": "RPG.GameCore.WaitSecond",
-          "WaitTime": 1
-        },
-        {
-          "$type": "RPG.GameCore.ShowUIPage",
-          "AssetPath": "UI/Common/Widget/BattleAlertHint.prefab",
-          "UITextNodes": [
-            {
-              "TextPath": "AreaInfoPanel/Title/Text",
-              "TextContent": {
-                "Hash": 1627976539
-              }
-            }
-          ],
-          "LifeTime": 3
-        },
-        {
-          "$type": "RPG.GameCore.SkillPerformFinish"
-        }
-      ]
-    },
-    {
-      "Name": "Monster_W3_DeathPart_00_Skill03_Insert",
-      "TargetInfo": {
-        "TargetType": "Caster"
-      },
-      "OnStart": [
-        {
-          "$type": "RPG.GameCore.TriggerAbility",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "AbilityName": "Monster_W3_DeathPart_00_Skill03_Phase02",
-          "IsSkillPerform": true
-        },
-        {
-          "$type": "RPG.GameCore.TriggerAbility",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "AbilityName": "Monster_W3_DeathPart_00_Skill03_Camera",
-          "IsSkillPerform": true
-        },
-        {
-          "$type": "RPG.GameCore.TriggerAnimState",
-          "AnimLogicState": "Idle"
-        }
-      ]
-    },
-    {
-      "Name": "Monster_W3_DeathPart_00_Skill03_Phase02",
-      "TargetInfo": {
-        "TargetType": "Caster"
-      },
-      "OnStart": [
-        {
-          "$type": "RPG.GameCore.ShowUIPage",
-          "AssetPath": "UI/Common/Widget/BattleAlertHint.prefab",
-          "UITextNodes": [
-            {
-              "TextPath": "AreaInfoPanel/Title/Text",
-              "TextContent": {
-                "Hash": -482185380
-              }
-            }
-          ],
-          "LifeTime": 3
-        },
-        {
-          "$type": "RPG.GameCore.WaitSecond",
-          "WaitTime": 1.5
         }
       ]
     }

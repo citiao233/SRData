@@ -4,6 +4,20 @@
     {
       "TaskList": [
         {
+          "$type": "RPG.GameCore.DefineDynamicValue",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetFetchCaster"
+          },
+          "DynamicKey": "CloseReward",
+          "ResetValue": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          },
+          "ContextScope": "TargetEntity"
+        },
+        {
           "$type": "RPG.GameCore.ShowTutorialUI"
         },
         {
@@ -30,8 +44,25 @@
           ]
         },
         {
+          "$type": "RPG.GameCore.WaitTutorial",
+          "Event": "ShowUIContext",
+          "Param": "RareRewardHintDialog"
+        },
+        {
+          "$type": "RPG.GameCore.WaitUIControllerClose",
+          "UIControllerName": "RareRewardHintDialog"
+        },
+        {
           "$type": "RPG.GameCore.WaitUINodeOpen",
           "NodeID": "MazeMainPage.20004"
+        },
+        {
+          "$type": "RPG.GameCore.DefineDynamicValue",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetFetchCaster"
+          },
+          "DynamicKey": "CloseReward",
+          "ContextScope": "TargetEntity"
         },
         {
           "$type": "RPG.GameCore.ShowUINodes",
@@ -59,6 +90,15 @@
               "$type": "RPG.GameCore.WaitTutorial",
               "Event": "ShowUIMainPage",
               "Param": "MazeMainPage"
+            },
+            {
+              "$type": "RPG.GameCore.WaitTutorial",
+              "Event": "ShowUIContext",
+              "Param": "RareRewardHintDialog"
+            },
+            {
+              "$type": "RPG.GameCore.WaitUIControllerClose",
+              "UIControllerName": "RareRewardHintDialog"
             },
             {
               "$type": "RPG.GameCore.WaitUINodeOpen",
@@ -190,6 +230,15 @@
               "Param": "MazeMainPage"
             },
             {
+              "$type": "RPG.GameCore.WaitTutorial",
+              "Event": "ShowUIContext",
+              "Param": "RareRewardHintDialog"
+            },
+            {
+              "$type": "RPG.GameCore.WaitUIControllerClose",
+              "UIControllerName": "RareRewardHintDialog"
+            },
+            {
               "$type": "RPG.GameCore.WaitUINodeOpen",
               "NodeID": "MazeMainPage.20004"
             },
@@ -341,6 +390,18 @@
               "Param": "MazeMainPage"
             },
             {
+              "$type": "RPG.GameCore.ByCompareDynamicValue",
+              "DynamicKey": "CloseReward",
+              "ContextScope": "TargetEntity",
+              "CompareType": "Equal",
+              "CompareValue": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0
+                }
+              }
+            },
+            {
               "$type": "RPG.GameCore.WaitUINodeOpen",
               "NodeID": "MazeMainPage.20004"
             },
@@ -419,7 +480,20 @@
             {
               "$type": "RPG.GameCore.WaitTutorial",
               "Event": "ShowUIMainPage",
-              "Param": "MazeMainPage"
+              "Param": "MazeMainPage",
+              "OnSuccessImmediate": []
+            },
+            {
+              "$type": "RPG.GameCore.ByCompareDynamicValue",
+              "DynamicKey": "CloseReward",
+              "ContextScope": "TargetEntity",
+              "CompareType": "Equal",
+              "CompareValue": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0
+                }
+              }
             },
             {
               "$type": "RPG.GameCore.WaitUINodeOpen",
@@ -492,6 +566,18 @@
               "$type": "RPG.GameCore.WaitTutorial",
               "Event": "ShowUIMainPage",
               "Param": "MazeMainPage"
+            },
+            {
+              "$type": "RPG.GameCore.ByCompareDynamicValue",
+              "DynamicKey": "CloseReward",
+              "ContextScope": "TargetEntity",
+              "CompareType": "Equal",
+              "CompareValue": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0
+                }
+              }
             },
             {
               "$type": "RPG.GameCore.WaitTutorial",
@@ -847,7 +933,12 @@
         },
         {
           "$type": "RPG.GameCore.WaitSecond",
-          "WaitTime": 0.3,
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.3000000002793968
+            }
+          },
           "TaskEnabled": false
         },
         {

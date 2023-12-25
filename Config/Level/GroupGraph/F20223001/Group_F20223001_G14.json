@@ -173,6 +173,43 @@
     {
       "TaskList": [
         {
+          "$type": "RPG.GameCore.WaitGroupEvent",
+          "EventName": {
+            "Value": "202170103_Predicate"
+          },
+          "OnEvent": [
+            {
+              "$type": "RPG.GameCore.CollectDataConditions"
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareSubMissionState",
+                "SubMissionID": 202170103,
+                "SubMissionState": "Started"
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.TriggerPerformance",
+                  "ValueSource": {},
+                  "PerformanceType": "D",
+                  "PerformanceID": 202170108
+                },
+                {
+                  "$type": "RPG.GameCore.TriggerCustomString",
+                  "CustomString": {
+                    "Value": "202170103_BattleStart"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
           "$type": "RPG.GameCore.PropSetupTrigger",
           "TargetType": {
             "$type": "RPG.GameCore.TargetFetchAdvPropEx",
@@ -196,15 +233,9 @@
           "DisableAfterTriggered": true,
           "OnTriggerEnter": [
             {
-              "$type": "RPG.GameCore.TriggerPerformance",
-              "ValueSource": {},
-              "PerformanceType": "D",
-              "PerformanceID": 202170108
-            },
-            {
-              "$type": "RPG.GameCore.TriggerCustomString",
-              "CustomString": {
-                "Value": "202170103_BattleStart"
+              "$type": "RPG.GameCore.TriggerGroupEvent",
+              "EventName": {
+                "Value": "202170103_Predicate"
               }
             }
           ]

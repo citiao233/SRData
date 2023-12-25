@@ -1,30 +1,7 @@
 {
   "AbilityList": [
     {
-      "Modifiers": {
-        "Local_SPAdd": {
-          "_CallbackList": [
-            {
-              "Event": "OnTriggerDeath",
-              "CallbackConfig": [
-                {
-                  "$type": "RPG.GameCore.ModifySPNew",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
-                  },
-                  "AddValue": {
-                    "IsDynamic": false,
-                    "FixedValue": {
-                      "Value": 10
-                    }
-                  }
-                }
-              ]
-            }
-          ]
-        }
-      },
+      "Modifiers": {},
       "Name": "Avatar_Common_PassiveSkill",
       "TargetInfo": {
         "TargetType": "Caster"
@@ -36,7 +13,15 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "AbilityTargetEntity"
           },
-          "ModifierName": "Local_SPAdd"
+          "ModifierName": "Local_SPAdd",
+          "DynamicValues": {
+            "MDF_AddValue": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 10
+              }
+            }
+          }
         },
         {
           "$type": "RPG.GameCore.AddModifier",
@@ -298,6 +283,38 @@
     }
   ],
   "GlobalModifiers": {
+    "Local_SPAdd": {
+      "_CallbackList": [
+        {
+          "Event": "OnTriggerDeath",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.ModifySPNew",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "AddValue": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    901482104
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "Stacking": "Replace",
+      "DynamicValues": {
+        "Values": {
+          "901482104": {}
+        }
+      }
+    },
     "TriggerStanceCountDown_Test": {
       "BehaviorFlagList": [
         "KeepOnDeathrattle"
