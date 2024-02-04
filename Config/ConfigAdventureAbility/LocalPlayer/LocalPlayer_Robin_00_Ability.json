@@ -63,7 +63,7 @@
               "NormalizedTimeEnd": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.0400000000372529
+                  "Value": 0.1
                 }
               }
             },
@@ -86,33 +86,57 @@
                 "Alias": "AbilityTargetEntity"
               },
               "Projectile": {
-                "Behavior": "Static",
+                "ColliderTemplate": "CapsuleZ_MazeCommonBullet",
+                "Behavior": "LinearWithHitDetect",
+                "FlySpeed": 20,
                 "EnableRayCast": true,
-                "MaxLifeTime": 2.5,
-                "TargetOffset": {
-                  "X": 0,
-                  "Y": 1.2,
-                  "Z": 0
-                },
-                "FlyEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_BlackSwan/Eff_Avatar_BlackSwan_00_MazeAttack01_Hit.prefab"
-              }
-            },
-            {
-              "$type": "RPG.GameCore.AdventureFireProjectile",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "AbilityTargetEntity"
-              },
-              "Projectile": {
-                "Behavior": "Static",
-                "EnableRayCast": true,
-                "MaxLifeTime": 0.1,
+                "Gravity": 0,
+                "MaxLifeTime": 0.7,
+                "AttachPoint": "Origin",
                 "AttachOffset": {
                   "X": 0,
-                  "Y": 1.2,
+                  "Y": 1.25,
                   "Z": 0
+                },
+                "TargetAttachPoint": "Root",
+                "FlyEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Robin/Eff_Avatar_Robin_00_MazeAttack_Bird.prefab",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Robin/Eff_Avatar_Robin_00_MazeAttack_Hit.prefab",
+                "FlyEffectFadeOut": true,
+                "LinearPitchAngle": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 0.1
+                  }
                 }
               },
+              "OnProjectileHit": [
+                {
+                  "$type": "RPG.GameCore.AdventureTriggerAttack",
+                  "AttackTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllEnemy"
+                  },
+                  "AttackRootTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ProjectileHitEntity"
+                  },
+                  "TriggerBattleDelay": 0.1,
+                  "AttackDetectConfig": {
+                    "$type": "RPG.GameCore.AdventureAttackDetectCircleConfig",
+                    "MaxRadius": 1,
+                    "FanAngle": 360,
+                    "Hight": 2,
+                    "Offset": {
+                      "X": 0,
+                      "Y": -1,
+                      "Z": 0
+                    }
+                  },
+                  "HitConfig": {
+                    "HitAnimation": "Hit"
+                  }
+                }
+              ],
               "OnProjectileLifetimeFinish": [
                 {
                   "$type": "RPG.GameCore.AdventureTriggerAttack",
@@ -127,9 +151,14 @@
                   "TriggerBattleDelay": 0.1,
                   "AttackDetectConfig": {
                     "$type": "RPG.GameCore.AdventureAttackDetectCircleConfig",
-                    "MaxRadius": 2,
+                    "MaxRadius": 1,
                     "FanAngle": 360,
-                    "Hight": 2
+                    "Hight": 2,
+                    "Offset": {
+                      "X": 0,
+                      "Y": -1,
+                      "Z": 0
+                    }
                   },
                   "HitConfig": {
                     "HitAnimation": "Hit"
@@ -158,7 +187,7 @@
               "NormalizedTimeEnd": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.0400000000372529
+                  "Value": 0.138
                 }
               }
             },
@@ -181,33 +210,57 @@
                 "Alias": "None"
               },
               "Projectile": {
-                "Behavior": "Static",
+                "ColliderTemplate": "CapsuleZ_MazeCommonBullet",
+                "Behavior": "LinearWithHitDetect",
+                "FlySpeed": 20,
                 "EnableRayCast": true,
-                "MaxLifeTime": 2.5,
+                "Gravity": 0,
+                "MaxLifeTime": 0.7,
+                "AttachPoint": "Origin",
                 "AttachOffset": {
                   "X": 0,
-                  "Y": 1.2,
-                  "Z": 6
+                  "Y": 1.25,
+                  "Z": 0
                 },
-                "FlyEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_BlackSwan/Eff_Avatar_BlackSwan_00_MazeAttack01_Hit.prefab"
-              }
-            },
-            {
-              "$type": "RPG.GameCore.AdventureFireProjectile",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "None"
-              },
-              "Projectile": {
-                "Behavior": "Static",
-                "EnableRayCast": true,
-                "MaxLifeTime": 0.4,
-                "AttachOffset": {
-                  "X": 0,
-                  "Y": 1.2,
-                  "Z": 6
+                "TargetAttachPoint": "Root",
+                "FlyEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Robin/Eff_Avatar_Robin_00_MazeAttack_Bird.prefab",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Robin/Eff_Avatar_Robin_00_MazeAttack_Hit.prefab",
+                "FlyEffectFadeOut": true,
+                "LinearPitchAngle": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": -1
+                  }
                 }
               },
+              "OnProjectileHit": [
+                {
+                  "$type": "RPG.GameCore.AdventureTriggerAttack",
+                  "AttackTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllEnemy"
+                  },
+                  "AttackRootTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ProjectileHitEntity"
+                  },
+                  "TriggerBattleDelay": 0.1,
+                  "AttackDetectConfig": {
+                    "$type": "RPG.GameCore.AdventureAttackDetectCircleConfig",
+                    "MaxRadius": 1,
+                    "FanAngle": 360,
+                    "Hight": 2,
+                    "Offset": {
+                      "X": 0,
+                      "Y": -1,
+                      "Z": 0
+                    }
+                  },
+                  "HitConfig": {
+                    "HitAnimation": "Hit"
+                  }
+                }
+              ],
               "OnProjectileLifetimeFinish": [
                 {
                   "$type": "RPG.GameCore.AdventureTriggerAttack",
@@ -222,12 +275,12 @@
                   "TriggerBattleDelay": 0.1,
                   "AttackDetectConfig": {
                     "$type": "RPG.GameCore.AdventureAttackDetectCircleConfig",
-                    "MaxRadius": 2,
+                    "MaxRadius": 1,
                     "FanAngle": 360,
                     "Hight": 2,
                     "Offset": {
                       "X": 0,
-                      "Y": -0.8,
+                      "Y": -1,
                       "Z": 0
                     }
                   },
@@ -266,7 +319,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.11599999968893826
+              "Value": 0.116
             }
           }
         },

@@ -47,7 +47,7 @@
                   "PropertyValue": {
                     "IsDynamic": false,
                     "FixedValue": {
-                      "Value": 0.7500000006984919
+                      "Value": 0.75
                     }
                   }
                 }
@@ -115,7 +115,7 @@
                   "PropertyValue": {
                     "IsDynamic": false,
                     "FixedValue": {
-                      "Value": 0.7500000006984919
+                      "Value": 0.75
                     }
                   }
                 }
@@ -189,7 +189,7 @@
                       "Attacker_AllDamageTypeAddedRatio": {
                         "IsDynamic": false,
                         "FixedValue": {
-                          "Value": 0.7500000006984919
+                          "Value": 0.75
                         }
                       }
                     }
@@ -210,7 +210,7 @@
                   "PropertyValue": {
                     "IsDynamic": false,
                     "FixedValue": {
-                      "Value": 0.3000000002793968
+                      "Value": 0.3
                     }
                   }
                 }
@@ -282,7 +282,7 @@
                       "Attacker_AllDamageTypeAddedRatio": {
                         "IsDynamic": false,
                         "FixedValue": {
-                          "Value": 0.7500000006984919
+                          "Value": 0.75
                         }
                       }
                     }
@@ -303,7 +303,7 @@
                   "PropertyValue": {
                     "IsDynamic": false,
                     "FixedValue": {
-                      "Value": 0.7500000006984919
+                      "Value": 0.75
                     }
                   }
                 },
@@ -317,7 +317,7 @@
                   "PropertyValue": {
                     "IsDynamic": false,
                     "FixedValue": {
-                      "Value": 0.7500000006984919
+                      "Value": 0.75
                     }
                   }
                 }
@@ -385,7 +385,7 @@
                   "PropertyValue": {
                     "IsDynamic": false,
                     "FixedValue": {
-                      "Value": 0.7500000006984919
+                      "Value": 0.75
                     }
                   }
                 }
@@ -458,7 +458,7 @@
                       "Attacker_AllDamageTypeAddedRatio": {
                         "IsDynamic": false,
                         "FixedValue": {
-                          "Value": 0.7500000006984919
+                          "Value": 0.75
                         }
                       }
                     }
@@ -612,7 +612,7 @@
                         "Modifier_Electric_DamagePercentage": {
                           "IsDynamic": false,
                           "FixedValue": {
-                            "Value": 1.5000000004656613
+                            "Value": 1.5
                           }
                         }
                       }
@@ -681,7 +681,7 @@
               "AddDelayRatio": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": -0.1500000001396984
+                  "Value": -0.15
                 }
               }
             }
@@ -704,7 +704,7 @@
                       "Attacker_AllDamageTypeAddedRatio": {
                         "IsDynamic": false,
                         "FixedValue": {
-                          "Value": 0.5000000004656613
+                          "Value": 0.5
                         }
                       }
                     }
@@ -731,7 +731,7 @@
                       "AddNormalizedValue": {
                         "IsDynamic": false,
                         "FixedValue": {
-                          "Value": -0.1500000001396984
+                          "Value": -0.15
                         }
                       }
                     }
@@ -751,6 +751,366 @@
             "Alias": "Caster"
           },
           "ModifierName": "MFarmRelic_104308"
+        }
+      ]
+    },
+    {
+      "Modifiers": {
+        "MFarmRelic_104309": {
+          "_CallbackList": [
+            {
+              "Event": "OnListenCharacterCreate",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByTargetTeam",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "Team": "TeamDark"
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "MFarmRelic_104309_Sub"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "MFarmRelic_104309_Sub": {
+          "_CallbackList": [
+            {
+              "Event": "OnModifierAdd",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCheckModifierCallBackBehaviorFlag",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "Flag": "STAT_DOT"
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValueByMultiModifierValueSum",
+                      "ReadTargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "BehaviorFlag": "STAT_DOT",
+                      "ValueType": "Amount",
+                      "DynamicKey": "DOT_Layer"
+                    },
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "DynamicKey": "DOT_Layer",
+                        "CompareType": "Greater",
+                        "CompareValue": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 5
+                          }
+                        }
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.SetDynamicValue",
+                          "DynamicKey": "DOT_Layer",
+                          "Value": {
+                            "IsDynamic": false,
+                            "FixedValue": {
+                              "Value": 5
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByIsContainModifier",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "ModifierName": "MFarmRelic_104309_Sub2"
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
+                          "ReadTargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "ModifierName": "MFarmRelic_104309_Sub2",
+                          "ValueType": "Layer",
+                          "Multiplier": {
+                            "IsDynamic": false,
+                            "FixedValue": {
+                              "Value": 1
+                            }
+                          },
+                          "DynamicKey": "Modifier_Layer"
+                        }
+                      ],
+                      "FailedTaskList": [
+                        {
+                          "$type": "RPG.GameCore.SetDynamicValue",
+                          "DynamicKey": "Modifier_Layer",
+                          "Value": {
+                            "IsDynamic": false,
+                            "FixedValue": {
+                              "Value": 0
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "ModifierName": "MFarmRelic_104309_Sub2",
+                      "LayerAddWhenStack": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQABAQMK",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            1372040199,
+                            1346702127
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Event": "OnModifierRemove",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCheckModifierCallBackBehaviorFlag",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "Flag": "STAT_DOT"
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValueByMultiModifierValueSum",
+                      "ReadTargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "BehaviorFlag": "STAT_DOT",
+                      "ValueType": "Amount",
+                      "DynamicKey": "DOT_Layer"
+                    },
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "DynamicKey": "DOT_Layer",
+                        "CompareType": "Greater",
+                        "CompareValue": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 5
+                          }
+                        }
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.SetDynamicValue",
+                          "DynamicKey": "DOT_Layer",
+                          "Value": {
+                            "IsDynamic": false,
+                            "FixedValue": {
+                              "Value": 5
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByIsContainModifier",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "ModifierName": "MFarmRelic_104309_Sub2"
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
+                          "ReadTargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "ModifierName": "MFarmRelic_104309_Sub2",
+                          "ValueType": "Layer",
+                          "Multiplier": {
+                            "IsDynamic": false,
+                            "FixedValue": {
+                              "Value": 1
+                            }
+                          },
+                          "DynamicKey": "Modifier_Layer"
+                        }
+                      ],
+                      "FailedTaskList": [
+                        {
+                          "$type": "RPG.GameCore.SetDynamicValue",
+                          "DynamicKey": "Modifier_Layer",
+                          "Value": {
+                            "IsDynamic": false,
+                            "FixedValue": {
+                              "Value": 0
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "ModifierName": "MFarmRelic_104309_Sub2",
+                      "LayerAddWhenStack": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQABAQMK",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            1372040199,
+                            1346702127
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "DynamicValues": {
+            "Values": {
+              "1372040199": {},
+              "1346702127": {},
+              "1912601768": {}
+            }
+          }
+        },
+        "MFarmRelic_104309_Sub2": {
+          "LayerAddWhenStack": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          },
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
+                  "ReadTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "ValueType": "Layer",
+                  "Multiplier": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  },
+                  "DynamicKey": "_Layer"
+                },
+                {
+                  "$type": "RPG.GameCore.StackProperty",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "Property": "AllDamageTypeTakenRatio",
+                  "PropertyValue": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQABAQQK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        909832565,
+                        1912601768
+                      ]
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "DynamicKey": "_Layer",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.RemoveSelfModifier"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "Stacking": "ReplaceByCaster",
+          "DynamicValues": {
+            "Values": {
+              "909832565": {},
+              "909832562": {},
+              "1912601768": {}
+            }
+          }
+        }
+      },
+      "Name": "FarmRelicAbility_104309",
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "MFarmRelic_104309"
         }
       ]
     }

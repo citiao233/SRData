@@ -38,7 +38,7 @@
           "NormalizedTimeWait": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.6800000006332994
+              "Value": 0.68
             }
           }
         }
@@ -65,7 +65,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.13699999963864684
+              "Value": 0.137
             }
           }
         },
@@ -185,7 +185,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.40000000037252903
+              "Value": 0.4
             }
           }
         },
@@ -253,7 +253,7 @@
           "NormalizedTimeWait": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.6600000006146729
+              "Value": 0.66
             }
           }
         },
@@ -285,7 +285,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.3500000003259629
+              "Value": 0.35
             }
           }
         },
@@ -295,6 +295,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "AbilityTargetEntity"
           },
+          "IsAttachToTargetEntity": false,
           "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Natasha/Eff_Avatar_Natasha_00_Skill02_Heal.prefab"
         },
         {
@@ -303,7 +304,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.4300000004004687
+              "Value": 0.43
             }
           }
         },
@@ -453,7 +454,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.530000000493601
+              "Value": 0.53
             }
           }
         },
@@ -471,22 +472,36 @@
           }
         },
         {
-          "$type": "RPG.GameCore.PredicateTaskList",
+          "$type": "RPG.GameCore.Retarget",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "SkillTargetEntityList"
+          },
           "Predicate": {
-            "$type": "RPG.GameCore.ByIsTurnActionEntity",
+            "$type": "RPG.GameCore.ByCompareTarget",
             "TargetType": {
               "$type": "RPG.GameCore.TargetAlias",
-              "Alias": "SkillTargetEntityList"
+              "Alias": "ParamEntity"
+            },
+            "CompareType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "Inverse": true
+          },
+          "MaxNumber": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
             }
           },
-          "SuccessTaskList": [],
-          "FailedTaskList": [
+          "TaskList": [
             {
               "$type": "RPG.GameCore.CharacterPlayVO",
               "VOType": "ReceiveHealing",
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "SkillTargetEntityList"
+                "Alias": "ParamEntity"
               }
             }
           ]
@@ -512,7 +527,12 @@
         },
         {
           "$type": "RPG.GameCore.WaitSecond",
-          "WaitTime": 0.5
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.5
+            }
+          }
         },
         {
           "$type": "RPG.GameCore.TriggerAnimState",
@@ -559,7 +579,12 @@
         },
         {
           "$type": "RPG.GameCore.WaitSecond",
-          "WaitTime": 0.6
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.6
+            }
+          }
         },
         {
           "$type": "RPG.GameCore.VCameraConfigChange",
@@ -651,7 +676,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.21599999978207052
+              "Value": 0.216
             }
           }
         },
@@ -665,7 +690,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.7300000006798655
+              "Value": 0.73
             }
           }
         },
@@ -687,7 +712,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.9980000003706664
+              "Value": 0.998
             }
           }
         },
@@ -739,6 +764,7 @@
                         "$type": "RPG.GameCore.TargetAlias",
                         "Alias": "ModifierOwnerEntity"
                       },
+                      "IsAttachToTargetEntity": false,
                       "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_Heal.prefab"
                     },
                     {
@@ -799,7 +825,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.7300000006798655
+              "Value": 0.73
             }
           }
         },
@@ -809,6 +835,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "AllLightTeam"
           },
+          "IsAttachToTargetEntity": false,
           "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Natasha/Eff_Avatar_Natasha_00_Skill03_03_Heal.prefab"
         },
         {
@@ -817,7 +844,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.7500000006984919
+              "Value": 0.75
             }
           }
         },
@@ -827,6 +854,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "AllLightTeam"
           },
+          "IsAttachToTargetEntity": false,
           "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_Heal.prefab"
         },
         {
@@ -920,7 +948,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.7800000007264316
+              "Value": 0.78
             }
           }
         },
@@ -971,22 +999,36 @@
           }
         },
         {
-          "$type": "RPG.GameCore.PredicateTaskList",
+          "$type": "RPG.GameCore.Retarget",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "SkillTargetEntityList"
+          },
           "Predicate": {
-            "$type": "RPG.GameCore.ByIsTurnActionEntity",
+            "$type": "RPG.GameCore.ByCompareTarget",
             "TargetType": {
               "$type": "RPG.GameCore.TargetAlias",
-              "Alias": "SkillTargetEntityList"
+              "Alias": "ParamEntity"
+            },
+            "CompareType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "Inverse": true
+          },
+          "MaxNumber": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
             }
           },
-          "SuccessTaskList": [],
-          "FailedTaskList": [
+          "TaskList": [
             {
               "$type": "RPG.GameCore.CharacterPlayVO",
               "VOType": "ReceiveHealing",
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "SkillTargetEntityList"
+                "Alias": "ParamEntity"
               }
             }
           ]
@@ -997,7 +1039,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.9980000003706664
+              "Value": 0.998
             }
           }
         },
@@ -1351,6 +1393,7 @@
                     "$type": "RPG.GameCore.TargetAlias",
                     "Alias": "Caster"
                   },
+                  "IsAttachToTargetEntity": false,
                   "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_MAZ_RecoverSP.prefab"
                 }
               ]
@@ -1477,7 +1520,7 @@
           "NormalizedTimeWait": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.6600000006146729
+              "Value": 0.66
             }
           }
         },
@@ -1509,7 +1552,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.3500000003259629
+              "Value": 0.35
             }
           }
         },
@@ -1519,6 +1562,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "AbilityTargetEntity"
           },
+          "IsAttachToTargetEntity": false,
           "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Natasha/Eff_Avatar_Natasha_00_Skill02_Heal.prefab"
         },
         {
@@ -1527,7 +1571,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.4300000004004687
+              "Value": 0.43
             }
           }
         },
@@ -1604,6 +1648,7 @@
                     "$type": "RPG.GameCore.TargetAlias",
                     "Alias": "ModifierOwnerEntity"
                   },
+                  "IsAttachToTargetEntity": false,
                   "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_Heal.prefab"
                 },
                 {

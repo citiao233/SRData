@@ -1,6 +1,12 @@
 {
   "AIName": "ST_NPCMonster_Master_Steer",
   "VariableList": [],
+  "GlobalVariableList": [
+    {
+      "$type": "RPG.GameCore.AIVariableFloat",
+      "Name": "Int_StateMemory"
+    }
+  ],
   "DecisionList": [],
   "TransitionTable": [],
   "RootState": {
@@ -38,7 +44,8 @@
           "$type": "RPG.GameCore.ST_ByHasAbnormalState",
           "States": [
             "Taunt",
-            "Fear"
+            "Fear",
+            "Enchanted"
           ]
         },
         "SubStateList": [
@@ -73,6 +80,22 @@
             ],
             "FilePath": "Config/ConfigAI/Adventure/NPCMonster/ST_NPCMonster_Sub_Fear.json",
             "Name": "FearState"
+          },
+          {
+            "$type": "RPG.GameCore.StateTreeSubTreeConfig",
+            "EnterCondition": {
+              "$type": "RPG.GameCore.ST_ByHasAbnormalState",
+              "States": [
+                "Enchanted"
+              ]
+            },
+            "TransitionList": [
+              {
+                "TransitionToState": "ExitCombatState"
+              }
+            ],
+            "FilePath": "Config/ConfigAI/Adventure/NPCMonster/ST_NPCMonster_Sub_Enchanted_Chase.json",
+            "Name": "EnchantedState"
           }
         ],
         "Name": "AbnormalState"
@@ -110,7 +133,8 @@
               "$type": "RPG.GameCore.ST_ByHasAbnormalState",
               "States": [
                 "Taunt",
-                "Fear"
+                "Fear",
+                "Enchanted"
               ]
             }
           }
@@ -133,7 +157,8 @@
                   "States": [
                     "Taunt",
                     "HangUp",
-                    "Fear"
+                    "Fear",
+                    "Enchanted"
                   ]
                 },
                 {
@@ -224,5 +249,11 @@
         "Name": "SystemicState"
       }
     ]
+  },
+  "OnDisable": {
+    "$type": "RPG.GameCore.TaskConfig"
+  },
+  "OnInit": {
+    "$type": "RPG.GameCore.TaskConfig"
   }
 }

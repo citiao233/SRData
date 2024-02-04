@@ -61,19 +61,19 @@
                   "OffsetTargetDistance": {
                     "IsDynamic": false,
                     "FixedValue": {
-                      "Value": 1.2000000001862645
+                      "Value": 1.2
                     }
                   },
                   "NormalizedTimeStart": {
                     "IsDynamic": false,
                     "FixedValue": {
-                      "Value": 0.027999999467283487
+                      "Value": 0.027999999
                     }
                   },
                   "NormalizedTimeEnd": {
                     "IsDynamic": false,
                     "FixedValue": {
-                      "Value": 0.04299999983049929
+                      "Value": 0.043
                     }
                   },
                   "DefaultMoveDistance": {
@@ -97,13 +97,13 @@
                   "SteerNormalizedTimeStart": {
                     "IsDynamic": false,
                     "FixedValue": {
-                      "Value": 0.027999999467283487
+                      "Value": 0.027999999
                     }
                   },
                   "SteerNormalizedTimeEnd": {
                     "IsDynamic": false,
                     "FixedValue": {
-                      "Value": 0.04299999983049929
+                      "Value": 0.043
                     }
                   }
                 }
@@ -119,7 +119,7 @@
               "NormalizedTimeEnd": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.05000000004656613
+                  "Value": 0.05
                 }
               }
             },
@@ -133,7 +133,7 @@
               "NormalizedTimeEnd": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.060000000055879354
+                  "Value": 0.06
                 }
               }
             },
@@ -166,7 +166,7 @@
               "NormalizedTimeEnd": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.14000000013038516
+                  "Value": 0.14
                 }
               }
             }
@@ -192,13 +192,13 @@
                       "NormalizedTimeStart": {
                         "IsDynamic": false,
                         "FixedValue": {
-                          "Value": 0.027999999467283487
+                          "Value": 0.027999999
                         }
                       },
                       "NormalizedTimeEnd": {
                         "IsDynamic": false,
                         "FixedValue": {
-                          "Value": 0.04299999983049929
+                          "Value": 0.043
                         }
                       },
                       "DefaultMoveDistance": {
@@ -220,7 +220,7 @@
                   "NormalizedTimeEnd": {
                     "IsDynamic": false,
                     "FixedValue": {
-                      "Value": 0.05000000004656613
+                      "Value": 0.05
                     }
                   }
                 },
@@ -247,7 +247,7 @@
                   "NormalizedTimeEnd": {
                     "IsDynamic": false,
                     "FixedValue": {
-                      "Value": 0.060000000055879354
+                      "Value": 0.06
                     }
                   }
                 },
@@ -278,7 +278,7 @@
                   "NormalizedTimeEnd": {
                     "IsDynamic": false,
                     "FixedValue": {
-                      "Value": 0.14000000013038516
+                      "Value": 0.14
                     }
                   }
                 }
@@ -304,13 +304,13 @@
                           "NormalizedTimeStart": {
                             "IsDynamic": false,
                             "FixedValue": {
-                              "Value": 0.027999999467283487
+                              "Value": 0.027999999
                             }
                           },
                           "NormalizedTimeEnd": {
                             "IsDynamic": false,
                             "FixedValue": {
-                              "Value": 0.04299999983049929
+                              "Value": 0.043
                             }
                           },
                           "DefaultMoveDistance": {
@@ -332,7 +332,7 @@
                       "NormalizedTimeEnd": {
                         "IsDynamic": false,
                         "FixedValue": {
-                          "Value": 0.05000000004656613
+                          "Value": 0.05
                         }
                       }
                     },
@@ -359,7 +359,7 @@
                       "NormalizedTimeEnd": {
                         "IsDynamic": false,
                         "FixedValue": {
-                          "Value": 0.060000000055879354
+                          "Value": 0.06
                         }
                       }
                     },
@@ -390,7 +390,7 @@
                       "NormalizedTimeEnd": {
                         "IsDynamic": false,
                         "FixedValue": {
-                          "Value": 0.14000000013038516
+                          "Value": 0.14
                         }
                       }
                     }
@@ -416,7 +416,7 @@
                       "NormalizedTimeEnd": {
                         "IsDynamic": false,
                         "FixedValue": {
-                          "Value": 0.05000000004656613
+                          "Value": 0.05
                         }
                       }
                     },
@@ -443,7 +443,7 @@
                       "NormalizedTimeEnd": {
                         "IsDynamic": false,
                         "FixedValue": {
-                          "Value": 0.060000000055879354
+                          "Value": 0.06
                         }
                       }
                     },
@@ -474,7 +474,7 @@
                       "NormalizedTimeEnd": {
                         "IsDynamic": false,
                         "FixedValue": {
-                          "Value": 0.14000000013038516
+                          "Value": 0.14
                         }
                       }
                     }
@@ -523,9 +523,103 @@
           "UseAllRenderer": true
         },
         {
+          "$type": "RPG.GameCore.EnableLocalPlayerMoveIgnoreMonster"
+        },
+        {
+          "$type": "RPG.GameCore.DisableMazeLockTarget",
+          "Target": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AdvLocalPlayer"
+          },
+          "Disable": false
+        },
+        {
           "$type": "RPG.GameCore.GlobalMainIntensityEffect",
           "IsRevert": true,
           "FadeDuration": 0.5
+        },
+        {
+          "$type": "RPG.GameCore.CharacterChangeModel",
+          "OnSuccess": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAdvCharacterLogicState",
+                "Type": "MazeSkill"
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.AdventureTriggerAnimStateWithMove",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AdvLocalPlayer"
+                  },
+                  "AnimLogicState": "Idle",
+                  "AnimStateName": "StandBy",
+                  "TransitionDuration": 0
+                }
+              ]
+            },
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Firefly/Eff_Avatar_Firefly_00_MazeSkill_Bianshen_End_01.prefab"
+            },
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Firefly/Eff_Avatar_Sam_00_MazeSkill_Bianshen_End_01.prefab"
+            },
+            {
+              "$type": "RPG.GameCore.SetTargetEntityFadeWithAnim",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              }
+            },
+            {
+              "$type": "RPG.GameCore.TriggerEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Firefly/Eff_Avatar_Firefly_00_MazeSkill_Bianshen_End_01.prefab",
+              "MinMutexTime": -1,
+              "MinMutexType": "Entity"
+            },
+            {
+              "$type": "RPG.GameCore.VCameraConfigChange",
+              "CameraConfig": {
+                "Freelook3rdConfig": {
+                  "FOVChangeParam": {
+                    "TargetValue": 45,
+                    "Time": 1.2,
+                    "ChangeCurvePath": "Camera/BlendCurve/BlendCut_1310_MazeSkill.asset"
+                  },
+                  "ZoomChangeParam": {
+                    "TargetValue": -0.5,
+                    "Time": 1.2,
+                    "ChangeCurvePath": "Camera/BlendCurve/BlendCut_1310_MazeSkill.asset"
+                  },
+                  "AxisYChangeParam": {
+                    "TargetValue": 0.5,
+                    "Time": 1.2,
+                    "ChangeCurvePath": "Camera/BlendCurve/BlendCut_1310_MazeSkill.asset"
+                  },
+                  "LookAtOffsetChangeParam": {
+                    "Time": 1.2,
+                    "ChangeCurvePath": "Camera/BlendCurve/BlendCut_1310_MazeSkill.asset"
+                  }
+                }
+              }
+            }
+          ]
         }
       ],
       "Name": "LocalPlayer_Firefly_00_MazeSkill",
@@ -584,7 +678,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.5000000004656613
+              "Value": 0.5
             }
           }
         },
@@ -618,6 +712,10 @@
           "$type": "RPG.GameCore.SetNoShadowCaster",
           "UseAllRenderer": true,
           "IsNoShadow": false
+        },
+        {
+          "$type": "RPG.GameCore.EnableLocalPlayerMoveIgnoreMonster",
+          "Enable": true
         },
         {
           "$type": "RPG.GameCore.VCameraConfigChange",
@@ -671,7 +769,7 @@
           "MaxDuration": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 3.2000000001862645
+              "Value": 3.2
             }
           },
           "MaxSpeed": {
@@ -705,7 +803,7 @@
           "WaitTime": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.25000000023283064
+              "Value": 0.25
             }
           }
         },
@@ -721,7 +819,7 @@
               "OpCodes": "AQAAAAMK",
               "FixedValues": [
                 {
-                  "Value": 0.25000000023283064
+                  "Value": 0.25
                 }
               ],
               "DynamicHashes": [
@@ -750,7 +848,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.027999999467283487
+              "Value": 0.027999999
             }
           }
         },
@@ -763,7 +861,7 @@
           "MaxDuration": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.40000000037252903
+              "Value": 0.4
             }
           },
           "MaxSpeed": {
@@ -792,6 +890,9 @@
           "UseAllRenderer": true
         },
         {
+          "$type": "RPG.GameCore.EnableLocalPlayerMoveIgnoreMonster"
+        },
+        {
           "$type": "RPG.GameCore.WaitAnimState",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
@@ -801,7 +902,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.036999999545514584
+              "Value": 0.037
             }
           }
         },
@@ -881,7 +982,7 @@
               "ID": 131001
             }
           ],
-          "TriggerBattleByAllHitTarget": true
+          "EnterBattleSelectTargetType": "AllHitTarget"
         },
         {
           "$type": "RPG.GameCore.VCameraConfigChange",
@@ -910,7 +1011,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.05000000004656613
+              "Value": 0.05
             }
           }
         },
@@ -924,7 +1025,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.13299999991431832
+              "Value": 0.133
             }
           }
         },
@@ -938,7 +1039,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.17000000015832484
+              "Value": 0.17
             }
           }
         }

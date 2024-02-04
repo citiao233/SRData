@@ -1022,7 +1022,41 @@
     "ADV_Modifier_MazeCommon_Dead": {
       "OnAttack": [
         {
-          "$type": "RPG.GameCore.AdventureSetAttackTargetMonsterDie"
+          "$type": "RPG.GameCore.AdventureSetAttackTargetMonsterDie",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ParamEntityList"
+          }
+        }
+      ]
+    },
+    "ADV_Modifier_MazeCommon_WolfBro_MonsterHitPlayer": {
+      "OnAttack": [
+        {
+          "$type": "RPG.GameCore.WolfBroPuzzleReport",
+          "ReportHit": true
+        }
+      ]
+    },
+    "ADV_Modifier_MazeCommon_DeDead": {
+      "OnDestroy": [
+        {
+          "$type": "RPG.GameCore.AdventureSetAttackTargetMonsterDie",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "IsServerSimulateBattle": false
+        }
+      ],
+      "OnBeAttack": [
+        {
+          "$type": "RPG.GameCore.AdventureSetAttackTargetMonsterDie",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "IsServerSimulateBattle": false
         }
       ]
     },
@@ -1033,7 +1067,8 @@
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "ParamEntityList"
-          }
+          },
+          "IsServerSimulateBattle": false
         }
       ]
     },
@@ -1049,6 +1084,87 @@
           "ModifierName": "ADV_Modifier_MazeCommon_PlayDead"
         }
       ]
+    },
+    "ADV_Modifier_MiniHero_LateDead": {
+      "LifeTime": 0.1,
+      "OnDestroy": [
+        {
+          "$type": "RPG.GameCore.AddAdventureModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "ModifierName": "ADV_Modifier_MiniHero_PlayDead"
+        }
+      ]
+    },
+    "ADV_Modifier_MiniHero_PlayDead": {
+      "OnDestroy": [
+        {
+          "$type": "RPG.GameCore.CharacterTriggerAnimState",
+          "TargetAlias": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "AnimStateName": "StandBy"
+        },
+        {
+          "$type": "RPG.GameCore.AdvMonsterForbidSelect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "Enable": false
+        },
+        {
+          "$type": "RPG.GameCore.AdvCharacterDisableHitBox",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "Enable": false
+        },
+        {
+          "$type": "RPG.GameCore.EnableNPCMonsterAI",
+          "Enable": true,
+          "GroupMonsterIDs": [],
+          "UniqueNames": []
+        }
+      ],
+      "OnStack": [
+        {
+          "$type": "RPG.GameCore.CharacterTriggerAnimState",
+          "TargetAlias": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "AnimStateName": "Die"
+        },
+        {
+          "$type": "RPG.GameCore.AdvMonsterForbidSelect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.AdvCharacterDisableHitBox",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.EnableNPCMonsterAI",
+          "GroupMonsterIDs": [],
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "UniqueNames": []
+        }
+      ],
+      "Stacking": "Replace"
     },
     "ADV_Modifier_MazeCommon_PlayDead": {
       "LifeTime": 4,
@@ -1141,7 +1257,20 @@
       ],
       "OnAttack": [
         {
-          "$type": "RPG.GameCore.AdventureSetAttackTargetWithoutBattle"
+          "$type": "RPG.GameCore.Retarget",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ParamEntityList"
+          },
+          "TaskList": [
+            {
+              "$type": "RPG.GameCore.AdventureSetAttackTargetWithoutBattle",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ParamEntity"
+              }
+            }
+          ]
         },
         {
           "$type": "RPG.GameCore.RemoveEffect",
@@ -1156,7 +1285,11 @@
     "ADV_Modifier_MazeCommon_HitToDie": {
       "OnBeAttack": [
         {
-          "$type": "RPG.GameCore.AdventureSetAttackTargetWithoutBattle"
+          "$type": "RPG.GameCore.AdventureSetAttackTargetWithoutBattle",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          }
         },
         {
           "$type": "RPG.GameCore.AddAdventureModifier",
@@ -1176,6 +1309,43 @@
             "Alias": "ModifierOwnerEntity"
           },
           "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_FakePlayer_W1_Mecha01_00_WhiteBox_LockTarget.prefab"
+        }
+      ]
+    },
+    "ADV_Modifier_MazeCommon_MiniHero_HitToDie": {
+      "OnBeAttack": [
+        {
+          "$type": "RPG.GameCore.AdventureSetAttackTargetWithoutBattle",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.AddAdventureModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "ModifierName": "ADV_Modifier_MiniHero_LateDead"
+        }
+      ]
+    },
+    "ADV_Modifier_MazeCommon_MiniHero_NoBattle": {
+      "OnBeforeAttack": [],
+      "OnBeAttack": [
+        {
+          "$type": "RPG.GameCore.AdventureSetAttackTargetWithoutBattle",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerCustomString",
+          "CustomString": {
+            "Value": "HeroBeHit"
+          }
         }
       ]
     },
@@ -1210,6 +1380,89 @@
           "ModifierName": "ADV_Modifier_MazeCommon_HitCount"
         }
       ]
+    },
+    "ADV_Modifier_MazeCommon_DinosaurRun_SpeedUP": {
+      "OnDestroy": [
+        {
+          "$type": "RPG.GameCore.ModifyAdventureCharacterRunSpeedRatio",
+          "UniqueKey": "TaskEnabled",
+          "ModifyEnabled": false,
+          "SpeedRatioMultiplier": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          }
+        }
+      ],
+      "OnStack": [
+        {
+          "$type": "RPG.GameCore.ModifyAdventureCharacterRunSpeedRatio",
+          "UniqueKey": "TaskEnabled",
+          "SpeedRatioMultiplier": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1.5
+            }
+          }
+        }
+      ],
+      "Stacking": "Replace"
+    },
+    "ADV_Modifier_MazeCommon_DinosaurRun_SpeedDown": {
+      "OnDestroy": [
+        {
+          "$type": "RPG.GameCore.ModifyAdventureCharacterRunSpeedRatio",
+          "UniqueKey": "TaskEnabled",
+          "ModifyEnabled": false,
+          "SpeedRatioMultiplier": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          }
+        }
+      ],
+      "OnStack": [
+        {
+          "$type": "RPG.GameCore.ModifyAdventureCharacterRunSpeedRatio",
+          "UniqueKey": "TaskEnabled",
+          "SpeedRatioMultiplier": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.5
+            }
+          }
+        }
+      ],
+      "Stacking": "Replace"
+    },
+    "ADV_Modifier_MazeCommon_WolfBro_GetGun": {
+      "OnDestroy": [
+        {
+          "$type": "RPG.GameCore.SetAdvLockDistance",
+          "IsPushValue": true
+        },
+        {
+          "$type": "RPG.GameCore.SetAdvLockDistance",
+          "SkillType": "MazeSkill",
+          "IsPushValue": true
+        }
+      ],
+      "OnStack": [
+        {
+          "$type": "RPG.GameCore.SetAdvLockDistance",
+          "IsPushValue": true,
+          "LockDistance": 10
+        },
+        {
+          "$type": "RPG.GameCore.SetAdvLockDistance",
+          "SkillType": "MazeSkill",
+          "IsPushValue": true,
+          "LockDistance": 10
+        }
+      ],
+      "Stacking": "Replace"
     }
   }
 }

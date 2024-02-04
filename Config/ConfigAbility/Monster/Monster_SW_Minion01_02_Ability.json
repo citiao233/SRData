@@ -37,6 +37,78 @@
               ]
             }
           ]
+        },
+        "Monster_SW_Minion01_02_WingsControl": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.TriggerEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "IsAttachToTargetEntity": false,
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_SW_Minion01_02/Eff_Monster_SW_Minion01_02_Idle_StandBy.prefab"
+                }
+              ]
+            },
+            {
+              "Event": "OnBeforeSkillUse",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.RemoveEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_SW_Minion01_02/Eff_Monster_SW_Minion01_02_Idle_StandBy.prefab"
+                }
+              ]
+            },
+            {
+              "Event": "OnAfterSkillUse",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.TriggerEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "IsAttachToTargetEntity": false,
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_SW_Minion01_02/Eff_Monster_SW_Minion01_02_Idle_StandBy.prefab"
+                }
+              ]
+            },
+            {
+              "Event": "OnBeingBreak",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.RemoveEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_SW_Minion01_02/Eff_Monster_SW_Minion01_02_Idle_StandBy.prefab"
+                }
+              ]
+            },
+            {
+              "Event": "OnEndBreak",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.TriggerEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "IsAttachToTargetEntity": false,
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_SW_Minion01_02/Eff_Monster_SW_Minion01_02_Idle_StandBy.prefab"
+                }
+              ]
+            }
+          ]
         }
       },
       "Name": "Monster_SW_Minion01_02_Passive01",
@@ -60,6 +132,14 @@
             "Alias": "Caster"
           },
           "ModifierName": "Monster_SW_Minion01_02_Deathrattle"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "Monster_SW_Minion01_02_WingsControl"
         }
       ]
     },
@@ -114,44 +194,19 @@
               "OffsetTargetDistance": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.20000000018626451
+                  "Value": 3
                 }
               },
               "NormalizedTimeStart": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.26000000024214387
+                  "Value": 0.052
                 }
               },
               "NormalizedTimeEnd": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.31000000028871
-                }
-              }
-            },
-            {
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "AbilityTargetEntity"
-              },
-              "IgnoreRadius": true,
-              "OffsetTargetDistance": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 2.5000000004656613
-                }
-              },
-              "NormalizedTimeStart": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 0.4200000003911555
-                }
-              },
-              "NormalizedTimeEnd": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 0.4700000004377216
+                  "Value": 0.146
                 }
               }
             },
@@ -170,38 +225,13 @@
               "NormalizedTimeStart": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.6760000002104789
+                  "Value": 0.666
                 }
               },
               "NormalizedTimeEnd": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.6840000003576279
-                }
-              }
-            },
-            {
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "TeamFormation"
-              },
-              "IgnoreRadius": true,
-              "OffsetTargetDistance": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 0
-                }
-              },
-              "NormalizedTimeStart": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 0.9000000008381903
-                }
-              },
-              "NormalizedTimeEnd": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 0.9700000009033829
+                  "Value": 0.714
                 }
               }
             }
@@ -220,16 +250,6 @@
       },
       "OnStart": [
         {
-          "$type": "RPG.GameCore.WaitAnimState",
-          "AnimStateName": "Skill01",
-          "NormalizedTimeEnd": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0.10000000009313226
-            }
-          }
-        },
-        {
           "$type": "RPG.GameCore.SkillExecutionStart"
         },
         {
@@ -238,7 +258,42 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.3766230004839599
+              "Value": 0.041
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.SetEntityVisible",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "AnimStateName": "Skill01",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.118
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.SetEntityVisible",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "Visible": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "AnimStateName": "Skill01",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.17
             }
           }
         },
@@ -256,7 +311,7 @@
                 "OpCodes": "AQAAAAQK",
                 "FixedValues": [
                   {
-                    "Value": 0.5000000004656613
+                    "Value": 0.5
                   }
                 ],
                 "DynamicHashes": [
@@ -267,12 +322,12 @@
             "SPHitRatio": {
               "IsDynamic": false,
               "FixedValue": {
-                "Value": 0.5000000004656613
+                "Value": 0.5
               }
             },
             "AttackType": "Normal",
             "HitAnimation": "Hit",
-            "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_SW_Minion01_00/Eff_Monster_SW_Minion01_00_Attack_Hit.prefab"
+            "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_SW_Minion01_02/Eff_Monster_SW_Minion01_02_Attack_Hit_01.prefab"
           },
           "TriggerHitSound": true,
           "CanTriggerLastKill": true,
@@ -283,12 +338,55 @@
           }
         },
         {
+          "$type": "RPG.GameCore.TriggerModifierCustomEvent",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "EventType": "DOT_Entangle"
+        },
+        {
           "$type": "RPG.GameCore.WaitAnimState",
           "AnimStateName": "Skill01",
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.4090910004451871
+              "Value": 0.193
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.SetEntityVisible",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "AnimStateName": "Skill01",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.339
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.SetEntityVisible",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "Visible": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "AnimStateName": "Skill01",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.397
             }
           }
         },
@@ -306,7 +404,7 @@
                 "OpCodes": "AQAAAAQK",
                 "FixedValues": [
                   {
-                    "Value": 0.5000000004656613
+                    "Value": 0.5
                   }
                 ],
                 "DynamicHashes": [
@@ -317,12 +415,11 @@
             "SPHitRatio": {
               "IsDynamic": false,
               "FixedValue": {
-                "Value": 0.5000000004656613
+                "Value": 0.5
               }
             },
             "AttackType": "Normal",
-            "HitAnimation": "Hit",
-            "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_SW_Minion01_00/Eff_Monster_SW_Minion01_00_Attack_Hit.prefab"
+            "HitAnimation": "Hit"
           },
           "TriggerHitSound": true,
           "CanTriggerLastKill": true,
@@ -381,7 +478,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.6700000006239861
+              "Value": 0.66
             }
           }
         },
@@ -398,7 +495,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.7000000006519258
+              "Value": 0.72
             }
           }
         },
@@ -424,7 +521,7 @@
         {
           "$type": "RPG.GameCore.ShowSkillTextDialog",
           "SkillName": {
-            "Hash": -1277588993
+            "Hash": -754977560
           },
           "IsDark": true
         },
@@ -495,7 +592,7 @@
               "NormalizedTime": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.6500000006053597
+                  "Value": 0.65
                 }
               },
               "TaskList": [
@@ -602,9 +699,9 @@
                       }
                     },
                     "StanceDamageType": "Quantum",
-                    "AttackType": "Pursued",
+                    "AttackType": "Normal",
                     "HitAnimation": "Hit_H",
-                    "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_SW_Boss_00/Eff_Monster_SW_Boss_PassiveSkill01_Hit.prefab",
+                    "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_SW_Minion01_02/Eff_Monster_SW_Minion01_02_PassiveSkill01_Hit.prefab",
                     "HitEffectHeight": 1.136,
                     "HitTimeSlowType": "Impact"
                   }
@@ -683,7 +780,12 @@
         },
         {
           "$type": "RPG.GameCore.WaitSecond",
-          "WaitTime": 1
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          }
         }
       ]
     }

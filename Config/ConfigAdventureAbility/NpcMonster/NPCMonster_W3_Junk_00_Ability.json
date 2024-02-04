@@ -27,46 +27,22 @@
                   "Value": 1
                 }
               },
-              "NormalizedTimeStart": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 0.054999999701976776
-                }
-              },
-              "NormalizedTimeEnd": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 0.20699999970383942
-                }
-              },
-              "MaxMoveDistance": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 1
-                }
-              },
-              "MaxSpeed": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 60
-                }
-              },
               "SteerNormalizedTimeStart": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.05000000004656613
+                  "Value": 0.05
                 }
               },
               "SteerNormalizedTimeEnd": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.24000000022351742
+                  "Value": 0.24
                 }
               },
               "MaxSteerSpeed": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 300
+                  "Value": 500
                 }
               }
             }
@@ -82,7 +58,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.23799999966286123
+              "Value": 0.165
             }
           }
         },
@@ -95,8 +71,8 @@
           "TriggerBattleDelay": 0.1,
           "AttackDetectConfig": {
             "$type": "RPG.GameCore.AdventureAttackDetectCircleConfig",
-            "MaxRadius": 2.5,
-            "FanAngle": 100,
+            "MaxRadius": 1.2,
+            "FanAngle": 180,
             "Offset": {
               "X": 0,
               "Y": 0.5,
@@ -105,7 +81,7 @@
           },
           "HitConfig": {
             "HitAnimation": "Hit",
-            "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W1_Soldier01_03/Eff_Monster_W1_Soldier01_03_MazeAttack_Hit.prefab"
+            "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Junk_00/Eff_Monster_W3_Junk_00_MazeAttack_Hit01.prefab"
           }
         },
         {
@@ -125,6 +101,129 @@
             "IsDynamic": false,
             "FixedValue": {
               "Value": 1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Name": "MazeMonster_W3_Junk_00_Disguise_Enter",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.AdventureTriggerAnimStateWithMove",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimLogicState": "CustomSkill",
+          "AnimStateName": "SpecialStandByBS1"
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "SpecialStandByBS1",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Name": "MazeMonster_W3_Junk_00_Disguise_Exit",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.AdventureTriggerAnimStateWithMove",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimLogicState": "CustomSkill",
+          "AnimStateName": "SpecialStandByAS1"
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "SpecialStandByAS1",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Name": "MazeMonster_W3_Junk_00_Disguise_On",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.AddAdventureModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "ADV_Modifier_W3_Junk_Disguise"
+        }
+      ]
+    },
+    {
+      "Name": "MazeMonster_W3_Junk_00_Disguise_Off",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.RemoveAdventureModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "ADV_Modifier_W3_Junk_Disguise"
+        }
+      ]
+    },
+    {
+      "Name": "MazeMonster_W3_Junk_00_Passive",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.AdvDisablePlayerLockTarget",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.AddAdventureModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "ADV_Modifier_W3_Junk_Passive",
+          "LifeTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": -1
             }
           }
         }

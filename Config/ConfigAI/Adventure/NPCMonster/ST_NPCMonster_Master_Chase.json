@@ -1,6 +1,12 @@
 {
   "AIName": "ST_NPCMonster_Master_Chase",
   "VariableList": [],
+  "GlobalVariableList": [
+    {
+      "$type": "RPG.GameCore.AIVariableFloat",
+      "Name": "Int_StateMemory"
+    }
+  ],
   "DecisionList": [],
   "TransitionTable": [],
   "RootState": {
@@ -36,10 +42,21 @@
       {
         "$type": "RPG.GameCore.StateTreeStateConfig",
         "EnterCondition": {
-          "$type": "RPG.GameCore.ST_ByHasAbnormalState",
-          "States": [
-            "Taunt",
-            "Fear"
+          "$type": "RPG.GameCore.ByAny",
+          "PredicateList": [
+            {
+              "$type": "RPG.GameCore.ST_ByHasAbnormalState",
+              "States": [
+                "Taunt",
+                "Fear",
+                "Enchanted"
+              ]
+            },
+            {
+              "$type": "RPG.GameCore.ST_ByCompareVariableFloat",
+              "VarName": "Int_StateMemory",
+              "CompareType": "Greater"
+            }
           ]
         },
         "TransitionList": [],
@@ -75,6 +92,32 @@
             ],
             "FilePath": "Config/ConfigAI/Adventure/NPCMonster/ST_NPCMonster_Sub_Fear.json",
             "Name": "FearState"
+          },
+          {
+            "$type": "RPG.GameCore.StateTreeSubTreeConfig",
+            "EnterCondition": {
+              "$type": "RPG.GameCore.ByAny",
+              "PredicateList": [
+                {
+                  "$type": "RPG.GameCore.ST_ByHasAbnormalState",
+                  "States": [
+                    "Enchanted"
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.ST_ByCompareVariableFloat",
+                  "VarName": "Int_StateMemory",
+                  "CompareType": "Greater"
+                }
+              ]
+            },
+            "TransitionList": [
+              {
+                "TransitionToState": "ExitCombatState"
+              }
+            ],
+            "FilePath": "Config/ConfigAI/Adventure/NPCMonster/ST_NPCMonster_Sub_Enchanted_Chase.json",
+            "Name": "EnchantedState"
           }
         ],
         "Name": "AbnormalState"
@@ -96,11 +139,17 @@
                   "States": [
                     "Taunt",
                     "HangUp",
-                    "Fear"
+                    "Fear",
+                    "Enchanted"
                   ]
                 },
                 {
                   "$type": "RPG.GameCore.ST_ByOnHit"
+                },
+                {
+                  "$type": "RPG.GameCore.ST_ByCompareVariableFloat",
+                  "VarName": "Int_StateMemory",
+                  "CompareType": "Greater"
                 }
               ]
             }
@@ -144,11 +193,17 @@
                   "States": [
                     "Taunt",
                     "HangUp",
-                    "Fear"
+                    "Fear",
+                    "Enchanted"
                   ]
                 },
                 {
                   "$type": "RPG.GameCore.ST_ByOnHit"
+                },
+                {
+                  "$type": "RPG.GameCore.ST_ByCompareVariableFloat",
+                  "VarName": "Int_StateMemory",
+                  "CompareType": "Greater"
                 }
               ]
             }
@@ -240,5 +295,11 @@
         "Name": "SystemicState"
       }
     ]
+  },
+  "OnDisable": {
+    "$type": "RPG.GameCore.TaskConfig"
+  },
+  "OnInit": {
+    "$type": "RPG.GameCore.TaskConfig"
   }
 }

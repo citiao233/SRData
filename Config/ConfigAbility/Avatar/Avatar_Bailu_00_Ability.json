@@ -41,13 +41,13 @@
               "NormalizedTimeStart": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.035999999614432454
+                  "Value": 0.036
                 }
               },
               "NormalizedTimeEnd": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.261000000173226
+                  "Value": 0.261
                 }
               }
             },
@@ -65,13 +65,13 @@
               "NormalizedTimeStart": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.922000000718981
+                  "Value": 0.922
                 }
               },
               "NormalizedTimeEnd": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.9770000004209578
+                  "Value": 0.977
                 }
               }
             }
@@ -114,7 +114,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.38300000014714897
+              "Value": 0.383
             }
           }
         },
@@ -168,7 +168,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.8500000007916242
+              "Value": 0.85
             }
           }
         },
@@ -214,19 +214,24 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.9500000008847564
+              "Value": 0.95
             }
           },
           "NormalizedTimeWait": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.93000000086613
+              "Value": 0.93
             }
           }
         },
         {
           "$type": "RPG.GameCore.WaitSecond",
-          "WaitTime": 0.7
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.7
+            }
+          }
         },
         {
           "$type": "RPG.GameCore.MoveToTargetPosition",
@@ -259,7 +264,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.3169999998062849
+              "Value": 0.317
             }
           }
         },
@@ -275,7 +280,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.47100000036880374
+              "Value": 0.471
             }
           }
         },
@@ -285,6 +290,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "AbilityTargetEntity"
           },
+          "IsAttachToTargetEntity": false,
           "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Bailu/Eff_Avatar_Bailu_00_Skill02_Trail.prefab"
         },
         {
@@ -293,7 +299,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.4979999999050051
+              "Value": 0.498
             }
           }
         },
@@ -371,7 +377,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.4989999998360872
+              "Value": 0.499
             }
           }
         },
@@ -405,7 +411,12 @@
         },
         {
           "$type": "RPG.GameCore.WaitSecond",
-          "WaitTime": 0.2
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.2
+            }
+          }
         },
         {
           "$type": "RPG.GameCore.Retarget",
@@ -543,7 +554,12 @@
           "TaskList": [
             {
               "$type": "RPG.GameCore.WaitSecond",
-              "WaitTime": 0.2
+              "WaitTime": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0.2
+                }
+              }
             },
             {
               "$type": "RPG.GameCore.Retarget",
@@ -697,29 +713,48 @@
           ]
         },
         {
-          "$type": "RPG.GameCore.PredicateTaskList",
+          "$type": "RPG.GameCore.Retarget",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "SkillTargetEntityList"
+          },
           "Predicate": {
-            "$type": "RPG.GameCore.ByIsTurnActionEntity",
+            "$type": "RPG.GameCore.ByCompareTarget",
             "TargetType": {
               "$type": "RPG.GameCore.TargetAlias",
-              "Alias": "SkillTargetEntityList"
+              "Alias": "ParamEntity"
+            },
+            "CompareType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "Inverse": true
+          },
+          "MaxNumber": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
             }
           },
-          "SuccessTaskList": [],
-          "FailedTaskList": [
+          "TaskList": [
             {
               "$type": "RPG.GameCore.CharacterPlayVO",
               "VOType": "ReceiveHealing",
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "SkillTargetEntityList"
+                "Alias": "ParamEntity"
               }
             }
           ]
         },
         {
           "$type": "RPG.GameCore.WaitSecond",
-          "WaitTime": 0.7
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.7
+            }
+          }
         },
         {
           "$type": "RPG.GameCore.SkillPerformFinish"
@@ -742,7 +777,12 @@
         },
         {
           "$type": "RPG.GameCore.WaitSecond",
-          "WaitTime": 0.5
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.5
+            }
+          }
         },
         {
           "$type": "RPG.GameCore.TriggerAnimState",
@@ -789,7 +829,12 @@
         },
         {
           "$type": "RPG.GameCore.WaitSecond",
-          "WaitTime": 0.6
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.6
+            }
+          }
         },
         {
           "$type": "RPG.GameCore.VCameraConfigChange",
@@ -877,7 +922,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.27499999990686774
+              "Value": 0.275
             }
           }
         },
@@ -900,7 +945,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.6389999999664724
+              "Value": 0.639
             }
           }
         },
@@ -919,7 +964,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.7620000005699694
+              "Value": 0.762
             }
           }
         },
@@ -957,7 +1002,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.7300000006798655
+              "Value": 0.73
             }
           }
         },
@@ -967,7 +1012,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.7620000005699694
+              "Value": 0.762
             }
           }
         },
@@ -977,6 +1022,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "AllLightTeam"
           },
+          "IsAttachToTargetEntity": false,
           "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Bailu/Eff_Avatar_Bailu_00_Skill03_Buff.prefab"
         },
         {
@@ -985,7 +1031,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.7800000007264316
+              "Value": 0.78
             }
           }
         },
@@ -1239,7 +1285,7 @@
                       }
                     }
                   },
-                  "SuccessTaskList": [
+                  "FailTaskList": [
                     {
                       "$type": "RPG.GameCore.PredicateTaskList",
                       "Predicate": {
@@ -1332,22 +1378,36 @@
           }
         },
         {
-          "$type": "RPG.GameCore.PredicateTaskList",
+          "$type": "RPG.GameCore.Retarget",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "SkillTargetEntityList"
+          },
           "Predicate": {
-            "$type": "RPG.GameCore.ByIsTurnActionEntity",
+            "$type": "RPG.GameCore.ByCompareTarget",
             "TargetType": {
               "$type": "RPG.GameCore.TargetAlias",
-              "Alias": "SkillTargetEntityList"
+              "Alias": "ParamEntity"
+            },
+            "CompareType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "Inverse": true
+          },
+          "MaxNumber": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
             }
           },
-          "SuccessTaskList": [],
-          "FailedTaskList": [
+          "TaskList": [
             {
               "$type": "RPG.GameCore.CharacterPlayVO",
               "VOType": "ReceiveHealing",
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "SkillTargetEntityList"
+                "Alias": "ParamEntity"
               }
             }
           ]
@@ -1663,7 +1723,7 @@
               "NormalizedTimeEnd": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.6700000006239861
+                  "Value": 0.67
                 }
               }
             },
@@ -1673,6 +1733,7 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "AbilityTargetEntity"
               },
+              "IsAttachToTargetEntity": false,
               "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Bailu/Eff_Avatar_Bailu_00_PassiveSkill_Buff_01.prefab"
             },
             {
@@ -2067,7 +2128,7 @@
                           }
                         }
                       },
-                      "SuccessTaskList": [
+                      "FailTaskList": [
                         {
                           "$type": "RPG.GameCore.PredicateTaskList",
                           "Predicate": {
@@ -2361,6 +2422,7 @@
                     "$type": "RPG.GameCore.TargetAlias",
                     "Alias": "ModifierOwnerEntity"
                   },
+                  "IsAttachToTargetEntity": false,
                   "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_MAZ_RecoverSP.prefab"
                 }
               ]
@@ -2927,7 +2989,7 @@
                       "NormalizedTransitionDuration": {
                         "IsDynamic": false,
                         "FixedValue": {
-                          "Value": 0.010000000009313226
+                          "Value": 0.01
                         }
                       },
                       "ForceStart": true

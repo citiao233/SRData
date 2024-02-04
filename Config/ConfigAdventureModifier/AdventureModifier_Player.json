@@ -9,6 +9,9 @@
       "Stacking": "Merge"
     },
     "ADV_StageAbility_Maze_Himeko": {
+      "BehaviorFlagList": [
+        "Debuff"
+      ],
       "OnCreate": [
         {
           "$type": "RPG.GameCore.TriggerEffect",
@@ -23,6 +26,9 @@
       "Stacking": "Merge"
     },
     "ADV_StageAbility_Maze_Welt": {
+      "BehaviorFlagList": [
+        "Debuff"
+      ],
       "OnStack": [
         {
           "$type": "RPG.GameCore.AdventureStackProperty",
@@ -108,6 +114,14 @@
       "LifeTime": 20,
       "OnCreate": [
         {
+          "$type": "RPG.GameCore.TriggerSound",
+          "SoundName": "Ev_sfx_avatar_seele_skill_maze_open",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          }
+        },
+        {
           "$type": "RPG.GameCore.ModifierAttachEffect",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
@@ -150,6 +164,14 @@
         {
           "$type": "RPG.GameCore.TriggerSound",
           "SoundName": "Ev_sfx_eff_avatar_seele_00_skill_passive"
+        },
+        {
+          "$type": "RPG.GameCore.TriggerSound",
+          "SoundName": "Ev_sfx_avatar_seele_skill_maze_close",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          }
         }
       ],
       "OnUnstage": [
@@ -352,7 +374,7 @@
     "ADV_StageAbility_Maze_RuanMei_RogueExtraEffect": {
       "OnBeforeBattle": [
         {
-          "$type": "RPG.GameCore.SetDynamicValueByRogueBuffNumWithType",
+          "$type": "RPG.GameCore.SetDynamicValueByRogueBuffNum",
           "TaskEnabled": true
         }
       ],
@@ -545,7 +567,8 @@
         {
           "$type": "RPG.GameCore.ModifierOverrideOnHitEffect",
           "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_FuXuan/Eff_Avatar_FuXuan_00_MazeSkill01_03.prefab",
-          "ModifierOverrideOnHitEffectPriority": "ModifyOthers"
+          "ModifierOverrideOnHitEffectPriority": "ModifyOthers",
+          "OverrideOffset": true
         }
       ],
       "OnDestroy": [
@@ -557,32 +580,64 @@
       ],
       "OnStack": [
         {
-          "$type": "RPG.GameCore.ModifierDetachEffect",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AdvLocalPlayer"
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareTarget",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "AdvLocalPlayer"
+            },
+            "CompareType": {
+              "$type": "RPG.GameCore.TargetFetchAdvFakeAvatar"
+            },
+            "Inverse": true
           },
-          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_FuXuan/Eff_Avatar_FuXuan_00_MazeSkill01_02.prefab"
-        },
-        {
-          "$type": "RPG.GameCore.ModifierAttachEffect",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AdvLocalPlayer"
-          },
-          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_FuXuan/Eff_Avatar_FuXuan_00_MazeSkill01_02.prefab",
-          "ColliderHeightRatio": 0.8
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.ModifierDetachEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AdvLocalPlayer"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_FuXuan/Eff_Avatar_FuXuan_00_MazeSkill01_02.prefab"
+            },
+            {
+              "$type": "RPG.GameCore.ModifierAttachEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AdvLocalPlayer"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_FuXuan/Eff_Avatar_FuXuan_00_MazeSkill01_02.prefab",
+              "ColliderHeightRatio": 0.8
+            }
+          ]
         }
       ],
       "OnTeamLeaderChange": [
         {
-          "$type": "RPG.GameCore.ModifierReattachEffect",
-          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_FuXuan/Eff_Avatar_FuXuan_00_MazeSkill01_02.prefab",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "ParamEntity"
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareTarget",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "AdvLocalPlayer"
+            },
+            "CompareType": {
+              "$type": "RPG.GameCore.TargetFetchAdvFakeAvatar"
+            },
+            "Inverse": true
           },
-          "ColliderHeightRatio": 0.8
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.ModifierReattachEffect",
+              "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_FuXuan/Eff_Avatar_FuXuan_00_MazeSkill01_02.prefab",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ParamEntity"
+              },
+              "ColliderHeightRatio": 0.8
+            }
+          ]
         }
       ],
       "Count": 1,
@@ -673,7 +728,7 @@
               "LifeTime": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 19.90000000083819
+                  "Value": 19.9
                 }
               }
             },
@@ -774,7 +829,7 @@
           "LifeTime": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 1.5000000004656613
+              "Value": 1.5
             }
           }
         },
@@ -1163,6 +1218,31 @@
       "Count": 1,
       "Stacking": "Merge"
     },
+    "ADV_StageAbility_Maze_WolfBro": {
+      "LifeTime": 4,
+      "BehaviorFlagList": [
+        "Stun"
+      ],
+      "OnCreate": [
+        {
+          "$type": "RPG.GameCore.ModifierAttachEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Argenti/Eff_Avatar_Argenti_00_MazeSkill_Icon.prefab",
+          "AttachPoint": "HeadPoint",
+          "MinMutexTime": -1,
+          "MutexType": "Entity"
+        },
+        {
+          "$type": "RPG.GameCore.AdvModifierOverrideFeatureFlagParam"
+        }
+      ],
+      "OnDestroy": [],
+      "Count": 1,
+      "Stacking": "Merge"
+    },
     "ADV_StageAbility_Maze_Aventurine_R": {
       "Count": 1,
       "Stacking": "Merge"
@@ -1311,16 +1391,63 @@
       "OnDestroy": [],
       "OnStack": [
         {
-          "$type": "RPG.GameCore.ModifierAttachEffect",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AdvLocalPlayer"
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareTarget",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "AdvLocalPlayer"
+            },
+            "CompareType": {
+              "$type": "RPG.GameCore.TargetFetchAdvFakeAvatar"
+            },
+            "Inverse": true
           },
-          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Sparkle/Eff_Avatar_Sparkle_00_MazeSkill01_Mask.prefab"
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.ModifierAttachEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AdvLocalPlayer"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Sparkle/Eff_Avatar_Sparkle_00_MazeSkill01_Mask.prefab"
+            }
+          ]
+        }
+      ],
+      "OnTeamLeaderChange": [
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareTarget",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "AdvLocalPlayer"
+            },
+            "CompareType": {
+              "$type": "RPG.GameCore.TargetFetchAdvFakeAvatar"
+            },
+            "Inverse": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.ModifierReattachEffect",
+              "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Sparkle/Eff_Avatar_Sparkle_00_MazeSkill01_Mask.prefab",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ParamEntity"
+              }
+            }
+          ]
         }
       ],
       "Count": 1,
       "Stacking": "Refresh"
+    },
+    "ADV_StageAbility_Maze_Sparkle_Hide": {
+      "OnCreate": [],
+      "Count": 1,
+      "Stacking": "Merge"
     },
     "ADV_StageAbility_Maze_BlackSwan": {
       "OnCreate": [],
@@ -1349,6 +1476,9 @@
       "Stacking": "Merge"
     },
     "ADV_StageAbility_Maze_Acheron_Realm": {
+      "BehaviorFlagList": [
+        "HolyShield"
+      ],
       "OnCreate": [],
       "OnDestroy": [
         {
@@ -1365,6 +1495,7 @@
           "$type": "RPG.GameCore.RemoveSelfModifier"
         }
       ],
+      "Count": 1,
       "Stacking": "Merge"
     },
     "ADV_StageAbility_Maze_Acheron_killFlag": {
@@ -1497,7 +1628,7 @@
           "LifeTime": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 1.5000000004656613
+              "Value": 1.5
             }
           }
         },
@@ -1516,9 +1647,19 @@
       "Count": 1,
       "Stacking": "Merge"
     },
-    "ADV_StageAbility_Maze_Robin_Target": {
+    "ADV_StageAbility_Maze_Robin_Enemy": {
       "BehaviorFlagList": [
-        "Taunt"
+        "Enchanted"
+      ],
+      "OnCreate": [
+        {
+          "$type": "RPG.GameCore.ModifierAttachEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Robin/Eff_Avatar_Robin_00_MazeSkill01_Start02.prefab"
+        }
       ],
       "Count": 1,
       "Stacking": "Refresh"
@@ -1562,6 +1703,37 @@
     },
     "ADV_StageAbility_Maze_Misha_AttackBoost": {
       "OnCreate": [],
+      "Count": 1,
+      "Stacking": "Merge"
+    },
+    "ADV_Maze_Misha_TriggerDisappearEffect": {
+      "TickInterval": 14,
+      "OnInterval": [
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetFetchSummonUnit",
+            "Summoner": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "ModifierOwnerEntity"
+            },
+            "SummonUnitID": 13121
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Misha/Eff_Avatar_Misha_00_MazeSkill01_Start03.prefab",
+          "PositionOffset": {
+            "X": 0,
+            "Y": 1.3,
+            "Z": 0
+          }
+        }
+      ],
+      "Stacking": "Merge"
+    },
+    "ADV_StageAbility_Maze_Boothill": {
+      "Count": 1,
+      "Stacking": "Merge"
+    },
+    "ADV_StageAbility_Maze_W_Boothill": {
       "Count": 1,
       "Stacking": "Merge"
     },

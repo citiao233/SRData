@@ -47,6 +47,11 @@
       },
       "OnStart": [
         {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamDark",
+          "FormationType": "DarkTeamNormal"
+        },
+        {
           "$type": "RPG.GameCore.TriggerAbility",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
@@ -75,6 +80,12 @@
             "IsDynamic": false,
             "FixedValue": {
               "Value": 1
+            }
+          },
+          "NormalizedTimeWait": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.9
             }
           }
         },
@@ -105,7 +116,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.20000000018626451
+              "Value": 0.2
             }
           }
         },
@@ -122,7 +133,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.6240000003017485
+              "Value": 0.624
             }
           }
         },
@@ -155,13 +166,52 @@
           "IsSkillPerform": true
         },
         {
-          "$type": "RPG.GameCore.TriggerAbility",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByAnd",
+            "PredicateList": [
+              {
+                "$type": "RPG.GameCore.ByIsTeamLocationIndexType",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "Caster"
+                },
+                "TeamType": "TeamDark",
+                "Type": "Left"
+              },
+              {
+                "$type": "RPG.GameCore.ByIsTeamLocationIndexType",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "Caster"
+                },
+                "TeamType": "TeamDark",
+                "Type": "Right"
+              }
+            ]
           },
-          "AbilityName": "Monster_W3_Clock_00_Skill02_Camera",
-          "IsSkillPerform": true
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.TriggerAbility",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AbilityName": "Monster_W3_Clock_00_Skill02_Camera_Special",
+              "IsSkillPerform": true
+            }
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.TriggerAbility",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AbilityName": "Monster_W3_Clock_00_Skill02_Camera",
+              "IsSkillPerform": true
+            }
+          ]
         },
         {
           "$type": "RPG.GameCore.TriggerAnimState",
@@ -172,10 +222,10 @@
               "Value": 1
             }
           },
-          "NormalizedTransitionDuration": {
+          "NormalizedTimeWait": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.1500000001396984
+              "Value": 0.9
             }
           }
         },
@@ -206,7 +256,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.20000000018626451
+              "Value": 0.2
             }
           }
         },
@@ -223,7 +273,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.26000000024214387
+              "Value": 0.285
             }
           }
         },
@@ -233,6 +283,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "AllTeammate"
           },
+          "IsAttachToTargetEntity": false,
           "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Monster_Common_Immediate.prefab"
         },
         {
@@ -316,19 +367,19 @@
               "OffsetTargetDistance": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 3.3000000002793968
+                  "Value": 3.7
                 }
               },
               "NormalizedTimeStart": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.1659999997355044
+                  "Value": 0.264
                 }
               },
               "NormalizedTimeEnd": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.2249999998603016
+                  "Value": 0.289
                 }
               }
             },
@@ -347,13 +398,13 @@
               "NormalizedTimeStart": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.5510000004433095
+                  "Value": 0.59
                 }
               },
               "NormalizedTimeEnd": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.6750000002793968
+                  "Value": 0.709
                 }
               }
             }
@@ -406,7 +457,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.30300000007264316
+              "Value": 0.371
             }
           }
         },
@@ -674,6 +725,7 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "ModifierOwnerEntity"
               },
+              "IsAttachToTargetEntity": false,
               "EffectPath": "Characters/WhiteBox/WEffects/WEff_Prefab/WEff_Monster/WEff_Monster_W3_Frightfur01_00/WEff_Monster_W2_Mecha03_00_SkillP01_Charging.prefab",
               "UniqueEffectName": "ClockEffect",
               "AttachPoint": "Head"
