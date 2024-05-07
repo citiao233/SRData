@@ -1,7 +1,456 @@
 {
   "AbilityList": [
     {
-      "Name": "Monster_W2_Argenti_00_IF_Skill01_Phase01",
+      "Modifiers": {
+        "MMonster_W2_Argenti_00_IF_AIController": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "DynamicKey": "AIFlag",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "DynamicKey": "SAIFlag",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "Event": "OnBeingBreak",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "DynamicKey": "AIFlag",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "DynamicKey": "SAIFlag",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 3
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "DynamicKey": "SAIFlag",
+                      "Value": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1
+                        }
+                      }
+                    }
+                  ],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "DynamicKey": "SAIFlag",
+                      "Value": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AAABAAMK",
+                          "FixedValues": [
+                            {
+                              "Value": 3
+                            }
+                          ],
+                          "DynamicHashes": [
+                            1626413987
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "Name": "Monster_W2_Argenti_00_IF_Passive01",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "Monster_W2_Argenti_00_IF_SuperArmorController",
+          "DynamicValues": {
+            "MDF_SuperArmorDamageResistance": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  465567984
+                ]
+              }
+            },
+            "MDF_SuperArmorBreakDamageTakenRatio": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  720807995
+                ]
+              }
+            },
+            "MDF_SuperArmorBreakActionDelay": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  939671589
+                ]
+              }
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.ModifyDefaultTeamFormation",
+          "TeamCenter": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AutoBalance": true,
+          "ExtraConfig": []
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "W2_Argenti_00_BattleScore1"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "W2_Argenti_00_BattleScore2"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "OneMorePerTurn"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "MMonster_W2_Argenti_00_IF_Boss_Enhance"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "MMonster_W2_Argenti_00_IF_AIController"
+        },
+        {
+          "$type": "RPG.GameCore.SetActionDelay",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "NormalizedValue": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.5
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Modifiers": {
+        "Monster_W2_Argenti_00_IF_Initiate": {
+          "_CallbackList": [
+            {
+              "Event": "OnLimboWaitHeal",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.RemoveModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "CasterSummonedMinions"
+                  },
+                  "ModifierName": "MMonster_W2_ArgentiTotem_00_Initiate"
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "CasterSummonedMinions"
+                  },
+                  "ModifierName": "MMonster_W2_ArgentiTotem_01_Initiate"
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "CasterSummonedMinions"
+                  },
+                  "ModifierName": "MMonster_W2_ArgentiTotem_02_Initiate"
+                },
+                {
+                  "$type": "RPG.GameCore.ForceKill",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "CasterSummonedMinions"
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "MMonster_W2_Argenti_00_IF_Boss_PowerController"
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "DynamicKey": "Die_Flag",
+                    "ContextScope": "TargetEntity",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.TriggerAnimState",
+                      "AnimStateName": "Stagger"
+                    },
+                    {
+                      "$type": "RPG.GameCore.DispelStatus",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "OnlyAlive": false,
+                      "IsSlientDispel": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.DefineDynamicValue",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "DynamicKey": "Die_Flag",
+                      "ResetValue": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1
+                        }
+                      },
+                      "ContextScope": "TargetEntity"
+                    },
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "AliveOnly": false,
+                      "ModifierName": "Monster_Common_Endurance"
+                    },
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValueByVariateType",
+                      "DynamicKey": "MaxPhase",
+                      "VariateType": "MaxMonsterPhase"
+                    },
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareMonsterPhase",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "CompareType": "Equal",
+                        "CompareValue": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 1
+                          }
+                        }
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.SetMonsterPhase",
+                          "SetMode": "Inc"
+                        },
+                        {
+                          "$type": "RPG.GameCore.RemoveModifier",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "ModifierName": "MMonster_W2_Argenti_00_IF_Power"
+                        },
+                        {
+                          "$type": "RPG.GameCore.TurnInsertAbility",
+                          "AbilityName": "Monster_W2_Argenti_00_PhaseChange_Insert",
+                          "InsertAbilityPriority": "MonsterChangePhase",
+                          "OwnerAliveState": "Mask_AliveOrLimbo",
+                          "TargetAliveState": "Mask_AliveOrLimbo",
+                          "ShowInActionBar": true
+                        },
+                        {
+                          "$type": "RPG.GameCore.SetDynamicValue",
+                          "DynamicKey": "AIFlag",
+                          "Value": {
+                            "IsDynamic": false,
+                            "FixedValue": {
+                              "Value": 1
+                            }
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.SetDynamicValue",
+                          "DynamicKey": "SAIFlag",
+                          "Value": {
+                            "IsDynamic": false,
+                            "FixedValue": {
+                              "Value": 1
+                            }
+                          }
+                        }
+                      ],
+                      "FailedTaskList": [
+                        {
+                          "$type": "RPG.GameCore.PredicateTaskList",
+                          "Predicate": {
+                            "$type": "RPG.GameCore.ByAnd",
+                            "PredicateList": [
+                              {
+                                "$type": "RPG.GameCore.ByCompareMonsterPhase",
+                                "TargetType": {
+                                  "$type": "RPG.GameCore.TargetAlias",
+                                  "Alias": "ModifierOwnerEntity"
+                                },
+                                "CompareType": "NotEqual",
+                                "CompareValue": {
+                                  "IsDynamic": true,
+                                  "PostfixExpr": {
+                                    "OpCodes": "AQAK",
+                                    "FixedValues": [],
+                                    "DynamicHashes": [
+                                      -1735901893
+                                    ]
+                                  }
+                                }
+                              },
+                              {
+                                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                                "TargetType": {
+                                  "$type": "RPG.GameCore.TargetAlias",
+                                  "Alias": "ModifierOwnerEntity"
+                                },
+                                "DynamicKey": "MaxPhase",
+                                "CompareType": "Equal",
+                                "CompareValue": {
+                                  "IsDynamic": false,
+                                  "FixedValue": {
+                                    "Value": 3
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "SuccessTaskList": [
+                            {
+                              "$type": "RPG.GameCore.SetMonsterPhase",
+                              "SetMode": "Inc"
+                            },
+                            {
+                              "$type": "RPG.GameCore.TurnInsertAbility",
+                              "AbilityName": "Monster_W2_Argenti_00_PhaseChange2T3_Insert",
+                              "InsertAbilityPriority": "MonsterChangePhase",
+                              "OwnerAliveState": "Mask_AliveOrLimbo",
+                              "TargetAliveState": "Mask_AliveOrLimbo",
+                              "ShowInActionBar": true
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "_PriorityList": [
+            {
+              "PriorityName": "LimboWaitHealPriority",
+              "Key": "ChangePhase"
+            }
+          ]
+        }
+      },
+      "Name": "Monster_W2_Argenti_00_IF_Passive02",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "Monster_W2_Argenti_00_IF_Initiate"
+        }
+      ]
+    },
+    {
+      "Name": "Monster_W2_Argenti_00_Skill11_IF_Phase01",
       "TargetInfo": {
         "TargetType": "Caster"
       },
@@ -12,7 +461,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "AbilityName": "Monster_W2_Argenti_00_IF_Skill01_Phase02",
+          "AbilityName": "Monster_W2_Argenti_00_Skill11_IF_Phase02",
           "IsSkillPerform": true
         },
         {
@@ -59,15 +508,11 @@
       ]
     },
     {
-      "Name": "Monster_W2_Argenti_00_IF_Skill01_Phase02",
+      "Name": "Monster_W2_Argenti_00_Skill11_IF_Phase02",
       "TargetInfo": {
         "TargetType": "Caster"
       },
       "OnStart": [
-        {
-          "$type": "RPG.GameCore.IncludeTaskListTemplate",
-          "Name": "Argenti_KillAllMonsters"
-        },
         {
           "$type": "RPG.GameCore.WaitAnimState",
           "TargetType": {
@@ -97,30 +542,54 @@
               }
             },
             "DelayRatio01": {
-              "IsDynamic": false,
-              "FixedValue": {
-                "Value": 0.75
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  -1816969979
+                ]
               }
             },
             "DelayRatio02": {
-              "IsDynamic": false,
-              "FixedValue": {
-                "Value": 0.25
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  -1890636345
+                ]
               }
             },
             "DelayRatio03": {
-              "IsDynamic": false,
-              "FixedValue": {
-                "Value": 0.5
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  -1925243548
+                ]
               }
             },
             "DelayRatio04": {
-              "IsDynamic": false,
-              "FixedValue": {
-                "Value": 1
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  -1842377310
+                ]
               }
             }
           }
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "MMonster_W2_Argenti_00_IF_Protect"
         },
         {
           "$type": "RPG.GameCore.WaitAnimState",
@@ -142,7 +611,7 @@
       ]
     },
     {
-      "Name": "Monster_W2_Argenti_00_IF_Skill02_Phase01",
+      "Name": "Monster_W2_Argenti_00_Skill12_IF_Phase01",
       "TargetInfo": {
         "TargetType": "Caster"
       },
@@ -153,7 +622,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "AbilityName": "Monster_W2_Argenti_00_IF_Skill02_Phase02",
+          "AbilityName": "Monster_W2_Argenti_00_Skill12_IF_Phase02",
           "IsSkillPerform": true
         },
         {
@@ -200,14 +669,23 @@
       ]
     },
     {
-      "Name": "Monster_W2_Argenti_00_IF_Skill02_Phase02",
+      "Name": "Monster_W2_Argenti_00_Skill12_IF_Phase02",
       "TargetInfo": {
         "TargetType": "Caster"
       },
       "OnStart": [
         {
-          "$type": "RPG.GameCore.IncludeTaskListTemplate",
-          "Name": "Argenti_KillAllMonsters"
+          "$type": "RPG.GameCore.ShowUIPage",
+          "AssetPath": "UI/Common/Widget/ShowBattleHint.prefab",
+          "UITextNodes": [
+            {
+              "TextPath": "AreaInfoPanel/Title/Text",
+              "TextContent": {
+                "Hash": 257780911
+              }
+            }
+          ],
+          "LifeTime": 2
         },
         {
           "$type": "RPG.GameCore.WaitAnimState",
@@ -238,27 +716,43 @@
               }
             },
             "DelayRatio01": {
-              "IsDynamic": false,
-              "FixedValue": {
-                "Value": 0.75
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  -10037420
+                ]
               }
             },
             "DelayRatio02": {
-              "IsDynamic": false,
-              "FixedValue": {
-                "Value": 0.25
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  -83703786
+                ]
               }
             },
             "DelayRatio03": {
-              "IsDynamic": false,
-              "FixedValue": {
-                "Value": 0.5
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  -118310989
+                ]
               }
             },
             "DelayRatio04": {
-              "IsDynamic": false,
-              "FixedValue": {
-                "Value": 1
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  -35444751
+                ]
               }
             }
           }
@@ -283,7 +777,7 @@
       ]
     },
     {
-      "Name": "Monster_W2_Argenti_00_IF_Skill03_Phase01",
+      "Name": "Monster_W2_Argenti_00_Skill13_IF_Phase01",
       "TargetInfo": {
         "TargetType": "Caster"
       },
@@ -294,7 +788,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "AbilityName": "Monster_W2_Argenti_00_IF_Skill03_Phase02",
+          "AbilityName": "Monster_W2_Argenti_00_Skill13_IF_Phase02",
           "IsSkillPerform": true
         },
         {
@@ -341,14 +835,24 @@
       ]
     },
     {
-      "Name": "Monster_W2_Argenti_00_IF_Skill03_Phase02",
+      "Modifiers": {},
+      "Name": "Monster_W2_Argenti_00_Skill13_IF_Phase02",
       "TargetInfo": {
         "TargetType": "Caster"
       },
       "OnStart": [
         {
-          "$type": "RPG.GameCore.IncludeTaskListTemplate",
-          "Name": "Argenti_KillAllMonsters"
+          "$type": "RPG.GameCore.ShowUIPage",
+          "AssetPath": "UI/Common/Widget/ShowBattleHint.prefab",
+          "UITextNodes": [
+            {
+              "TextPath": "AreaInfoPanel/Title/Text",
+              "TextContent": {
+                "Hash": -1308303030
+              }
+            }
+          ],
+          "LifeTime": 2
         },
         {
           "$type": "RPG.GameCore.WaitAnimState",
@@ -379,27 +883,43 @@
               }
             },
             "DelayRatio01": {
-              "IsDynamic": false,
-              "FixedValue": {
-                "Value": 0.75
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  -1947359345
+                ]
               }
             },
             "DelayRatio02": {
-              "IsDynamic": false,
-              "FixedValue": {
-                "Value": 0.25
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  -2021025711
+                ]
               }
             },
             "DelayRatio03": {
-              "IsDynamic": false,
-              "FixedValue": {
-                "Value": 0.5
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  -2055632914
+                ]
               }
             },
             "DelayRatio04": {
-              "IsDynamic": false,
-              "FixedValue": {
-                "Value": 1
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  -1972766676
+                ]
               }
             }
           }
@@ -424,7 +944,7 @@
       ]
     },
     {
-      "Name": "Monster_W2_Argenti_00_IF_Skill04_Phase01",
+      "Name": "Monster_W2_Argenti_00_Skill14_IF_Phase01",
       "TargetInfo": {
         "TargetType": "Caster"
       },
@@ -441,7 +961,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "AbilityName": "Monster_W2_Argenti_00_IF_Skill04_Phase02",
+          "AbilityName": "Monster_W2_Argenti_00_Skill14_IF_Phase02",
           "IsSkillPerform": true
         },
         {
@@ -450,7 +970,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "AbilityName": "Monster_W2_Argenti_00_IF_Skill04_Camera",
+          "AbilityName": "Monster_W2_Argenti_00_Skill14_IF_Camera",
           "IsSkillPerform": true
         },
         {
@@ -501,13 +1021,38 @@
     },
     {
       "Modifiers": {
-        "Monster_W2_Argenti_00_IF_Skill04_MarkModifier": {}
+        "Monster_W2_Argenti_00_Skill14_IF_MarkModifier": {}
       },
-      "Name": "Monster_W2_Argenti_00_IF_Skill04_Phase02",
+      "Name": "Monster_W2_Argenti_00_Skill14_IF_Phase02",
       "TargetInfo": {
         "TargetType": "Caster"
       },
       "OnStart": [
+        {
+          "$type": "RPG.GameCore.ShowUIPage",
+          "AssetPath": "UI/Common/Widget/ShowBattleHint.prefab",
+          "UITextNodes": [
+            {
+              "TextPath": "AreaInfoPanel/Title/Text",
+              "TextContent": {
+                "Hash": -681834444
+              }
+            }
+          ],
+          "LifeTime": 2
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamLight",
+          "FormationType": "LightTeamNormal",
+          "CustomFormationIgnoreDying": false
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamDark",
+          "FormationType": "DarkTeamNormal",
+          "CustomFormationIgnoreDying": false
+        },
         {
           "$type": "RPG.GameCore.WaitAnimState",
           "TargetType": {
@@ -552,7 +1097,7 @@
                   "$type": "RPG.GameCore.TargetAlias",
                   "Alias": "ParamEntity"
                 },
-                "ModifierName": "Monster_W2_Argenti_00_IF_Skill04_MarkModifier",
+                "ModifierName": "Monster_W2_Argenti_00_Skill14_IF_MarkModifier",
                 "Inverse": true
               },
               "ByRandom": false,
@@ -570,7 +1115,7 @@
                     "$type": "RPG.GameCore.TargetAlias",
                     "Alias": "ParamEntity"
                   },
-                  "ModifierName": "Monster_W2_Argenti_00_IF_Skill04_MarkModifier"
+                  "ModifierName": "Monster_W2_Argenti_00_Skill14_IF_MarkModifier"
                 },
                 {
                   "$type": "RPG.GameCore.TriggerAbility",
@@ -608,135 +1153,33 @@
           "MaxLoopCount": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 16
+              "Value": 4
             }
           },
           "TaskList": [
             {
-              "$type": "RPG.GameCore.Retarget",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "AllLightTeam"
-              },
-              "Predicate": {
-                "$type": "RPG.GameCore.ByIsContainModifier",
-                "TargetType": {
-                  "$type": "RPG.GameCore.TargetAlias",
-                  "Alias": "ParamEntity"
-                },
-                "ModifierName": "Monster_W2_Argenti_00_IF_Skill04_MarkModifier",
-                "Inverse": true
-              },
-              "MaxNumber": {
+              "$type": "RPG.GameCore.LoopExecuteTaskListWithInterval",
+              "MaxLoopCount": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 1
+                  "Value": 4
                 }
               },
               "TaskList": [
-                {
-                  "$type": "RPG.GameCore.AddModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  },
-                  "ModifierName": "Monster_W2_Argenti_00_IF_Skill04_MarkModifier"
-                },
-                {
-                  "$type": "RPG.GameCore.TriggerEffect",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  },
-                  "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Argenti_00/Eff_Monster_W2_ArgentiTotem_00_Skill01Trigger_02.prefab"
-                },
-                {
-                  "$type": "RPG.GameCore.DamageByAttackProperty",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  },
-                  "AttackProperty": {
-                    "DamagePercentage": {
-                      "IsDynamic": false,
-                      "FixedValue": {
-                        "Value": 0.3
-                      }
-                    },
-                    "SPHitRatio": {
-                      "IsDynamic": false,
-                      "FixedValue": {
-                        "Value": 0.3
-                      }
-                    },
-                    "StanceDamageType": "Physical",
-                    "AttackType": "Normal",
-                    "HitAnimation": "Hit",
-                    "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Argenti_00/Eff_Monster_W2_ArgentiTotem_00_Skill01Hit01.prefab",
-                    "HitEffectHeight": 1.136,
-                    "HitTimeSlowType": "Impact"
-                  },
-                  "PerformanceDelay": {
-                    "IsDynamic": false,
-                    "FixedValue": {
-                      "Value": 0.1
-                    }
-                  },
-                  "IsHitAnimPerformanceDelay": true
-                },
-                {
-                  "$type": "RPG.GameCore.WaitSecond",
-                  "WaitTime": {
-                    "IsDynamic": false,
-                    "FixedValue": {
-                      "Value": 0.15
-                    }
-                  }
-                },
-                {
-                  "$type": "RPG.GameCore.VCameraConfigChange",
-                  "CameraConfig": {
-                    "ShakeConfigV2": {
-                      "ShakeRange": 0.07,
-                      "ShakeTime": 0.2,
-                      "ShakeDir": {
-                        "X": 0,
-                        "Y": 0.14,
-                        "Z": 0
-                      },
-                      "BaseCycle": 0.06,
-                      "CycleDamping": 0,
-                      "RangeAttenuation": 0.95,
-                      "PerlinNoiseAmplitude": {
-                        "X": 0.03,
-                        "Y": 0.03,
-                        "Z": 0
-                      },
-                      "PerlinNoiseFreq": {
-                        "X": 16,
-                        "Y": 16,
-                        "Z": 0
-                      },
-                      "RotationalAmplitude": {
-                        "X": 0,
-                        "Y": 0,
-                        "Z": 1
-                      },
-                      "RotationFreqV3": {
-                        "X": 0,
-                        "Y": 0,
-                        "Z": 8
-                      }
-                    }
-                  }
-                }
-              ],
-              "FailedTaskList": [
                 {
                   "$type": "RPG.GameCore.Retarget",
                   "TargetType": {
                     "$type": "RPG.GameCore.TargetAlias",
                     "Alias": "AllLightTeam"
+                  },
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByIsContainModifier",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "ModifierName": "Monster_W2_Argenti_00_Skill14_IF_MarkModifier",
+                    "Inverse": true
                   },
                   "MaxNumber": {
                     "IsDynamic": false,
@@ -746,12 +1189,12 @@
                   },
                   "TaskList": [
                     {
-                      "$type": "RPG.GameCore.RemoveModifier",
+                      "$type": "RPG.GameCore.AddModifier",
                       "TargetType": {
                         "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "AllLightTeam"
+                        "Alias": "ParamEntity"
                       },
-                      "ModifierName": "Monster_W2_Argenti_00_IF_Skill04_MarkModifier"
+                      "ModifierName": "Monster_W2_Argenti_00_Skill14_IF_MarkModifier"
                     },
                     {
                       "$type": "RPG.GameCore.TriggerEffect",
@@ -768,19 +1211,32 @@
                         "Alias": "ParamEntity"
                       },
                       "AttackProperty": {
+                        "DamageType": {
+                          "DamageType": "Physical"
+                        },
                         "DamagePercentage": {
-                          "IsDynamic": false,
-                          "FixedValue": {
-                            "Value": 0.3
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAAAAUK",
+                            "FixedValues": [
+                              {
+                                "Value": 16
+                              }
+                            ],
+                            "DynamicHashes": [
+                              -1062921175
+                            ]
                           }
                         },
                         "SPHitRatio": {
                           "IsDynamic": false,
                           "FixedValue": {
-                            "Value": 0.3
+                            "Value": 0.0625
                           }
                         },
-                        "StanceDamageType": "Physical",
+                        "StanceDamageType": {
+                          "DamageType": "Physical"
+                        },
                         "AttackType": "Normal",
                         "HitAnimation": "Hit",
                         "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Argenti_00/Eff_Monster_W2_ArgentiTotem_00_Skill01Hit01.prefab",
@@ -841,6 +1297,132 @@
                         }
                       }
                     }
+                  ],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.Retarget",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AllLightTeam"
+                      },
+                      "MaxNumber": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1
+                        }
+                      },
+                      "TaskList": [
+                        {
+                          "$type": "RPG.GameCore.RemoveModifier",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "AllLightTeam"
+                          },
+                          "ModifierName": "Monster_W2_Argenti_00_Skill14_IF_MarkModifier"
+                        },
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Argenti_00/Eff_Monster_W2_ArgentiTotem_00_Skill01Trigger_02.prefab"
+                        },
+                        {
+                          "$type": "RPG.GameCore.DamageByAttackProperty",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "AttackProperty": {
+                            "DamageType": {
+                              "DamageType": "Physical"
+                            },
+                            "DamagePercentage": {
+                              "IsDynamic": true,
+                              "PostfixExpr": {
+                                "OpCodes": "AQAAAAUK",
+                                "FixedValues": [
+                                  {
+                                    "Value": 16
+                                  }
+                                ],
+                                "DynamicHashes": [
+                                  -1062921175
+                                ]
+                              }
+                            },
+                            "SPHitRatio": {
+                              "IsDynamic": false,
+                              "FixedValue": {
+                                "Value": 0.0625
+                              }
+                            },
+                            "StanceDamageType": {
+                              "DamageType": "Physical"
+                            },
+                            "AttackType": "Normal",
+                            "HitAnimation": "Hit",
+                            "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Argenti_00/Eff_Monster_W2_ArgentiTotem_00_Skill01Hit01.prefab",
+                            "HitEffectHeight": 1.136,
+                            "HitTimeSlowType": "Impact"
+                          },
+                          "PerformanceDelay": {
+                            "IsDynamic": false,
+                            "FixedValue": {
+                              "Value": 0.1
+                            }
+                          },
+                          "IsHitAnimPerformanceDelay": true
+                        },
+                        {
+                          "$type": "RPG.GameCore.WaitSecond",
+                          "WaitTime": {
+                            "IsDynamic": false,
+                            "FixedValue": {
+                              "Value": 0.15
+                            }
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.VCameraConfigChange",
+                          "CameraConfig": {
+                            "ShakeConfigV2": {
+                              "ShakeRange": 0.07,
+                              "ShakeTime": 0.2,
+                              "ShakeDir": {
+                                "X": 0,
+                                "Y": 0.14,
+                                "Z": 0
+                              },
+                              "BaseCycle": 0.06,
+                              "CycleDamping": 0,
+                              "RangeAttenuation": 0.95,
+                              "PerlinNoiseAmplitude": {
+                                "X": 0.03,
+                                "Y": 0.03,
+                                "Z": 0
+                              },
+                              "PerlinNoiseFreq": {
+                                "X": 16,
+                                "Y": 16,
+                                "Z": 0
+                              },
+                              "RotationalAmplitude": {
+                                "X": 0,
+                                "Y": 0,
+                                "Z": 1
+                              },
+                              "RotationFreqV3": {
+                                "X": 0,
+                                "Y": 0,
+                                "Z": 8
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
                   ]
                 }
               ]
@@ -867,7 +1449,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "AllDarkTeam"
           },
-          "ModifierName": "Monster_W2_Argenti_00_IF_Skill04_MarkModifier"
+          "ModifierName": "Monster_W2_Argenti_00_Skill14_IF_MarkModifier"
         },
         {
           "$type": "RPG.GameCore.DamagePerformFinish"
@@ -878,7 +1460,7 @@
       ]
     },
     {
-      "Name": "Monster_W2_Argenti_00_IF_Skill05_Phase01",
+      "Name": "Monster_W2_Argenti_00_Skill15_IF_Phase01",
       "TargetInfo": {
         "TargetType": "SkillTargetEntityList"
       },
@@ -889,7 +1471,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "AbilityName": "Monster_W2_Argenti_00_IF_Skill05_Phase02",
+          "AbilityName": "Monster_W2_Argenti_00_Skill15_IF_Phase02",
           "IsSkillPerform": true
         },
         {
@@ -898,7 +1480,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "AbilityName": "Monster_W2_Argenti_00_Skill04_Camera",
+          "AbilityName": "Monster_W2_Argenti_00_Skill15_IF_Camera",
           "IsSkillPerform": true
         },
         {
@@ -925,13 +1507,13 @@
     },
     {
       "Modifiers": {
-        "Monster_W2_Argenti_00_IF_Skill05_MarkModifier": {},
-        "Monster_W2_Argenti_00_IF_Skill05_Taunt01_MarkModifier": {},
-        "Monster_W2_Argenti_00_IF_Skill05_Taunt02_MarkModifier": {},
-        "Monster_W2_Argenti_00_IF_Skill05_Taunt03_MarkModifier": {},
-        "Monster_W2_Argenti_00_IF_Skill05_Taunt04_MarkModifier": {}
+        "Monster_W2_Argenti_00_Skill15_IF_MarkModifier": {},
+        "Monster_W2_Argenti_00_Skill15_IF_Taunt01_MarkModifier": {},
+        "Monster_W2_Argenti_00_Skill15_IF_Taunt02_MarkModifier": {},
+        "Monster_W2_Argenti_00_Skill15_IF_Taunt03_MarkModifier": {},
+        "Monster_W2_Argenti_00_Skill15_IF_Taunt04_MarkModifier": {}
       },
-      "Name": "Monster_W2_Argenti_00_IF_Skill05_Phase02",
+      "Name": "Monster_W2_Argenti_00_Skill15_IF_Phase02",
       "TargetInfo": {
         "TargetType": "SkillTargetEntityList"
       },
@@ -981,6 +1563,19 @@
           }
         },
         {
+          "$type": "RPG.GameCore.ShowUIPage",
+          "AssetPath": "UI/Common/Widget/ShowBattleHint.prefab",
+          "UITextNodes": [
+            {
+              "TextPath": "AreaInfoPanel/Title/Text",
+              "TextContent": {
+                "Hash": -681834447
+              }
+            }
+          ],
+          "LifeTime": 2
+        },
+        {
           "$type": "RPG.GameCore.SetAttachmentVisibility",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
@@ -1012,7 +1607,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "AllLightTeam"
           },
-          "ModifierName": "Monster_W2_Argenti_00_IF_Skill05_Taunt01_MarkModifier"
+          "ModifierName": "Monster_W2_Argenti_00_Skill15_IF_Taunt01_MarkModifier"
         },
         {
           "$type": "RPG.GameCore.RemoveModifier",
@@ -1020,7 +1615,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "AllLightTeam"
           },
-          "ModifierName": "Monster_W2_Argenti_00_IF_Skill05_Taunt02_MarkModifier"
+          "ModifierName": "Monster_W2_Argenti_00_Skill15_IF_Taunt02_MarkModifier"
         },
         {
           "$type": "RPG.GameCore.RemoveModifier",
@@ -1028,7 +1623,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "AllLightTeam"
           },
-          "ModifierName": "Monster_W2_Argenti_00_IF_Skill05_Taunt03_MarkModifier"
+          "ModifierName": "Monster_W2_Argenti_00_Skill15_IF_Taunt03_MarkModifier"
         },
         {
           "$type": "RPG.GameCore.RemoveModifier",
@@ -1036,7 +1631,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "AllLightTeam"
           },
-          "ModifierName": "Monster_W2_Argenti_00_IF_Skill05_Taunt04_MarkModifier"
+          "ModifierName": "Monster_W2_Argenti_00_Skill15_IF_Taunt04_MarkModifier"
         },
         {
           "$type": "RPG.GameCore.Retarget",
@@ -1065,7 +1660,7 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "ParamEntity"
               },
-              "ModifierName": "Monster_W2_Argenti_00_IF_Skill05_Taunt01_MarkModifier"
+              "ModifierName": "Monster_W2_Argenti_00_Skill15_IF_Taunt01_MarkModifier"
             }
           ]
         },
@@ -1097,7 +1692,7 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "ParamEntity"
               },
-              "ModifierName": "Monster_W2_Argenti_00_IF_Skill05_Taunt02_MarkModifier"
+              "ModifierName": "Monster_W2_Argenti_00_Skill15_IF_Taunt02_MarkModifier"
             }
           ]
         },
@@ -1129,7 +1724,7 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "ParamEntity"
               },
-              "ModifierName": "Monster_W2_Argenti_00_IF_Skill05_Taunt03_MarkModifier"
+              "ModifierName": "Monster_W2_Argenti_00_Skill15_IF_Taunt03_MarkModifier"
             }
           ]
         },
@@ -1161,7 +1756,7 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "ParamEntity"
               },
-              "ModifierName": "Monster_W2_Argenti_00_IF_Skill05_Taunt04_MarkModifier"
+              "ModifierName": "Monster_W2_Argenti_00_Skill15_IF_Taunt04_MarkModifier"
             }
           ]
         },
@@ -1194,7 +1789,7 @@
                   "$type": "RPG.GameCore.TargetAlias",
                   "Alias": "ParamEntity"
                 },
-                "ModifierName": "Monster_W2_Argenti_00_IF_Skill05_MarkModifier",
+                "ModifierName": "Monster_W2_Argenti_00_Skill15_IF_MarkModifier",
                 "Inverse": true
               },
               "ByRandom": false,
@@ -1212,7 +1807,7 @@
                     "$type": "RPG.GameCore.TargetAlias",
                     "Alias": "ParamEntity"
                   },
-                  "ModifierName": "Monster_W2_Argenti_00_IF_Skill05_MarkModifier"
+                  "ModifierName": "Monster_W2_Argenti_00_Skill15_IF_MarkModifier"
                 },
                 {
                   "$type": "RPG.GameCore.TriggerAbility",
@@ -1228,7 +1823,7 @@
                   "WaitTime": {
                     "IsDynamic": false,
                     "FixedValue": {
-                      "Value": 0.15
+                      "Value": 0.4
                     }
                   }
                 }
@@ -1242,7 +1837,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "AllDarkTeam"
           },
-          "ModifierName": "Monster_W2_Argenti_00_IF_Skill05_MarkModifier"
+          "ModifierName": "Monster_W2_Argenti_00_Skill15_IF_MarkModifier"
         },
         {
           "$type": "RPG.GameCore.SkillPerformFinish"
@@ -1250,7 +1845,7 @@
       ]
     },
     {
-      "Name": "Monster_W2_Argenti_00_IF_Skill07_Phase01",
+      "Name": "Monster_W2_Argenti_00_Skill09_IF_Phase01",
       "TargetInfo": {
         "TargetType": "SkillTargetEntityList"
       },
@@ -1261,7 +1856,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "AbilityName": "Monster_W2_Argenti_00_IF_Skill07_Phase02",
+          "AbilityName": "Monster_W2_Argenti_00_Skill09_IF_Phase02",
           "IsSkillPerform": true
         },
         {
@@ -1297,9 +1892,248 @@
     },
     {
       "Modifiers": {
-        "Monster_W2_Argenti_00_IF_Skill07_MarkModifier": {}
+        "Monster_W2_Argenti_00_Skill15_IF_BOSS_Modifier": {
+          "_CallbackList": [
+            {
+              "Event": "OnDestroy",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SetEntityUnselectable",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  }
+                }
+              ]
+            },
+            {
+              "Event": "OnStack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SetEntityUnselectable",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "Unselectable": true
+                }
+              ]
+            },
+            {
+              "Event": "OnListenCharacterDie",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByIsMatchTeammateCount",
+                    "TeamType": "TeamDark",
+                    "CountType": "Count1"
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.RemoveSelfModifier"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
       },
-      "Name": "Monster_W2_Argenti_00_IF_Skill07_Phase02",
+      "Name": "Monster_W2_Argenti_00_Skill09_IF_Phase02",
+      "TargetInfo": {
+        "TargetType": "SkillTargetEntityList"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.SetAttachmentVisibility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AttachPoints": [
+            {
+              "Name": "Effect_Flower"
+            }
+          ],
+          "Visibility": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill04",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.2
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.SkillExecutionStart"
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill04",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.5
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.ShowUIPage",
+          "AssetPath": "UI/Common/Widget/ShowBattleHint.prefab",
+          "UITextNodes": [
+            {
+              "TextPath": "AreaInfoPanel/Title/Text",
+              "TextContent": {
+                "Hash": -681834446
+              }
+            }
+          ],
+          "LifeTime": 2
+        },
+        {
+          "$type": "RPG.GameCore.SetAttachmentVisibility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AttachPoints": [
+            {
+              "Name": "Effect_Flower"
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill04",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.534
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Argenti_00/Eff_Monster_W2_ArgentiTotem_01_Skill01Hit.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Argenti_00/Eff_Monster_W2_ArgentiTotem_01_Flower_UI.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "Monster_W2_Argenti_00_Skill15_IF_BOSS_Modifier"
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.ModifyActionDelay",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AddNormalizedValue": {
+            "IsDynamic": true,
+            "PostfixExpr": {
+              "OpCodes": "AQAK",
+              "FixedValues": [],
+              "DynamicHashes": [
+                1769177038
+              ]
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.SkillPerformFinish"
+        }
+      ]
+    },
+    {
+      "Name": "Monster_W2_Argenti_00_Skill16_IF_Phase01",
+      "TargetInfo": {
+        "TargetType": "SkillTargetEntityList"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityName": "Monster_W2_Argenti_00_Skill16_IF_Phase02",
+          "IsSkillPerform": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityName": "Monster_W2_Argenti_00_Skill04_Camera",
+          "IsSkillPerform": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAnimState",
+          "AnimStateName": "Skill04",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          },
+          "NormalizedTimeWait": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.72
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAnimState",
+          "AnimLogicState": "Idle"
+        }
+      ]
+    },
+    {
+      "Modifiers": {
+        "Monster_W2_Argenti_00_Skill16_IF_MarkModifier": {}
+      },
+      "Name": "Monster_W2_Argenti_00_Skill16_IF_Phase02",
       "TargetInfo": {
         "TargetType": "SkillTargetEntityList"
       },
@@ -1403,7 +2237,7 @@
                   "$type": "RPG.GameCore.TargetAlias",
                   "Alias": "ParamEntity"
                 },
-                "ModifierName": "Monster_W2_Argenti_00_IF_Skill07_MarkModifier",
+                "ModifierName": "Monster_W2_Argenti_00_Skill16_IF_MarkModifier",
                 "Inverse": true
               },
               "ByRandom": false,
@@ -1421,7 +2255,7 @@
                     "$type": "RPG.GameCore.TargetAlias",
                     "Alias": "ParamEntity"
                   },
-                  "ModifierName": "Monster_W2_Argenti_00_IF_Skill07_MarkModifier"
+                  "ModifierName": "Monster_W2_Argenti_00_Skill16_IF_MarkModifier"
                 },
                 {
                   "$type": "RPG.GameCore.TriggerAbility",
@@ -1439,7 +2273,7 @@
               "WaitTime": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.5
+                  "Value": 0.1
                 }
               }
             }
@@ -1449,16 +2283,24 @@
           "$type": "RPG.GameCore.RemoveModifier",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "MMonster_W2_Argenti_00_IF_Boss_PowerController"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
             "Alias": "AllDarkTeam"
           },
-          "ModifierName": "Monster_W2_Argenti_00_IF_Skill07_MarkModifier"
+          "ModifierName": "Monster_W2_Argenti_00_Skill16_IF_MarkModifier"
         },
         {
           "$type": "RPG.GameCore.WaitSecond",
           "WaitTime": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 2.5
+              "Value": 1.1
             }
           }
         },
@@ -1468,7 +2310,7 @@
       ]
     },
     {
-      "Name": "Monster_W2_Argenti_00_IF_Skill08_Phase01",
+      "Name": "Monster_W2_Argenti_00_Skill17_IF_Phase01",
       "TargetInfo": {
         "TargetType": "SkillTargetEntityList"
       },
@@ -1479,7 +2321,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "AbilityName": "Monster_W2_Argenti_00_IF_Skill08_Phase02",
+          "AbilityName": "Monster_W2_Argenti_00_Skill17_IF_Phase02",
           "IsSkillPerform": true
         },
         {
@@ -1514,7 +2356,7 @@
       ]
     },
     {
-      "Name": "Monster_W2_Argenti_00_IF_Skill08_Phase02",
+      "Name": "Monster_W2_Argenti_00_Skill17_IF_Phase02",
       "TargetInfo": {
         "TargetType": "SkillTargetEntityList"
       },
@@ -1603,6 +2445,14 @@
           "LifeTime": 2
         },
         {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "MMonster_W2_Argenti_00_IF_Boss_PowerController"
+        },
+        {
           "$type": "RPG.GameCore.LoopExecuteTaskList",
           "MaxLoopCount": {
             "IsDynamic": false,
@@ -1629,7 +2479,7 @@
                           "$type": "RPG.GameCore.TargetAlias",
                           "Alias": "ParamEntity"
                         },
-                        "ModifierName": "MMonster_W2_Argenti_00_Power"
+                        "ModifierName": "MMonster_W2_Argenti_00_IF_Power"
                       }
                     ],
                     "Inverse": true
@@ -1659,17 +2509,7 @@
                     "$type": "RPG.GameCore.TargetAlias",
                     "Alias": "ParamEntity"
                   },
-                  "ModifierName": "MMonster_W2_Argenti_00_Power",
-                  "LifeTime": {
-                    "IsDynamic": true,
-                    "PostfixExpr": {
-                      "OpCodes": "AQAK",
-                      "FixedValues": [],
-                      "DynamicHashes": [
-                        -1748310060
-                      ]
-                    }
-                  }
+                  "ModifierName": "MMonster_W2_Argenti_00_IF_Power"
                 }
               ]
             }
@@ -1679,6 +2519,604 @@
           "$type": "RPG.GameCore.SkillPerformFinish"
         }
       ]
+    },
+    {
+      "Name": "Monster_W2_Argenti_00_Skill10_IF_Phase01",
+      "TargetInfo": {
+        "TargetType": "SkillTargetEntityList"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamLight",
+          "FormationType": "LightTeamNormal",
+          "CustomFormationIgnoreDying": false
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamDark",
+          "CustomFormationName": "Monster_XP_Elite01_01_Skill03",
+          "CustomCenterTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "LightTeamCenter"
+          },
+          "CustomFormationIgnoreDying": false
+        },
+        {
+          "$type": "RPG.GameCore.LookAt",
+          "TargetType": "LightTeamCenter"
+        },
+        {
+          "$type": "RPG.GameCore.ShowBattleUI"
+        },
+        {
+          "$type": "RPG.GameCore.ResetHeadLookAt",
+          "PerformerType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "StopImmediately": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityName": "Monster_W2_Argenti_00_Skill10_IF_Phase02",
+          "IsSkillPerform": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityName": "Monster_W2_Argenti_00_Skill10_IF_Camera",
+          "IsSkillPerform": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAnimState",
+          "AnimStateName": "Skill10",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.WaitTimelineFinish",
+          "TimelineName": "Monster_W2_Argenti_00_Skill10_Timeline"
+        },
+        {
+          "$type": "RPG.GameCore.MoveToTargetPosition",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "TeamFormation"
+          },
+          "IgnoreRadius": true,
+          "OffsetTargetDistance": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAnimState",
+          "AnimLogicState": "Idle"
+        },
+        {
+          "$type": "RPG.GameCore.ShowBattleUI",
+          "IsShow": true
+        }
+      ]
+    },
+    {
+      "Modifiers": {
+        "Monster_W2_Argenti_00_Skill10_IF_MarkModifier": {}
+      },
+      "Name": "Monster_W2_Argenti_00_Skill10_IF_Phase02",
+      "TargetInfo": {
+        "TargetType": "SkillTargetEntityList"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.RemoveModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "Monster_W2_Argenti_00_Skill15_IF_BOSS_Modifier"
+        },
+        {
+          "$type": "RPG.GameCore.GlobalMainIntensityEffect",
+          "TargetIntensity": 0.1,
+          "FadeDuration": 0.3
+        },
+        {
+          "$type": "RPG.GameCore.HideLevelStage",
+          "IsHide": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill10",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.125
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.SkillExecutionStart"
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill10",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.1
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.LookAt",
+          "TargetType": "EnemyTeamCenter"
+        },
+        {
+          "$type": "RPG.GameCore.SkillExecutionStart"
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill10",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.545
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllEnemy"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Argenti_00/Eff_Monster_W2_Argenti_00_Skill05_Hit01.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.DamageByAttackProperty",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllEnemy"
+          },
+          "AttackProperty": {
+            "DamageType": {
+              "DamageType": "Physical"
+            },
+            "DamagePercentage": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAAAAQK",
+                "FixedValues": [
+                  {
+                    "Value": 0.2
+                  }
+                ],
+                "DynamicHashes": [
+                  -1787455043
+                ]
+              }
+            },
+            "SPHitRatio": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 0.2
+              }
+            },
+            "AttackType": "Normal",
+            "HitAnimation": "Hit",
+            "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Argenti_00/Eff_Monster_W2_Argenti_00_Skill05_Hit.prefab",
+            "HitTimeSlowType": "Slash",
+            "HitTimeSlowIntensity": "Heavy"
+          },
+          "DisplayData": {
+            "UIMessageHeight": 1
+          }
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill10",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.774
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.DamageByAttackProperty",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllEnemy"
+          },
+          "AttackProperty": {
+            "DamageType": {
+              "DamageType": "Physical"
+            },
+            "DamagePercentage": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAAAAQK",
+                "FixedValues": [
+                  {
+                    "Value": 0.8
+                  }
+                ],
+                "DynamicHashes": [
+                  -1787455043
+                ]
+              }
+            },
+            "SPHitRatio": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 0.8
+              }
+            },
+            "AttackType": "Normal",
+            "HitAnimation": "Hit_H",
+            "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Argenti_00/Eff_Monster_W2_Argenti_00_Skill05_Hit.prefab",
+            "HitTimeSlowType": "Slash",
+            "HitTimeSlowIntensity": "Heavy"
+          },
+          "DisplayData": {
+            "UIMessageHeight": 1
+          }
+        },
+        {
+          "$type": "RPG.GameCore.RadialBlurEffect",
+          "BlurRadius": 1,
+          "Iteration": 10,
+          "BlurStart": 0.01,
+          "BlurFeather": 0.01
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill10",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.824
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.LoopExecuteTaskListWithInterval",
+          "MaxLoopCount": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 4
+            }
+          },
+          "TaskList": [
+            {
+              "$type": "RPG.GameCore.DamageByAttackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllEnemy"
+              },
+              "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Physical"
+                },
+                "DamagePercentage": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAK",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      1531275234
+                    ]
+                  }
+                },
+                "StanceDamageType": {
+                  "DamageType": "Physical"
+                },
+                "AttackType": "Normal",
+                "HitAnimation": "Hit",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Argenti_00/Eff_Monster_W2_ArgentiTotem_00_Skill01Hit01.prefab",
+                "HitEffectHeight": 1.136,
+                "HitTimeSlowType": "Impact"
+              },
+              "PerformanceDelay": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0.1
+                }
+              },
+              "IsHitAnimPerformanceDelay": true
+            },
+            {
+              "$type": "RPG.GameCore.WaitSecond",
+              "WaitTime": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0.15
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.VCameraConfigChange",
+              "CameraConfig": {
+                "ShakeConfigV2": {
+                  "ShakeRange": 0.07,
+                  "ShakeTime": 0.2,
+                  "ShakeDir": {
+                    "X": 0,
+                    "Y": 0.14,
+                    "Z": 0
+                  },
+                  "BaseCycle": 0.06,
+                  "CycleDamping": 0,
+                  "RangeAttenuation": 0.95,
+                  "PerlinNoiseAmplitude": {
+                    "X": 0.03,
+                    "Y": 0.03,
+                    "Z": 0
+                  },
+                  "PerlinNoiseFreq": {
+                    "X": 16,
+                    "Y": 16,
+                    "Z": 0
+                  },
+                  "RotationalAmplitude": {
+                    "X": 0,
+                    "Y": 0,
+                    "Z": 1
+                  },
+                  "RotationFreqV3": {
+                    "X": 0,
+                    "Y": 0,
+                    "Z": 8
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.SetDynamicValue",
+          "DynamicKey": "FlowerPower",
+          "Value": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.RemoveModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "ModifierName": "Monster_W2_Argenti_00_Skill10_IF_MarkModifier"
+        },
+        {
+          "$type": "RPG.GameCore.DamagePerformFinish"
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareMonsterID",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "TargetMonsterID": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 3024011
+              }
+            }
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "ModifierName": "Monster_W1_Gepard_00_RL_DamageUP",
+              "DynamicValues": {
+                "MDF_DamageAddedRatio": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAK",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      -20297811
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill10",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.877
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.GlobalMainIntensityEffect",
+          "IsRevert": true,
+          "FadeDuration": 0.5
+        },
+        {
+          "$type": "RPG.GameCore.RadialBlurEffect",
+          "Active": false
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill10",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.HideLevelStage"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "Monster_W2_Argenti_00_IF_FlowerPower"
+        },
+        {
+          "$type": "RPG.GameCore.SkillPerformFinish"
+        }
+      ]
+    },
+    {
+      "Name": "Monster_W2_Argenti_00_IF_TransferEnhance",
+      "TargetInfo": {
+        "TargetType": "SkillTargetEntityList"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.2
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.LoopExecuteTaskList",
+          "MaxLoopCount": {
+            "IsDynamic": true,
+            "PostfixExpr": {
+              "OpCodes": "AQAK",
+              "FixedValues": [],
+              "DynamicHashes": [
+                -1440146502
+              ]
+            }
+          },
+          "TaskList": [
+            {
+              "$type": "RPG.GameCore.Retarget",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllTeammate"
+              },
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByAny",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByIsContainModifier",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "ModifierName": "MMonster_W2_Argenti_00_IF_Power"
+                      }
+                    ],
+                    "Inverse": true
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByCheckCustomValueBool",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "Key": {
+                      "Hash": 363068616
+                    }
+                  }
+                ]
+              },
+              "MaxNumber": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1
+                }
+              },
+              "TaskList": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "ModifierName": "MMonster_W2_Argenti_00_IF_Power"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.7
+            }
+          }
+        }
+      ],
+      "DynamicValues": {
+        "Values": {
+          "-1440146502": {}
+        }
+      }
     }
   ],
   "GlobalModifiers": {
@@ -1686,24 +3124,38 @@
     "Monster_W2_Argenti_00_IF_Summon02": {},
     "Monster_W2_Argenti_00_IF_Summon03": {},
     "Monster_W2_Argenti_00_IF_Summon04": {},
-    "MMonster_W2_Argenti_00_IF_Summon_Enhance_Sword": {
+    "MMonster_W2_Argenti_00_IF_Boss_Enhance": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
+          "CallbackConfig": []
+        },
+        {
+          "Event": "OnBeingBreak",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.IncludeTaskListTemplate",
+              "Name": "Argenti_KillAllMonsters"
+            }
+          ]
+        }
+      ]
+    },
+    "MMonster_W2_Argenti_00_IF_Boss_EnhanceByRecycle": {
       "_CallbackList": [
         {
           "Event": "OnStack",
           "CallbackConfig": [
             {
-              "$type": "RPG.GameCore.StackProperty",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "Property": "HPAddedRatio",
-              "PropertyValue": {
+              "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
+              "ValueType": "Layer",
+              "Multiplier": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 2
+                  "Value": 1
                 }
-              }
+              },
+              "DynamicKey": "Layer"
             },
             {
               "$type": "RPG.GameCore.StackProperty",
@@ -1711,29 +3163,298 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "ModifierOwnerEntity"
               },
-              "Property": "MaxStance",
+              "Property": "AllDamageTypeAddedRatio",
               "PropertyValue": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 60
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQABAQQK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    -1880897480,
+                    -1779155193
+                  ]
                 }
               }
-            },
-            {
-              "$type": "RPG.GameCore.ResetStance",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "ConstantValue": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 150
-                }
-              },
-              "SkipLockTeamStance": true
             }
           ]
+        }
+      ],
+      "DynamicValues": {
+        "Values": {
+          "-1779155193": {}
+        }
+      }
+    },
+    "Monster_W2_Argenti_00_IF_FlowerPower": {
+      "MaxLayer": 4,
+      "_CallbackList": [
+        {
+          "Event": "OnDestroy",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValue",
+              "DynamicKey": "FlowerPower",
+              "ContextScope": "TargetEntity",
+              "Value": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "UniqueEffectName": "SummonBall01"
+            },
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "UniqueEffectName": "SummonBall02"
+            },
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "UniqueEffectName": "SummonBall03"
+            },
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "UniqueEffectName": "SummonBall04"
+            }
+          ]
+        },
+        {
+          "Event": "OnStack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValueByAddValue",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "Key": "FlowerPower",
+              "AddValue": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1
+                }
+              },
+              "Min": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0
+                }
+              },
+              "Max": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 100
+                }
+              },
+              "ContextScope": "TargetEntity"
+            },
+            {
+              "$type": "RPG.GameCore.SwitchCaseByDynamicValue",
+              "Switch": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    -1699325254
+                  ]
+                }
+              },
+              "CaseTaskList": [
+                {
+                  "Case": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  },
+                  "TaskList": [
+                    {
+                      "$type": "RPG.GameCore.TriggerEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_BattleEvent/Eff_VampireSurvivors_01/Eff_VampireSurvivors_FireBall_01.prefab",
+                      "UniqueEffectName": "FireBall01",
+                      "PositionOffset": {
+                        "X": 0.8,
+                        "Y": 1.6,
+                        "Z": -1
+                      },
+                      "Scale": {
+                        "X": 0.3,
+                        "Y": 0.3,
+                        "Z": 0.3
+                      }
+                    }
+                  ]
+                },
+                {
+                  "Case": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 2
+                    }
+                  },
+                  "TaskList": [
+                    {
+                      "$type": "RPG.GameCore.TriggerEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_BattleEvent/Eff_VampireSurvivors_01/Eff_VampireSurvivors_FireBall_01.prefab",
+                      "UniqueEffectName": "FireBall02",
+                      "PositionOffset": {
+                        "X": -0.8,
+                        "Y": 1.6,
+                        "Z": -1
+                      },
+                      "Scale": {
+                        "X": 0.3,
+                        "Y": 0.3,
+                        "Z": 0.3
+                      }
+                    }
+                  ]
+                },
+                {
+                  "Case": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 3
+                    }
+                  },
+                  "TaskList": [
+                    {
+                      "$type": "RPG.GameCore.TriggerEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_BattleEvent/Eff_VampireSurvivors_01/Eff_VampireSurvivors_FireBall_01.prefab",
+                      "UniqueEffectName": "FireBall03",
+                      "PositionOffset": {
+                        "X": 1,
+                        "Y": 1.3,
+                        "Z": 0.5
+                      },
+                      "Scale": {
+                        "X": 0.3,
+                        "Y": 0.3,
+                        "Z": 0.3
+                      }
+                    }
+                  ]
+                },
+                {
+                  "Case": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 4
+                    }
+                  },
+                  "TaskList": [
+                    {
+                      "$type": "RPG.GameCore.TriggerEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_BattleEvent/Eff_VampireSurvivors_01/Eff_VampireSurvivors_FireBall_01.prefab",
+                      "UniqueEffectName": "FireBall04",
+                      "PositionOffset": {
+                        "X": -1,
+                        "Y": 1.3,
+                        "Z": 0.5
+                      },
+                      "Scale": {
+                        "X": 0.3,
+                        "Y": 0.3,
+                        "Z": 0.3
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Event": "OnBeingBreak",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValue",
+              "DynamicKey": "FlowerPower",
+              "ContextScope": "TargetEntity",
+              "Value": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "UniqueEffectName": "SummonBall01"
+            },
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "UniqueEffectName": "SummonBall02"
+            },
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "UniqueEffectName": "SummonBall03"
+            },
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "UniqueEffectName": "SummonBall04"
+            }
+          ]
+        }
+      ],
+      "Stacking": "Replace"
+    },
+    "MMonster_W2_Argenti_00_IF_Summon_Enhance_Sword": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
+          "CallbackConfig": []
         }
       ]
     },
@@ -1741,6 +3462,241 @@
       "_CallbackList": [
         {
           "Event": "OnStack",
+          "CallbackConfig": []
+        }
+      ]
+    },
+    "MMonster_W2_Argenti_00_IF_Boss_PowerController": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
+          "CallbackConfig": []
+        },
+        {
+          "Event": "OnAfterSkillUse",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAny",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCurrentSkillName",
+                    "SkillName": "Skill11_IF"
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByCurrentSkillName",
+                    "SkillName": "Skill14_IF"
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "DynamicKey": "PowerNumber",
+                  "ContextScope": "ContextModifier",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.Retarget",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllDarkTeam"
+                  },
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByIsContainModifier",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "ModifierName": "MMonster_W2_Argenti_00_IF_Power"
+                  },
+                  "MaxNumber": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 5
+                    }
+                  },
+                  "TaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValueByAddValue",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "Key": "PowerNumber",
+                      "AddValue": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1
+                        }
+                      },
+                      "Min": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 0
+                        }
+                      },
+                      "Max": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 100
+                        }
+                      },
+                      "ContextScope": "ContextModifier"
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "DynamicKey": "PowerNumber",
+                    "ContextScope": "ContextModifier",
+                    "CompareType": "Less",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 2
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.TurnInsertAbility",
+                      "AbilityName": "Monster_W2_Argenti_00_IF_TransferEnhance",
+                      "AbilityTarget": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "InsertAbilityPriority": "MonsterBuffOthers",
+                      "DynamicValues": {
+                        "LoopTimes": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AAABAAMK",
+                            "FixedValues": [
+                              {
+                                "Value": 2
+                              }
+                            ],
+                            "DynamicHashes": [
+                              481761442
+                            ]
+                          }
+                        }
+                      },
+                      "OwnerAliveState": "NoOne"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Event": "OnBeingBreak",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.RemoveSelfModifier"
+            }
+          ]
+        }
+      ],
+      "DynamicValues": {
+        "Values": {
+          "481761442": {}
+        }
+      }
+    },
+    "MMonster_W2_Argenti_00_IF_Power": {
+      "BehaviorFlagList": [
+        "STAT_SpeedUp"
+      ],
+      "_CallbackList": [
+        {
+          "Event": "OnDestroy",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.DebugLog",
+              "Message": "==============MMonster_W2_Argenti_00_IF_Power OnDestroy======================"
+            },
+            {
+              "$type": "RPG.GameCore.Retarget",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntityAllTeammate"
+              },
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCompareMonsterRank",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "CompareType": "LessEqual",
+                    "CompareValue": 2
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "Flag": "Break",
+                    "Inverse": true
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByIsContainModifier",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "ModifierName": "MMonster_W2_Argenti_00_IF_Power",
+                    "Inverse": true
+                  }
+                ]
+              },
+              "MaxNumber": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1
+                }
+              },
+              "TaskList": [
+                {
+                  "$type": "RPG.GameCore.DebugLog",
+                  "Message": "==============MMonster_W2_Argenti_00_IF_Power Success======================"
+                },
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "ModifierName": "MMonster_W2_Argenti_00_IF_Power"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.StackProperty",
@@ -1748,11 +3704,15 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "ModifierOwnerEntity"
               },
-              "Property": "HPAddedRatio",
+              "Property": "SpeedAddedRatio",
               "PropertyValue": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 2
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    731855998
+                  ]
                 }
               }
             },
@@ -1762,31 +3722,753 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "ModifierOwnerEntity"
               },
-              "Property": "MaxStance",
+              "Property": "AllDamageTypeAddedRatio",
               "PropertyValue": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 120
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    -805411944
+                  ]
                 }
               }
             },
             {
-              "$type": "RPG.GameCore.ResetStance",
+              "$type": "RPG.GameCore.TriggerEffect",
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "ModifierOwnerEntity"
               },
-              "ConstantValue": {
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Argenti_00/Eff_Monster_W2_ArgentiTotem_All_Power_Strat.prefab"
+            },
+            {
+              "$type": "RPG.GameCore.DispelStatus",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "OnlyAlive": false,
+              "IsSlientDispel": true
+            },
+            {
+              "$type": "RPG.GameCore.ExitBreakState",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "CancelRecoverAnim": true
+            },
+            {
+              "$type": "RPG.GameCore.RemoveModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ModifierName": "Monster_Common_WeakControl"
+            }
+          ]
+        },
+        {
+          "Event": "OnBeingBreak",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.DebugLog",
+              "Message": "==============MMonster_W2_Argenti_00_IF_Power OnBeingBreak======================"
+            },
+            {
+              "$type": "RPG.GameCore.RemoveSelfModifier"
+            }
+          ]
+        }
+      ],
+      "Stacking": "Multiple",
+      "DynamicValues": {
+        "Values": {
+          "1733325153": {},
+          "2136609680": {},
+          "570525739": {},
+          "1330040626": {}
+        }
+      }
+    },
+    "Monster_W2_Argenti_00_IF_SuperArmorController": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ModifierName": "MCommon_SuperArmor",
+              "DynamicValues": {
+                "MDF_AllDamageTypeResistance": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAK",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      1877773466
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.SetResilience",
+              "DoReset": true
+            }
+          ]
+        },
+        {
+          "Event": "OnStack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.AddStageAbilityByName",
+              "StageAbilityName": "BattleEventAbility_IF_BOSS_Common_BeingBreak",
+              "CanReplace": false,
+              "DynamicValues": {}
+            }
+          ]
+        },
+        {
+          "Event": "OnBeingBreak",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_SuperArmor_Behit_Small.prefab",
+              "IsNeedFadeOut": false
+            },
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_SuperArmor_Behit.prefab",
+              "IsNeedFadeOut": false
+            },
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_SuperArmor_Behit_Big.prefab",
+              "IsNeedFadeOut": false
+            },
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_SuperArmor_Behit1.prefab",
+              "IsNeedFadeOut": false
+            },
+            {
+              "$type": "RPG.GameCore.TriggerEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_SuperArmor_Behit_Stop.prefab"
+            },
+            {
+              "$type": "RPG.GameCore.TriggerEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_SuperArmor_Behit1_Stop.prefab"
+            },
+            {
+              "$type": "RPG.GameCore.RemoveModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ModifierName": "MCommon_SuperArmor"
+            },
+            {
+              "$type": "RPG.GameCore.ModifyActionDelay",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "AddNormalizedValue": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    1748351382
+                  ]
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ModifierName": "MCommon_SuperArmorBreak",
+              "DynamicValues": {
+                "MDF_AllDamageTypeTakenRatio": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAK",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      66881034
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCompareMonsterRank",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "CompareType": "GreaterEqual",
+                    "CompareValue": 4
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByCompareHPRatio",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "CompareType": "Greater",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    }
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.TurnInsertAbility",
+                  "AbilityName": "BattleEventAbility_IF_BOSS_Common_BeingBreak",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "LevelEntity"
+                  },
+                  "AbilityTarget": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "InsertAbilityPriority": "MonsterBattleCry",
+                  "DynamicValues": {
+                    "BOSS_BreakDelay": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.ClearWeakness",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "OPType": "Protected",
+                  "WeakList": [
+                    "Physical",
+                    "Fire",
+                    "Ice",
+                    "Thunder",
+                    "Wind",
+                    "Quantum",
+                    "Imaginary"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Event": "OnEndBreak",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.RemoveModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ModifierName": "MCommon_SuperArmorBreak"
+            },
+            {
+              "$type": "RPG.GameCore.TriggerEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_SuperArmor_Recover.prefab"
+            },
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "AliveOnly": false,
+              "ModifierName": "MCommon_SuperArmor",
+              "DynamicValues": {
+                "MDF_AllDamageTypeResistance": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAK",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      1877773466
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.SetResilience",
+              "DoReset": true
+            }
+          ]
+        }
+      ],
+      "DynamicValues": {
+        "Values": {
+          "1877773466": {},
+          "66881034": {},
+          "1748351382": {}
+        }
+      }
+    },
+    "WMMonster_W2_Argenti_00_IF_DamageSplit_Boss": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.Retarget",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntityAllTeammate"
+              },
+              "Predicate": {
+                "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "Flag": "Break",
+                "Inverse": true
+              },
+              "MaxNumber": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 120
+                  "Value": 1
                 }
               },
-              "SkipLockTeamStance": true
+              "TaskList": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "ModifierName": "WMMonster_W2_Argenti_00_IF_DamageSplit_Ohters",
+                  "InheritCaster": "CasterSelf"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Event": "OnListenCharacterCreate",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByTargetTeam",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "Team": "TeamDark"
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "ModifierName": "WMMonster_W2_Argenti_00_IF_DamageSplit_Ohters",
+                  "InheritCaster": "CasterSelf"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Event": "OnListenEndBreak",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByTargetTeam",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "Team": "TeamDark"
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "ModifierName": "WMMonster_W2_Argenti_00_IF_DamageSplit_Ohters",
+                  "InheritCaster": "CasterSelf"
+                }
+              ]
             }
           ]
         }
       ]
+    },
+    "WMMonster_W2_Argenti_00_IF_DamageSplit_Ohters": {
+      "BehaviorFlagList": [
+        "RemoveWhenCasterDead"
+      ],
+      "_CallbackList": [
+        {
+          "Event": "OnBeforeBeingHitAll",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByNot",
+                "Predicate": {
+                  "$type": "RPG.GameCore.ByIsSplitDamage",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  }
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.HitDamageSplit",
+                  "SplitTarget": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "SelfSplitRatio": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0.2
+                    }
+                  },
+                  "TargetSplitRatio": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0.8
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Event": "OnBeingBreak",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.RemoveSelfModifier"
+            }
+          ]
+        }
+      ],
+      "Stacking": "ReplaceByCaster"
+    },
+    "MMonster_W2_Argenti_00_IF_Protect": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareTargetCount",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "AllDarkTeam"
+                },
+                "AliveOnly": true,
+                "Number": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 5
+                  }
+                },
+                "CompareType": "Equal"
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "ModifierName": "MMonster__W2_Argenti_00_IF_NoWeakness",
+                  "DynamicValues": {
+                    "MDF_DefenceAddedRatio": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          1849530227
+                        ]
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Event": "OnListenCharacterDie",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareTargetCount",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "AllDarkTeam"
+                },
+                "AliveOnly": true,
+                "Number": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 5
+                  }
+                },
+                "CompareType": "Less"
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.RemoveModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "ModifierName": "MMonster__W2_Argenti_00_IF_NoWeakness"
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveSelfModifier"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Event": "OnListenCharacterCreate",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareTargetCount",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "AllDarkTeam"
+                },
+                "AliveOnly": true,
+                "Number": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 5
+                  }
+                },
+                "CompareType": "Equal"
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "ModifierName": "MMonster__W2_Argenti_00_IF_NoWeakness",
+                  "DynamicValues": {
+                    "MDF_DefenceAddedRatio": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          1849530227
+                        ]
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Event": "OnAfterSkillUse",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareTargetCount",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "AllDarkTeam"
+                },
+                "AliveOnly": true,
+                "Number": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 5
+                  }
+                },
+                "CompareType": "Less"
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.RemoveModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "ModifierName": "MMonster__W2_Argenti_00_IF_NoWeakness"
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveSelfModifier"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "DynamicValues": {
+        "Values": {
+          "1849530227": {}
+        }
+      }
+    },
+    "MMonster__W2_Argenti_00_IF_NoWeakness": {
+      "BehaviorFlagList": [
+        "MuteBreak"
+      ],
+      "_CallbackList": [
+        {
+          "Event": "OnDestroy",
+          "CallbackConfig": []
+        },
+        {
+          "Event": "OnStack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.ShowUIPage",
+              "AssetPath": "UI/Common/Widget/ShowBattleHint.prefab",
+              "UITextNodes": [
+                {
+                  "TextPath": "AreaInfoPanel/Title/Text",
+                  "TextContent": {
+                    "Hash": 1823864852
+                  }
+                }
+              ],
+              "LifeTime": 2
+            },
+            {
+              "$type": "RPG.GameCore.TriggerEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Buff_Common_DefenceUp.prefab"
+            },
+            {
+              "$type": "RPG.GameCore.ModifierAttachEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Xuanlu_00/Eff_Monster_W2_Xuanlu_00_Skill03_Defense.prefab"
+            },
+            {
+              "$type": "RPG.GameCore.StackWeakness",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "OPType": "Protected",
+              "WeakList": [
+                "Physical",
+                "Fire",
+                "Ice",
+                "Thunder",
+                "Wind",
+                "Quantum",
+                "Imaginary"
+              ]
+            },
+            {
+              "$type": "RPG.GameCore.StackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "Property": "DefenceAddedRatio",
+              "PropertyValue": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    1849530227
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "Stacking": "Replace",
+      "DynamicValues": {
+        "Values": {
+          "1849530227": {}
+        }
+      }
     }
   },
   "GlobalTemplates": [
@@ -1794,64 +4476,156 @@
       "Name": "Argenti_SummonAllMonsters",
       "TaskList": [
         {
-          "$type": "RPG.GameCore.SummonMonster",
-          "SummonMonsterDataList": [
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByIsTeamLocationIndexType",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "TeamType": "TeamDark",
+            "Type": "Left"
+          },
+          "SuccessTaskList": [
             {
-              "MonsterID": {
+              "$type": "RPG.GameCore.SummonMonster",
+              "SummonMonsterDataList": [
+                {
+                  "MonsterID": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        1556601572
+                      ]
+                    }
+                  },
+                  "LocationType": "First",
+                  "InitAnimStateName": "Appear"
+                }
+              ],
+              "DelayRatio": {
                 "IsDynamic": true,
                 "PostfixExpr": {
                   "OpCodes": "AQAK",
                   "FixedValues": [],
                   "DynamicHashes": [
-                    1556601572
+                    1744637801
                   ]
                 }
               },
-              "LocationType": "First",
-              "InitAnimStateName": "Appear"
+              "RefreshTeamLocation": false
             }
           ],
-          "DelayRatio": {
-            "IsDynamic": true,
-            "PostfixExpr": {
-              "OpCodes": "AQAK",
-              "FixedValues": [],
-              "DynamicHashes": [
-                1744637801
-              ]
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.SummonMonster",
+              "SummonMonsterDataList": [
+                {
+                  "MonsterID": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        1556601572
+                      ]
+                    }
+                  },
+                  "LocationType": "Last",
+                  "InitAnimStateName": "Appear"
+                }
+              ],
+              "DelayRatio": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    1744637801
+                  ]
+                }
+              },
+              "RefreshTeamLocation": false
             }
-          },
-          "RefreshTeamLocation": false
+          ]
         },
         {
-          "$type": "RPG.GameCore.SummonMonster",
-          "SummonMonsterDataList": [
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByIsTeamLocationIndexType",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "TeamType": "TeamDark",
+            "Type": "Left"
+          },
+          "SuccessTaskList": [
             {
-              "MonsterID": {
+              "$type": "RPG.GameCore.SummonMonster",
+              "SummonMonsterDataList": [
+                {
+                  "MonsterID": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        1556601572
+                      ]
+                    }
+                  },
+                  "LocationType": "First",
+                  "InitAnimStateName": "Appear"
+                }
+              ],
+              "DelayRatio": {
                 "IsDynamic": true,
                 "PostfixExpr": {
                   "OpCodes": "AQAK",
                   "FixedValues": [],
                   "DynamicHashes": [
-                    1556601572
+                    -984245554
                   ]
                 }
               },
-              "LocationType": "Last",
-              "InitAnimStateName": "Appear"
+              "RefreshTeamLocation": false
             }
           ],
-          "DelayRatio": {
-            "IsDynamic": true,
-            "PostfixExpr": {
-              "OpCodes": "AQAK",
-              "FixedValues": [],
-              "DynamicHashes": [
-                -984245554
-              ]
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.SummonMonster",
+              "SummonMonsterDataList": [
+                {
+                  "MonsterID": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        1556601572
+                      ]
+                    }
+                  },
+                  "LocationType": "Last",
+                  "InitAnimStateName": "Appear"
+                }
+              ],
+              "DelayRatio": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    -984245554
+                  ]
+                }
+              },
+              "RefreshTeamLocation": false
             }
-          },
-          "RefreshTeamLocation": false
+          ]
         },
         {
           "$type": "RPG.GameCore.Retarget",
@@ -1917,64 +4691,156 @@
           ]
         },
         {
-          "$type": "RPG.GameCore.SummonMonster",
-          "SummonMonsterDataList": [
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByIsTeamLocationIndexType",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "TeamType": "TeamDark",
+            "Type": "Left"
+          },
+          "SuccessTaskList": [
             {
-              "MonsterID": {
+              "$type": "RPG.GameCore.SummonMonster",
+              "SummonMonsterDataList": [
+                {
+                  "MonsterID": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        1556601572
+                      ]
+                    }
+                  },
+                  "LocationType": "First",
+                  "InitAnimStateName": "Appear"
+                }
+              ],
+              "DelayRatio": {
                 "IsDynamic": true,
                 "PostfixExpr": {
                   "OpCodes": "AQAK",
                   "FixedValues": [],
                   "DynamicHashes": [
-                    1556601572
+                    -2147044968
                   ]
                 }
               },
-              "LocationType": "First",
-              "InitAnimStateName": "Appear"
+              "RefreshTeamLocation": false
             }
           ],
-          "DelayRatio": {
-            "IsDynamic": true,
-            "PostfixExpr": {
-              "OpCodes": "AQAK",
-              "FixedValues": [],
-              "DynamicHashes": [
-                581838387
-              ]
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.SummonMonster",
+              "SummonMonsterDataList": [
+                {
+                  "MonsterID": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        1556601572
+                      ]
+                    }
+                  },
+                  "LocationType": "Last",
+                  "InitAnimStateName": "Appear"
+                }
+              ],
+              "DelayRatio": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    -2147044968
+                  ]
+                }
+              },
+              "RefreshTeamLocation": false
             }
-          },
-          "RefreshTeamLocation": false
+          ]
         },
         {
-          "$type": "RPG.GameCore.SummonMonster",
-          "SummonMonsterDataList": [
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByIsTeamLocationIndexType",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "TeamType": "TeamDark",
+            "Type": "Left"
+          },
+          "SuccessTaskList": [
             {
-              "MonsterID": {
+              "$type": "RPG.GameCore.SummonMonster",
+              "SummonMonsterDataList": [
+                {
+                  "MonsterID": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        1556601572
+                      ]
+                    }
+                  },
+                  "LocationType": "First",
+                  "InitAnimStateName": "Appear"
+                }
+              ],
+              "DelayRatio": {
                 "IsDynamic": true,
                 "PostfixExpr": {
                   "OpCodes": "AQAK",
                   "FixedValues": [],
                   "DynamicHashes": [
-                    1556601572
+                    581838387
                   ]
                 }
               },
-              "LocationType": "Last",
-              "InitAnimStateName": "Appear"
+              "RefreshTeamLocation": false
             }
           ],
-          "DelayRatio": {
-            "IsDynamic": true,
-            "PostfixExpr": {
-              "OpCodes": "AQAK",
-              "FixedValues": [],
-              "DynamicHashes": [
-                -2147044968
-              ]
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.SummonMonster",
+              "SummonMonsterDataList": [
+                {
+                  "MonsterID": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        1556601572
+                      ]
+                    }
+                  },
+                  "LocationType": "Last",
+                  "InitAnimStateName": "Appear"
+                }
+              ],
+              "DelayRatio": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    581838387
+                  ]
+                }
+              },
+              "RefreshTeamLocation": false
             }
-          },
-          "RefreshTeamLocation": false
+          ]
         },
         {
           "$type": "RPG.GameCore.Retarget",
@@ -2094,6 +4960,46 @@
               "ModifierName": "MMonster_W2_Argenti_00_IF_Summon_Enhance_Shield"
             }
           ]
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "CasterSummonedMinions"
+          },
+          "ModifierName": "Monster_W2_Argenti_00_IF_SuperArmorController",
+          "DynamicValues": {
+            "MDF_SuperArmorDamageResistance": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  465567984
+                ]
+              }
+            },
+            "MDF_SuperArmorBreakDamageTakenRatio": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  720807995
+                ]
+              }
+            },
+            "MDF_SuperArmorBreakActionDelay": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  939671589
+                ]
+              }
+            }
+          }
         },
         {
           "$type": "RPG.GameCore.AddModifier",

@@ -119,6 +119,66 @@
           }
         },
         {
+          "$type": "RPG.GameCore.Retarget",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "Predicate": {
+            "$type": "RPG.GameCore.ByAny",
+            "PredicateList": [
+              {
+                "$type": "RPG.GameCore.ByCompareCharacterID",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "TargetCharacterID": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 8003
+                  }
+                }
+              },
+              {
+                "$type": "RPG.GameCore.ByCompareCharacterID",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "TargetCharacterID": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 8004
+                  }
+                }
+              }
+            ]
+          },
+          "TaskList": [
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ParamEntity"
+              },
+              "ModifierName": "W_BattleEvent_SummonActivity8_BigOnAvatarModifier",
+              "DynamicValues": {
+                "MDF_Level": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAK",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      2113480413
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
           "$type": "RPG.GameCore.PredicateTaskList",
           "Predicate": {
             "$type": "RPG.GameCore.ByCompareDynamicValue",
@@ -171,27 +231,6 @@
               "ShowInActionBar": true
             }
           ]
-        },
-        {
-          "$type": "RPG.GameCore.LoseHPByRatio",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AbilityTargetEntity"
-          },
-          "RatioType": "MaxHP",
-          "Ratio": {
-            "IsDynamic": true,
-            "PostfixExpr": {
-              "OpCodes": "AQAK",
-              "FixedValues": [],
-              "DynamicHashes": [
-                110466255
-              ]
-            }
-          },
-          "Floor": {
-            "Value": 1
-          }
         },
         {
           "$type": "RPG.GameCore.ModifyActionDelay",
@@ -934,7 +973,9 @@
             "Alias": "AllDarkTeam"
           },
           "AttackProperty": {
-            "DamageType": "Fire",
+            "DamageType": {
+              "DamageType": "Fire"
+            },
             "DamagePercentage": {
               "IsDynamic": false,
               "FixedValue": {
@@ -1157,7 +1198,9 @@
             "Alias": "AllDarkTeam"
           },
           "AttackProperty": {
-            "DamageType": "Fire",
+            "DamageType": {
+              "DamageType": "Fire"
+            },
             "DamagePercentage": {
               "IsDynamic": true,
               "PostfixExpr": {
@@ -1379,6 +1422,32 @@
               ]
             },
             {
+              "Event": "OnListenCharacterCreate",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByTargetTeam",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "Team": "TeamDark"
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "MAvatar_SummonActivity8_CounterOnMonster"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
               "Event": "OnBeforeDying",
               "CallbackConfig": [
                 {
@@ -1420,19 +1489,6 @@
                       }
                     }
                   ]
-                }
-              ]
-            },
-            {
-              "Event": "OnWaveMonster",
-              "CallbackConfig": [
-                {
-                  "$type": "RPG.GameCore.AddModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "AllDarkTeam"
-                  },
-                  "ModifierName": "MAvatar_SummonActivity8_CounterOnMonster"
                 }
               ]
             }
@@ -1570,6 +1626,35 @@
     }
   ],
   "GlobalModifiers": {
+    "W_BattleEvent_SummonActivity8_BigOnAvatarModifier": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.StackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "Property": "ShieldAddedRatio",
+              "PropertyValue": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQABAQQK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    -1804325268,
+                    741565678
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "Stacking": "ReplaceByCaster"
+    },
     "W_BattleEvent_SummonActivity8_BigModifier": {
       "_CallbackList": [
         {

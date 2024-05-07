@@ -4,8 +4,27 @@
     {
       "TaskList": [
         {
-          "$type": "RPG.GameCore.PropSetupUITrigger",
-          "ButtonCallback": [
+          "$type": "RPG.GameCore.AdvSetupButtonListTrigger",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+          },
+          "TriggerName": "MissionTrigger",
+          "ButtonsByName": [],
+          "ButtonConfigs": [
+            {
+              "ID": "btn1",
+              "ButtonText": {
+                "Custom": true,
+                "Key": "BtnName"
+              }
+            }
+          ],
+          "OverridedValidGuestConfig": {}
+        },
+        {
+          "$type": "RPG.GameCore.AdvOnButtonPressed",
+          "ButtonName": "btn1",
+          "OnPressedCallback": [
             {
               "$type": "RPG.GameCore.PlayScreenTransfer",
               "Mode": "SwitchOut",
@@ -27,12 +46,12 @@
               "$type": "RPG.GameCore.PlayScreenTransfer",
               "CustomTime": 0.5
             }
-          ],
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetFetchAdvPropEx"
-          }
+          ]
         }
       ]
+    },
+    {
+      "TaskList": []
     }
   ],
   "ValueSource": {
@@ -44,6 +63,10 @@
       {
         "$type": "RPG.GameCore.SharedString",
         "Key": "Area Name"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "BtnName"
       }
     ]
   }

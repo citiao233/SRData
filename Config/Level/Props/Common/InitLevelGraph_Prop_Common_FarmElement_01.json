@@ -29,7 +29,13 @@
           },
           "InactiveFarmElementRestartAnimTriggerName": {
             "Value": "Restart_Trigger"
-          }
+          },
+          "InactiveFarmElementFadeOutEffectName": [
+            {
+              "Custom": true,
+              "Key": "SpecialMonsterEffect1"
+            }
+          ]
         }
       ]
     }
@@ -308,7 +314,6 @@
           "TargetType": {
             "$type": "RPG.GameCore.TargetFetchAdvPropEx"
           },
-          "TargetEntityType": "LocalPlayer",
           "TargetGroupID": {
             "IsDynamic": false,
             "FixedValue": {
@@ -321,18 +326,56 @@
               "Value": 0
             }
           },
-          "TargetTypes": [],
+          "TargetTypes": [
+            "LocalPlayer",
+            "NPCMonster"
+          ],
           "ColliderRelativePath": "CustomTrigger_DetectPlayer",
           "DisableAfterTriggered": true,
           "OnTriggerEnter": [],
           "OnTriggerExit": [
             {
-              "$type": "RPG.GameCore.TriggerCustomString",
-              "CustomString": {
-                "Value": "RemoveAssistAvatar"
-              }
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.AdvByCheckFarmElementActive",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.TriggerCustomString",
+                  "CustomString": {
+                    "Value": "RemoveAssistAvatar"
+                  }
+                }
+              ],
+              "FailedTaskList": []
             }
-          ]
+          ],
+          "OnExitFilter": {
+            "$type": "RPG.GameCore.ByAny",
+            "PredicateList": [
+              {
+                "$type": "RPG.GameCore.ByCompareTarget",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetFetchTaskActionTarget"
+                },
+                "CompareType": {
+                  "$type": "RPG.GameCore.TargetFetchAdvLocalPlayer"
+                }
+              },
+              {
+                "$type": "RPG.GameCore.ByCompareTarget",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetFetchTaskActionTarget"
+                },
+                "CompareType": {
+                  "$type": "RPG.GameCore.TargetFetchPropFarmElement"
+                }
+              }
+            ]
+          }
         },
         {
           "$type": "RPG.GameCore.PropEnableCollider",
@@ -383,7 +426,12 @@
         "$type": "RPG.GameCore.SharedString",
         "Value": "Effects/Eff_Prefab/Eff_Common/Eff_Common_BossDomain_Assistfield_01.prefab",
         "Key": "AssistEffectPath"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "SpecialMonsterEffect1"
       }
     ]
-  }
+  },
+  "Type": "Entity"
 }

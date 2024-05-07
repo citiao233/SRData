@@ -271,6 +271,9 @@
             "Alias": "AbilityTargetEntity"
           },
           "AttackProperty": {
+            "DamageType": {
+              "DamageType": "Physical"
+            },
             "DamagePercentage": {
               "IsDynamic": true,
               "PostfixExpr": {
@@ -686,6 +689,9 @@
                 "Alias": "AllEnemy"
               },
               "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Physical"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -736,6 +742,9 @@
             "Alias": "AllEnemy"
           },
           "AttackProperty": {
+            "DamageType": {
+              "DamageType": "Physical"
+            },
             "DamagePercentage": {
               "IsDynamic": true,
               "PostfixExpr": {
@@ -2588,6 +2597,9 @@
             "Alias": "AbilityTargetEntity"
           },
           "AttackProperty": {
+            "DamageType": {
+              "DamageType": "Physical"
+            },
             "DamagePercentage": {
               "IsDynamic": true,
               "PostfixExpr": {
@@ -2638,6 +2650,9 @@
             "Alias": "AbilityTargetEntity"
           },
           "AttackProperty": {
+            "DamageType": {
+              "DamageType": "Physical"
+            },
             "DamagePercentage": {
               "IsDynamic": true,
               "PostfixExpr": {
@@ -2688,6 +2703,9 @@
             "Alias": "AbilityTargetEntity"
           },
           "AttackProperty": {
+            "DamageType": {
+              "DamageType": "Physical"
+            },
             "DamagePercentage": {
               "IsDynamic": true,
               "PostfixExpr": {
@@ -4527,8 +4545,59 @@
       },
       "_CallbackList": [
         {
+          "Event": "OnCreate",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ModifierName": "Monster_Company_Coin_Avater_Mark"
+            },
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ModifierName": "Monster_Company_Coin_Avater_Effect",
+              "LayerAddWhenStack": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    1458882163
+                  ]
+                }
+              },
+              "DynamicValues": {
+                "MDF_DamageUpRatio_PerLayer": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAK",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      -945261968
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
           "Event": "OnDestroy",
           "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.RemoveModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ModifierName": "Monster_Company_Coin_Avater_Effect"
+            },
             {
               "$type": "RPG.GameCore.RemoveModifier",
               "TargetType": {
@@ -4631,14 +4700,6 @@
                 }
               },
               "DynamicKey": "ModifierLayers"
-            },
-            {
-              "$type": "RPG.GameCore.RemoveModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "ModifierName": "Monster_Company_Coin_Avater_Mark"
             }
           ]
         },

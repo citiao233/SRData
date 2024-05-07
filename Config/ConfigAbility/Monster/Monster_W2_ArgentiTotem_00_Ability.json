@@ -471,6 +471,9 @@
                 "Alias": "AllEnemy"
               },
               "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Physical"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -491,7 +494,9 @@
                     "Value": 0.3
                   }
                 },
-                "StanceDamageType": "Physical",
+                "StanceDamageType": {
+                  "DamageType": "Physical"
+                },
                 "AttackType": "Normal",
                 "HitAnimation": "Hit",
                 "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Argenti_00/Eff_Monster_W2_ArgentiTotem_00_Skill01Hit01.prefab",
@@ -515,6 +520,9 @@
                 "Alias": "AllEnemy"
               },
               "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Physical"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -535,7 +543,9 @@
                     "Value": 0.7
                   }
                 },
-                "StanceDamageType": "Physical",
+                "StanceDamageType": {
+                  "DamageType": "Physical"
+                },
                 "AttackType": "Normal",
                 "HitAnimation": "Hit_H",
                 "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Argenti_00/Eff_Monster_W2_ArgentiTotem_00_Skill01Hit02.prefab",
@@ -627,6 +637,9 @@
                 "Alias": "AllEnemy"
               },
               "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Physical"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -643,7 +656,9 @@
                     "Value": 1
                   }
                 },
-                "StanceDamageType": "Physical",
+                "StanceDamageType": {
+                  "DamageType": "Physical"
+                },
                 "AttackType": "Normal",
                 "HitAnimation": "Hit_H",
                 "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Argenti_00/Eff_Monster_W2_ArgentiTotem_00_Skill01Hit01.prefab",
@@ -774,7 +789,9 @@
         },
         {
           "$type": "RPG.GameCore.TriggerSound",
-          "SoundName": "Ev_sfx_monster_skill02_w2_argenti_00_sword_disappear",
+          "SoundName": {
+            "Value": "Ev_sfx_monster_skill02_w2_argenti_00_sword_disappear"
+          },
           "EmitterType": "DefaultEmitter"
         },
         {
@@ -875,6 +892,9 @@
                 "Alias": "AllTeammate"
               },
               "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Physical"
+                },
                 "FormulaType": "ByMaxHP",
                 "DamagePercentage": {
                   "IsDynamic": true,
@@ -904,7 +924,9 @@
                     ]
                   }
                 },
-                "StanceDamageType": "Physical",
+                "StanceDamageType": {
+                  "DamageType": "Physical"
+                },
                 "AttackType": "Normal",
                 "HitAnimation": "Hit",
                 "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Argenti_00/Eff_Monster_W2_ArgentiTotem_00_Skill01Hit01.prefab",
@@ -928,6 +950,9 @@
                 "Alias": "AllTeammate"
               },
               "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Physical"
+                },
                 "FormulaType": "ByMaxHP",
                 "DamagePercentage": {
                   "IsDynamic": true,
@@ -957,7 +982,9 @@
                     ]
                   }
                 },
-                "StanceDamageType": "Physical",
+                "StanceDamageType": {
+                  "DamageType": "Physical"
+                },
                 "AttackType": "Normal",
                 "HitAnimation": "Hit",
                 "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Argenti_00/Eff_Monster_W2_ArgentiTotem_00_Skill01Hit02.prefab",
@@ -966,49 +993,68 @@
               }
             },
             {
-              "$type": "RPG.GameCore.VCameraConfigChange",
-              "CameraConfig": {
-                "ShotAnimMovementConfig": {
-                  "DistanceZ": -1.5,
-                  "Damp": 0.5,
-                  "Duration": 0.1,
-                  "RecoveryDamp": 10000
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareTargetCount",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "AllTeammate"
                 },
-                "ShowEntityConfig": {
-                  "ShowTargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "AllLightTeamWithAllDarkTeam"
-                  },
-                  "IsAliveOnly": false
-                }
-              }
-            },
-            {
-              "$type": "RPG.GameCore.VCameraConfigChange",
-              "CameraConfig": {
-                "ShakeConfigV2": {
-                  "ShakeRange": 0.43,
-                  "ShakeTime": 0.3,
-                  "ShakeDir": {
-                    "X": 0.15,
-                    "Y": 0.4,
-                    "Z": 0.05
-                  },
-                  "BaseCycle": 0.06,
-                  "CycleDamping": 0,
-                  "RangeAttenuation": 0.95,
-                  "PerlinNoiseAmplitude": {
-                    "X": 0.05,
-                    "Y": 0.15,
-                    "Z": 0.05
-                  },
-                  "PerlinNoiseFreq": {
-                    "X": 12,
-                    "Y": 14,
-                    "Z": 16
+                "Number": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 0
+                  }
+                },
+                "CompareType": "Greater"
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.VCameraConfigChange",
+                  "CameraConfig": {
+                    "ShotAnimMovementConfig": {
+                      "DistanceZ": -1.5,
+                      "Damp": 0.5,
+                      "Duration": 0.1,
+                      "RecoveryDamp": 10000
+                    },
+                    "ShowEntityConfig": {
+                      "ShowTargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AllLightTeamWithAllDarkTeam"
+                      },
+                      "IsAliveOnly": false
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.VCameraConfigChange",
+                  "CameraConfig": {
+                    "ShakeConfigV2": {
+                      "ShakeRange": 0.43,
+                      "ShakeTime": 0.3,
+                      "ShakeDir": {
+                        "X": 0.15,
+                        "Y": 0.4,
+                        "Z": 0.05
+                      },
+                      "BaseCycle": 0.06,
+                      "CycleDamping": 0,
+                      "RangeAttenuation": 0.95,
+                      "PerlinNoiseAmplitude": {
+                        "X": 0.05,
+                        "Y": 0.15,
+                        "Z": 0.05
+                      },
+                      "PerlinNoiseFreq": {
+                        "X": 12,
+                        "Y": 14,
+                        "Z": 16
+                      }
+                    }
                   }
                 }
-              }
+              ]
             },
             {
               "$type": "RPG.GameCore.WaitSecond",
@@ -1045,6 +1091,9 @@
                 "Alias": "AllTeammate"
               },
               "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Physical"
+                },
                 "FormulaType": "ByMaxHP",
                 "DamagePercentage": {
                   "IsDynamic": true,
@@ -1072,7 +1121,9 @@
                     "Value": 1
                   }
                 },
-                "StanceDamageType": "Physical",
+                "StanceDamageType": {
+                  "DamageType": "Physical"
+                },
                 "AttackType": "Normal",
                 "HitAnimation": "Hit",
                 "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Argenti_00/Eff_Monster_W2_ArgentiTotem_00_Skill01Hit01.prefab",

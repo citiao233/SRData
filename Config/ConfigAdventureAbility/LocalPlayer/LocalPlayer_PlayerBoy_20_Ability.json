@@ -52,57 +52,7 @@
               },
               "AnimLogicState": "NormalAtk",
               "AnimStateName": "Attack_1",
-              "NormalizedTimeStart": 0.04,
-              "MovingRangeList": [
-                {
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "AbilityTargetEntity"
-                  },
-                  "OffsetTargetDistance": {
-                    "IsDynamic": false,
-                    "FixedValue": {
-                      "Value": 2.3000000002793968
-                    }
-                  },
-                  "NormalizedTimeStart": {
-                    "IsDynamic": false,
-                    "FixedValue": {
-                      "Value": 0.030000000027939677
-                    }
-                  },
-                  "NormalizedTimeEnd": {
-                    "IsDynamic": false,
-                    "FixedValue": {
-                      "Value": 0.06299999984912574
-                    }
-                  },
-                  "MaxMoveDistance": {
-                    "IsDynamic": false,
-                    "FixedValue": {
-                      "Value": 4
-                    }
-                  },
-                  "MaxSpeed": {
-                    "IsDynamic": false,
-                    "FixedValue": {
-                      "Value": 350
-                    }
-                  },
-                  "SteerNormalizedTimeStart": {
-                    "IsDynamic": false,
-                    "FixedValue": {
-                      "Value": 0.010000000009313226
-                    }
-                  },
-                  "SteerNormalizedTimeEnd": {
-                    "IsDynamic": false,
-                    "FixedValue": {
-                      "Value": 0.030000000027939677
-                    }
-                  }
-                }
-              ]
+              "NormalizedTimeStart": 0.01
             },
             {
               "$type": "RPG.GameCore.WaitAnimState",
@@ -114,94 +64,247 @@
               "NormalizedTimeEnd": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.060000000055879354
+                  "Value": 0.041
                 }
               }
             },
-            {
-              "$type": "RPG.GameCore.RadialBlurEffect",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "Caster"
-              },
-              "Duration": 0.05,
-              "BlurY": 0.4,
-              "BlurRadius": 1,
-              "Iteration": 4,
-              "BlurStart": 0.005,
-              "BlurFeather": 0.01
-            },
-            {
-              "$type": "RPG.GameCore.AdventureTriggerAttack",
-              "TriggerBattleDelay": 0.1,
-              "AttackDetectConfig": {
-                "$type": "RPG.GameCore.AdventureAttackDetectBoxConfig",
-                "Size": {
-                  "X": 0.6,
-                  "Y": 0.4,
-                  "Z": 3
-                },
-                "Offset": {
-                  "X": 0,
-                  "Y": 1,
-                  "Z": 2.2
-                }
-              },
-              "HitConfig": {
-                "HitAnimation": "Hit",
-                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_PlayerBoy_10/Eff_Avatar_PlayerBoy_10_Common_Hit.prefab",
-                "HitSoundEvent": "Ev_sfx_avatar_atk_maze_hit_playerboy_spear",
-                "HitEffectHeight": 1
-              }
-            },
-            {
-              "$type": "RPG.GameCore.VCameraConfigChange",
-              "CameraConfig": {
-                "ShakeTemplateName": "LocalPlayer_PlayerBoy_NormalAttack_OnTarget"
-              }
-            }
-          ],
-          "FailedTaskList": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
               "Predicate": {
-                "$type": "RPG.GameCore.AdventureByInMotionState",
-                "MotionFlag": "FastRun"
+                "$type": "RPG.GameCore.ByDistance",
+                "From": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "Caster"
+                },
+                "To": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "AbilityTargetEntity"
+                },
+                "CompareType": "LessEqual",
+                "CompareValue": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 5
+                  }
+                }
               },
               "SuccessTaskList": [
                 {
-                  "$type": "RPG.GameCore.AdventureTriggerAnimStateWithMove",
+                  "$type": "RPG.GameCore.AdventureFireProjectile",
                   "TargetType": {
                     "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "AdvLocalPlayer"
+                    "Alias": "AbilityTargetEntity"
                   },
-                  "AnimLogicState": "NormalAtk",
-                  "AnimStateName": "Attack_1",
-                  "MovingRangeList": [
+                  "Projectile": {
+                    "ColliderTemplate": "CapsuleZ_MazeCommonBullet",
+                    "Behavior": "HalfBoomerangWithDetect",
+                    "FlySpeed": 21,
+                    "EnableRayCast": true,
+                    "Gravity": -3,
+                    "MaxLifeTime": 0.8,
+                    "AttachPoint": "Wrist_R",
+                    "AttachOffset": {
+                      "X": 0.55,
+                      "Y": 0,
+                      "Z": 0.35
+                    },
+                    "TargetAttachPoint": "Root",
+                    "FlyEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_PlayerBoy_20/Eff_Avatar_PlayerBoy_20_MazeAttack01.prefab",
+                    "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_PlayerBoy_20/Eff_Avatar_PlayerBoy_20_MazeAttack01_Hit.prefab",
+                    "FlyEffectFadeOut": true,
+                    "BoomerangEccentricity": 0.05
+                  },
+                  "OnProjectileHit": [
                     {
-                      "OffsetTargetDistance": {
-                        "IsDynamic": false,
-                        "FixedValue": {
-                          "Value": 2
+                      "$type": "RPG.GameCore.RadialBlurEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "Duration": 0.05,
+                      "BlurY": 0.4,
+                      "BlurRadius": 1,
+                      "Iteration": 4,
+                      "BlurStart": 0.005,
+                      "BlurFeather": 0.01
+                    },
+                    {
+                      "$type": "RPG.GameCore.AdventureTriggerAttack",
+                      "AttackTargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AllEnemy"
+                      },
+                      "AttackRootTargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ProjectileHitEntity"
+                      },
+                      "TriggerBattleDelay": 0.2,
+                      "AttackDetectConfig": {
+                        "$type": "RPG.GameCore.AdventureAttackDetectCircleConfig",
+                        "MaxRadius": 1,
+                        "FanAngle": 360,
+                        "Hight": 2,
+                        "Offset": {
+                          "X": 0,
+                          "Y": -1,
+                          "Z": 0
                         }
                       },
-                      "NormalizedTimeStart": {
-                        "IsDynamic": false,
-                        "FixedValue": {
-                          "Value": 0.030000000027939677
+                      "HitConfig": {
+                        "HitAnimation": "Hit",
+                        "HitSoundEvent": "Ev_sfx_avatar_atk_cast_hit_bronya"
+                      }
+                    }
+                  ],
+                  "OnProjectileLifetimeFinish": [
+                    {
+                      "$type": "RPG.GameCore.RadialBlurEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "Duration": 0.05,
+                      "BlurY": 0.4,
+                      "BlurRadius": 1,
+                      "Iteration": 4,
+                      "BlurStart": 0.005,
+                      "BlurFeather": 0.01
+                    },
+                    {
+                      "$type": "RPG.GameCore.AdventureTriggerAttack",
+                      "AttackTargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AllEnemy"
+                      },
+                      "AttackRootTargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ProjectileHitEntity"
+                      },
+                      "TriggerBattleDelay": 0.2,
+                      "AttackDetectConfig": {
+                        "$type": "RPG.GameCore.AdventureAttackDetectCircleConfig",
+                        "MaxRadius": 1,
+                        "FanAngle": 360,
+                        "Hight": 2,
+                        "Offset": {
+                          "X": 0,
+                          "Y": -1,
+                          "Z": 0
                         }
                       },
-                      "NormalizedTimeEnd": {
-                        "IsDynamic": false,
-                        "FixedValue": {
-                          "Value": 0.06299999984912574
+                      "HitConfig": {
+                        "HitAnimation": "Hit",
+                        "HitSoundEvent": "Ev_sfx_avatar_atk_cast_hit_bronya"
+                      }
+                    }
+                  ]
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.AdventureFireProjectile",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AbilityTargetEntity"
+                  },
+                  "Projectile": {
+                    "ColliderTemplate": "CapsuleZ_MazeCommonBullet",
+                    "Behavior": "HalfBoomerangWithDetect",
+                    "FlySpeed": 21,
+                    "EnableRayCast": true,
+                    "Gravity": -3,
+                    "MaxLifeTime": 0.8,
+                    "AttachPoint": "Wrist_R",
+                    "AttachOffset": {
+                      "X": 0.55,
+                      "Y": 0,
+                      "Z": 0.35
+                    },
+                    "TargetAttachPoint": "Root",
+                    "FlyEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_PlayerBoy_20/Eff_Avatar_PlayerBoy_20_MazeAttack01.prefab",
+                    "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_PlayerBoy_20/Eff_Avatar_PlayerBoy_20_MazeAttack01_Hit.prefab",
+                    "FlyEffectFadeOut": true,
+                    "BoomerangEccentricity": 0.1
+                  },
+                  "OnProjectileHit": [
+                    {
+                      "$type": "RPG.GameCore.RadialBlurEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "Duration": 0.05,
+                      "BlurY": 0.4,
+                      "BlurRadius": 1,
+                      "Iteration": 4,
+                      "BlurStart": 0.005,
+                      "BlurFeather": 0.01
+                    },
+                    {
+                      "$type": "RPG.GameCore.AdventureTriggerAttack",
+                      "AttackTargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AllEnemy"
+                      },
+                      "AttackRootTargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ProjectileHitEntity"
+                      },
+                      "TriggerBattleDelay": 0.2,
+                      "AttackDetectConfig": {
+                        "$type": "RPG.GameCore.AdventureAttackDetectCircleConfig",
+                        "MaxRadius": 1,
+                        "FanAngle": 360,
+                        "Hight": 2,
+                        "Offset": {
+                          "X": 0,
+                          "Y": -1,
+                          "Z": 0
                         }
                       },
-                      "DefaultMoveDistance": {
-                        "IsDynamic": false,
-                        "FixedValue": {
-                          "Value": 3
+                      "HitConfig": {
+                        "HitAnimation": "Hit"
+                      }
+                    }
+                  ],
+                  "OnProjectileLifetimeFinish": [
+                    {
+                      "$type": "RPG.GameCore.RadialBlurEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "Duration": 0.05,
+                      "BlurY": 0.4,
+                      "BlurRadius": 1,
+                      "Iteration": 4,
+                      "BlurStart": 0.005,
+                      "BlurFeather": 0.01
+                    },
+                    {
+                      "$type": "RPG.GameCore.AdventureTriggerAttack",
+                      "AttackTargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AllEnemy"
+                      },
+                      "AttackRootTargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ProjectileHitEntity"
+                      },
+                      "TriggerBattleDelay": 0.2,
+                      "AttackDetectConfig": {
+                        "$type": "RPG.GameCore.AdventureAttackDetectCircleConfig",
+                        "MaxRadius": 1,
+                        "FanAngle": 360,
+                        "Hight": 2,
+                        "Offset": {
+                          "X": 0,
+                          "Y": -1,
+                          "Z": 0
                         }
+                      },
+                      "HitConfig": {
+                        "HitAnimation": "Hit"
                       }
                     }
                   ]
@@ -216,10 +319,68 @@
                   "NormalizedTimeEnd": {
                     "IsDynamic": false,
                     "FixedValue": {
-                      "Value": 0.07000000006519258
+                      "Value": 0.07
                     }
                   }
+                }
+              ]
+            }
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.AdventureTriggerAnimStateWithMove",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AdvLocalPlayer"
+              },
+              "AnimLogicState": "NormalAtk",
+              "AnimStateName": "Attack_1"
+            },
+            {
+              "$type": "RPG.GameCore.WaitAnimState",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AnimStateName": "Attack_1",
+              "NormalizedTimeEnd": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0.041
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.AdventureFireProjectile",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "Projectile": {
+                "ColliderTemplate": "CapsuleZ_MazeCommonBullet",
+                "Behavior": "HalfBoomerangWithDetect",
+                "FlySpeed": 24,
+                "EnableRayCast": true,
+                "Gravity": -3,
+                "MaxLifeTime": 0.5,
+                "AttachPoint": "Wrist_R",
+                "AttachOffset": {
+                  "X": 0.55,
+                  "Y": 0,
+                  "Z": 0.35
                 },
+                "TargetAttachPoint": "Root",
+                "TargetOffset": {
+                  "X": 0,
+                  "Y": 0,
+                  "Z": 10
+                },
+                "FlyEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_PlayerBoy_20/Eff_Avatar_PlayerBoy_20_MazeAttack01.prefab",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_PlayerBoy_20/Eff_Avatar_PlayerBoy_20_MazeAttack01_Hit.prefab",
+                "FlyEffectFadeOut": true,
+                "BoomerangEccentricity": 0.1
+              },
+              "OnProjectileHit": [
                 {
                   "$type": "RPG.GameCore.RadialBlurEffect",
                   "TargetType": {
@@ -239,229 +400,95 @@
                     "$type": "RPG.GameCore.TargetAlias",
                     "Alias": "AllEnemy"
                   },
-                  "TriggerBattleDelay": 0.1,
+                  "AttackRootTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ProjectileHitEntity"
+                  },
+                  "TriggerBattleDelay": 0.2,
                   "AttackDetectConfig": {
-                    "$type": "RPG.GameCore.AdventureAttackDetectBoxConfig",
-                    "Size": {
-                      "X": 0.4,
-                      "Y": 0.4,
-                      "Z": 1.35
-                    },
+                    "$type": "RPG.GameCore.AdventureAttackDetectCircleConfig",
+                    "MaxRadius": 1,
+                    "FanAngle": 360,
+                    "Hight": 2,
                     "Offset": {
                       "X": 0,
-                      "Y": 0.7,
-                      "Z": 1.6
+                      "Y": -1,
+                      "Z": 0
                     }
                   },
                   "HitConfig": {
-                    "HitAnimation": "Hit",
-                    "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_PlayerBoy_10/Eff_Avatar_PlayerBoy_10_Common_Hit.prefab",
-                    "HitSoundEvent": "Ev_sfx_avatar_atk_maze_hit_playerboy_spear",
-                    "HitEffectHeight": 1
+                    "HitAnimation": "Hit"
                   }
                 }
               ],
-              "FailedTaskList": [
+              "OnProjectileLifetimeFinish": [
                 {
-                  "$type": "RPG.GameCore.PredicateTaskList",
-                  "Predicate": {
-                    "$type": "RPG.GameCore.AdventureByInMotionState",
-                    "MotionFlag": "Run"
+                  "$type": "RPG.GameCore.RadialBlurEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
                   },
-                  "SuccessTaskList": [
-                    {
-                      "$type": "RPG.GameCore.AdventureTriggerAnimStateWithMove",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "AdvLocalPlayer"
-                      },
-                      "AnimLogicState": "NormalAtk",
-                      "AnimStateName": "Attack_1",
-                      "MovingRangeList": [
-                        {
-                          "OffsetTargetDistance": {
-                            "IsDynamic": false,
-                            "FixedValue": {
-                              "Value": 2
-                            }
-                          },
-                          "NormalizedTimeStart": {
-                            "IsDynamic": false,
-                            "FixedValue": {
-                              "Value": 0.030000000027939677
-                            }
-                          },
-                          "NormalizedTimeEnd": {
-                            "IsDynamic": false,
-                            "FixedValue": {
-                              "Value": 0.06299999984912574
-                            }
-                          },
-                          "DefaultMoveDistance": {
-                            "IsDynamic": false,
-                            "FixedValue": {
-                              "Value": 1.5000000004656613
-                            }
-                          }
-                        }
-                      ]
-                    },
-                    {
-                      "$type": "RPG.GameCore.WaitAnimState",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "Caster"
-                      },
-                      "AnimStateName": "Attack_1",
-                      "NormalizedTimeEnd": {
-                        "IsDynamic": false,
-                        "FixedValue": {
-                          "Value": 0.07000000006519258
-                        }
-                      }
-                    },
-                    {
-                      "$type": "RPG.GameCore.RadialBlurEffect",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "Caster"
-                      },
-                      "Duration": 0.05,
-                      "BlurY": 0.4,
-                      "BlurRadius": 1,
-                      "Iteration": 4,
-                      "BlurStart": 0.005,
-                      "BlurFeather": 0.01
-                    },
-                    {
-                      "$type": "RPG.GameCore.AdventureTriggerAttack",
-                      "AttackTargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "AllEnemy"
-                      },
-                      "TriggerBattleDelay": 0.1,
-                      "AttackDetectConfig": {
-                        "$type": "RPG.GameCore.AdventureAttackDetectBoxConfig",
-                        "Size": {
-                          "X": 0.4,
-                          "Y": 0.4,
-                          "Z": 1.35
-                        },
-                        "Offset": {
-                          "X": 0,
-                          "Y": 0.7,
-                          "Z": 1.6
-                        }
-                      },
-                      "HitConfig": {
-                        "HitAnimation": "Hit",
-                        "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_PlayerBoy_10/Eff_Avatar_PlayerBoy_10_Common_Hit.prefab",
-                        "HitSoundEvent": "Ev_sfx_avatar_atk_maze_hit_playerboy_spear",
-                        "HitEffectHeight": 1
-                      }
+                  "Duration": 0.05,
+                  "BlurY": 0.4,
+                  "BlurRadius": 1,
+                  "Iteration": 4,
+                  "BlurStart": 0.005,
+                  "BlurFeather": 0.01
+                },
+                {
+                  "$type": "RPG.GameCore.AdventureTriggerAttack",
+                  "AttackTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllEnemy"
+                  },
+                  "AttackRootTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ProjectileHitEntity"
+                  },
+                  "TriggerBattleDelay": 0.2,
+                  "AttackDetectConfig": {
+                    "$type": "RPG.GameCore.AdventureAttackDetectCircleConfig",
+                    "MaxRadius": 1,
+                    "FanAngle": 360,
+                    "Hight": 2,
+                    "Offset": {
+                      "X": 0,
+                      "Y": -0.8,
+                      "Z": 0.3
                     }
-                  ],
-                  "FailedTaskList": [
-                    {
-                      "$type": "RPG.GameCore.AdventureTriggerAnimStateWithMove",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "AdvLocalPlayer"
-                      },
-                      "AnimLogicState": "NormalAtk",
-                      "AnimStateName": "Attack_1",
-                      "MovingRangeList": [
-                        {
-                          "OffsetTargetDistance": {
-                            "IsDynamic": false,
-                            "FixedValue": {
-                              "Value": 2
-                            }
-                          },
-                          "NormalizedTimeStart": {
-                            "IsDynamic": false,
-                            "FixedValue": {
-                              "Value": 0.030000000027939677
-                            }
-                          },
-                          "NormalizedTimeEnd": {
-                            "IsDynamic": false,
-                            "FixedValue": {
-                              "Value": 0.06299999984912574
-                            }
-                          },
-                          "DefaultMoveDistance": {
-                            "IsDynamic": false,
-                            "FixedValue": {
-                              "Value": 1.5000000004656613
-                            }
-                          }
-                        }
-                      ]
-                    },
-                    {
-                      "$type": "RPG.GameCore.WaitAnimState",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "Caster"
-                      },
-                      "AnimStateName": "Attack_1",
-                      "NormalizedTimeEnd": {
-                        "IsDynamic": false,
-                        "FixedValue": {
-                          "Value": 0.07000000006519258
-                        }
-                      }
-                    },
-                    {
-                      "$type": "RPG.GameCore.RadialBlurEffect",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "Caster"
-                      },
-                      "Duration": 0.05,
-                      "BlurY": 0.4,
-                      "BlurRadius": 1,
-                      "Iteration": 4,
-                      "BlurStart": 0.005,
-                      "BlurFeather": 0.01
-                    },
-                    {
-                      "$type": "RPG.GameCore.AdventureTriggerAttack",
-                      "AttackTargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "AllEnemy"
-                      },
-                      "TriggerBattleDelay": 0.1,
-                      "AttackDetectConfig": {
-                        "$type": "RPG.GameCore.AdventureAttackDetectBoxConfig",
-                        "Size": {
-                          "X": 0.4,
-                          "Y": 0.4,
-                          "Z": 1.35
-                        },
-                        "Offset": {
-                          "X": 0,
-                          "Y": 0.7,
-                          "Z": 1.6
-                        }
-                      },
-                      "HitConfig": {
-                        "HitAnimation": "Hit",
-                        "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_PlayerBoy_10/Eff_Avatar_PlayerBoy_10_Common_Hit.prefab",
-                        "HitSoundEvent": "Ev_sfx_avatar_atk_maze_hit_playerboy_spear",
-                        "HitEffectHeight": 1
-                      }
-                    }
-                  ]
+                  },
+                  "HitConfig": {
+                    "HitAnimation": "Hit"
+                  }
                 }
               ]
+            },
+            {
+              "$type": "RPG.GameCore.WaitAnimState",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AnimStateName": "Attack_1",
+              "NormalizedTimeEnd": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0.04
+                }
+              }
             }
           ]
         }
       ]
     },
     {
+      "OnAbort": [
+        {
+          "$type": "RPG.GameCore.GlobalMainIntensityEffect",
+          "IsRevert": true,
+          "FadeDuration": 1
+        }
+      ],
       "Name": "LocalPlayer_PlayerBoy_20_MazeSkill",
       "TargetInfo": {
         "TargetType": "Caster"
@@ -474,8 +501,7 @@
             "Alias": "AdvLocalPlayer"
           },
           "AnimLogicState": "MazeSkill",
-          "AnimStateName": "MazeSkill",
-          "TransitionDuration": 0.9
+          "AnimStateName": "MazeSkill"
         },
         {
           "$type": "RPG.GameCore.WaitAnimState",
@@ -487,21 +513,14 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.027999999467283487
+              "Value": 0.05
             }
           }
         },
         {
-          "$type": "RPG.GameCore.VCameraConfigChange",
-          "CameraConfig": {
-            "Freelook3rdConfig": {
-              "ZoomChangeParam": {
-                "Time": 0.5,
-                "ChangeCurvePath": "Camera/BlendCurve/BlendCut06.asset",
-                "RecoveryCurvePath": "Camera/BlendCurve/BlendCut06.asset"
-              }
-            }
-          }
+          "$type": "RPG.GameCore.GlobalMainIntensityEffect",
+          "TargetIntensity": 0.3,
+          "FadeDuration": 0.5
         },
         {
           "$type": "RPG.GameCore.WaitAnimState",
@@ -513,55 +532,30 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.11000000010244548
+              "Value": 0.121
             }
           }
         },
         {
-          "$type": "RPG.GameCore.VCameraConfigChange",
-          "CameraConfig": {
-            "Freelook3rdConfig": {
-              "ZoomChangeParam": {
-                "TargetValue": 0.5,
-                "ChangeCurvePath": "Camera/BlendCurve/BlendCut06.asset",
-                "RecoveryCurvePath": "Camera/BlendCurve/BlendCut06.asset"
-              }
-            }
-          }
-        },
-        {
-          "$type": "RPG.GameCore.WaitAnimState",
+          "$type": "RPG.GameCore.RadialBlurEffect",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "AnimStateName": "MazeSkill",
-          "NormalizedTimeEnd": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0.11499999975785613
-            }
-          }
+          "Duration": 0.1,
+          "BlurY": 0.4,
+          "BlurRadius": 1,
+          "Iteration": 4,
+          "BlurStart": 0.1,
+          "BlurFeather": 0.2
         },
         {
-          "$type": "RPG.GameCore.VCameraConfigChange",
-          "CameraConfig": {
-            "ShakeTemplateName": "LocalPlayer_Bronya_Skill"
-          }
-        },
-        {
-          "$type": "RPG.GameCore.WaitAnimState",
+          "$type": "RPG.GameCore.TriggerEffect",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "AnimStateName": "MazeSkill",
-          "NormalizedTimeEnd": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0.12000000011175871
-            }
-          }
+          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_PlayerBoy_20/Eff_Avatar_PlayerBoy_20_MazeSkill.prefab"
         },
         {
           "$type": "RPG.GameCore.AddMazeBuff",
@@ -569,13 +563,32 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "ID": 800301,
+          "ID": 800501,
           "LifeTime": {
             "IsDynamic": false,
             "FixedValue": {
               "Value": -1
             }
           }
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "MazeSkill",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.202
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.GlobalMainIntensityEffect",
+          "IsRevert": true,
+          "FadeDuration": 1
         },
         {
           "$type": "RPG.GameCore.AdventureSubmitSkill"

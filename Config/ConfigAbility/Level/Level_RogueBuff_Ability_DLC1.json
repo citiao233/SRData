@@ -5670,18 +5670,17 @@
               },
               "SuccessTaskList": [
                 {
-                  "$type": "RPG.GameCore.SetDynamicValue",
-                  "DynamicKey": "Infect_Time",
-                  "Value": {
-                    "IsDynamic": true,
-                    "PostfixExpr": {
-                      "OpCodes": "AQAK",
-                      "FixedValues": [],
-                      "DynamicHashes": [
-                        -500962917
-                      ]
-                    }
-                  }
+                  "$type": "RPG.GameCore.SetDynamicValueByCopying",
+                  "FromTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "LevelEntity"
+                  },
+                  "FromDynamicKey": "CustomValue_612740_ADF_1",
+                  "ToTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "ToDynamicKey": "Infect_Time"
                 },
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -6298,7 +6297,9 @@
                                     "Alias": "ParamEntity"
                                   },
                                   "AttackProperty": {
-                                    "DamageType": "Wind",
+                                    "DamageType": {
+                                      "DamageType": "Wind"
+                                    },
                                     "DamageValue": {
                                       "IsDynamic": true,
                                       "PostfixExpr": {
@@ -6438,7 +6439,14 @@
                                         "Alias": "ParamEntity"
                                       },
                                       "AttackProperty": {
-                                        "DamageTypeFromAttacker": true,
+                                        "DamageType": {
+                                          "SourceType": "ReadTargetType",
+                                          "DamageType": "Physical",
+                                          "ReadTargetType": {
+                                            "$type": "RPG.GameCore.TargetAlias",
+                                            "Alias": "Caster"
+                                          }
+                                        },
                                         "DamagePercentage": {
                                           "IsDynamic": true,
                                           "PostfixExpr": {
@@ -6486,7 +6494,14 @@
                                         "Alias": "ParamEntity"
                                       },
                                       "AttackProperty": {
-                                        "DamageTypeFromAttacker": true,
+                                        "DamageType": {
+                                          "SourceType": "ReadTargetType",
+                                          "DamageType": "Physical",
+                                          "ReadTargetType": {
+                                            "$type": "RPG.GameCore.TargetAlias",
+                                            "Alias": "Caster"
+                                          }
+                                        },
                                         "DamagePercentage": {
                                           "IsDynamic": true,
                                           "PostfixExpr": {
@@ -6653,7 +6668,9 @@
                                 "Alias": "ParamEntity"
                               },
                               "AttackProperty": {
-                                "DamageType": "Wind",
+                                "DamageType": {
+                                  "DamageType": "Wind"
+                                },
                                 "DamageValue": {
                                   "IsDynamic": true,
                                   "PostfixExpr": {

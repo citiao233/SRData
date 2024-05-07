@@ -206,7 +206,9 @@
             "Alias": "AbilityTargetEntity"
           },
           "AttackProperty": {
-            "DamageType": "Imaginary",
+            "DamageType": {
+              "DamageType": "Imaginary"
+            },
             "DamagePercentage": {
               "IsDynamic": true,
               "PostfixExpr": {
@@ -234,7 +236,7 @@
               }
             },
             "HitAnimation": "Hit",
-            "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Dr_Ratio/Eff_Avatar_Dr_Ratio_00_Skill01_Hit.prefab",
+            "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Dr_Ratio_00/Eff_Avatar_Dr_Ratio_00_Skill01_Hit.prefab",
             "HitEffectHeight": 1.4,
             "HitPosHeight": 1.4
           },
@@ -926,7 +928,7 @@
                     "$type": "RPG.GameCore.TargetAlias",
                     "Alias": "Caster"
                   },
-                  "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Dr_Ratio/Eff_Avatar_Dr_Ratio_00_Skill02_Buff02.prefab"
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Dr_Ratio_00/Eff_Avatar_Dr_Ratio_00_Skill02_Buff02.prefab"
                 },
                 {
                   "$type": "RPG.GameCore.WaitSecond",
@@ -958,7 +960,7 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "Caster"
               },
-              "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Dr_Ratio/Eff_Avatar_Dr_Ratio_00_Skill02_Passive.prefab"
+              "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Dr_Ratio_00/Eff_Avatar_Dr_Ratio_00_Skill02_Passive.prefab"
             }
           ]
         },
@@ -982,7 +984,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "AbilityTargetEntity"
           },
-          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Dr_Ratio/Eff_Avatar_Dr_Ratio_00_Skill02_Hit.prefab"
+          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Dr_Ratio_00/Eff_Avatar_Dr_Ratio_00_Skill02_Hit.prefab"
         },
         {
           "$type": "RPG.GameCore.TriggerAnimState",
@@ -1087,7 +1089,9 @@
             "Alias": "AbilityTargetEntity"
           },
           "AttackProperty": {
-            "DamageType": "Imaginary",
+            "DamageType": {
+              "DamageType": "Imaginary"
+            },
             "DamagePercentage": {
               "IsDynamic": true,
               "PostfixExpr": {
@@ -1461,7 +1465,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Dr_Ratio/Eff_Avatar_Dr_Ratio_00_Ani_Skill03.prefab",
+          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Dr_Ratio_00/Eff_Avatar_Dr_Ratio_00_Ani_Skill03.prefab",
           "AttachPoint": "EffectScale"
         },
         {
@@ -1525,7 +1529,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Dr_Ratio/Eff_Avatar_Dr_Ratio_00_Ani_Skill03.prefab"
+          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Dr_Ratio_00/Eff_Avatar_Dr_Ratio_00_Ani_Skill03.prefab"
         },
         {
           "$type": "RPG.GameCore.ScaleCharacterModel",
@@ -1680,7 +1684,9 @@
             "Alias": "AbilityTargetEntity"
           },
           "AttackProperty": {
-            "DamageType": "Imaginary",
+            "DamageType": {
+              "DamageType": "Imaginary"
+            },
             "DamagePercentage": {
               "IsDynamic": true,
               "PostfixExpr": {
@@ -3595,7 +3601,9 @@
             "Alias": "AbilityTargetEntity"
           },
           "AttackProperty": {
-            "DamageType": "Imaginary",
+            "DamageType": {
+              "DamageType": "Imaginary"
+            },
             "DamagePercentage": {
               "IsDynamic": true,
               "PostfixExpr": {
@@ -3694,7 +3702,9 @@
                     "Alias": "AbilityTargetEntity"
                   },
                   "AttackProperty": {
-                    "DamageType": "Imaginary",
+                    "DamageType": {
+                      "DamageType": "Imaginary"
+                    },
                     "DamagePercentage": {
                       "IsDynamic": true,
                       "PostfixExpr": {
@@ -3938,6 +3948,47 @@
         "UIMiniEffectPath": "UI/Battle/Widget/SpecialSkilMarkEff/Mini/SpecialSkillMark_Ratio_Mini.prefab"
       },
       "_CallbackList": [
+        {
+          "Event": "OnCreate",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.Retarget",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllDarkTeamWithAllDarkTeamUnselectable"
+              },
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareTarget",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "CompareType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ModifierOwnerEntity"
+                },
+                "Inverse": true
+              },
+              "IncludeLimbo": true,
+              "MaxNumber": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 10
+                }
+              },
+              "TaskList": [
+                {
+                  "$type": "RPG.GameCore.RemoveModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "ModifierName": "MAvatar_Dr_Ratio_00_Skill03_TheFool"
+                }
+              ]
+            }
+          ]
+        },
         {
           "Event": "OnDestroy",
           "CallbackConfig": [
@@ -4817,9 +4868,6 @@
       }
     },
     "MAvatar_Dr_Ratio_00_PointB3_Modifier": {
-      "BehaviorFlagList": [
-        "ModifyDotDamageData"
-      ],
       "_CallbackList": [
         {
           "Event": "OnBeforeHitAll",
@@ -5164,6 +5212,7 @@
                 "DisableAction"
               ],
               "InsertAbilityPriority": "AvatarInsertAttackSelf",
+              "CanRunOnUnselectableTarget": false,
               "ShowInActionBar": true,
               "PreCheck": {
                 "$type": "RPG.GameCore.TurnInsertAbilityCondition",
@@ -5228,6 +5277,7 @@
                     "DisableAction"
                   ],
                   "InsertAbilityPriority": "AvatarInsertAttackSelf",
+                  "CanRunOnUnselectableTarget": false,
                   "ShowInActionBar": true,
                   "PreCheck": {
                     "$type": "RPG.GameCore.TurnInsertAbilityCondition",
@@ -5271,6 +5321,7 @@
                         "DisableAction"
                       ],
                       "InsertAbilityPriority": "AvatarInsertAttackSelf",
+                      "CanRunOnUnselectableTarget": false,
                       "ShowInActionBar": true,
                       "PreCheck": {
                         "$type": "RPG.GameCore.TurnInsertAbilityCondition",

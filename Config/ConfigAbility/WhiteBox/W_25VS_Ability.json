@@ -1,6 +1,678 @@
 {
   "AbilityList": [
     {
+      "Name": "Monster_W2_Kafka_00_RL_25VS_Skill06_Phase01",
+      "TargetInfo": {
+        "TargetType": "InherentTargetEntity"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityInherentTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "AbilityName": "Monster_W2_Kafka_00_RL_25VS_Skill06_Phase02",
+          "IsSkillPerform": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityInherentTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "AbilityName": "Monster_W2_Kafka_00_Skill06_Camera",
+          "IsSkillPerform": true
+        },
+        {
+          "$type": "RPG.GameCore.SetAttachmentScale",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AttachPoints": [
+            {
+              "Name": "Weapon02"
+            },
+            {
+              "Name": "Weapon03"
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.LookAt",
+          "TargetType": "AbilityTargetEntity"
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAnimState",
+          "AnimStateName": "Skill06",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAnimState",
+          "AnimLogicState": "Idle",
+          "AnimStateName": "StandBy"
+        },
+        {
+          "$type": "RPG.GameCore.LookAt",
+          "TargetType": "TeamFormation"
+        },
+        {
+          "$type": "RPG.GameCore.SetAttachmentScale",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AttachPoints": [
+            {
+              "Name": "Weapon02"
+            },
+            {
+              "Name": "Weapon03"
+            }
+          ],
+          "Scale": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Monster_W2_Kafka_00_RL_25VS_Skill06_Phase02",
+      "TargetInfo": {
+        "TargetType": "InherentTargetEntity"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "MWStrongChallenge_GameMode_25VS_KFK_S_PursuitPunish"
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareMonsterPhase",
+            "CompareType": "Equal",
+            "CompareValue": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 3
+              }
+            }
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.RemoveModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "ModifierName": "Monster_W2_Kafka_00_RL_Phase03WeaponEnhanceEffect"
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.RemoveModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "ModifierName": "MCommon_MindControl_Target"
+        },
+        {
+          "$type": "RPG.GameCore.ResetTeammateAttackPerform"
+        },
+        {
+          "$type": "RPG.GameCore.HeadLookAt",
+          "PerformerType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "DoRootRotate": true
+        },
+        {
+          "$type": "RPG.GameCore.LookAt",
+          "PerformerType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "TargetType": "TeamFormation"
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamLight",
+          "FormationType": "LightTeamNormal",
+          "CustomFormationIgnoreDying": false
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill06",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.135
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.StartAim",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "TargetAttachPoint": "Root",
+          "HorizontalAlpha": 0
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill06",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.333
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.DamageByAttackProperty",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "AttackProperty": {
+            "DamageType": {
+              "DamageType": "Thunder"
+            },
+            "DamagePercentage": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  -1122549516
+                ]
+              }
+            },
+            "HitSplitRatio": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 0.15
+              }
+            },
+            "SPHitRatio": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 1
+              }
+            },
+            "AttackType": "Normal",
+            "HitAnimation": "Hit",
+            "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Kafka_00/Eff_Monster_W2_Kafka_00_Skill06_Passive_Hit.prefab"
+          },
+          "DisplayData": {
+            "UIMessageHeight": 1.2
+          }
+        },
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "ShakeTemplateName": "Common_Rapid_Light"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill06",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.343
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.DamageByAttackProperty",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "AttackProperty": {
+            "DamageType": {
+              "DamageType": "Thunder"
+            },
+            "DamagePercentage": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  -1122549516
+                ]
+              }
+            },
+            "HitSplitRatio": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 0.15
+              }
+            },
+            "SPHitRatio": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 1
+              }
+            },
+            "AttackType": "Normal",
+            "HitAnimation": "Hit"
+          },
+          "DisplayData": {
+            "UIMessageHeight": 1.2
+          }
+        },
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "ShakeTemplateName": "Common_Rapid_Light"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill06",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.353
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.DamageByAttackProperty",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "AttackProperty": {
+            "DamageType": {
+              "DamageType": "Thunder"
+            },
+            "DamagePercentage": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  -1122549516
+                ]
+              }
+            },
+            "HitSplitRatio": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 0.15
+              }
+            },
+            "SPHitRatio": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 1
+              }
+            },
+            "AttackType": "Normal",
+            "HitAnimation": "Hit"
+          },
+          "DisplayData": {
+            "UIMessageHeight": 1.2
+          }
+        },
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "ShakeTemplateName": "Common_Rapid_Light"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill06",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.363
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.DamageByAttackProperty",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "AttackProperty": {
+            "DamageType": {
+              "DamageType": "Thunder"
+            },
+            "DamagePercentage": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  -1122549516
+                ]
+              }
+            },
+            "HitSplitRatio": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 0.15
+              }
+            },
+            "SPHitRatio": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 1
+              }
+            },
+            "AttackType": "Normal",
+            "HitAnimation": "Hit"
+          },
+          "DisplayData": {
+            "UIMessageHeight": 1.2
+          }
+        },
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "ShakeTemplateName": "Common_Rapid_Light"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill06",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.373
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.DamageByAttackProperty",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "AttackProperty": {
+            "DamageType": {
+              "DamageType": "Thunder"
+            },
+            "DamagePercentage": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  -1122549516
+                ]
+              }
+            },
+            "HitSplitRatio": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 0.15
+              }
+            },
+            "SPHitRatio": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 1
+              }
+            },
+            "AttackType": "Normal",
+            "HitAnimation": "Hit"
+          },
+          "DisplayData": {
+            "UIMessageHeight": 1.2
+          }
+        },
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "ShakeTemplateName": "Common_Rapid_Light"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill06",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.383
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.DamageByAttackProperty",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "AttackProperty": {
+            "DamageType": {
+              "DamageType": "Thunder"
+            },
+            "DamagePercentage": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  -1122549516
+                ]
+              }
+            },
+            "HitSplitRatio": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 0.25
+              }
+            },
+            "SPHitRatio": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 1
+              }
+            },
+            "AttackType": "Normal",
+            "HitAnimation": "Hit"
+          },
+          "DisplayData": {
+            "UIMessageHeight": 1.2
+          }
+        },
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "ShakeTemplateName": "Common_Rapid_Middle"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.DamagePerformFinish"
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill06",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.45
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "ShakeTemplateName": "Common_Rapid_Middle"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.HideModifierEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "EventType": "DOT_Electric",
+          "ReplaceEffectName": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Kafka_00/Eff_Monster_W2_Kafka_00_DeBuff_Hit.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill06",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.644
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.StopAim",
+          "TransitTime": 0.15
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill06",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.7
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "ModifierName": "Monster_W2_Kafka_00_EnhanceElectricDamage"
+        },
+        {
+          "$type": "RPG.GameCore.DefineDynamicValue",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "DynamicKey": "PursuitCheck",
+          "ContextScope": "TargetEntity"
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill06",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.RemoveModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "MWStrongChallenge_GameMode_25VS_KFK_S_PursuitPunish"
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareMonsterPhase",
+            "CompareType": "Equal",
+            "CompareValue": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 3
+              }
+            }
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "ModifierName": "Monster_W2_Kafka_00_RL_Phase03WeaponEnhanceEffect"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "Modifiers": {},
       "Name": "StrongChallenge_GameMode_StageAbility_BE_Selector",
       "TargetInfo": {
@@ -476,28 +1148,6 @@
           "Order": "LastAdded"
         },
         {
-          "$type": "RPG.GameCore.AddModifier",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AllLightTeam"
-          },
-          "ModifierName": "MWBattleEvent_25VSSelector_BE_Buff01",
-          "LifeTime": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 2
-            }
-          },
-          "DynamicValues": {
-            "MDF_PropertyValue": {
-              "IsDynamic": false,
-              "FixedValue": {
-                "Value": 0.5
-              }
-            }
-          }
-        },
-        {
           "$type": "RPG.GameCore.WaitSecond",
           "WaitTime": {
             "IsDynamic": false,
@@ -784,33 +1434,6 @@
           }
         },
         {
-          "$type": "RPG.GameCore.SetDynamicValueByAddValue",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "LevelEntity"
-          },
-          "Key": "VSCount_LightTeam_Delta",
-          "AddValue": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 20
-            }
-          },
-          "Min": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0
-            }
-          },
-          "Max": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 100
-            }
-          },
-          "ContextScope": "TargetEntity"
-        },
-        {
           "$type": "RPG.GameCore.WaitSecond",
           "WaitTime": {
             "IsDynamic": false,
@@ -1066,7 +1689,9 @@
         },
         {
           "$type": "RPG.GameCore.TriggerSound",
-          "SoundName": "Ev_sfx_rogue_buff_ruin",
+          "SoundName": {
+            "Value": "Ev_sfx_rogue_buff_ruin"
+          },
           "EmitterType": "DefaultEmitter"
         },
         {
@@ -1108,7 +1733,9 @@
             "Alias": "AllDarkTeam"
           },
           "AttackProperty": {
-            "DamageType": "Fire",
+            "DamageType": {
+              "DamageType": "Fire"
+            },
             "DamagePercentage": {
               "IsDynamic": false,
               "FixedValue": {
@@ -1126,7 +1753,13 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "AllDarkTeam"
           },
-          "ModifierName": "MWBattleEvent_25VSSelector_BE_Buff03"
+          "ModifierName": "MCommon_AllDamageTypeResistanceDown",
+          "LifeTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          }
         },
         {
           "$type": "RPG.GameCore.ModifyActionDelay",
@@ -1143,33 +1776,6 @@
         },
         {
           "$type": "RPG.GameCore.DamagePerformFinish"
-        },
-        {
-          "$type": "RPG.GameCore.SetDynamicValueByAddValue",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "LevelEntity"
-          },
-          "Key": "VSCount_LightTeam",
-          "AddValue": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": -25
-            }
-          },
-          "Min": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0
-            }
-          },
-          "Max": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 100
-            }
-          },
-          "ContextScope": "TargetEntity"
         },
         {
           "$type": "RPG.GameCore.WaitSecond",
@@ -1406,7 +2012,9 @@
         },
         {
           "$type": "RPG.GameCore.TriggerSound",
-          "SoundName": "Ev_sfx_rogue_buff_ruin",
+          "SoundName": {
+            "Value": "Ev_sfx_rogue_buff_ruin"
+          },
           "EmitterType": "DefaultEmitter"
         },
         {
@@ -1448,7 +2056,9 @@
             "Alias": "AllDarkTeam"
           },
           "AttackProperty": {
-            "DamageType": "Fire",
+            "DamageType": {
+              "DamageType": "Fire"
+            },
             "DamagePercentage": {
               "IsDynamic": false,
               "FixedValue": {
@@ -1464,7 +2074,7 @@
           "$type": "RPG.GameCore.ModifyActionDelay",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AbilityTargetEntity"
+            "Alias": "AllDarkTeam"
           },
           "AddNormalizedValue": {
             "IsDynamic": false,
@@ -1474,7 +2084,74 @@
           }
         },
         {
+          "$type": "RPG.GameCore.ForceKill",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetSequence",
+            "Sequence": [
+              {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllDarkTeam"
+              },
+              {
+                "$type": "RPG.GameCore.TargetFilter",
+                "Predicate": {
+                  "$type": "RPG.GameCore.ByIsContainModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "ModifierName": "MWStrongChallenge_GameMode_25VS_Minion"
+                }
+              }
+            ]
+          },
+          "CanOverkill": false
+        },
+        {
+          "$type": "RPG.GameCore.DamageByAttackProperty",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllDarkTeam"
+          },
+          "AttackProperty": {
+            "DamageType": {
+              "DamageType": "Fire"
+            },
+            "StanceValue": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 1000
+              }
+            },
+            "IsNotHit": true
+          },
+          "CanTriggerLastKill": true
+        },
+        {
           "$type": "RPG.GameCore.DamagePerformFinish"
+        },
+        {
+          "$type": "RPG.GameCore.ModifyTeamBoostPoint",
+          "ModifyFunction": "Add",
+          "ModifyValue": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 3
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.ModifySPNew",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "FixedAddMaxSPRatio": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          }
         },
         {
           "$type": "RPG.GameCore.RemoveModifier",
@@ -1677,7 +2354,7 @@
                           "OpCodes": "AAAK",
                           "FixedValues": [
                             {
-                              "Value": 9002307
+                              "Value": 9003915
                             }
                           ],
                           "DynamicHashes": []
@@ -1690,7 +2367,7 @@
                   "DelayRatio": {
                     "IsDynamic": false,
                     "FixedValue": {
-                      "Value": 0.75
+                      "Value": 0.42
                     }
                   },
                   "RefreshTeamLocation": false
@@ -1705,7 +2382,7 @@
                           "OpCodes": "AAAK",
                           "FixedValues": [
                             {
-                              "Value": 9002307
+                              "Value": 9002308
                             }
                           ],
                           "DynamicHashes": []
@@ -1718,7 +2395,7 @@
                   "DelayRatio": {
                     "IsDynamic": false,
                     "FixedValue": {
-                      "Value": 0.75
+                      "Value": 0.42
                     }
                   },
                   "RefreshTeamLocation": false
@@ -1726,6 +2403,144 @@
               ]
             }
           ]
+        },
+        "MWStrongChallenge_GameMode_25VS_KFK_S_Pursuit": {
+          "BehaviorFlagList": [
+            "ListenBattleEventSkill"
+          ],
+          "_CallbackList": [
+            {
+              "Event": "OnListenCharmMakeDamage",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "DynamicKey": "PursuitCheck",
+                        "ContextScope": "TargetEntity",
+                        "CompareType": "Equal",
+                        "CompareValue": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 0
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.TurnInsertAbility",
+                      "AbilityName": "Monster_W2_Kafka_00_RL_25VS_Skill06_Phase01",
+                      "AbilityTarget": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "AbortBehaviorFlags": [
+                        "STAT_CTRL",
+                        "DisableAction",
+                        "Break"
+                      ],
+                      "InsertAbilityPriority": "MonsterInsertAttackSelf",
+                      "ShowInActionBar": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.DefineDynamicValue",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "DynamicKey": "PursuitCheck",
+                      "ResetValue": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1
+                        }
+                      },
+                      "ContextScope": "TargetEntity"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Event": "OnListenAfterSkillUse",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByCompareTurnActionEntityTeamType",
+                        "Team": "TeamDark"
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByTargetTeam",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "TurnActionEntitySkillTarget"
+                        },
+                        "Team": "TeamLight"
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "TurnActionEntitySkillTarget"
+                        },
+                        "Flag": "STAT_CTRL"
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCompareHPRatio",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "TurnActionEntitySkillTarget"
+                        },
+                        "CompareType": "Greater",
+                        "CompareValue": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 0
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.TurnInsertAbility",
+                      "AbilityName": "Monster_W2_Kafka_00_RL_25VS_Skill06_Phase01",
+                      "AbilityTarget": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "TurnActionEntitySkillTarget"
+                      },
+                      "AbortBehaviorFlags": [
+                        "STAT_CTRL",
+                        "DisableAction",
+                        "Break"
+                      ],
+                      "InsertAbilityPriority": "MonsterInsertAttackSelf",
+                      "ShowInActionBar": true
+                    }
+                  ],
+                  "FailedTaskList": []
+                }
+              ]
+            }
+          ],
+          "DynamicValues": {
+            "Values": {
+              "-2027709849": {}
+            }
+          }
         }
       },
       "Name": "Monster_W2_Kafka_00_RL_25VS_Passive01",
@@ -1782,6 +2597,14 @@
             "Alias": "Caster"
           },
           "ModifierName": "MWStrongChallenge_GameMode_25VS_KFK_S_Fish"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "MWStrongChallenge_GameMode_25VS_KFK_S_Pursuit"
         }
       ]
     },
@@ -2071,34 +2894,6 @@
               "LifeTime": 2
             }
           ]
-        },
-        {
-          "$type": "RPG.GameCore.SummonMonster",
-          "SummonMonsterDataList": [
-            {
-              "MonsterID": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AAAK",
-                  "FixedValues": [
-                    {
-                      "Value": 9002307
-                    }
-                  ],
-                  "DynamicHashes": []
-                }
-              },
-              "LocationType": "Last",
-              "InitAnimStateName": "Appear"
-            }
-          ],
-          "DelayRatio": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0.75
-            }
-          },
-          "RefreshTeamLocation": false
         },
         {
           "$type": "RPG.GameCore.ModifyActionDelay",
@@ -2728,62 +3523,6 @@
               ]
             }
           ]
-        },
-        {
-          "$type": "RPG.GameCore.SummonMonster",
-          "SummonMonsterDataList": [
-            {
-              "MonsterID": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AAAK",
-                  "FixedValues": [
-                    {
-                      "Value": 9002307
-                    }
-                  ],
-                  "DynamicHashes": []
-                }
-              },
-              "LocationType": "First",
-              "InitAnimStateName": "Appear"
-            }
-          ],
-          "DelayRatio": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0.75
-            }
-          },
-          "RefreshTeamLocation": false
-        },
-        {
-          "$type": "RPG.GameCore.SummonMonster",
-          "SummonMonsterDataList": [
-            {
-              "MonsterID": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AAAK",
-                  "FixedValues": [
-                    {
-                      "Value": 9002307
-                    }
-                  ],
-                  "DynamicHashes": []
-                }
-              },
-              "LocationType": "Last",
-              "InitAnimStateName": "Appear"
-            }
-          ],
-          "DelayRatio": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0.75
-            }
-          },
-          "RefreshTeamLocation": false
         },
         {
           "$type": "RPG.GameCore.ModifyActionDelay",
@@ -3474,7 +4213,7 @@
       }
     },
     "MWMonster_24VSActivity_Test_Kafka_PunishMode": {
-      "LifeTime": 4,
+      "LifeTime": 1,
       "_CallbackList": [
         {
           "Event": "OnStack",
@@ -3502,7 +4241,7 @@
               "PropertyValue": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.5
+                  "Value": 1
                 }
               }
             },
@@ -3516,7 +4255,7 @@
               "PropertyValue": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.4
+                  "Value": 4
                 }
               }
             },
@@ -3572,7 +4311,7 @@
               "Value": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 20
+                  "Value": 30
                 }
               }
             },
@@ -3638,13 +4377,7 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "ModifierOwnerEntity"
               },
-              "ModifierName": "MCommon_AllDamageTypeResistanceDown",
-              "LifeTime": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 1
-                }
-              },
+              "ModifierName": "MCommon_AllDamageTypeTakenRatio",
               "DynamicValues": {
                 "MDF_PropertyValue": {
                   "IsDynamic": false,
@@ -3720,7 +4453,7 @@
               "Value": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 50
+                  "Value": 30
                 }
               }
             },
@@ -3883,6 +4616,14 @@
           "Event": "OnDestroy",
           "CallbackConfig": [
             {
+              "$type": "RPG.GameCore.RemoveModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ModifierName": "MCommon_AllDamageTypeResistanceDown"
+            },
+            {
               "$type": "RPG.GameCore.ShowUIPage",
               "AssetPath": "UI/Common/Widget/ShowBattleHint.prefab",
               "UITextNodes": [
@@ -3935,7 +4676,7 @@
                       "OpCodes": "AAAK",
                       "FixedValues": [
                         {
-                          "Value": 9002307
+                          "Value": 9003915
                         }
                       ],
                       "DynamicHashes": []
@@ -3948,7 +4689,7 @@
               "DelayRatio": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.75
+                  "Value": 0.42
                 }
               },
               "RefreshTeamLocation": false
@@ -3963,7 +4704,7 @@
                       "OpCodes": "AAAK",
                       "FixedValues": [
                         {
-                          "Value": 9002307
+                          "Value": 9002308
                         }
                       ],
                       "DynamicHashes": []
@@ -3976,7 +4717,7 @@
               "DelayRatio": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.75
+                  "Value": 0.42
                 }
               },
               "RefreshTeamLocation": false
@@ -3991,7 +4732,7 @@
               "Value": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 50
+                  "Value": 30
                 }
               }
             },
@@ -4335,7 +5076,7 @@
                   "AddValue": {
                     "IsDynamic": false,
                     "FixedValue": {
-                      "Value": 2
+                      "Value": 0.8
                     }
                   },
                   "Min": {
@@ -4358,17 +5099,7 @@
         },
         {
           "Event": "OnStack",
-          "CallbackConfig": [
-            {
-              "$type": "RPG.GameCore.AddModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "ModifierName": "MWStrongChallenge_GameMode_25VS_Minion_DOT",
-              "InheritCaster": "TargetSelf"
-            }
-          ]
+          "CallbackConfig": []
         },
         {
           "Event": "OnAfterAttack",
@@ -4383,7 +5114,7 @@
               "AddValue": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 2
+                  "Value": 5
                 }
               },
               "Min": {
@@ -4404,6 +5135,7 @@
         }
       ]
     },
+    "MWStrongChallenge_GameMode_25VS_KFK_S_PursuitPunish": {},
     "MWStrongChallenge_GameMode_25VS_KFK": {
       "_CallbackList": [
         {
@@ -4454,7 +5186,7 @@
                   "AddValue": {
                     "IsDynamic": false,
                     "FixedValue": {
-                      "Value": 4
+                      "Value": 3
                     }
                   },
                   "Min": {
@@ -4493,20 +5225,85 @@
                 "Alias": "ModifierOwnerEntity"
               },
               "ModifierName": "MWMonster_24VSActivity_Test_Kafka_StrongMode"
+            }
+          ]
+        },
+        {
+          "Event": "OnBeforeAttack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCurrentSkillName",
+                "SkillName": "Skill03"
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SummonMonster",
+                  "SummonMonsterDataList": [
+                    {
+                      "MonsterID": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AAAK",
+                          "FixedValues": [
+                            {
+                              "Value": 9002308
+                            }
+                          ],
+                          "DynamicHashes": []
+                        }
+                      },
+                      "LocationType": "Last",
+                      "InitAnimStateName": "Appear"
+                    }
+                  ],
+                  "DelayRatio": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0
+                    }
+                  },
+                  "RefreshTeamLocation": false
+                }
+              ]
             },
             {
-              "$type": "RPG.GameCore.StackProperty",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCurrentSkillName",
+                "SkillName": "Skill02"
               },
-              "Property": "FatigueRatio",
-              "PropertyValue": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 0.35
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SummonMonster",
+                  "SummonMonsterDataList": [
+                    {
+                      "MonsterID": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AAAK",
+                          "FixedValues": [
+                            {
+                              "Value": 9003915
+                            }
+                          ],
+                          "DynamicHashes": []
+                        }
+                      },
+                      "LocationType": "Last",
+                      "InitAnimStateName": "Appear"
+                    }
+                  ],
+                  "DelayRatio": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0.6
+                    }
+                  },
+                  "RefreshTeamLocation": false
                 }
-              }
+              ]
             }
           ]
         },
@@ -4523,7 +5320,7 @@
               "AddValue": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 4
+                  "Value": 5
                 }
               },
               "Min": {
@@ -4539,6 +5336,82 @@
                 }
               },
               "ContextScope": "TargetEntity"
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByIsContainModifier",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ModifierOwnerEntity"
+                },
+                "ModifierName": "MWStrongChallenge_GameMode_25VS_KFK_S_PursuitPunish"
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValueByAddValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "LevelEntity"
+                  },
+                  "Key": "VSCount_DarkTeam_Delta",
+                  "AddValue": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 15
+                    }
+                  },
+                  "Min": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0
+                    }
+                  },
+                  "Max": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 100
+                    }
+                  },
+                  "ContextScope": "TargetEntity"
+                }
+              ]
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCurrentSkillName",
+                "SkillName": "Skill04"
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValueByAddValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "LevelEntity"
+                  },
+                  "Key": "VSCount_DarkTeam_Delta",
+                  "AddValue": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 7
+                    }
+                  },
+                  "Min": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0
+                    }
+                  },
+                  "Max": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 100
+                    }
+                  },
+                  "ContextScope": "TargetEntity"
+                }
+              ]
             }
           ]
         },
@@ -4670,7 +5543,7 @@
                   "AddValue": {
                     "IsDynamic": false,
                     "FixedValue": {
-                      "Value": 2
+                      "Value": 1
                     }
                   },
                   "Min": {
@@ -4688,6 +5561,38 @@
                   "ContextScope": "TargetEntity"
                 }
               ]
+            }
+          ]
+        },
+        {
+          "Event": "OnTriggerDeath",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValueByAddValue",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LevelEntity"
+              },
+              "Key": "VSCount_LightTeam_Delta",
+              "AddValue": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 5
+                }
+              },
+              "Min": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0
+                }
+              },
+              "Max": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 100
+                }
+              },
+              "ContextScope": "TargetEntity"
             }
           ]
         },

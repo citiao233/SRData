@@ -2423,6 +2423,9 @@
                 "Alias": "ParamEntity"
               },
               "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Physical"
+                },
                 "FormulaType": "ByMaxHP",
                 "StanceValue": {
                   "IsDynamic": false,
@@ -2431,7 +2434,9 @@
                   }
                 },
                 "IsNotHit": true,
-                "StanceDamageType": "AllType",
+                "StanceDamageType": {
+                  "DamageType": "AllType"
+                },
                 "AttackType": "Pursued"
               }
             },
@@ -4810,6 +4815,9 @@
             "Alias": "AllDarkTeam"
           },
           "AttackProperty": {
+            "DamageType": {
+              "DamageType": "Physical"
+            },
             "FormulaType": "ByMaxHP",
             "DamageValue": {
               "IsDynamic": true,
@@ -4907,6 +4915,9 @@
                 "Alias": "ParamEntity"
               },
               "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Physical"
+                },
                 "FormulaType": "ByMaxHP",
                 "StanceValue": {
                   "IsDynamic": true,
@@ -4919,7 +4930,9 @@
                   }
                 },
                 "IsNotHit": true,
-                "StanceDamageType": "AllType",
+                "StanceDamageType": {
+                  "DamageType": "AllType"
+                },
                 "AttackType": "Pursued",
                 "HitEffect": "Effects/Eff_Prefab/Eff_Common/Eff_BattleEvent_ShenYuan_Damage_hit2.prefab"
               }
@@ -5225,6 +5238,9 @@
                         "Alias": "ParamEntity"
                       },
                       "AttackProperty": {
+                        "DamageType": {
+                          "DamageType": "Physical"
+                        },
                         "DamageValue": {
                           "IsDynamic": true,
                           "PostfixExpr": {
@@ -5488,15 +5504,13 @@
                     {
                       "$type": "RPG.GameCore.PredicateTaskList",
                       "Predicate": {
-                        "$type": "RPG.GameCore.ByRandomChance",
-                        "Chance": {
-                          "IsDynamic": true,
-                          "PostfixExpr": {
-                            "OpCodes": "AQAK",
-                            "FixedValues": [],
-                            "DynamicHashes": [
-                              421786570
-                            ]
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "DynamicKey": "CriticalFlag",
+                        "CompareType": "Equal",
+                        "CompareValue": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 1
                           }
                         }
                       },
@@ -5556,6 +5570,51 @@
                           }
                         }
                       ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Event": "OnBeforeAttack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByRandomChance",
+                    "Chance": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          421786570
+                        ]
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "DynamicKey": "CriticalFlag",
+                      "Value": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1
+                        }
+                      }
+                    }
+                  ],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "DynamicKey": "CriticalFlag",
+                      "Value": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 0
+                        }
+                      }
                     }
                   ]
                 }

@@ -147,8 +147,8 @@
             "FlySpeed": 300,
             "AttachPoint": "Gun",
             "TargetAttachPoint": "SelectRoot",
-            "FlyEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Bronya/Eff_Avatar_Bronya_00_Skill01_Start01_Bullet.prefab",
-            "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Bronya/Eff_Avatar_Bronya_00_Skill01_Hit01.prefab",
+            "FlyEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Bronya_00/Eff_Avatar_Bronya_00_Skill01_Start01_Bullet.prefab",
+            "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Bronya_00/Eff_Avatar_Bronya_00_Skill01_Hit01.prefab",
             "WriteProgressToEffectAnimator": true
           },
           "OnProjectileHit": [
@@ -159,7 +159,9 @@
                 "Alias": "AbilityTargetEntity"
               },
               "AttackProperty": {
-                "DamageType": "Wind",
+                "DamageType": {
+                  "DamageType": "Wind"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -566,7 +568,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "AbilityTargetEntity"
           },
-          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Bronya/Eff_Avatar_Bronya_00_Skill02_Buff.prefab",
+          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Bronya_00/Eff_Avatar_Bronya_00_Skill02_Buff.prefab",
           "PositionOffset": {
             "X": 0.2,
             "Y": 0,
@@ -868,7 +870,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "AbilityTargetEntity"
           },
-          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Bronya/Eff_Avatar_Bronya_00_Skill02_Buff_Self.prefab"
+          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Bronya_00/Eff_Avatar_Bronya_00_Skill02_Buff_Self.prefab"
         },
         {
           "$type": "RPG.GameCore.ModifySPNew",
@@ -1072,7 +1074,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "AllTeammate"
           },
-          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Bronya/Eff_Avatar_Bronya_00_Skill03_Buff.prefab"
+          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Bronya_00/Eff_Avatar_Bronya_00_Skill03_Buff.prefab"
         },
         {
           "$type": "RPG.GameCore.TriggerEffect",
@@ -1080,7 +1082,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Bronya/Eff_Avatar_Bronya_00_Skill03_Buff_Self.prefab"
+          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Bronya_00/Eff_Avatar_Bronya_00_Skill03_Buff_Self.prefab"
         },
         {
           "$type": "RPG.GameCore.WaitAnimState",
@@ -1257,7 +1259,7 @@
     },
     {
       "Modifiers": {
-        "Avatar_Bronya_SkillPreshow": {
+        "Avatar_Bronya_AttackPreshow": {
           "ModifierAffectedPreshowConfig": {
             "SkillTypes": [
               "Normal"
@@ -1275,6 +1277,37 @@
                   "DynamicHashes": [
                     1244012525
                   ]
+                }
+              }
+            }
+          }
+        },
+        "Avatar_Bronya_SkillPreshow": {
+          "ModifierAffectedPreshowConfig": {
+            "SkillTypes": [
+              "Skill"
+            ],
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "CurrentAimAtTarget"
+            },
+            "Condition": {
+              "$type": "RPG.GameCore.ByTargetListIntersects",
+              "FirstTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "SecondTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ParamEntity"
+              },
+              "Inverse": true
+            },
+            "ActionDelayPreshowConfig": {
+              "SetDelayValue": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0
                 }
               }
             }
@@ -1321,6 +1354,14 @@
               }
             }
           ]
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "Avatar_Bronya_AttackPreshow"
         },
         {
           "$type": "RPG.GameCore.AddModifier",
@@ -1733,8 +1774,8 @@
             "FlySpeed": 300,
             "AttachPoint": "Gun",
             "TargetAttachPoint": "SelectRoot",
-            "FlyEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Bronya/Eff_Avatar_Bronya_00_Skill01_Start01_Bullet.prefab",
-            "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Bronya/Eff_Avatar_Bronya_00_Skill01_Hit01.prefab",
+            "FlyEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Bronya_00/Eff_Avatar_Bronya_00_Skill01_Start01_Bullet.prefab",
+            "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Bronya_00/Eff_Avatar_Bronya_00_Skill01_Hit01.prefab",
             "WriteProgressToEffectAnimator": true
           },
           "OnProjectileHit": [
@@ -1745,7 +1786,9 @@
                 "Alias": "AbilityTargetEntity"
               },
               "AttackProperty": {
-                "DamageType": "Wind",
+                "DamageType": {
+                  "DamageType": "Wind"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {

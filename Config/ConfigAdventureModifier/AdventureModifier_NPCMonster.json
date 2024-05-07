@@ -172,6 +172,71 @@
           ]
         }
       ]
+    },
+    "ADV_Monster_W3_Figure_02_FireInHead": {
+      "OnModifierAdd": [
+        {
+          "$type": "RPG.GameCore.ModifierAttachEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Figure_02/Eff_Monster_W3_Figure_02_Fire_Loop.prefab",
+          "MinMutexTime": -1,
+          "MutexType": "Entity"
+        }
+      ]
+    },
+    "ADV_Monster_W1_Mecha01_02_CleanEffect": {
+      "OnDestroy": [
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W1_Mecha01_02/Eff_Monster_W1_Mecha01_02_StandBy_Light.prefab",
+          "IsNeedFadeOut": false
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W1_Mecha01_02/Eff_Monster_W1_Mecha01_02_MazeStandBy01_Light.prefab",
+          "IsNeedFadeOut": false
+        }
+      ],
+      "OnModifierAdd": [
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCheckAdvModifierCallBackBehaviorFlag",
+            "Flag": "Freeze"
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W1_Mecha01_02/Eff_Monster_W1_Mecha01_02_StandBy_Light.prefab",
+              "IsNeedFadeOut": false
+            },
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W1_Mecha01_02/Eff_Monster_W1_Mecha01_02_MazeStandBy01_Light.prefab",
+              "IsNeedFadeOut": false
+            }
+          ]
+        }
+      ]
     }
   }
 }

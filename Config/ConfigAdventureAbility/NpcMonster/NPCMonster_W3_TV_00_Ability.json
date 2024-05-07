@@ -283,31 +283,6 @@
           },
           "OnProjectileLifetimeFinish": [
             {
-              "$type": "RPG.GameCore.AdventureTriggerAttack",
-              "AttackTargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "AllEnemy"
-              },
-              "AttackRootTargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ProjectileHitEntity"
-              },
-              "TriggerBattle": false,
-              "TriggerBattleDelay": 0.1,
-              "AttackDetectConfig": {
-                "$type": "RPG.GameCore.AdventureAttackDetectCircleConfig",
-                "MaxRadius": 1.5,
-                "FanAngle": 360
-              },
-              "HitConfig": {
-                "HitAnimation": "Hit",
-                "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_TV_00/Eff_Monster_W3_TV_00_MazeAttack_Attack01_Hit.prefab",
-                "HitEffectHeight": 1
-              },
-              "IncludeProps": false,
-              "AttackDetectCollision": false
-            },
-            {
               "$type": "RPG.GameCore.WolfBroMonsterHitBoomProp",
               "AttackTargetType": {
                 "$type": "RPG.GameCore.TargetSequence",
@@ -339,6 +314,43 @@
                 "HitEffectHeight": 1
               },
               "AttackDetectCollision": false
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByHaveEnemyAlive",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "Caster"
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.AdventureTriggerAttack",
+                  "AttackTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllEnemy"
+                  },
+                  "AttackRootTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ProjectileHitEntity"
+                  },
+                  "TriggerBattle": false,
+                  "TriggerBattleDelay": 0.1,
+                  "AttackDetectConfig": {
+                    "$type": "RPG.GameCore.AdventureAttackDetectCircleConfig",
+                    "MaxRadius": 1.5,
+                    "FanAngle": 360
+                  },
+                  "HitConfig": {
+                    "HitAnimation": "Hit",
+                    "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_TV_00/Eff_Monster_W3_TV_00_MazeAttack_Attack01_Hit.prefab",
+                    "HitEffectHeight": 1
+                  },
+                  "IncludeProps": false,
+                  "AttackDetectCollision": false
+                }
+              ]
             },
             {
               "$type": "RPG.GameCore.VCameraConfigChange",

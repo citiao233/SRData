@@ -158,7 +158,7 @@
               "WaitTime": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 1.5000000004656613
+                  "Value": 1.5
                 }
               }
             }
@@ -375,7 +375,7 @@
               "WaitTime": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 1.5000000004656613
+                  "Value": 1.5
                 }
               }
             }
@@ -438,6 +438,74 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "AllDarkTeam"
               }
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamDark",
+          "FormationType": "DarkTeamNormal"
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamRootOffset",
+          "Team": "TeamLight",
+          "Reset": true
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamLight",
+          "FormationType": "LightTeamNormal"
+        }
+      ]
+    },
+    {
+      "IsLoop": true,
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitCustomString",
+          "CustomString": {
+            "Value": "Stage_ShowDefaultCameraAfterTimelineOnAvatarDying"
+          },
+          "GoNextImmediately": true
+        },
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "NormalConfig": {
+              "CameraState": "CasterToTargetPerform",
+              "AnchorTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "DarkTeamCenter"
+              },
+              "IsLocalOffset": true,
+              "AnchorOffset": {
+                "X": 0.01,
+                "Y": 1.6,
+                "Z": 6
+              },
+              "AnchorRatio": 1,
+              "AimTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "AimOffset": {
+                "X": 0.01,
+                "Y": 0.8,
+                "Z": 0.01
+              }
+            },
+            "CloseupShotConfig": {
+              "Exit": true
+            },
+            "BlendConfig": {
+              "BlendType": "Cut"
+            },
+            "ShowEntityConfig": {
+              "ShowTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              },
+              "IsAliveOnly": false
             }
           }
         },
@@ -623,6 +691,96 @@
           "GoNextImmediately": true
         },
         {
+          "$type": "RPG.GameCore.FinishHitStateImmediately",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "BattleDataViewUISelectEnter"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByAny",
+            "PredicateList": [
+              {
+                "$type": "RPG.GameCore.ByTargetAliveState",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "BattleDataViewUISelectEnter"
+                },
+                "AliveStateMask": "Mask_AliveOrLimbo",
+                "Inverse": true
+              },
+              {
+                "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "BattleDataViewUISelectEnter"
+                },
+                "Flag": "STAT_CTRL_UnOperable"
+              }
+            ]
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValue",
+              "DynamicKey": "DV_DataViewSelectCharacterDie",
+              "Value": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1
+                }
+              }
+            }
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValue",
+              "DynamicKey": "DV_DataViewSelectCharacterDie",
+              "Value": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0
+                }
+              }
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareDynamicValue",
+            "DynamicKey": "DV_DataViewSelectCharacterDie",
+            "CompareType": "Equal",
+            "CompareValue": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 1
+              }
+            }
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.SetCameraRootFollow",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "BattleDataViewUISelectEnter"
+              },
+              "PointName": "Origin"
+            }
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.SetCameraRootFollow",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "BattleDataViewUISelectEnter"
+              },
+              "PointName": "SelectRoot"
+            }
+          ]
+        },
+        {
           "$type": "RPG.GameCore.PredicateTaskList",
           "Predicate": {
             "$type": "RPG.GameCore.ByIsTargetValid",
@@ -639,44 +797,6 @@
                 "Alias": "BattleDataViewUISelectLeave"
               },
               "IsReset": true
-            },
-            {
-              "$type": "RPG.GameCore.PredicateTaskList",
-              "Predicate": {
-                "$type": "RPG.GameCore.ByCompareHP",
-                "TargetType": {
-                  "$type": "RPG.GameCore.TargetAlias",
-                  "Alias": "BattleDataViewUISelectEnter"
-                },
-                "CompareType": "Greater",
-                "CompareValue": {
-                  "IsDynamic": false,
-                  "FixedValue": {
-                    "Value": 0
-                  }
-                },
-                "Inverse": true
-              },
-              "SuccessTaskList": [
-                {
-                  "$type": "RPG.GameCore.SetCameraRootFollow",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "BattleDataViewUISelectEnter"
-                  },
-                  "PointName": "Origin"
-                }
-              ],
-              "FailedTaskList": [
-                {
-                  "$type": "RPG.GameCore.SetCameraRootFollow",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "BattleDataViewUISelectEnter"
-                  },
-                  "PointName": "SelectRoot"
-                }
-              ]
             },
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -827,44 +947,6 @@
               }
             },
             {
-              "$type": "RPG.GameCore.PredicateTaskList",
-              "Predicate": {
-                "$type": "RPG.GameCore.ByCompareHP",
-                "TargetType": {
-                  "$type": "RPG.GameCore.TargetAlias",
-                  "Alias": "BattleDataViewUISelectEnter"
-                },
-                "CompareType": "Greater",
-                "CompareValue": {
-                  "IsDynamic": false,
-                  "FixedValue": {
-                    "Value": 0
-                  }
-                },
-                "Inverse": true
-              },
-              "SuccessTaskList": [
-                {
-                  "$type": "RPG.GameCore.SetCameraRootFollow",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "BattleDataViewUISelectEnter"
-                  },
-                  "PointName": "Origin"
-                }
-              ],
-              "FailedTaskList": [
-                {
-                  "$type": "RPG.GameCore.SetCameraRootFollow",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "BattleDataViewUISelectEnter"
-                  },
-                  "PointName": "SelectRoot"
-                }
-              ]
-            },
-            {
               "$type": "RPG.GameCore.ResetTeamEntityFaceDir",
               "Team": "TeamDark"
             },
@@ -949,7 +1031,7 @@
               "WaitTime": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.3000000002793968
+                  "Value": 0.3
                 }
               }
             },
@@ -985,7 +1067,7 @@
           "WaitTime": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.25000000023283064
+              "Value": 0.25
             }
           }
         },
@@ -1035,5 +1117,13 @@
         }
       ]
     }
-  ]
+  ],
+  "ValueSource": {
+    "Values": [
+      {
+        "$type": "RPG.GameCore.SharedFloat",
+        "Key": "DV_DataViewSelectCharacterDie"
+      }
+    ]
+  }
 }

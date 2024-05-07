@@ -229,31 +229,6 @@
           },
           "OnProjectileLifetimeFinish": [
             {
-              "$type": "RPG.GameCore.AdventureTriggerAttack",
-              "AttackTargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "AllEnemy"
-              },
-              "TriggerBattle": false,
-              "TriggerBattleDelay": 0.1,
-              "AttackDetectConfig": {
-                "$type": "RPG.GameCore.AdventureAttackDetectCircleConfig",
-                "MaxRadius": 1,
-                "FanAngle": 360,
-                "Offset": {
-                  "X": 0,
-                  "Y": 0.5,
-                  "Z": 1.5
-                }
-              },
-              "HitConfig": {
-                "HitAnimation": "Hit",
-                "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Clock_00/Eff_Monster_W3_Clock_00_MazeHit.prefab",
-                "HitEffectHeight": 1.3
-              },
-              "IncludeProps": false
-            },
-            {
               "$type": "RPG.GameCore.WolfBroMonsterHitBoomProp",
               "AttackTargetType": {
                 "$type": "RPG.GameCore.TargetSequence",
@@ -285,6 +260,43 @@
                 "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Clock_00/Eff_Monster_W3_Clock_00_MazeHit.prefab",
                 "HitEffectHeight": 1.3
               }
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByHaveEnemyAlive",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "Caster"
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.AdventureTriggerAttack",
+                  "AttackTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllEnemy"
+                  },
+                  "TriggerBattle": false,
+                  "TriggerBattleDelay": 0.1,
+                  "AttackDetectConfig": {
+                    "$type": "RPG.GameCore.AdventureAttackDetectCircleConfig",
+                    "MaxRadius": 1,
+                    "FanAngle": 360,
+                    "Offset": {
+                      "X": 0,
+                      "Y": 0.5,
+                      "Z": 1.5
+                    }
+                  },
+                  "HitConfig": {
+                    "HitAnimation": "Hit",
+                    "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Clock_00/Eff_Monster_W3_Clock_00_MazeHit.prefab",
+                    "HitEffectHeight": 1.3
+                  },
+                  "IncludeProps": false
+                }
+              ]
             },
             {
               "$type": "RPG.GameCore.VCameraConfigChange",

@@ -4,6 +4,16 @@
     {
       "TaskList": [
         {
+          "$type": "RPG.GameCore.SetHudTemplate",
+          "TemplateID": 1011,
+          "EnableTemplate": true
+        },
+        {
+          "$type": "RPG.GameCore.BlockInputController",
+          "Enable": true,
+          "ActionNameList": []
+        },
+        {
           "$type": "RPG.GameCore.EnablePlayerPlayIdleShow",
           "Enable": false
         },
@@ -94,20 +104,80 @@
           ]
         },
         {
-          "$type": "RPG.GameCore.AdvEntityFaceTo",
-          "SourceType": {
-            "$type": "RPG.GameCore.TargetFetchAdvLocalPlayer"
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByAnd",
+            "PredicateList": [
+              {
+                "$type": "RPG.GameCore.ByCompareGraphDynamicFloat",
+                "Name": "FaceToCameraTarget",
+                "Value": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 0
+                  }
+                },
+                "CompareType": "NotEqual"
+              },
+              {
+                "$type": "RPG.GameCore.ByCompareGraphDynamicString",
+                "Name": "CameraTargetName",
+                "Value": {
+                  "Value": "0"
+                },
+                "Inverse": true
+              }
+            ]
           },
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetFetchAnchorByName",
-            "AnchorName": {
-              "Custom": true,
-              "Key": "CameraAnchorName"
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareGraphDynamicString",
+                "Name": "CameraTargetName",
+                "Value": {
+                  "Value": "0"
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.AdvEntityFaceTo",
+                  "SourceType": {
+                    "$type": "RPG.GameCore.TargetFetchAdvLocalPlayer"
+                  },
+                  "TargetType": {
+                    "$type": "RPG.GameCore.AdvGroupFetchTargetByString",
+                    "Target": {
+                      "Custom": true,
+                      "Key": "CameraAnchorName"
+                    }
+                  },
+                  "EnableSteer": true,
+                  "WaitFinishMode": "Default",
+                  "TurnBackOnGraphEnd": false
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.AdvEntityFaceTo",
+                  "SourceType": {
+                    "$type": "RPG.GameCore.TargetFetchAdvLocalPlayer"
+                  },
+                  "TargetType": {
+                    "$type": "RPG.GameCore.AdvGroupFetchTargetByString",
+                    "Target": {
+                      "Custom": true,
+                      "Key": "CameraTargetName"
+                    }
+                  },
+                  "EnableSteer": true,
+                  "WaitFinishMode": "Default",
+                  "TurnBackOnGraphEnd": false
+                }
+              ]
             }
-          },
-          "EnableSteer": true,
-          "WaitFinishMode": "Default",
-          "TurnBackOnGraphEnd": false
+          ],
+          "FailedTaskList": []
         },
         {
           "$type": "RPG.GameCore.WaitSecond",
@@ -314,6 +384,14 @@
           "$type": "RPG.GameCore.EnablePlayerPlayIdleShow"
         },
         {
+          "$type": "RPG.GameCore.BlockInputController",
+          "ActionNameList": []
+        },
+        {
+          "$type": "RPG.GameCore.SetHudTemplate",
+          "TemplateID": 1011
+        },
+        {
           "$type": "RPG.GameCore.TriggerCustomString",
           "CustomString": {
             "Custom": true,
@@ -327,12 +405,12 @@
     "Values": [
       {
         "$type": "RPG.GameCore.SharedFloat",
-        "Value": 5,
+        "Value": 3,
         "Key": "CamDuration"
       },
       {
         "$type": "RPG.GameCore.SharedFloat",
-        "Value": 2,
+        "Value": 1.5,
         "Key": "WaitSecondsBeforeCut"
       },
       {
@@ -364,6 +442,11 @@
         "$type": "RPG.GameCore.SharedString",
         "Value": "DefaultEventName",
         "Key": "CallBackEventName"
+      },
+      {
+        "$type": "RPG.GameCore.SharedFloat",
+        "Value": 1,
+        "Key": "FaceToCameraTarget"
       }
     ]
   },

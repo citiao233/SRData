@@ -4314,7 +4314,13 @@
                 "Alias": "ModifierOwnerEntity"
               },
               "AttackProperty": {
-                "DamageTypeFromAttacker": true,
+                "DamageType": {
+                  "SourceType": "ReadTargetType",
+                  "ReadTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  }
+                },
                 "DamageValue": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -4923,6 +4929,9 @@
                 "Alias": "ParamEntity"
               },
               "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Physical"
+                },
                 "DamageValue": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -5009,6 +5018,9 @@
                 "Alias": "ParamEntity"
               },
               "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Physical"
+                },
                 "DamageValue": {
                   "IsDynamic": false,
                   "FixedValue": {
@@ -5072,6 +5084,9 @@
                 "Alias": "ParamEntity"
               },
               "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Physical"
+                },
                 "DamageValue": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -5454,6 +5469,9 @@
                 "Alias": "ParamEntity"
               },
               "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Physical"
+                },
                 "DamageValue": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -9946,20 +9964,6 @@
               "Event": "OnCreate",
               "CallbackConfig": [
                 {
-                  "$type": "RPG.GameCore.StackProperty",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
-                  },
-                  "Property": "StatusResistanceBase",
-                  "PropertyValue": {
-                    "IsDynamic": false,
-                    "FixedValue": {
-                      "Value": 1
-                    }
-                  }
-                },
-                {
                   "$type": "RPG.GameCore.AddModifier",
                   "TargetType": {
                     "$type": "RPG.GameCore.TargetAlias",
@@ -10016,6 +10020,25 @@
                           -2054011112
                         ]
                       }
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "Event": "OnStack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.StackProperty",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "Property": "StatusResistanceBase",
+                  "PropertyValue": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
                     }
                   }
                 }
@@ -17139,7 +17162,7 @@
           ],
           "_CallbackList": [
             {
-              "Event": "OnCreate",
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.StackProperty",
@@ -24068,7 +24091,13 @@
                                 "Alias": "ParamEntity"
                               },
                               "AttackProperty": {
-                                "DamageTypeFromAttacker": true,
+                                "DamageType": {
+                                  "SourceType": "ReadTargetType",
+                                  "ReadTargetType": {
+                                    "$type": "RPG.GameCore.TargetAlias",
+                                    "Alias": "Caster"
+                                  }
+                                },
                                 "DamageValue": {
                                   "IsDynamic": true,
                                   "PostfixExpr": {
@@ -25274,6 +25303,9 @@
                 "Alias": "ModifierOwnerEntity"
               },
               "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Physical"
+                },
                 "DamageValue": {
                   "IsDynamic": true,
                   "PostfixExpr": {

@@ -451,6 +451,25 @@
     "NextTurnOwnerEntity": {
       "$type": "RPG.GameCore.TargetFetchNextTurnOwnerEntity"
     },
+    "AvatarNextTurnOwnerEntity": {
+      "$type": "RPG.GameCore.TargetSequence",
+      "Sequence": [
+        {
+          "$type": "RPG.GameCore.TargetQuery",
+          "TeamTypeMask": "TeamLight",
+          "EntityTypeMask": "Avatar",
+          "AliveStateMask": "Mask_AliveOnly"
+        },
+        {
+          "$type": "RPG.GameCore.TargetSortByActionOrder",
+          "FilterNoActionEntity": true
+        },
+        {
+          "$type": "RPG.GameCore.TargetTake",
+          "Count": 1
+        }
+      ]
+    },
     "SkillPointEntity": {
       "$type": "RPG.GameCore.TargetSequence",
       "Sequence": [
@@ -589,6 +608,10 @@
         }
       ]
     },
+    "AbilityTargetSummonUnitOrSummoner": {
+      "$type": "RPG.GameCore.TargetAlias",
+      "Alias": "AbilityTargetEntity.GetSummoner + AbilityTargetEntity.GetSummonUnit"
+    },
     "AbilityTargetLeftEntity": {
       "$type": "RPG.GameCore.TargetSequence",
       "Sequence": [
@@ -662,6 +685,9 @@
           "$type": "RPG.GameCore.TargetMapAdjoinEntity"
         }
       ]
+    },
+    "TemplateParamEntityList": {
+      "$type": "RPG.GameCore.TargetFetchTemplateEntityList"
     },
     "ParamEntity": {
       "$type": "RPG.GameCore.TargetFetchParamEntity"
@@ -824,7 +850,7 @@
         }
       ]
     },
-    "Lingsha_BattleEventEntity": {
+    "9146_BattleEventEntity": {
       "$type": "RPG.GameCore.TargetSequence",
       "Sequence": [
         {
@@ -839,25 +865,45 @@
               "$type": "RPG.GameCore.TargetAlias",
               "Alias": "ParamEntity"
             },
-            "ModifierName": "MWAvatar_Lingsha_BPSkill_BattleEvent"
+            "ModifierName": "MWAvatar_9146_BPSkill_BattleEvent"
           }
         }
       ]
     },
-    "Lingsha_EarliestBattleEventEntity": {
+    "9146_EarliestBattleEventEntity": {
       "$type": "RPG.GameCore.TargetSequence",
       "Sequence": [
         {
           "$type": "RPG.GameCore.TargetAlias",
-          "Alias": "Lingsha_BattleEventEntity"
+          "Alias": "9146_BattleEventEntity"
         },
         {
           "$type": "RPG.GameCore.TargetSortByModifierValue",
-          "ModifierName": "MWAvatar_Lingsha_BPSkill_BattleEvent_LifeTime"
+          "ModifierName": "MWAvatar_9146_BPSkill_BattleEvent_LifeTime"
         }
       ]
     },
-    "Mar7th_10_Master": {
+    "9148_BattleEventEntity": {
+      "$type": "RPG.GameCore.TargetSequence",
+      "Sequence": [
+        {
+          "$type": "RPG.GameCore.TargetAlias",
+          "Alias": "BattleEventEntityList"
+        },
+        {
+          "$type": "RPG.GameCore.TargetFilter",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByIsContainModifier",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "ParamEntity"
+            },
+            "ModifierName": "MWAvatar_9148_Summon_Passive"
+          }
+        }
+      ]
+    },
+    "9147_Master": {
       "$type": "RPG.GameCore.TargetSequence",
       "Sequence": [
         {
@@ -872,12 +918,12 @@
               "$type": "RPG.GameCore.TargetAlias",
               "Alias": "ParamEntity"
             },
-            "ModifierName": "MWAvatar_Mar_7th_10_Skill02_Master"
+            "ModifierName": "MWAvatar_9147_Skill02_Master"
           }
         }
       ]
     },
-    "Mar_7th_10_Master": {
+    "91477_Master": {
       "$type": "RPG.GameCore.TargetSequence",
       "Sequence": [
         {
@@ -892,8 +938,57 @@
               "$type": "RPG.GameCore.TargetAlias",
               "Alias": "ParamEntity"
             },
-            "ModifierName": "MAvatar_Mar_7th_10_Skill02_Master"
+            "ModifierName": "MAvatar_91477_Skill02_Master"
           }
+        }
+      ]
+    },
+    "9149_00_UltraTarget": {
+      "$type": "RPG.GameCore.TargetSequence",
+      "Sequence": [
+        {
+          "$type": "RPG.GameCore.TargetAlias",
+          "Alias": "AllEnemy"
+        },
+        {
+          "$type": "RPG.GameCore.TargetFilter",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByIsContainModifier",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "ParamEntity"
+            },
+            "ModifierName": "M_9149_00_UltraTarget"
+          }
+        }
+      ]
+    },
+    "CasterWith9149Target": {
+      "$type": "RPG.GameCore.TargetConcat",
+      "Targets": [
+        {
+          "$type": "RPG.GameCore.TargetAlias",
+          "Alias": "Caster"
+        },
+        {
+          "$type": "RPG.GameCore.TargetSequence",
+          "Sequence": [
+            {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "AllEnemy"
+            },
+            {
+              "$type": "RPG.GameCore.TargetFilter",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByIsContainModifier",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "ModifierName": "M_9149_00_UltraTarget"
+              }
+            }
+          ]
         }
       ]
     },
@@ -975,6 +1070,9 @@
     },
     "CurrentGroupNPCMonsters": {
       "$type": "RPG.GameCore.TargetFetchCurrentGroupNPCMonsters"
+    },
+    "NpcMonsterWithMazeBuff": {
+      "$type": "RPG.GameCore.TargetFetchNpcMonsterWithMazeBuff"
     },
     "AdvSkillTargetEntityList": {
       "$type": "RPG.GameCore.TargetFetchAdvSkillTargetEntityList"
@@ -1211,6 +1309,19 @@
         {
           "$type": "RPG.GameCore.TargetAlias",
           "Alias": "AbilityTargetEntity"
+        }
+      ]
+    },
+    "CasterWithAbilityTargetGroup": {
+      "$type": "RPG.GameCore.TargetConcat",
+      "Targets": [
+        {
+          "$type": "RPG.GameCore.TargetAlias",
+          "Alias": "Caster"
+        },
+        {
+          "$type": "RPG.GameCore.TargetAlias",
+          "Alias": "AbilityTargetGroup"
         }
       ]
     },
@@ -2255,8 +2366,8 @@
       "$type": "RPG.GameCore.TargetFetchDataViewUISelectLeave"
     },
     "AllDarkTeamWithAbilityTargetAndAdjoinEntity": {
-      "$type": "RPG.GameCore.TargetSequence",
-      "Sequence": [
+      "$type": "RPG.GameCore.TargetConcat",
+      "Targets": [
         {
           "$type": "RPG.GameCore.TargetAlias",
           "Alias": "AllDarkTeam"
@@ -2499,6 +2610,18 @@
         {
           "$type": "RPG.GameCore.TargetSortByFormation",
           "HighestFirst": true
+        }
+      ]
+    },
+    "LeftToRightLightTeamTarget": {
+      "$type": "RPG.GameCore.TargetSequence",
+      "Sequence": [
+        {
+          "$type": "RPG.GameCore.TargetAlias",
+          "Alias": "AllLightTeam"
+        },
+        {
+          "$type": "RPG.GameCore.TargetSortByFormation"
         }
       ]
     },
@@ -2865,6 +2988,39 @@
             },
             "ModifierName": "MAvatar_Robin_00_Skill02_AttackUp"
           }
+        }
+      ]
+    },
+    "9146_00_BattleEventEntity": {
+      "$type": "RPG.GameCore.TargetSequence",
+      "Sequence": [
+        {
+          "$type": "RPG.GameCore.TargetAlias",
+          "Alias": "BattleEventEntityList"
+        },
+        {
+          "$type": "RPG.GameCore.TargetFilter",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByIsContainModifier",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "ParamEntity"
+            },
+            "ModifierName": "MAvatar_9146_BPSkill_BattleEvent"
+          }
+        }
+      ]
+    },
+    "9146_00_EarliestBattleEventEntity": {
+      "$type": "RPG.GameCore.TargetSequence",
+      "Sequence": [
+        {
+          "$type": "RPG.GameCore.TargetAlias",
+          "Alias": "9146_BattleEventEntity"
+        },
+        {
+          "$type": "RPG.GameCore.TargetSortByModifierValue",
+          "ModifierName": "MAvatar_9146_BPSkill_BattleEvent_LifeTime"
         }
       ]
     },

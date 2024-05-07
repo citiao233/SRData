@@ -88,7 +88,12 @@
         },
         {
           "$type": "RPG.GameCore.WaitSecond",
-          "WaitTime": 0.1
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.1
+            }
+          }
         },
         {
           "$type": "RPG.GameCore.PropInitPuzzle",
@@ -101,6 +106,7 @@
             "Y": 21.71,
             "Z": 169.5
           },
+          "AutoPlayFinishSound": false,
           "PuzzleArea": {
             "Value": "TestCommandRobotPuzzle"
           }
@@ -112,6 +118,12 @@
         {
           "$type": "RPG.GameCore.WaitStreamingJobFinished",
           "StopLoadingTick": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitPropPuzzleLoadingFinish",
+          "TargetEntity": {
+            "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+          }
         },
         {
           "$type": "RPG.GameCore.ActiveVirtualCamera",
@@ -129,7 +141,10 @@
           "$type": "RPG.GameCore.LockPlayerControl"
         },
         {
-          "$type": "RPG.GameCore.PropStartPuzzle"
+          "$type": "RPG.GameCore.PropStartPuzzle",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+          }
         },
         {
           "$type": "RPG.GameCore.LevelAudioState",
@@ -161,7 +176,12 @@
         },
         {
           "$type": "RPG.GameCore.WaitSecond",
-          "WaitTime": 1
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          }
         },
         {
           "$type": "RPG.GameCore.PlayScreenTransfer",
@@ -191,7 +211,12 @@
           "FinishCallback": [
             {
               "$type": "RPG.GameCore.WaitSecond",
-              "WaitTime": 1.8
+              "WaitTime": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1.8
+                }
+              }
             },
             {
               "$type": "RPG.GameCore.PlayScreenTransfer",
@@ -211,7 +236,12 @@
             },
             {
               "$type": "RPG.GameCore.WaitSecond",
-              "WaitTime": 1.5
+              "WaitTime": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1.5
+                }
+              }
             },
             {
               "$type": "RPG.GameCore.SetEntityVisible",
@@ -263,7 +293,12 @@
             },
             {
               "$type": "RPG.GameCore.WaitSecond",
-              "WaitTime": 0.1
+              "WaitTime": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0.1
+                }
+              }
             },
             {
               "$type": "RPG.GameCore.SetForceStreamingThisFrame",
@@ -329,6 +364,9 @@
                 {
                   "$type": "RPG.GameCore.PlayScreenTransfer",
                   "CustomTime": 0.5
+                },
+                {
+                  "$type": "RPG.GameCore.PropPuzzleViewEventSender"
                 },
                 {
                   "$type": "RPG.GameCore.UnLockPlayerControl"
@@ -426,7 +464,12 @@
             },
             {
               "$type": "RPG.GameCore.WaitSecond",
-              "WaitTime": 0.1
+              "WaitTime": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0.1
+                }
+              }
             },
             {
               "$type": "RPG.GameCore.SetForceStreamingThisFrame",
@@ -569,7 +612,15 @@
           "OnChange": [
             {
               "$type": "RPG.GameCore.TriggerEntityEvent",
-              "EventName": "Clt_OnOpened"
+              "EventName": {
+                "Value": "Clt_OnOpened"
+              },
+              "InstanceID": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0
+                }
+              }
             }
           ],
           "TargetType": {

@@ -3,7 +3,39 @@
     {
       "Modifiers": {
         "Monster_W3_TV_00_FlopHandler": {
+          "BehaviorFlagList": [
+            "KeepOnDeathrattle"
+          ],
           "_CallbackList": [
+            {
+              "Event": "OnDestroy",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.RemoveEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_TV_00/Eff_Monster_W3_TV_00_Break_Occur_Blank.prefab"
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_TV_00/Eff_Monster_W3_TV_00_BeingHit01.prefab"
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_TV_00/Eff_Monster_W3_TV_00_BeingHit02.prefab"
+                }
+              ]
+            },
             {
               "Event": "OnAfterBeingHit",
               "CallbackConfig": []
@@ -311,7 +343,9 @@
                             "$type": "RPG.GameCore.TargetAlias",
                             "Alias": "ModifierOwnerEntity"
                           },
-                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_TV_00/Eff_Monster_W3_TV_00_Break_Occur_Blank.prefab"
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_TV_00/Eff_Monster_W3_TV_00_Break_Occur_Blank.prefab",
+                          "MinMutexTime": -1,
+                          "MinMutexType": "Entity"
                         }
                       ]
                     }
@@ -644,6 +678,11 @@
           "AnimStateName": "StandBy"
         },
         {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamDark",
+          "FormationType": "DarkTeamNormal"
+        },
+        {
           "$type": "RPG.GameCore.LookAt",
           "TargetType": "TeamFormation"
         }
@@ -749,7 +788,9 @@
             "Alias": "AllEnemy"
           },
           "AttackProperty": {
-            "DamageType": "Quantum",
+            "DamageType": {
+              "DamageType": "Quantum"
+            },
             "DamagePercentage": {
               "IsDynamic": true,
               "PostfixExpr": {

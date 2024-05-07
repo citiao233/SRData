@@ -7,6 +7,11 @@
       },
       "OnStart": [
         {
+          "$type": "RPG.GameCore.LookAt",
+          "TargetType": "AbilityTargetEntity",
+          "Duration": 0.45
+        },
+        {
           "$type": "RPG.GameCore.AdventureTriggerAnimStateWithMove",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
@@ -20,47 +25,16 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "AbilityTargetEntity"
               },
-              "OffsetTargetDistance": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 1.5
-                }
-              },
-              "NormalizedTimeStart": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 0.01
-                }
-              },
-              "NormalizedTimeEnd": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 0.165
-                }
-              },
-              "MaxMoveDistance": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 6
-                }
-              },
-              "OnlyMoveForward": true,
-              "MaxSpeed": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 9
-                }
-              },
               "SteerNormalizedTimeStart": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.01
+                  "Value": 0.005
                 }
               },
               "SteerNormalizedTimeEnd": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.165
+                  "Value": 0.2
                 }
               },
               "MaxSteerSpeed": {
@@ -82,37 +56,65 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.239
+              "Value": 0.078
             }
           }
         },
         {
-          "$type": "RPG.GameCore.AdventureTriggerAttack",
-          "AttackTargetType": {
+          "$type": "RPG.GameCore.StartAim",
+          "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AllEnemy"
+            "Alias": "AbilityTargetEntity"
           },
-          "TriggerBattleDelay": 0.1,
-          "AttackDetectConfig": {
-            "$type": "RPG.GameCore.AdventureAttackDetectCircleConfig",
-            "MaxRadius": 2.5,
-            "FanAngle": 100,
-            "Offset": {
-              "X": 0,
-              "Y": 0.5,
-              "Z": -0.3
-            }
-          },
-          "HitConfig": {
-            "HitAnimation": "Hit",
-            "HitEffectHeight": 0.72
+          "TargetAttachPoint": "Root",
+          "HorizontalAlpha": 0,
+          "LimitTargetRange": {
+            "X": 2,
+            "Y": 0.1
           }
         },
         {
-          "$type": "RPG.GameCore.VCameraConfigChange",
-          "CameraConfig": {
-            "ShakeTemplateName": "Impact_Middle"
-          }
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Figure_01/Eff_Monster_W3_Figure_01_MazeSkill_Down_Lod0.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.AdventureFireProjectile",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "Projectile": {
+            "Behavior": "Static",
+            "MaxLifeTime": 0.6
+          },
+          "OnProjectileLifetimeFinish": [
+            {
+              "$type": "RPG.GameCore.AdventureTriggerAttack",
+              "AttackTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllEnemy"
+              },
+              "AttackRootTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ProjectileHitEntity"
+              },
+              "TriggerBattleDelay": 0.1,
+              "AttackDetectConfig": {
+                "$type": "RPG.GameCore.AdventureAttackDetectCircleConfig",
+                "MaxRadius": 0.4,
+                "FanAngle": 360
+              },
+              "HitConfig": {
+                "HitAnimation": "Hit",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Figure_01/Eff_Monster_W3_Figure_01_DotHit_Lod0.prefab",
+                "HitEffectHeight": 1
+              }
+            }
+          ]
         },
         {
           "$type": "RPG.GameCore.WaitAnimState",

@@ -23,7 +23,7 @@
               "OffsetTargetDistance": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 1.5
+                  "Value": 2
                 }
               },
               "NormalizedTimeStart": {
@@ -35,13 +35,13 @@
               "NormalizedTimeEnd": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.165
+                  "Value": 0.1
                 }
               },
               "MaxMoveDistance": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 6
+                  "Value": 1.5
                 }
               },
               "OnlyMoveForward": true,
@@ -82,7 +82,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.239
+              "Value": 0.228
             }
           }
         },
@@ -105,7 +105,8 @@
           },
           "HitConfig": {
             "HitAnimation": "Hit",
-            "HitEffectHeight": 0.72
+            "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Figure_02/Eff_Monster_W3_Figure_02_MazeSkill01_Hit01.prefab",
+            "HitEffectHeight": 0.9
           }
         },
         {
@@ -127,6 +128,38 @@
               "Value": 1
             }
           }
+        }
+      ]
+    },
+    {
+      "Name": "MazeMonster_W3_Figure_02_FireInHead",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.AddAdventureModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "ADV_Monster_W3_Figure_02_FireInHead"
+        }
+      ]
+    },
+    {
+      "Name": "ManikinMonster_W3_Figure_02_Passive",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.TriggerEffectForUI",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Figure_02/Eff_Monster_W3_Figure_02_Fire_Loop.prefab"
         }
       ]
     }

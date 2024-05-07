@@ -970,7 +970,9 @@
             "Alias": "AbilityTargetEntity"
           },
           "AttackProperty": {
-            "DamageType": "Quantum",
+            "DamageType": {
+              "DamageType": "Quantum"
+            },
             "DamagePercentage": {
               "IsDynamic": true,
               "PostfixExpr": {
@@ -1559,7 +1561,9 @@
             "Alias": "AllEnemy"
           },
           "AttackProperty": {
-            "DamageType": "Quantum",
+            "DamageType": {
+              "DamageType": "Quantum"
+            },
             "DamagePercentage": {
               "IsDynamic": true,
               "PostfixExpr": {
@@ -1612,7 +1616,9 @@
             "Alias": "AllEnemy"
           },
           "AttackProperty": {
-            "DamageType": "Quantum",
+            "DamageType": {
+              "DamageType": "Quantum"
+            },
             "DamagePercentage": {
               "IsDynamic": true,
               "PostfixExpr": {
@@ -1665,7 +1671,9 @@
             "Alias": "AllEnemy"
           },
           "AttackProperty": {
-            "DamageType": "Quantum",
+            "DamageType": {
+              "DamageType": "Quantum"
+            },
             "DamagePercentage": {
               "IsDynamic": true,
               "PostfixExpr": {
@@ -1837,6 +1845,19 @@
     },
     "MMonster_W2_Beast02_00_RLElite_BreakListener": {
       "_CallbackList": [
+        {
+          "Event": "OnBeingLimbo",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Beast02_00/Eff_Monster_W2_Beast02_00_Normal_BackEffect.prefab"
+            }
+          ]
+        },
         {
           "Event": "OnBeingBreak",
           "CallbackConfig": [
@@ -2133,7 +2154,9 @@
       ]
     },
     "Monster_W2_Beast02_00_RLElite_Attack_Sign": {
-      "BehaviorFlagList": [],
+      "BehaviorFlagList": [
+        "RemoveWhenCasterDead"
+      ],
       "UIConfig": {
         "UIEffectPath": "UI/Battle/Widget/TeamInfoStatusEff/TeamInfoStatus_Genki.prefab",
         "UIPosition": "UI_TOP",
@@ -2242,6 +2265,9 @@
       }
     },
     "Monster_W2_Beast02_00_RLElite_Edict": {
+      "BehaviorFlagList": [
+        "RemoveWhenCasterDead"
+      ],
       "_CallbackList": [
         {
           "Event": "OnCreate",

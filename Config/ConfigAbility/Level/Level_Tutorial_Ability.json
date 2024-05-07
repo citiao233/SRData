@@ -2,6 +2,90 @@
   "AbilityList": [
     {
       "Modifiers": {
+        "TutorialAbility_Common_BreakDamageRatio_Modifier": {
+          "_CallbackList": [
+            {
+              "Event": "OnListenCharacterCreate",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareCharacterID",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "TargetCharacterID": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 1206
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "TutorialAbility_Common_BreakDamageRatio_TakenModifier_2"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "TutorialAbility_Common_BreakDamageRatio_TakenModifier_2": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.StackProperty",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "Property": "BreakDamageAddedRatioBase",
+                  "PropertyValue": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        2128130574
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "Stacking": "Replace",
+          "DynamicValues": {
+            "Values": {
+              "1662446059": {},
+              "2128130574": {}
+            }
+          }
+        }
+      },
+      "Name": "TutorialAbility_Common_BreakDamageRatio",
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "TutorialAbility_Common_BreakDamageRatio_Modifier"
+        }
+      ]
+    },
+    {
+      "Modifiers": {
         "TutorialAbility_Hook_SkillEnhance_Modifier": {
           "_CallbackList": [
             {
@@ -4036,9 +4120,6 @@
           ]
         },
         "TutorialAbility_Common_BurnDamage": {
-          "BehaviorFlagList": [
-            "ModifyDotDamageData"
-          ],
           "_CallbackList": [
             {
               "Event": "OnAfterHitAll",
@@ -4046,29 +4127,9 @@
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
                   "Predicate": {
-                    "$type": "RPG.GameCore.ByAny",
-                    "PredicateList": [
-                      {
-                        "$type": "RPG.GameCore.ByAnd",
-                        "PredicateList": [
-                          {
-                            "$type": "RPG.GameCore.ByAttackType",
-                            "AttackTypes": [
-                              "DOT"
-                            ]
-                          },
-                          {
-                            "$type": "RPG.GameCore.ByIsDamageType",
-                            "TargetType": {
-                              "$type": "RPG.GameCore.TargetAlias",
-                              "Alias": "ModifierOwnerEntity"
-                            },
-                            "DamageTypeList": [
-                              "Fire"
-                            ]
-                          }
-                        ]
-                      }
+                    "$type": "RPG.GameCore.ByDamageSourceContainBehaviorFlag",
+                    "BehaviorFlags": [
+                      "STAT_DOT_Burn"
                     ]
                   },
                   "SuccessTaskList": [
@@ -4225,9 +4286,6 @@
           ]
         },
         "TutorialAbility_Common_ElectricDamage_DefaultModifier": {
-          "BehaviorFlagList": [
-            "ModifyDotDamageData"
-          ],
           "_CallbackList": [
             {
               "Event": "OnAfterHitAll",
@@ -4235,29 +4293,9 @@
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
                   "Predicate": {
-                    "$type": "RPG.GameCore.ByAny",
-                    "PredicateList": [
-                      {
-                        "$type": "RPG.GameCore.ByAnd",
-                        "PredicateList": [
-                          {
-                            "$type": "RPG.GameCore.ByAttackType",
-                            "AttackTypes": [
-                              "DOT"
-                            ]
-                          },
-                          {
-                            "$type": "RPG.GameCore.ByIsDamageType",
-                            "TargetType": {
-                              "$type": "RPG.GameCore.TargetAlias",
-                              "Alias": "ModifierOwnerEntity"
-                            },
-                            "DamageTypeList": [
-                              "Thunder"
-                            ]
-                          }
-                        ]
-                      }
+                    "$type": "RPG.GameCore.ByDamageSourceContainBehaviorFlag",
+                    "BehaviorFlags": [
+                      "STAT_DOT_Electric"
                     ]
                   },
                   "SuccessTaskList": [
@@ -4414,9 +4452,6 @@
           ]
         },
         "TutorialAbility_Common_BleedDamage_DefaultModifier": {
-          "BehaviorFlagList": [
-            "ModifyDotDamageData"
-          ],
           "_CallbackList": [
             {
               "Event": "OnAfterHitAll",
@@ -4424,29 +4459,9 @@
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
                   "Predicate": {
-                    "$type": "RPG.GameCore.ByAny",
-                    "PredicateList": [
-                      {
-                        "$type": "RPG.GameCore.ByAnd",
-                        "PredicateList": [
-                          {
-                            "$type": "RPG.GameCore.ByAttackType",
-                            "AttackTypes": [
-                              "DOT"
-                            ]
-                          },
-                          {
-                            "$type": "RPG.GameCore.ByIsDamageType",
-                            "TargetType": {
-                              "$type": "RPG.GameCore.TargetAlias",
-                              "Alias": "ModifierOwnerEntity"
-                            },
-                            "DamageTypeList": [
-                              "Physical"
-                            ]
-                          }
-                        ]
-                      }
+                    "$type": "RPG.GameCore.ByDamageSourceContainBehaviorFlag",
+                    "BehaviorFlags": [
+                      "STAT_DOT_Bleed"
                     ]
                   },
                   "SuccessTaskList": [
@@ -4603,9 +4618,6 @@
           ]
         },
         "TutorialAbility_Common_PoisonDamage_DefaultModifier": {
-          "BehaviorFlagList": [
-            "ModifyDotDamageData"
-          ],
           "_CallbackList": [
             {
               "Event": "OnAfterHitAll",
@@ -4613,29 +4625,9 @@
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
                   "Predicate": {
-                    "$type": "RPG.GameCore.ByAny",
-                    "PredicateList": [
-                      {
-                        "$type": "RPG.GameCore.ByAnd",
-                        "PredicateList": [
-                          {
-                            "$type": "RPG.GameCore.ByAttackType",
-                            "AttackTypes": [
-                              "DOT"
-                            ]
-                          },
-                          {
-                            "$type": "RPG.GameCore.ByIsDamageType",
-                            "TargetType": {
-                              "$type": "RPG.GameCore.TargetAlias",
-                              "Alias": "ModifierOwnerEntity"
-                            },
-                            "DamageTypeList": [
-                              "Wind"
-                            ]
-                          }
-                        ]
-                      }
+                    "$type": "RPG.GameCore.ByDamageSourceContainBehaviorFlag",
+                    "BehaviorFlags": [
+                      "STAT_DOT_Poison"
                     ]
                   },
                   "SuccessTaskList": [
@@ -4950,9 +4942,6 @@
           ]
         },
         "TutorialAbility_Common_EntangleDamage_DefaultModifier": {
-          "BehaviorFlagList": [
-            "ModifyDotDamageData"
-          ],
           "_CallbackList": [
             {
               "Event": "OnAfterHitAll",
@@ -6216,6 +6205,9 @@
             "Alias": "AbilityTargetEntity"
           },
           "AttackProperty": {
+            "DamageType": {
+              "DamageType": "Physical"
+            },
             "DamagePercentage": {
               "IsDynamic": true,
               "PostfixExpr": {
@@ -6926,7 +6918,9 @@
                             "Alias": "AbilityTargetEntity"
                           },
                           "AttackProperty": {
-                            "DamageType": "Wind",
+                            "DamageType": {
+                              "DamageType": "Wind"
+                            },
                             "DamagePercentage": {
                               "IsDynamic": true,
                               "PostfixExpr": {
@@ -7050,7 +7044,9 @@
                             "Alias": "AbilityTargetEntity"
                           },
                           "AttackProperty": {
-                            "DamageType": "Wind",
+                            "DamageType": {
+                              "DamageType": "Wind"
+                            },
                             "DamagePercentage": {
                               "IsDynamic": true,
                               "PostfixExpr": {
@@ -7144,7 +7140,9 @@
                         "Alias": "AbilityTargetEntity"
                       },
                       "AttackProperty": {
-                        "DamageType": "Wind",
+                        "DamageType": {
+                          "DamageType": "Wind"
+                        },
                         "DamagePercentage": {
                           "IsDynamic": true,
                           "PostfixExpr": {
@@ -7193,7 +7191,9 @@
                         "Alias": "AbilityTargetEntity"
                       },
                       "AttackProperty": {
-                        "DamageType": "Wind",
+                        "DamageType": {
+                          "DamageType": "Wind"
+                        },
                         "DamagePercentage": {
                           "IsDynamic": true,
                           "PostfixExpr": {

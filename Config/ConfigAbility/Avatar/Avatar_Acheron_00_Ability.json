@@ -224,7 +224,9 @@
                 "Alias": "AbilityTargetEntity"
               },
               "AttackProperty": {
-                "DamageType": "Thunder",
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -253,7 +255,7 @@
                   }
                 },
                 "HitAnimation": "Hit",
-                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron/Eff_Avatar_Acheron_00_Skill01_Hit_01.prefab",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron_00/Eff_Avatar_Acheron_00_Skill01_Hit_01.prefab",
                 "HitPosHeight": 1.2,
                 "HitAngleHorizontal": -70,
                 "HitAngleVertical": 30
@@ -269,7 +271,9 @@
                 "Alias": "AbilityTargetEntity"
               },
               "AttackProperty": {
-                "DamageType": "Thunder",
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -297,7 +301,7 @@
                   }
                 },
                 "HitAnimation": "Hit",
-                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron/Eff_Avatar_Acheron_00_Skill01_Hit_01.prefab",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron_00/Eff_Avatar_Acheron_00_Skill01_Hit_01.prefab",
                 "HitPosHeight": 1.2,
                 "HitAngleHorizontal": -70,
                 "HitAngleVertical": 30
@@ -440,7 +444,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron/Eff_Avatar_Acheron_00_Skill02_Shadow00.prefab"
+          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron_00/Eff_Avatar_Acheron_00_Skill02_Shadow00.prefab"
         },
         {
           "$type": "RPG.GameCore.GlobalMainIntensityEffect",
@@ -597,7 +601,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron/Eff_Avatar_Acheron_00_Skill02_Shadow00.prefab"
+          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron_00/Eff_Avatar_Acheron_00_Skill02_Shadow00.prefab"
         },
         {
           "$type": "RPG.GameCore.ClearTargetTimeSlow",
@@ -739,7 +743,7 @@
               "Predicate": {
                 "$type": "RPG.GameCore.ByCompareDynamicValue",
                 "DynamicKey": "MDF_Passive_Count",
-                "CompareType": "Less",
+                "CompareType": "LessEqual",
                 "CompareValue": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -766,8 +770,111 @@
                   },
                   "TaskList": [
                     {
-                      "$type": "RPG.GameCore.IncludeTaskListTemplate",
-                      "Name": "Acheron_AddFlower_Skill"
+                      "$type": "RPG.GameCore.Retarget",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AllDarkTeamWithAllUnselectable"
+                      },
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByIsContainModifier",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "ModifierName": "MAvatar_Acheron_00_PassiveFlag01"
+                      },
+                      "MaxNumber": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 5
+                        }
+                      },
+                      "TaskList": [
+                        {
+                          "$type": "RPG.GameCore.SetDynamicValue",
+                          "DynamicKey": "MDF_CurrentCountFlag01",
+                          "Value": {
+                            "IsDynamic": false,
+                            "FixedValue": {
+                              "Value": 0
+                            }
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
+                          "ReadTargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "ModifierName": "MAvatar_Acheron_00_PassiveFlag01",
+                          "Multiplier": {
+                            "IsDynamic": false,
+                            "FixedValue": {
+                              "Value": 1
+                            }
+                          },
+                          "DynamicKey": "MDF_CurrentCountFlag01"
+                        },
+                        {
+                          "$type": "RPG.GameCore.SetDynamicValue",
+                          "DynamicKey": "Skill02_FlowerTotalCount",
+                          "Value": {
+                            "IsDynamic": true,
+                            "PostfixExpr": {
+                              "OpCodes": "AQABAQIK",
+                              "FixedValues": [],
+                              "DynamicHashes": [
+                                -1491737720,
+                                -19650269
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "DynamicKey": "Skill02_FlowerTotalCount",
+                        "CompareType": "Less",
+                        "CompareValue": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              1483210409
+                            ]
+                          }
+                        }
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                          "Name": "Acheron_AddFlower_Skill"
+                        }
+                      ]
+                    },
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "DynamicKey": "Skill02_FlowerTotalCount",
+                      "Value": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 0
+                        }
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "DynamicKey": "MDF_CurrentCountFlag01",
+                      "Value": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 0
+                        }
+                      }
                     }
                   ]
                 }
@@ -805,7 +912,9 @@
                 "Alias": "AbilityTargetEntity"
               },
               "AttackProperty": {
-                "DamageType": "Thunder",
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -834,7 +943,7 @@
                   }
                 },
                 "AttackType": "BPSkill",
-                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron/Eff_Avatar_Acheron_00_Skill02_Hit01.prefab"
+                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron_00/Eff_Avatar_Acheron_00_Skill02_Hit01.prefab"
               },
               "CanTriggerLastKill": true
             },
@@ -845,7 +954,9 @@
                 "Alias": "AbilityTargetAdjoinEntity"
               },
               "AttackProperty": {
-                "DamageType": "Thunder",
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -874,7 +985,7 @@
                   }
                 },
                 "AttackType": "BPSkill",
-                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron/Eff_Avatar_Acheron_00_Skill02_Hit01.prefab"
+                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron_00/Eff_Avatar_Acheron_00_Skill02_Hit01.prefab"
               },
               "CanTriggerLastKill": true
             }
@@ -887,7 +998,9 @@
                 "Alias": "AbilityTargetEntity"
               },
               "AttackProperty": {
-                "DamageType": "Thunder",
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -915,7 +1028,7 @@
                   }
                 },
                 "AttackType": "BPSkill",
-                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron/Eff_Avatar_Acheron_00_Skill02_Hit01.prefab"
+                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron_00/Eff_Avatar_Acheron_00_Skill02_Hit01.prefab"
               },
               "CanTriggerLastKill": true
             },
@@ -926,7 +1039,9 @@
                 "Alias": "AbilityTargetAdjoinEntity"
               },
               "AttackProperty": {
-                "DamageType": "Thunder",
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -954,7 +1069,7 @@
                   }
                 },
                 "AttackType": "BPSkill",
-                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron/Eff_Avatar_Acheron_00_Skill02_Hit01.prefab"
+                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron_00/Eff_Avatar_Acheron_00_Skill02_Hit01.prefab"
               },
               "CanTriggerLastKill": true
             }
@@ -990,7 +1105,9 @@
                 "Alias": "AbilityTargetEntity"
               },
               "AttackProperty": {
-                "DamageType": "Thunder",
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -1030,7 +1147,9 @@
                 "Alias": "AbilityTargetAdjoinEntity"
               },
               "AttackProperty": {
-                "DamageType": "Thunder",
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -1071,7 +1190,9 @@
                 "Alias": "AbilityTargetEntity"
               },
               "AttackProperty": {
-                "DamageType": "Thunder",
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -1110,7 +1231,9 @@
                 "Alias": "AbilityTargetAdjoinEntity"
               },
               "AttackProperty": {
-                "DamageType": "Thunder",
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -1173,7 +1296,9 @@
                 "Alias": "AbilityTargetEntity"
               },
               "AttackProperty": {
-                "DamageType": "Thunder",
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -1213,7 +1338,9 @@
                 "Alias": "AbilityTargetAdjoinEntity"
               },
               "AttackProperty": {
-                "DamageType": "Thunder",
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -1254,7 +1381,9 @@
                 "Alias": "AbilityTargetEntity"
               },
               "AttackProperty": {
-                "DamageType": "Thunder",
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -1293,7 +1422,9 @@
                 "Alias": "AbilityTargetAdjoinEntity"
               },
               "AttackProperty": {
-                "DamageType": "Thunder",
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -1356,7 +1487,9 @@
                 "Alias": "AbilityTargetEntity"
               },
               "AttackProperty": {
-                "DamageType": "Thunder",
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -1404,7 +1537,9 @@
                 "Alias": "AbilityTargetAdjoinEntity"
               },
               "AttackProperty": {
-                "DamageType": "Thunder",
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -1454,7 +1589,9 @@
                 "Alias": "AbilityTargetEntity"
               },
               "AttackProperty": {
-                "DamageType": "Thunder",
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -1501,7 +1638,9 @@
                 "Alias": "AbilityTargetAdjoinEntity"
               },
               "AttackProperty": {
-                "DamageType": "Thunder",
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -1908,34 +2047,12 @@
       },
       "OnStart": [
         {
-          "$type": "RPG.GameCore.ModifySpecialSP",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "ModifierOwnerEntity"
-          },
-          "SetValue": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0
-            }
-          },
-          "IgnoreBlock": true
-        },
-        {
           "$type": "RPG.GameCore.RemoveModifier",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
           "ModifierName": "MAvatar_Acheron_00_Passive01Modifier"
-        },
-        {
-          "$type": "RPG.GameCore.RemoveModifier",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "ModifierName": "MAvatar_Acheron_00_Skill03_Special"
         },
         {
           "$type": "RPG.GameCore.RemoveModifier",
@@ -1952,15 +2069,6 @@
             "Alias": "Caster"
           },
           "ModifierName": "MAvatar_Acheron_00_SkillChange02"
-        },
-        {
-          "$type": "RPG.GameCore.AddModifier",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "ModifierName": "MAvatar_Acheron_00_Skill03_Special",
-          "LifeStepImmediately": true
         },
         {
           "$type": "RPG.GameCore.WaitAnimState",
@@ -2397,7 +2505,9 @@
                 "Alias": "AbilityTargetEntity"
               },
               "AttackProperty": {
-                "DamageType": "Thunder",
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -2433,7 +2543,7 @@
                 },
                 "AttackType": "Ultra",
                 "HitAnimation": "Hit",
-                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron/Eff_Avatar_Acheron_00_Skill03_Hit_01.prefab",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron_00/Eff_Avatar_Acheron_00_Skill03_Hit_01.prefab",
                 "HitEffectHeight": 0.65,
                 "HitPosHeight": 1.65,
                 "HitAngleHorizontal": -70,
@@ -2450,7 +2560,9 @@
                 "Alias": "AbilityTargetEntity"
               },
               "AttackProperty": {
-                "DamageType": "Thunder",
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -2485,7 +2597,7 @@
                 },
                 "AttackType": "Ultra",
                 "HitAnimation": "Hit",
-                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron/Eff_Avatar_Acheron_00_Skill03_Hit_01.prefab",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron_00/Eff_Avatar_Acheron_00_Skill03_Hit_01.prefab",
                 "HitEffectHeight": 0.65,
                 "HitPosHeight": 1.65,
                 "HitAngleHorizontal": -70,
@@ -2515,7 +2627,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "DarkTeamEntity"
           },
-          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron/Eff_Avatar_Acheron_00_Skill03_Hit_L02.prefab"
+          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron_00/Eff_Avatar_Acheron_00_Skill03_Hit_L02.prefab"
         },
         {
           "$type": "RPG.GameCore.PredicateTaskList",
@@ -2533,7 +2645,9 @@
                 "Alias": "AbilityTargetEntity"
               },
               "AttackProperty": {
-                "DamageType": "Thunder",
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -2569,7 +2683,7 @@
                 },
                 "AttackType": "Ultra",
                 "HitAnimation": "Hit",
-                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron/Eff_Avatar_Acheron_00_Skill03_Hit_02.prefab",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron_00/Eff_Avatar_Acheron_00_Skill03_Hit_02.prefab",
                 "HitEffectHeight": 0.75,
                 "HitPosHeight": 1.65,
                 "HitAngleHorizontal": -70,
@@ -2586,7 +2700,9 @@
                 "Alias": "AbilityTargetEntity"
               },
               "AttackProperty": {
-                "DamageType": "Thunder",
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -2621,7 +2737,7 @@
                 },
                 "AttackType": "Ultra",
                 "HitAnimation": "Hit",
-                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron/Eff_Avatar_Acheron_00_Skill03_Hit_02.prefab",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron_00/Eff_Avatar_Acheron_00_Skill03_Hit_02.prefab",
                 "HitEffectHeight": 0.75,
                 "HitPosHeight": 1.65,
                 "HitAngleHorizontal": -70,
@@ -3096,7 +3212,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron/Eff_Avatar_Acheron_00_Skill03_Strart02_Camera.prefab"
+          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron_00/Eff_Avatar_Acheron_00_Skill03_Strart02_Camera.prefab"
         },
         {
           "$type": "RPG.GameCore.ClearTargetTimeSlow",
@@ -3165,7 +3281,9 @@
                 "Alias": "AbilityTargetEntity"
               },
               "AttackProperty": {
-                "DamageType": "Thunder",
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -3201,7 +3319,7 @@
                 },
                 "AttackType": "Ultra",
                 "HitAnimation": "Hit_H",
-                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron/Eff_Avatar_Acheron_00_Skill03_Hit_A01.prefab",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron_00/Eff_Avatar_Acheron_00_Skill03_Hit_A01.prefab",
                 "HitEffectHeight": 1,
                 "HitPosHeight": 1
               },
@@ -3216,7 +3334,9 @@
                 "Alias": "AbilityTargetEntity"
               },
               "AttackProperty": {
-                "DamageType": "Thunder",
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -3251,7 +3371,7 @@
                 },
                 "AttackType": "Ultra",
                 "HitAnimation": "Hit_H",
-                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron/Eff_Avatar_Acheron_00_Skill03_Hit_A01.prefab",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron_00/Eff_Avatar_Acheron_00_Skill03_Hit_A01.prefab",
                 "HitEffectHeight": 1,
                 "HitPosHeight": 1
               },
@@ -3279,7 +3399,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "DarkTeamEntity"
           },
-          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron/Eff_Avatar_Acheron_00_Skill03_Hit_L04.prefab"
+          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron_00/Eff_Avatar_Acheron_00_Skill03_Hit_L04.prefab"
         },
         {
           "$type": "RPG.GameCore.PredicateTaskList",
@@ -3297,7 +3417,9 @@
                 "Alias": "AbilityTargetEntity"
               },
               "AttackProperty": {
-                "DamageType": "Thunder",
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -3327,7 +3449,7 @@
                 },
                 "AttackType": "Ultra",
                 "HitAnimation": "Hit_H",
-                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron/Eff_Avatar_Acheron_00_Skill03_Hit_03.prefab",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron_00/Eff_Avatar_Acheron_00_Skill03_Hit_03.prefab",
                 "HitEffectHeight": 1,
                 "HitPosHeight": 1
               },
@@ -3342,7 +3464,9 @@
                 "Alias": "AbilityTargetEntity"
               },
               "AttackProperty": {
-                "DamageType": "Thunder",
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -3371,7 +3495,7 @@
                 },
                 "AttackType": "Ultra",
                 "HitAnimation": "Hit_H",
-                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron/Eff_Avatar_Acheron_00_Skill03_Hit_03.prefab",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron_00/Eff_Avatar_Acheron_00_Skill03_Hit_03.prefab",
                 "HitEffectHeight": 1,
                 "HitPosHeight": 1
               },
@@ -3409,7 +3533,9 @@
                 "Alias": "AbilityTargetEntity"
               },
               "AttackProperty": {
-                "DamageType": "Thunder",
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -3439,7 +3565,7 @@
                 },
                 "AttackType": "Ultra",
                 "HitAnimation": "Hit_H",
-                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron/Eff_Avatar_Acheron_00_Skill03_Hit_A02.prefab",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron_00/Eff_Avatar_Acheron_00_Skill03_Hit_A02.prefab",
                 "HitEffectHeight": 1,
                 "HitPosHeight": 1
               },
@@ -3454,7 +3580,9 @@
                 "Alias": "AbilityTargetEntity"
               },
               "AttackProperty": {
-                "DamageType": "Thunder",
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -3483,7 +3611,7 @@
                 },
                 "AttackType": "Ultra",
                 "HitAnimation": "Hit_H",
-                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron/Eff_Avatar_Acheron_00_Skill03_Hit_A02.prefab",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron_00/Eff_Avatar_Acheron_00_Skill03_Hit_A02.prefab",
                 "HitEffectHeight": 1,
                 "HitPosHeight": 1
               },
@@ -3931,7 +4059,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron/Eff_Avatar_Acheron_00_Skill03_Strart02_Camera.prefab"
+          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron_00/Eff_Avatar_Acheron_00_Skill03_Strart02_Camera.prefab"
         },
         {
           "$type": "RPG.GameCore.ClearTargetTimeSlow",
@@ -3990,7 +4118,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "DarkTeamEntity"
           },
-          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron/Eff_Avatar_Acheron_00_Skill03_Hit_L05.prefab"
+          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron_00/Eff_Avatar_Acheron_00_Skill03_Hit_L05.prefab"
         },
         {
           "$type": "RPG.GameCore.PredicateTaskList",
@@ -4008,7 +4136,9 @@
                 "Alias": "AbilityTargetEntity"
               },
               "AttackProperty": {
-                "DamageType": "Thunder",
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -4032,7 +4162,7 @@
                 },
                 "AttackType": "Ultra",
                 "HitAnimation": "Hit_H",
-                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron/Eff_Avatar_Acheron_00_Skill03_Hit_06.prefab",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron_00/Eff_Avatar_Acheron_00_Skill03_Hit_06.prefab",
                 "HitPosHeight": 1.6,
                 "HitAngleHorizontal": 45,
                 "HitAngleVertical": -90
@@ -4048,7 +4178,9 @@
                 "Alias": "AbilityTargetEntity"
               },
               "AttackProperty": {
-                "DamageType": "Thunder",
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -4071,7 +4203,7 @@
                 },
                 "AttackType": "Ultra",
                 "HitAnimation": "Hit_H",
-                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron/Eff_Avatar_Acheron_00_Skill03_Hit_06.prefab",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron_00/Eff_Avatar_Acheron_00_Skill03_Hit_06.prefab",
                 "HitPosHeight": 1.6,
                 "HitAngleHorizontal": 45,
                 "HitAngleVertical": -90
@@ -4414,7 +4546,9 @@
                 "Alias": "AllEnemy"
               },
               "AttackProperty": {
-                "DamageType": "Thunder",
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -4444,7 +4578,7 @@
                 },
                 "AttackType": "Ultra",
                 "HitAnimation": "Hit_H",
-                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron/Eff_Avatar_Acheron_00_Skill03_Hit_07.prefab",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron_00/Eff_Avatar_Acheron_00_Skill03_Hit_07.prefab",
                 "HitEffectHeight": 1,
                 "HitPosHeight": 1.6,
                 "HitAngleHorizontal": 45,
@@ -4461,7 +4595,9 @@
                 "Alias": "AllEnemy"
               },
               "AttackProperty": {
-                "DamageType": "Thunder",
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -4490,7 +4626,7 @@
                 },
                 "AttackType": "Ultra",
                 "HitAnimation": "Hit_H",
-                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron/Eff_Avatar_Acheron_00_Skill03_Hit_07.prefab",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron_00/Eff_Avatar_Acheron_00_Skill03_Hit_07.prefab",
                 "HitEffectHeight": 1,
                 "HitPosHeight": 1.6,
                 "HitAngleHorizontal": 45,
@@ -4560,7 +4696,9 @@
                 "Alias": "AllEnemy"
               },
               "AttackProperty": {
-                "DamageType": "Thunder",
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -4606,7 +4744,9 @@
                 "Alias": "AllEnemy"
               },
               "AttackProperty": {
-                "DamageType": "Thunder",
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -4723,7 +4863,9 @@
                             "Alias": "ParamEntity"
                           },
                           "AttackProperty": {
-                            "DamageType": "Thunder",
+                            "DamageType": {
+                              "DamageType": "Thunder"
+                            },
                             "DamagePercentage": {
                               "IsDynamic": true,
                               "PostfixExpr": {
@@ -4753,7 +4895,9 @@
                             "Alias": "ParamEntity"
                           },
                           "AttackProperty": {
-                            "DamageType": "Thunder",
+                            "DamageType": {
+                              "DamageType": "Thunder"
+                            },
                             "DamagePercentage": {
                               "IsDynamic": true,
                               "PostfixExpr": {
@@ -5094,6 +5238,120 @@
               ]
             },
             {
+              "Event": "OnListenTurnEnd",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAny",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "DynamicKey": "MDF_SkillUseFlag",
+                        "CompareType": "Equal",
+                        "CompareValue": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 1
+                          }
+                        }
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "DynamicKey": "MDF_SkillUseDubuff",
+                        "CompareType": "Equal",
+                        "CompareValue": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 1
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "DynamicKey": "MDF_SkillUseFlag",
+                      "Value": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 0
+                        }
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "DynamicKey": "MDF_SkillUseDubuff",
+                      "Value": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 0
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Event": "OnListenTurnPhase2Begin",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAny",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "DynamicKey": "MDF_SkillUseFlag",
+                        "CompareType": "Equal",
+                        "CompareValue": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 1
+                          }
+                        }
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "DynamicKey": "MDF_SkillUseDubuff",
+                        "CompareType": "Equal",
+                        "CompareValue": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 1
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "DynamicKey": "MDF_SkillUseFlag",
+                      "Value": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 0
+                        }
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "DynamicKey": "MDF_SkillUseDubuff",
+                      "Value": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 0
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
               "Event": "OnStack",
               "CallbackConfig": []
             },
@@ -5428,6 +5686,14 @@
                                 }
                               },
                               "IgnoreBlock": true
+                            },
+                            {
+                              "$type": "RPG.GameCore.AddModifier",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "Caster"
+                              },
+                              "ModifierName": "MAvatar_Acheron_00_RuondDeBuffCD"
                             }
                           ]
                         }
@@ -5724,14 +5990,10 @@
                                 "Team": "TeamNeutral"
                               },
                               {
-                                "$type": "RPG.GameCore.ByCompareTarget",
+                                "$type": "RPG.GameCore.ByIsBattleEventEntity",
                                 "TargetType": {
                                   "$type": "RPG.GameCore.TargetAlias",
                                   "Alias": "ParamEntity"
-                                },
-                                "CompareType": {
-                                  "$type": "RPG.GameCore.TargetAlias",
-                                  "Alias": "BattleEventEntityList"
                                 }
                               }
                             ]
@@ -5777,6 +6039,96 @@
                           "Value": 1
                         }
                       }
+                    },
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByAnd",
+                        "PredicateList": [
+                          {
+                            "$type": "RPG.GameCore.ByTargetTeam",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "ParamEntity"
+                            },
+                            "Team": "TeamLight"
+                          },
+                          {
+                            "$type": "RPG.GameCore.ByCurrentSkillType",
+                            "SkillType": "Ultra"
+                          }
+                        ]
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                          "Name": "Acheron_LimboTransfer"
+                        }
+                      ]
+                    },
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByAnd",
+                        "PredicateList": [
+                          {
+                            "$type": "RPG.GameCore.ByCompareTarget",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "ParamEntity"
+                            },
+                            "CompareType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "Caster"
+                            }
+                          },
+                          {
+                            "$type": "RPG.GameCore.ByCurrentSkillType",
+                            "SkillType": "Ultra"
+                          }
+                        ]
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.ModifySpecialSP",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "Caster"
+                          },
+                          "SetValue": {
+                            "IsDynamic": false,
+                            "FixedValue": {
+                              "Value": 0
+                            }
+                          },
+                          "IgnoreBlock": true
+                        },
+                        {
+                          "$type": "RPG.GameCore.RemoveModifier",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "Caster"
+                          },
+                          "ModifierName": "MAvatar_Acheron_00_Passive01Modifier"
+                        },
+                        {
+                          "$type": "RPG.GameCore.RemoveModifier",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "Caster"
+                          },
+                          "ModifierName": "MAvatar_Acheron_00_Skill03_Special"
+                        },
+                        {
+                          "$type": "RPG.GameCore.AddModifier",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "Caster"
+                          },
+                          "ModifierName": "MAvatar_Acheron_00_Skill03_Special",
+                          "LifeStepImmediately": true
+                        }
+                      ]
                     }
                   ]
                 },
@@ -6383,7 +6735,8 @@
                             ]
                           }
                         }
-                      }
+                      },
+                      "ShowUIMessageDelayTime": 1
                     }
                   ]
                 }
@@ -6681,7 +7034,7 @@
                     "$type": "RPG.GameCore.TargetAlias",
                     "Alias": "DarkTeamEntity"
                   },
-                  "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron/Eff_Avatar_Acheron_00_MazeSkill02_Hit04_01.prefab"
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron_00/Eff_Avatar_Acheron_00_MazeSkill02_Hit04_01.prefab"
                 },
                 {
                   "$type": "RPG.GameCore.WaitSecond",
@@ -6740,7 +7093,9 @@
                         "Alias": "AllEnemy"
                       },
                       "AttackProperty": {
-                        "DamageType": "Thunder",
+                        "DamageType": {
+                          "DamageType": "Thunder"
+                        },
                         "DamagePercentage": {
                           "IsDynamic": true,
                           "PostfixExpr": {
@@ -6768,7 +7123,7 @@
                           }
                         },
                         "AttackType": "Maze",
-                        "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron/Eff_Avatar_Acheron_00_Skill03_AOEHit_02.prefab",
+                        "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron_00/Eff_Avatar_Acheron_00_Skill03_AOEHit_02.prefab",
                         "HitEffectHeight": 1,
                         "HitPosHeight": 1.2
                       },
@@ -6788,7 +7143,9 @@
                         "Alias": "AllEnemy"
                       },
                       "AttackProperty": {
-                        "DamageType": "Thunder",
+                        "DamageType": {
+                          "DamageType": "Thunder"
+                        },
                         "DamagePercentage": {
                           "IsDynamic": true,
                           "PostfixExpr": {
@@ -6806,7 +7163,7 @@
                           }
                         },
                         "AttackType": "Maze",
-                        "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron/Eff_Avatar_Acheron_00_Skill03_AOEHit_02.prefab",
+                        "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron_00/Eff_Avatar_Acheron_00_Skill03_AOEHit_02.prefab",
                         "HitEffectHeight": 1,
                         "HitPosHeight": 1.2
                       },
@@ -9503,7 +9860,7 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "Caster"
               },
-              "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron/Eff_Avatar_Acheron_00_Skill03_AOEHit_03.prefab"
+              "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron_00/Eff_Avatar_Acheron_00_Skill03_AOEHit_03.prefab"
             }
           ],
           "FailedTaskList": [
@@ -9513,7 +9870,7 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "AbilityTargetEntity"
               },
-              "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron/Eff_Avatar_Acheron_00_Skill03_AOEHit_01.prefab"
+              "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron_00/Eff_Avatar_Acheron_00_Skill03_AOEHit_01.prefab"
             }
           ]
         },
@@ -9533,7 +9890,9 @@
                 "Alias": "AllEnemy"
               },
               "AttackProperty": {
-                "DamageType": "Thunder",
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -9564,7 +9923,7 @@
                 },
                 "AttackType": "Ultra",
                 "HitAnimation": "Hit_H",
-                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron/Eff_Avatar_Acheron_00_Skill03_AOEHit_02.prefab"
+                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron_00/Eff_Avatar_Acheron_00_Skill03_AOEHit_02.prefab"
               },
               "CanTriggerLastKill": true
             }
@@ -9577,7 +9936,9 @@
                 "Alias": "AllEnemy"
               },
               "AttackProperty": {
-                "DamageType": "Thunder",
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -9607,7 +9968,7 @@
                 },
                 "AttackType": "Ultra",
                 "HitAnimation": "Hit_H",
-                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron/Eff_Avatar_Acheron_00_Skill03_AOEHit_02.prefab"
+                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Acheron_00/Eff_Avatar_Acheron_00_Skill03_AOEHit_02.prefab"
               },
               "CanTriggerLastKill": true
             }

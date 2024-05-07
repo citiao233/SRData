@@ -67,7 +67,7 @@
               "NormalizedTimeEnd": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.04
+                  "Value": 0.037
                 }
               }
             },
@@ -113,7 +113,7 @@
                 "FlySpeed": 200,
                 "EnableRayCast": true,
                 "Gravity": 0,
-                "MaxLifeTime": 0.2,
+                "MaxLifeTime": 0.075,
                 "AttachPoint": "Muzzle",
                 "AttachOffset": {
                   "X": 0,
@@ -121,8 +121,8 @@
                   "Z": 0.5
                 },
                 "TargetAttachPoint": "Root",
-                "FlyEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Boothill/Eff_Avatar_Boothill_00_MazeAttack_Bullet_01.prefab",
-                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Boothill/Eff_Avatar_Boothill_00_MazeAttack_Hit01.prefab"
+                "FlyEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Boothill_00/Eff_Avatar_Boothill_00_MazeAttack_Bullet_01.prefab",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Boothill_00/Eff_Avatar_Boothill_00_MazeAttack_Hit01.prefab"
               },
               "OnProjectileHit": [
                 {
@@ -216,7 +216,7 @@
               "NormalizedTimeEnd": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.04
+                  "Value": 0.037
                 }
               }
             },
@@ -245,7 +245,7 @@
                 "FlySpeed": 200,
                 "EnableRayCast": true,
                 "Gravity": 0,
-                "MaxLifeTime": 0.2,
+                "MaxLifeTime": 0.075,
                 "AttachPoint": "Muzzle",
                 "AttachOffset": {
                   "X": 0,
@@ -253,8 +253,8 @@
                   "Z": 0.5
                 },
                 "TargetAttachPoint": "Root",
-                "FlyEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Boothill/Eff_Avatar_Boothill_00_MazeAttack_Bullet_01.prefab",
-                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Boothill/Eff_Avatar_Boothill_00_MazeAttack_Hit01.prefab"
+                "FlyEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Boothill_00/Eff_Avatar_Boothill_00_MazeAttack_Bullet_01.prefab",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Boothill_00/Eff_Avatar_Boothill_00_MazeAttack_Hit01.prefab"
               },
               "OnProjectileHit": [
                 {
@@ -457,6 +457,12 @@
             "FixedValue": {
               "Value": -1
             }
+          },
+          "Count": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
           }
         },
         {
@@ -475,6 +481,36 @@
               "Value": 0.15
             }
           }
+        }
+      ]
+    },
+    {
+      "Name": "LocalPlayer_Boothill_00_Passive",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareCarryMazebuff",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "BuffID": 131503,
+            "Inverse": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.AddMazeBuff",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "ID": 131503
+            }
+          ]
         }
       ]
     }

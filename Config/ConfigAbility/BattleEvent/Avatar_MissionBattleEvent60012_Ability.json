@@ -255,6 +255,59 @@
       },
       "OnStart": [
         {
+          "$type": "RPG.GameCore.SetDynamicValue",
+          "DynamicKey": "UseTimes",
+          "Value": {
+            "IsDynamic": true,
+            "PostfixExpr": {
+              "OpCodes": "AQAAAAIK",
+              "FixedValues": [
+                {
+                  "Value": 1
+                }
+              ],
+              "DynamicHashes": [
+                -331181979
+              ]
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareDynamicValue",
+            "DynamicKey": "UseTimes",
+            "CompareType": "LessEqual",
+            "CompareValue": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 5
+              }
+            }
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.SetSimulationSpeedEnable"
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.LevelAudioState",
+          "GroupName": "State_Battle_Monster_W3_Sunday_00_BE",
+          "StateName": {
+            "Value": "BE_AS"
+          },
+          "SaveToCustomString": true
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllEnemy"
+          },
+          "ModifierName": "MMonster_W3_Sunday_00_DuringBE"
+        },
+        {
           "$type": "RPG.GameCore.ShowBattleUI"
         },
         {
@@ -264,12 +317,114 @@
           }
         },
         {
+          "$type": "RPG.GameCore.RemoveModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllEnemy"
+          },
+          "ModifierName": "MMonster_W3_Sunday_00_P2BELockHP_2"
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByAnd",
+            "PredicateList": [
+              {
+                "$type": "RPG.GameCore.ByCompareCharacterNumber",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "AllDarkTeam"
+                },
+                "Predicate": {
+                  "$type": "RPG.GameCore.ByCompareMonsterID",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "TargetMonsterID": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 3025010
+                    }
+                  }
+                },
+                "CompareType": "GreaterEqual",
+                "CompareNumber": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 1
+                  }
+                }
+              },
+              {
+                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                "DynamicKey": "BGMChangeFlag",
+                "CompareType": "Equal",
+                "CompareValue": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 0
+                  }
+                }
+              }
+            ]
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValue",
+              "DynamicKey": "BGMChangeFlag",
+              "Value": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.Retarget",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllDarkTeam"
+          },
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareMonsterID",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "ParamEntity"
+            },
+            "TargetMonsterID": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 3025010
+              }
+            }
+          },
+          "MaxNumber": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          },
+          "TaskList": [
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ParamEntity"
+              },
+              "ModifierName": "MMonster_W3_Sunday_00_P2SongState"
+            }
+          ]
+        },
+        {
           "$type": "RPG.GameCore.WaitAnimState",
           "AnimStateName": "Perform_BattleEvent60012",
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.637362
+              "Value": 0.6351
             }
           }
         },
@@ -310,7 +465,9 @@
             "Alias": "AllEnemy"
           },
           "AttackProperty": {
-            "DamageType": "Imaginary",
+            "DamageType": {
+              "DamageType": "Imaginary"
+            },
             "FormulaType": "ByMaxHP",
             "DamagePercentage": {
               "IsDynamic": true,
@@ -339,10 +496,13 @@
                 "Value": 0.2
               }
             },
-            "StanceDamageType": "Imaginary",
+            "StanceDamageType": {
+              "DamageType": "Imaginary"
+            },
             "AttackType": "Ultra",
             "HitAnimation": "Hit_H"
           },
+          "SpecialHitSoundEvent": "Ev_Sfx_Eff_Sunday_00_BattleEvent_60012_Hit",
           "CanTriggerLastKill": true,
           "DisplayData": {
             "UIMessageHeight": 6,
@@ -369,7 +529,9 @@
             "Alias": "AllEnemy"
           },
           "AttackProperty": {
-            "DamageType": "Imaginary",
+            "DamageType": {
+              "DamageType": "Imaginary"
+            },
             "FormulaType": "ByMaxHP",
             "DamagePercentage": {
               "IsDynamic": true,
@@ -398,10 +560,13 @@
                 "Value": 0.2
               }
             },
-            "StanceDamageType": "Imaginary",
+            "StanceDamageType": {
+              "DamageType": "Imaginary"
+            },
             "AttackType": "Ultra",
             "HitAnimation": "Hit_H"
           },
+          "SpecialHitSoundEvent": "Ev_Sfx_Eff_Sunday_00_BattleEvent_60012_Hit",
           "CanTriggerLastKill": true,
           "DisplayData": {
             "UIMessageHeight": 6,
@@ -428,7 +593,9 @@
             "Alias": "AllEnemy"
           },
           "AttackProperty": {
-            "DamageType": "Imaginary",
+            "DamageType": {
+              "DamageType": "Imaginary"
+            },
             "FormulaType": "ByMaxHP",
             "DamagePercentage": {
               "IsDynamic": true,
@@ -457,10 +624,13 @@
                 "Value": 0.2
               }
             },
-            "StanceDamageType": "Imaginary",
+            "StanceDamageType": {
+              "DamageType": "Imaginary"
+            },
             "AttackType": "Ultra",
             "HitAnimation": "Hit_H"
           },
+          "SpecialHitSoundEvent": "Ev_Sfx_Eff_Sunday_00_BattleEvent_60012_Hit",
           "CanTriggerLastKill": true,
           "DisplayData": {
             "UIMessageHeight": 6,
@@ -487,7 +657,9 @@
             "Alias": "AllEnemy"
           },
           "AttackProperty": {
-            "DamageType": "Imaginary",
+            "DamageType": {
+              "DamageType": "Imaginary"
+            },
             "FormulaType": "ByMaxHP",
             "DamagePercentage": {
               "IsDynamic": true,
@@ -516,10 +688,13 @@
                 "Value": 0.2
               }
             },
-            "StanceDamageType": "Imaginary",
+            "StanceDamageType": {
+              "DamageType": "Imaginary"
+            },
             "AttackType": "Ultra",
             "HitAnimation": "Hit_H"
           },
+          "SpecialHitSoundEvent": "Ev_Sfx_Eff_Sunday_00_BattleEvent_60012_Hit",
           "CanTriggerLastKill": true,
           "DisplayData": {
             "UIMessageHeight": 6,
@@ -546,7 +721,9 @@
             "Alias": "AllEnemy"
           },
           "AttackProperty": {
-            "DamageType": "Imaginary",
+            "DamageType": {
+              "DamageType": "Imaginary"
+            },
             "FormulaType": "ByMaxHP",
             "DamagePercentage": {
               "IsDynamic": true,
@@ -575,10 +752,13 @@
                 "Value": 0.2
               }
             },
-            "StanceDamageType": "Imaginary",
+            "StanceDamageType": {
+              "DamageType": "Imaginary"
+            },
             "AttackType": "Ultra",
             "HitAnimation": "Hit_H"
           },
+          "SpecialHitSoundEvent": "Ev_Sfx_Eff_Sunday_00_BattleEvent_60012_Hit",
           "CanTriggerLastKill": true,
           "DisplayData": {
             "UIMessageHeight": 6,
@@ -605,14 +785,29 @@
           }
         },
         {
-          "$type": "RPG.GameCore.WaitAnimState",
-          "AnimStateName": "Perform_BattleEvent60012",
-          "NormalizedTimeEnd": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0.99
-            }
-          }
+          "$type": "RPG.GameCore.WaitTimelineFinish",
+          "TimelineName": "Monster_W3_Sunday_00_BattleEvent_60012_Timeline",
+          "IgnoreWarning": true
+        },
+        {
+          "$type": "RPG.GameCore.SetEntityVisible",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "Visible": true
+        },
+        {
+          "$type": "RPG.GameCore.RemoveModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllEnemy"
+          },
+          "ModifierName": "MMonster_W3_Sunday_00_DuringBE"
+        },
+        {
+          "$type": "RPG.GameCore.SetSimulationSpeedEnable",
+          "Enable": true
         },
         {
           "$type": "RPG.GameCore.SkillPerformFinish"
