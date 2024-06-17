@@ -2,6 +2,32 @@
   "OnInitSequece": [],
   "OnStartSequece": [
     {
+      "IsLoop": true,
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitGroupEvent",
+          "EventName": {
+            "Value": "EnterArea_LocalGroup"
+          },
+          "OnEvent": [
+            {
+              "$type": "RPG.GameCore.PlayMissionTalk",
+              "SimpleTalkList": [
+                {
+                  "TalkSentenceID": 103309905,
+                  "ProtectTime": 2
+                }
+              ]
+            },
+            {
+              "$type": "RPG.GameCore.ClientFinishMission",
+              "SubmissionID": 103300104
+            }
+          ]
+        }
+      ]
+    },
+    {
       "TaskList": [
         {
           "$type": "RPG.GameCore.CollectDataConditions",
@@ -38,34 +64,6 @@
             "SubMissionState": "Started"
           },
           "DisableAfterTriggered": true
-        }
-      ]
-    },
-    {
-      "IsLoop": true,
-      "TaskList": [
-        {
-          "$type": "RPG.GameCore.WaitGroupEvent",
-          "EventName": {
-            "Value": "EnterArea_LocalGroup"
-          },
-          "OnEvent": [
-            {
-              "$type": "RPG.GameCore.PlayMissionTalk",
-              "SimpleTalkList": [
-                {
-                  "TalkSentenceID": 103309905,
-                  "ProtectTime": 2
-                }
-              ]
-            },
-            {
-              "$type": "RPG.GameCore.TriggerCustomString",
-              "CustomString": {
-                "Value": "Talk_103300104"
-              }
-            }
-          ]
         }
       ]
     },

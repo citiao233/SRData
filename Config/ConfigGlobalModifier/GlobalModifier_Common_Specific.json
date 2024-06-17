@@ -21,6 +21,7 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "ModifierOwnerEntity"
               },
+              "AliveOnly": false,
               "ModifierName": "StanceBreakState_Effect"
             },
             {
@@ -166,14 +167,60 @@
                   ],
                   "FailedTaskList": [
                     {
-                      "$type": "RPG.GameCore.ModifierAttachEffect",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "ModifierOwnerEntity"
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByAnd",
+                        "PredicateList": [
+                          {
+                            "$type": "RPG.GameCore.ByCompareCharacterID",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "CurrentTurnActionEntity"
+                            },
+                            "TargetCharacterID": {
+                              "IsDynamic": false,
+                              "FixedValue": {
+                                "Value": 1310
+                              }
+                            }
+                          },
+                          {
+                            "$type": "RPG.GameCore.ByCompareCharacterID",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "DamageAttackerEntity"
+                            },
+                            "TargetCharacterID": {
+                              "IsDynamic": false,
+                              "FixedValue": {
+                                "Value": 1303
+                              }
+                            }
+                          }
+                        ]
                       },
-                      "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_StanceBreak_Common_Ice.prefab",
-                      "MinMutexTime": -1,
-                      "MutexType": "Entity"
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Sam_00/Eff_Avatar_Sam_00_Common_Fire.prefab"
+                        }
+                      ],
+                      "FailedTaskList": [
+                        {
+                          "$type": "RPG.GameCore.ModifierAttachEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_StanceBreak_Common_Ice.prefab",
+                          "MinMutexTime": -1,
+                          "MutexType": "Entity"
+                        }
+                      ]
                     }
                   ]
                 }
@@ -276,12 +323,40 @@
                       "MutexType": "Entity"
                     },
                     {
-                      "$type": "RPG.GameCore.TriggerEffect",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "ModifierOwnerEntity"
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareCharacterID",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "DamageAttackerEntity"
+                        },
+                        "TargetCharacterID": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 1310
+                          }
+                        }
                       },
-                      "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_StanceBreak_Common_Fire.prefab"
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Sam_00/Eff_Avatar_Sam_00_Common_Fire.prefab"
+                        }
+                      ],
+                      "FailedTaskList": [
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_StanceBreak_Common_Fire.prefab"
+                        }
+                      ]
                     }
                   ]
                 }
@@ -989,7 +1064,9 @@
                   }
                 },
                 "AttackType": "DOT",
-                "DamageTag": "Burn"
+                "DamageTag": [
+                  "Burn"
+                ]
               },
               "DisplayData": {
                 "AttachPoint": "SelectRoot"
@@ -1065,7 +1142,9 @@
                   }
                 },
                 "AttackType": "DOT",
-                "DamageTag": "Burn"
+                "DamageTag": [
+                  "Burn"
+                ]
               },
               "DisplayData": {
                 "AttachPoint": "SelectRoot"

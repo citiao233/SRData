@@ -489,16 +489,8 @@
       },
       "OnStart": [
         {
-          "$type": "RPG.GameCore.SetSkillTargetFormationByPos",
-          "Team": "TeamLight",
-          "CenterOffset": {
-            "X": 0,
-            "Y": 0,
-            "Z": -3
-          },
-          "TargetFormation": {},
-          "LeftSideFormations": [],
-          "RightSideFormations": []
+          "$type": "RPG.GameCore.IncludeTaskListTemplate",
+          "Name": "CocoliaP2_Position"
         },
         {
           "$type": "RPG.GameCore.LookAt",
@@ -1030,7 +1022,7 @@
               "$type": "RPG.GameCore.TargetAlias",
               "Alias": "ParamEntity"
             },
-            "ModifierName": "MMonster_W1_CocoliaP2_00_IF_TargetLock01"
+            "ModifierName": "MMonster_W1_CocoliaP2_00_IF_Rel_TargetLock01"
           },
           "MaxNumber": {
             "IsDynamic": false,
@@ -1040,18 +1032,47 @@
           },
           "TaskList": [
             {
-              "$type": "RPG.GameCore.TurnInsertAbility",
-              "AbilityName": "Monster_W1_CocoliaP2_00_IF_Skill06_Phase01_Insert",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "Caster"
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "Caster"
+                },
+                "Flag": "Taunt"
               },
-              "AbilityTarget": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ParamEntity"
-              },
-              "InsertAbilityPriority": "MonsterInsertAttackOthers",
-              "ShowInActionBar": true
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.TurnInsertAbility",
+                  "AbilityName": "Monster_W1_CocoliaP2_00_IF_Skill06_Phase01_Insert",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "AbilityTarget": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "TauntOrAggroEnemy"
+                  },
+                  "InsertAbilityPriority": "PROG_MonsterLowest",
+                  "ShowInActionBar": true
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.TurnInsertAbility",
+                  "AbilityName": "Monster_W1_CocoliaP2_00_IF_Skill06_Phase01_Insert",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "AbilityTarget": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "InsertAbilityPriority": "PROG_MonsterLowest",
+                  "ShowInActionBar": true
+                }
+              ]
             }
           ]
         },
@@ -1067,7 +1088,7 @@
               "$type": "RPG.GameCore.TargetAlias",
               "Alias": "ParamEntity"
             },
-            "ModifierName": "MMonster_W1_CocoliaP2_00_IF_TargetLock02"
+            "ModifierName": "MMonster_W1_CocoliaP2_00_IF_Rel_TargetLock02"
           },
           "MaxNumber": {
             "IsDynamic": false,
@@ -1077,18 +1098,179 @@
           },
           "TaskList": [
             {
-              "$type": "RPG.GameCore.TurnInsertAbility",
-              "AbilityName": "Monster_W1_CocoliaP2_00_IF_Skill06_Phase01_Insert",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "Caster"
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "Caster"
+                },
+                "Flag": "Taunt"
               },
-              "AbilityTarget": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ParamEntity"
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.TurnInsertAbility",
+                  "AbilityName": "Monster_W1_CocoliaP2_00_IF_Skill06_Phase01_Insert",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "AbilityTarget": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "TauntOrAggroEnemy"
+                  },
+                  "InsertAbilityPriority": "PROG_MonsterLowest",
+                  "ShowInActionBar": true
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.TurnInsertAbility",
+                  "AbilityName": "Monster_W1_CocoliaP2_00_IF_Skill06_Phase01_Insert",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "AbilityTarget": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "InsertAbilityPriority": "PROG_MonsterLowest",
+                  "ShowInActionBar": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.Retarget",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllEnemy"
+          },
+          "Predicate": {
+            "$type": "RPG.GameCore.ByIsContainModifier",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "ParamEntity"
+            },
+            "ModifierName": "MMonster_W1_CocoliaP2_00_IF_Rel_TargetLock03"
+          },
+          "MaxNumber": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          },
+          "TaskList": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "Caster"
+                },
+                "Flag": "Taunt"
               },
-              "InsertAbilityPriority": "MonsterInsertAttackOthers",
-              "ShowInActionBar": true
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.TurnInsertAbility",
+                  "AbilityName": "Monster_W1_CocoliaP2_00_IF_Skill06_Phase01_Insert",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "AbilityTarget": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "TauntOrAggroEnemy"
+                  },
+                  "InsertAbilityPriority": "PROG_MonsterLowest",
+                  "ShowInActionBar": true
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.TurnInsertAbility",
+                  "AbilityName": "Monster_W1_CocoliaP2_00_IF_Skill06_Phase01_Insert",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "AbilityTarget": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "InsertAbilityPriority": "PROG_MonsterLowest",
+                  "ShowInActionBar": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.Retarget",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllEnemy"
+          },
+          "Predicate": {
+            "$type": "RPG.GameCore.ByIsContainModifier",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "ParamEntity"
+            },
+            "ModifierName": "MMonster_W1_CocoliaP2_00_IF_Rel_TargetLock04"
+          },
+          "MaxNumber": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          },
+          "TaskList": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "Caster"
+                },
+                "Flag": "Taunt"
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.TurnInsertAbility",
+                  "AbilityName": "Monster_W1_CocoliaP2_00_IF_Skill06_Phase01_Insert",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "AbilityTarget": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "TauntOrAggroEnemy"
+                  },
+                  "InsertAbilityPriority": "PROG_MonsterLowest",
+                  "ShowInActionBar": true
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.TurnInsertAbility",
+                  "AbilityName": "Monster_W1_CocoliaP2_00_IF_Skill06_Phase01_Insert",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "AbilityTarget": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "InsertAbilityPriority": "PROG_MonsterLowest",
+                  "ShowInActionBar": true
+                }
+              ]
             }
           ]
         },
@@ -1104,16 +1286,8 @@
       },
       "OnStart": [
         {
-          "$type": "RPG.GameCore.SetSkillTargetFormationByPos",
-          "Team": "TeamLight",
-          "CenterOffset": {
-            "X": 0,
-            "Y": 0,
-            "Z": -3
-          },
-          "TargetFormation": {},
-          "LeftSideFormations": [],
-          "RightSideFormations": []
+          "$type": "RPG.GameCore.IncludeTaskListTemplate",
+          "Name": "CocoliaP2_Position"
         },
         {
           "$type": "RPG.GameCore.LookAt",
@@ -1570,44 +1744,274 @@
           "WaitProjectileFinish": true
         },
         {
-          "$type": "RPG.GameCore.AddModifier",
-          "TargetType": {
+          "$type": "RPG.GameCore.SetDynamicValueByCharacterCount",
+          "DynamicKey": "_NotBreakCount",
+          "ReadTargetType": {
             "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AbilityTargetEntity"
+            "Alias": "AllTeammate"
           },
-          "ModifierName": "MCommon_CTRL_Frozen",
-          "Chance": {
-            "IsDynamic": true,
-            "PostfixExpr": {
-              "OpCodes": "AQAK",
-              "FixedValues": [],
-              "DynamicHashes": [
-                1109782588
-              ]
-            }
-          },
-          "LifeTime": {
-            "IsDynamic": true,
-            "PostfixExpr": {
-              "OpCodes": "AQAK",
-              "FixedValues": [],
-              "DynamicHashes": [
-                1987669189
-              ]
-            }
-          },
-          "DynamicValues": {
-            "Modifier_Frozen_DamagePercentage": {
-              "IsDynamic": true,
-              "PostfixExpr": {
-                "OpCodes": "AQAK",
-                "FixedValues": [],
-                "DynamicHashes": [
-                  -393929900
-                ]
-              }
-            }
+          "Predicate": {
+            "$type": "RPG.GameCore.ByContainBehaviorFlag",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "ParamEntity"
+            },
+            "Flag": "Break",
+            "Inverse": true
           }
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByIsContainModifier",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "ModifierName": "MMonster_W2_Cocolia_00_IF_MoreTarget"
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                "DynamicKey": "_NotBreakCount",
+                "CompareType": "Equal",
+                "CompareValue": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 1
+                  }
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.DebugLog",
+                  "Message": "==============_NotBreakCount 1======================"
+                },
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AbilityTargetEntity"
+                  },
+                  "ModifierName": "MCommon_CTRL_Frozen",
+                  "Chance": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        -146705798
+                      ]
+                    }
+                  },
+                  "LifeTime": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        1987669189
+                      ]
+                    }
+                  },
+                  "DynamicValues": {
+                    "Modifier_Frozen_DamagePercentage": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          -393929900
+                        ]
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                "DynamicKey": "_NotBreakCount",
+                "CompareType": "Equal",
+                "CompareValue": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 2
+                  }
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.DebugLog",
+                  "Message": "==============_NotBreakCount 2======================"
+                },
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AbilityTargetEntity"
+                  },
+                  "ModifierName": "MCommon_CTRL_Frozen",
+                  "Chance": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        1613252441
+                      ]
+                    }
+                  },
+                  "LifeTime": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        1987669189
+                      ]
+                    }
+                  },
+                  "DynamicValues": {
+                    "Modifier_Frozen_DamagePercentage": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          -393929900
+                        ]
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                "DynamicKey": "_NotBreakCount",
+                "CompareType": "Equal",
+                "CompareValue": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 3
+                  }
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.DebugLog",
+                  "Message": "==============_NotBreakCount 3======================"
+                },
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AbilityTargetEntity"
+                  },
+                  "ModifierName": "MCommon_CTRL_Frozen",
+                  "Chance": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        -717223368
+                      ]
+                    }
+                  },
+                  "LifeTime": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        1987669189
+                      ]
+                    }
+                  },
+                  "DynamicValues": {
+                    "Modifier_Frozen_DamagePercentage": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          -393929900
+                        ]
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                "DynamicKey": "_NotBreakCount",
+                "CompareType": "Equal",
+                "CompareValue": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 4
+                  }
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.DebugLog",
+                  "Message": "==============_NotBreakCount 4======================"
+                },
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AbilityTargetEntity"
+                  },
+                  "ModifierName": "MCommon_CTRL_Frozen",
+                  "Chance": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        -178798561
+                      ]
+                    }
+                  },
+                  "LifeTime": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        1987669189
+                      ]
+                    }
+                  },
+                  "DynamicValues": {
+                    "Modifier_Frozen_DamagePercentage": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          -393929900
+                        ]
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
         },
         {
           "$type": "RPG.GameCore.RemoveModifier",
@@ -1638,7 +2042,12 @@
         {
           "$type": "RPG.GameCore.DamagePerformFinish"
         }
-      ]
+      ],
+      "DynamicValues": {
+        "Values": {
+          "1108424574": {}
+        }
+      }
     },
     {
       "Name": "Monster_W1_CocoliaP2_00_IF_Skill06_Camera_Insert",
@@ -1844,13 +2253,8 @@
       },
       "OnStart": [
         {
-          "$type": "RPG.GameCore.SetTeamRootOffset",
-          "Team": "TeamLight",
-          "Offset": {
-            "X": 0,
-            "Y": 0,
-            "Z": 3
-          }
+          "$type": "RPG.GameCore.IncludeTaskListTemplate",
+          "Name": "CocoliaP2_Position"
         },
         {
           "$type": "RPG.GameCore.TriggerAbility",
@@ -2177,7 +2581,7 @@
               "$type": "RPG.GameCore.TargetAlias",
               "Alias": "ParamEntity"
             },
-            "ModifierName": "MMonster_W1_CocoliaP2_00_IF_TargetLock01"
+            "ModifierName": "MMonster_W1_CocoliaP2_00_IF_Rel_TargetLock01"
           },
           "MaxNumber": {
             "IsDynamic": false,
@@ -2187,18 +2591,47 @@
           },
           "TaskList": [
             {
-              "$type": "RPG.GameCore.TurnInsertAbility",
-              "AbilityName": "Monster_W1_CocoliaP2_00_IF_Skill07_Phase01_Insert",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "Caster"
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "Caster"
+                },
+                "Flag": "Taunt"
               },
-              "AbilityTarget": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ParamEntity"
-              },
-              "InsertAbilityPriority": "MonsterInsertAttackOthers",
-              "ShowInActionBar": true
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.TurnInsertAbility",
+                  "AbilityName": "Monster_W1_CocoliaP2_00_IF_Skill07_Phase01_Insert",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "AbilityTarget": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "TauntOrAggroEnemy"
+                  },
+                  "InsertAbilityPriority": "PROG_MonsterLowest",
+                  "ShowInActionBar": true
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.TurnInsertAbility",
+                  "AbilityName": "Monster_W1_CocoliaP2_00_IF_Skill07_Phase01_Insert",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "AbilityTarget": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "InsertAbilityPriority": "PROG_MonsterLowest",
+                  "ShowInActionBar": true
+                }
+              ]
             }
           ]
         },
@@ -2214,7 +2647,7 @@
               "$type": "RPG.GameCore.TargetAlias",
               "Alias": "ParamEntity"
             },
-            "ModifierName": "MMonster_W1_CocoliaP2_00_IF_TargetLock02"
+            "ModifierName": "MMonster_W1_CocoliaP2_00_IF_Rel_TargetLock02"
           },
           "MaxNumber": {
             "IsDynamic": false,
@@ -2224,18 +2657,179 @@
           },
           "TaskList": [
             {
-              "$type": "RPG.GameCore.TurnInsertAbility",
-              "AbilityName": "Monster_W1_CocoliaP2_00_IF_Skill07_Phase01_Insert",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "Caster"
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "Caster"
+                },
+                "Flag": "Taunt"
               },
-              "AbilityTarget": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ParamEntity"
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.TurnInsertAbility",
+                  "AbilityName": "Monster_W1_CocoliaP2_00_IF_Skill07_Phase01_Insert",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "AbilityTarget": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "TauntOrAggroEnemy"
+                  },
+                  "InsertAbilityPriority": "PROG_MonsterLowest",
+                  "ShowInActionBar": true
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.TurnInsertAbility",
+                  "AbilityName": "Monster_W1_CocoliaP2_00_IF_Skill07_Phase01_Insert",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "AbilityTarget": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "InsertAbilityPriority": "PROG_MonsterLowest",
+                  "ShowInActionBar": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.Retarget",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllEnemy"
+          },
+          "Predicate": {
+            "$type": "RPG.GameCore.ByIsContainModifier",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "ParamEntity"
+            },
+            "ModifierName": "MMonster_W1_CocoliaP2_00_IF_Rel_TargetLock03"
+          },
+          "MaxNumber": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          },
+          "TaskList": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "Caster"
+                },
+                "Flag": "Taunt"
               },
-              "InsertAbilityPriority": "MonsterInsertAttackOthers",
-              "ShowInActionBar": true
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.TurnInsertAbility",
+                  "AbilityName": "Monster_W1_CocoliaP2_00_IF_Skill07_Phase01_Insert",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "AbilityTarget": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "TauntOrAggroEnemy"
+                  },
+                  "InsertAbilityPriority": "PROG_MonsterLowest",
+                  "ShowInActionBar": true
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.TurnInsertAbility",
+                  "AbilityName": "Monster_W1_CocoliaP2_00_IF_Skill07_Phase01_Insert",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "AbilityTarget": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "InsertAbilityPriority": "PROG_MonsterLowest",
+                  "ShowInActionBar": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.Retarget",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllEnemy"
+          },
+          "Predicate": {
+            "$type": "RPG.GameCore.ByIsContainModifier",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "ParamEntity"
+            },
+            "ModifierName": "MMonster_W1_CocoliaP2_00_IF_Rel_TargetLock04"
+          },
+          "MaxNumber": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          },
+          "TaskList": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "Caster"
+                },
+                "Flag": "Taunt"
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.TurnInsertAbility",
+                  "AbilityName": "Monster_W1_CocoliaP2_00_IF_Skill07_Phase01_Insert",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "AbilityTarget": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "TauntOrAggroEnemy"
+                  },
+                  "InsertAbilityPriority": "PROG_MonsterLowest",
+                  "ShowInActionBar": true
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.TurnInsertAbility",
+                  "AbilityName": "Monster_W1_CocoliaP2_00_IF_Skill07_Phase01_Insert",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "AbilityTarget": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "InsertAbilityPriority": "PROG_MonsterLowest",
+                  "ShowInActionBar": true
+                }
+              ]
             }
           ]
         },
@@ -2251,13 +2845,8 @@
       },
       "OnStart": [
         {
-          "$type": "RPG.GameCore.SetTeamRootOffset",
-          "Team": "TeamLight",
-          "Offset": {
-            "X": 0,
-            "Y": 0,
-            "Z": 3
-          }
+          "$type": "RPG.GameCore.IncludeTaskListTemplate",
+          "Name": "CocoliaP2_Position"
         },
         {
           "$type": "RPG.GameCore.TriggerAbility",
@@ -2951,7 +3540,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.591
+              "Value": 0.391
             }
           }
         },
@@ -2962,6 +3551,20 @@
             "Alias": "CasterSummoner"
           },
           "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W1_CocoliaP2_00/Eff_Monster_W1_CocoliaP2_00_Skill11_CocoliaP1_Model.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "SkillPerform01",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.591
+            }
+          }
         },
         {
           "$type": "RPG.GameCore.RemoveEffect",
@@ -5649,5 +6252,54 @@
         }
       }
     }
-  }
+  },
+  "GlobalTemplates": [
+    {
+      "Name": "CocoliaP2_Position",
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.SetSkillTargetFormationByPos",
+          "Team": "TeamDark",
+          "CustomTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllTeamMember"
+          },
+          "IgnoreHitBoxRadius": true,
+          "TargetFormation": {},
+          "LeftSideFormations": [
+            {
+              "LocalDelta": {
+                "X": 8.9,
+                "Y": 0,
+                "Z": -1
+              }
+            },
+            {
+              "LocalDelta": {
+                "X": 5.7,
+                "Y": 0,
+                "Z": 2.3
+              }
+            }
+          ],
+          "RightSideFormations": [
+            {
+              "LocalDelta": {
+                "X": -5.7,
+                "Y": 0,
+                "Z": 2.3
+              }
+            },
+            {
+              "LocalDelta": {
+                "X": -8.9,
+                "Y": 0,
+                "Z": -1
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }

@@ -1245,6 +1245,45 @@
           ]
         }
       ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareGraphDynamicFloat",
+            "Name": "IsForward",
+            "Value": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 0
+              }
+            },
+            "CompareType": "Equal"
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.AnimSetParameter",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+              },
+              "ParameterName": "IsForward",
+              "ParameterType": "Bool"
+            }
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.AnimSetParameter",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+              },
+              "ParameterName": "IsForward",
+              "ParameterType": "Bool",
+              "Value": 1
+            }
+          ]
+        }
+      ]
     }
   ],
   "ValueSource": {
@@ -1272,6 +1311,11 @@
         "$type": "RPG.GameCore.SharedInt",
         "Value": 1,
         "Key": "CanInteractInLock"
+      },
+      {
+        "$type": "RPG.GameCore.SharedFloat",
+        "Value": 1,
+        "Key": "IsForward"
       }
     ]
   },

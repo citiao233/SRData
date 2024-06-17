@@ -11,6 +11,15 @@
               "Event": "OnBeforeBeingHitAll",
               "CallbackConfig": [
                 {
+                  "$type": "RPG.GameCore.RemoveEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Junk_00/Eff_Monster_W3_Junk_00_BeingHit.prefab",
+                  "IsNeedFadeOut": false
+                },
+                {
                   "$type": "RPG.GameCore.TriggerEffect",
                   "TargetType": {
                     "$type": "RPG.GameCore.TargetAlias",
@@ -82,13 +91,30 @@
                     {
                       "$type": "RPG.GameCore.PredicateTaskList",
                       "Predicate": {
-                        "$type": "RPG.GameCore.ByIsDamageType",
-                        "TargetType": {
-                          "$type": "RPG.GameCore.TargetAlias",
-                          "Alias": "ModifierOwnerEntity"
-                        },
-                        "DamageTypeList": [
-                          "Fire"
+                        "$type": "RPG.GameCore.ByAnd",
+                        "PredicateList": [
+                          {
+                            "$type": "RPG.GameCore.ByIsDamageType",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "ModifierOwnerEntity"
+                            },
+                            "DamageTypeList": [
+                              "Fire"
+                            ]
+                          },
+                          {
+                            "$type": "RPG.GameCore.ByHasStanceWeak",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "ModifierOwnerEntity"
+                            },
+                            "WeakType": {
+                              "DamageType": "Fire"
+                            },
+                            "OnlyDefault": true,
+                            "Inverse": true
+                          }
                         ]
                       },
                       "SuccessTaskList": [
@@ -98,6 +124,7 @@
                             "$type": "RPG.GameCore.TargetAlias",
                             "Alias": "ModifierOwnerEntity"
                           },
+                          "OPType": "Attach",
                           "WeakList": [
                             "Fire"
                           ]
@@ -115,13 +142,30 @@
                     {
                       "$type": "RPG.GameCore.PredicateTaskList",
                       "Predicate": {
-                        "$type": "RPG.GameCore.ByIsDamageType",
-                        "TargetType": {
-                          "$type": "RPG.GameCore.TargetAlias",
-                          "Alias": "ModifierOwnerEntity"
-                        },
-                        "DamageTypeList": [
-                          "Ice"
+                        "$type": "RPG.GameCore.ByAnd",
+                        "PredicateList": [
+                          {
+                            "$type": "RPG.GameCore.ByIsDamageType",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "ModifierOwnerEntity"
+                            },
+                            "DamageTypeList": [
+                              "Ice"
+                            ]
+                          },
+                          {
+                            "$type": "RPG.GameCore.ByHasStanceWeak",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "ModifierOwnerEntity"
+                            },
+                            "WeakType": {
+                              "DamageType": "Ice"
+                            },
+                            "OnlyDefault": true,
+                            "Inverse": true
+                          }
                         ]
                       },
                       "SuccessTaskList": [
@@ -131,6 +175,7 @@
                             "$type": "RPG.GameCore.TargetAlias",
                             "Alias": "ModifierOwnerEntity"
                           },
+                          "OPType": "Attach",
                           "WeakList": [
                             "Ice"
                           ]
@@ -148,13 +193,30 @@
                     {
                       "$type": "RPG.GameCore.PredicateTaskList",
                       "Predicate": {
-                        "$type": "RPG.GameCore.ByIsDamageType",
-                        "TargetType": {
-                          "$type": "RPG.GameCore.TargetAlias",
-                          "Alias": "ModifierOwnerEntity"
-                        },
-                        "DamageTypeList": [
-                          "Imaginary"
+                        "$type": "RPG.GameCore.ByAnd",
+                        "PredicateList": [
+                          {
+                            "$type": "RPG.GameCore.ByIsDamageType",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "ModifierOwnerEntity"
+                            },
+                            "DamageTypeList": [
+                              "Imaginary"
+                            ]
+                          },
+                          {
+                            "$type": "RPG.GameCore.ByHasStanceWeak",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "ModifierOwnerEntity"
+                            },
+                            "WeakType": {
+                              "DamageType": "Imaginary"
+                            },
+                            "OnlyDefault": true,
+                            "Inverse": true
+                          }
                         ]
                       },
                       "SuccessTaskList": [
@@ -164,6 +226,7 @@
                             "$type": "RPG.GameCore.TargetAlias",
                             "Alias": "ModifierOwnerEntity"
                           },
+                          "OPType": "Attach",
                           "WeakList": [
                             "Imaginary"
                           ]
@@ -181,13 +244,30 @@
                     {
                       "$type": "RPG.GameCore.PredicateTaskList",
                       "Predicate": {
-                        "$type": "RPG.GameCore.ByIsDamageType",
-                        "TargetType": {
-                          "$type": "RPG.GameCore.TargetAlias",
-                          "Alias": "ModifierOwnerEntity"
-                        },
-                        "DamageTypeList": [
-                          "Physical"
+                        "$type": "RPG.GameCore.ByAnd",
+                        "PredicateList": [
+                          {
+                            "$type": "RPG.GameCore.ByIsDamageType",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "ModifierOwnerEntity"
+                            },
+                            "DamageTypeList": [
+                              "Physical"
+                            ]
+                          },
+                          {
+                            "$type": "RPG.GameCore.ByHasStanceWeak",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "ModifierOwnerEntity"
+                            },
+                            "WeakType": {
+                              "DamageType": "Physical"
+                            },
+                            "OnlyDefault": true,
+                            "Inverse": true
+                          }
                         ]
                       },
                       "SuccessTaskList": [
@@ -197,6 +277,7 @@
                             "$type": "RPG.GameCore.TargetAlias",
                             "Alias": "ModifierOwnerEntity"
                           },
+                          "OPType": "Attach",
                           "WeakList": [
                             "Physical"
                           ]
@@ -214,13 +295,30 @@
                     {
                       "$type": "RPG.GameCore.PredicateTaskList",
                       "Predicate": {
-                        "$type": "RPG.GameCore.ByIsDamageType",
-                        "TargetType": {
-                          "$type": "RPG.GameCore.TargetAlias",
-                          "Alias": "ModifierOwnerEntity"
-                        },
-                        "DamageTypeList": [
-                          "Quantum"
+                        "$type": "RPG.GameCore.ByAnd",
+                        "PredicateList": [
+                          {
+                            "$type": "RPG.GameCore.ByIsDamageType",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "ModifierOwnerEntity"
+                            },
+                            "DamageTypeList": [
+                              "Quantum"
+                            ]
+                          },
+                          {
+                            "$type": "RPG.GameCore.ByHasStanceWeak",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "ModifierOwnerEntity"
+                            },
+                            "WeakType": {
+                              "DamageType": "Quantum"
+                            },
+                            "OnlyDefault": true,
+                            "Inverse": true
+                          }
                         ]
                       },
                       "SuccessTaskList": [
@@ -230,6 +328,7 @@
                             "$type": "RPG.GameCore.TargetAlias",
                             "Alias": "ModifierOwnerEntity"
                           },
+                          "OPType": "Attach",
                           "WeakList": [
                             "Quantum"
                           ]
@@ -247,13 +346,30 @@
                     {
                       "$type": "RPG.GameCore.PredicateTaskList",
                       "Predicate": {
-                        "$type": "RPG.GameCore.ByIsDamageType",
-                        "TargetType": {
-                          "$type": "RPG.GameCore.TargetAlias",
-                          "Alias": "ModifierOwnerEntity"
-                        },
-                        "DamageTypeList": [
-                          "Thunder"
+                        "$type": "RPG.GameCore.ByAnd",
+                        "PredicateList": [
+                          {
+                            "$type": "RPG.GameCore.ByIsDamageType",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "ModifierOwnerEntity"
+                            },
+                            "DamageTypeList": [
+                              "Thunder"
+                            ]
+                          },
+                          {
+                            "$type": "RPG.GameCore.ByHasStanceWeak",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "ModifierOwnerEntity"
+                            },
+                            "WeakType": {
+                              "DamageType": "Thunder"
+                            },
+                            "OnlyDefault": true,
+                            "Inverse": true
+                          }
                         ]
                       },
                       "SuccessTaskList": [
@@ -263,6 +379,7 @@
                             "$type": "RPG.GameCore.TargetAlias",
                             "Alias": "ModifierOwnerEntity"
                           },
+                          "OPType": "Attach",
                           "WeakList": [
                             "Thunder"
                           ]
@@ -280,13 +397,30 @@
                     {
                       "$type": "RPG.GameCore.PredicateTaskList",
                       "Predicate": {
-                        "$type": "RPG.GameCore.ByIsDamageType",
-                        "TargetType": {
-                          "$type": "RPG.GameCore.TargetAlias",
-                          "Alias": "ModifierOwnerEntity"
-                        },
-                        "DamageTypeList": [
-                          "Wind"
+                        "$type": "RPG.GameCore.ByAnd",
+                        "PredicateList": [
+                          {
+                            "$type": "RPG.GameCore.ByIsDamageType",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "ModifierOwnerEntity"
+                            },
+                            "DamageTypeList": [
+                              "Wind"
+                            ]
+                          },
+                          {
+                            "$type": "RPG.GameCore.ByHasStanceWeak",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "ModifierOwnerEntity"
+                            },
+                            "WeakType": {
+                              "DamageType": "Wind"
+                            },
+                            "OnlyDefault": true,
+                            "Inverse": true
+                          }
                         ]
                       },
                       "SuccessTaskList": [
@@ -296,6 +430,7 @@
                             "$type": "RPG.GameCore.TargetAlias",
                             "Alias": "ModifierOwnerEntity"
                           },
+                          "OPType": "Attach",
                           "WeakList": [
                             "Wind"
                           ]

@@ -1113,6 +1113,119 @@
           "ModifierName": "MFarmRelic_104309"
         }
       ]
+    },
+    {
+      "Modifiers": {
+        "MFarmRelic_104310": {
+          "_CallbackList": [
+            {
+              "Event": "OnListenCharacterCreate",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByTargetTeam",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "Team": "TeamLight"
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "MCommon_StanceBreakAddedRatio",
+                      "DynamicValues": {
+                        "MDF_PropertyValue": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 0.5
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByTargetTeam",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "Team": "TeamDark"
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "MFarmRelic_104310_Sub"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "MFarmRelic_104310_Sub": {
+          "_CallbackList": [
+            {
+              "Event": "OnBeingBreak",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "ModifierName": "MCommon_AllDamageTypeTakenRatio",
+                  "DynamicValues": {
+                    "MDF_PropertyValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0.5
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "Event": "OnEndBreak",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.RemoveModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "ModifierName": "MCommon_AllDamageTypeTakenRatio",
+                  "OnlyRemoveCasterAdded": true
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "Name": "FarmRelicAbility_104310",
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "MFarmRelic_104310"
+        }
+      ]
     }
   ],
   "GlobalModifiers": {}

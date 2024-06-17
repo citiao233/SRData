@@ -1572,17 +1572,31 @@
               "ModifierName": "MModifier_Monster_W3_TV_00_InsertMark"
             },
             {
-              "$type": "RPG.GameCore.ShowUIPage",
-              "AssetPath": "UI/Common/Widget/BattleSelfStatusHint.prefab",
-              "UITextNodes": [
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByIsContainModifier",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "LevelEntity"
+                },
+                "ModifierName": "StageAbility_RogueDLCTVLevel_Modifier"
+              },
+              "SuccessTaskList": [],
+              "FailedTaskList": [
                 {
-                  "TextPath": "AreaInfoPanel/Title/Text",
-                  "TextContent": {
-                    "Hash": 1977641664
-                  }
+                  "$type": "RPG.GameCore.ShowUIPage",
+                  "AssetPath": "UI/Common/Widget/BattleSelfStatusHint.prefab",
+                  "UITextNodes": [
+                    {
+                      "TextPath": "AreaInfoPanel/Title/Text",
+                      "TextContent": {
+                        "Hash": 1977641664
+                      }
+                    }
+                  ],
+                  "LifeTime": 1.5
                 }
-              ],
-              "LifeTime": 1.5
+              ]
             }
           ]
         },
@@ -1599,12 +1613,6 @@
               "Alias": "ParamEntity"
             },
             "ModifierName": "MModifier_Monster_W3_TV_00_RemoveMark"
-          },
-          "MaxNumber": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 5
-            }
           },
           "TaskList": [
             {
@@ -1804,7 +1812,50 @@
       "_CallbackList": [
         {
           "Event": "OnStack",
-          "CallbackConfig": []
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAny",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCompareMonsterID",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "TargetMonsterID": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 300201000
+                      }
+                    }
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByCompareMonsterID",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "TargetMonsterID": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 300201000
+                      }
+                    }
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.StackStatusDesc",
+                  "TextID": {
+                    "Hash": 90668491
+                  }
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -1812,9 +1863,160 @@
       "_CallbackList": [
         {
           "Event": "OnStack",
-          "CallbackConfig": []
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAny",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCompareMonsterID",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "TargetMonsterID": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 300201000
+                      }
+                    }
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByCompareMonsterID",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "TargetMonsterID": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 300201000
+                      }
+                    }
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.StackStatusDesc",
+                  "TextID": {
+                    "Hash": -1172887472
+                  }
+                }
+              ]
+            }
+          ]
         }
       ]
+    },
+    "Rogue_Scoring_Event_TV_Count_Modifier": {
+      "MaxLayer": 15,
+      "LayerAddWhenStack": {
+        "IsDynamic": false,
+        "FixedValue": {
+          "Value": 1
+        }
+      },
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                "DynamicKey": "MDF_Count",
+                "CompareType": "Less",
+                "CompareValue": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 15
+                  }
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetBattleScoringItem",
+                  "ScoringID": 80004,
+                  "ModifyValue": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.SetBattleTargetProgress",
+                  "BattleTargetID": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 5001002
+                    }
+                  },
+                  "ModifyValue": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
+              "ModifierName": "Rogue_Scoring_Event_TV_Count_Modifier",
+              "ValueType": "Layer",
+              "Multiplier": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1
+                }
+              },
+              "DynamicKey": "MDF_Count"
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                "DynamicKey": "MDF_Count",
+                "CompareType": "Equal",
+                "CompareValue": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 15
+                  }
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetBattleScoringItem",
+                  "ScoringID": 80005,
+                  "ModifyFunction": "Set",
+                  "ModifyValue": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.TriggerCustomString",
+                  "CustomString": {
+                    "Value": "Level_SpecialWin"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "Stacking": "Replace",
+      "DynamicValues": {
+        "Values": {
+          "-2027709849": {}
+        }
+      }
     }
   }
 }

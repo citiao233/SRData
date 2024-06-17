@@ -162,6 +162,35 @@
               "TargetType": {
                 "$type": "RPG.GameCore.TargetFetchAdvPropEx"
               }
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareGraphDynamicFloat",
+                "Name": "ShowReading",
+                "Value": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 1
+                  }
+                },
+                "CompareType": "Equal"
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.ShowReading",
+                  "BookID": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        1503897291
+                      ]
+                    }
+                  }
+                }
+              ]
             }
           ],
           "TargetType": {
@@ -246,5 +275,17 @@
       ]
     }
   ],
+  "ValueSource": {
+    "Values": [
+      {
+        "$type": "RPG.GameCore.SharedInt",
+        "Key": "ShowReading"
+      },
+      {
+        "$type": "RPG.GameCore.SharedInt",
+        "Key": "ReadingID"
+      }
+    ]
+  },
   "Type": "Entity"
 }

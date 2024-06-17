@@ -203,7 +203,7 @@
         },
         {
           "$type": "RPG.GameCore.IncludeTaskListTemplate",
-          "Name": "WMonster_XP_Elite02_02_Elite_Skill01_TaskTemplate_DamageWithRandomEffect"
+          "Name": "Monster_XP_Elite02_02_RLElite_Skill01_TaskTemplate_DamageWithRandomEffect_FirstHit"
         },
         {
           "$type": "RPG.GameCore.WaitSecond",
@@ -216,7 +216,7 @@
         },
         {
           "$type": "RPG.GameCore.IncludeTaskListTemplate",
-          "Name": "WMonster_XP_Elite02_02_Elite_Skill01_TaskTemplate_DamageWithRandomEffect"
+          "Name": "Monster_XP_Elite02_02_RLElite_Skill01_TaskTemplate_DamageWithRandomEffect"
         },
         {
           "$type": "RPG.GameCore.WaitSecond",
@@ -229,7 +229,7 @@
         },
         {
           "$type": "RPG.GameCore.IncludeTaskListTemplate",
-          "Name": "WMonster_XP_Elite02_02_Elite_Skill01_TaskTemplate_DamageWithRandomEffect"
+          "Name": "Monster_XP_Elite02_02_RLElite_Skill01_TaskTemplate_DamageWithRandomEffect"
         },
         {
           "$type": "RPG.GameCore.WaitSecond",
@@ -242,7 +242,7 @@
         },
         {
           "$type": "RPG.GameCore.IncludeTaskListTemplate",
-          "Name": "WMonster_XP_Elite02_02_Elite_Skill01_TaskTemplate_DamageWithRandomEffect"
+          "Name": "Monster_XP_Elite02_02_RLElite_Skill01_TaskTemplate_DamageWithRandomEffect"
         },
         {
           "$type": "RPG.GameCore.WaitSecond",
@@ -315,11 +315,7 @@
                 },
                 "AttackType": "Normal",
                 "HitAnimation": "Hit",
-                "HitRandomEffect": [
-                  "Effects/Eff_Prefab/Eff_Monster/Eff_XP_Elite02_02/Eff_Monster_XP_Elite02_02_Skill01_Hit.prefab",
-                  "Effects/Eff_Prefab/Eff_Monster/Eff_XP_Elite02_02/Eff_Monster_XP_Elite02_02_Skill01_Hit_02.prefab",
-                  "Effects/Eff_Prefab/Eff_Monster/Eff_XP_Elite02_02/Eff_Monster_XP_Elite02_02_Skill01_Hit_03.prefab"
-                ]
+                "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_XP_Elite02_02/Eff_Monster_XP_Elite02_02_Hit.prefab"
               },
               "SpecialHitSoundEvent": "Ev_sfx_monster_skill_06_hit_xp_elite02",
               "CanTriggerLastKill": true,
@@ -374,12 +370,60 @@
               "$type": "RPG.GameCore.DamagePerformFinish"
             },
             {
-              "$type": "RPG.GameCore.TriggerEffect",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ParamEntity"
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByRandomChance",
+                "Chance": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 0.4
+                  }
+                }
               },
-              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_XP_Elite02_02/Eff_Monster_XP_Elite02_02_Hit.prefab"
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.TriggerEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_XP_Elite02_02/Eff_Monster_XP_Elite02_02_Skill01_Hit.prefab"
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByRandomChance",
+                    "Chance": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0.5
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.TriggerEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_XP_Elite02_02/Eff_Monster_XP_Elite02_02_Skill01_Hit_02.prefab"
+                    }
+                  ],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.TriggerEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_XP_Elite02_02/Eff_Monster_XP_Elite02_02_Skill01_Hit_03.prefab"
+                    }
+                  ]
+                }
+              ]
             },
             {
               "$type": "RPG.GameCore.VCameraConfigChange",
@@ -397,6 +441,11 @@
                   "RangeAttenuation": 0.95
                 }
               }
+            }
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.DamagePerformFinish"
             }
           ]
         },
@@ -420,7 +469,200 @@
       ],
       "TaskListTemplate": [
         {
-          "Name": "WMonster_XP_Elite02_02_Elite_Skill01_TaskTemplate_DamageWithRandomEffect",
+          "Name": "Monster_XP_Elite02_02_RLElite_Skill01_TaskTemplate_DamageWithRandomEffect_FirstHit",
+          "TaskList": [
+            {
+              "$type": "RPG.GameCore.Retarget",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "TauntOrRandomEnemy"
+              },
+              "MaxNumber": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1
+                }
+              },
+              "TaskList": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByIsContainModifier",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "ModifierName": "MCommon_BlackBlood"
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "Monster_XP_Elite02_02_RLElite_TryAddDirtyHP"
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.DamageByAttackProperty",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "AttackProperty": {
+                    "DamageType": {
+                      "DamageType": "Wind"
+                    },
+                    "DamagePercentage": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          -1126825319
+                        ]
+                      }
+                    },
+                    "SPHitRatio": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 1
+                      }
+                    },
+                    "AttackType": "Normal",
+                    "HitAnimation": "Hit",
+                    "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_XP_Elite02_02/Eff_Monster_XP_Elite02_02_Hit.prefab"
+                  },
+                  "SpecialHitSoundEvent": "Ev_sfx_monster_skill_06_hit_xp_elite02",
+                  "CanTriggerLastKill": true,
+                  "DisplayData": {
+                    "UIMessageHeight": 0.8,
+                    "DitherRangeX": 0.01,
+                    "DitherRangeY": 0.04
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "ModifierName": "MCommon_DOT_Poison",
+                  "StackingFlag": "CharacterSkill",
+                  "Chance": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        1846727255
+                      ]
+                    }
+                  },
+                  "LifeTime": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        1159772563
+                      ]
+                    }
+                  },
+                  "DynamicValues": {
+                    "Modifier_Poison_DamagePercentage": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          1063217924
+                        ]
+                      }
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByRandomChance",
+                    "Chance": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0.4
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.TriggerEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_XP_Elite02_02/Eff_Monster_XP_Elite02_02_Skill01_Hit.prefab"
+                    }
+                  ],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByRandomChance",
+                        "Chance": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 0.5
+                          }
+                        }
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_XP_Elite02_02/Eff_Monster_XP_Elite02_02_Skill01_Hit_02.prefab"
+                        }
+                      ],
+                      "FailedTaskList": [
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_XP_Elite02_02/Eff_Monster_XP_Elite02_02_Skill01_Hit_03.prefab"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.VCameraConfigChange",
+                  "CameraConfig": {
+                    "ShakeConfigV2": {
+                      "ShakeRange": 0.12,
+                      "ShakeTime": 0.06,
+                      "ShakeDir": {
+                        "X": 0,
+                        "Y": -0.07,
+                        "Z": 0.07
+                      },
+                      "BaseCycle": 0.07,
+                      "CycleDamping": 0,
+                      "RangeAttenuation": 0.95
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Name": "Monster_XP_Elite02_02_RLElite_Skill01_TaskTemplate_DamageWithRandomEffect",
           "TaskList": [
             {
               "$type": "RPG.GameCore.Retarget",
@@ -484,11 +726,7 @@
                     },
                     "AttackType": "Normal",
                     "HitAnimation": "Hit",
-                    "HitRandomEffect": [
-                      "Effects/Eff_Prefab/Eff_Monster/Eff_XP_Elite02_02/Eff_Monster_XP_Elite02_02_Skill01_Hit.prefab",
-                      "Effects/Eff_Prefab/Eff_Monster/Eff_XP_Elite02_02/Eff_Monster_XP_Elite02_02_Skill01_Hit_02.prefab",
-                      "Effects/Eff_Prefab/Eff_Monster/Eff_XP_Elite02_02/Eff_Monster_XP_Elite02_02_Skill01_Hit_03.prefab"
-                    ]
+                    "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_XP_Elite02_02/Eff_Monster_XP_Elite02_02_Hit.prefab"
                   },
                   "SpecialHitSoundEvent": "Ev_sfx_monster_skill_06_hit_xp_elite02",
                   "CanTriggerLastKill": true,
@@ -540,12 +778,60 @@
                   }
                 },
                 {
-                  "$type": "RPG.GameCore.TriggerEffect",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByRandomChance",
+                    "Chance": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0.4
+                      }
+                    }
                   },
-                  "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_XP_Elite02_02/Eff_Monster_XP_Elite02_02_Hit.prefab"
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.TriggerEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_XP_Elite02_02/Eff_Monster_XP_Elite02_02_Skill01_Hit.prefab"
+                    }
+                  ],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByRandomChance",
+                        "Chance": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 0.5
+                          }
+                        }
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_XP_Elite02_02/Eff_Monster_XP_Elite02_02_Skill01_Hit_02.prefab"
+                        }
+                      ],
+                      "FailedTaskList": [
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_XP_Elite02_02/Eff_Monster_XP_Elite02_02_Skill01_Hit_03.prefab"
+                        }
+                      ]
+                    }
+                  ]
                 },
                 {
                   "$type": "RPG.GameCore.VCameraConfigChange",
@@ -1194,7 +1480,7 @@
             },
             "AttackType": "Normal",
             "HitAnimation": "Hit",
-            "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_XP_Elite02_02/Eff_Monster_XP_Elite02_02_Skill03_Hit.prefab",
+            "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_XP_Elite02_02/Eff_Monster_XP_Elite02_02_Hit.prefab",
             "HitTimeSlowType": "Impact"
           },
           "SpecialHitSoundEvent": "Ev_sfx_monster_skill_01_hit_xp_elite02"
@@ -1249,7 +1535,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "AbilityTargetEntity"
           },
-          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_XP_Elite02_02/Eff_Monster_XP_Elite02_02_Hit.prefab"
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_XP_Elite02_02/Eff_Monster_XP_Elite02_02_Skill03_Hit.prefab"
         },
         {
           "$type": "RPG.GameCore.VCameraConfigChange",

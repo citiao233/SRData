@@ -2,6 +2,25 @@
   "AbilityList": [
     {
       "Modifiers": {
+        "MMonster_W3_Figure_00_RLElite_BreakController": {
+          "_CallbackList": [
+            {
+              "Event": "OnBeingBreak",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "DynamicKey": "AIFlag",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 7
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
         "MMonster_W3_Figure_00_RLElite_AudioControllerForChosenOne": {
           "_CallbackList": [
             {
@@ -11,12 +30,12 @@
                   "$type": "RPG.GameCore.PredicateTaskList",
                   "Predicate": {
                     "$type": "RPG.GameCore.ByCheckModifierCallBackName",
-                    "ModifierName": "MMonster_W3_DollElite_Commnon_TheChosenOne"
+                    "ModifierName": "Monster_W3_FigureBoss_00_Common_TheChosenOne"
                   },
                   "SuccessTaskList": [
                     {
                       "$type": "RPG.GameCore.LevelAudioState",
-                      "GroupName": "State_Battle_Monster_W3_Figure_00_RLElite",
+                      "GroupName": "State_Battle_Monster_W3_Figure_00",
                       "StateName": {
                         "Value": "On"
                       },
@@ -33,12 +52,12 @@
                   "$type": "RPG.GameCore.PredicateTaskList",
                   "Predicate": {
                     "$type": "RPG.GameCore.ByCheckModifierCallBackName",
-                    "ModifierName": "MMonster_W3_DollElite_Commnon_TheChosenOne"
+                    "ModifierName": "Monster_W3_FigureBoss_00_Common_TheChosenOne"
                   },
                   "SuccessTaskList": [
                     {
                       "$type": "RPG.GameCore.LevelAudioState",
-                      "GroupName": "State_Battle_Monster_W3_Figure_00_RLElite",
+                      "GroupName": "State_Battle_Monster_W3_Figure_00",
                       "StateName": {
                         "Value": "Off"
                       },
@@ -65,20 +84,51 @@
           "ModifierName": "MMonster_Common_MuteHitFly"
         },
         {
-          "$type": "RPG.GameCore.ModifyDefaultTeamFormation",
-          "TeamCenter": {
+          "$type": "RPG.GameCore.Retarget",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetFetchUniqueNameEntity",
+            "UniqueName": "DollBoss"
+          },
+          "MaxNumber": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          },
+          "TaskList": [
+            {
+              "$type": "RPG.GameCore.ModifyDefaultTeamFormation",
+              "TeamCenter": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "ExtraConfig": [
+                {},
+                {},
+                {
+                  "LocalZOffsetFixed": -0.5
+                },
+                {},
+                {}
+              ]
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "ExtraConfig": [
-            {},
-            {},
-            {
-              "LocalZOffsetFixed": -0.5
-            },
-            {},
-            {}
-          ]
+          "ModifierName": "MMonster_W3_Figure_00_RLElite_BreakController"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "W3_Figure_00_BattleScore1"
         },
         {
           "$type": "RPG.GameCore.AddModifier",
@@ -372,60 +422,76 @@
               "Z": -0.5
             },
             "TargetAttachPoint": "Root",
-            "FlyEffect": "Effects/Eff_Prefab/Eff_Common/Eff_Empty_Projectile.prefab"
-          },
-          "OnProjectileHit": [
-            {
-              "$type": "RPG.GameCore.AddModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "AbilityTargetEntity"
-              },
-              "ModifierName": "MMonster_W3_Figure_00_RLElite_CTRL_Sleep",
-              "Chance": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQAK",
-                  "FixedValues": [],
-                  "DynamicHashes": [
-                    614399896
-                  ]
-                }
-              },
-              "LifeTime": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQAK",
-                  "FixedValues": [],
-                  "DynamicHashes": [
-                    1556989036
-                  ]
-                }
-              }
-            }
-          ]
-        },
-        {
-          "$type": "RPG.GameCore.FireProjectile",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AbilityTargetEntity"
-          },
-          "Projectile": {
-            "FlySpeed": 4.9,
-            "AttachPoint": "Origin",
-            "AttachOffset": {
-              "X": -0.55,
-              "Y": 2.5,
-              "Z": -0.5
-            },
-            "TargetAttachPoint": "Root",
             "TargetDistanceOffset": 2,
             "IgnoreTargetHitbox": true,
             "FlyEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Figure_00/Eff_Monster_W3_Figure_00_Skill02_01.prefab",
             "FlyEffectFadeOut": true
           },
           "OnProjectileHit": []
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill02",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.614
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "ModifierName": "MCommon_CTRL_Sleep",
+          "Chance": {
+            "IsDynamic": true,
+            "PostfixExpr": {
+              "OpCodes": "AQAK",
+              "FixedValues": [],
+              "DynamicHashes": [
+                614399896
+              ]
+            }
+          },
+          "LifeTime": {
+            "IsDynamic": true,
+            "PostfixExpr": {
+              "OpCodes": "AQAK",
+              "FixedValues": [],
+              "DynamicHashes": [
+                1556989036
+              ]
+            }
+          },
+          "DynamicValues": {
+            "MDF_AllDamageAddedRatio": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  1570692530
+                ]
+              }
+            },
+            "MDF_HealPercentage": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  -855184549
+                ]
+              }
+            }
+          }
         },
         {
           "$type": "RPG.GameCore.SkillPerformFinish"
@@ -931,7 +997,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "AllEnemy"
           },
-          "ModifierName": "MMonster_W3_Figure_00_RLElite_CTRL_Sleep",
+          "ModifierName": "MCommon_CTRL_Sleep",
           "Chance": {
             "IsDynamic": true,
             "PostfixExpr": {
@@ -950,6 +1016,28 @@
               "DynamicHashes": [
                 -961622124
               ]
+            }
+          },
+          "DynamicValues": {
+            "MDF_AllDamageAddedRatio": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  1570692530
+                ]
+              }
+            },
+            "MDF_HealPercentage": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  -855184549
+                ]
+              }
             }
           }
         }
@@ -1015,57 +1103,12 @@
             {
               "$type": "RPG.GameCore.PredicateTaskList",
               "Predicate": {
-                "$type": "RPG.GameCore.ByCompareDynamicValue",
-                "DynamicKey": "SleepCount",
-                "CompareType": "GreaterEqual",
-                "CompareValue": {
-                  "IsDynamic": false,
-                  "FixedValue": {
-                    "Value": 2
-                  }
-                },
-                "Inverse": true
-              },
-              "SuccessTaskList": [
-                {
-                  "$type": "RPG.GameCore.AddModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  },
-                  "ModifierName": "MMonster_W3_Figure_00_RLElite_CTRL_Sleep",
-                  "Chance": {
-                    "IsDynamic": true,
-                    "PostfixExpr": {
-                      "OpCodes": "AQAK",
-                      "FixedValues": [],
-                      "DynamicHashes": [
-                        -1713038530
-                      ]
-                    }
-                  },
-                  "LifeTime": {
-                    "IsDynamic": true,
-                    "PostfixExpr": {
-                      "OpCodes": "AQAK",
-                      "FixedValues": [],
-                      "DynamicHashes": [
-                        -961622124
-                      ]
-                    }
-                  }
-                }
-              ]
-            },
-            {
-              "$type": "RPG.GameCore.PredicateTaskList",
-              "Predicate": {
                 "$type": "RPG.GameCore.ByIsContainModifier",
                 "TargetType": {
                   "$type": "RPG.GameCore.TargetAlias",
                   "Alias": "ParamEntity"
                 },
-                "ModifierName": "MMonster_W3_Figure_00_RLElite_CTRL_Sleep"
+                "ModifierName": "MCommon_CTRL_Sleep"
               },
               "SuccessTaskList": [
                 {
@@ -1085,6 +1128,182 @@
                       ]
                     }
                   }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.Retarget",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllEnemy"
+          },
+          "TaskList": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByIsContainModifier",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "ModifierName": "MCommon_CTRL_Sleep"
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "ModifierName": "MCommon_CTRL_Sleep",
+                  "Chance": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        -1713038530
+                      ]
+                    }
+                  },
+                  "LifeTime": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        -961622124
+                      ]
+                    }
+                  },
+                  "DynamicValues": {
+                    "MDF_AllDamageAddedRatio": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          1570692530
+                        ]
+                      }
+                    },
+                    "MDF_HealPercentage": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          -855184549
+                        ]
+                      }
+                    }
+                  }
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "DynamicKey": "SleepCount",
+                    "CompareType": "GreaterEqual",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 2
+                      }
+                    },
+                    "Inverse": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "MCommon_CTRL_Sleep",
+                      "Chance": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAK",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            -1713038530
+                          ]
+                        }
+                      },
+                      "LifeTime": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAK",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            -961622124
+                          ]
+                        }
+                      },
+                      "DynamicValues": {
+                        "MDF_AllDamageAddedRatio": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              1570692530
+                            ]
+                          }
+                        },
+                        "MDF_HealPercentage": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              -855184549
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByIsContainModifier",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "ModifierName": "MCommon_CTRL_Sleep"
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "DynamicKey": "SleepCount",
+                      "Value": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAAAAIK",
+                          "FixedValues": [
+                            {
+                              "Value": 1
+                            }
+                          ],
+                          "DynamicHashes": [
+                            1005867528
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.DebugLog",
+                  "Message": "=============={SleepCount}======================"
                 }
               ]
             }
@@ -1206,36 +1425,165 @@
         {
           "$type": "RPG.GameCore.WaitParallelTimeStamp",
           "WaitTime": {
-            "Value": 3.028667
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 3.566
+            }
           }
         },
         {
-          "$type": "RPG.GameCore.AddModifier",
+          "$type": "RPG.GameCore.Retarget",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "AllEnemy"
           },
-          "ModifierName": "MMonster_W3_Figure_00_RLElite_CTRL_Sleep",
-          "Chance": {
-            "IsDynamic": true,
-            "PostfixExpr": {
-              "OpCodes": "AQAK",
-              "FixedValues": [],
-              "DynamicHashes": [
-                -1713038530
+          "TaskList": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                "DynamicKey": "SleepCount",
+                "CompareType": "GreaterEqual",
+                "CompareValue": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 2
+                  }
+                },
+                "Inverse": true
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "ModifierName": "MCommon_CTRL_Sleep",
+                  "Chance": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        -1713038530
+                      ]
+                    }
+                  },
+                  "LifeTime": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        -961622124
+                      ]
+                    }
+                  },
+                  "DynamicValues": {
+                    "MDF_AllDamageAddedRatio": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          1570692530
+                        ]
+                      }
+                    },
+                    "MDF_HealPercentage": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          -855184549
+                        ]
+                      }
+                    }
+                  }
+                }
               ]
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByIsContainModifier",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "ModifierName": "MCommon_CTRL_Sleep"
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "DynamicKey": "SleepCount",
+                  "Value": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAAAAIK",
+                      "FixedValues": [
+                        {
+                          "Value": 1
+                        }
+                      ],
+                      "DynamicHashes": [
+                        1005867528
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "$type": "RPG.GameCore.DebugLog",
+              "Message": "=============={SleepCount}======================"
             }
-          },
-          "LifeTime": {
-            "IsDynamic": true,
-            "PostfixExpr": {
-              "OpCodes": "AQAK",
-              "FixedValues": [],
-              "DynamicHashes": [
-                -961622124
-              ]
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.SetDynamicValue",
+          "DynamicKey": "SleepCount",
+          "Value": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0
             }
           }
+        },
+        {
+          "$type": "RPG.GameCore.WaitParallelTimeStamp",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 5.11
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.SetEntityVisible",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.WaitParallelTimeStamp",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 7.95
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.SetEntityVisible",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "Visible": true
         }
       ]
     },
@@ -1282,21 +1630,6 @@
           "Event": "OnBeingBreak",
           "CallbackConfig": [
             {
-              "$type": "RPG.GameCore.SetDynamicValue",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "DynamicKey": "AIFlag",
-              "ContextScope": "TargetEntity",
-              "Value": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 5
-                }
-              }
-            },
-            {
               "$type": "RPG.GameCore.RemoveSelfModifier"
             }
           ]
@@ -1323,7 +1656,7 @@
                   },
                   {
                     "$type": "RPG.GameCore.ByCheckModifierCallBackName",
-                    "ModifierName": "MMonster_W3_Figure_00_RLElite_CTRL_Sleep"
+                    "ModifierName": "MCommon_CTRL_Sleep"
                   }
                 ]
               },
@@ -1348,7 +1681,7 @@
                       "$type": "RPG.GameCore.TargetAlias",
                       "Alias": "ParamEntity"
                     },
-                    "ModifierName": "MMonster_W3_Figure_00_RLElite_CTRL_Sleep"
+                    "ModifierName": "MCommon_CTRL_Sleep"
                   },
                   "MaxNumber": {
                     "IsDynamic": false,
@@ -1439,7 +1772,7 @@
                   },
                   {
                     "$type": "RPG.GameCore.ByCheckModifierCallBackName",
-                    "ModifierName": "MMonster_W3_Figure_00_RLElite_CTRL_Sleep"
+                    "ModifierName": "MCommon_CTRL_Sleep"
                   }
                 ]
               },
@@ -1464,7 +1797,7 @@
                       "$type": "RPG.GameCore.TargetAlias",
                       "Alias": "ParamEntity"
                     },
-                    "ModifierName": "MMonster_W3_Figure_00_RLElite_CTRL_Sleep"
+                    "ModifierName": "MCommon_CTRL_Sleep"
                   },
                   "MaxNumber": {
                     "IsDynamic": false,
@@ -1589,329 +1922,6 @@
           "1351893788": {}
         }
       }
-    },
-    "MMonster_W3_Figure_00_RLElite_CTRL_Sleep": {
-      "LifeStepMoment": "ModifierPhase1End",
-      "PerformTime": {
-        "IsDynamic": false,
-        "FixedValue": {
-          "Value": 1
-        }
-      },
-      "BehaviorFlagList": [
-        "STAT_CTRL",
-        "STAT_CTRL_Sleep",
-        "DisableAction",
-        "AvatarBreak",
-        "DispelPriorityHigh"
-      ],
-      "UseSnapshotEntity": true,
-      "UIConfig": {
-        "UIEffectPath": "UI/Battle/Widget/TeamInfoStatusEff/TeamInfoStatusEffMid_Dizzy.prefab",
-        "UIPosition": "UI_Middle",
-        "ModifierUIPriority": "SoftControl",
-        "IsShowInAvatarPanel": true
-      },
-      "_CallbackList": [
-        {
-          "Event": "OnCreate",
-          "CallbackConfig": [
-            {
-              "$type": "RPG.GameCore.TargetTimeSlow",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "ActiveDelay": 0.14,
-              "TimeScale": 0.65,
-              "UnscaledDuration": 2
-            }
-          ]
-        },
-        {
-          "Event": "OnDestroy",
-          "CallbackConfig": [
-            {
-              "$type": "RPG.GameCore.RemoveModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "ModifierName": "MMonster_W3_Figure_00_RLElite_CTRL_Sleep_Effect"
-            },
-            {
-              "$type": "RPG.GameCore.PredicateTaskList",
-              "Predicate": {
-                "$type": "RPG.GameCore.ByIsTargetValid",
-                "TargetType": {
-                  "$type": "RPG.GameCore.TargetAlias",
-                  "Alias": "ModifierOwnerEntity"
-                },
-                "AliveOnly": true
-              },
-              "SuccessTaskList": [
-                {
-                  "$type": "RPG.GameCore.WaitSecond",
-                  "WaitTime": {
-                    "IsDynamic": false,
-                    "FixedValue": {
-                      "Value": 0.15
-                    }
-                  }
-                },
-                {
-                  "$type": "RPG.GameCore.ShowEntityFloatMessage",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
-                  },
-                  "ContentID": {
-                    "Hash": -1508958192
-                  }
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "Event": "OnPhase1",
-          "CallbackConfig": [
-            {
-              "$type": "RPG.GameCore.TriggerEffect",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_Heal.prefab"
-            },
-            {
-              "$type": "RPG.GameCore.HealHP",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "FormulaType": "HealByTargetMaxHP",
-              "HealPercentage": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 0.05
-                }
-              },
-              "DisplayData": {
-                "UIMessageHeight": 0.8,
-                "DitherRangeX": 0,
-                "DitherRangeY": 0,
-                "FixedPosition": false
-              }
-            },
-            {
-              "$type": "RPG.GameCore.ModifySPNew",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "FixedAddValue": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 5
-                }
-              }
-            },
-            {
-              "$type": "RPG.GameCore.PredicateTaskList",
-              "Predicate": {
-                "$type": "RPG.GameCore.ByCompareModifierValue",
-                "TargetType": {
-                  "$type": "RPG.GameCore.TargetAlias",
-                  "Alias": "ModifierOwnerEntity"
-                },
-                "ValueType": "LifeTime",
-                "CompareType": "LessEqual",
-                "CompareValue": {
-                  "IsDynamic": false,
-                  "FixedValue": {
-                    "Value": 1
-                  }
-                }
-              },
-              "FailedTaskList": [
-                {
-                  "$type": "RPG.GameCore.ShowEntityFloatMessage",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
-                  },
-                  "AliveOnly": true,
-                  "ContentID": {
-                    "Hash": -562322604
-                  }
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "Event": "OnStack",
-          "CallbackConfig": [
-            {
-              "$type": "RPG.GameCore.AddModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "ModifierName": "MMonster_W3_Figure_00_RLElite_CTRL_Sleep_Effect"
-            },
-            {
-              "$type": "RPG.GameCore.AttachSkillTypeDisable",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "Types": [
-                "Ultra"
-              ],
-              "TextmapID": {
-                "Hash": -1129675816
-              }
-            }
-          ]
-        },
-        {
-          "Event": "OnBeforeBeingAttacked",
-          "CallbackConfig": [
-            {
-              "$type": "RPG.GameCore.AddModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "ModifierName": "MMonster_W3_Figure_00_RLElite_CTRL_Sleep_AllDamageTakenUp"
-            }
-          ]
-        }
-      ],
-      "Stacking": "ReplaceByCaster"
-    },
-    "MMonster_W3_Figure_00_RLElite_CTRL_Sleep_AllDamageTakenUp": {
-      "_CallbackList": [
-        {
-          "Event": "OnStack",
-          "CallbackConfig": [
-            {
-              "$type": "RPG.GameCore.StackProperty",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "Property": "AllDamageTypeTakenRatio",
-              "PropertyValue": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 1
-                }
-              }
-            }
-          ]
-        },
-        {
-          "Event": "OnListenAfterSkillUse",
-          "CallbackConfig": [
-            {
-              "$type": "RPG.GameCore.PredicateTaskList",
-              "Predicate": {
-                "$type": "RPG.GameCore.ByIsContainModifier",
-                "TargetType": {
-                  "$type": "RPG.GameCore.TargetAlias",
-                  "Alias": "ParamEntity"
-                },
-                "ModifierName": "MMonster_W3_Figure_00_RLElite_SuccessSleep",
-                "Inverse": true
-              },
-              "SuccessTaskList": [
-                {
-                  "$type": "RPG.GameCore.RemoveModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
-                  },
-                  "ModifierName": "MMonster_W3_Figure_00_RLElite_CTRL_Sleep",
-                  "RemoveAllInstance": true
-                }
-              ],
-              "FailedTaskList": [
-                {
-                  "$type": "RPG.GameCore.ShowUIPage",
-                  "AssetPath": "UI/Common/Widget/BattleAlertHint.prefab",
-                  "UITextNodes": [
-                    {
-                      "TextPath": "AreaInfoPanel/Title/Text",
-                      "TextContent": {
-                        "Hash": -1526224300
-                      }
-                    }
-                  ],
-                  "LifeTime": 1.5
-                }
-              ]
-            },
-            {
-              "$type": "RPG.GameCore.RemoveSelfModifier"
-            }
-          ]
-        },
-        {
-          "Event": "OnListenInsertAbilityStart",
-          "CallbackConfig": [
-            {
-              "$type": "RPG.GameCore.RemoveModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "ModifierName": "MMonster_W3_Figure_00_RLElite_CTRL_Sleep",
-              "RemoveAllInstance": true
-            },
-            {
-              "$type": "RPG.GameCore.RemoveSelfModifier"
-            }
-          ]
-        },
-        {
-          "Event": "OnListenInsertAbilityFinish",
-          "CallbackConfig": [
-            {
-              "$type": "RPG.GameCore.RemoveModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "ModifierName": "MMonster_W3_Figure_00_RLElite_CTRL_Sleep",
-              "RemoveAllInstance": true
-            },
-            {
-              "$type": "RPG.GameCore.RemoveSelfModifier"
-            }
-          ]
-        }
-      ],
-      "Stacking": "Multiple"
-    },
-    "MMonster_W3_Figure_00_RLElite_CTRL_Sleep_Effect": {
-      "_CallbackList": [
-        {
-          "Event": "OnStack",
-          "CallbackConfig": [
-            {
-              "$type": "RPG.GameCore.ModifierAttachEffect",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_Sleep_Loop.prefab"
-            }
-          ]
-        }
-      ]
     }
   }
 }

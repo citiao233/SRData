@@ -20,7 +20,8 @@
         },
         "MMonster_XP_Elite01_00_MuteHitFly": {
           "BehaviorFlagList": [
-            "MuteHitFly"
+            "MuteHitFly",
+            "KeepOnDeathrattle"
           ]
         },
         "MMonster_XP_Elite01_00_AIControl": {
@@ -1055,11 +1056,72 @@
           }
         },
         {
+          "$type": "RPG.GameCore.SetDynamicEntityParam",
+          "DynamicKey": "ProjectileTargets",
+          "ReadTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ParamTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "TauntOrRandomEnemy"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.Retarget",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetCompute",
+            "ComputeType": "Minus",
+            "Targets": [
+              {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllEnemy"
+              },
+              {
+                "$type": "RPG.GameCore.TargetSequence",
+                "Sequence": [
+                  {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  {
+                    "$type": "RPG.GameCore.TargetMapDynamicEntityParam",
+                    "DynamicKey": "ProjectileTargets"
+                  }
+                ]
+              }
+            ]
+          },
+          "TaskList": [
+            {
+              "$type": "RPG.GameCore.AddDynamicEntityParam",
+              "DynamicKey": "ProjectileTargets",
+              "ReadTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "ParamTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ParamEntity"
+              }
+            }
+          ]
+        },
+        {
           "$type": "RPG.GameCore.RetargetPerSequence",
           "Parallel": true,
           "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AllEnemy"
+            "$type": "RPG.GameCore.TargetSequence",
+            "Sequence": [
+              {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              {
+                "$type": "RPG.GameCore.TargetMapDynamicEntityParam",
+                "DynamicKey": "ProjectileTargets"
+              }
+            ]
           },
           "SequenceList": [
             {

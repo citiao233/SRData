@@ -55,6 +55,39 @@
       },
       "OnStart": [
         {
+          "$type": "RPG.GameCore.ShowUIPage",
+          "AssetPath": "UI/Common/Widget/BattleAlertHint.prefab",
+          "UITextNodes": [
+            {
+              "TextPath": "AreaInfoPanel/Title/Text",
+              "TextContent": {
+                "Hash": 1635146247
+              }
+            }
+          ],
+          "LifeTime": 3
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "Monster_W3_Aventurine_00_DamageUpPunish_RL",
+          "DynamicValues": {
+            "MDF_DamageUpRatio_PerLayer": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  1720276700
+                ]
+              }
+            }
+          }
+        },
+        {
           "$type": "RPG.GameCore.SetAttachmentScale",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
@@ -226,19 +259,6 @@
           }
         },
         {
-          "$type": "RPG.GameCore.ShowUIPage",
-          "AssetPath": "UI/Common/Widget/BattleAlertHint.prefab",
-          "UITextNodes": [
-            {
-              "TextPath": "AreaInfoPanel/Title/Text",
-              "TextContent": {
-                "Hash": -350932662
-              }
-            }
-          ],
-          "LifeTime": 2
-        },
-        {
           "$type": "RPG.GameCore.GlobalMainIntensityEffect",
           "IsRevert": true,
           "IsDurable": true
@@ -303,26 +323,9 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "AbilityTargetEntity"
               },
-              "InsertAbilityPriority": "MonsterChangePhase",
-              "ShowInActionBar": true
+              "InsertAbilityPriority": "MonsterChangePhase"
             }
           ]
-        },
-        {
-          "$type": "RPG.GameCore.RemoveModifier",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AllEnemy"
-          },
-          "ModifierName": "Monster_W3_Aventurine_00_DamageUp_RL"
-        },
-        {
-          "$type": "RPG.GameCore.RemoveModifier",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AllEnemy"
-          },
-          "ModifierName": "Monster_W3_Aventurine_00_DamageTakenUp_RL"
         },
         {
           "$type": "RPG.GameCore.AddModifier",
@@ -530,6 +533,107 @@
           "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill04_0_Yellow_Drak.prefab"
         },
         {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByIsEntityActionState",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "AbilityTargetEntity"
+            }
+          },
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                "DynamicKey": "WaitInsert",
+                "ContextScope": "TargetEntity",
+                "CompareType": "Equal",
+                "CompareValue": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 0
+                  }
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "DynamicKey": "WaitInsert",
+                  "ContextScope": "TargetEntity",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "DynamicKey": "GamblingInsertCheck",
+                  "ContextScope": "TargetEntity",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.Retarget",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "CasterSummonedMinions"
+                  },
+                  "MaxNumber": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  },
+                  "TaskList": [
+                    {
+                      "$type": "RPG.GameCore.TurnInsertAbility",
+                      "AbilityName": "Monster_W3_AventurinePart_00_Skill04_Phase01",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "AbilityTarget": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "InsertAbilityPriority": "MonsterBuffOthers",
+                      "ShowInActionBar": true
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.TurnInsertAbility",
+                  "AbilityName": "Monster_W3_Aventurine_00_Skill09_Phase01_RL",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "AbilityTarget": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AbilityTargetEntity"
+                  },
+                  "InsertAbilityPriority": "MonsterBuffOthers"
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AbilityTargetEntity"
+                  },
+                  "ModifierName": "Monster_W3_AventurinePart_00_ResultTarget"
+                }
+              ]
+            }
+          ]
+        },
+        {
           "$type": "RPG.GameCore.WaitAnimState",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
@@ -631,6 +735,87 @@
       },
       "OnStart": [
         {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareMonsterPhase",
+            "CompareType": "Equal",
+            "CompareValue": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 2
+              }
+            }
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.ShowUIPage",
+              "AssetPath": "UI/Common/Widget/BattleAlertHint.prefab",
+              "UITextNodes": [
+                {
+                  "TextPath": "AreaInfoPanel/Title/Text",
+                  "TextContent": {
+                    "Hash": 2058633750
+                  }
+                }
+              ],
+              "LifeTime": 3
+            }
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.ShowUIPage",
+              "AssetPath": "UI/Common/Widget/BattleAlertHint.prefab",
+              "UITextNodes": [
+                {
+                  "TextPath": "AreaInfoPanel/Title/Text",
+                  "TextContent": {
+                    "Hash": 1917471249
+                  }
+                }
+              ],
+              "LifeTime": 3
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.SetDynamicValue",
+          "DynamicKey": "ChangePhaseCheck_RL",
+          "Value": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.RemoveModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "OneMorePerTurn"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "Monster_W3_Aventurine_00_DamageUpPunish_RL",
+          "DynamicValues": {
+            "MDF_DamageUpRatio_PerLayer": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  1720276700
+                ]
+              }
+            }
+          }
+        },
+        {
           "$type": "RPG.GameCore.SetTeamFormation",
           "Team": "TeamLight",
           "FormationType": "LightTeamNormal",
@@ -658,7 +843,7 @@
           "SummonMonsterDataList": [
             {
               "MonsterIDFromCustomValue": {
-                "Hash": 1279333447
+                "Hash": -1718055568
               },
               "LocationType": "BeforeCaster",
               "InitAnimStateName": "StandBy_Speed"
@@ -700,7 +885,7 @@
           "SummonMonsterDataList": [
             {
               "MonsterIDFromCustomValue": {
-                "Hash": -1718055568
+                "Hash": 1279333447
               },
               "LocationType": "First"
             },
@@ -726,12 +911,44 @@
           },
           "SuccessTaskList": [
             {
-              "$type": "RPG.GameCore.AddModifier",
+              "$type": "RPG.GameCore.RetargetList",
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "CasterSummonedMinions"
               },
-              "ModifierName": "Monster_W3_Aventurine_00_TargetDice"
+              "Predicate": {
+                "$type": "RPG.GameCore.ByIsContainModifier",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "ModifierName": "Monster_W3_AventurinePart_00_SpeedZero_RL",
+                "Inverse": true
+              },
+              "MaxNumber": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 3
+                }
+              },
+              "TaskList": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntityList"
+                  },
+                  "ModifierName": "Monster_W3_Aventurine_00_TargetDice"
+                },
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntityList"
+                  },
+                  "ModifierName": "Monster_W3_Aventurine_00_TargetDice_RL"
+                }
+              ]
             }
           ]
         },
@@ -870,39 +1087,9 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "AllLightTeam"
               },
-              "InsertAbilityPriority": "MonsterChangePhase",
-              "ShowInActionBar": true
+              "InsertAbilityPriority": "MonsterChangePhase"
             }
           ]
-        },
-        {
-          "$type": "RPG.GameCore.RemoveModifier",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AllEnemy"
-          },
-          "ModifierName": "Monster_W3_Aventurine_00_DamageUp_RL"
-        },
-        {
-          "$type": "RPG.GameCore.RemoveModifier",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AllEnemy"
-          },
-          "ModifierName": "Monster_W3_Aventurine_00_DamageTakenUp_RL"
-        },
-        {
-          "$type": "RPG.GameCore.ShowUIPage",
-          "AssetPath": "UI/Common/Widget/BattleAlertHint.prefab",
-          "UITextNodes": [
-            {
-              "TextPath": "AreaInfoPanel/Title/Text",
-              "TextContent": {
-                "Hash": -350765785
-              }
-            }
-          ],
-          "LifeTime": 2
         },
         {
           "$type": "RPG.GameCore.PredicateTaskList",
@@ -1029,6 +1216,26 @@
           },
           "TaskList": [
             {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ParamEntity"
+              },
+              "ModifierName": "Monster_W3_AventurinePart_00_Result",
+              "DynamicValues": {
+                "MDF_MaxLoopCount_RL": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAK",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      -746033571
+                    ]
+                  }
+                }
+              }
+            },
+            {
               "$type": "RPG.GameCore.TriggerAnimState",
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
@@ -1047,14 +1254,6 @@
                   "Value": 0
                 }
               }
-            },
-            {
-              "$type": "RPG.GameCore.AddModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ParamEntity"
-              },
-              "ModifierName": "Monster_W3_AventurinePart_00_Result"
             }
           ]
         },
@@ -1122,6 +1321,20 @@
           "PhaseAnimConfig": {
             "StandBy": "StandBy_Gambling"
           }
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareMonsterPhase",
+            "CompareType": "Equal",
+            "CompareValue": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 2
+              }
+            }
+          },
+          "SuccessTaskList": []
         },
         {
           "$type": "RPG.GameCore.AddModifier",
@@ -1646,6 +1859,16 @@
                 "Alias": "AbilityTargetEntity"
               },
               "ModifierName": "Monster_W3_Aventurine_00_DamageUp_RL",
+              "LifeTime": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    82085217
+                  ]
+                }
+              },
               "LayerAddWhenStack": {
                 "IsDynamic": true,
                 "PostfixExpr": {
@@ -1695,11 +1918,361 @@
                 {
                   "TextPath": "AreaInfoPanel/Title/Text",
                   "TextContent": {
-                    "Hash": -281461983
+                    "Hash": -1170659127
                   }
                 }
               ],
               "LifeTime": 3
+            },
+            {
+              "$type": "RPG.GameCore.SwitchCaseByDynamicValue",
+              "Switch": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    245892332
+                  ]
+                }
+              },
+              "CaseTaskList": [
+                {
+                  "Case": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  },
+                  "TaskList": [
+                    {
+                      "$type": "RPG.GameCore.TriggerEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AbilityTargetEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_Icon.prefab",
+                      "AttachPoint": "Origin",
+                      "PositionOffset": {
+                        "X": 0.25,
+                        "Y": 0.6,
+                        "Z": 0.5
+                      },
+                      "Scale": {
+                        "X": 0.15,
+                        "Y": 0.15,
+                        "Z": 0.15
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.TriggerEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AbilityTargetEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_X_Spyellow.prefab",
+                      "AttachPoint": "Origin",
+                      "PositionOffset": {
+                        "X": 0,
+                        "Y": 0.6,
+                        "Z": 0.5
+                      },
+                      "Scale": {
+                        "X": 0.15,
+                        "Y": 0.15,
+                        "Z": 0.15
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.TriggerEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AbilityTargetEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_01_Spyellow.prefab",
+                      "AttachPoint": "Origin",
+                      "PositionOffset": {
+                        "X": -0.25,
+                        "Y": 0.6,
+                        "Z": 0.5
+                      },
+                      "Scale": {
+                        "X": 0.15,
+                        "Y": 0.15,
+                        "Z": 0.15
+                      }
+                    }
+                  ]
+                },
+                {
+                  "Case": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 2
+                    }
+                  },
+                  "TaskList": [
+                    {
+                      "$type": "RPG.GameCore.TriggerEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AbilityTargetEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_Icon.prefab",
+                      "AttachPoint": "Origin",
+                      "PositionOffset": {
+                        "X": 0.25,
+                        "Y": 0.6,
+                        "Z": 0.5
+                      },
+                      "Scale": {
+                        "X": 0.15,
+                        "Y": 0.15,
+                        "Z": 0.15
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.TriggerEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AbilityTargetEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_X_Spyellow.prefab",
+                      "AttachPoint": "Origin",
+                      "PositionOffset": {
+                        "X": 0,
+                        "Y": 0.6,
+                        "Z": 0.5
+                      },
+                      "Scale": {
+                        "X": 0.15,
+                        "Y": 0.15,
+                        "Z": 0.15
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.TriggerEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AbilityTargetEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_02_Spyellow.prefab",
+                      "AttachPoint": "Origin",
+                      "PositionOffset": {
+                        "X": -0.25,
+                        "Y": 0.6,
+                        "Z": 0.5
+                      },
+                      "Scale": {
+                        "X": 0.15,
+                        "Y": 0.15,
+                        "Z": 0.15
+                      }
+                    }
+                  ]
+                },
+                {
+                  "Case": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 4
+                    }
+                  },
+                  "TaskList": [
+                    {
+                      "$type": "RPG.GameCore.TriggerEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AbilityTargetEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_Icon.prefab",
+                      "AttachPoint": "Origin",
+                      "PositionOffset": {
+                        "X": 0.25,
+                        "Y": 0.6,
+                        "Z": 0.5
+                      },
+                      "Scale": {
+                        "X": 0.15,
+                        "Y": 0.15,
+                        "Z": 0.15
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.TriggerEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AbilityTargetEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_X_Spyellow.prefab",
+                      "AttachPoint": "Origin",
+                      "PositionOffset": {
+                        "X": 0,
+                        "Y": 0.6,
+                        "Z": 0.5
+                      },
+                      "Scale": {
+                        "X": 0.15,
+                        "Y": 0.15,
+                        "Z": 0.15
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.TriggerEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AbilityTargetEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_04_Spyellow.prefab",
+                      "AttachPoint": "Origin",
+                      "PositionOffset": {
+                        "X": -0.25,
+                        "Y": 0.6,
+                        "Z": 0.5
+                      },
+                      "Scale": {
+                        "X": 0.15,
+                        "Y": 0.15,
+                        "Z": 0.15
+                      }
+                    }
+                  ]
+                },
+                {
+                  "Case": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 8
+                    }
+                  },
+                  "TaskList": [
+                    {
+                      "$type": "RPG.GameCore.TriggerEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AbilityTargetEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_Icon.prefab",
+                      "AttachPoint": "Origin",
+                      "PositionOffset": {
+                        "X": 0.25,
+                        "Y": 0.6,
+                        "Z": 0.5
+                      },
+                      "Scale": {
+                        "X": 0.15,
+                        "Y": 0.15,
+                        "Z": 0.15
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.TriggerEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AbilityTargetEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_X_Spyellow.prefab",
+                      "AttachPoint": "Origin",
+                      "PositionOffset": {
+                        "X": 0,
+                        "Y": 0.6,
+                        "Z": 0.5
+                      },
+                      "Scale": {
+                        "X": 0.15,
+                        "Y": 0.15,
+                        "Z": 0.15
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.TriggerEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AbilityTargetEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_08_Spyellow.prefab",
+                      "AttachPoint": "Origin",
+                      "PositionOffset": {
+                        "X": -0.25,
+                        "Y": 0.6,
+                        "Z": 0.5
+                      },
+                      "Scale": {
+                        "X": 0.15,
+                        "Y": 0.15,
+                        "Z": 0.15
+                      }
+                    }
+                  ]
+                },
+                {
+                  "Case": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 16
+                    }
+                  },
+                  "TaskList": [
+                    {
+                      "$type": "RPG.GameCore.TriggerEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AbilityTargetEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_Icon.prefab",
+                      "AttachPoint": "Origin",
+                      "PositionOffset": {
+                        "X": 0.25,
+                        "Y": 0.6,
+                        "Z": 0.5
+                      },
+                      "Scale": {
+                        "X": 0.15,
+                        "Y": 0.15,
+                        "Z": 0.15
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.TriggerEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AbilityTargetEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_X_Spyellow.prefab",
+                      "AttachPoint": "Origin",
+                      "PositionOffset": {
+                        "X": 0,
+                        "Y": 0.6,
+                        "Z": 0.5
+                      },
+                      "Scale": {
+                        "X": 0.15,
+                        "Y": 0.15,
+                        "Z": 0.15
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.TriggerEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AbilityTargetEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_16_Spyellow.prefab",
+                      "AttachPoint": "Origin",
+                      "PositionOffset": {
+                        "X": -0.25,
+                        "Y": 0.6,
+                        "Z": 0.5
+                      },
+                      "Scale": {
+                        "X": 0.15,
+                        "Y": 0.15,
+                        "Z": 0.15
+                      }
+                    }
+                  ]
+                }
+              ]
             },
             {
               "$type": "RPG.GameCore.WaitSecond",
@@ -1717,6 +2290,62 @@
                 "Alias": "AbilityTargetEntity"
               },
               "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill05_Win_Icon_01.prefab"
+            },
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_Icon.prefab"
+            },
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_X_Spyellow.prefab"
+            },
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_01_Spyellow.prefab"
+            },
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_02_Spyellow.prefab"
+            },
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_04_Spyellow.prefab"
+            },
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_08_Spyellow.prefab"
+            },
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_16_Spyellow.prefab"
             }
           ],
           "FailedTaskList": [
@@ -1750,7 +2379,7 @@
                     {
                       "TextPath": "AreaInfoPanel/Title/Text",
                       "TextContent": {
-                        "Hash": -1041131655
+                        "Hash": -181568023
                       }
                     }
                   ],
@@ -1853,6 +2482,16 @@
                     "Alias": "AbilityTargetEntity"
                   },
                   "ModifierName": "Monster_W3_Aventurine_00_DamageTakenUp_RL",
+                  "LifeTime": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        60446843
+                      ]
+                    }
+                  },
                   "LayerAddWhenStack": {
                     "IsDynamic": true,
                     "PostfixExpr": {
@@ -1883,7 +2522,7 @@
                     {
                       "TextPath": "AreaInfoPanel/Title/Text",
                       "TextContent": {
-                        "Hash": 1116711566
+                        "Hash": 1398069744
                       }
                     }
                   ],
@@ -1916,6 +2555,356 @@
                     "$type": "RPG.GameCore.TargetAlias",
                     "Alias": "AbilityTargetEntity"
                   }
+                },
+                {
+                  "$type": "RPG.GameCore.SwitchCaseByDynamicValue",
+                  "Switch": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        245892332
+                      ]
+                    }
+                  },
+                  "CaseTaskList": [
+                    {
+                      "Case": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1
+                        }
+                      },
+                      "TaskList": [
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "AbilityTargetEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_Icon_Drak.prefab",
+                          "AttachPoint": "Origin",
+                          "PositionOffset": {
+                            "X": 0.25,
+                            "Y": 0.6,
+                            "Z": 0.5
+                          },
+                          "Scale": {
+                            "X": 0.15,
+                            "Y": 0.15,
+                            "Z": 0.15
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "AbilityTargetEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_X_Spyellow_Drak.prefab",
+                          "AttachPoint": "Origin",
+                          "PositionOffset": {
+                            "X": 0,
+                            "Y": 0.6,
+                            "Z": 0.5
+                          },
+                          "Scale": {
+                            "X": 0.15,
+                            "Y": 0.15,
+                            "Z": 0.15
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "AbilityTargetEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_01_Spyellow_Drak.prefab",
+                          "AttachPoint": "Origin",
+                          "PositionOffset": {
+                            "X": -0.25,
+                            "Y": 0.6,
+                            "Z": 0.5
+                          },
+                          "Scale": {
+                            "X": 0.15,
+                            "Y": 0.15,
+                            "Z": 0.15
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "Case": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 2
+                        }
+                      },
+                      "TaskList": [
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "AbilityTargetEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_Icon_Drak.prefab",
+                          "AttachPoint": "Origin",
+                          "PositionOffset": {
+                            "X": 0.25,
+                            "Y": 0.6,
+                            "Z": 0.5
+                          },
+                          "Scale": {
+                            "X": 0.15,
+                            "Y": 0.15,
+                            "Z": 0.15
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "AbilityTargetEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_X_Spyellow_Drak.prefab",
+                          "AttachPoint": "Origin",
+                          "PositionOffset": {
+                            "X": 0,
+                            "Y": 0.6,
+                            "Z": 0.5
+                          },
+                          "Scale": {
+                            "X": 0.15,
+                            "Y": 0.15,
+                            "Z": 0.15
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "AbilityTargetEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_02_Spyellow_Drak.prefab",
+                          "AttachPoint": "Origin",
+                          "PositionOffset": {
+                            "X": -0.25,
+                            "Y": 0.6,
+                            "Z": 0.5
+                          },
+                          "Scale": {
+                            "X": 0.15,
+                            "Y": 0.15,
+                            "Z": 0.15
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "Case": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 4
+                        }
+                      },
+                      "TaskList": [
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "AbilityTargetEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_Icon_Drak.prefab",
+                          "AttachPoint": "Origin",
+                          "PositionOffset": {
+                            "X": 0.25,
+                            "Y": 0.6,
+                            "Z": 0.5
+                          },
+                          "Scale": {
+                            "X": 0.15,
+                            "Y": 0.15,
+                            "Z": 0.15
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "AbilityTargetEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_X_Spyellow_Drak.prefab",
+                          "AttachPoint": "Origin",
+                          "PositionOffset": {
+                            "X": 0,
+                            "Y": 0.6,
+                            "Z": 0.5
+                          },
+                          "Scale": {
+                            "X": 0.15,
+                            "Y": 0.15,
+                            "Z": 0.15
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "AbilityTargetEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_04_Spyellow_Drak.prefab",
+                          "AttachPoint": "Origin",
+                          "PositionOffset": {
+                            "X": -0.25,
+                            "Y": 0.6,
+                            "Z": 0.5
+                          },
+                          "Scale": {
+                            "X": 0.15,
+                            "Y": 0.15,
+                            "Z": 0.15
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "Case": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 8
+                        }
+                      },
+                      "TaskList": [
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "AbilityTargetEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_Icon_Drak.prefab",
+                          "AttachPoint": "Origin",
+                          "PositionOffset": {
+                            "X": 0.25,
+                            "Y": 0.6,
+                            "Z": 0.5
+                          },
+                          "Scale": {
+                            "X": 0.15,
+                            "Y": 0.15,
+                            "Z": 0.15
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "AbilityTargetEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_X_Spyellow_Drak.prefab",
+                          "AttachPoint": "Origin",
+                          "PositionOffset": {
+                            "X": 0,
+                            "Y": 0.6,
+                            "Z": 0.5
+                          },
+                          "Scale": {
+                            "X": 0.15,
+                            "Y": 0.15,
+                            "Z": 0.15
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "AbilityTargetEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_08_Spyellow_Drak.prefab",
+                          "AttachPoint": "Origin",
+                          "PositionOffset": {
+                            "X": -0.25,
+                            "Y": 0.6,
+                            "Z": 0.5
+                          },
+                          "Scale": {
+                            "X": 0.15,
+                            "Y": 0.15,
+                            "Z": 0.15
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "Case": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 16
+                        }
+                      },
+                      "TaskList": [
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "AbilityTargetEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_Icon_Drak.prefab",
+                          "AttachPoint": "Origin",
+                          "PositionOffset": {
+                            "X": 0.25,
+                            "Y": 0.6,
+                            "Z": 0.5
+                          },
+                          "Scale": {
+                            "X": 0.15,
+                            "Y": 0.15,
+                            "Z": 0.15
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "AbilityTargetEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_X_Spyellow_Drak.prefab",
+                          "AttachPoint": "Origin",
+                          "PositionOffset": {
+                            "X": 0,
+                            "Y": 0.6,
+                            "Z": 0.5
+                          },
+                          "Scale": {
+                            "X": 0.15,
+                            "Y": 0.15,
+                            "Z": 0.15
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "AbilityTargetEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_16_Spyellow_Drak.prefab",
+                          "AttachPoint": "Origin",
+                          "PositionOffset": {
+                            "X": -0.25,
+                            "Y": 0.6,
+                            "Z": 0.5
+                          },
+                          "Scale": {
+                            "X": 0.15,
+                            "Y": 0.15,
+                            "Z": 0.15
+                          }
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             }
@@ -2100,6 +3089,69 @@
           "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill05_Icon_Scene.prefab"
         },
         {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_Icon_Drak.prefab",
+          "IsNeedFadeOut": false
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_X_Spyellow_Drak.prefab",
+          "IsNeedFadeOut": false
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_01_Spyellow_Drak.prefab",
+          "IsNeedFadeOut": false
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_02_Spyellow_Drak.prefab",
+          "IsNeedFadeOut": false
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_04_Spyellow_Drak.prefab",
+          "IsNeedFadeOut": false
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_08_Spyellow_Drak.prefab",
+          "IsNeedFadeOut": false
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_16_Spyellow_Drak.prefab",
+          "IsNeedFadeOut": false
+        },
+        {
           "$type": "RPG.GameCore.RemoveModifier",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
@@ -2195,6 +3247,14 @@
         "TargetType": "AllEnemy"
       },
       "OnStart": [
+        {
+          "$type": "RPG.GameCore.RemoveModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "Monster_W3_Aventurine_00_Skill07Result_RL_MuteDamage"
+        },
         {
           "$type": "RPG.GameCore.SetTeamFormation",
           "Team": "TeamLight",
@@ -2807,6 +3867,16 @@
                     "Alias": "ParamEntity"
                   },
                   "ModifierName": "Monster_W3_Aventurine_00_DamageUp_RL",
+                  "LifeTime": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        82085217
+                      ]
+                    }
+                  },
                   "LayerAddWhenStack": {
                     "IsDynamic": true,
                     "PostfixExpr": {
@@ -2856,6 +3926,421 @@
                     "$type": "RPG.GameCore.TargetAlias",
                     "Alias": "ParamEntity"
                   }
+                },
+                {
+                  "$type": "RPG.GameCore.SwitchCaseByDynamicValue",
+                  "Switch": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        245892332
+                      ]
+                    }
+                  },
+                  "CaseTaskList": [
+                    {
+                      "Case": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1
+                        }
+                      },
+                      "TaskList": [
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_Icon.prefab",
+                          "AttachPoint": "Origin",
+                          "PositionOffset": {
+                            "X": 0.25,
+                            "Y": 0.6,
+                            "Z": 0.5
+                          },
+                          "Scale": {
+                            "X": 0.15,
+                            "Y": 0.15,
+                            "Z": 0.15
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_X_Spyellow.prefab",
+                          "AttachPoint": "Origin",
+                          "PositionOffset": {
+                            "X": 0,
+                            "Y": 0.6,
+                            "Z": 0.5
+                          },
+                          "Scale": {
+                            "X": 0.15,
+                            "Y": 0.15,
+                            "Z": 0.15
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_01_Spyellow.prefab",
+                          "AttachPoint": "Origin",
+                          "PositionOffset": {
+                            "X": -0.25,
+                            "Y": 0.6,
+                            "Z": 0.5
+                          },
+                          "Scale": {
+                            "X": 0.15,
+                            "Y": 0.15,
+                            "Z": 0.15
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "Case": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 2
+                        }
+                      },
+                      "TaskList": [
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_Icon.prefab",
+                          "AttachPoint": "Origin",
+                          "PositionOffset": {
+                            "X": 0.25,
+                            "Y": 0.6,
+                            "Z": 0.5
+                          },
+                          "Scale": {
+                            "X": 0.15,
+                            "Y": 0.15,
+                            "Z": 0.15
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_X_Spyellow.prefab",
+                          "AttachPoint": "Origin",
+                          "PositionOffset": {
+                            "X": 0,
+                            "Y": 0.6,
+                            "Z": 0.5
+                          },
+                          "Scale": {
+                            "X": 0.15,
+                            "Y": 0.15,
+                            "Z": 0.15
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_02_Spyellow.prefab",
+                          "AttachPoint": "Origin",
+                          "PositionOffset": {
+                            "X": -0.25,
+                            "Y": 0.6,
+                            "Z": 0.5
+                          },
+                          "Scale": {
+                            "X": 0.15,
+                            "Y": 0.15,
+                            "Z": 0.15
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "Case": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 4
+                        }
+                      },
+                      "TaskList": [
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_Icon.prefab",
+                          "AttachPoint": "Origin",
+                          "PositionOffset": {
+                            "X": 0.25,
+                            "Y": 0.6,
+                            "Z": 0.5
+                          },
+                          "Scale": {
+                            "X": 0.15,
+                            "Y": 0.15,
+                            "Z": 0.15
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_X_Spyellow.prefab",
+                          "AttachPoint": "Origin",
+                          "PositionOffset": {
+                            "X": 0,
+                            "Y": 0.6,
+                            "Z": 0.5
+                          },
+                          "Scale": {
+                            "X": 0.15,
+                            "Y": 0.15,
+                            "Z": 0.15
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_04_Spyellow.prefab",
+                          "AttachPoint": "Origin",
+                          "PositionOffset": {
+                            "X": -0.25,
+                            "Y": 0.6,
+                            "Z": 0.5
+                          },
+                          "Scale": {
+                            "X": 0.15,
+                            "Y": 0.15,
+                            "Z": 0.15
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "Case": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 8
+                        }
+                      },
+                      "TaskList": [
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_Icon.prefab",
+                          "AttachPoint": "Origin",
+                          "PositionOffset": {
+                            "X": 0.25,
+                            "Y": 0.6,
+                            "Z": 0.5
+                          },
+                          "Scale": {
+                            "X": 0.15,
+                            "Y": 0.15,
+                            "Z": 0.15
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_X_Spyellow.prefab",
+                          "AttachPoint": "Origin",
+                          "PositionOffset": {
+                            "X": 0,
+                            "Y": 0.6,
+                            "Z": 0.5
+                          },
+                          "Scale": {
+                            "X": 0.15,
+                            "Y": 0.15,
+                            "Z": 0.15
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_08_Spyellow.prefab",
+                          "AttachPoint": "Origin",
+                          "PositionOffset": {
+                            "X": -0.25,
+                            "Y": 0.6,
+                            "Z": 0.5
+                          },
+                          "Scale": {
+                            "X": 0.15,
+                            "Y": 0.15,
+                            "Z": 0.15
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "Case": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 16
+                        }
+                      },
+                      "TaskList": [
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_Icon.prefab",
+                          "AttachPoint": "Origin",
+                          "PositionOffset": {
+                            "X": 0.25,
+                            "Y": 0.6,
+                            "Z": 0.5
+                          },
+                          "Scale": {
+                            "X": 0.15,
+                            "Y": 0.15,
+                            "Z": 0.15
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_X_Spyellow.prefab",
+                          "AttachPoint": "Origin",
+                          "PositionOffset": {
+                            "X": 0,
+                            "Y": 0.6,
+                            "Z": 0.5
+                          },
+                          "Scale": {
+                            "X": 0.15,
+                            "Y": 0.15,
+                            "Z": 0.15
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_16_Spyellow.prefab",
+                          "AttachPoint": "Origin",
+                          "PositionOffset": {
+                            "X": -0.25,
+                            "Y": 0.6,
+                            "Z": 0.5
+                          },
+                          "Scale": {
+                            "X": 0.15,
+                            "Y": 0.15,
+                            "Z": 0.15
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.WaitSecond",
+                  "WaitTime": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0.4
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_Icon.prefab"
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_X_Spyellow.prefab"
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_01_Spyellow.prefab"
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_02_Spyellow.prefab"
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_04_Spyellow.prefab"
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_08_Spyellow.prefab"
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_16_Spyellow.prefab"
                 }
               ]
             }
@@ -2901,7 +4386,7 @@
                 {
                   "TextPath": "AreaInfoPanel/Title/Text",
                   "TextContent": {
-                    "Hash": 1921807018
+                    "Hash": 193735668
                   }
                 }
               ],
@@ -3027,7 +4512,7 @@
                 {
                   "TextPath": "AreaInfoPanel/Title/Text",
                   "TextContent": {
-                    "Hash": -346731494
+                    "Hash": 661629212
                   }
                 }
               ],
@@ -3111,6 +4596,16 @@
                     "Alias": "ParamEntity"
                   },
                   "ModifierName": "Monster_W3_Aventurine_00_DamageTakenUp_RL",
+                  "LifeTime": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        60446843
+                      ]
+                    }
+                  },
                   "LayerAddWhenStack": {
                     "IsDynamic": true,
                     "PostfixExpr": {
@@ -3152,6 +4647,356 @@
                     "$type": "RPG.GameCore.TargetAlias",
                     "Alias": "ParamEntity"
                   }
+                },
+                {
+                  "$type": "RPG.GameCore.SwitchCaseByDynamicValue",
+                  "Switch": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        245892332
+                      ]
+                    }
+                  },
+                  "CaseTaskList": [
+                    {
+                      "Case": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1
+                        }
+                      },
+                      "TaskList": [
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_Icon_Drak.prefab",
+                          "AttachPoint": "Origin",
+                          "PositionOffset": {
+                            "X": 0.25,
+                            "Y": 0.6,
+                            "Z": 0.5
+                          },
+                          "Scale": {
+                            "X": 0.15,
+                            "Y": 0.15,
+                            "Z": 0.15
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_X_Spyellow_Drak.prefab",
+                          "AttachPoint": "Origin",
+                          "PositionOffset": {
+                            "X": 0,
+                            "Y": 0.6,
+                            "Z": 0.5
+                          },
+                          "Scale": {
+                            "X": 0.15,
+                            "Y": 0.15,
+                            "Z": 0.15
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_01_Spyellow_Drak.prefab",
+                          "AttachPoint": "Origin",
+                          "PositionOffset": {
+                            "X": -0.25,
+                            "Y": 0.6,
+                            "Z": 0.5
+                          },
+                          "Scale": {
+                            "X": 0.15,
+                            "Y": 0.15,
+                            "Z": 0.15
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "Case": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 2
+                        }
+                      },
+                      "TaskList": [
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_Icon_Drak.prefab",
+                          "AttachPoint": "Origin",
+                          "PositionOffset": {
+                            "X": 0.25,
+                            "Y": 0.6,
+                            "Z": 0.5
+                          },
+                          "Scale": {
+                            "X": 0.15,
+                            "Y": 0.15,
+                            "Z": 0.15
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_X_Spyellow_Drak.prefab",
+                          "AttachPoint": "Origin",
+                          "PositionOffset": {
+                            "X": 0,
+                            "Y": 0.6,
+                            "Z": 0.5
+                          },
+                          "Scale": {
+                            "X": 0.15,
+                            "Y": 0.15,
+                            "Z": 0.15
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_02_Spyellow_Drak.prefab",
+                          "AttachPoint": "Origin",
+                          "PositionOffset": {
+                            "X": -0.25,
+                            "Y": 0.6,
+                            "Z": 0.5
+                          },
+                          "Scale": {
+                            "X": 0.15,
+                            "Y": 0.15,
+                            "Z": 0.15
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "Case": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 4
+                        }
+                      },
+                      "TaskList": [
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_Icon_Drak.prefab",
+                          "AttachPoint": "Origin",
+                          "PositionOffset": {
+                            "X": 0.25,
+                            "Y": 0.6,
+                            "Z": 0.5
+                          },
+                          "Scale": {
+                            "X": 0.15,
+                            "Y": 0.15,
+                            "Z": 0.15
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_X_Spyellow_Drak.prefab",
+                          "AttachPoint": "Origin",
+                          "PositionOffset": {
+                            "X": 0,
+                            "Y": 0.6,
+                            "Z": 0.5
+                          },
+                          "Scale": {
+                            "X": 0.15,
+                            "Y": 0.15,
+                            "Z": 0.15
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_04_Spyellow_Drak.prefab",
+                          "AttachPoint": "Origin",
+                          "PositionOffset": {
+                            "X": -0.25,
+                            "Y": 0.6,
+                            "Z": 0.5
+                          },
+                          "Scale": {
+                            "X": 0.15,
+                            "Y": 0.15,
+                            "Z": 0.15
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "Case": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 8
+                        }
+                      },
+                      "TaskList": [
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_Icon_Drak.prefab",
+                          "AttachPoint": "Origin",
+                          "PositionOffset": {
+                            "X": 0.25,
+                            "Y": 0.6,
+                            "Z": 0.5
+                          },
+                          "Scale": {
+                            "X": 0.15,
+                            "Y": 0.15,
+                            "Z": 0.15
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_X_Spyellow_Drak.prefab",
+                          "AttachPoint": "Origin",
+                          "PositionOffset": {
+                            "X": 0,
+                            "Y": 0.6,
+                            "Z": 0.5
+                          },
+                          "Scale": {
+                            "X": 0.15,
+                            "Y": 0.15,
+                            "Z": 0.15
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_08_Spyellow_Drak.prefab",
+                          "AttachPoint": "Origin",
+                          "PositionOffset": {
+                            "X": -0.25,
+                            "Y": 0.6,
+                            "Z": 0.5
+                          },
+                          "Scale": {
+                            "X": 0.15,
+                            "Y": 0.15,
+                            "Z": 0.15
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "Case": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 16
+                        }
+                      },
+                      "TaskList": [
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_Icon_Drak.prefab",
+                          "AttachPoint": "Origin",
+                          "PositionOffset": {
+                            "X": 0.25,
+                            "Y": 0.6,
+                            "Z": 0.5
+                          },
+                          "Scale": {
+                            "X": 0.15,
+                            "Y": 0.15,
+                            "Z": 0.15
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_X_Spyellow_Drak.prefab",
+                          "AttachPoint": "Origin",
+                          "PositionOffset": {
+                            "X": 0,
+                            "Y": 0.6,
+                            "Z": 0.5
+                          },
+                          "Scale": {
+                            "X": 0.15,
+                            "Y": 0.15,
+                            "Z": 0.15
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_16_Spyellow_Drak.prefab",
+                          "AttachPoint": "Origin",
+                          "PositionOffset": {
+                            "X": -0.25,
+                            "Y": 0.6,
+                            "Z": 0.5
+                          },
+                          "Scale": {
+                            "X": 0.15,
+                            "Y": 0.15,
+                            "Z": 0.15
+                          }
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             }
@@ -3211,7 +5056,7 @@
                 {
                   "TextPath": "AreaInfoPanel/Title/Text",
                   "TextContent": {
-                    "Hash": -729813323
+                    "Hash": -628778283
                   }
                 }
               ],
@@ -3225,6 +5070,23 @@
                   "Value": 1
                 }
               }
+            }
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.SetDieImmediately",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "CasterSummonedMinions"
+              }
+            },
+            {
+              "$type": "RPG.GameCore.ForceKill",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "CasterSummonedMinions"
+              },
+              "CanOverkill": false
             }
           ]
         },
@@ -3245,21 +5107,6 @@
               "Value": 0.5
             }
           }
-        },
-        {
-          "$type": "RPG.GameCore.SetDieImmediately",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "CasterSummonedMinions"
-          }
-        },
-        {
-          "$type": "RPG.GameCore.ForceKill",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "CasterSummonedMinions"
-          },
-          "CanOverkill": false
         },
         {
           "$type": "RPG.GameCore.SetEntityVisible",
@@ -3400,6 +5247,69 @@
           "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill06_Icon_Lose.prefab"
         },
         {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_Icon_Drak.prefab",
+          "IsNeedFadeOut": false
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_X_Spyellow_Drak.prefab",
+          "IsNeedFadeOut": false
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_01_Spyellow_Drak.prefab",
+          "IsNeedFadeOut": false
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_02_Spyellow_Drak.prefab",
+          "IsNeedFadeOut": false
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_04_Spyellow_Drak.prefab",
+          "IsNeedFadeOut": false
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_08_Spyellow_Drak.prefab",
+          "IsNeedFadeOut": false
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill09_16_Spyellow_Drak.prefab",
+          "IsNeedFadeOut": false
+        },
+        {
           "$type": "RPG.GameCore.RemoveModifier",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
@@ -3436,6 +5346,325 @@
           "IsSlientDispel": true
         },
         {
+          "$type": "RPG.GameCore.SetSkillTargetFormationByPos",
+          "Team": "TeamDark",
+          "CustomTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "IgnoreHitBoxRadius": true,
+          "TargetFormation": {}
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill04_0_Yellow.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill04_01_Yellow.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill04_02_Yellow.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill04_03_Yellow.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill04_04_Yellow.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill04_05_Yellow.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill04_06_Yellow.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill04_07_Yellow.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill04_08_Yellow.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill04_09_Yellow.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill04_10_Yellow.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill04_0_Green.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill04_01_Green.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill04_02_Green.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill04_03_Green.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill04_04_Green.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill04_05_Green.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill04_06_Green.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill04_07_Green.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill04_08_Green.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill04_09_Green.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill04_10_Green.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill04_0_Green_Dark.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill04_01_Green_Dark.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill04_02_Green_Dark.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill04_03_Green_Dark.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill04_04_Green_Dark.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill04_05_Green_Dark.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill04_06_Green_Dark.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill04_07_Green_Dark.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill04_08_Green_Dark.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill04_09_Green_Dark.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill04.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill04_Scene.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill04_Scene_Light_01.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "LightTeamCenter"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill04_Scene_Light_02.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill04_Yello_Light.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Aventurine_00/Eff_Monster_W3_Aventurine_00_Skill04_Yellow_Win.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.GlobalMainIntensityEffect",
+          "IsRevert": true,
+          "IsDurable": true
+        },
+        {
           "$type": "RPG.GameCore.RemoveModifier",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
@@ -3466,6 +5695,40 @@
             "Alias": "AllLightTeam"
           },
           "ModifierName": "Monster_W3_Aventurine_00_Sign"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "ModifierName": "Monster_W3_AventurinePart_00_ResultCount"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "ModifierName": "Monster_W3_AventurinePart_00_ResultCountZero"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "ModifierName": "Monster_W3_AventurinePart_00_ResultTarget"
+        },
+        {
+          "$type": "RPG.GameCore.SetDynamicValue",
+          "DynamicKey": "DiceResult",
+          "Value": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0
+            }
+          }
         },
         {
           "$type": "RPG.GameCore.SetDieImmediately",
@@ -3606,7 +5869,7 @@
             "CompareValue": {
               "IsDynamic": false,
               "FixedValue": {
-                "Value": 1
+                "Value": 2
               }
             }
           },
@@ -3618,6 +5881,19 @@
                 "Value": "Phase2"
               },
               "SaveToCustomString": true
+            },
+            {
+              "$type": "RPG.GameCore.ShowUIPage",
+              "AssetPath": "UI/Common/Widget/BattlePhaseChangeHint.prefab",
+              "UITextNodes": [
+                {
+                  "TextPath": "AreaInfoPanel/Title/Text",
+                  "TextContent": {
+                    "Hash": -602640412
+                  }
+                }
+              ],
+              "LifeTime": 3
             }
           ],
           "FailedTaskList": [
@@ -3625,9 +5901,22 @@
               "$type": "RPG.GameCore.LevelAudioState",
               "GroupName": "State_Battle_Monster_W3_Aventurine_00",
               "StateName": {
-                "Value": "Phase3"
+                "Value": "Phase2"
               },
               "SaveToCustomString": true
+            },
+            {
+              "$type": "RPG.GameCore.ShowUIPage",
+              "AssetPath": "UI/Common/Widget/BattlePhaseChangeHint.prefab",
+              "UITextNodes": [
+                {
+                  "TextPath": "AreaInfoPanel/Title/Text",
+                  "TextContent": {
+                    "Hash": 963443529
+                  }
+                }
+              ],
+              "LifeTime": 3
             }
           ]
         },
@@ -3753,6 +6042,22 @@
           "ModifierName": "Monster_W3_Aventurine_00_Endurance"
         },
         {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "OneMorePerTurn"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "OneMore"
+        },
+        {
           "$type": "RPG.GameCore.PredicateTaskList",
           "Predicate": {
             "$type": "RPG.GameCore.ByIsContainModifier",
@@ -3827,6 +6132,31 @@
           ]
         },
         {
+          "$type": "RPG.GameCore.AddGlobalDynamicOffset",
+          "ConfigName": {
+            "Value": "Aventurine_00"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.RemoveModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "Monster_W3_Aventurine_00_Unselectable"
+        },
+        {
+          "$type": "RPG.GameCore.CharacterChangePhase",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "PhaseName": "Phase1",
+          "PhaseAnimConfig": {
+            "StandBy": "StandBy"
+          }
+        },
+        {
           "$type": "RPG.GameCore.TriggerAnimState",
           "AnimLogicState": "Idle"
         }
@@ -3834,7 +6164,28 @@
     }
   ],
   "GlobalModifiers": {
-    "Monster_W3_Aventurine_00_RL": {},
+    "Monster_W3_Aventurine_00_RL": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.ShowUIPage",
+              "AssetPath": "UI/Common/Widget/BattlePhaseChangeHint.prefab",
+              "UITextNodes": [
+                {
+                  "TextPath": "AreaInfoPanel/Title/Text",
+                  "TextContent": {
+                    "Hash": -199355885
+                  }
+                }
+              ],
+              "LifeTime": 3
+            }
+          ]
+        }
+      ]
+    },
     "Monster_W3_Aventurine_00_PhaseController_RL": {
       "_CallbackList": [
         {
@@ -3983,6 +6334,20 @@
                       "InsertAbilityPriority": "MonsterChangePhase",
                       "OwnerAliveState": "Mask_AliveOrLimbo",
                       "TargetAliveState": "Mask_AliveOrLimbo"
+                    },
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "DynamicKey": "ChangePhaseCheck_RL",
+                      "Value": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1
+                        }
+                      }
                     }
                   ],
                   "FailedTaskList": []
@@ -4141,6 +6506,11 @@
         }
       }
     },
+    "Monster_W3_Aventurine_00_Skill07Result_RL_MuteDamage": {
+      "BehaviorFlagList": [
+        "MuteDamage"
+      ]
+    },
     "Monster_W3_Aventurine_00_Skill07Result_RL": {
       "_CallbackList": [
         {
@@ -4153,7 +6523,24 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "Caster"
               },
-              "InsertAbilityPriority": "MonsterBuffOthers"
+              "InsertAbilityPriority": "MonsterBuffOthers",
+              "OwnerAliveState": "Mask_AliveOrLimbo",
+              "TargetAliveState": "Mask_AliveOrLimbo",
+              "ActivePredicate": {
+                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ModifierOwnerEntity"
+                },
+                "DynamicKey": "ChangePhaseCheck_RL",
+                "CompareType": "Equal",
+                "CompareValue": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 0
+                  }
+                }
+              }
             },
             {
               "$type": "RPG.GameCore.RemoveSelfModifier"
@@ -4161,6 +6548,58 @@
           ]
         }
       ]
+    },
+    "Monster_W3_Aventurine_00_DamageUpPunish_RL": {
+      "LayerAddWhenStack": {
+        "IsDynamic": false,
+        "FixedValue": {
+          "Value": 1
+        }
+      },
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
+              "ValueType": "Layer",
+              "Multiplier": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1
+                }
+              },
+              "DynamicKey": "ModifierLayers"
+            },
+            {
+              "$type": "RPG.GameCore.StackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "Property": "AllDamageTypeAddedRatio",
+              "PropertyValue": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQABAQQK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    -945261968,
+                    1458882163
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "Stacking": "Replace",
+      "DynamicValues": {
+        "Values": {
+          "-945261968": {},
+          "1458882163": {}
+        }
+      }
     }
   }
 }

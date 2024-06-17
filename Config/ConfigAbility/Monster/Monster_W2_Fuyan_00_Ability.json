@@ -43,6 +43,14 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
+          "ModifierName": "Monster_Fuyan_00_LockHP"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
           "ModifierName": "MMonster_Fuyan_00_Unselectable"
         }
       ]
@@ -250,7 +258,8 @@
             "FixedValue": {
               "Value": 0.26
             }
-          }
+          },
+          "SkipWhenStateChange": true
         },
         {
           "$type": "RPG.GameCore.TriggerEffect",
@@ -272,7 +281,8 @@
             "FixedValue": {
               "Value": 0.37
             }
-          }
+          },
+          "SkipWhenStateChange": true
         },
         {
           "$type": "RPG.GameCore.TriggerEffect",
@@ -389,7 +399,8 @@
             "FixedValue": {
               "Value": 0.25
             }
-          }
+          },
+          "SkipWhenStateChange": true
         },
         {
           "$type": "RPG.GameCore.RemoveModifier",
@@ -411,7 +422,8 @@
             "FixedValue": {
               "Value": 0.296
             }
-          }
+          },
+          "SkipWhenStateChange": true
         },
         {
           "$type": "RPG.GameCore.RadialBlurEffect",
@@ -450,7 +462,8 @@
             "FixedValue": {
               "Value": 0.33
             }
-          }
+          },
+          "SkipWhenStateChange": true
         },
         {
           "$type": "RPG.GameCore.AddModifier",
@@ -477,8 +490,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "AbilityName": "Monster_Fuyan_00_Hit_Phase02",
-          "IsSkillPerform": true
+          "AbilityName": "Monster_Fuyan_00_Hit_Phase02"
         },
         {
           "$type": "RPG.GameCore.SetDynamicValueByProperty",
@@ -664,12 +676,20 @@
               "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Fuyan_00/Eff_Monster_fuyan_00_Body05.prefab"
             },
             {
-              "$type": "RPG.GameCore.RemoveModifier",
+              "$type": "RPG.GameCore.RemoveEffect",
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "Caster"
+                "Alias": "ModifierOwnerEntity"
               },
-              "ModifierName": "MMonster_Fuyan_00_EffectController"
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Fuyan_00/Eff_Monster_fuyan_00_Loop.prefab"
+            },
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Fuyan_00/Eff_Monster_fuyan_00_Loop01.prefab"
             },
             {
               "$type": "RPG.GameCore.WaitAnimState",
@@ -686,12 +706,22 @@
               }
             },
             {
-              "$type": "RPG.GameCore.AddModifier",
+              "$type": "RPG.GameCore.TriggerEffect",
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "Caster"
               },
-              "ModifierName": "MMonster_Fuyan_00_EffectController"
+              "IsAttachToTargetEntity": true,
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Fuyan_00/Eff_Monster_fuyan_00_Loop.prefab"
+            },
+            {
+              "$type": "RPG.GameCore.TriggerEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "IsAttachToTargetEntity": true,
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Fuyan_00/Eff_Monster_fuyan_00_Loop01.prefab"
             }
           ]
         }
@@ -740,24 +770,43 @@
           "Event": "OnCreate",
           "CallbackConfig": [
             {
-              "$type": "RPG.GameCore.ModifierAttachEffect",
+              "$type": "RPG.GameCore.TriggerEffect",
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "ModifierOwnerEntity"
               },
-              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Fuyan_00/Eff_Monster_fuyan_00_Loop.prefab",
-              "MinMutexTime": -1,
-              "MutexType": "Entity"
+              "IsAttachToTargetEntity": true,
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Fuyan_00/Eff_Monster_fuyan_00_Loop.prefab"
             },
             {
-              "$type": "RPG.GameCore.ModifierAttachEffect",
+              "$type": "RPG.GameCore.TriggerEffect",
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "ModifierOwnerEntity"
               },
-              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Fuyan_00/Eff_Monster_fuyan_00_Loop01.prefab",
-              "MinMutexTime": -1,
-              "MutexType": "Entity"
+              "IsAttachToTargetEntity": true,
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Fuyan_00/Eff_Monster_fuyan_00_Loop01.prefab"
+            }
+          ]
+        },
+        {
+          "Event": "OnDestroy",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Fuyan_00/Eff_Monster_fuyan_00_Loop.prefab"
+            },
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Fuyan_00/Eff_Monster_fuyan_00_Loop01.prefab"
             }
           ]
         }
@@ -1092,6 +1141,14 @@
           "Event": "OnListenCharacterDie",
           "CallbackConfig": [
             {
+              "$type": "RPG.GameCore.RemoveModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ModifierName": "Monster_Fuyan_00_LockHP"
+            },
+            {
               "$type": "RPG.GameCore.PredicateTaskList",
               "Predicate": {
                 "$type": "RPG.GameCore.ByAnd",
@@ -1239,8 +1296,7 @@
                         "$type": "RPG.GameCore.TargetAlias",
                         "Alias": "Caster"
                       },
-                      "AbilityName": "Monster_Fuyan_00_Hit_Phase01",
-                      "IsSkillPerform": true
+                      "AbilityName": "Monster_Fuyan_00_Hit_Phase01"
                     }
                   ]
                 }
@@ -1414,6 +1470,24 @@
           "283060677": {}
         }
       }
+    },
+    "Monster_Fuyan_00_LockHP": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.LockHP",
+              "Threshold": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1
+                }
+              }
+            }
+          ]
+        }
+      ]
     }
   }
 }

@@ -51,78 +51,13 @@
               "Event": "OnAfterBeingAttacked",
               "CallbackConfig": [
                 {
-                  "$type": "RPG.GameCore.SetDynamicValueByMazeBuffConfig",
-                  "QueryList": {
-                    "TeamShieldRatio": {
-                      "MazeBuffID": 670010,
-                      "Index": 6
-                    }
-                  }
-                },
-                {
-                  "$type": "RPG.GameCore.SetDynamicValue",
-                  "DynamicKey": "Shield_For_Damage",
-                  "Value": {
-                    "IsDynamic": false,
-                    "FixedValue": {
-                      "Value": 0
-                    }
-                  }
-                },
-                {
-                  "$type": "RPG.GameCore.SetDynamicValueByShield",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
-                  },
-                  "DynamicKey": "_TeamShield",
-                  "ValueType": "Team"
-                },
-                {
-                  "$type": "RPG.GameCore.SetDynamicValueByShield",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
-                  },
-                  "DynamicKey": "_Shield"
-                },
-                {
-                  "$type": "RPG.GameCore.SetDynamicValue",
-                  "DynamicKey": "_Shield",
-                  "Value": {
-                    "IsDynamic": true,
-                    "PostfixExpr": {
-                      "OpCodes": "AQABAQECBAIK",
-                      "FixedValues": [],
-                      "DynamicHashes": [
-                        1508201202,
-                        -539719431,
-                        -1594012757
-                      ]
-                    }
-                  }
-                },
-                {
-                  "$type": "RPG.GameCore.SetDynamicValue",
-                  "DynamicKey": "Shield_For_Damage",
-                  "Value": {
-                    "IsDynamic": true,
-                    "PostfixExpr": {
-                      "OpCodes": "AQABAQECBAIK",
-                      "FixedValues": [],
-                      "DynamicHashes": [
-                        -254826041,
-                        1508201202,
-                        909827945
-                      ]
-                    }
-                  }
-                },
-                {
                   "$type": "RPG.GameCore.PredicateTaskList",
                   "Predicate": {
-                    "$type": "RPG.GameCore.ByCompareDynamicValue",
-                    "DynamicKey": "Shield_For_Damage",
+                    "$type": "RPG.GameCore.ByCompareHPRatio",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
                     "CompareType": "Greater",
                     "CompareValue": {
                       "IsDynamic": false,
@@ -133,72 +68,158 @@
                   },
                   "SuccessTaskList": [
                     {
-                      "$type": "RPG.GameCore.LockTargetHP",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "AllDarkTeam"
-                      },
-                      "LockKey": "Rogue_LockHP_615010",
-                      "Threshold": {
-                        "IsDynamic": true,
-                        "PostfixExpr": {
-                          "OpCodes": "AAAK",
-                          "FixedValues": [
-                            {
-                              "Value": 1.0000076E-05
-                            }
-                          ],
-                          "DynamicHashes": []
+                      "$type": "RPG.GameCore.SetDynamicValueByMazeBuffConfig",
+                      "QueryList": {
+                        "TeamShieldRatio": {
+                          "MazeBuffID": 670010,
+                          "Index": 6
                         }
                       }
                     },
                     {
-                      "$type": "RPG.GameCore.DamageByAttackProperty",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "ParamEntity"
-                      },
-                      "AttackProperty": {
-                        "DamageType": {
-                          "SourceType": "ReadTargetType",
-                          "ReadTargetType": {
-                            "$type": "RPG.GameCore.TargetAlias",
-                            "Alias": "Caster"
-                          }
-                        },
-                        "DamageValue": {
-                          "IsDynamic": true,
-                          "PostfixExpr": {
-                            "OpCodes": "AQAK",
-                            "FixedValues": [],
-                            "DynamicHashes": [
-                              -254826041
-                            ]
-                          }
-                        },
-                        "AttackType": "Pursued",
-                        "DamageTag": "Quake",
-                        "HitEffectHeight": 1.1
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "DynamicKey": "Shield_For_Damage",
+                      "Value": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 0
+                        }
                       }
                     },
                     {
-                      "$type": "RPG.GameCore.TriggerEffect",
+                      "$type": "RPG.GameCore.SetDynamicValueByShield",
                       "TargetType": {
                         "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "ParamEntity"
+                        "Alias": "ModifierOwnerEntity"
                       },
-                      "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Rogue_Shield_v2_Hit.prefab",
-                      "Delay": 0.5,
-                      "MinMutexTime": 0.5,
-                      "MinMutexType": "Entity"
+                      "DynamicKey": "_TeamShield",
+                      "ValueType": "Team"
                     },
                     {
-                      "$type": "RPG.GameCore.UnlockTargetHP",
+                      "$type": "RPG.GameCore.SetDynamicValueByShield",
                       "TargetType": {
                         "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "AllDarkTeam"
+                        "Alias": "ModifierOwnerEntity"
                       },
-                      "LockKey": "Rogue_LockHP_615010"
+                      "DynamicKey": "_Shield"
+                    },
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "DynamicKey": "_Shield",
+                      "Value": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQABAQECBAIK",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            1508201202,
+                            -539719431,
+                            -1594012757
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "DynamicKey": "Shield_For_Damage",
+                      "Value": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQABAQECBAIK",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            -254826041,
+                            1508201202,
+                            909827945
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "DynamicKey": "Shield_For_Damage",
+                        "CompareType": "Greater",
+                        "CompareValue": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 0
+                          }
+                        }
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.LockTargetHP",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "AllDarkTeam"
+                          },
+                          "LockKey": "Rogue_LockHP_615010",
+                          "Threshold": {
+                            "IsDynamic": true,
+                            "PostfixExpr": {
+                              "OpCodes": "AAAK",
+                              "FixedValues": [
+                                {
+                                  "Value": 1.0000076E-05
+                                }
+                              ],
+                              "DynamicHashes": []
+                            }
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.DamageByAttackProperty",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "AttackProperty": {
+                            "DamageType": {
+                              "SourceType": "ReadTargetType",
+                              "ReadTargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "Caster"
+                              }
+                            },
+                            "DamageValue": {
+                              "IsDynamic": true,
+                              "PostfixExpr": {
+                                "OpCodes": "AQAK",
+                                "FixedValues": [],
+                                "DynamicHashes": [
+                                  -254826041
+                                ]
+                              }
+                            },
+                            "AttackType": "Pursued",
+                            "DamageTag": [
+                              "Quake"
+                            ],
+                            "HitEffectHeight": 1.1
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Rogue_Shield_v2_Hit.prefab",
+                          "Delay": 0.5,
+                          "MinMutexTime": 0.5,
+                          "MinMutexType": "Entity"
+                        },
+                        {
+                          "$type": "RPG.GameCore.UnlockTargetHP",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "AllDarkTeam"
+                          },
+                          "LockKey": "Rogue_LockHP_615010"
+                        }
+                      ]
                     }
                   ]
                 }
@@ -226,6 +247,84 @@
             "Alias": "Caster"
           },
           "ModifierName": "StageAbility_615010_Modifier"
+        }
+      ]
+    },
+    {
+      "Name": "StageAbility_615020",
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.CreateBattleEvent",
+          "EventID": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 41101
+            }
+          },
+          "DynamicValues": {
+            "ADF_1": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  462955996
+                ]
+              }
+            },
+            "ADF_2": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  59671469
+                ]
+              }
+            },
+            "ADF_3": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  1625755410
+                ]
+              }
+            },
+            "ADF_4": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  866240523
+                ]
+              }
+            },
+            "ADF_5": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  -1862642832
+                ]
+              }
+            },
+            "ADF_6": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  2029039937
+                ]
+              }
+            }
+          },
+          "Team": "TeamNeutral",
+          "TotalDamageTeam": "TeamLight"
         }
       ]
     },
@@ -437,7 +536,9 @@
                               }
                             },
                             "AttackType": "Pursued",
-                            "DamageTag": "Quake",
+                            "DamageTag": [
+                              "Quake"
+                            ],
                             "HitEffectHeight": 1.1
                           },
                           "PerformanceDelay": {
@@ -669,7 +770,9 @@
                           }
                         },
                         "AttackType": "Pursued",
-                        "DamageTag": "Quake",
+                        "DamageTag": [
+                          "Quake"
+                        ],
                         "HitEffectHeight": 1.1
                       }
                     },
@@ -759,19 +862,34 @@
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
                   "Predicate": {
-                    "$type": "RPG.GameCore.ByCheckModifierCallBackBehaviorFlag",
-                    "Flag": "Shield"
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByCheckModifierCallBackBehaviorFlag",
+                        "Flag": "Shield"
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCheckModifierCallBackName",
+                        "ModifierName": "Modifier_StageAbility_633001_Shield",
+                        "Inverse": true
+                      }
+                    ]
                   },
                   "SuccessTaskList": [
                     {
                       "$type": "RPG.GameCore.PredicateTaskList",
                       "Predicate": {
-                        "$type": "RPG.GameCore.ByIsContainModifier",
-                        "TargetType": {
-                          "$type": "RPG.GameCore.TargetAlias",
-                          "Alias": "ModifierOwnerEntity"
-                        },
-                        "ModifierName": "StageAbility_615032_Modifier_Sub2"
+                        "$type": "RPG.GameCore.ByAnd",
+                        "PredicateList": [
+                          {
+                            "$type": "RPG.GameCore.ByIsContainModifier",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "ModifierOwnerEntity"
+                            },
+                            "ModifierName": "StageAbility_615032_Modifier_Sub2"
+                          }
+                        ]
                       },
                       "SuccessTaskList": [
                         {
@@ -833,8 +951,7 @@
                                 ]
                               }
                             }
-                          },
-                          "IsSilenceAddAndStack": true
+                          }
                         }
                       ]
                     }
@@ -854,6 +971,32 @@
             "Shield"
           ],
           "_CallbackList": [
+            {
+              "Event": "OnCreate",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.InitShield",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "ShieldValue": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        1803358415
+                      ]
+                    }
+                  },
+                  "ShowText": false
+                },
+                {
+                  "$type": "RPG.GameCore.SetResilience"
+                }
+              ]
+            },
             {
               "Event": "OnDestroy",
               "CallbackConfig": [
@@ -947,32 +1090,10 @@
                             1625755410
                           ]
                         }
-                      }
+                      },
+                      "ShowText": false
                     }
                   ]
-                }
-              ]
-            },
-            {
-              "Event": "OnStack",
-              "CallbackConfig": [
-                {
-                  "$type": "RPG.GameCore.InitShield",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
-                  },
-                  "ShieldValue": {
-                    "IsDynamic": true,
-                    "PostfixExpr": {
-                      "OpCodes": "AQAK",
-                      "FixedValues": [],
-                      "DynamicHashes": [
-                        1803358415
-                      ]
-                    }
-                  },
-                  "ShowText": false
                 }
               ]
             }
@@ -1007,7 +1128,7 @@
     },
     {
       "Modifiers": {
-        "StageAbility_612040_Modifier": {
+        "StageAbility_615040_Modifier": {
           "_CallbackList": [
             {
               "Event": "OnListenCharacterCreate",
@@ -1097,24 +1218,14 @@
                   },
                   "SuccessTaskList": [
                     {
-                      "$type": "RPG.GameCore.SetDynamicValueByDamageDataProperty",
-                      "DynamicKey": "_Value",
-                      "ReadTargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "ModifierOwnerEntity"
-                      },
-                      "Property": "AttackData_DamageValue"
-                    },
-                    {
                       "$type": "RPG.GameCore.ModifyDamageData",
-                      "AttackData_DamageValue": {
+                      "Attacker_AllDamageTypeAddedRatio": {
                         "IsDynamic": true,
                         "PostfixExpr": {
-                          "OpCodes": "AQABAQQK",
+                          "OpCodes": "AQAK",
                           "FixedValues": [],
                           "DynamicHashes": [
-                            -1976239376,
-                            462955996
+                            1625755410
                           ]
                         }
                       }
@@ -1147,6 +1258,14 @@
                             "Value": 0
                           }
                         }
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByIsSplitDamage",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "Inverse": true
                       }
                     ]
                   },
@@ -1249,7 +1368,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "ModifierName": "StageAbility_612040_Modifier"
+          "ModifierName": "StageAbility_615040_Modifier"
         }
       ]
     },
@@ -1264,7 +1383,7 @@
           "QueryList": {
             "ADF_1": {
               "MazeBuffID": 615040,
-              "Index": 3
+              "Index": 1
             }
           }
         },
@@ -1335,7 +1454,9 @@
                   }
                 },
                 "AttackType": "Pursued",
-                "DamageTag": "Quake",
+                "DamageTag": [
+                  "Quake"
+                ],
                 "HitEffectHeight": 1.1
               }
             },
@@ -1386,7 +1507,9 @@
                   }
                 },
                 "AttackType": "Pursued",
-                "DamageTag": "Quake",
+                "DamageTag": [
+                  "Quake"
+                ],
                 "HitEffectHeight": 1.1
               }
             },
@@ -1402,9 +1525,6 @@
               "MinMutexType": "Entity"
             }
           ]
-        },
-        {
-          "$type": "RPG.GameCore.DamagePerformFinish"
         },
         {
           "$type": "RPG.GameCore.SetModifierDynamicValue",
@@ -1441,7 +1561,7 @@
             "ADF_1": {
               "MazeBuffID": 615040,
               "Level": 2,
-              "Index": 3
+              "Index": 1
             }
           }
         },
@@ -1522,7 +1642,9 @@
                   }
                 },
                 "AttackType": "Pursued",
-                "DamageTag": "Quake",
+                "DamageTag": [
+                  "Quake"
+                ],
                 "HitEffectHeight": 1.1
               }
             },
@@ -1593,7 +1715,9 @@
                   }
                 },
                 "AttackType": "Pursued",
-                "DamageTag": "Quake",
+                "DamageTag": [
+                  "Quake"
+                ],
                 "HitEffectHeight": 1.1
               }
             },
@@ -1619,9 +1743,6 @@
               "MinMutexType": "Entity"
             }
           ]
-        },
-        {
-          "$type": "RPG.GameCore.DamagePerformFinish"
         },
         {
           "$type": "RPG.GameCore.SetModifierDynamicValue",
@@ -1774,28 +1895,72 @@
         "StageAbility_615042_Modifier_Sub": {
           "_CallbackList": [
             {
-              "Event": "OnListenModifierAdd",
+              "Event": "OnListenModifierRemove",
               "CallbackConfig": [
                 {
-                  "$type": "RPG.GameCore.AddModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByTargetTeam",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "Team": "TeamLight"
                   },
-                  "ModifierName": "StageAbility_615042_Modifier_Sub2"
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCheckModifierCallBackBehaviorFlag",
+                        "Flag": "Shield"
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.AddModifier",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "ModifierName": "StageAbility_615042_Modifier_Sub2"
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             },
             {
-              "Event": "OnListenModifierRemove",
+              "Event": "OnListenModifierOnStack",
               "CallbackConfig": [
                 {
-                  "$type": "RPG.GameCore.AddModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByTargetTeam",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "Team": "TeamLight"
                   },
-                  "ModifierName": "StageAbility_615042_Modifier_Sub2"
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCheckModifierCallBackBehaviorFlag",
+                        "Flag": "Shield"
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.AddModifier",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "ModifierName": "StageAbility_615042_Modifier_Sub2"
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             },
@@ -1820,24 +1985,6 @@
               "Event": "OnStack",
               "CallbackConfig": [
                 {
-                  "$type": "RPG.GameCore.SetDynamicValueByMazeBuffConfig",
-                  "QueryList": {
-                    "TeamShieldRatio": {
-                      "MazeBuffID": 670010,
-                      "Index": 6
-                    }
-                  }
-                },
-                {
-                  "$type": "RPG.GameCore.SetDynamicValueByShield",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
-                  },
-                  "DynamicKey": "_TeamShield",
-                  "ValueType": "Team"
-                },
-                {
                   "$type": "RPG.GameCore.SetDynamicValueByShield",
                   "TargetType": {
                     "$type": "RPG.GameCore.TargetAlias",
@@ -1851,12 +1998,10 @@
                   "Value": {
                     "IsDynamic": true,
                     "PostfixExpr": {
-                      "OpCodes": "AQABAQECBAIK",
+                      "OpCodes": "AQAK",
                       "FixedValues": [],
                       "DynamicHashes": [
-                        1508201202,
-                        -539719431,
-                        -1594012757
+                        1508201202
                       ]
                     }
                   }
@@ -1946,8 +2091,6 @@
           "DynamicValues": {
             "Values": {
               "1508201202": {},
-              "-539719431": {},
-              "-1594012757": {},
               "1980221162": {},
               "327019592": {}
             }
@@ -2803,28 +2946,72 @@
         "StageAbility_615054_Modifier_Sub": {
           "_CallbackList": [
             {
-              "Event": "OnListenModifierAdd",
+              "Event": "OnListenModifierRemove",
               "CallbackConfig": [
                 {
-                  "$type": "RPG.GameCore.AddModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByTargetTeam",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "Team": "TeamLight"
                   },
-                  "ModifierName": "StageAbility_615054_Modifier_Sub2"
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCheckModifierCallBackBehaviorFlag",
+                        "Flag": "Shield"
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.AddModifier",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "ModifierName": "StageAbility_615054_Modifier_Sub2"
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             },
             {
-              "Event": "OnListenModifierRemove",
+              "Event": "OnListenModifierOnStack",
               "CallbackConfig": [
                 {
-                  "$type": "RPG.GameCore.AddModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByTargetTeam",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "Team": "TeamLight"
                   },
-                  "ModifierName": "StageAbility_615054_Modifier_Sub2"
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCheckModifierCallBackBehaviorFlag",
+                        "Flag": "Shield"
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.AddModifier",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "ModifierName": "StageAbility_615054_Modifier_Sub2"
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             },
@@ -2849,26 +3036,14 @@
               "Event": "OnStack",
               "CallbackConfig": [
                 {
-                  "$type": "RPG.GameCore.SetDynamicValueByShield",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
-                  },
-                  "DynamicKey": "_Shield",
-                  "ValueType": "Total"
-                },
-                {
                   "$type": "RPG.GameCore.PredicateTaskList",
                   "Predicate": {
-                    "$type": "RPG.GameCore.ByCompareDynamicValue",
-                    "DynamicKey": "_Shield",
-                    "CompareType": "Greater",
-                    "CompareValue": {
-                      "IsDynamic": false,
-                      "FixedValue": {
-                        "Value": 0
-                      }
-                    }
+                    "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "Flag": "Shield"
                   },
                   "SuccessTaskList": [
                     {
@@ -2894,12 +3069,7 @@
               ]
             }
           ],
-          "Stacking": "ReplaceByCaster",
-          "DynamicValues": {
-            "Values": {
-              "1508201202": {}
-            }
-          }
+          "Stacking": "ReplaceByCaster"
         }
       },
       "Name": "StageAbility_615054",
@@ -3044,28 +3214,72 @@
         "StageAbility_615056_Modifier_Sub": {
           "_CallbackList": [
             {
-              "Event": "OnListenModifierAdd",
+              "Event": "OnListenModifierRemove",
               "CallbackConfig": [
                 {
-                  "$type": "RPG.GameCore.AddModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByTargetTeam",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "Team": "TeamLight"
                   },
-                  "ModifierName": "StageAbility_615056_Modifier_Sub2"
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCheckModifierCallBackBehaviorFlag",
+                        "Flag": "Shield"
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.AddModifier",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "ModifierName": "StageAbility_615056_Modifier_Sub2"
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             },
             {
-              "Event": "OnListenModifierRemove",
+              "Event": "OnListenModifierOnStack",
               "CallbackConfig": [
                 {
-                  "$type": "RPG.GameCore.AddModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByTargetTeam",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "Team": "TeamLight"
                   },
-                  "ModifierName": "StageAbility_615056_Modifier_Sub2"
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCheckModifierCallBackBehaviorFlag",
+                        "Flag": "Shield"
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.AddModifier",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "ModifierName": "StageAbility_615056_Modifier_Sub2"
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             },
@@ -3090,26 +3304,14 @@
               "Event": "OnStack",
               "CallbackConfig": [
                 {
-                  "$type": "RPG.GameCore.SetDynamicValueByShield",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
-                  },
-                  "DynamicKey": "_Shield",
-                  "ValueType": "Total"
-                },
-                {
                   "$type": "RPG.GameCore.PredicateTaskList",
                   "Predicate": {
-                    "$type": "RPG.GameCore.ByCompareDynamicValue",
-                    "DynamicKey": "_Shield",
-                    "CompareType": "Greater",
-                    "CompareValue": {
-                      "IsDynamic": false,
-                      "FixedValue": {
-                        "Value": 0
-                      }
-                    }
+                    "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "Flag": "Shield"
                   },
                   "SuccessTaskList": [
                     {
@@ -3135,12 +3337,7 @@
               ]
             }
           ],
-          "Stacking": "ReplaceByCaster",
-          "DynamicValues": {
-            "Values": {
-              "1508201202": {}
-            }
-          }
+          "Stacking": "ReplaceByCaster"
         }
       },
       "Name": "StageAbility_615056",
@@ -3190,28 +3387,72 @@
         "StageAbility_615057_Modifier_Sub": {
           "_CallbackList": [
             {
-              "Event": "OnListenModifierAdd",
+              "Event": "OnListenModifierRemove",
               "CallbackConfig": [
                 {
-                  "$type": "RPG.GameCore.AddModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByTargetTeam",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "Team": "TeamLight"
                   },
-                  "ModifierName": "StageAbility_615057_Modifier_Sub2"
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCheckModifierCallBackBehaviorFlag",
+                        "Flag": "Shield"
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.AddModifier",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "ModifierName": "StageAbility_615057_Modifier_Sub2"
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             },
             {
-              "Event": "OnListenModifierRemove",
+              "Event": "OnListenModifierOnStack",
               "CallbackConfig": [
                 {
-                  "$type": "RPG.GameCore.AddModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByTargetTeam",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "Team": "TeamLight"
                   },
-                  "ModifierName": "StageAbility_615057_Modifier_Sub2"
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCheckModifierCallBackBehaviorFlag",
+                        "Flag": "Shield"
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.AddModifier",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "ModifierName": "StageAbility_615057_Modifier_Sub2"
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             },
@@ -3236,26 +3477,14 @@
               "Event": "OnStack",
               "CallbackConfig": [
                 {
-                  "$type": "RPG.GameCore.SetDynamicValueByShield",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
-                  },
-                  "DynamicKey": "_Shield",
-                  "ValueType": "Total"
-                },
-                {
                   "$type": "RPG.GameCore.PredicateTaskList",
                   "Predicate": {
-                    "$type": "RPG.GameCore.ByCompareDynamicValue",
-                    "DynamicKey": "_Shield",
-                    "CompareType": "Greater",
-                    "CompareValue": {
-                      "IsDynamic": false,
-                      "FixedValue": {
-                        "Value": 0
-                      }
-                    }
+                    "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "Flag": "Shield"
                   },
                   "SuccessTaskList": [
                     {

@@ -40,7 +40,7 @@
           "NormalizedTimeWait": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.7500000006984919
+              "Value": 0.75
             }
           }
         },
@@ -66,7 +66,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.05000000004656613
+              "Value": 0.05
             }
           }
         },
@@ -83,7 +83,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.23799999966286123
+              "Value": 0.238
             }
           }
         },
@@ -105,7 +105,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.27499999990686774
+              "Value": 0.275
             }
           }
         },
@@ -116,14 +116,16 @@
             "Alias": "AbilityTargetEntity"
           },
           "AttackProperty": {
-            "DamageType": "Ice",
+            "DamageType": {
+              "DamageType": "Ice"
+            },
             "DamagePercentage": {
               "IsDynamic": true,
               "PostfixExpr": {
                 "OpCodes": "AQAAAAQK",
                 "FixedValues": [
                   {
-                    "Value": 0.5000000004656613
+                    "Value": 0.5
                   }
                 ],
                 "DynamicHashes": [
@@ -134,7 +136,7 @@
             "SPHitRatio": {
               "IsDynamic": false,
               "FixedValue": {
-                "Value": 0.5000000004656613
+                "Value": 0.5
               }
             },
             "HitAnimation": "Hit"
@@ -157,7 +159,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.325999999884516
+              "Value": 0.326
             }
           }
         },
@@ -168,14 +170,16 @@
             "Alias": "AbilityTargetEntity"
           },
           "AttackProperty": {
-            "DamageType": "Ice",
+            "DamageType": {
+              "DamageType": "Ice"
+            },
             "DamagePercentage": {
               "IsDynamic": true,
               "PostfixExpr": {
                 "OpCodes": "AQAAAAQK",
                 "FixedValues": [
                   {
-                    "Value": 0.5000000004656613
+                    "Value": 0.5
                   }
                 ],
                 "DynamicHashes": [
@@ -186,7 +190,7 @@
             "SPHitRatio": {
               "IsDynamic": false,
               "FixedValue": {
-                "Value": 0.5000000004656613
+                "Value": 0.5
               }
             },
             "HitAnimation": "Hit"
@@ -339,6 +343,22 @@
           "$type": "RPG.GameCore.SkillExecutionStart"
         },
         {
+          "$type": "RPG.GameCore.RemoveModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "MMonster_W2_Yanqing_00_Skill02_MarkingCountDown_1"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "MMonster_W2_Yanqing_00_Skill02_MarkingCountDown_2"
+        },
+        {
           "$type": "RPG.GameCore.PredicateTaskList",
           "Predicate": {
             "$type": "RPG.GameCore.ByCompareCharacterNumber",
@@ -401,7 +421,8 @@
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "CasterSummonedMinions"
-              }
+              },
+              "CanOverkill": false
             },
             {
               "$type": "RPG.GameCore.RemoveEntityFromTeamFormation",
@@ -409,6 +430,14 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "CasterSummonedMinions"
               }
+            },
+            {
+              "$type": "RPG.GameCore.RemoveModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllEnemy"
+              },
+              "ModifierName": "MMonster_W2_Yanqing_00_Skill02_Mark"
             }
           ]
         },
@@ -629,7 +658,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.5800000005401671
+              "Value": 0.58
             }
           }
         },
@@ -660,7 +689,7 @@
             "Chance": {
               "IsDynamic": false,
               "FixedValue": {
-                "Value": 0.33000000030733645
+                "Value": 0.33
               }
             }
           },
@@ -770,7 +799,7 @@
                 "Chance": {
                   "IsDynamic": false,
                   "FixedValue": {
-                    "Value": 0.5000000004656613
+                    "Value": 0.5
                   }
                 }
               },
@@ -1054,7 +1083,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.6800000006332994
+              "Value": 0.68
             }
           }
         },
@@ -1072,15 +1101,161 @@
           },
           "SuccessTaskList": [
             {
-              "$type": "RPG.GameCore.Retarget",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "CasterSummonedMinions"
-              },
+              "$type": "RPG.GameCore.PredicateTaskList",
               "Predicate": {
-                "$type": "RPG.GameCore.ByAnd",
-                "PredicateList": [
-                  {
+                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                "DynamicKey": "FinalPhase",
+                "ContextScope": "TargetEntity",
+                "CompareType": "Equal",
+                "CompareValue": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 1
+                  }
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.Retarget",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "CasterSummonedMinions"
+                  },
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByIsContainModifier",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "ModifierName": "MMonster_W2_Yanqing_00_SwordPowerUp",
+                        "Inverse": true
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCompareCharacterID",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "TargetCharacterID": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              957250210
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "MaxNumber": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  },
+                  "TaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetActionDelay",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "NormalizedValue": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 0
+                        }
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "MMonster_W2_Yanqing_00_SwordPowerUp"
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.Retarget",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "CasterSummonedMinions"
+                  },
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByIsContainModifier",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "ModifierName": "MMonster_W2_Yanqing_00_SwordPowerUp",
+                        "Inverse": true
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCompareCharacterID",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "TargetCharacterID": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              957250210
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "MaxNumber": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  },
+                  "TaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetActionDelay",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "NormalizedValue": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 0.5
+                        }
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "MMonster_W2_Yanqing_00_SwordPowerUp"
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.Retarget",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "CasterSummonedMinions"
+                  },
+                  "Predicate": {
                     "$type": "RPG.GameCore.ByIsContainModifier",
                     "TargetType": {
                       "$type": "RPG.GameCore.TargetAlias",
@@ -1089,65 +1264,43 @@
                     "ModifierName": "MMonster_W2_Yanqing_00_SwordPowerUp",
                     "Inverse": true
                   },
-                  {
-                    "$type": "RPG.GameCore.ByCompareCharacterID",
-                    "TargetType": {
-                      "$type": "RPG.GameCore.TargetAlias",
-                      "Alias": "ParamEntity"
-                    },
-                    "TargetCharacterID": {
-                      "IsDynamic": true,
-                      "PostfixExpr": {
-                        "OpCodes": "AQAK",
-                        "FixedValues": [],
-                        "DynamicHashes": [
-                          957250210
-                        ]
-                      }
-                    }
-                  }
-                ]
-              },
-              "MaxNumber": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 1
-                }
-              },
-              "TaskList": [
-                {
-                  "$type": "RPG.GameCore.SetActionDelay",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  },
-                  "NormalizedValue": {
+                  "MaxNumber": {
                     "IsDynamic": false,
                     "FixedValue": {
-                      "Value": 0
+                      "Value": 1
                     }
-                  }
+                  },
+                  "TaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetActionDelay",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "NormalizedValue": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1.5
+                        }
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "MMonster_W2_Yanqing_00_SwordPowerUp"
+                    }
+                  ]
                 },
                 {
-                  "$type": "RPG.GameCore.AddModifier",
+                  "$type": "RPG.GameCore.Retarget",
                   "TargetType": {
                     "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
+                    "Alias": "CasterSummonedMinions"
                   },
-                  "ModifierName": "MMonster_W2_Yanqing_00_SwordPowerUp"
-                }
-              ]
-            },
-            {
-              "$type": "RPG.GameCore.Retarget",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "CasterSummonedMinions"
-              },
-              "Predicate": {
-                "$type": "RPG.GameCore.ByAnd",
-                "PredicateList": [
-                  {
+                  "Predicate": {
                     "$type": "RPG.GameCore.ByIsContainModifier",
                     "TargetType": {
                       "$type": "RPG.GameCore.TargetAlias",
@@ -1156,89 +1309,195 @@
                     "ModifierName": "MMonster_W2_Yanqing_00_SwordPowerUp",
                     "Inverse": true
                   },
-                  {
-                    "$type": "RPG.GameCore.ByCompareCharacterID",
+                  "MaxNumber": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  },
+                  "TaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "MMonster_W2_Yanqing_00_SwordPowerUp"
+                    }
+                  ]
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.Retarget",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "CasterSummonedMinions"
+                  },
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByIsContainModifier",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "ModifierName": "MMonster_W2_Yanqing_00_SwordPowerUp",
+                        "Inverse": true
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCompareCharacterID",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "TargetCharacterID": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              957250210
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "MaxNumber": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  },
+                  "TaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetActionDelay",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "NormalizedValue": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 0
+                        }
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "MMonster_W2_Yanqing_00_SwordPowerUp"
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.Retarget",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "CasterSummonedMinions"
+                  },
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByIsContainModifier",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "ModifierName": "MMonster_W2_Yanqing_00_SwordPowerUp",
+                        "Inverse": true
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCompareCharacterID",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "TargetCharacterID": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              957250210
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "MaxNumber": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  },
+                  "TaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetActionDelay",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "NormalizedValue": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 0.5
+                        }
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "MMonster_W2_Yanqing_00_SwordPowerUp"
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.Retarget",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "CasterSummonedMinions"
+                  },
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByIsContainModifier",
                     "TargetType": {
                       "$type": "RPG.GameCore.TargetAlias",
                       "Alias": "ParamEntity"
                     },
-                    "TargetCharacterID": {
-                      "IsDynamic": true,
-                      "PostfixExpr": {
-                        "OpCodes": "AQAK",
-                        "FixedValues": [],
-                        "DynamicHashes": [
-                          957250210
-                        ]
+                    "ModifierName": "MMonster_W2_Yanqing_00_SwordPowerUp",
+                    "Inverse": true
+                  },
+                  "MaxNumber": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  },
+                  "TaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetActionDelay",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "NormalizedValue": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1.5
+                        }
                       }
                     }
-                  }
-                ]
-              },
-              "MaxNumber": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 1
-                }
-              },
-              "TaskList": [
-                {
-                  "$type": "RPG.GameCore.SetActionDelay",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  },
-                  "NormalizedValue": {
-                    "IsDynamic": false,
-                    "FixedValue": {
-                      "Value": 0.5000000004656613
-                    }
-                  }
-                },
-                {
-                  "$type": "RPG.GameCore.AddModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  },
-                  "ModifierName": "MMonster_W2_Yanqing_00_SwordPowerUp"
-                }
-              ]
-            },
-            {
-              "$type": "RPG.GameCore.Retarget",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "CasterSummonedMinions"
-              },
-              "Predicate": {
-                "$type": "RPG.GameCore.ByIsContainModifier",
-                "TargetType": {
-                  "$type": "RPG.GameCore.TargetAlias",
-                  "Alias": "ParamEntity"
-                },
-                "ModifierName": "MMonster_W2_Yanqing_00_SwordPowerUp",
-                "Inverse": true
-              },
-              "MaxNumber": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 1
-                }
-              },
-              "TaskList": [
-                {
-                  "$type": "RPG.GameCore.SetActionDelay",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  },
-                  "NormalizedValue": {
-                    "IsDynamic": false,
-                    "FixedValue": {
-                      "Value": 1.5000000004656613
-                    }
-                  }
+                  ]
                 }
               ]
             }
@@ -1255,7 +1514,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.8000000007450581
+              "Value": 0.8
             }
           }
         },
@@ -1445,7 +1704,12 @@
         },
         {
           "$type": "RPG.GameCore.WaitSecond",
-          "WaitTime": 0.5
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.5
+            }
+          }
         },
         {
           "$type": "RPG.GameCore.LoseHPByRatio",
@@ -1598,7 +1862,12 @@
         },
         {
           "$type": "RPG.GameCore.WaitSecond",
-          "WaitTime": 1.6
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1.6
+            }
+          }
         }
       ]
     },
@@ -1706,7 +1975,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.0009999999310821295
+              "Value": 0.0009999999
             }
           }
         },
@@ -1723,7 +1992,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.41699999989941716
+              "Value": 0.417
             }
           }
         },
@@ -1841,7 +2110,7 @@
           "NormalizedTimeWait": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.8000000007450581
+              "Value": 0.8
             }
           }
         },
@@ -1867,7 +2136,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.10000000009313226
+              "Value": 0.1
             }
           }
         },
@@ -1884,7 +2153,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.36110000032931566
+              "Value": 0.3611
             }
           }
         },
@@ -2044,7 +2313,12 @@
         },
         {
           "$type": "RPG.GameCore.WaitSecond",
-          "WaitTime": 1.6
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1.6
+            }
+          }
         },
         {
           "$type": "RPG.GameCore.TriggerAnimState",
@@ -2077,13 +2351,17 @@
           "SuccessTaskList": [
             {
               "$type": "RPG.GameCore.TriggerSound",
-              "SoundName": "Ev_sfx_monster_skill08_absorb_w2_yanqing_00"
+              "SoundName": {
+                "Value": "Ev_sfx_monster_skill08_absorb_w2_yanqing_00"
+              }
             }
           ],
           "FailedTaskList": [
             {
               "$type": "RPG.GameCore.TriggerSound",
-              "SoundName": "Ev_sfx_monster_skill08_w2_yanqing_00"
+              "SoundName": {
+                "Value": "Ev_sfx_monster_skill08_w2_yanqing_00"
+              }
             }
           ]
         },
@@ -2261,7 +2539,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.036360000260174274
+              "Value": 0.03636
             }
           }
         },
@@ -2310,7 +2588,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.24000000022351742
+              "Value": 0.24
             }
           }
         },
@@ -2350,7 +2628,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.3900000003632158
+              "Value": 0.39
             }
           }
         },
@@ -2412,7 +2690,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.40799999982118607
+              "Value": 0.408
             }
           }
         },
@@ -2484,7 +2762,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.5747365271672606
+              "Value": 0.57473654
             }
           }
         },
@@ -2507,7 +2785,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.6000000005587935
+              "Value": 0.6
             }
           }
         },
@@ -2529,7 +2807,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.6315789590589702
+              "Value": 0.631579
             }
           }
         },
@@ -2551,7 +2829,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.6552631575614214
+              "Value": 0.6552632
             }
           }
         },
@@ -2574,7 +2852,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.6710526326205581
+              "Value": 0.67105263
             }
           }
         },
@@ -2606,7 +2884,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.6763157851528376
+              "Value": 0.6763158
             }
           }
         },
@@ -2649,17 +2927,19 @@
                 "Alias": "AbilityTargetEntity"
               },
               "AttackProperty": {
-                "DamageType": "Ice",
+                "DamageType": {
+                  "DamageType": "Ice"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
                     "OpCodes": "AAAAAQEAAAIDBAIBAQQK",
                     "FixedValues": [
                       {
-                        "Value": 0.40000000037252903
+                        "Value": 0.4
                       },
                       {
-                        "Value": 0.1500000001396984
+                        "Value": 0.15
                       },
                       {
                         "Value": 1
@@ -2674,7 +2954,7 @@
                 "SPHitRatio": {
                   "IsDynamic": false,
                   "FixedValue": {
-                    "Value": 0.40000000037252903
+                    "Value": 0.4
                   }
                 },
                 "HitAnimation": "Hit",
@@ -2694,7 +2974,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.725263151107356
+              "Value": 0.7252632
             }
           }
         },
@@ -2737,14 +3017,16 @@
                 "Alias": "AbilityTargetEntity"
               },
               "AttackProperty": {
-                "DamageType": "Ice",
+                "DamageType": {
+                  "DamageType": "Ice"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
                     "OpCodes": "AAABAAQK",
                     "FixedValues": [
                       {
-                        "Value": 0.7000000006519258
+                        "Value": 0.7
                       }
                     ],
                     "DynamicHashes": [
@@ -2786,7 +3068,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.7542105212341994
+              "Value": 0.75421053
             }
           }
         },
@@ -2829,14 +3111,16 @@
                 "Alias": "AbilityTargetEntity"
               },
               "AttackProperty": {
-                "DamageType": "Ice",
+                "DamageType": {
+                  "DamageType": "Ice"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
                     "OpCodes": "AAABAAQK",
                     "FixedValues": [
                       {
-                        "Value": 0.7000000006519258
+                        "Value": 0.7
                       }
                     ],
                     "DynamicHashes": [
@@ -2878,7 +3162,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.7831578920595348
+              "Value": 0.7831579
             }
           }
         },
@@ -2921,14 +3205,16 @@
                 "Alias": "AbilityTargetEntity"
               },
               "AttackProperty": {
-                "DamageType": "Ice",
+                "DamageType": {
+                  "DamageType": "Ice"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
                     "OpCodes": "AAABAAQK",
                     "FixedValues": [
                       {
-                        "Value": 0.7000000006519258
+                        "Value": 0.7
                       }
                     ],
                     "DynamicHashes": [
@@ -2970,7 +3256,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.812105261022225
+              "Value": 0.81210524
             }
           }
         },
@@ -3013,14 +3299,16 @@
                 "Alias": "AbilityTargetEntity"
               },
               "AttackProperty": {
-                "DamageType": "Ice",
+                "DamageType": {
+                  "DamageType": "Ice"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
                     "OpCodes": "AAABAAQK",
                     "FixedValues": [
                       {
-                        "Value": 0.7000000006519258
+                        "Value": 0.7
                       }
                     ],
                     "DynamicHashes": [
@@ -3062,7 +3350,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.9552631578408182
+              "Value": 0.95526314
             }
           }
         },
@@ -3084,7 +3372,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.9868421060964465
+              "Value": 0.9868421
             }
           }
         },
@@ -3102,17 +3390,19 @@
             "Alias": "AbilityTargetEntity"
           },
           "AttackProperty": {
-            "DamageType": "Ice",
+            "DamageType": {
+              "DamageType": "Ice"
+            },
             "DamagePercentage": {
               "IsDynamic": true,
               "PostfixExpr": {
                 "OpCodes": "AAAAAQEAAAIDBAIBAQQK",
                 "FixedValues": [
                   {
-                    "Value": 0.6000000005587935
+                    "Value": 0.6
                   },
                   {
-                    "Value": 0.1500000001396984
+                    "Value": 0.15
                   },
                   {
                     "Value": 1
@@ -3127,7 +3417,7 @@
             "SPHitRatio": {
               "IsDynamic": false,
               "FixedValue": {
-                "Value": 0.6000000005587935
+                "Value": 0.6
               }
             },
             "HitAnimation": "Hit_H",
@@ -3164,7 +3454,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.9900000009220093
+              "Value": 0.99
             }
           }
         },
@@ -3317,7 +3607,12 @@
         },
         {
           "$type": "RPG.GameCore.WaitSecond",
-          "WaitTime": 0.5
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.5
+            }
+          }
         },
         {
           "$type": "RPG.GameCore.VCameraConfigChange",
@@ -3439,7 +3734,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.0800000000745058
+              "Value": 0.08
             }
           }
         },
@@ -3591,7 +3886,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.34200000017881393
+              "Value": 0.342
             }
           }
         },
@@ -3689,6 +3984,29 @@
             }
           },
           "ContextScope": "TargetEntity"
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCheckCustomValueBool",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "Key": {
+              "Hash": -250391333
+            }
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.RemoveModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "ModifierName": "MMonster_W2_Yanqing_00_SkillP01_ChangePhaseController"
+            }
+          ]
         },
         {
           "$type": "RPG.GameCore.TriggerAnimState",
@@ -3803,7 +4121,12 @@
         },
         {
           "$type": "RPG.GameCore.WaitSecond",
-          "WaitTime": 0.5
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.5
+            }
+          }
         },
         {
           "$type": "RPG.GameCore.VCameraConfigChange",
@@ -3925,7 +4248,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.0800000000745058
+              "Value": 0.08
             }
           }
         },
@@ -4097,7 +4420,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.34200000017881393
+              "Value": 0.342
             }
           }
         },
@@ -4434,6 +4757,21 @@
             {
               "Event": "OnBeingBreak",
               "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.DefineDynamicValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "DynamicKey": "AIFlag",
+                  "ResetValue": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  },
+                  "ContextScope": "TargetEntity"
+                },
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
                   "Predicate": {
@@ -5189,6 +5527,26 @@
             }
           },
           "ContextScope": "TargetEntity"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "Monster_W2_Yanqing_00_RL_LowHP",
+          "DynamicValues": {
+            "MDF_LowHPRatio": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  546536366
+                ]
+              }
+            }
+          }
         }
       ]
     }
@@ -5400,7 +5758,9 @@
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.TriggerSound",
-              "SoundName": "Ev_sfx_eff_monster_w2_yanqing_00_skill02_behit"
+              "SoundName": {
+                "Value": "Ev_sfx_eff_monster_w2_yanqing_00_skill02_behit"
+              }
             }
           ]
         },
@@ -5617,7 +5977,36 @@
       }
     },
     "MMonster_W2_Yanqing_00_Skill02_MarkingCountDown_2": {},
-    "MMonster_W2_Yanqing_00_Skill02_MarkingCountDown_1": {},
+    "MMonster_W2_Yanqing_00_Skill02_MarkingCountDown_1": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ModifierName": "Monster_APShow"
+            }
+          ]
+        },
+        {
+          "Event": "OnDestroy",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.RemoveModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ModifierName": "Monster_APShow"
+            }
+          ]
+        }
+      ]
+    },
     "MMonster_W2_Yanqing_00_Skill05_Charge_RL": {
       "BehaviorFlagList": [
         "MuteHitH"
@@ -6116,7 +6505,7 @@
       "PerformTime": {
         "IsDynamic": false,
         "FixedValue": {
-          "Value": 0.3000000002793968
+          "Value": 0.3
         }
       },
       "BehaviorFlagList": [
@@ -6154,7 +6543,7 @@
                   "AddPerformTime": {
                     "IsDynamic": false,
                     "FixedValue": {
-                      "Value": 0.7500000006984919
+                      "Value": 0.75
                     }
                   }
                 }
@@ -6176,7 +6565,12 @@
             },
             {
               "$type": "RPG.GameCore.WaitSecond",
-              "WaitTime": 0.1
+              "WaitTime": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0.1
+                }
+              }
             },
             {
               "$type": "RPG.GameCore.DamageByAttackProperty",
@@ -6185,7 +6579,9 @@
                 "Alias": "ModifierOwnerEntity"
               },
               "AttackProperty": {
-                "DamageType": "Ice",
+                "DamageType": {
+                  "DamageType": "Ice"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -6214,7 +6610,12 @@
             },
             {
               "$type": "RPG.GameCore.WaitSecond",
-              "WaitTime": 0.1
+              "WaitTime": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0.1
+                }
+              }
             }
           ]
         },
@@ -6239,7 +6640,9 @@
                 "Alias": "ModifierOwnerEntity"
               },
               "AttackProperty": {
-                "DamageType": "Ice",
+                "DamageType": {
+                  "DamageType": "Ice"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -6336,6 +6739,165 @@
           ]
         }
       ]
+    },
+    "Monster_W2_Yanqing_00_RL_LowHP": {
+      "_CallbackList": [
+        {
+          "Event": "OnHPChange",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCompareHPRatio",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "CompareType": "LessEqual",
+                    "CompareValue": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          -71259139
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByCompareMonsterPhase",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 3
+                      }
+                    }
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.DefineDynamicValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "DynamicKey": "FinalPhase",
+                  "ResetValue": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  },
+                  "ContextScope": "TargetEntity"
+                },
+                {
+                  "$type": "RPG.GameCore.DefineDynamicValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "DynamicKey": "AIFlag",
+                  "ResetValue": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  },
+                  "ContextScope": "TargetEntity"
+                },
+                {
+                  "$type": "RPG.GameCore.DefineDynamicValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "DynamicKey": "W2_Yanqing_00_AICounter",
+                  "ResetValue": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  },
+                  "ContextScope": "TargetEntity"
+                },
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "ModifierName": "OneMorePerTurn"
+                },
+                {
+                  "$type": "RPG.GameCore.SetActionDelay",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "NormalizedValue": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareHPRatio",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "CompareType": "LessEqual",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.ShowUIPage",
+                      "AssetPath": "UI/Common/Widget/ShowBattleHint.prefab",
+                      "UITextNodes": [
+                        {
+                          "TextPath": "AreaInfoPanel/Title/Text",
+                          "TextContent": {
+                            "Hash": -2067091805
+                          }
+                        }
+                      ],
+                      "LifeTime": 2
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveSelfModifier"
+                }
+              ],
+              "FailedTaskList": []
+            }
+          ]
+        }
+      ],
+      "DynamicValues": {
+        "Values": {
+          "-71259139": {}
+        }
+      }
     }
   }
 }

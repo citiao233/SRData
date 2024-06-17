@@ -883,28 +883,15 @@
             "$type": "RPG.GameCore.ByAny",
             "PredicateList": [
               {
-                "$type": "RPG.GameCore.ByCompareMonsterID",
+                "$type": "RPG.GameCore.ByCompareMonsterUniqueID",
                 "TargetType": {
                   "$type": "RPG.GameCore.TargetAlias",
                   "Alias": "ParamEntity"
                 },
-                "TargetMonsterID": {
+                "TargetMonsterUniqueID": {
                   "IsDynamic": false,
                   "FixedValue": {
-                    "Value": 8015010
-                  }
-                }
-              },
-              {
-                "$type": "RPG.GameCore.ByCompareMonsterID",
-                "TargetType": {
-                  "$type": "RPG.GameCore.TargetAlias",
-                  "Alias": "ParamEntity"
-                },
-                "TargetMonsterID": {
-                  "IsDynamic": false,
-                  "FixedValue": {
-                    "Value": 8015011
+                    "Value": 801501
                   }
                 }
               }
@@ -962,28 +949,15 @@
             "$type": "RPG.GameCore.ByAny",
             "PredicateList": [
               {
-                "$type": "RPG.GameCore.ByCompareMonsterID",
+                "$type": "RPG.GameCore.ByCompareMonsterUniqueID",
                 "TargetType": {
                   "$type": "RPG.GameCore.TargetAlias",
                   "Alias": "AbilityTargetEntity"
                 },
-                "TargetMonsterID": {
+                "TargetMonsterUniqueID": {
                   "IsDynamic": false,
                   "FixedValue": {
-                    "Value": 8015021
-                  }
-                }
-              },
-              {
-                "$type": "RPG.GameCore.ByCompareMonsterID",
-                "TargetType": {
-                  "$type": "RPG.GameCore.TargetAlias",
-                  "Alias": "AbilityTargetEntity"
-                },
-                "TargetMonsterID": {
-                  "IsDynamic": false,
-                  "FixedValue": {
-                    "Value": 8015020
+                    "Value": 801502
                   }
                 }
               }
@@ -2394,6 +2368,25 @@
         {
           "Event": "OnStack",
           "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByRankActivated",
+                "TriggerKey": {
+                  "Hash": 523552506
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "MAvatar_Aventurine_Rank02_Mark"
+                }
+              ]
+            },
             {
               "$type": "RPG.GameCore.SetDynamicValue",
               "DynamicKey": "MDF_InsertAttackLimit",
@@ -4521,33 +4514,7 @@
     "MAvatar_Aventurine_SkillTree01": {
       "OnAbilityPropertyChange": [
         {
-          "Property": "DefenceAddedRatio",
-          "Ranges": [
-            {
-              "OnChange": [
-                {
-                  "$type": "RPG.GameCore.IncludeTaskListTemplate",
-                  "Name": "Aventurine_SkillTree01_Sub"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "Property": "DefenceDelta",
-          "Ranges": [
-            {
-              "OnChange": [
-                {
-                  "$type": "RPG.GameCore.IncludeTaskListTemplate",
-                  "Name": "Aventurine_SkillTree01_Sub"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "Property": "DefenceConvert",
+          "Property": "Defence",
           "Ranges": [
             {
               "OnChange": [
@@ -4852,6 +4819,7 @@
         }
       }
     },
+    "MAvatar_Aventurine_Rank02_Mark": {},
     "MAvatar_Aventurine_Rank04": {
       "DynamicValues": {
         "Values": {

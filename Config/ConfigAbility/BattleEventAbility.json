@@ -14156,6 +14156,280 @@
       ]
     },
     {
+      "Modifiers": {
+        "BattleEventAbility_SummonMonsterInfinite_Fuyan_Modifier": {
+          "BehaviorFlagList": [
+            "CustomEvent_InfiniteDoSummon"
+          ],
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.DefineDynamicValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "DynamicKey": "Insert_Flag",
+                  "ContextScope": "TargetEntity"
+                },
+                {
+                  "$type": "RPG.GameCore.OwnerEntityAddAbility",
+                  "AbilityName": "BattleEventAbility_SummonMonsterInfinite_Fuyan_Insert"
+                },
+                {
+                  "$type": "RPG.GameCore.OwnerEntityAddAbility",
+                  "AbilityName": "BattleEventAbility_SummonMonsterInfinite_Fuyan_Camera"
+                }
+              ]
+            },
+            {
+              "Event": "OnListenCharacterDie",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.IncludeGlobalTaskListTemplate",
+                  "Name": "InfiniteWave_SummonMonster_Fuyan",
+                  "DynamicValues": {
+                    "ManuallySummon_Flag": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "Event": "OnListenCharacterEscape",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.IncludeGlobalTaskListTemplate",
+                  "Name": "InfiniteWave_SummonMonster_Fuyan",
+                  "DynamicValues": {
+                    "ManuallySummon_Flag": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "Event": "OnCustomEvent",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.IncludeGlobalTaskListTemplate",
+                  "Name": "InfiniteWave_SummonMonster_Fuyan",
+                  "DynamicValues": {
+                    "ManuallySummon_Flag": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 1
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "DynamicValues": {
+            "Values": {}
+          }
+        },
+        "Modifier_Infinite_Summon_Level": {
+          "_CallbackList": [
+            {
+              "Event": "OnWaveMonster",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.ShowEntityFloatMessage",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllDarkTeam"
+                  },
+                  "ContentID": {
+                    "Hash": 1675170655
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "Name": "BattleEventAbility_SummonMonsterInfinite_Fuyan",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "BattleEventAbility_SummonMonsterInfinite_Fuyan_Modifier"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "LevelEntity"
+          },
+          "ModifierName": "Modifier_Infinite_Summon_Level"
+        }
+      ]
+    },
+    {
+      "Name": "BattleEventAbility_SummonMonsterInfinite_Fuyan_Insert",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityName": "BattleEventAbility_SummonMonsterInfinite_Fuyan_Camera",
+          "IsSkillPerform": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitFor",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByHaveDyingEntity",
+            "TeamTypeMask": "TeamDark",
+            "EntityTypeMask": "Mask_TeamCharacters",
+            "Inverse": true
+          }
+        },
+        {
+          "$type": "RPG.GameCore.DefineDynamicValue",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "DynamicKey": "Insert_Flag",
+          "ContextScope": "TargetEntity"
+        },
+        {
+          "$type": "RPG.GameCore.ConditionLoopExecuteTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByAnd",
+            "PredicateList": [
+              {
+                "$type": "RPG.GameCore.ByInfiniteMonsterWaveLeft",
+                "TotalRank": 7
+              }
+            ]
+          },
+          "TaskList": [
+            {
+              "$type": "RPG.GameCore.InfiniteWaveNextMonsterId",
+              "ContextScope": "ContextAbility",
+              "MonsterIDKey": "Value_NextMonsterId",
+              "EliteGroupKey": "Value_NextMonsterEliteGroup"
+            },
+            {
+              "$type": "RPG.GameCore.SummonMonster",
+              "SummonMonsterDataList": [
+                {
+                  "MonsterID": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        -1877575176
+                      ]
+                    }
+                  },
+                  "LocationType": "FormationRecord",
+                  "InitAnimStateName": "Appear",
+                  "OverrideEliteGroup": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        559699793
+                      ]
+                    }
+                  }
+                }
+              ],
+              "DelayRatio": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    -142090201
+                  ]
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.ShowEntityFloatMessage",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LastSummonMonsters"
+              },
+              "ContentID": {
+                "Hash": 1675170655
+              }
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.ClearRecordEntityFormation",
+          "Team": "TeamDark"
+        },
+        {
+          "$type": "RPG.GameCore.TriggerModifierCustomEvent",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetConcat",
+            "Targets": [
+              {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LevelEntity"
+              },
+              {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              }
+            ]
+          },
+          "EventType": "InfiniteRefresh"
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1.5
+            }
+          }
+        }
+      ],
+      "DynamicValues": {
+        "Values": {
+          "-142090201": {
+            "ReadInfo": {
+              "Type": "None",
+              "Str": "#BattleEvent"
+            }
+          },
+          "-1877575176": {},
+          "559699793": {}
+        }
+      }
+    },
+    {
       "Name": "BattleEventAbility_SummonMonsterInfinite_Insert",
       "TargetInfo": {
         "TargetType": "Caster"
@@ -14263,8 +14537,17 @@
         {
           "$type": "RPG.GameCore.TriggerModifierCustomEvent",
           "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AllLightTeam"
+            "$type": "RPG.GameCore.TargetConcat",
+            "Targets": [
+              {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LevelEntity"
+              },
+              {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              }
+            ]
           },
           "EventType": "InfiniteRefresh"
         },
@@ -14398,8 +14681,17 @@
         {
           "$type": "RPG.GameCore.TriggerModifierCustomEvent",
           "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AllLightTeam"
+            "$type": "RPG.GameCore.TargetConcat",
+            "Targets": [
+              {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LevelEntity"
+              },
+              {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              }
+            ]
           },
           "EventType": "InfiniteRefresh"
         },
@@ -14472,6 +14764,58 @@
               "ShowTargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "AllDarkTeam"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Name": "BattleEventAbility_SummonMonsterInfinite_Fuyan_Camera",
+      "TargetInfo": {
+        "TargetType": "AllTeamMember"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamDark",
+          "FormationType": "DarkTeamNormal",
+          "CustomFormationIgnoreDying": false
+        },
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "NormalConfig": {
+              "CameraState": "CasterToTargetPerform",
+              "AnchorTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "IsLocalOffset": true,
+              "AnchorOffset": {
+                "X": 1,
+                "Y": 1.4,
+                "Z": -3
+              },
+              "AnchorRatio": 0.1,
+              "AimTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "DarkTeamCenter"
+              },
+              "AimOffset": {
+                "X": 0,
+                "Y": 1,
+                "Z": -1
+              },
+              "AimRatio": 1
+            },
+            "BlendConfig": {
+              "BlendType": "Cut"
+            },
+            "ShowEntityConfig": {
+              "ShowTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllDarkTeamWithAllDarkTeamUnselectable"
               }
             }
           }

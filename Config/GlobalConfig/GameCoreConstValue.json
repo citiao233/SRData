@@ -9,7 +9,7 @@
     "Value": 2
   },
   "DamageTakenRatioMax": {
-    "Value": 3.5000000004656613
+    "Value": 3.5
   },
   "DamageRandomMin": {
     "Value": 1
@@ -24,7 +24,7 @@
     "Value": 10
   },
   "AllDamageReduceMax": {
-    "Value": 0.9900000009220093
+    "Value": 0.99
   },
   "SPMultipleRatio": {
     "Value": 0
@@ -34,7 +34,7 @@
     "Value": -1
   },
   "OverallResistanceMax": {
-    "Value": 0.9000000008381903
+    "Value": 0.9
   },
   "TeamBPFloatStart": {
     "Value": 3
@@ -95,11 +95,11 @@
   "ModifierPhasePerformTimeMax": 2.1,
   "DefaultCharacterEffectTransitionTime": 1,
   "LowHPFlagRatio": {
-    "Value": 0.3000000002793968
+    "Value": 0.3
   },
   "StanceTargetSkipRound": true,
   "DamageToLowHPRatio": {
-    "Value": 0.10000000009313226
+    "Value": 0.1
   },
   "ConstKeys": {
     "MonsterBossTag": {
@@ -129,7 +129,9 @@
     "LevelSpecialWinEvent": "Level_SpecialWin",
     "UltraKillFinalMonsterOfWave": "Stage_UltraKillFinalMonster",
     "KillFinalMonsterOfStage": "Stage_KillFinalMonsterOfStage",
-    "ShowDefaultCameraAfterTimeline": "Stage_ShowDefaultCameraAfterTimeline"
+    "ShowDefaultCameraAfterTimeline": "Stage_ShowDefaultCameraAfterTimeline",
+    "ShowDefaultCameraAfterTimelineOnAvatarDying": "Stage_ShowDefaultCameraAfterTimelineOnAvatarDying",
+    "AllEnemyDeadButWaveContinue": "Stage_ShowDefaultCameraWhenAllEnemyDeadButWaveContinue"
   },
   "StageConfigDataKeys": {},
   "ShieldConstKeys": {
@@ -189,7 +191,8 @@
       "AnimLoop": "Stun_Loop",
       "AnimRecover": "Stun_Recover",
       "AnimOccurTransition": 0,
-      "AnimRecoverTransition": 0.3,
+      "AnimLoopTransition": 0,
+      "AnimRecoverTransition": 0,
       "RepeatOccurAnimWhenBeHitNormalizedTime": 0.7,
       "ReactionAnims": {
         "$type": "RPG.GameCore.CharacterReactionAnimConfig",
@@ -200,19 +203,19 @@
       "EmoAnimName": "Emo_Stun"
     },
     {
-      "Flag": "STAT_CTRL_Shake",
+      "Flag": "STAT_CTRL_UnOperable",
       "ModifierBehaviorVisualPriority": "Stun",
-      "AnimOccur": "Stun_Occur",
-      "AnimLoop": "Stun_Loop",
-      "AnimRecover": "Stun_Recover",
+      "AnimOccur": "Die",
+      "AnimLoop": "Die_Loop",
+      "AnimRecover": "Revive",
       "AnimOccurTransition": 0,
-      "AnimRecoverTransition": 0.3,
+      "AnimLoopTransition": 0,
+      "AnimRecoverTransition": 0,
       "RepeatOccurAnimWhenBeHitNormalizedTime": 0.7,
+      "ForecHitH": true,
       "ReactionAnims": {
         "$type": "RPG.GameCore.CharacterReactionAnimConfig",
-        "Hit": "Hit_Stun",
-        "HitH": "Stun_Occur",
-        "HitFlyRecover": "Hit_Fly_Recover_Stun"
+        "HitH": "Die_Hit"
       },
       "EmoAnimName": "Emo_Stun"
     },
@@ -367,37 +370,43 @@
         "STAT_DOT_Bleed",
         "STAT_DOT_Poison",
         "STAT_DOT_Electric"
-      ]
+      ],
+      "SortBy": "Phase1Priority"
     },
     {
       "BehaviorFlags": [
         "STAT_DOT_Burn"
       ],
-      "EventType": "DOT_Burn"
+      "EventType": "DOT_Burn",
+      "SortBy": "Phase1Priority"
     },
     {
       "BehaviorFlags": [
         "STAT_DOT_Electric"
       ],
-      "EventType": "DOT_Electric"
+      "EventType": "DOT_Electric",
+      "SortBy": "Phase1Priority"
     },
     {
       "BehaviorFlags": [
         "STAT_DOT_Poison"
       ],
-      "EventType": "DOT_Poison"
+      "EventType": "DOT_Poison",
+      "SortBy": "Phase1Priority"
     },
     {
       "BehaviorFlags": [
         "STAT_DOT_Bleed"
       ],
-      "EventType": "DOT_Bleed"
+      "EventType": "DOT_Bleed",
+      "SortBy": "Phase1Priority"
     },
     {
       "BehaviorFlags": [
         "STAT_Entangle"
       ],
-      "EventType": "DOT_Entangle"
+      "EventType": "DOT_Entangle",
+      "SortBy": "Phase1Priority"
     },
     {
       "BehaviorFlags": [
@@ -410,6 +419,18 @@
         "CustomEvent_MonsterChangePhase"
       ],
       "EventType": "MonsterChangePhase"
+    },
+    {
+      "BehaviorFlags": [
+        "CustomEvent_BattleScoreChange"
+      ],
+      "EventType": "BattleScoreChange"
+    },
+    {
+      "BehaviorFlags": [
+        "CustomEvent_InfiniteDoSummon"
+      ],
+      "EventType": "InfiniteDoSummon"
     }
   ],
   "DieAnimTransitDuration": 0,
@@ -423,9 +444,19 @@
         "STAT_CTRL"
       ]
     },
+    "ImmuneDot": {
+      "BehaviorFlags": [
+        "STAT_DOT"
+      ]
+    },
     "MuteAttachWeakness": {
       "BehaviorFlags": [
         "STAT_AttachWeakness"
+      ]
+    },
+    "STAT_ImmuneKnowledge": {
+      "BehaviorFlags": [
+        "STAT_Knowledge"
       ]
     }
   },
@@ -438,6 +469,13 @@
     "ResistDebuff": {
       "StatusTypes": [
         "Debuff"
+      ]
+    },
+    "STAT_ResistAll": {
+      "StatusTypes": [
+        "Debuff",
+        "Buff",
+        "Other"
       ]
     }
   },
@@ -534,22 +572,22 @@
     ],
     "DynamicMinusRatioByGear": [
       {
-        "Value": 0.1810000000987202
+        "Value": 0.181
       },
       {
-        "Value": 0.3200000002980232
+        "Value": 0.32
       },
       {
-        "Value": 0.5660000001080334
+        "Value": 0.566
       },
       {
         "Value": 1
       },
       {
-        "Value": 1.2910000002011657
+        "Value": 1.291
       },
       {
-        "Value": 1.6700000006239861
+        "Value": 1.67
       }
     ],
     "Gear": [
@@ -577,19 +615,19 @@
         "Value": 0
       },
       {
-        "Value": 0.05000000004656613
+        "Value": 0.05
       },
       {
-        "Value": 0.10000000009313226
+        "Value": 0.1
       },
       {
-        "Value": 0.20000000018626451
+        "Value": 0.2
       },
       {
-        "Value": 0.3500000003259629
+        "Value": 0.35
       },
       {
-        "Value": 0.5000000004656613
+        "Value": 0.5
       }
     ],
     "ComboDamageSkillAdded": {
@@ -640,34 +678,37 @@
   "TimelineDataAsset": [
     "Camera/TimeLine/TimelineData.asset"
   ],
-  "GameCoreDesignDataVersion": 5826665,
+  "ProjectileCurveAsset": [
+    "Projectile/ProjectileSpeedCurve.asset"
+  ],
+  "GameCoreDesignDataVersion": 7269028,
   "StanceBreakActionDelayChangeRatio": {
-    "Value": 0.25000000023283064
+    "Value": 0.25
   },
   "SkillDamageTypePreshowConfigs": {
     "Imaginary": {
       "StanceBreakActionSpeedChangeRatio": {
-        "Value": -0.10000000009313226
+        "Value": -0.1
       },
       "StanceBreakActionDelayChangeRatio": {
-        "Value": 0.3000000002793968
+        "Value": 0.3
       }
     },
     "Quantum": {
       "StanceBreakActionDelayChangeRatio": {
-        "Value": 0.20000000018626451
+        "Value": 0.2
       }
     }
   },
   "MonsterRankScore": {
     "Minion": {
-      "Value": 0.5000000004656613
+      "Value": 0.5
     },
     "MinionLv2": {
       "Value": 1
     },
     "Elite": {
-      "Value": 1.5000000004656613
+      "Value": 1.5
     },
     "LittleBoss": {
       "Value": 2
@@ -677,5 +718,34 @@
     }
   },
   "EnableModifyDotDamageData": true,
-  "CustomSwitchMap": {}
+  "CustomSwitchMap": {},
+  "ForbidRecallModifierEventList": [
+    "OnModifierAdd",
+    "OnAddModifierSuc",
+    "OnModifierOnStack",
+    "OnModifierRemove",
+    "OnModifierDotAdd",
+    "OnBeforeDealHeal",
+    "OnAfterDealHeal",
+    "OnListenHPChange",
+    "OnListenModifierAdd",
+    "OnListenModifierRemove",
+    "OnListenModifierOnStack",
+    "OnTriggerBreak"
+  ],
+  "SomatoWidthRange": [
+    {
+      "SomatoWidthType": "Thin",
+      "Max": 3
+    },
+    {
+      "Min": 3,
+      "Max": 4
+    },
+    {
+      "SomatoWidthType": "Fat",
+      "Min": 4,
+      "Max": 999
+    }
+  ]
 }

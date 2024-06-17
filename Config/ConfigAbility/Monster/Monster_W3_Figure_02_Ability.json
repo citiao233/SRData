@@ -733,7 +733,13 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "ModifierName": "Monster_W3_Figure_02_IsAiming"
+          "ModifierName": "Monster_W3_Figure_02_IsAiming",
+          "LayerAddWhenStack": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 4
+            }
+          }
         },
         {
           "$type": "RPG.GameCore.WaitAnimState",
@@ -2335,7 +2341,10 @@
         {
           "$type": "RPG.GameCore.WaitParallelTimeStamp",
           "WaitTime": {
-            "Value": 6.66666
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 6.66666
+            }
           }
         },
         {
@@ -2380,7 +2389,10 @@
         {
           "$type": "RPG.GameCore.WaitParallelTimeStamp",
           "WaitTime": {
-            "Value": 7.25
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 7.25
+            }
           }
         },
         {
@@ -2401,7 +2413,10 @@
         {
           "$type": "RPG.GameCore.WaitParallelTimeStamp",
           "WaitTime": {
-            "Value": 8
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 8
+            }
           }
         },
         {
@@ -2653,6 +2668,13 @@
       }
     },
     "Monster_W3_Figure_02_IsAiming": {
+      "MaxLayer": 4,
+      "LayerAddWhenStack": {
+        "IsDynamic": false,
+        "FixedValue": {
+          "Value": -1
+        }
+      },
       "_CallbackList": [
         {
           "Event": "OnDestroy",
@@ -2689,6 +2711,29 @@
                 "Alias": "AllEnemy"
               },
               "ModifierName": "Monster_W3_Figure_02_AimTarget"
+            }
+          ]
+        },
+        {
+          "Event": "OnStack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValue",
+              "DynamicKey": "MDF_DangerLevel",
+              "Value": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AAABAAMK",
+                  "FixedValues": [
+                    {
+                      "Value": 5
+                    }
+                  ],
+                  "DynamicHashes": [
+                    -320093813
+                  ]
+                }
+              }
             }
           ]
         },
@@ -2782,6 +2827,14 @@
                     }
                   ],
                   "LifeTime": 3
+                },
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "ModifierName": "Monster_W3_Figure_02_IsAiming"
                 }
               ]
             }
@@ -2839,7 +2892,13 @@
             }
           ]
         }
-      ]
+      ],
+      "Stacking": "Replace",
+      "DynamicValues": {
+        "Values": {
+          "-388349015": {}
+        }
+      }
     },
     "Monster_W3_Figure_02_ChainMark1": {},
     "Monster_W3_Figure_02_ChainMark2": {},

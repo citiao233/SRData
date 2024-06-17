@@ -4,7 +4,8 @@
       "Modifiers": {
         "MModifier_Monster_W3_Dinosaur_00_MuteHitFly": {
           "BehaviorFlagList": [
-            "MuteHitFly"
+            "MuteHitFly",
+            "KeepOnDeathrattle"
           ]
         }
       },
@@ -93,7 +94,8 @@
         "MModifier_Monster_W3_Dinosaur_00_RLElite": {},
         "MModifier_Monster_W3_Dinosaur_00_MuteHitFly": {
           "BehaviorFlagList": [
-            "MuteHitFly"
+            "MuteHitFly",
+            "KeepOnDeathrattle"
           ]
         }
       },
@@ -1499,6 +1501,14 @@
           }
         },
         {
+          "$type": "RPG.GameCore.RemoveModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "Monster_APShow"
+        },
+        {
           "$type": "RPG.GameCore.AddModifier",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
@@ -2271,6 +2281,14 @@
               }
             },
             {
+              "$type": "RPG.GameCore.RemoveModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "ModifierName": "Monster_APShow"
+            },
+            {
               "$type": "RPG.GameCore.PredicateTaskList",
               "Predicate": {
                 "$type": "RPG.GameCore.ByIsContainModifier",
@@ -2746,6 +2764,14 @@
               }
             },
             {
+              "$type": "RPG.GameCore.RemoveModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "ModifierName": "Monster_APShow"
+            },
+            {
               "$type": "RPG.GameCore.AddModifier",
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
@@ -3069,6 +3095,14 @@
           }
         },
         {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "Monster_APShow"
+        },
+        {
           "$type": "RPG.GameCore.RemoveModifier",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
@@ -3182,11 +3216,33 @@
       },
       "OnStart": [
         {
-          "$type": "RPG.GameCore.ShowSkillTextDialog",
-          "SkillName": {
-            "Hash": 960114383
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByIsContainModifier",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "ModifierName": "MModifier_Monster_W3_Dinosaur_00_RLElite"
           },
-          "IsDark": true
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.ShowSkillTextDialog",
+              "SkillName": {
+                "Hash": -726929083
+              },
+              "IsDark": true
+            }
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.ShowSkillTextDialog",
+              "SkillName": {
+                "Hash": 960114383
+              },
+              "IsDark": true
+            }
+          ]
         },
         {
           "$type": "RPG.GameCore.RemoveModifierByBehaviorFlag",
@@ -3420,6 +3476,14 @@
               }
             }
           }
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "Monster_APShow"
         },
         {
           "$type": "RPG.GameCore.RemoveModifier",
@@ -5613,6 +5677,10 @@
                                 "$type": "RPG.GameCore.TargetAlias",
                                 "Alias": "ModifierOwnerEntity"
                               },
+                              "AbortBehaviorFlags": [
+                                "STAT_CTRL",
+                                "Break"
+                              ],
                               "InsertAbilityPriority": "MonsterChangeState",
                               "ShowInActionBar": true,
                               "PreCheck": {
@@ -5624,6 +5692,29 @@
                                     "Value": 1
                                   }
                                 }
+                              },
+                              "ActivePredicate": {
+                                "$type": "RPG.GameCore.ByAnd",
+                                "PredicateList": [
+                                  {
+                                    "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                    "TargetType": {
+                                      "$type": "RPG.GameCore.TargetAlias",
+                                      "Alias": "ModifierOwnerEntity"
+                                    },
+                                    "Flag": "STAT_CTRL",
+                                    "Inverse": true
+                                  },
+                                  {
+                                    "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                    "TargetType": {
+                                      "$type": "RPG.GameCore.TargetAlias",
+                                      "Alias": "ModifierOwnerEntity"
+                                    },
+                                    "Flag": "Break",
+                                    "Inverse": true
+                                  }
+                                ]
                               }
                             }
                           ]
@@ -6339,6 +6430,10 @@
                             "$type": "RPG.GameCore.TargetAlias",
                             "Alias": "ModifierOwnerEntity"
                           },
+                          "AbortBehaviorFlags": [
+                            "STAT_CTRL",
+                            "Break"
+                          ],
                           "InsertAbilityPriority": "MonsterChangeState",
                           "ShowInActionBar": true,
                           "PreCheck": {
@@ -6350,6 +6445,29 @@
                                 "Value": 1
                               }
                             }
+                          },
+                          "ActivePredicate": {
+                            "$type": "RPG.GameCore.ByAnd",
+                            "PredicateList": [
+                              {
+                                "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                "TargetType": {
+                                  "$type": "RPG.GameCore.TargetAlias",
+                                  "Alias": "ModifierOwnerEntity"
+                                },
+                                "Flag": "STAT_CTRL",
+                                "Inverse": true
+                              },
+                              {
+                                "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                "TargetType": {
+                                  "$type": "RPG.GameCore.TargetAlias",
+                                  "Alias": "ModifierOwnerEntity"
+                                },
+                                "Flag": "Break",
+                                "Inverse": true
+                              }
+                            ]
                           }
                         }
                       ]
@@ -6752,6 +6870,14 @@
                   "ModifierName": "OneMorePerTurn"
                 }
               ]
+            },
+            {
+              "$type": "RPG.GameCore.RemoveModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "ModifierName": "Monster_APShow"
             },
             {
               "$type": "RPG.GameCore.RemoveModifier",
@@ -7167,6 +7293,14 @@
                   "ModifierName": "OneMorePerTurn"
                 }
               ]
+            },
+            {
+              "$type": "RPG.GameCore.RemoveModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "ModifierName": "Monster_APShow"
             },
             {
               "$type": "RPG.GameCore.RemoveModifier",

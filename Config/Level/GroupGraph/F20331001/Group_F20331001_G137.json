@@ -20,23 +20,15 @@
     {
       "TaskList": [
         {
-          "$type": "RPG.GameCore.AdvSetupButtonListTrigger",
-          "TargetType": {
-            "$type": "RPG.GameCore.GroupFetchLocalTarget",
-            "TargetType": "Prop",
-            "Targets": [
-              300001
-            ]
-          },
-          "TriggerName": "MissionTrigger",
-          "ButtonsByName": [],
-          "ButtonConfigs": [
-            {
-              "ID": "Option3A",
-              "ButtonText": {
-                "Value": "PropInteractTitle_352"
-              }
-            }
+          "$type": "RPG.GameCore.WaitCustomString",
+          "CustomString": {
+            "Value": "OptionChosen_1032801"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.AdvDestroyGroupEntity",
+          "InstanceIDList": [
+            300002
           ]
         }
       ]
@@ -44,14 +36,26 @@
     {
       "TaskList": [
         {
-          "$type": "RPG.GameCore.AdvOnButtonPressed",
-          "ButtonName": "Option3A",
-          "OnPressedCallback": [
+          "$type": "RPG.GameCore.WaitGroupEvent",
+          "EventName": {
+            "Value": "WayChosen"
+          },
+          "OnEvent": [
             {
-              "$type": "RPG.GameCore.TriggerGroupEvent",
-              "EventName": {
-                "Value": "Perf"
+              "$type": "RPG.GameCore.TriggerPerformance",
+              "ValueSource": {},
+              "PerformanceType": "C",
+              "PerformanceID": 103270223
+            },
+            {
+              "$type": "RPG.GameCore.TriggerCustomString",
+              "CustomString": {
+                "Value": "Talk_103280114"
               }
+            },
+            {
+              "$type": "RPG.GameCore.OpenTreasureChallenge",
+              "RaidID": 43321
             }
           ]
         }
@@ -126,26 +130,14 @@
     {
       "TaskList": [
         {
-          "$type": "RPG.GameCore.WaitGroupEvent",
-          "EventName": {
-            "Value": "WayChosen"
-          },
-          "OnEvent": [
+          "$type": "RPG.GameCore.AdvOnButtonPressed",
+          "ButtonName": "Option3A",
+          "OnPressedCallback": [
             {
-              "$type": "RPG.GameCore.TriggerPerformance",
-              "ValueSource": {},
-              "PerformanceType": "C",
-              "PerformanceID": 103270223
-            },
-            {
-              "$type": "RPG.GameCore.TriggerCustomString",
-              "CustomString": {
-                "Value": "Talk_103280114"
+              "$type": "RPG.GameCore.TriggerGroupEvent",
+              "EventName": {
+                "Value": "Perf"
               }
-            },
-            {
-              "$type": "RPG.GameCore.OpenTreasureChallenge",
-              "RaidID": 43321
             }
           ]
         }
@@ -154,15 +146,23 @@
     {
       "TaskList": [
         {
-          "$type": "RPG.GameCore.WaitCustomString",
-          "CustomString": {
-            "Value": "OptionChosen_1032801"
-          }
-        },
-        {
-          "$type": "RPG.GameCore.AdvDestroyGroupEntity",
-          "InstanceIDList": [
-            300002
+          "$type": "RPG.GameCore.AdvSetupButtonListTrigger",
+          "TargetType": {
+            "$type": "RPG.GameCore.GroupFetchLocalTarget",
+            "TargetType": "Prop",
+            "Targets": [
+              300001
+            ]
+          },
+          "TriggerName": "MissionTrigger",
+          "ButtonsByName": [],
+          "ButtonConfigs": [
+            {
+              "ID": "Option3A",
+              "ButtonText": {
+                "Value": "PropInteractTitle_352"
+              }
+            }
           ]
         }
       ]

@@ -137,74 +137,165 @@
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
                   "Predicate": {
-                    "$type": "RPG.GameCore.ByCheckCustomValueBool",
-                    "TargetType": {
-                      "$type": "RPG.GameCore.TargetAlias",
-                      "Alias": "ParamEntity"
-                    },
-                    "Key": {
-                      "Hash": -846539687
-                    }
+                    "$type": "RPG.GameCore.ByAny",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByCheckCustomValueBool",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "Key": {
+                          "Hash": -846539687
+                        }
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCheckCustomValueBool",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "Key": {
+                          "Hash": 1514167029
+                        }
+                      }
+                    ]
                   },
                   "SuccessTaskList": [
                     {
-                      "$type": "RPG.GameCore.ShowUIPage",
-                      "AssetPath": "UI/Common/Widget/ShowBattleHint.prefab",
-                      "UITextNodes": [
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCheckCustomValueBool",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "Key": {
+                          "Hash": -846539687
+                        }
+                      },
+                      "SuccessTaskList": [
                         {
-                          "TextPath": "AreaInfoPanel/Title/Text",
-                          "TextContent": {
-                            "Hash": -328772521
+                          "$type": "RPG.GameCore.ShowUIPage",
+                          "AssetPath": "UI/Common/Widget/ShowBattleHint.prefab",
+                          "UITextNodes": [
+                            {
+                              "TextPath": "AreaInfoPanel/Title/Text",
+                              "TextContent": {
+                                "Hash": -328772521
+                              }
+                            }
+                          ],
+                          "LifeTime": 3
+                        },
+                        {
+                          "$type": "RPG.GameCore.SetDynamicValue",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "DynamicKey": "HPScore",
+                          "Value": {
+                            "IsDynamic": false,
+                            "FixedValue": {
+                              "Value": 500
+                            }
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.SetDynamicValue",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "DynamicKey": "RemainingScore",
+                          "Value": {
+                            "IsDynamic": true,
+                            "PostfixExpr": {
+                              "OpCodes": "AQAK",
+                              "FixedValues": [],
+                              "DynamicHashes": [
+                                -347003192
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.SetDynamicValue",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "DynamicKey": "KillScore",
+                          "Value": {
+                            "IsDynamic": false,
+                            "FixedValue": {
+                              "Value": 1500
+                            }
                           }
                         }
-                      ],
-                      "LifeTime": 3
+                      ]
                     },
                     {
-                      "$type": "RPG.GameCore.SetDynamicValue",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "ModifierOwnerEntity"
-                      },
-                      "DynamicKey": "HPScore",
-                      "Value": {
-                        "IsDynamic": false,
-                        "FixedValue": {
-                          "Value": 500
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCheckCustomValueBool",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "Key": {
+                          "Hash": 1514167029
                         }
-                      }
-                    },
-                    {
-                      "$type": "RPG.GameCore.SetDynamicValue",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "ModifierOwnerEntity"
                       },
-                      "DynamicKey": "RemainingScore",
-                      "Value": {
-                        "IsDynamic": true,
-                        "PostfixExpr": {
-                          "OpCodes": "AQAK",
-                          "FixedValues": [],
-                          "DynamicHashes": [
-                            -347003192
-                          ]
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.SetDynamicValue",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "DynamicKey": "HPScore",
+                          "Value": {
+                            "IsDynamic": false,
+                            "FixedValue": {
+                              "Value": 0
+                            }
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.SetDynamicValue",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "DynamicKey": "RemainingScore",
+                          "Value": {
+                            "IsDynamic": true,
+                            "PostfixExpr": {
+                              "OpCodes": "AQAK",
+                              "FixedValues": [],
+                              "DynamicHashes": [
+                                -347003192
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.SetDynamicValue",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "DynamicKey": "KillScore",
+                          "Value": {
+                            "IsDynamic": false,
+                            "FixedValue": {
+                              "Value": 2000
+                            }
+                          }
                         }
-                      }
-                    },
-                    {
-                      "$type": "RPG.GameCore.SetDynamicValue",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "ModifierOwnerEntity"
-                      },
-                      "DynamicKey": "KillScore",
-                      "Value": {
-                        "IsDynamic": false,
-                        "FixedValue": {
-                          "Value": 1500
-                        }
-                      }
+                      ]
                     }
                   ],
                   "FailedTaskList": [
@@ -214,7 +305,7 @@
                         "$type": "RPG.GameCore.ByCompareMonsterRank",
                         "TargetType": {
                           "$type": "RPG.GameCore.TargetAlias",
-                          "Alias": "ParamEntity"
+                          "Alias": "ModifierOwnerEntity"
                         },
                         "CompareType": "Equal",
                         "CompareValue": 1
@@ -274,7 +365,7 @@
                             "$type": "RPG.GameCore.ByCompareMonsterRank",
                             "TargetType": {
                               "$type": "RPG.GameCore.TargetAlias",
-                              "Alias": "ParamEntity"
+                              "Alias": "ModifierOwnerEntity"
                             },
                             "CompareType": "Equal",
                             "CompareValue": 2
@@ -286,7 +377,7 @@
                                 "$type": "RPG.GameCore.ByCheckCustomValueBool",
                                 "TargetType": {
                                   "$type": "RPG.GameCore.TargetAlias",
-                                  "Alias": "ParamEntity"
+                                  "Alias": "ModifierOwnerEntity"
                                 },
                                 "Key": {
                                   "Hash": 1264957298
@@ -397,7 +488,7 @@
                                 "$type": "RPG.GameCore.ByCompareMonsterRank",
                                 "TargetType": {
                                   "$type": "RPG.GameCore.TargetAlias",
-                                  "Alias": "ParamEntity"
+                                  "Alias": "ModifierOwnerEntity"
                                 },
                                 "CompareType": "Equal",
                                 "CompareValue": 3
@@ -457,7 +548,7 @@
                                     "$type": "RPG.GameCore.ByCompareMonsterRank",
                                     "TargetType": {
                                       "$type": "RPG.GameCore.TargetAlias",
-                                      "Alias": "ParamEntity"
+                                      "Alias": "ModifierOwnerEntity"
                                     },
                                     "CompareType": "GreaterEqual",
                                     "CompareValue": 4
@@ -877,74 +968,165 @@
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
                   "Predicate": {
-                    "$type": "RPG.GameCore.ByCheckCustomValueBool",
-                    "TargetType": {
-                      "$type": "RPG.GameCore.TargetAlias",
-                      "Alias": "ParamEntity"
-                    },
-                    "Key": {
-                      "Hash": -846539687
-                    }
+                    "$type": "RPG.GameCore.ByAny",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByCheckCustomValueBool",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "Key": {
+                          "Hash": -846539687
+                        }
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCheckCustomValueBool",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "Key": {
+                          "Hash": 1514167029
+                        }
+                      }
+                    ]
                   },
                   "SuccessTaskList": [
                     {
-                      "$type": "RPG.GameCore.ShowUIPage",
-                      "AssetPath": "UI/Common/Widget/ShowBattleHint.prefab",
-                      "UITextNodes": [
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCheckCustomValueBool",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "Key": {
+                          "Hash": -846539687
+                        }
+                      },
+                      "SuccessTaskList": [
                         {
-                          "TextPath": "AreaInfoPanel/Title/Text",
-                          "TextContent": {
-                            "Hash": -328772521
+                          "$type": "RPG.GameCore.ShowUIPage",
+                          "AssetPath": "UI/Common/Widget/ShowBattleHint.prefab",
+                          "UITextNodes": [
+                            {
+                              "TextPath": "AreaInfoPanel/Title/Text",
+                              "TextContent": {
+                                "Hash": -328772521
+                              }
+                            }
+                          ],
+                          "LifeTime": 3
+                        },
+                        {
+                          "$type": "RPG.GameCore.SetDynamicValue",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "DynamicKey": "HPScore",
+                          "Value": {
+                            "IsDynamic": false,
+                            "FixedValue": {
+                              "Value": 1000
+                            }
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.SetDynamicValue",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "DynamicKey": "RemainingScore",
+                          "Value": {
+                            "IsDynamic": true,
+                            "PostfixExpr": {
+                              "OpCodes": "AQAK",
+                              "FixedValues": [],
+                              "DynamicHashes": [
+                                -347003192
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.SetDynamicValue",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "DynamicKey": "KillScore",
+                          "Value": {
+                            "IsDynamic": false,
+                            "FixedValue": {
+                              "Value": 1500
+                            }
                           }
                         }
-                      ],
-                      "LifeTime": 3
+                      ]
                     },
                     {
-                      "$type": "RPG.GameCore.SetDynamicValue",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "ModifierOwnerEntity"
-                      },
-                      "DynamicKey": "HPScore",
-                      "Value": {
-                        "IsDynamic": false,
-                        "FixedValue": {
-                          "Value": 1000
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCheckCustomValueBool",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "Key": {
+                          "Hash": 1514167029
                         }
-                      }
-                    },
-                    {
-                      "$type": "RPG.GameCore.SetDynamicValue",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "ModifierOwnerEntity"
                       },
-                      "DynamicKey": "RemainingScore",
-                      "Value": {
-                        "IsDynamic": true,
-                        "PostfixExpr": {
-                          "OpCodes": "AQAK",
-                          "FixedValues": [],
-                          "DynamicHashes": [
-                            -347003192
-                          ]
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.SetDynamicValue",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "DynamicKey": "HPScore",
+                          "Value": {
+                            "IsDynamic": false,
+                            "FixedValue": {
+                              "Value": 0
+                            }
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.SetDynamicValue",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "DynamicKey": "RemainingScore",
+                          "Value": {
+                            "IsDynamic": true,
+                            "PostfixExpr": {
+                              "OpCodes": "AQAK",
+                              "FixedValues": [],
+                              "DynamicHashes": [
+                                -347003192
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.SetDynamicValue",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "DynamicKey": "KillScore",
+                          "Value": {
+                            "IsDynamic": false,
+                            "FixedValue": {
+                              "Value": 2500
+                            }
+                          }
                         }
-                      }
-                    },
-                    {
-                      "$type": "RPG.GameCore.SetDynamicValue",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "ModifierOwnerEntity"
-                      },
-                      "DynamicKey": "KillScore",
-                      "Value": {
-                        "IsDynamic": false,
-                        "FixedValue": {
-                          "Value": 1500
-                        }
-                      }
+                      ]
                     }
                   ],
                   "FailedTaskList": [
@@ -954,7 +1136,7 @@
                         "$type": "RPG.GameCore.ByCompareMonsterRank",
                         "TargetType": {
                           "$type": "RPG.GameCore.TargetAlias",
-                          "Alias": "ParamEntity"
+                          "Alias": "ModifierOwnerEntity"
                         },
                         "CompareType": "Equal",
                         "CompareValue": 1
@@ -1014,7 +1196,7 @@
                             "$type": "RPG.GameCore.ByCompareMonsterRank",
                             "TargetType": {
                               "$type": "RPG.GameCore.TargetAlias",
-                              "Alias": "ParamEntity"
+                              "Alias": "ModifierOwnerEntity"
                             },
                             "CompareType": "Equal",
                             "CompareValue": 2
@@ -1026,7 +1208,7 @@
                                 "$type": "RPG.GameCore.ByCheckCustomValueBool",
                                 "TargetType": {
                                   "$type": "RPG.GameCore.TargetAlias",
-                                  "Alias": "ParamEntity"
+                                  "Alias": "ModifierOwnerEntity"
                                 },
                                 "Key": {
                                   "Hash": 1264957298
@@ -1137,7 +1319,7 @@
                                 "$type": "RPG.GameCore.ByCompareMonsterRank",
                                 "TargetType": {
                                   "$type": "RPG.GameCore.TargetAlias",
-                                  "Alias": "ParamEntity"
+                                  "Alias": "ModifierOwnerEntity"
                                 },
                                 "CompareType": "Equal",
                                 "CompareValue": 3
@@ -1197,7 +1379,7 @@
                                     "$type": "RPG.GameCore.ByCompareMonsterRank",
                                     "TargetType": {
                                       "$type": "RPG.GameCore.TargetAlias",
-                                      "Alias": "ParamEntity"
+                                      "Alias": "ModifierOwnerEntity"
                                     },
                                     "CompareType": "GreaterEqual",
                                     "CompareValue": 4

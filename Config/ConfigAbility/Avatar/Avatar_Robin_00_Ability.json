@@ -915,6 +915,18 @@
             "Alias": "Caster"
           },
           "ModifierName": "MAvatar_Robin_00_PassiveSkill01_BattleEvent_BaseSpeed"
+        },
+        {
+          "$type": "RPG.GameCore.LockActionDelayChange",
+          "LockTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "WhitelistSourceEntity": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "WhitelistChangeReason": "Bit_TurnBasedAdvance"
         }
       ]
     },
@@ -2070,6 +2082,15 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "Caster"
               }
+            },
+            {
+              "$type": "RPG.GameCore.TriggerAnimState",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "BattleEventCaster"
+              },
+              "AnimLogicState": "Idle",
+              "AnimStateName": "StandBy"
             }
           ]
         }
@@ -2979,6 +3000,17 @@
               "PhaseName": "Phase2",
               "PhaseAnimConfig": {
                 "StandBy": "Skill03_Loop",
+                "ModifierBehaviorVisuals": [
+                  {
+                    "Flag": "AvatarBreak",
+                    "AnimOccur": "Skill03_Loop",
+                    "AnimLoop": "Stagger_Loop",
+                    "AnimRecover": "Skill03_Loop",
+                    "AnimOccurTransition": 0,
+                    "AnimLoopTransition": 0,
+                    "AnimRecoverTransition": 0
+                  }
+                ],
                 "Hit": "Skill03_Loop",
                 "HitH": "Skill03_Loop"
               }
@@ -3166,7 +3198,9 @@
                       }
                     },
                     "AttackType": "Pursued",
-                    "DamageTag": "Robin_00_FixedCrit_Pursed",
+                    "DamageTag": [
+                      "Robin_00_FixedCrit_Pursed"
+                    ],
                     "HitAnimation": "Hit",
                     "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Robin_00/Eff_Avatar_Robin_00_Skill03_Hit.prefab"
                   },

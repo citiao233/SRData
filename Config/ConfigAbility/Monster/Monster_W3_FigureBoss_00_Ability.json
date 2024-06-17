@@ -542,6 +542,12 @@
                 }
               ]
             }
+          ],
+          "_PriorityList": [
+            {
+              "PriorityName": "EnterBattlePriority",
+              "Key": "DefineHPSharedGroup"
+            }
           ]
         },
         "MMonster_W3_DollElite_Boss_ViewModeListener": {
@@ -554,6 +560,20 @@
                   "Team": "TeamDark",
                   "FormationType": "DarkTeamNormal",
                   "FormationConfigName": "LowSpacing"
+                },
+                {
+                  "$type": "RPG.GameCore.SetEntityPosition",
+                  "PosTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllTeamCenter"
+                  },
+                  "OffsetY": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": -5
+                    }
+                  },
+                  "SetRotation": false
                 }
               ]
             },
@@ -1060,7 +1080,7 @@
           "EventID": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 96071
+              "Value": 20012
             }
           },
           "DynamicValues": {
@@ -1112,7 +1132,7 @@
             "TargetBattleEventID": {
               "IsDynamic": false,
               "FixedValue": {
-                "Value": 96071
+                "Value": 20012
               }
             }
           },
@@ -1563,6 +1583,59 @@
         {
           "$type": "RPG.GameCore.TriggerAnimState",
           "AnimLogicState": "Idle"
+        },
+        {
+          "$type": "RPG.GameCore.Retarget",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllDarkTeam"
+          },
+          "Predicate": {
+            "$type": "RPG.GameCore.ByAny",
+            "PredicateList": [
+              {
+                "$type": "RPG.GameCore.ByCheckCustomValueBool",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "Key": {
+                  "Hash": -231967306
+                }
+              },
+              {
+                "$type": "RPG.GameCore.ByCheckCustomValueBool",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "Key": {
+                  "Hash": 1334116635
+                }
+              },
+              {
+                "$type": "RPG.GameCore.ByCheckCustomValueBool",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "Key": {
+                  "Hash": 930832108
+                }
+              }
+            ]
+          },
+          "ByRandom": false,
+          "TaskList": [
+            {
+              "$type": "RPG.GameCore.TriggerAnimState",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ParamEntity"
+              },
+              "AnimLogicState": "Idle"
+            }
+          ]
         },
         {
           "$type": "RPG.GameCore.RemoveModifier",
@@ -4223,6 +4296,14 @@
                       "AnimStateName": "ChangePhaseStart"
                     },
                     {
+                      "$type": "RPG.GameCore.RemoveModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "ModifierName": "MAvatar_RuanMei_PassiveArea_EnemyCD"
+                    },
+                    {
                       "$type": "RPG.GameCore.Retarget",
                       "TargetType": {
                         "$type": "RPG.GameCore.TargetAlias",
@@ -4271,6 +4352,14 @@
                             "Alias": "ParamEntity"
                           },
                           "AnimStateName": "Stagger"
+                        },
+                        {
+                          "$type": "RPG.GameCore.RemoveModifier",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "ModifierName": "MAvatar_RuanMei_PassiveArea_EnemyCD"
                         },
                         {
                           "$type": "RPG.GameCore.RemoveModifier",
@@ -4641,12 +4730,6 @@
                       "Alias": "ParamEntity"
                     },
                     "ModifierName": "MMonster_W3_DollElite_Commnon_TheChosenOne"
-                  },
-                  "MaxNumber": {
-                    "IsDynamic": false,
-                    "FixedValue": {
-                      "Value": 5
-                    }
                   },
                   "TaskList": [
                     {
@@ -5351,6 +5434,20 @@
                           "IsDynamic": false,
                           "FixedValue": {
                             "Value": 1
+                          }
+                        }
+                      },
+                      "ActivePredicate": {
+                        "$type": "RPG.GameCore.ByCompareMonsterPhase",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetFetchUniqueNameEntity",
+                          "UniqueName": "DollBoss"
+                        },
+                        "CompareType": "Less",
+                        "CompareValue": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 2
                           }
                         }
                       }

@@ -10,7 +10,7 @@
     },
     "ADV_StageAbility_Maze_Himeko": {
       "BehaviorFlagList": [
-        "Debuff"
+        "Counter"
       ],
       "OnCreate": [
         {
@@ -27,7 +27,7 @@
     },
     "ADV_StageAbility_Maze_Welt": {
       "BehaviorFlagList": [
-        "Debuff"
+        "Counter"
       ],
       "OnStack": [
         {
@@ -1724,6 +1724,194 @@
       "Count": 1,
       "Stacking": "Refresh"
     },
+    "ADV_StageAbility_Maze_Firefly": {
+      "Count": 1,
+      "Stacking": "Merge"
+    },
+    "ADV_StageAbility_Maze_Firefly_FireWeakness": {
+      "OnStack": [
+        {
+          "$type": "RPG.GameCore.AdvAddGlobalWeakness",
+          "Weakness": "Fire"
+        }
+      ],
+      "Count": 1,
+      "Stacking": "Merge"
+    },
+    "ADV_StageAbility_Maze_Firefly_MidAirInvincible": {
+      "LifeTime": 5,
+      "BehaviorFlagList": [
+        "Stealth",
+        "HolyShield"
+      ],
+      "TickInterval": 0.03,
+      "OnInterval": [
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByAnd",
+            "PredicateList": [
+              {
+                "$type": "RPG.GameCore.ByHasPlayerMoveInput"
+              },
+              {
+                "$type": "RPG.GameCore.ByCompareCharacterSpeed",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ModifierOwnerEntity"
+                },
+                "RealSpeed": true,
+                "CompareType": "Greater",
+                "CompareValue": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 0
+                  }
+                }
+              }
+            ]
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                "DynamicKey": "_SoundStartFlag",
+                "CompareType": "Equal",
+                "CompareValue": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 0
+                  }
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.TriggerSound",
+                  "SoundName": {
+                    "Value": "Ev_sfx_avatar_MazeSkill_Movment_shiftUp_Firefly"
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "DynamicKey": "_SoundStartFlag",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "DynamicKey": "_SoundEndFlag",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "DynamicKey": "_SoundStartFlag",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 1
+                      }
+                    }
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "DynamicKey": "_SoundEndFlag",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    }
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.TriggerSound",
+                  "SoundName": {
+                    "Value": "Ev_sfx_avatar_MazeSkill_Movment_shiftDown_Firefly"
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "DynamicKey": "_SoundStartFlag",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "DynamicKey": "_SoundEndFlag",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "OnUnstage": [
+        {
+          "$type": "RPG.GameCore.RemoveSelfModifier"
+        }
+      ],
+      "Count": 1,
+      "Stacking": "Refresh",
+      "DynamicValues": {
+        "Values": {
+          "-1652196396": {},
+          "-781446665": {}
+        }
+      }
+    },
+    "ADV_StageAbility_Maze_Firefly_FadeOut": {
+      "OnUnstage": [
+        {
+          "$type": "RPG.GameCore.SetTargetEntityFadeWithAnim",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "TargetValue": 1
+        },
+        {
+          "$type": "RPG.GameCore.RemoveAdventureModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "ModifierName": "ADV_StageAbility_Maze_Firefly_FadeOut"
+        }
+      ],
+      "Stacking": "ReplaceByCaster"
+    },
     "ADV_StageAbility_Maze_Misha": {
       "BehaviorFlagList": [
         "TimeLock"
@@ -1770,6 +1958,105 @@
         }
       ],
       "Stacking": "Merge"
+    },
+    "ADV_StageAbility_Maze_Jade_TiggerExit": {
+      "OnCreate": [
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByIsTeamLeader",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "ModifierOwnerEntity"
+            }
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.CreateSummonUnit",
+              "SummonUnitID": 13141,
+              "AttachTarget": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "PosTarget": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              }
+            }
+          ]
+        }
+      ],
+      "OnDestroy": [
+        {
+          "$type": "RPG.GameCore.DestroySummonUnit",
+          "SummonUnit": {
+            "$type": "RPG.GameCore.TargetFetchSummonUnit",
+            "Summoner": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "SummonUnitID": 13141
+          }
+        }
+      ],
+      "OnStage": [
+        {
+          "$type": "RPG.GameCore.CreateSummonUnit",
+          "SummonUnitID": 13141,
+          "AttachTarget": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "PosTarget": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          }
+        }
+      ],
+      "Stacking": "Merge"
+    },
+    "ADV_StageAbility_Maze_Jade_Flag": {
+      "Count": 1,
+      "Stacking": "Merge"
+    },
+    "ADV_StageAbility_Maze_Jade": {
+      "BehaviorFlagList": [
+        "Blind"
+      ],
+      "OnDestroy": [
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Jade_00/Eff_Avatar_Jade_00_MazeSkill01_DeBuff_01.prefab"
+        }
+      ],
+      "OnStack": [
+        {
+          "$type": "RPG.GameCore.ModifierAttachEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Jade_00/Eff_Avatar_Jade_00_MazeSkill01_DeBuff_01.prefab",
+          "MinMutexTime": -1,
+          "MutexType": "Entity"
+        }
+      ],
+      "OnBeAttack": [
+        {
+          "$type": "RPG.GameCore.AdvAddExtraBattleMonster",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetFetchNpcMonsterWithMazeBuff",
+            "MazeBuffID": 131401,
+            "ModifierName": "ADV_StageAbility_Maze_Jade_Flag"
+          }
+        }
+      ],
+      "Count": 1,
+      "Stacking": "Replace"
     },
     "ADV_StageAbility_Maze_Boothill": {
       "Count": 1,
@@ -1908,6 +2195,14 @@
                 }
               },
               "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.RemoveMazeBuff",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "ID": 131502
+                },
                 {
                   "$type": "RPG.GameCore.AddMazeBuff",
                   "TargetType": {
@@ -2383,6 +2678,29 @@
       ],
       "Count": 1,
       "Stacking": "Refresh"
+    },
+    "ADV_StageAbility_Maze_W_Jade": {
+      "Count": 1,
+      "Stacking": "Merge"
+    },
+    "ADV_StageAbility_Maze_W_Jade_Enemy": {
+      "BehaviorFlagList": [
+        "Blind"
+      ],
+      "OnStack": [
+        {
+          "$type": "RPG.GameCore.ModifierAttachEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Jade_00/Eff_Avatar_Jade_00_MazeSkill01_DeBuff_01.prefab",
+          "MinMutexTime": -1,
+          "MutexType": "Entity"
+        }
+      ],
+      "Count": 1,
+      "Stacking": "Merge"
     },
     "ADV_Modifier_ZhangZhang_FindTrotter_VFX": {
       "Count": 1,

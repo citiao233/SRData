@@ -4,22 +4,26 @@
     {
       "TaskList": [
         {
-          "$type": "RPG.GameCore.AdvSetupButtonListTrigger",
-          "TargetType": {
-            "$type": "RPG.GameCore.GroupFetchLocalTarget",
-            "TargetType": "Prop",
-            "Targets": [
-              300001
-            ]
+          "$type": "RPG.GameCore.WaitGroupEvent",
+          "EventName": {
+            "Value": "FinishPuzzle"
           },
-          "TriggerName": "MissionTrigger",
-          "ButtonsByName": [],
-          "ButtonConfigs": [
+          "OnEvent": [
             {
-              "ID": "SubmitItem",
-              "IconType": "CheckIcon",
-              "ButtonText": {
-                "Value": "PropInteractTitle_1"
+              "$type": "RPG.GameCore.TriggerPerformance",
+              "ValueSource": {},
+              "PerformanceType": "E",
+              "PerformanceID": 103280112
+            },
+            {
+              "$type": "RPG.GameCore.AdventureGameplayLock",
+              "IsLock": true,
+              "LockSource": "FullScreenLock"
+            },
+            {
+              "$type": "RPG.GameCore.TriggerCustomString",
+              "CustomString": {
+                "Value": "Talk_103280208"
               }
             }
           ]
@@ -45,24 +49,26 @@
     {
       "TaskList": [
         {
-          "$type": "RPG.GameCore.WaitGroupEvent",
-          "EventName": {
-            "Value": "FinishPuzzle"
+          "$type": "RPG.GameCore.AdvSetupButtonListTrigger",
+          "TargetType": {
+            "$type": "RPG.GameCore.GroupFetchLocalTarget",
+            "TargetType": "Prop",
+            "Targets": [
+              300001
+            ]
           },
-          "OnEvent": [
+          "TriggerName": "MissionTrigger",
+          "ButtonsByName": [],
+          "ButtonConfigs": [
             {
-              "$type": "RPG.GameCore.TriggerPerformance",
-              "ValueSource": {},
-              "PerformanceType": "E",
-              "PerformanceID": 103280112
-            },
-            {
-              "$type": "RPG.GameCore.TriggerCustomString",
-              "CustomString": {
-                "Value": "Talk_103280208"
+              "ID": "SubmitItem",
+              "IconType": "CheckIcon",
+              "ButtonText": {
+                "Value": "PropInteractTitle_1"
               }
             }
-          ]
+          ],
+          "DisableAfterTriggered": true
         }
       ]
     }

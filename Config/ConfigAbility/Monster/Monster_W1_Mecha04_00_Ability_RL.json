@@ -151,7 +151,8 @@
         },
         "WMonster_Mecha_02_MuteHitFly": {
           "BehaviorFlagList": [
-            "MuteHitFly"
+            "MuteHitFly",
+            "KeepOnDeathrattle"
           ]
         },
         "MMonster_W1_Mecha04_00_ChainSawSpeedController": {
@@ -1111,6 +1112,22 @@
                     }
                   },
                   "ContextScope": "TargetEntity"
+                },
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "ModifierName": "Monster_APShow_Base_Immediately",
+                  "DynamicValues": {
+                    "Acc_Turn": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    }
+                  }
                 }
               ]
             }
@@ -5231,6 +5248,14 @@
                     }
                   },
                   "ContextScope": "TargetEntity"
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "ModifierName": "Monster_APShow"
                 },
                 {
                   "$type": "RPG.GameCore.SetDynamicValue",

@@ -24,9 +24,31 @@
           "Pause": true
         },
         {
+          "$type": "RPG.GameCore.SetGraphDynamicString",
+          "Name": "Tutorial_5390_CanSkip",
+          "TargetIDs": [],
+          "Value": {
+            "Value": "true"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerCustomString",
+          "CustomString": {
+            "Value": "Tutorial_5390_Start_Timer"
+          }
+        },
+        {
           "$type": "RPG.GameCore.ShowGuideHintWithText",
           "Block": true,
           "TargetEvent": [
+            {
+              "$type": "RPG.GameCore.SetGraphDynamicString",
+              "Name": "Tutorial_5390_CanSkip",
+              "TargetIDs": [],
+              "Value": {
+                "Value": "false"
+              }
+            },
             {
               "$type": "RPG.GameCore.WaitPlayerAction",
               "ActionType": "AnyAction",
@@ -90,6 +112,43 @@
         {
           "$type": "RPG.GameCore.TutorialFinish",
           "TutorialID": 5390
+        }
+      ]
+    },
+    {
+      "IsLoop": true,
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitCustomString",
+          "CustomString": {
+            "Value": "Tutorial_5390_Start_Timer"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 5
+            }
+          },
+          "IsRealtime": true
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareGraphDynamicString",
+            "Name": "Tutorial_5390_CanSkip",
+            "Value": {
+              "Value": "true"
+            }
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.TutorialFinish",
+              "TutorialID": 5390
+            }
+          ]
         }
       ]
     }

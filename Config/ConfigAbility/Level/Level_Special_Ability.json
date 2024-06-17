@@ -5103,6 +5103,211 @@
     },
     {
       "Modifiers": {
+        "StageAbility_RogueDLCTrotterEnhance_Modifier": {
+          "_CallbackList": [
+            {
+              "Event": "OnEnterBattle",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.Retarget",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllDarkTeam"
+                  },
+                  "TaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "Monster_Common_SpeedAddedRatio",
+                      "DynamicValues": {
+                        "MDF_PropertyValue": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 0.5
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "_PriorityList": [
+            {
+              "PriorityName": "EnterBattlePriority",
+              "Key": "LevelBuff"
+            }
+          ]
+        }
+      },
+      "Name": "StageAbility_RogueDLCTrotterEnhance",
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "StageAbility_RogueDLCTrotterEnhance_Modifier"
+        }
+      ]
+    },
+    {
+      "Modifiers": {
+        "StageAbility_RogueDLCTVLevel_Modifier": {
+          "_CallbackList": [
+            {
+              "Event": "OnCreate",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SetBattleScoringItem",
+                  "ScoringID": 80005,
+                  "ModifyFunction": "Set",
+                  "ModifyValue": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "Event": "OnListenCharacterDie",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAny",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByCompareMonsterID",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "TargetMonsterID": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 300201000
+                          }
+                        }
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCompareMonsterID",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "TargetMonsterID": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 300201000
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "LevelEntity"
+                      },
+                      "ModifierName": "Rogue_Scoring_Event_TV_Count_Modifier"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Event": "OnListenCharacterCreate",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAny",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByCompareMonsterID",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "TargetMonsterID": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 300201000
+                          }
+                        }
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCompareMonsterID",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "TargetMonsterID": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 300201000
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "StageAbility_RogueDLCTVLevel_Monster_Modifier"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "StageAbility_RogueDLCTVLevel_Monster_Modifier": {}
+      },
+      "Name": "StageAbility_RogueDLCTVLevel",
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "StageAbility_RogueDLCTVLevel_Modifier"
+        }
+      ]
+    },
+    {
+      "Modifiers": {
+        "StageAbility_RogueDLCVirtualLevel_Modifier": {}
+      },
+      "Name": "StageAbility_RogueDLCVirtualLevel",
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "StageAbility_RogueDLCVirtualLevel_Modifier"
+        }
+      ]
+    },
+    {
+      "Modifiers": {
         "MonsterDisableDebuff_Level": {
           "_CallbackList": [
             {
@@ -5664,6 +5869,22 @@
     },
     {
       "Modifiers": {
+        "StageAbility_RogueTimeLimit_Special_Modifier": {}
+      },
+      "Name": "StageAbility_RogueTimeLimit_Special",
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "StageAbility_RogueTimeLimit_Special_Modifier"
+        }
+      ]
+    },
+    {
+      "Modifiers": {
         "StageAbility_RogueEliteLevel_Enhance_Modifier": {
           "_CallbackList": [
             {
@@ -5746,12 +5967,25 @@
                         {
                           "$type": "RPG.GameCore.PredicateTaskList",
                           "Predicate": {
-                            "$type": "RPG.GameCore.ByIsContainModifier",
-                            "TargetType": {
-                              "$type": "RPG.GameCore.TargetAlias",
-                              "Alias": "LevelEntity"
-                            },
-                            "ModifierName": "StageAbility_RogueNous_DifficultyJudge_02_Modifier"
+                            "$type": "RPG.GameCore.ByAny",
+                            "PredicateList": [
+                              {
+                                "$type": "RPG.GameCore.ByIsContainModifier",
+                                "TargetType": {
+                                  "$type": "RPG.GameCore.TargetAlias",
+                                  "Alias": "LevelEntity"
+                                },
+                                "ModifierName": "StageAbility_RogueNous_DifficultyJudge_02_Modifier"
+                              },
+                              {
+                                "$type": "RPG.GameCore.ByIsContainModifier",
+                                "TargetType": {
+                                  "$type": "RPG.GameCore.TargetAlias",
+                                  "Alias": "LevelEntity"
+                                },
+                                "ModifierName": "StageAbility_651004_Modifier"
+                              }
+                            ]
                           },
                           "SuccessTaskList": [
                             {
@@ -5767,12 +6001,25 @@
                         {
                           "$type": "RPG.GameCore.PredicateTaskList",
                           "Predicate": {
-                            "$type": "RPG.GameCore.ByIsContainModifier",
-                            "TargetType": {
-                              "$type": "RPG.GameCore.TargetAlias",
-                              "Alias": "LevelEntity"
-                            },
-                            "ModifierName": "StageAbility_RogueNous_DifficultyJudge_01_Modifier"
+                            "$type": "RPG.GameCore.ByAny",
+                            "PredicateList": [
+                              {
+                                "$type": "RPG.GameCore.ByIsContainModifier",
+                                "TargetType": {
+                                  "$type": "RPG.GameCore.TargetAlias",
+                                  "Alias": "LevelEntity"
+                                },
+                                "ModifierName": "StageAbility_RogueNous_DifficultyJudge_01_Modifier"
+                              },
+                              {
+                                "$type": "RPG.GameCore.ByIsContainModifier",
+                                "TargetType": {
+                                  "$type": "RPG.GameCore.TargetAlias",
+                                  "Alias": "LevelEntity"
+                                },
+                                "ModifierName": "StageAbility_651002_Modifier"
+                              }
+                            ]
                           },
                           "SuccessTaskList": [
                             {
@@ -5873,12 +6120,25 @@
                         }
                       },
                       {
-                        "$type": "RPG.GameCore.ByIsContainModifier",
-                        "TargetType": {
-                          "$type": "RPG.GameCore.TargetAlias",
-                          "Alias": "LevelEntity"
-                        },
-                        "ModifierName": "StageAbility_RogueNous_DifficultyJudge_02_Modifier"
+                        "$type": "RPG.GameCore.ByAny",
+                        "PredicateList": [
+                          {
+                            "$type": "RPG.GameCore.ByIsContainModifier",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "LevelEntity"
+                            },
+                            "ModifierName": "StageAbility_RogueNous_DifficultyJudge_02_Modifier"
+                          },
+                          {
+                            "$type": "RPG.GameCore.ByIsContainModifier",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "LevelEntity"
+                            },
+                            "ModifierName": "StageAbility_651004_Modifier"
+                          }
+                        ]
                       }
                     ]
                   },
@@ -5901,12 +6161,25 @@
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
                   "Predicate": {
-                    "$type": "RPG.GameCore.ByIsContainModifier",
-                    "TargetType": {
-                      "$type": "RPG.GameCore.TargetAlias",
-                      "Alias": "LevelEntity"
-                    },
-                    "ModifierName": "StageAbility_RogueNous_DifficultyJudge_01_Modifier"
+                    "$type": "RPG.GameCore.ByAny",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByIsContainModifier",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "LevelEntity"
+                        },
+                        "ModifierName": "StageAbility_RogueNous_DifficultyJudge_01_Modifier"
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByIsContainModifier",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "LevelEntity"
+                        },
+                        "ModifierName": "StageAbility_651002_Modifier"
+                      }
+                    ]
                   },
                   "SuccessTaskList": [
                     {
@@ -5937,12 +6210,25 @@
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
                   "Predicate": {
-                    "$type": "RPG.GameCore.ByIsContainModifier",
-                    "TargetType": {
-                      "$type": "RPG.GameCore.TargetAlias",
-                      "Alias": "LevelEntity"
-                    },
-                    "ModifierName": "StageAbility_RogueNous_DifficultyJudge_01_Modifier"
+                    "$type": "RPG.GameCore.ByAny",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByIsContainModifier",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "LevelEntity"
+                        },
+                        "ModifierName": "StageAbility_RogueNous_DifficultyJudge_01_Modifier"
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByIsContainModifier",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "LevelEntity"
+                        },
+                        "ModifierName": "StageAbility_651002_Modifier"
+                      }
+                    ]
                   },
                   "SuccessTaskList": [
                     {
@@ -6139,12 +6425,25 @@
                         {
                           "$type": "RPG.GameCore.PredicateTaskList",
                           "Predicate": {
-                            "$type": "RPG.GameCore.ByIsContainModifier",
-                            "TargetType": {
-                              "$type": "RPG.GameCore.TargetAlias",
-                              "Alias": "LevelEntity"
-                            },
-                            "ModifierName": "StageAbility_RogueNous_DifficultyJudge_02_Modifier"
+                            "$type": "RPG.GameCore.ByAny",
+                            "PredicateList": [
+                              {
+                                "$type": "RPG.GameCore.ByIsContainModifier",
+                                "TargetType": {
+                                  "$type": "RPG.GameCore.TargetAlias",
+                                  "Alias": "LevelEntity"
+                                },
+                                "ModifierName": "StageAbility_RogueNous_DifficultyJudge_02_Modifier"
+                              },
+                              {
+                                "$type": "RPG.GameCore.ByIsContainModifier",
+                                "TargetType": {
+                                  "$type": "RPG.GameCore.TargetAlias",
+                                  "Alias": "LevelEntity"
+                                },
+                                "ModifierName": "StageAbility_651004_Modifier"
+                              }
+                            ]
                           },
                           "SuccessTaskList": [
                             {
@@ -6160,12 +6459,25 @@
                         {
                           "$type": "RPG.GameCore.PredicateTaskList",
                           "Predicate": {
-                            "$type": "RPG.GameCore.ByIsContainModifier",
-                            "TargetType": {
-                              "$type": "RPG.GameCore.TargetAlias",
-                              "Alias": "LevelEntity"
-                            },
-                            "ModifierName": "StageAbility_RogueNous_DifficultyJudge_01_Modifier"
+                            "$type": "RPG.GameCore.ByAny",
+                            "PredicateList": [
+                              {
+                                "$type": "RPG.GameCore.ByIsContainModifier",
+                                "TargetType": {
+                                  "$type": "RPG.GameCore.TargetAlias",
+                                  "Alias": "LevelEntity"
+                                },
+                                "ModifierName": "StageAbility_RogueNous_DifficultyJudge_01_Modifier"
+                              },
+                              {
+                                "$type": "RPG.GameCore.ByIsContainModifier",
+                                "TargetType": {
+                                  "$type": "RPG.GameCore.TargetAlias",
+                                  "Alias": "LevelEntity"
+                                },
+                                "ModifierName": "StageAbility_651002_Modifier"
+                              }
+                            ]
                           },
                           "SuccessTaskList": [
                             {
@@ -6266,12 +6578,25 @@
                         }
                       },
                       {
-                        "$type": "RPG.GameCore.ByIsContainModifier",
-                        "TargetType": {
-                          "$type": "RPG.GameCore.TargetAlias",
-                          "Alias": "LevelEntity"
-                        },
-                        "ModifierName": "StageAbility_RogueNous_DifficultyJudge_02_Modifier"
+                        "$type": "RPG.GameCore.ByAny",
+                        "PredicateList": [
+                          {
+                            "$type": "RPG.GameCore.ByIsContainModifier",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "LevelEntity"
+                            },
+                            "ModifierName": "StageAbility_RogueNous_DifficultyJudge_02_Modifier"
+                          },
+                          {
+                            "$type": "RPG.GameCore.ByIsContainModifier",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "LevelEntity"
+                            },
+                            "ModifierName": "StageAbility_651004_Modifier"
+                          }
+                        ]
                       }
                     ]
                   },
@@ -6294,12 +6619,25 @@
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
                   "Predicate": {
-                    "$type": "RPG.GameCore.ByIsContainModifier",
-                    "TargetType": {
-                      "$type": "RPG.GameCore.TargetAlias",
-                      "Alias": "LevelEntity"
-                    },
-                    "ModifierName": "StageAbility_RogueNous_DifficultyJudge_01_Modifier"
+                    "$type": "RPG.GameCore.ByAny",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByIsContainModifier",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "LevelEntity"
+                        },
+                        "ModifierName": "StageAbility_RogueNous_DifficultyJudge_01_Modifier"
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByIsContainModifier",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "LevelEntity"
+                        },
+                        "ModifierName": "StageAbility_651002_Modifier"
+                      }
+                    ]
                   },
                   "SuccessTaskList": [
                     {
@@ -6330,12 +6668,25 @@
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
                   "Predicate": {
-                    "$type": "RPG.GameCore.ByIsContainModifier",
-                    "TargetType": {
-                      "$type": "RPG.GameCore.TargetAlias",
-                      "Alias": "LevelEntity"
-                    },
-                    "ModifierName": "StageAbility_RogueNous_DifficultyJudge_01_Modifier"
+                    "$type": "RPG.GameCore.ByAny",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByIsContainModifier",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "LevelEntity"
+                        },
+                        "ModifierName": "StageAbility_RogueNous_DifficultyJudge_01_Modifier"
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByIsContainModifier",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "LevelEntity"
+                        },
+                        "ModifierName": "StageAbility_651002_Modifier"
+                      }
+                    ]
                   },
                   "SuccessTaskList": [
                     {
@@ -8762,7 +9113,7 @@
               ]
             },
             {
-              "Event": "OnListenSetActiveSkill",
+              "Event": "OnListenSetActiveSkill_CL",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -8826,7 +9177,7 @@
               "DynamicHashes": []
             }
           },
-          "PropertyFromTarget": {
+          "SpecifyCaster": {
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "LightTeamRight"
           },
@@ -9104,7 +9455,7 @@
               "DynamicHashes": []
             }
           },
-          "PropertyFromTarget": {
+          "SpecifyCaster": {
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "LightTeamRight"
           },
@@ -9380,9 +9731,9 @@
               ]
             }
           },
-          "PropertyFromTarget": {
+          "SpecifyCaster": {
             "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "LightTeamLeft"
+            "Alias": "LightTeamRight"
           },
           "Team": "TeamLight",
           "TotalDamageTeam": "TeamLight",
@@ -9394,232 +9745,6 @@
                 "Alias": "ParamEntity"
               },
               "ModifierName": "StageSpecialAbility_WhiteBox_SummonButton_TargetTag"
-            }
-          ]
-        },
-        {
-          "$type": "RPG.GameCore.Retarget",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "BattleEventEntityList"
-          },
-          "Predicate": {
-            "$type": "RPG.GameCore.ByIsContainModifier",
-            "TargetType": {
-              "$type": "RPG.GameCore.TargetAlias",
-              "Alias": "ParamEntity"
-            },
-            "ModifierName": "StageSpecialAbility_WhiteBox_SummonButton_TargetTag"
-          },
-          "MaxNumber": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 1
-            }
-          },
-          "TaskList": [
-            {
-              "$type": "RPG.GameCore.VCameraConfigChange",
-              "CameraConfig": {
-                "NormalConfig": {
-                  "CameraState": "UseSkillPerform",
-                  "AnchorTargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  },
-                  "IsLocalOffset": true,
-                  "AimTargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  },
-                  "AimOffset": {
-                    "X": 0.02,
-                    "Y": -0.201,
-                    "Z": 0.07
-                  },
-                  "FollowPoleAngle": 397.452,
-                  "FollowElevationAngle": -9,
-                  "FollowRadius": 2.646978
-                },
-                "BlendConfig": {
-                  "BlendType": "Cut"
-                },
-                "ShowEntityConfig": {
-                  "ShowTargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  }
-                }
-              }
-            },
-            {
-              "$type": "RPG.GameCore.TriggerEffect",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ParamEntity"
-              },
-              "EffectPath": "Effects/Eff_Prefab/Eff_BattleEvent/Eff_Rogue_Breeding/Eff_BattleEvent_Rogue_Breeding_03.prefab"
-            },
-            {
-              "$type": "RPG.GameCore.TriggerEffect",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ParamEntity"
-              },
-              "EffectPath": "Effects/Eff_Prefab/Eff_BattleEvent/Eff_Rogue_Breeding/Eff_BattleEvent_Rogue_Breeding_03_01.prefab"
-            },
-            {
-              "$type": "RPG.GameCore.TriggerEffect",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ParamEntity"
-              },
-              "EffectPath": "Effects/Eff_Prefab/Eff_BattleEvent/Eff_Rogue_Breeding/Eff_BattleEvent_Rogue_Breeding_03_Cam.prefab"
-            },
-            {
-              "$type": "RPG.GameCore.WaitSecond",
-              "WaitTime": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 0.01
-                }
-              }
-            },
-            {
-              "$type": "RPG.GameCore.VCameraConfigChange",
-              "CameraConfig": {
-                "NormalConfig": {
-                  "CameraState": "UseSkillPerform",
-                  "AnchorTargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  },
-                  "IsLocalOffset": true,
-                  "AimTargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  },
-                  "AimOffset": {
-                    "X": 0.02,
-                    "Y": -0.201,
-                    "Z": 0.07
-                  },
-                  "FollowPoleAngle": 398,
-                  "FollowElevationAngle": -6,
-                  "FollowRadius": 2.9
-                },
-                "BlendConfig": {
-                  "BlendType": "Linear",
-                  "BlendTime": 0.7
-                },
-                "ShowEntityConfig": {
-                  "ShowTargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  }
-                }
-              }
-            },
-            {
-              "$type": "RPG.GameCore.WaitSecond",
-              "WaitTime": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 0.7
-                }
-              }
-            },
-            {
-              "$type": "RPG.GameCore.WaitSecond",
-              "WaitTime": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 0.7
-                }
-              }
-            },
-            {
-              "$type": "RPG.GameCore.RadialBlurCurveEffect",
-              "BlurRadius": 0.6,
-              "Iteration": 8,
-              "BlurStart": 0.01,
-              "BlurFeather": 0.015,
-              "Duration": 0.3,
-              "CurveName": "ChargeBlurCurve"
-            },
-            {
-              "$type": "RPG.GameCore.VCameraConfigChange",
-              "CameraConfig": {
-                "NormalConfig": {
-                  "CameraState": "UseSkillPerform",
-                  "AnchorTargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  },
-                  "IsLocalOffset": true,
-                  "AimTargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  },
-                  "AimOffset": {
-                    "X": 0.02,
-                    "Y": -0.2,
-                    "Z": 0.07
-                  },
-                  "FollowPoleAngle": 409.7723,
-                  "FollowElevationAngle": 8.91,
-                  "FollowRadius": 6.327277
-                },
-                "BlendConfig": {
-                  "BlendType": "Custom",
-                  "CustomCurveName": "BlendCut05",
-                  "BlendTime": 1.27
-                },
-                "ShowEntityConfig": {
-                  "ShowTargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  }
-                }
-              }
-            },
-            {
-              "$type": "RPG.GameCore.GlobalMainIntensityEffect",
-              "IsRevert": true,
-              "FadeDuration": 1
-            },
-            {
-              "$type": "RPG.GameCore.WaitSecond",
-              "WaitTime": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 1.63
-                }
-              }
-            },
-            {
-              "$type": "RPG.GameCore.RemoveEffect",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ParamEntity"
-              },
-              "EffectPath": "Effects/Eff_Prefab/Eff_BattleEvent/Eff_Rogue_Breeding/Eff_BattleEvent_Rogue_Breeding_03.prefab"
-            },
-            {
-              "$type": "RPG.GameCore.RemoveEffect",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ParamEntity"
-              },
-              "EffectPath": "Effects/Eff_Prefab/Eff_BattleEvent/Eff_Rogue_Breeding/Eff_BattleEvent_Rogue_Breeding_03_01.prefab"
-            },
-            {
-              "$type": "RPG.GameCore.TriggerEffect",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ParamEntity"
-              },
-              "EffectPath": "Effects/Eff_Prefab/Eff_BattleEvent/Eff_Rogue_Breeding/Eff_BattleEvent_Rogue_Breeding_03_End.prefab"
             }
           ]
         },
@@ -9660,6 +9785,9 @@
         "TargetType": "Caster"
       },
       "OnStart": [
+        {
+          "$type": "RPG.GameCore.ShowBattleEventButton"
+        },
         {
           "$type": "RPG.GameCore.AddModifier",
           "TargetType": {
@@ -9712,10 +9840,6 @@
                       "DynamicHashes": []
                     }
                   },
-                  "PropertyFromTarget": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
-                  },
                   "Team": "TeamLight",
                   "TotalDamageTeam": "TeamLight",
                   "OnBattleEventCreate": []
@@ -9747,7 +9871,7 @@
               ]
             },
             {
-              "Event": "OnListenSetActiveSkill",
+              "Event": "OnListenSetActiveSkill_CL",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -9998,10 +10122,6 @@
                       "DynamicHashes": []
                     }
                   },
-                  "PropertyFromTarget": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
-                  },
                   "Team": "TeamLight",
                   "TotalDamageTeam": "TeamLight",
                   "OnBattleEventCreate": []
@@ -10071,10 +10191,6 @@
                       ],
                       "DynamicHashes": []
                     }
-                  },
-                  "PropertyFromTarget": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
                   },
                   "Team": "TeamLight",
                   "TotalDamageTeam": "TeamLight",
@@ -10146,10 +10262,6 @@
                       "DynamicHashes": []
                     }
                   },
-                  "PropertyFromTarget": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
-                  },
                   "Team": "TeamLight",
                   "TotalDamageTeam": "TeamLight",
                   "OnBattleEventCreate": [
@@ -10194,15 +10306,41 @@
     },
     {
       "Modifiers": {
-        "Modifier_WhiteBox_SummonerTest05": {
+        "Modifier_WhiteBox_SummonerTest05_AfterRevive": {},
+        "Modifier_WhiteBox_SummonerTest05_Alive": {
           "_CallbackList": [
             {
-              "Event": "OnListenCharacterCreate",
+              "Event": "OnDestroy",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "Modifier_WhiteBox_SummonerTest05_AfterRevive"
+                },
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "Modifier_WhiteBox_SummonerTest05_ListenSkillRevive"
+                }
+              ]
+            }
+          ]
+        },
+        "Modifier_WhiteBox_SummonerTest05_ListenSkillRevive": {
+          "_CallbackList": [
+            {
+              "Event": "OnListenAfterSkillUse",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
                   "Predicate": {
-                    "$type": "RPG.GameCore.ByAny",
+                    "$type": "RPG.GameCore.ByAnd",
                     "PredicateList": [
                       {
                         "$type": "RPG.GameCore.ByCompareCharacterID",
@@ -10213,24 +10351,70 @@
                         "TargetCharacterID": {
                           "IsDynamic": false,
                           "FixedValue": {
-                            "Value": 8003
+                            "Value": 1001
                           }
                         }
                       },
                       {
-                        "$type": "RPG.GameCore.ByCompareCharacterID",
-                        "TargetType": {
-                          "$type": "RPG.GameCore.TargetAlias",
-                          "Alias": "ParamEntity"
-                        },
-                        "TargetCharacterID": {
-                          "IsDynamic": false,
-                          "FixedValue": {
-                            "Value": 8004
-                          }
-                        }
+                        "$type": "RPG.GameCore.ByCurrentSkillName",
+                        "SkillName": "Skill02"
                       }
                     ]
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "Modifier_WhiteBox_SummonerTest_OnAvatar",
+                      "DynamicValues": {
+                        "MDF_Revive": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 1
+                          }
+                        }
+                      },
+                      "InheritCaster": "TargetSelf"
+                    },
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "ModifierName": "Modifier_WhiteBox_SummonerTest05_Alive"
+                    },
+                    {
+                      "$type": "RPG.GameCore.RemoveSelfModifier"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "Modifier_WhiteBox_SummonerTest05": {
+          "_CallbackList": [
+            {
+              "Event": "OnListenCharacterCreate",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareCharacterID",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "TargetCharacterID": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 1001
+                      }
+                    }
                   },
                   "SuccessTaskList": [
                     {
@@ -10257,6 +10441,51 @@
               "Event": "OnStack",
               "CallbackConfig": [
                 {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "DynamicKey": "MDF_Revive",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 1
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.CreateBattleEvent",
+                      "EventID": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AAAK",
+                          "FixedValues": [
+                            {
+                              "Value": 96101
+                            }
+                          ],
+                          "DynamicHashes": []
+                        }
+                      },
+                      "SpecifyCaster": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "LightTeamRight"
+                      },
+                      "Team": "TeamLight",
+                      "TotalDamageTeam": "TeamLight"
+                    },
+                    {
+                      "$type": "RPG.GameCore.RemoveSelfModifier"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Event": "OnWaveMonster",
+              "CallbackConfig": [
+                {
                   "$type": "RPG.GameCore.CreateBattleEvent",
                   "EventID": {
                     "IsDynamic": true,
@@ -10264,45 +10493,31 @@
                       "OpCodes": "AAAK",
                       "FixedValues": [
                         {
-                          "Value": 96102
+                          "Value": 96101
                         }
                       ],
                       "DynamicHashes": []
                     }
                   },
-                  "PropertyFromTarget": {
+                  "SpecifyCaster": {
                     "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
+                    "Alias": "LightTeamRight"
                   },
                   "Team": "TeamLight",
-                  "TotalDamageTeam": "TeamLight",
-                  "OnBattleEventCreate": [
-                    {
-                      "$type": "RPG.GameCore.ModifySPNew",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "ParamEntity"
-                      },
-                      "AddValue": {
-                        "IsDynamic": false,
-                        "FixedValue": {
-                          "Value": 100
-                        }
-                      }
-                    },
-                    {
-                      "$type": "RPG.GameCore.SetTargetAlwaysAutoBattle",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "ParamEntity"
-                      },
-                      "AutoBattle": true
-                    }
-                  ]
+                  "TotalDamageTeam": "TeamLight"
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveSelfModifier"
                 }
               ]
             }
-          ]
+          ],
+          "Stacking": "ReplaceByCaster",
+          "DynamicValues": {
+            "Values": {
+              "-1947897585": {}
+            }
+          }
         }
       },
       "Name": "StageSpecialAbility_WhiteBox_SummonerTest05",
@@ -10316,6 +10531,14 @@
           "ModifierName": "Modifier_WhiteBox_SummonerTest05"
         },
         {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "Modifier_WhiteBox_SummonerTest05_Alive"
+        },
+        {
           "$type": "RPG.GameCore.PreloadBattleEventByID",
           "BattleEventID": [
             96101,
@@ -10326,6 +10549,114 @@
     },
     {
       "Modifiers": {
+        "Modifier_WhiteBox_SummonerTest06_AfterRevive": {},
+        "Modifier_WhiteBox_SummonerTest06_Alive": {
+          "_CallbackList": [
+            {
+              "Event": "OnDestroy",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "Modifier_WhiteBox_SummonerTest06_AfterRevive"
+                },
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "Modifier_WhiteBox_SummonerTest06_ListenSkillRevive"
+                }
+              ]
+            }
+          ]
+        },
+        "Modifier_WhiteBox_SummonerTest06_ListenSkillRevive": {
+          "_CallbackList": [
+            {
+              "Event": "OnListenAfterSkillUse",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByAny",
+                        "PredicateList": [
+                          {
+                            "$type": "RPG.GameCore.ByCompareCharacterID",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "ParamEntity"
+                            },
+                            "TargetCharacterID": {
+                              "IsDynamic": false,
+                              "FixedValue": {
+                                "Value": 8001
+                              }
+                            }
+                          },
+                          {
+                            "$type": "RPG.GameCore.ByCompareCharacterID",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "ParamEntity"
+                            },
+                            "TargetCharacterID": {
+                              "IsDynamic": false,
+                              "FixedValue": {
+                                "Value": 8002
+                              }
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCurrentSkillName",
+                        "SkillName": "Skill02"
+                      }
+                    ]
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "Modifier_WhiteBox_SummonerTest_OnAvatar",
+                      "DynamicValues": {
+                        "MDF_Revive": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 1
+                          }
+                        }
+                      },
+                      "InheritCaster": "TargetSelf"
+                    },
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "ModifierName": "Modifier_WhiteBox_SummonerTest06_Alive"
+                    },
+                    {
+                      "$type": "RPG.GameCore.RemoveSelfModifier"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
         "Modifier_WhiteBox_SummonerTest06": {
           "_CallbackList": [
             {
@@ -10389,6 +10720,51 @@
               "Event": "OnStack",
               "CallbackConfig": [
                 {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "DynamicKey": "MDF_Revive",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 1
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.CreateBattleEvent",
+                      "EventID": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AAAK",
+                          "FixedValues": [
+                            {
+                              "Value": 96103
+                            }
+                          ],
+                          "DynamicHashes": []
+                        }
+                      },
+                      "SpecifyCaster": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "LightTeamRight"
+                      },
+                      "Team": "TeamLight",
+                      "TotalDamageTeam": "TeamLight"
+                    },
+                    {
+                      "$type": "RPG.GameCore.RemoveSelfModifier"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Event": "OnWaveMonster",
+              "CallbackConfig": [
+                {
                   "$type": "RPG.GameCore.CreateBattleEvent",
                   "EventID": {
                     "IsDynamic": true,
@@ -10396,45 +10772,31 @@
                       "OpCodes": "AAAK",
                       "FixedValues": [
                         {
-                          "Value": 96104
+                          "Value": 96103
                         }
                       ],
                       "DynamicHashes": []
                     }
                   },
-                  "PropertyFromTarget": {
+                  "SpecifyCaster": {
                     "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
+                    "Alias": "LightTeamRight"
                   },
                   "Team": "TeamLight",
-                  "TotalDamageTeam": "TeamLight",
-                  "OnBattleEventCreate": [
-                    {
-                      "$type": "RPG.GameCore.ModifySPNew",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "ParamEntity"
-                      },
-                      "AddValue": {
-                        "IsDynamic": false,
-                        "FixedValue": {
-                          "Value": 100
-                        }
-                      }
-                    },
-                    {
-                      "$type": "RPG.GameCore.SetTargetAlwaysAutoBattle",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "ParamEntity"
-                      },
-                      "AutoBattle": true
-                    }
-                  ]
+                  "TotalDamageTeam": "TeamLight"
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveSelfModifier"
                 }
               ]
             }
-          ]
+          ],
+          "Stacking": "ReplaceByCaster",
+          "DynamicValues": {
+            "Values": {
+              "-1947897585": {}
+            }
+          }
         }
       },
       "Name": "StageSpecialAbility_WhiteBox_SummonerTest06",
@@ -10448,6 +10810,14 @@
           "ModifierName": "Modifier_WhiteBox_SummonerTest06"
         },
         {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "Modifier_WhiteBox_SummonerTest06_Alive"
+        },
+        {
           "$type": "RPG.GameCore.PreloadBattleEventByID",
           "BattleEventID": [
             96103,
@@ -10458,15 +10828,41 @@
     },
     {
       "Modifiers": {
-        "Modifier_WhiteBox_SummonerTest07": {
+        "Modifier_WhiteBox_SummonerTest07_AfterRevive": {},
+        "Modifier_WhiteBox_SummonerTest07_Alive": {
           "_CallbackList": [
             {
-              "Event": "OnListenCharacterCreate",
+              "Event": "OnDestroy",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "Modifier_WhiteBox_SummonerTest07_AfterRevive"
+                },
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "Modifier_WhiteBox_SummonerTest07_ListenSkillRevive"
+                }
+              ]
+            }
+          ]
+        },
+        "Modifier_WhiteBox_SummonerTest07_ListenSkillRevive": {
+          "_CallbackList": [
+            {
+              "Event": "OnListenAfterSkillUse",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
                   "Predicate": {
-                    "$type": "RPG.GameCore.ByAny",
+                    "$type": "RPG.GameCore.ByAnd",
                     "PredicateList": [
                       {
                         "$type": "RPG.GameCore.ByCompareCharacterID",
@@ -10477,24 +10873,70 @@
                         "TargetCharacterID": {
                           "IsDynamic": false,
                           "FixedValue": {
-                            "Value": 8005
+                            "Value": 1108
                           }
                         }
                       },
                       {
-                        "$type": "RPG.GameCore.ByCompareCharacterID",
-                        "TargetType": {
-                          "$type": "RPG.GameCore.TargetAlias",
-                          "Alias": "ParamEntity"
-                        },
-                        "TargetCharacterID": {
-                          "IsDynamic": false,
-                          "FixedValue": {
-                            "Value": 8006
-                          }
-                        }
+                        "$type": "RPG.GameCore.ByCurrentSkillName",
+                        "SkillName": "Skill02"
                       }
                     ]
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "Modifier_WhiteBox_SummonerTest_OnAvatar",
+                      "DynamicValues": {
+                        "MDF_Revive": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 1
+                          }
+                        }
+                      },
+                      "InheritCaster": "TargetSelf"
+                    },
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "ModifierName": "Modifier_WhiteBox_SummonerTest07_Alive"
+                    },
+                    {
+                      "$type": "RPG.GameCore.RemoveSelfModifier"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "Modifier_WhiteBox_SummonerTest07": {
+          "_CallbackList": [
+            {
+              "Event": "OnListenCharacterCreate",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareCharacterID",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "TargetCharacterID": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 1108
+                      }
+                    }
                   },
                   "SuccessTaskList": [
                     {
@@ -10521,6 +10963,51 @@
               "Event": "OnStack",
               "CallbackConfig": [
                 {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "DynamicKey": "MDF_Revive",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 1
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.CreateBattleEvent",
+                      "EventID": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AAAK",
+                          "FixedValues": [
+                            {
+                              "Value": 96105
+                            }
+                          ],
+                          "DynamicHashes": []
+                        }
+                      },
+                      "SpecifyCaster": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "LightTeamRight"
+                      },
+                      "Team": "TeamLight",
+                      "TotalDamageTeam": "TeamLight"
+                    },
+                    {
+                      "$type": "RPG.GameCore.RemoveSelfModifier"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Event": "OnWaveMonster",
+              "CallbackConfig": [
+                {
                   "$type": "RPG.GameCore.CreateBattleEvent",
                   "EventID": {
                     "IsDynamic": true,
@@ -10528,45 +11015,31 @@
                       "OpCodes": "AAAK",
                       "FixedValues": [
                         {
-                          "Value": 96106
+                          "Value": 96105
                         }
                       ],
                       "DynamicHashes": []
                     }
                   },
-                  "PropertyFromTarget": {
+                  "SpecifyCaster": {
                     "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
+                    "Alias": "LightTeamRight"
                   },
                   "Team": "TeamLight",
-                  "TotalDamageTeam": "TeamLight",
-                  "OnBattleEventCreate": [
-                    {
-                      "$type": "RPG.GameCore.ModifySPNew",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "ParamEntity"
-                      },
-                      "AddValue": {
-                        "IsDynamic": false,
-                        "FixedValue": {
-                          "Value": 100
-                        }
-                      }
-                    },
-                    {
-                      "$type": "RPG.GameCore.SetTargetAlwaysAutoBattle",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "ParamEntity"
-                      },
-                      "AutoBattle": true
-                    }
-                  ]
+                  "TotalDamageTeam": "TeamLight"
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveSelfModifier"
                 }
               ]
             }
-          ]
+          ],
+          "Stacking": "ReplaceByCaster",
+          "DynamicValues": {
+            "Values": {
+              "-1947897585": {}
+            }
+          }
         }
       },
       "Name": "StageSpecialAbility_WhiteBox_SummonerTest07",
@@ -10578,6 +11051,14 @@
             "Alias": "Caster"
           },
           "ModifierName": "Modifier_WhiteBox_SummonerTest07"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "Modifier_WhiteBox_SummonerTest07_Alive"
         },
         {
           "$type": "RPG.GameCore.PreloadBattleEventByID",
@@ -10648,10 +11129,6 @@
                       "DynamicHashes": []
                     }
                   },
-                  "PropertyFromTarget": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
-                  },
                   "Team": "TeamLight",
                   "TotalDamageTeam": "TeamLight",
                   "OnBattleEventCreate": [
@@ -10720,7 +11197,7 @@
                     "TargetCharacterID": {
                       "IsDynamic": false,
                       "FixedValue": {
-                        "Value": 1013
+                        "Value": 1106
                       }
                     }
                   },
@@ -10761,10 +11238,6 @@
                       ],
                       "DynamicHashes": []
                     }
-                  },
-                  "PropertyFromTarget": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
                   },
                   "Team": "TeamLight",
                   "TotalDamageTeam": "TeamLight",
@@ -10811,6 +11284,744 @@
           "$type": "RPG.GameCore.PreloadBattleEventByID",
           "BattleEventID": [
             96111,
+            20005
+          ]
+        }
+      ]
+    },
+    {
+      "Modifiers": {
+        "StageSpecialAbility_WhiteBox_SummonJunk_SelfModifier": {
+          "_CallbackList": [
+            {
+              "Event": "OnWaveMonster",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.CreateBattleEvent",
+                  "EventID": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AAAK",
+                      "FixedValues": [
+                        {
+                          "Value": 96116
+                        }
+                      ],
+                      "DynamicHashes": []
+                    }
+                  },
+                  "SpecifyCaster": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "LightTeamRight"
+                  },
+                  "Team": "TeamLight",
+                  "TotalDamageTeam": "TeamLight"
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveSelfModifier"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "Name": "StageSpecialAbility_WhiteBox_SummonJunk_Ability",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "StageSpecialAbility_WhiteBox_SummonJunk_SelfModifier"
+        }
+      ]
+    },
+    {
+      "Modifiers": {
+        "Modifier_WhiteBox_SummonerTest10_AfterRevive": {},
+        "Modifier_WhiteBox_SummonerTest10_Alive": {
+          "_CallbackList": [
+            {
+              "Event": "OnDestroy",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "Modifier_WhiteBox_SummonerTest10_AfterRevive"
+                },
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "Modifier_WhiteBox_SummonerTest10_ListenSkillRevive"
+                }
+              ]
+            }
+          ]
+        },
+        "Modifier_WhiteBox_SummonerTest10_ListenSkillRevive": {
+          "_CallbackList": [
+            {
+              "Event": "OnListenAfterSkillUse",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByCompareCharacterID",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "TargetCharacterID": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 1002
+                          }
+                        }
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCurrentSkillName",
+                        "SkillName": "Skill02"
+                      }
+                    ]
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "Modifier_WhiteBox_SummonerTest_OnAvatar",
+                      "InheritCaster": "TargetSelf"
+                    },
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "ModifierName": "Modifier_WhiteBox_SummonerTest10_Alive"
+                    },
+                    {
+                      "$type": "RPG.GameCore.RemoveSelfModifier"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "Modifier_WhiteBox_SummonerTest10": {
+          "_CallbackList": [
+            {
+              "Event": "OnListenCharacterCreate",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareCharacterID",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "TargetCharacterID": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 1002
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "Modifier_WhiteBox_SummonerTest_OnAvatar",
+                      "InheritCaster": "TargetSelf"
+                    },
+                    {
+                      "$type": "RPG.GameCore.RemoveSelfModifier"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "Modifier_WhiteBox_SummonerTest_OnAvatar": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.CreateBattleEvent",
+                  "EventID": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AAAK",
+                      "FixedValues": [
+                        {
+                          "Value": 96118
+                        }
+                      ],
+                      "DynamicHashes": []
+                    }
+                  },
+                  "Team": "TeamLight",
+                  "TotalDamageTeam": "TeamLight",
+                  "OnBattleEventCreate": [
+                    {
+                      "$type": "RPG.GameCore.ModifySPNew",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "AddValue": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 100
+                        }
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.SetTargetAlwaysAutoBattle",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "AutoBattle": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "Stacking": "ReplaceByCaster"
+        }
+      },
+      "Name": "StageSpecialAbility_WhiteBox_SummonerTest10",
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "Modifier_WhiteBox_SummonerTest10"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "Modifier_WhiteBox_SummonerTest10_Alive"
+        },
+        {
+          "$type": "RPG.GameCore.PreloadBattleEventByID",
+          "BattleEventID": [
+            96117,
+            20005
+          ]
+        }
+      ]
+    },
+    {
+      "Modifiers": {
+        "Modifier_WhiteBox_SummonerTest11_AfterRevive": {},
+        "Modifier_WhiteBox_SummonerTest11_Alive": {
+          "_CallbackList": [
+            {
+              "Event": "OnDestroy",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "Modifier_WhiteBox_SummonerTest11_AfterRevive"
+                },
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "Modifier_WhiteBox_SummonerTest11_ListenSkillRevive"
+                }
+              ]
+            }
+          ]
+        },
+        "Modifier_WhiteBox_SummonerTest11_ListenSkillRevive": {
+          "_CallbackList": [
+            {
+              "Event": "OnListenAfterSkillUse",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByCompareCharacterID",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "TargetCharacterID": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 1106
+                          }
+                        }
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCurrentSkillName",
+                        "SkillName": "Skill02"
+                      }
+                    ]
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "Modifier_WhiteBox_SummonerTest_OnAvatar",
+                      "DynamicValues": {
+                        "MDF_Revive": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 1
+                          }
+                        }
+                      },
+                      "InheritCaster": "TargetSelf"
+                    },
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "ModifierName": "Modifier_WhiteBox_SummonerTest11_Alive"
+                    },
+                    {
+                      "$type": "RPG.GameCore.RemoveSelfModifier"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "Modifier_WhiteBox_SummonerTest11": {
+          "_CallbackList": [
+            {
+              "Event": "OnListenCharacterCreate",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareCharacterID",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "TargetCharacterID": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 1106
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "Modifier_WhiteBox_SummonerTest_OnAvatar",
+                      "InheritCaster": "TargetSelf"
+                    },
+                    {
+                      "$type": "RPG.GameCore.RemoveSelfModifier"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "Modifier_WhiteBox_SummonerTest_OnAvatar": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "DynamicKey": "MDF_Revive",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 1
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.CreateBattleEvent",
+                      "EventID": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AAAK",
+                          "FixedValues": [
+                            {
+                              "Value": 96119
+                            }
+                          ],
+                          "DynamicHashes": []
+                        }
+                      },
+                      "SpecifyCaster": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "LightTeamRight"
+                      },
+                      "Team": "TeamLight",
+                      "TotalDamageTeam": "TeamLight"
+                    },
+                    {
+                      "$type": "RPG.GameCore.RemoveSelfModifier"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Event": "OnWaveMonster",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.CreateBattleEvent",
+                  "EventID": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AAAK",
+                      "FixedValues": [
+                        {
+                          "Value": 96119
+                        }
+                      ],
+                      "DynamicHashes": []
+                    }
+                  },
+                  "SpecifyCaster": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "LightTeamRight"
+                  },
+                  "Team": "TeamLight",
+                  "TotalDamageTeam": "TeamLight"
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveSelfModifier"
+                }
+              ]
+            }
+          ],
+          "Stacking": "ReplaceByCaster",
+          "DynamicValues": {
+            "Values": {
+              "-1947897585": {}
+            }
+          }
+        }
+      },
+      "Name": "StageSpecialAbility_WhiteBox_SummonerTest11",
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "Modifier_WhiteBox_SummonerTest11"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "Modifier_WhiteBox_SummonerTest11_Alive"
+        },
+        {
+          "$type": "RPG.GameCore.PreloadBattleEventByID",
+          "BattleEventID": [
+            96119,
+            20005
+          ]
+        }
+      ]
+    },
+    {
+      "Modifiers": {
+        "Modifier_WhiteBox_SummonerTest12_AfterRevive": {},
+        "Modifier_WhiteBox_SummonerTest12_Alive": {
+          "_CallbackList": [
+            {
+              "Event": "OnDestroy",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "Modifier_WhiteBox_SummonerTest12_AfterRevive"
+                },
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "Modifier_WhiteBox_SummonerTest12_ListenSkillRevive"
+                }
+              ]
+            }
+          ]
+        },
+        "Modifier_WhiteBox_SummonerTest12_ListenSkillRevive": {
+          "_CallbackList": [
+            {
+              "Event": "OnListenAfterSkillUse",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByCompareCharacterID",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "TargetCharacterID": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 1205
+                          }
+                        }
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCurrentSkillName",
+                        "SkillName": "Skill02"
+                      }
+                    ]
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "Modifier_WhiteBox_SummonerTest_OnAvatar",
+                      "DynamicValues": {
+                        "MDF_Revive": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 1
+                          }
+                        }
+                      },
+                      "InheritCaster": "TargetSelf"
+                    },
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "ModifierName": "Modifier_WhiteBox_SummonerTest12_Alive"
+                    },
+                    {
+                      "$type": "RPG.GameCore.RemoveSelfModifier"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "Modifier_WhiteBox_SummonerTest12": {
+          "_CallbackList": [
+            {
+              "Event": "OnListenCharacterCreate",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareCharacterID",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "TargetCharacterID": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 1205
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "Modifier_WhiteBox_SummonerTest_OnAvatar",
+                      "InheritCaster": "TargetSelf"
+                    },
+                    {
+                      "$type": "RPG.GameCore.RemoveSelfModifier"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "Modifier_WhiteBox_SummonerTest_OnAvatar": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "DynamicKey": "MDF_Revive",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 1
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.CreateBattleEvent",
+                      "EventID": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AAAK",
+                          "FixedValues": [
+                            {
+                              "Value": 96128
+                            }
+                          ],
+                          "DynamicHashes": []
+                        }
+                      },
+                      "SpecifyCaster": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "LightTeamRight"
+                      },
+                      "Team": "TeamLight",
+                      "TotalDamageTeam": "TeamLight"
+                    },
+                    {
+                      "$type": "RPG.GameCore.RemoveSelfModifier"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Event": "OnWaveMonster",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.CreateBattleEvent",
+                  "EventID": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AAAK",
+                      "FixedValues": [
+                        {
+                          "Value": 96128
+                        }
+                      ],
+                      "DynamicHashes": []
+                    }
+                  },
+                  "SpecifyCaster": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "LightTeamRight"
+                  },
+                  "Team": "TeamLight",
+                  "TotalDamageTeam": "TeamLight"
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveSelfModifier"
+                }
+              ]
+            }
+          ],
+          "Stacking": "ReplaceByCaster",
+          "DynamicValues": {
+            "Values": {
+              "-1947897585": {}
+            }
+          }
+        }
+      },
+      "Name": "StageSpecialAbility_WhiteBox_SummonerTest12",
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "Modifier_WhiteBox_SummonerTest12"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "Modifier_WhiteBox_SummonerTest12_Alive"
+        },
+        {
+          "$type": "RPG.GameCore.PreloadBattleEventByID",
+          "BattleEventID": [
+            96128,
             20005
           ]
         }
@@ -11006,376 +12217,6 @@
           "59671469": {}
         }
       }
-    },
-    {
-      "Modifiers": {
-        "Modifier_StageSpecialAbility_2158_Mar_7th_10": {
-          "_CallbackList": [
-            {
-              "Event": "OnListenCharacterCreate",
-              "CallbackConfig": [
-                {
-                  "$type": "RPG.GameCore.PredicateTaskList",
-                  "Predicate": {
-                    "$type": "RPG.GameCore.ByCompareCharacterID",
-                    "TargetType": {
-                      "$type": "RPG.GameCore.TargetAlias",
-                      "Alias": "ParamEntity"
-                    },
-                    "TargetCharacterID": {
-                      "IsDynamic": false,
-                      "FixedValue": {
-                        "Value": 1224
-                      }
-                    }
-                  },
-                  "SuccessTaskList": [
-                    {
-                      "$type": "RPG.GameCore.AddModifier",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "ParamEntity"
-                      },
-                      "ModifierName": "Modifier_StageSpecialAbility_2158_Mar_7th_10_Tutorial"
-                    },
-                    {
-                      "$type": "RPG.GameCore.AddModifier",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "ParamEntity"
-                      },
-                      "ModifierName": "Modifier_StageSpecialAbility_2158_Mar_7th_10_FirstSkill11"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        "Modifier_StageSpecialAbility_2158_Mar_7th_10_Tutorial": {
-          "_CallbackList": [
-            {
-              "Event": "OnAllowAction",
-              "CallbackConfig": [
-                {
-                  "$type": "RPG.GameCore.PredicateTaskList",
-                  "Predicate": {
-                    "$type": "RPG.GameCore.ByCompareTargetCount",
-                    "TargetType": {
-                      "$type": "RPG.GameCore.TargetAlias",
-                      "Alias": "AllLightTeam"
-                    },
-                    "AliveOnly": true,
-                    "Number": {
-                      "IsDynamic": false,
-                      "FixedValue": {
-                        "Value": 1
-                      }
-                    },
-                    "CompareType": "Greater"
-                  },
-                  "SuccessTaskList": [
-                    {
-                      "$type": "RPG.GameCore.TriggerCustomString",
-                      "CustomString": {
-                        "Value": "StageSpecialAbility_2158_Mar_7th_10_FirstTurn"
-                      }
-                    }
-                  ],
-                  "FailedTaskList": [
-                    {
-                      "$type": "RPG.GameCore.DebugLog",
-                      "Level": "Warn",
-                      "Message": "【三月七剧情战提示】请至少上2个角色, 否则教程会卡死"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "Event": "OnListenAllowAction",
-              "CallbackConfig": [
-                {
-                  "$type": "RPG.GameCore.PredicateTaskList",
-                  "Predicate": {
-                    "$type": "RPG.GameCore.ByIsContainModifier",
-                    "TargetType": {
-                      "$type": "RPG.GameCore.TargetAlias",
-                      "Alias": "ParamEntity"
-                    },
-                    "ModifierName": "MAvatar_91477_Skill02_Master"
-                  },
-                  "SuccessTaskList": [
-                    {
-                      "$type": "RPG.GameCore.TriggerCustomString",
-                      "CustomString": {
-                        "Value": "StageSpecialAbility_2158_Mar_7th_10_AfterBP"
-                      }
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        "Modifier_StageSpecialAbility_2158_Mar_7th_10_FirstSkill11": {
-          "_CallbackList": [
-            {
-              "Event": "OnDestroy",
-              "CallbackConfig": [
-                {
-                  "$type": "RPG.GameCore.SetDynamicValue",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
-                  },
-                  "DynamicKey": "Skill11_ExtraChanceFromLevel",
-                  "ContextScope": "TargetEntity",
-                  "Value": {
-                    "IsDynamic": false,
-                    "FixedValue": {
-                      "Value": 0
-                    }
-                  }
-                },
-                {
-                  "$type": "RPG.GameCore.AddModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
-                  },
-                  "ModifierName": "Modifier_StageSpecialAbility_2158_Mar_7th_10_SecondSkill11"
-                }
-              ]
-            },
-            {
-              "Event": "OnStack",
-              "CallbackConfig": [
-                {
-                  "$type": "RPG.GameCore.SetDynamicValue",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
-                  },
-                  "DynamicKey": "Skill11_ExtraChanceFromLevel",
-                  "ContextScope": "TargetEntity",
-                  "Value": {
-                    "IsDynamic": false,
-                    "FixedValue": {
-                      "Value": -1
-                    }
-                  }
-                }
-              ]
-            },
-            {
-              "Event": "OnBeforeSkillUse",
-              "CallbackConfig": [
-                {
-                  "$type": "RPG.GameCore.PredicateTaskList",
-                  "Predicate": {
-                    "$type": "RPG.GameCore.ByAnd",
-                    "PredicateList": [
-                      {
-                        "$type": "RPG.GameCore.ByCurrentSkillType"
-                      },
-                      {
-                        "$type": "RPG.GameCore.ByIsContainModifier",
-                        "TargetType": {
-                          "$type": "RPG.GameCore.TargetAlias",
-                          "Alias": "ModifierOwnerEntity"
-                        },
-                        "ModifierName": "MAvatar_Mar_7th_10_Enhance"
-                      }
-                    ]
-                  },
-                  "SuccessTaskList": [
-                    {
-                      "$type": "RPG.GameCore.SetDynamicValue",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "ModifierOwnerEntity"
-                      },
-                      "DynamicKey": "_isTriggered",
-                      "ContextScope": "ContextModifier",
-                      "Value": {
-                        "IsDynamic": false,
-                        "FixedValue": {
-                          "Value": 1
-                        }
-                      }
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "Event": "OnAfterSkillUse",
-              "CallbackConfig": [
-                {
-                  "$type": "RPG.GameCore.PredicateTaskList",
-                  "Predicate": {
-                    "$type": "RPG.GameCore.ByCompareDynamicValue",
-                    "TargetType": {
-                      "$type": "RPG.GameCore.TargetAlias",
-                      "Alias": "ModifierOwnerEntity"
-                    },
-                    "DynamicKey": "_isTriggered",
-                    "ContextScope": "ContextModifier",
-                    "CompareType": "GreaterEqual",
-                    "CompareValue": {
-                      "IsDynamic": false,
-                      "FixedValue": {
-                        "Value": 1
-                      }
-                    }
-                  },
-                  "SuccessTaskList": [
-                    {
-                      "$type": "RPG.GameCore.RemoveSelfModifier"
-                    }
-                  ]
-                }
-              ]
-            }
-          ],
-          "DynamicValues": {
-            "Values": {
-              "1023125788": {}
-            }
-          }
-        },
-        "Modifier_StageSpecialAbility_2158_Mar_7th_10_SecondSkill11": {
-          "_CallbackList": [
-            {
-              "Event": "OnDestroy",
-              "CallbackConfig": [
-                {
-                  "$type": "RPG.GameCore.SetDynamicValue",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
-                  },
-                  "DynamicKey": "Skill11_ExtraChanceFromLevel",
-                  "ContextScope": "TargetEntity",
-                  "Value": {
-                    "IsDynamic": false,
-                    "FixedValue": {
-                      "Value": 0
-                    }
-                  }
-                }
-              ]
-            },
-            {
-              "Event": "OnStack",
-              "CallbackConfig": [
-                {
-                  "$type": "RPG.GameCore.SetDynamicValue",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
-                  },
-                  "DynamicKey": "Skill11_ExtraChanceFromLevel",
-                  "ContextScope": "TargetEntity",
-                  "Value": {
-                    "IsDynamic": false,
-                    "FixedValue": {
-                      "Value": 1
-                    }
-                  }
-                }
-              ]
-            },
-            {
-              "Event": "OnBeforeSkillUse",
-              "CallbackConfig": [
-                {
-                  "$type": "RPG.GameCore.PredicateTaskList",
-                  "Predicate": {
-                    "$type": "RPG.GameCore.ByAnd",
-                    "PredicateList": [
-                      {
-                        "$type": "RPG.GameCore.ByCurrentSkillType"
-                      },
-                      {
-                        "$type": "RPG.GameCore.ByIsContainModifier",
-                        "TargetType": {
-                          "$type": "RPG.GameCore.TargetAlias",
-                          "Alias": "ModifierOwnerEntity"
-                        },
-                        "ModifierName": "MAvatar_Mar_7th_10_Enhance"
-                      }
-                    ]
-                  },
-                  "SuccessTaskList": [
-                    {
-                      "$type": "RPG.GameCore.SetDynamicValue",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "ModifierOwnerEntity"
-                      },
-                      "DynamicKey": "_isTriggered",
-                      "ContextScope": "ContextModifier",
-                      "Value": {
-                        "IsDynamic": false,
-                        "FixedValue": {
-                          "Value": 1
-                        }
-                      }
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "Event": "OnAfterSkillUse",
-              "CallbackConfig": [
-                {
-                  "$type": "RPG.GameCore.PredicateTaskList",
-                  "Predicate": {
-                    "$type": "RPG.GameCore.ByCompareDynamicValue",
-                    "TargetType": {
-                      "$type": "RPG.GameCore.TargetAlias",
-                      "Alias": "ModifierOwnerEntity"
-                    },
-                    "DynamicKey": "_isTriggered",
-                    "ContextScope": "ContextModifier",
-                    "CompareType": "GreaterEqual",
-                    "CompareValue": {
-                      "IsDynamic": false,
-                      "FixedValue": {
-                        "Value": 1
-                      }
-                    }
-                  },
-                  "SuccessTaskList": [
-                    {
-                      "$type": "RPG.GameCore.RemoveSelfModifier"
-                    }
-                  ]
-                }
-              ]
-            }
-          ],
-          "DynamicValues": {
-            "Values": {
-              "1023125788": {}
-            }
-          }
-        }
-      },
-      "Name": "StageSpecialAbility_2158_Mar_7th_10",
-      "OnAdd": [
-        {
-          "$type": "RPG.GameCore.AddModifier",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "ModifierName": "Modifier_StageSpecialAbility_2158_Mar_7th_10"
-        }
-      ]
     }
   ],
   "GlobalModifiers": {

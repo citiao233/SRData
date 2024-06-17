@@ -962,16 +962,21 @@
         {
           "$type": "RPG.GameCore.PredicateTaskList",
           "Predicate": {
-            "$type": "RPG.GameCore.ByCompareSPRatio",
+            "$type": "RPG.GameCore.ByCompareAbilityProperty",
             "TargetType": {
               "$type": "RPG.GameCore.TargetAlias",
               "Alias": "Caster"
             },
+            "Property": "CurrentSP",
             "CompareType": "GreaterEqual",
             "CompareValue": {
-              "IsDynamic": false,
-              "FixedValue": {
-                "Value": 1
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  -2038439955
+                ]
               }
             }
           },

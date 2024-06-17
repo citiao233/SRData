@@ -144,7 +144,8 @@
                                 "Z": 0
                               },
                               "LOD": true,
-                              "IsAsyncLoad": true
+                              "IsAsyncLoad": true,
+                              "AutoPlayFinishSound": false
                             },
                             {
                               "$type": "RPG.GameCore.TriggerEffect",
@@ -183,7 +184,8 @@
                                 "Z": 0
                               },
                               "LOD": true,
-                              "IsAsyncLoad": true
+                              "IsAsyncLoad": true,
+                              "AutoPlayFinishSound": false
                             },
                             {
                               "$type": "RPG.GameCore.TriggerEffect",
@@ -1810,6 +1812,25 @@
               }
             },
             {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareGraphDynamicFloat",
+                "Name": "PlayPuzzleFinishSound",
+                "Value": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 0.5
+                  }
+                },
+                "CompareType": "Greater"
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.PropPuzzleViewEventSender"
+                }
+              ]
+            },
+            {
               "$type": "RPG.GameCore.PropReqInteract",
               "TargetType": {
                 "$type": "RPG.GameCore.TargetFetchAdvPropEx"
@@ -2509,6 +2530,11 @@
         "$type": "RPG.GameCore.SharedFloat",
         "Value": 1,
         "Key": "AutoInit"
+      },
+      {
+        "$type": "RPG.GameCore.SharedFloat",
+        "Value": 1,
+        "Key": "PlayPuzzleFinishSound"
       }
     ]
   },

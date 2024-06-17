@@ -721,25 +721,46 @@
                 "xmin": {
                   "Value": 0.5
                 },
-                "ymin": {
+                "xmax": {
                   "Value": 1
+                }
+              }
+            ]
+          }
+        },
+        {
+          "Source": {
+            "$type": "RPG.GameCore.ComplexSkillAIAllTeamMemberCombine",
+            "TeamType": "TeamLight",
+            "Evaluator": {
+              "$type": "RPG.GameCore.ComplexSkillAISourceContainBehaviorFlag",
+              "BehaviorFlag": "STAT_SuperBreakBuff"
+            },
+            "ListCombineType": "Max"
+          },
+          "Mapper": {
+            "$type": "RPG.GameCore.ComplexSkillAIMapperMultiRange",
+            "Ranges": [
+              {
+                "xmax": {
+                  "Value": 0.5
+                }
+              },
+              {
+                "xmin": {
+                  "Value": 0.5
+                },
+                "ymin": {
+                  "Value": 1000
                 },
                 "xmax": {
                   "Value": 1
                 },
                 "ymax": {
-                  "Value": 1
+                  "Value": 1000
                 }
               }
             ]
-          },
-          "PostProcess": {
-            "$type": "RPG.GameCore.ComplexSkillAIPostProcessBreak",
-            "CompareType": "Equal",
-            "CompareValue": {
-              "Value": 1
-            },
-            "IsOverrideFinalScore": true
           }
         }
       ]
@@ -3273,29 +3294,6 @@
         }
       ]
     },
-    "Add01_BB_CheckBuff": {
-      "Factors": [
-        {
-          "Source": {
-            "$type": "RPG.GameCore.ComplexSkillAIContainModifier",
-            "ModifilerName": "WAvatar_BB02_00_Skill02_ShadowTargetModifier"
-          },
-          "Mapper": {
-            "$type": "RPG.GameCore.ComplexSkillAIMapperMultiRange",
-            "Ranges": [
-              {
-                "xmax": {
-                  "Value": 1
-                },
-                "ymax": {
-                  "Value": 100
-                }
-              }
-            ]
-          }
-        }
-      ]
-    },
     "Add01_Hanya_NormalAttack": {
       "Factors": [
         {
@@ -3616,7 +3614,7 @@
           "Source": {
             "$type": "RPG.GameCore.ComplexSkillAIContainModifier",
             "IsTarget": false,
-            "ModifilerName": "MAvatar_Jade_00_BPSkillListen"
+            "ModifilerName": "MAvatar_Jade_00_BPSkillBuffListen"
           },
           "Mapper": {
             "$type": "RPG.GameCore.ComplexSkillAIMapperMultiRange",
@@ -3719,17 +3717,21 @@
             "$type": "RPG.GameCore.ComplexSkillAIMapperMultiRange",
             "Ranges": [
               {
+                "ymin": {
+                  "Value": 10
+                },
                 "xmax": {
-                  "Value": 4
+                  "Value": 6
                 },
                 "ymax": {
-                  "Value": 400
+                  "Value": 600
                 }
               }
             ]
           }
         },
         {
+          "CombineOperator": "Mul",
           "Source": {
             "$type": "RPG.GameCore.ComplexSkillAISourceAITag",
             "DynamicValueKey": "DamageCarry"
@@ -3738,8 +3740,14 @@
             "$type": "RPG.GameCore.ComplexSkillAIMapperMultiRange",
             "Ranges": [
               {
+                "ymin": {
+                  "Value": 0.01
+                },
                 "xmax": {
                   "Value": 0.5
+                },
+                "ymax": {
+                  "Value": 0.01
                 }
               },
               {
@@ -3753,7 +3761,7 @@
                   "Value": 2
                 },
                 "ymax": {
-                  "Value": 2
+                  "Value": 1
                 }
               }
             ]
@@ -3788,16 +3796,107 @@
                   "Value": 0.5
                 },
                 "ymin": {
-                  "Value": 0.1
+                  "Value": 0.0009999999
                 },
                 "xmax": {
                   "Value": 1
                 },
                 "ymax": {
-                  "Value": 0.1
+                  "Value": 0.0009999999
                 }
               }
             ]
+          }
+        }
+      ]
+    },
+    "Add_Jade_Rank06SelfSource": {
+      "CombineOperator": "Mul",
+      "Factors": [
+        {
+          "CombineOperator": "Mul",
+          "Source": {
+            "$type": "RPG.GameCore.ComplexSkillAIContainModifier",
+            "IsTarget": false,
+            "ModifilerName": "MAvatar_Jade_00_Rank06_Check"
+          },
+          "Mapper": {
+            "$type": "RPG.GameCore.ComplexSkillAIMapperMultiRange",
+            "Ranges": [
+              {
+                "ymin": {
+                  "Value": 1.1
+                },
+                "xmax": {
+                  "Value": 0.5
+                },
+                "ymax": {
+                  "Value": 1.1
+                }
+              },
+              {
+                "xmin": {
+                  "Value": 0.5
+                },
+                "ymin": {
+                  "Value": 1
+                },
+                "xmax": {
+                  "Value": 1
+                },
+                "ymax": {
+                  "Value": 1
+                }
+              }
+            ]
+          }
+        },
+        {
+          "CombineOperator": "Mul",
+          "Source": {
+            "$type": "RPG.GameCore.ComplexSkillAISourceTargetIsActor"
+          },
+          "Mapper": {
+            "$type": "RPG.GameCore.ComplexSkillAIMapperMultiRange",
+            "Ranges": [
+              {
+                "ymin": {
+                  "Value": 1.1
+                },
+                "xmax": {
+                  "Value": 0.5
+                },
+                "ymax": {
+                  "Value": 1.1
+                }
+              },
+              {
+                "xmin": {
+                  "Value": 0.5
+                },
+                "ymin": {
+                  "Value": 1
+                },
+                "xmax": {
+                  "Value": 1
+                },
+                "ymax": {
+                  "Value": 1
+                }
+              }
+            ]
+          },
+          "PostProcess": {
+            "$type": "RPG.GameCore.ComplexSkillAIPostProcessBreak",
+            "UseFinalScore": true,
+            "CompareType": "Equal",
+            "CompareValue": {
+              "Value": 1
+            },
+            "IsOverrideFinalScore": true,
+            "FinalScore": {
+              "Value": 0.01
+            }
           }
         }
       ]
@@ -4470,97 +4569,6 @@
                 },
                 "ymax": {
                   "Value": 2000
-                }
-              }
-            ]
-          }
-        }
-      ]
-    },
-    "Add100nP_SSG_RedCheck": {
-      "Factors": [
-        {
-          "Source": {
-            "$type": "RPG.GameCore.ComplexSkillAIContainModifier",
-            "ModifilerName": "MAvatar_SSG_00_RedDot"
-          },
-          "Mapper": {
-            "$type": "RPG.GameCore.ComplexSkillAIMapperMultiRange",
-            "Ranges": [
-              {
-                "xmax": {
-                  "Value": 0.5
-                }
-              },
-              {
-                "xmin": {
-                  "Value": 0.5
-                },
-                "ymin": {
-                  "Value": 100
-                },
-                "xmax": {
-                  "Value": 1.5
-                },
-                "ymax": {
-                  "Value": 100
-                }
-              }
-            ]
-          }
-        }
-      ]
-    },
-    "Add100nP_SSG_BlueCheck": {
-      "Factors": [
-        {
-          "Source": {
-            "$type": "RPG.GameCore.ComplexSkillAIContainModifier",
-            "ModifilerName": "MAvatar_SSG_00_BlueDot"
-          },
-          "Mapper": {
-            "$type": "RPG.GameCore.ComplexSkillAIMapperMultiRange",
-            "Ranges": [
-              {
-                "xmax": {
-                  "Value": 0.5
-                }
-              },
-              {
-                "xmin": {
-                  "Value": 0.5
-                },
-                "ymin": {
-                  "Value": 100
-                },
-                "xmax": {
-                  "Value": 1.5
-                },
-                "ymax": {
-                  "Value": 100
-                }
-              }
-            ]
-          }
-        }
-      ]
-    },
-    "Add100nP_SSG_BreakCheck": {
-      "Factors": [
-        {
-          "Source": {
-            "$type": "RPG.GameCore.ComplexSkillAISourceContainBehaviorFlag",
-            "BehaviorFlag": "Break"
-          },
-          "Mapper": {
-            "$type": "RPG.GameCore.ComplexSkillAIMapperMultiRange",
-            "Ranges": [
-              {
-                "xmax": {
-                  "Value": 1
-                },
-                "ymax": {
-                  "Value": 100
                 }
               }
             ]
@@ -5265,56 +5273,65 @@
       "Factors": [
         {
           "Source": {
-            "$type": "RPG.GameCore.ComplexSkillAIGetStrengthLevel"
+            "$type": "RPG.GameCore.ComplexSkillAISourcePropertyCompare",
+            "TargetPropertyType": "CurrentStance"
           },
           "Mapper": {
             "$type": "RPG.GameCore.ComplexSkillAIMapperMultiRange",
             "Ranges": [
               {
+                "ymin": {
+                  "Value": 800
+                },
                 "xmax": {
-                  "Value": 2.5
+                  "Value": 1
+                },
+                "ymax": {
+                  "Value": 1000
+                }
+              }
+            ]
+          }
+        },
+        {
+          "CombineOperator": "Mul",
+          "Source": {
+            "$type": "RPG.GameCore.ComplexSkillAISourceWeaknessCompare"
+          },
+          "Mapper": {
+            "$type": "RPG.GameCore.ComplexSkillAIMapperMultiRange",
+            "Ranges": [
+              {
+                "ymin": {
+                  "Value": 0.1
+                },
+                "xmax": {
+                  "Value": 0.5
+                },
+                "ymax": {
+                  "Value": 0.1
                 }
               },
               {
                 "xmin": {
-                  "Value": 2.5
+                  "Value": 0.5
                 },
                 "ymin": {
-                  "Value": 60
+                  "Value": 1
                 },
                 "xmax": {
-                  "Value": 3.5
+                  "Value": 1.5
                 },
                 "ymax": {
-                  "Value": 60
+                  "Value": 1
                 }
               },
               {
                 "xmin": {
-                  "Value": 3.5
-                },
-                "ymin": {
-                  "Value": 80
+                  "Value": 1.5
                 },
                 "xmax": {
-                  "Value": 4.5
-                },
-                "ymax": {
-                  "Value": 80
-                }
-              },
-              {
-                "xmin": {
-                  "Value": 4.5
-                },
-                "ymin": {
-                  "Value": 100
-                },
-                "xmax": {
-                  "Value": 5.5
-                },
-                "ymax": {
-                  "Value": 100
+                  "Value": 3
                 }
               }
             ]
@@ -5322,7 +5339,271 @@
         },
         {
           "Source": {
+            "$type": "RPG.GameCore.ComplexSkillAISourcePropertyCompare",
+            "TargetPropertyType": "CurrentStance"
+          },
+          "Mapper": {
+            "$type": "RPG.GameCore.ComplexSkillAIMapperMultiRange",
+            "Ranges": [
+              {
+                "ymin": {
+                  "Value": 399
+                },
+                "xmax": {
+                  "Value": 1
+                },
+                "ymax": {
+                  "Value": 300
+                }
+              }
+            ]
+          }
+        },
+        {
+          "Source": {
+            "$type": "RPG.GameCore.ComplexSkillAIGetStrengthLevel"
+          },
+          "Mapper": {
+            "$type": "RPG.GameCore.ComplexSkillAIMapperMultiRange",
+            "Ranges": [
+              {
+                "ymin": {
+                  "Value": 1
+                },
+                "xmax": {
+                  "Value": 2.5
+                },
+                "ymax": {
+                  "Value": 2
+                }
+              },
+              {
+                "xmin": {
+                  "Value": 2.5
+                },
+                "ymin": {
+                  "Value": 20
+                },
+                "xmax": {
+                  "Value": 3.5
+                },
+                "ymax": {
+                  "Value": 20
+                }
+              },
+              {
+                "xmin": {
+                  "Value": 3.5
+                },
+                "ymin": {
+                  "Value": 30
+                },
+                "xmax": {
+                  "Value": 4.5
+                },
+                "ymax": {
+                  "Value": 30
+                }
+              },
+              {
+                "xmin": {
+                  "Value": 4.5
+                },
+                "ymin": {
+                  "Value": 40
+                },
+                "xmax": {
+                  "Value": 5.5
+                },
+                "ymax": {
+                  "Value": 40
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "BasepP_Sam_Skill21Groups": {
+      "Factors": [
+        {
+          "Source": {
+            "$type": "RPG.GameCore.ComplexSkillAIGetStrengthLevel"
+          },
+          "Mapper": {
+            "$type": "RPG.GameCore.ComplexSkillAIMapperMultiRange",
+            "Ranges": [
+              {
+                "ymin": {
+                  "Value": 20
+                },
+                "xmax": {
+                  "Value": 1.5
+                },
+                "ymax": {
+                  "Value": 20
+                }
+              },
+              {
+                "xmin": {
+                  "Value": 1.5
+                },
+                "ymin": {
+                  "Value": 30
+                },
+                "xmax": {
+                  "Value": 2.5
+                },
+                "ymax": {
+                  "Value": 30
+                }
+              },
+              {
+                "xmin": {
+                  "Value": 2.5
+                },
+                "ymin": {
+                  "Value": 800
+                },
+                "xmax": {
+                  "Value": 3.5
+                },
+                "ymax": {
+                  "Value": 800
+                }
+              },
+              {
+                "xmin": {
+                  "Value": 3.5
+                },
+                "ymin": {
+                  "Value": 900
+                },
+                "xmax": {
+                  "Value": 4.5
+                },
+                "ymax": {
+                  "Value": 900
+                }
+              },
+              {
+                "xmin": {
+                  "Value": 4.5
+                },
+                "ymin": {
+                  "Value": 1000
+                },
+                "xmax": {
+                  "Value": 5.5
+                },
+                "ymax": {
+                  "Value": 1000
+                }
+              }
+            ]
+          }
+        },
+        {
+          "CombineOperator": "Mul",
+          "Source": {
             "$type": "RPG.GameCore.ComplexSkillAISourceWeaknessCompare"
+          },
+          "Mapper": {
+            "$type": "RPG.GameCore.ComplexSkillAIMapperMultiRange",
+            "Ranges": [
+              {
+                "ymin": {
+                  "Value": 7
+                },
+                "xmax": {
+                  "Value": 0.5
+                },
+                "ymax": {
+                  "Value": 7
+                }
+              },
+              {
+                "xmin": {
+                  "Value": 0.5
+                },
+                "ymin": {
+                  "Value": 4
+                },
+                "xmax": {
+                  "Value": 1.5
+                },
+                "ymax": {
+                  "Value": 4
+                }
+              },
+              {
+                "xmin": {
+                  "Value": 1.5
+                },
+                "ymin": {
+                  "Value": 1
+                },
+                "xmax": {
+                  "Value": 2.5
+                },
+                "ymax": {
+                  "Value": 1
+                }
+              }
+            ]
+          }
+        },
+        {
+          "Source": {
+            "$type": "RPG.GameCore.ComplexSkillAIBattleGlobalData",
+            "DataType": "TargetNeighbourCount"
+          },
+          "Mapper": {
+            "$type": "RPG.GameCore.ComplexSkillAIMapperMultiRange",
+            "Ranges": [
+              {
+                "ymin": {
+                  "Value": 1
+                },
+                "xmax": {
+                  "Value": 0.5
+                },
+                "ymax": {
+                  "Value": 1
+                }
+              },
+              {
+                "ymin": {
+                  "Value": 500
+                },
+                "xmax": {
+                  "Value": 1.5
+                },
+                "ymax": {
+                  "Value": 500
+                }
+              },
+              {
+                "xmin": {
+                  "Value": 1.5
+                },
+                "ymin": {
+                  "Value": 2000
+                },
+                "xmax": {
+                  "Value": 2.5
+                },
+                "ymax": {
+                  "Value": 2000
+                }
+              }
+            ]
+          }
+        },
+        {
+          "Source": {
+            "$type": "RPG.GameCore.ComplexSkillAISourceContainBehaviorFlag",
+            "BehaviorFlag": "Break"
           },
           "Mapper": {
             "$type": "RPG.GameCore.ComplexSkillAIMapperMultiRange",
@@ -5336,6 +5617,141 @@
                 }
               }
             ]
+          }
+        }
+      ]
+    },
+    "BasepP_Sam_Skill21Groups_LockWeakness": {
+      "CombineOperator": "Mul",
+      "Factors": [
+        {
+          "Source": {
+            "$type": "RPG.GameCore.ComplexSkillAIGetStrengthLevel"
+          },
+          "Mapper": {
+            "$type": "RPG.GameCore.ComplexSkillAIMapperMultiRange",
+            "Ranges": [
+              {
+                "ymin": {
+                  "Value": 0.1
+                },
+                "xmax": {
+                  "Value": 1.5
+                },
+                "ymax": {
+                  "Value": 0.1
+                }
+              },
+              {
+                "xmin": {
+                  "Value": 1.5
+                },
+                "ymin": {
+                  "Value": 0.1
+                },
+                "xmax": {
+                  "Value": 2.5
+                },
+                "ymax": {
+                  "Value": 0.1
+                }
+              },
+              {
+                "xmin": {
+                  "Value": 2.5
+                },
+                "ymin": {
+                  "Value": 1
+                },
+                "xmax": {
+                  "Value": 3.5
+                },
+                "ymax": {
+                  "Value": 1
+                }
+              },
+              {
+                "xmin": {
+                  "Value": 3.5
+                },
+                "ymin": {
+                  "Value": 1
+                },
+                "xmax": {
+                  "Value": 4.5
+                },
+                "ymax": {
+                  "Value": 1
+                }
+              },
+              {
+                "xmin": {
+                  "Value": 4.5
+                },
+                "ymin": {
+                  "Value": 1
+                },
+                "xmax": {
+                  "Value": 5.5
+                },
+                "ymax": {
+                  "Value": 1
+                }
+              }
+            ]
+          }
+        },
+        {
+          "CombineOperator": "Mul",
+          "Source": {
+            "$type": "RPG.GameCore.ComplexSkillAISourceWeaknessCompare"
+          },
+          "Mapper": {
+            "$type": "RPG.GameCore.ComplexSkillAIMapperMultiRange",
+            "Ranges": [
+              {
+                "ymin": {
+                  "Value": 20
+                },
+                "xmax": {
+                  "Value": 0.5
+                },
+                "ymax": {
+                  "Value": 20
+                }
+              },
+              {
+                "xmin": {
+                  "Value": 0.5
+                },
+                "ymin": {
+                  "Value": 10
+                },
+                "xmax": {
+                  "Value": 1.5
+                },
+                "ymax": {
+                  "Value": 10
+                }
+              },
+              {
+                "xmin": {
+                  "Value": 1.5
+                },
+                "ymin": {
+                  "Value": 1
+                },
+                "xmax": {
+                  "Value": 2.5
+                },
+                "ymax": {
+                  "Value": 1
+                }
+              }
+            ]
+          },
+          "PostProcess": {
+            "$type": "RPG.GameCore.ComplexSkillAIPostProcessClamp"
           }
         }
       ]
@@ -7010,6 +7426,38 @@
         {
           "CombineOperator": "Mul",
           "Source": {
+            "$type": "RPG.GameCore.ComplexSkillAISourceAITag",
+            "IsTarget": false,
+            "DynamicValueKey": "IgnoreBPFail"
+          },
+          "Mapper": {
+            "$type": "RPG.GameCore.ComplexSkillAIMapperMultiRange",
+            "Ranges": [
+              {
+                "ymin": {
+                  "Value": 1
+                },
+                "xmax": {
+                  "Value": 0.5
+                },
+                "ymax": {
+                  "Value": 1
+                }
+              },
+              {
+                "xmin": {
+                  "Value": 0.5
+                },
+                "xmax": {
+                  "Value": 1
+                }
+              }
+            ]
+          }
+        },
+        {
+          "CombineOperator": "Mul",
+          "Source": {
             "$type": "RPG.GameCore.ComplexSkillAISourceMaxTeamBPCost",
             "IsTarget": false
           },
@@ -7117,6 +7565,38 @@
             "$type": "RPG.GameCore.ComplexSkillAISourceAITag",
             "IsTarget": false,
             "DynamicValueKey": "AlwaysNeedBP"
+          },
+          "Mapper": {
+            "$type": "RPG.GameCore.ComplexSkillAIMapperMultiRange",
+            "Ranges": [
+              {
+                "ymin": {
+                  "Value": 1
+                },
+                "xmax": {
+                  "Value": 0.5
+                },
+                "ymax": {
+                  "Value": 1
+                }
+              },
+              {
+                "xmin": {
+                  "Value": 0.5
+                },
+                "xmax": {
+                  "Value": 1
+                }
+              }
+            ]
+          }
+        },
+        {
+          "CombineOperator": "Mul",
+          "Source": {
+            "$type": "RPG.GameCore.ComplexSkillAISourceAITag",
+            "IsTarget": false,
+            "DynamicValueKey": "IgnoreBPFail"
           },
           "Mapper": {
             "$type": "RPG.GameCore.ComplexSkillAIMapperMultiRange",

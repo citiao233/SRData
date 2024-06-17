@@ -4,7 +4,8 @@
       "Modifiers": {
         "W2_Beast02_00_MuteHitFly": {
           "BehaviorFlagList": [
-            "MuteHitFly"
+            "MuteHitFly",
+            "KeepOnDeathrattle"
           ]
         }
       },
@@ -1955,7 +1956,29 @@
       "_CallbackList": [
         {
           "Event": "OnCreate",
-          "CallbackConfig": []
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ModifierName": "Monster_APShow"
+            }
+          ]
+        },
+        {
+          "Event": "OnDestroy",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.RemoveModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ModifierName": "Monster_APShow"
+            }
+          ]
         },
         {
           "Event": "OnAfterAttack",

@@ -3425,6 +3425,41 @@
           ]
         },
         {
+          "Event": "OnDestroy",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.Retarget",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "BattleEventEntityList"
+              },
+              "Predicate": {
+                "$type": "RPG.GameCore.ByIsContainModifier",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "ModifierName": "Modifier_W2_Kafka_00_RL_BattleEvent"
+              },
+              "TaskList": [
+                {
+                  "$type": "RPG.GameCore.ForceKill",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.GlobalMainIntensityEffect",
+                  "IsRevert": true,
+                  "IsDurable": true,
+                  "FadeDuration": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        {
           "Event": "OnListenTurnEnd",
           "CallbackConfig": [
             {
@@ -3718,7 +3753,8 @@
     },
     "Monster_W2_Kafka_00_RL_MindControl_True": {
       "BehaviorFlagList": [
-        "DispelPriorityHigh"
+        "DispelPriorityHigh",
+        "RemoveWhenCasterDead"
       ],
       "UIConfig": {
         "UIEffectPath": "UI/Battle/Widget/TeamInfoStatusEff/TeamInfoStatus_MindControl.prefab",

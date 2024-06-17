@@ -783,12 +783,6 @@
                         },
                         "ModifierName": "MAvatar_Acheron_00_PassiveFlag01"
                       },
-                      "MaxNumber": {
-                        "IsDynamic": false,
-                        "FixedValue": {
-                          "Value": 5
-                        }
-                      },
                       "TaskList": [
                         {
                           "$type": "RPG.GameCore.SetDynamicValue",
@@ -7707,6 +7701,14 @@
               "ShowAll": true
             },
             {
+              "$type": "RPG.GameCore.RemoveModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "ModifierName": "MAvatar_Acheron_00_Skill03_StancePreview"
+            },
+            {
               "$type": "RPG.GameCore.CharacterChangePhase",
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
@@ -7735,6 +7737,14 @@
               "ModifierName": [
                 "MAvatar_Acheron_00_DebuffSpecialMark01_Empty"
               ]
+            },
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "ModifierName": "MAvatar_Acheron_00_Skill03_StancePreview"
             },
             {
               "$type": "RPG.GameCore.CharacterChangePhase",
@@ -8536,9 +8546,6 @@
       }
     },
     "MAvatar_Acheron_00_Rank06_AddRegardAsSkillType": {
-      "BehaviorFlagList": [
-        "ForceStanceDamage"
-      ],
       "_CallbackList": [
         {
           "Event": "OnBeforeHitAll",
@@ -8593,6 +8600,22 @@
               },
               "OriginalAttackType": "BPSkill",
               "RegardAttackType": "Ultra"
+            },
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "ModifierName": "MAvatar_Acheron_00_Skill01_StancePreview"
+            },
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "ModifierName": "MAvatar_Acheron_00_Skill02_StancePreview"
             }
           ]
         }
@@ -8613,6 +8636,24 @@
           "CallbackConfig": []
         }
       ]
+    },
+    "MAvatar_Acheron_00_Skill01_StancePreview": {
+      "ModifierStancePreshowConfig": {
+        "SkillType": "Normal",
+        "AddForceStanceDamageFlag": true
+      }
+    },
+    "MAvatar_Acheron_00_Skill02_StancePreview": {
+      "ModifierStancePreshowConfig": {
+        "SkillType": "Skill",
+        "AddForceStanceDamageFlag": true
+      }
+    },
+    "MAvatar_Acheron_00_Skill03_StancePreview": {
+      "ModifierStancePreshowConfig": {
+        "SkillType": "Ultra",
+        "AddForceStanceDamageFlag": true
+      }
     },
     "MAvatar_Acheron_00_UltraSkillSpareCount": {
       "UIConfig": {
@@ -10036,12 +10077,6 @@
             ]
           },
           "IncludeLimbo": true,
-          "MaxNumber": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 5
-            }
-          },
           "TaskList": [
             {
               "$type": "RPG.GameCore.SetDynamicValueByModifierValue",

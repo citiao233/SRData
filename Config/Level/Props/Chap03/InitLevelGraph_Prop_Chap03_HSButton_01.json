@@ -42,11 +42,10 @@
     {
       "TaskList": [
         {
-          "$type": "RPG.GameCore.WaitEntityEvent",
-          "EventName": {
-            "Value": "TriggerTeleport"
-          },
-          "OnEvent": [
+          "$type": "RPG.GameCore.WaitPropStateChange",
+          "FromState": "Open",
+          "FromAnyState": true,
+          "OnChange": [
             {
               "$type": "RPG.GameCore.DebugLog",
               "Message": "HS_Btn_Teleport",
@@ -178,26 +177,8 @@
               "EventName": {
                 "Value": "OnHardReset"
               }
-            },
-            {
-              "$type": "RPG.GameCore.PropReqInteract",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetFetchAdvPropEx"
-              },
-              "InteractID": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 1010
-                }
-              }
             }
-          ],
-          "InstanceID": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0
-            }
-          }
+          ]
         }
       ]
     },
@@ -619,6 +600,36 @@
           "EventName": {
             "Value": "SelfStateChange"
           },
+          "InstanceID": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitEntityEvent",
+          "EventName": {
+            "Value": "TriggerTeleport"
+          },
+          "OnEvent": [
+            {
+              "$type": "RPG.GameCore.PropReqInteract",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+              },
+              "InteractID": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1010
+                }
+              }
+            }
+          ],
           "InstanceID": {
             "IsDynamic": false,
             "FixedValue": {

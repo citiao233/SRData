@@ -42,7 +42,8 @@
     },
     "Boss_Cocolia_MuteHitFly_Modifier": {
       "BehaviorFlagList": [
-        "MuteHitFly"
+        "MuteHitFly",
+        "KeepOnDeathrattle"
       ],
       "_CallbackList": [
         {
@@ -1819,6 +1820,39 @@
         }
       ]
     },
+    "W1_Mecha03_02_BattleScore1": {
+      "_CallbackList": [
+        {
+          "Event": "OnBeforeDying",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareCharacterID",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "TargetCharacterID": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 1304
+                  }
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetBattleAchievement",
+                  "AchievementID": 30117,
+                  "TagMatch": true
+                }
+              ],
+              "FailedTaskList": []
+            }
+          ]
+        }
+      ]
+    },
     "W2_YanQing_00_BattleScore1": {
       "_CallbackList": [
         {
@@ -2225,45 +2259,25 @@
               },
               "SuccessTaskList": [
                 {
-                  "$type": "RPG.GameCore.SetDynamicValueByAddValue",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "LevelEntity"
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByTargetTeam",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "Team": "TeamLight"
                   },
-                  "Key": "DeadCount",
-                  "AddValue": {
-                    "IsDynamic": false,
-                    "FixedValue": {
-                      "Value": 1
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "SW_Boss_00_BattleScore3_CharacterListen"
                     }
-                  },
-                  "ContextScope": "TargetEntity"
-                }
-              ]
-            },
-            {
-              "$type": "RPG.GameCore.PredicateTaskList",
-              "Predicate": {
-                "$type": "RPG.GameCore.ByCompareDynamicValue",
-                "TargetType": {
-                  "$type": "RPG.GameCore.TargetAlias",
-                  "Alias": "LevelEntity"
-                },
-                "DynamicKey": "DeadCount",
-                "ContextScope": "TargetEntity",
-                "CompareType": "Greater",
-                "CompareValue": {
-                  "IsDynamic": false,
-                  "FixedValue": {
-                    "Value": 1
-                  }
-                }
-              },
-              "SuccessTaskList": [
-                {
-                  "$type": "RPG.GameCore.SetBattleAchievement",
-                  "AchievementID": 30060,
-                  "TagMatch": true
+                  ]
                 }
               ]
             }
@@ -2286,6 +2300,1848 @@
       ]
     },
     "SW_Boss_00_BattleScore3_LimboFlag": {},
+    "SW_Boss_00_BattleScore3_CharacterListen": {
+      "MaxLayer": 2,
+      "LayerAddWhenStack": {
+        "IsDynamic": false,
+        "FixedValue": {
+          "Value": 1
+        }
+      },
+      "UseSnapshotEntity": true,
+      "_CallbackList": [
+        {
+          "Event": "OnActionEnd",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.RemoveSelfModifier"
+            }
+          ]
+        },
+        {
+          "Event": "OnStack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareModifierValue",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ModifierOwnerEntity"
+                },
+                "ValueType": "Layer",
+                "CompareType": "Greater",
+                "CompareValue": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 1
+                  }
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetBattleAchievement",
+                  "AchievementID": 30060,
+                  "TagMatch": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Event": "OnAfterAttack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.RemoveSelfModifier"
+            }
+          ]
+        }
+      ],
+      "Stacking": "Replace"
+    },
+    "W2_Argenti_00_BattleScore1": {
+      "_CallbackList": [
+        {
+          "Event": "OnListenCharacterDie",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByIsContainModifier",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "ModifierName": "W2_ArgentiTotem_00_BattleScore1"
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByIsContainModifier",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "ModifierName": "W2_ArgentiTotem_01_BattleScore1"
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByIsContainModifier",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "ModifierName": "W2_ArgentiTotem_02_BattleScore1"
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetBattleAchievement",
+                  "AchievementID": 30070,
+                  "TagMatch": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "W2_ArgentiTotem_00_BattleScore1": {},
+    "W2_ArgentiTotem_01_BattleScore1": {},
+    "W2_ArgentiTotem_02_BattleScore1": {},
+    "W2_Argenti_00_BattleScore2": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.DefineDynamicValue",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "DynamicKey": "W2_Argenti_00_BattleSore2_Flag",
+              "ContextScope": "TargetEntity"
+            }
+          ]
+        },
+        {
+          "Event": "OnBeforeDying",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "DynamicKey": "W2_Argenti_00_BattleSore2_Flag",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    }
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetBattleAchievement",
+                  "AchievementID": 30071,
+                  "TagMatch": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Event": "OnListenModifierAdd",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAny",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCheckModifierCallBackName",
+                    "ModifierName": "MMonster_W2_Argenti_00_Power"
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByCheckModifierCallBackName",
+                    "ModifierName": "MMonster_W2_Argenti_00_Power_RL"
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.DefineDynamicValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "DynamicKey": "W2_Argenti_00_BattleSore2_Flag",
+                  "ResetValue": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  },
+                  "ContextScope": "TargetEntity"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "W2_SW_Boss_01_BattleScore1": {
+      "_CallbackList": [
+        {
+          "Event": "OnListenModifierAdd",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCheckModifierCallBackName",
+                "ModifierName": "MMonster_SW_Boss_01_ScoringDetect0102"
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetBattleAchievement",
+                  "AchievementID": 30069,
+                  "TagMatch": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "W2_Beast02_01_BattleScore1": {
+      "_CallbackList": [
+        {
+          "Event": "OnListenAfterSkillUse",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                "DynamicKey": "BattleScore_FireBallCount",
+                "CompareType": "Equal",
+                "CompareValue": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 10
+                  }
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetBattleAchievement",
+                  "AchievementID": 30078,
+                  "TagMatch": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "W2_Death_00_BattleScore1": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.DefineDynamicValue",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "DynamicKey": "Death_CharacterCount"
+            }
+          ]
+        },
+        {
+          "Event": "OnBeforeDying",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.Retarget",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              },
+              "Predicate": {
+                "$type": "RPG.GameCore.ByIsContainModifier",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "ModifierName": "Death_Control_Modifier",
+                "Inverse": true
+              },
+              "MaxNumber": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 4
+                }
+              },
+              "TaskList": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValueByAddValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "Key": "Death_CharacterCount",
+                  "AddValue": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  },
+                  "Min": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0
+                    }
+                  },
+                  "Max": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 5
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ModifierOwnerEntity"
+                },
+                "DynamicKey": "Death_CharacterCount",
+                "CompareType": "Equal",
+                "CompareValue": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 1
+                  }
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetBattleAchievement",
+                  "AchievementID": 30079,
+                  "TagMatch": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "W3_Dinosaur_00_BattleScore1": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.DefineDynamicValue",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "DynamicKey": "Dinosaur_KillCount",
+              "ContextScope": "TargetEntity"
+            }
+          ]
+        },
+        {
+          "Event": "OnTriggerDeath",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByTargetTeam",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "Team": "TeamDark"
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValueByAddValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "Key": "Dinosaur_KillCount",
+                  "AddValue": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  },
+                  "Min": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0
+                    }
+                  },
+                  "Max": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 2
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "DynamicKey": "Dinosaur_KillCount",
+                    "CompareType": "GreaterEqual",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 2
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetBattleAchievement",
+                      "AchievementID": 30080
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "W3_Dinosaur_01_BattleScore1": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.DefineDynamicValue",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "DynamicKey": "Dinosaur_BreakModifierMaxCount",
+              "ContextScope": "TargetEntity"
+            }
+          ]
+        },
+        {
+          "Event": "OnBeforeBeingBreak",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
+              "ModifierName": "MMonster_W3_Dinosaur_01_Common_Growth",
+              "ValueType": "MaxLayer",
+              "Multiplier": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1
+                }
+              },
+              "DynamicKey": "Dinosaur_BreakModifierMaxCount"
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareModifierValue",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ModifierOwnerEntity"
+                },
+                "ModifierName": "MMonster_W3_Dinosaur_01_Common_Growth",
+                "ValueType": "Layer",
+                "CompareType": "Equal",
+                "CompareValue": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAK",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      137582181
+                    ]
+                  }
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetBattleAchievement",
+                  "AchievementID": 30115
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "W3_Dinosaur_01_BattleScore2": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.DefineDynamicValue",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "DynamicKey": "Dinosaur_BreakCount",
+              "ContextScope": "TargetEntity"
+            }
+          ]
+        },
+        {
+          "Event": "OnBeforeDying",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ModifierOwnerEntity"
+                },
+                "DynamicKey": "Dinosaur_BreakCount",
+                "CompareType": "Equal",
+                "CompareValue": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 0
+                  }
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetBattleAchievement",
+                  "AchievementID": 30116
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Event": "OnBeingBreak",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValue",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "DynamicKey": "Dinosaur_BreakCount",
+              "Value": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "W3_TV_00_BattleScore1": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.DefineDynamicValue",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "DynamicKey": "TV_AchievementFlag",
+              "ContextScope": "TargetEntity"
+            }
+          ]
+        },
+        {
+          "Event": "OnListenCharacterDie",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByTargetTeam",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "Team": "TeamDark"
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByIsContainModifier",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "ModifierName": "MModifier_Monster_W3_TV_00_Side1"
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByAnd",
+                        "PredicateList": [
+                          {
+                            "$type": "RPG.GameCore.ByIsContainModifier",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "CasterRightEntity"
+                            },
+                            "ModifierName": "MModifier_Monster_W3_TV_00_Side1"
+                          },
+                          {
+                            "$type": "RPG.GameCore.ByIsContainModifier",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "CasterLeftEntity"
+                            },
+                            "ModifierName": "MModifier_Monster_W3_TV_00_Side1"
+                          }
+                        ]
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.SetBattleAchievement",
+                          "AchievementID": 30081
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Event": "OnListenCharacterCreate",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByIsContainModifier",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ModifierOwnerEntity"
+                },
+                "ModifierName": "MModifier_Monster_W3_TV_00_Side1"
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByIsContainModifier",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "CasterRightEntity"
+                        },
+                        "ModifierName": "MModifier_Monster_W3_TV_00_Side1"
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByIsContainModifier",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "CasterLeftEntity"
+                        },
+                        "ModifierName": "MModifier_Monster_W3_TV_00_Side1"
+                      }
+                    ]
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetBattleAchievement",
+                      "AchievementID": 30081
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Event": "OnListenAfterAttack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByIsContainModifier",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ModifierOwnerEntity"
+                },
+                "ModifierName": "MModifier_Monster_W3_TV_00_Side1"
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByIsContainModifier",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "CasterRightEntity"
+                        },
+                        "ModifierName": "MModifier_Monster_W3_TV_00_Side1"
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByIsContainModifier",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "CasterLeftEntity"
+                        },
+                        "ModifierName": "MModifier_Monster_W3_TV_00_Side1"
+                      }
+                    ]
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetBattleAchievement",
+                      "AchievementID": 30081
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "W3_Junk_00_BattleScore1": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
+          "CallbackConfig": []
+        },
+        {
+          "Event": "OnTriggerDeath",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByTargetTeam",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "Team": "TeamLight"
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetBattleAchievement",
+                  "AchievementID": 30082
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "W3_Sam_00_BattleScore1": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.DefineDynamicValue",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "DynamicKey": "Sam_BattleScore1_Flag",
+              "ContextScope": "TargetEntity"
+            }
+          ]
+        },
+        {
+          "Event": "OnAfterSkillUse",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCurrentSkillName",
+                "SkillName": "Skill05"
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "DynamicKey": "Sam_BattleScore1_Flag",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 2
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Event": "OnBeingBreak",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ModifierOwnerEntity"
+                },
+                "DynamicKey": "Sam_BattleScore1_Flag",
+                "CompareType": "Equal",
+                "CompareValue": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 1
+                  }
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetBattleAchievement",
+                  "AchievementID": 30083
+                }
+              ]
+            },
+            {
+              "$type": "RPG.GameCore.SetDynamicValue",
+              "DynamicKey": "Sam_BattleScore1_Flag",
+              "Value": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Event": "OnModifierAdd",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCheckModifierCallBackName",
+                "ModifierName": "Monster_W3_Sam_00_Enhance"
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "DynamicKey": "Sam_BattleScore1_Flag",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "W3_Aventurine_00_BattleScore1": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.DefineDynamicValue",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "DynamicKey": "Aventurine_BattleScore1_Flag",
+              "ContextScope": "TargetEntity"
+            }
+          ]
+        },
+        {
+          "Event": "OnListenAfterAttack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValue",
+              "DynamicKey": "Aventurine_BattleScore1_Flag",
+              "Value": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.SetDynamicValue",
+              "DynamicKey": "MDF_LastLayer",
+              "Value": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Event": "OnListenModifierOnStack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCheckModifierCallBackName",
+                    "ModifierName": "Monster_W3_AventurinePart_00_ResultCount"
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByTargetTeam",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "Team": "TeamLight"
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
+                  "ReadTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "ModifierName": "Monster_W3_AventurinePart_00_ResultCount",
+                  "ValueType": "Layer",
+                  "Multiplier": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  },
+                  "DynamicKey": "MDF_CurrentLayer"
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "DynamicKey": "MDF_CurrentLayer",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAAAAIK",
+                        "FixedValues": [
+                          {
+                            "Value": 6
+                          }
+                        ],
+                        "DynamicHashes": [
+                          -592485439
+                        ]
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "DynamicKey": "Aventurine_BattleScore1_Flag",
+                      "Value": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAAAAIK",
+                          "FixedValues": [
+                            {
+                              "Value": 1
+                            }
+                          ],
+                          "DynamicHashes": [
+                            17637024
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "DynamicKey": "MDF_LastLayer",
+                  "Value": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        -63529766
+                      ]
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "DynamicKey": "Aventurine_BattleScore1_Flag",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 2
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetBattleAchievement",
+                      "AchievementID": 30106
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "DynamicValues": {
+        "Values": {
+          "-63529766": {},
+          "-592485439": {}
+        }
+      }
+    },
+    "W3_Aventurine_00_BattleScore2": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.DefineDynamicValue",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "DynamicKey": "Aventurine_BattleScore2_Flag",
+              "ContextScope": "TargetEntity"
+            }
+          ]
+        },
+        {
+          "Event": "OnListenModifierOnStack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCheckModifierCallBackName",
+                "ModifierName": "Monster_W3_Aventurine_00_DamageUp"
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "DynamicKey": "Aventurine_BattleScore2_Flag",
+                  "Value": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAAAAIK",
+                      "FixedValues": [
+                        {
+                          "Value": 1
+                        }
+                      ],
+                      "DynamicHashes": [
+                        17636193
+                      ]
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "DynamicKey": "Aventurine_BattleScore2_Flag",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 4
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetBattleAchievement",
+                      "AchievementID": 30107
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Event": "OnInsertAbilityFinish",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValue",
+              "DynamicKey": "Aventurine_BattleScore2_Flag",
+              "Value": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "W1_Mecha01_02_BattleScore1": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.SetBattleAchievement",
+              "AchievementID": 30118
+            }
+          ]
+        }
+      ]
+    },
+    "W3_Figure_00_BattleScore1": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.DefineDynamicValue",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "DynamicKey": "W3_Figure_00_BattleScore1_Flag",
+              "ContextScope": "TargetEntity"
+            }
+          ]
+        },
+        {
+          "Event": "OnListenModifierAdd",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCheckModifierCallBackName",
+                    "ModifierName": "MCommon_CTRL_Sleep"
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByTargetTeam",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "Team": "TeamLight"
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByIsContainModifier",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "ModifierName": "W3_Figure_00_BattleScore1_Mark",
+                    "Inverse": true
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "ModifierName": "W3_Figure_00_BattleScore1_Mark",
+                  "InheritCaster": "TargetSelf"
+                },
+                {
+                  "$type": "RPG.GameCore.SetDynamicValueByAddValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "Key": "W3_Figure_00_BattleScore1_Flag",
+                  "AddValue": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  },
+                  "Min": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0
+                    }
+                  },
+                  "Max": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 4
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "DynamicKey": "W3_Figure_00_BattleScore1_Flag",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 4
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetBattleAchievement",
+                      "AchievementID": 30119
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "W3_Figure_00_BattleScore1_Mark": {},
+    "W3_Figure_02_BattleScore1": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.DefineDynamicValue",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "DynamicKey": "W3_Figure_02_BattleScore1_Flag1",
+              "ContextScope": "TargetEntity"
+            },
+            {
+              "$type": "RPG.GameCore.DefineDynamicValue",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "DynamicKey": "W3_Figure_02_BattleScore1_Flag2",
+              "ContextScope": "TargetEntity"
+            }
+          ]
+        },
+        {
+          "Event": "OnActionPhaseBegin",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "DynamicKey": "W3_Figure_02_BattleScore1_Flag1",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 1
+                      }
+                    }
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "DynamicKey": "Monster_W3_Figure_02_AimTargetCount",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 1
+                      }
+                    }
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "DynamicKey": "W3_Figure_02_BattleScore1_Flag1",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "DynamicKey": "W3_Figure_02_BattleScore1_Flag2",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Event": "OnActionEnd",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ModifierOwnerEntity"
+                },
+                "DynamicKey": "W3_Figure_02_BattleScore1_Flag2",
+                "CompareType": "Equal",
+                "CompareValue": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 1
+                  }
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetBattleAchievement",
+                  "AchievementID": 30120
+                }
+              ]
+            },
+            {
+              "$type": "RPG.GameCore.SetDynamicValue",
+              "DynamicKey": "W3_Figure_02_BattleScore1_Flag2",
+              "Value": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Event": "OnListenCharacterDie",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValue",
+              "DynamicKey": "W3_Figure_02_BattleScore1_Flag2",
+              "Value": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "W3_FigureBoss_00_BattleScore1": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.DefineDynamicValue",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "DynamicKey": "W3_FigureBoss_00_BattleScore1_Flag1",
+              "ContextScope": "TargetEntity"
+            },
+            {
+              "$type": "RPG.GameCore.DefineDynamicValue",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "DynamicKey": "W3_FigureBoss_00_BattleScore1_Flag2",
+              "ContextScope": "TargetEntity"
+            },
+            {
+              "$type": "RPG.GameCore.DefineDynamicValue",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "DynamicKey": "W3_FigureBoss_00_BattleScore1_Flag3",
+              "ContextScope": "TargetEntity"
+            }
+          ]
+        },
+        {
+          "Event": "OnListenModifierOnStack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCheckModifierCallBackName",
+                    "ModifierName": "MMonster_W3_DollElite_Commnon_TheChosenOne"
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByCompareMonsterPhase",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 1
+                      }
+                    }
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCheckCustomValueBool",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "Key": {
+                      "Hash": -231967306
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "DynamicKey": "W3_FigureBoss_00_BattleScore1_Flag1",
+                      "Value": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCheckCustomValueBool",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "Key": {
+                      "Hash": 1334116635
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "DynamicKey": "W3_FigureBoss_00_BattleScore1_Flag2",
+                      "Value": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCheckCustomValueBool",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "Key": {
+                      "Hash": 930832108
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "DynamicKey": "W3_FigureBoss_00_BattleScore1_Flag3",
+                      "Value": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "DynamicKey": "W3_FigureBoss_00_BattleScore1_Flag1",
+                        "CompareType": "Equal",
+                        "CompareValue": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 1
+                          }
+                        }
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "DynamicKey": "W3_FigureBoss_00_BattleScore1_Flag2",
+                        "CompareType": "Equal",
+                        "CompareValue": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 1
+                          }
+                        }
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "DynamicKey": "W3_FigureBoss_00_BattleScore1_Flag3",
+                        "CompareType": "Equal",
+                        "CompareValue": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 1
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetBattleAchievement",
+                      "AchievementID": 30121
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "W3_FigureBoss_00_BattleScore2": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.DefineDynamicValue",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "DynamicKey": "W3_FigureBoss_00_BattleScore2_Flag1",
+              "ResetValue": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 2
+                }
+              },
+              "ContextScope": "TargetEntity"
+            }
+          ]
+        },
+        {
+          "Event": "OnDestroy",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ModifierOwnerEntity"
+                },
+                "DynamicKey": "W3_FigureBoss_00_BattleScore2_Flag1",
+                "CompareType": "GreaterEqual",
+                "CompareValue": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 1
+                  }
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetBattleAchievement",
+                  "AchievementID": 30122
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "W3_Figure_01_BattleScore1": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.SetBattleAchievement",
+              "AchievementID": 30123
+            }
+          ]
+        }
+      ]
+    },
+    "W3_Sunday_00_BattleScore1": {
+      "_CallbackList": [
+        {
+          "Event": "OnBeforeSkillUse",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCurrentSkillName",
+                "SkillName": "Skill052"
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetBattleAchievement",
+                  "AchievementID": 30124
+                }
+              ]
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCurrentSkillName",
+                "SkillName": "Skill06"
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareCharacterNumber",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "AllTeammate"
+                    },
+                    "Predicate": {
+                      "$type": "RPG.GameCore.ByAny",
+                      "PredicateList": [
+                        {
+                          "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "Flag": "STAT_CTRL"
+                        },
+                        {
+                          "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "Flag": "Break"
+                        },
+                        {
+                          "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "Flag": "DisableAction"
+                        }
+                      ],
+                      "Inverse": true
+                    },
+                    "CompareType": "Equal",
+                    "CompareNumber": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetBattleAchievement",
+                      "AchievementID": 30124
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "W3_Sunday_00_BattleScore2": {
+      "_CallbackList": [
+        {
+          "Event": "OnAfterAttack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCurrentSkillName",
+                    "SkillName": "Skill10"
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "DynamicKey": "W3_Sunday_00_BattleScore2_Flag",
+                    "ContextScope": "TargetEntity",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    }
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetBattleAchievement",
+                  "AchievementID": 30125
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "W3_Sunday_00_BattleScore2_Listener": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.DefineDynamicValue",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "DynamicKey": "W3_Sunday_00_BattleScore2_Flag",
+              "ContextScope": "TargetEntity"
+            }
+          ]
+        },
+        {
+          "Event": "OnListenHPChange",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByTargetTeam",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "Team": "TeamLight"
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "DynamicKey": "W3_Sunday_00_BattleScore2_Flag",
+                  "ContextScope": "TargetEntity",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
     "W1_Mecha02_ThunderDOT": {
       "LifeTime": 3,
       "MaxLayer": 5,
@@ -2299,7 +4155,7 @@
       "PerformTime": {
         "IsDynamic": false,
         "FixedValue": {
-          "Value": 0.3000000002793968
+          "Value": 0.3
         }
       },
       "BehaviorFlagList": [
@@ -2350,7 +4206,12 @@
             },
             {
               "$type": "RPG.GameCore.WaitSecond",
-              "WaitTime": 0.1
+              "WaitTime": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0.1
+                }
+              }
             },
             {
               "$type": "RPG.GameCore.DamageByAttackProperty",
@@ -2359,6 +4220,9 @@
                 "Alias": "ModifierOwnerEntity"
               },
               "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Physical"
+                },
                 "DamageValue": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -2376,7 +4240,12 @@
             },
             {
               "$type": "RPG.GameCore.WaitSecond",
-              "WaitTime": 0.1
+              "WaitTime": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0.1
+                }
+              }
             }
           ]
         },
@@ -2393,6 +4262,73 @@
               "AttachPoint": "SelectRoot"
             }
           ]
+        },
+        {
+          "Event": "OnCustomEvent",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
+              "ReadTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ValueType": "Layer",
+              "Multiplier": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1
+                }
+              },
+              "DynamicKey": "Modifier_Layer"
+            },
+            {
+              "$type": "RPG.GameCore.SetDynamicValueByProperty",
+              "DynamicKey": "Owner_MaxHP",
+              "ReadTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "Value": "MaxHP"
+            },
+            {
+              "$type": "RPG.GameCore.TriggerEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Hit_Common_Wound_Triger.prefab",
+              "AttachPoint": "SelectRoot"
+            },
+            {
+              "$type": "RPG.GameCore.DamageByAttackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Physical"
+                },
+                "DamageValue": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQABAQQBAgQBAwQK",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      375103313,
+                      -53809608,
+                      -1978048972,
+                      1346702127
+                    ]
+                  }
+                },
+                "AttackType": "DOT"
+              },
+              "DisplayData": {
+                "AttachPoint": "SelectRoot"
+              }
+            }
+          ]
         }
       ],
       "Stacking": "ReplaceByCaster",
@@ -2401,7 +4337,8 @@
           "-1978048972": {},
           "1346702127": {},
           "-53809608": {},
-          "931685943": {}
+          "931685943": {},
+          "375103313": {}
         }
       }
     },
@@ -2650,7 +4587,7 @@
               "Threshold": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.3000000002793968
+                  "Value": 0.3
                 }
               }
             }
@@ -3349,20 +5286,6 @@
               "DynamicKey": "ModifierLayers"
             },
             {
-              "$type": "RPG.GameCore.TriggerEffect",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "Caster"
-              },
-              "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Himeko/Eff_Avatar_Himeko_00_Skill03_Ready.prefab",
-              "UniqueEffectName": "Burn_Loop",
-              "PositionOffset": {
-                "X": 0,
-                "Y": 2,
-                "Z": 0
-              }
-            },
-            {
               "$type": "RPG.GameCore.StackProperty",
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
@@ -3894,8 +5817,20 @@
           "Event": "OnAfterBeingAttacked",
           "CallbackConfig": [
             {
-              "$type": "RPG.GameCore.SetModifierValue",
-              "ModifyFunction": "Add"
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByIsTriggeredBlockDamage",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ModifierOwnerEntity"
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetModifierValue",
+                  "ModifyFunction": "Add"
+                }
+              ]
             },
             {
               "$type": "RPG.GameCore.TriggerEffect",
@@ -3940,7 +5875,8 @@
         "Stealth",
         "DisableHealHP",
         "AlwaysSuccess",
-        "MuteSpeed"
+        "MuteSpeed",
+        "STAT_ForceControl"
       ],
       "UseSnapshotEntity": true,
       "UIConfig": {
@@ -3982,6 +5918,32 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "ModifierOwnerEntity"
               }
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareCharacterID",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ModifierOwnerEntity"
+                },
+                "TargetCharacterID": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 1310
+                  }
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.ScaleCharacterModel",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "AliveOnly": false
+                }
+              ]
             },
             {
               "$type": "RPG.GameCore.RemoveModifier",
@@ -4112,7 +6074,9 @@
                 "Alias": "ModifierOwnerEntity"
               },
               "AttackProperty": {
-                "DamageType": "Fire",
+                "DamageType": {
+                  "DamageType": "Fire"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -4175,7 +6139,8 @@
         "DisableAction",
         "STAT_CTRL_Stun",
         "STAT_CTRL",
-        "AlwaysSuccess"
+        "AlwaysSuccess",
+        "STAT_ForceControl"
       ],
       "UIConfig": {
         "UIEffectPath": "UI/Battle/Widget/TeamInfoStatusEff/TeamInfoStatusEffMid_DizzySvarog.prefab",
@@ -4221,7 +6186,12 @@
               "SuccessTaskList": [
                 {
                   "$type": "RPG.GameCore.WaitSecond",
-                  "WaitTime": 0.15
+                  "WaitTime": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0.15
+                    }
+                  }
                 },
                 {
                   "$type": "RPG.GameCore.ShowEntityFloatMessage",
@@ -4265,7 +6235,12 @@
               "FailedTaskList": [
                 {
                   "$type": "RPG.GameCore.WaitSecond",
-                  "WaitTime": 0.15
+                  "WaitTime": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0.15
+                    }
+                  }
                 },
                 {
                   "$type": "RPG.GameCore.ShowEntityFloatMessage",
@@ -5184,7 +7159,7 @@
                 "Chance": {
                   "IsDynamic": false,
                   "FixedValue": {
-                    "Value": 0.33000000030733645
+                    "Value": 0.33
                   }
                 }
               },
@@ -5206,7 +7181,7 @@
                     "Chance": {
                       "IsDynamic": false,
                       "FixedValue": {
-                        "Value": 0.5000000004656613
+                        "Value": 0.5
                       }
                     }
                   },
@@ -5316,7 +7291,7 @@
               "PropertyValue": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 0.5000000004656613
+                  "Value": 0.5
                 }
               }
             }
@@ -5328,18 +7303,7 @@
       "_CallbackList": [
         {
           "Event": "OnStack",
-          "CallbackConfig": [
-            {
-              "$type": "RPG.GameCore.ModifierAttachEffect",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Gepard/Eff_Avatar_Gepard_00_Skill03_Ready.prefab",
-              "MinMutexTime": -1,
-              "MutexType": "Entity"
-            }
-          ]
+          "CallbackConfig": []
         },
         {
           "Event": "OnBeingBreak",
@@ -5674,6 +7638,14 @@
                 "Alias": "ModifierOwnerEntity"
               },
               "ModifierName": "Monster_W1_Mecha03_01_Effect"
+            },
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ModifierName": "Monster_APShow"
             }
           ]
         },
@@ -5687,6 +7659,14 @@
                 "Alias": "ModifierOwnerEntity"
               },
               "ModifierName": "Monster_W1_Mecha03_01_Effect"
+            },
+            {
+              "$type": "RPG.GameCore.RemoveModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ModifierName": "Monster_APShow"
             }
           ]
         },
@@ -5923,7 +7903,7 @@
                   "OpCodes": "AQAAAAQK",
                   "FixedValues": [
                     {
-                      "Value": 0.3000000002793968
+                      "Value": 0.3
                     }
                   ],
                   "DynamicHashes": [
@@ -5997,7 +7977,7 @@
       "PerformTime": {
         "IsDynamic": false,
         "FixedValue": {
-          "Value": 0.3000000002793968
+          "Value": 0.3
         }
       },
       "BehaviorFlagList": [
@@ -6055,7 +8035,12 @@
             },
             {
               "$type": "RPG.GameCore.WaitSecond",
-              "WaitTime": 0.1
+              "WaitTime": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0.1
+                }
+              }
             },
             {
               "$type": "RPG.GameCore.DamageByAttackProperty",
@@ -6064,7 +8049,9 @@
                 "Alias": "ModifierOwnerEntity"
               },
               "AttackProperty": {
-                "DamageType": "Fire",
+                "DamageType": {
+                  "DamageType": "Fire"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -6076,12 +8063,20 @@
                     ]
                   }
                 },
-                "AttackType": "DOT"
+                "AttackType": "DOT",
+                "DamageTag": [
+                  "Burn"
+                ]
               }
             },
             {
               "$type": "RPG.GameCore.WaitSecond",
-              "WaitTime": 0.1
+              "WaitTime": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0.1
+                }
+              }
             }
           ]
         },
@@ -6130,7 +8125,9 @@
                 "Alias": "ModifierOwnerEntity"
               },
               "AttackProperty": {
-                "DamageType": "Fire",
+                "DamageType": {
+                  "DamageType": "Fire"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -6142,7 +8139,10 @@
                     ]
                   }
                 },
-                "AttackType": "DOT"
+                "AttackType": "DOT",
+                "DamageTag": [
+                  "Burn"
+                ]
               }
             }
           ]
@@ -6159,7 +8159,8 @@
     },
     "MMonster_Common_MuteHitFly": {
       "BehaviorFlagList": [
-        "MuteHitFly"
+        "MuteHitFly",
+        "KeepOnDeathrattle"
       ]
     },
     "MMonster_Common_HideMonsterHUD": {
@@ -6609,7 +8610,9 @@
                 "Alias": "ModifierOwnerEntity"
               },
               "AttackProperty": {
-                "DamageType": "Imaginary",
+                "DamageType": {
+                  "DamageType": "Imaginary"
+                },
                 "DamagePercentage": {
                   "IsDynamic": true,
                   "PostfixExpr": {
@@ -7190,7 +9193,7 @@
                     "MDF_DamageUpRatio_PerLayer": {
                       "IsDynamic": false,
                       "FixedValue": {
-                        "Value": 0.40000000037252903
+                        "Value": 0.4
                       }
                     }
                   }
@@ -7305,7 +9308,7 @@
                     "MDF_DamageUpRatio_PerLayer": {
                       "IsDynamic": false,
                       "FixedValue": {
-                        "Value": 0.40000000037252903
+                        "Value": 0.4
                       }
                     }
                   }
@@ -7383,6 +9386,756 @@
           "1458882163": {},
           "-797864550": {},
           "-945261968": {}
+        }
+      }
+    },
+    "MCommon_SuperArmorController": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ModifierName": "MCommon_SuperArmor",
+              "DynamicValues": {
+                "MDF_AllDamageTypeResistance": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAK",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      1877773466
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Event": "OnBeingBreak",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_SuperArmor_Behit_Small.prefab",
+              "IsNeedFadeOut": false
+            },
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_SuperArmor_Behit.prefab",
+              "IsNeedFadeOut": false
+            },
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_SuperArmor_Behit_Big.prefab",
+              "IsNeedFadeOut": false
+            },
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_SuperArmor_Behit1.prefab",
+              "IsNeedFadeOut": false
+            },
+            {
+              "$type": "RPG.GameCore.TriggerEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_SuperArmor_Behit_Stop.prefab"
+            },
+            {
+              "$type": "RPG.GameCore.TriggerEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_SuperArmor_Behit1_Stop.prefab"
+            },
+            {
+              "$type": "RPG.GameCore.RemoveModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ModifierName": "MCommon_SuperArmor"
+            },
+            {
+              "$type": "RPG.GameCore.ModifyActionDelay",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "AddNormalizedValue": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    1748351382
+                  ]
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ModifierName": "MCommon_SuperArmorBreak",
+              "DynamicValues": {
+                "MDF_AllDamageTypeTakenRatio": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAK",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      66881034
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Event": "OnEndBreak",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.RemoveModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ModifierName": "MCommon_SuperArmorBreak"
+            },
+            {
+              "$type": "RPG.GameCore.TriggerEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_SuperArmor_Recover.prefab"
+            },
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "AliveOnly": false,
+              "ModifierName": "MCommon_SuperArmor",
+              "DynamicValues": {
+                "MDF_AllDamageTypeResistance": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAK",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      1877773466
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "DynamicValues": {
+        "Values": {
+          "1877773466": {},
+          "66881034": {},
+          "1748351382": {}
+        }
+      }
+    },
+    "MCommon_SuperArmor": {
+      "BehaviorFlagList": [
+        "MuteHitH",
+        "STAT_SuperArmor"
+      ],
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.SetResilience",
+              "Resilience": "A"
+            }
+          ]
+        },
+        {
+          "Event": "OnDestroy",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.SetResilience",
+              "DoReset": true
+            }
+          ]
+        },
+        {
+          "Event": "OnAfterBeingHitAll",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAny",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCheckCustomValueBool",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "Key": {
+                      "Hash": -1410470501
+                    }
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByCheckCustomValueBool",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "Key": {
+                      "Hash": 578245315
+                    }
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByCheckCustomValueBool",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "Key": {
+                      "Hash": -1871984036
+                    }
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCheckCustomValueBool",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "Key": {
+                      "Hash": -1410470501
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.RemoveEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_SuperArmor_Behit_Small.prefab",
+                      "IsNeedFadeOut": false
+                    },
+                    {
+                      "$type": "RPG.GameCore.RemoveEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_SuperArmor_Behit1.prefab",
+                      "IsNeedFadeOut": false
+                    },
+                    {
+                      "$type": "RPG.GameCore.TriggerEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_SuperArmor_Behit_Small.prefab"
+                    },
+                    {
+                      "$type": "RPG.GameCore.TriggerEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_SuperArmor_Behit1.prefab"
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCheckCustomValueBool",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "Key": {
+                      "Hash": 578245315
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.RemoveEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_SuperArmor_Behit.prefab",
+                      "IsNeedFadeOut": false
+                    },
+                    {
+                      "$type": "RPG.GameCore.RemoveEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_SuperArmor_Behit1.prefab",
+                      "IsNeedFadeOut": false
+                    },
+                    {
+                      "$type": "RPG.GameCore.TriggerEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_SuperArmor_Behit.prefab"
+                    },
+                    {
+                      "$type": "RPG.GameCore.TriggerEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_SuperArmor_Behit1.prefab"
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCheckCustomValueBool",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "Key": {
+                      "Hash": -1871984036
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.RemoveEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_SuperArmor_Behit_Big.prefab",
+                      "IsNeedFadeOut": false
+                    },
+                    {
+                      "$type": "RPG.GameCore.RemoveEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_SuperArmor_Behit1.prefab",
+                      "IsNeedFadeOut": false
+                    },
+                    {
+                      "$type": "RPG.GameCore.TriggerEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_SuperArmor_Behit_Big.prefab"
+                    },
+                    {
+                      "$type": "RPG.GameCore.TriggerEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_SuperArmor_Behit1.prefab"
+                    }
+                  ]
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByCharacterSomatoWidthType",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "SomatoWidthType": "Thin"
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCompareSomatoType",
+                        "Target": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "SomatoTypes": [
+                          "LargeMonster",
+                          "LargeAvatar",
+                          "LargeFakeAvatar"
+                        ],
+                        "Inverse": true
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCompareMonsterRank",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "CompareType": "Less",
+                        "CompareValue": 5
+                      }
+                    ]
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.RemoveEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_SuperArmor_Behit_Small.prefab",
+                      "IsNeedFadeOut": false
+                    },
+                    {
+                      "$type": "RPG.GameCore.RemoveEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_SuperArmor_Behit1.prefab",
+                      "IsNeedFadeOut": false
+                    },
+                    {
+                      "$type": "RPG.GameCore.TriggerEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_SuperArmor_Behit_Small.prefab"
+                    },
+                    {
+                      "$type": "RPG.GameCore.TriggerEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_SuperArmor_Behit1.prefab"
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAny",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByAnd",
+                        "PredicateList": [
+                          {
+                            "$type": "RPG.GameCore.ByCharacterSomatoWidthType",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "ModifierOwnerEntity"
+                            },
+                            "SomatoWidthType": "Thin"
+                          },
+                          {
+                            "$type": "RPG.GameCore.ByCompareSomatoType",
+                            "Target": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "ModifierOwnerEntity"
+                            },
+                            "SomatoTypes": [
+                              "LargeMonster",
+                              "LargeAvatar",
+                              "LargeFakeAvatar"
+                            ]
+                          },
+                          {
+                            "$type": "RPG.GameCore.ByCompareMonsterRank",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "ModifierOwnerEntity"
+                            },
+                            "CompareType": "Less",
+                            "CompareValue": 5
+                          }
+                        ]
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByAnd",
+                        "PredicateList": [
+                          {
+                            "$type": "RPG.GameCore.ByCharacterSomatoWidthType",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "ModifierOwnerEntity"
+                            },
+                            "SomatoWidthType": "Thin",
+                            "Inverse": true
+                          },
+                          {
+                            "$type": "RPG.GameCore.ByCompareMonsterRank",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "ModifierOwnerEntity"
+                            },
+                            "CompareType": "Less",
+                            "CompareValue": 5
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.RemoveEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_SuperArmor_Behit.prefab",
+                      "IsNeedFadeOut": false
+                    },
+                    {
+                      "$type": "RPG.GameCore.RemoveEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_SuperArmor_Behit1.prefab",
+                      "IsNeedFadeOut": false
+                    },
+                    {
+                      "$type": "RPG.GameCore.TriggerEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_SuperArmor_Behit.prefab"
+                    },
+                    {
+                      "$type": "RPG.GameCore.TriggerEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_SuperArmor_Behit1.prefab"
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByCompareMonsterRank",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "CompareType": "GreaterEqual",
+                        "CompareValue": 5
+                      }
+                    ]
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.RemoveEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_SuperArmor_Behit_Big.prefab",
+                      "IsNeedFadeOut": false
+                    },
+                    {
+                      "$type": "RPG.GameCore.RemoveEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_SuperArmor_Behit1.prefab",
+                      "IsNeedFadeOut": false
+                    },
+                    {
+                      "$type": "RPG.GameCore.TriggerEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_SuperArmor_Behit_Big.prefab"
+                    },
+                    {
+                      "$type": "RPG.GameCore.TriggerEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_SuperArmor_Behit1.prefab"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Event": "OnStack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.StackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "Property": "AllDamageReduce",
+              "PropertyValue": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    -1691921679
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "DynamicValues": {
+        "Values": {
+          "-1691921679": {}
+        }
+      }
+    },
+    "MCommon_SuperArmorBreak": {
+      "BehaviorFlagList": [
+        "STAT_SuperArmorBreak"
+      ],
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.TriggerEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_SuperArmor_Break.prefab"
+            },
+            {
+              "$type": "RPG.GameCore.RemoveModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ModifierName": "StanceBreakState_Effect"
+            },
+            {
+              "$type": "RPG.GameCore.ModifierAttachEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_SuperArmor_Break_Loop.prefab"
+            },
+            {
+              "$type": "RPG.GameCore.ModifierAttachEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_SuperArmor_Break_Loop1.prefab"
+            }
+          ]
+        },
+        {
+          "Event": "OnStack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.StackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "Property": "AllDamageTypeTakenRatio",
+              "PropertyValue": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    -1247013092
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Event": "OnModifierAdd",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCheckModifierCallBackName",
+                "ModifierName": "StanceBreakState_Effect"
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.RemoveModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "ModifierName": "StanceBreakState_Effect"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "DynamicValues": {
+        "Values": {
+          "-1247013092": {}
         }
       }
     }

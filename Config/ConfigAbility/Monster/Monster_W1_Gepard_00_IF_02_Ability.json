@@ -468,12 +468,6 @@
             "CompareType": "LessEqual",
             "CompareValue": 2
           },
-          "MaxNumber": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 4
-            }
-          },
           "TaskList": [
             {
               "$type": "RPG.GameCore.TriggerBreak",
@@ -782,7 +776,7 @@
               "$type": "RPG.GameCore.AddModifier",
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "AllTeamMember"
+                "Alias": "AllTeammate"
               },
               "ModifierName": "Monster_Common_WeakControl"
             },
@@ -982,12 +976,6 @@
                     "CompareType": "LessEqual",
                     "CompareValue": 2
                   },
-                  "MaxNumber": {
-                    "IsDynamic": false,
-                    "FixedValue": {
-                      "Value": 4
-                    }
-                  },
                   "TaskList": [
                     {
                       "$type": "RPG.GameCore.TriggerBreak",
@@ -1143,6 +1131,38 @@
                     "Alias": "ParamEntity"
                   },
                   "ModifierName": "MAvatar_Gepard_00_RL_ShieldPerformance"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Event": "OnBeingBreak",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.RemoveSelfModifier"
+            }
+          ]
+        },
+        {
+          "Event": "OnListenBreak",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareTarget",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "CompareType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "Caster"
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.RemoveSelfModifier"
                 }
               ]
             }

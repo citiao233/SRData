@@ -1977,13 +1977,147 @@
           }
         },
         {
+          "$type": "RPG.GameCore.Retarget",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "TauntOrRandomEnemy"
+          },
+          "MaxNumber": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          },
+          "TaskList": [
+            {
+              "$type": "RPG.GameCore.WaitSecond",
+              "WaitTime": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0.23
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.TriggerEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ParamEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_XP_Elite02_00/Eff_Monster_XP_Elite02_00_Skill06_Hit.prefab"
+            },
+            {
+              "$type": "RPG.GameCore.DamageByAttackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ParamEntity"
+              },
+              "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
+                "DamagePercentage": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAK",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      -1122549516
+                    ]
+                  }
+                },
+                "SPHitRatio": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 1
+                  }
+                },
+                "AttackType": "Normal",
+                "HitAnimation": "Hit",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_XP_Elite02_00/Eff_Monster_XP_Elite02_00_Skill06_Hit_E.prefab"
+              },
+              "SpecialHitSoundEvent": "Ev_sfx_monster_skill_06_hit_xp_elite02",
+              "CanTriggerLastKill": true,
+              "DisplayData": {
+                "UIMessageHeight": 0.8,
+                "DitherRangeX": 0.01,
+                "DitherRangeY": 0.04
+              }
+            },
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ParamEntity"
+              },
+              "ModifierName": "MCommon_DOT_Electric",
+              "LifeStepImmediately": true,
+              "StackingFlag": "CharacterSkill",
+              "Chance": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    1419898868
+                  ]
+                }
+              },
+              "LifeTime": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    -1126321383
+                  ]
+                }
+              },
+              "DynamicValues": {
+                "Modifier_Electric_DamagePercentage": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAK",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      -2019022130
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.VCameraConfigChange",
+              "CameraConfig": {
+                "ShakeConfigV2": {
+                  "ShakeRange": 0.12,
+                  "ShakeTime": 0.06,
+                  "ShakeDir": {
+                    "X": 0.07,
+                    "Y": 0,
+                    "Z": 0.07
+                  },
+                  "BaseCycle": 0.07,
+                  "CycleDamping": 0,
+                  "RangeAttenuation": 0.95
+                }
+              }
+            }
+          ]
+        },
+        {
           "$type": "RPG.GameCore.LoopExecuteTaskList",
           "MaxLoopCount": {
             "IsDynamic": true,
             "PostfixExpr": {
-              "OpCodes": "AQAK",
-              "FixedValues": [],
+              "OpCodes": "AQABAQkBAAADCg==",
+              "FixedValues": [
+                {
+                  "Value": 1
+                }
+              ],
               "DynamicHashes": [
+                -1226284721,
                 1382620039
               ]
             }
