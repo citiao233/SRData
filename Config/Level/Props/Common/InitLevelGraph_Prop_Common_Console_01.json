@@ -13,15 +13,15 @@
           "OverridedValidGuestConfig": {}
         },
         {
-          "$type": "RPG.GameCore.SelectorConfig",
-          "TaskList": [
+          "$type": "RPG.GameCore.GenericSwitchCase",
+          "SwitchRef": {
+            "$type": "RPG.GameCore.SwitchRefPropState"
+          },
+          "Cases": [
             {
-              "$type": "RPG.GameCore.PropStateExecute",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetFetchAdvPropEx"
-              },
-              "State": "Open",
-              "Execute": [
+              "$type": "RPG.GameCore.PropStateCaseContainer",
+              "Case": "Open",
+              "OnSuccess": [
                 {
                   "$type": "RPG.GameCore.EnableBillboard",
                   "TargetType": {
@@ -52,12 +52,9 @@
               ]
             },
             {
-              "$type": "RPG.GameCore.PropStateExecute",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetFetchAdvPropEx"
-              },
-              "State": "Locked",
-              "Execute": [
+              "$type": "RPG.GameCore.PropStateCaseContainer",
+              "Case": "Locked",
+              "OnSuccess": [
                 {
                   "$type": "RPG.GameCore.EnableBillboard",
                   "TargetType": {
@@ -90,11 +87,8 @@
               ]
             },
             {
-              "$type": "RPG.GameCore.PropStateExecute",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetFetchAdvPropEx"
-              },
-              "Execute": [
+              "$type": "RPG.GameCore.PropStateCaseContainer",
+              "OnSuccess": [
                 {
                   "$type": "RPG.GameCore.EnableBillboard",
                   "TargetType": {
@@ -140,15 +134,15 @@
           "ButtonName": "Interact",
           "OnPressedCallback": [
             {
-              "$type": "RPG.GameCore.SelectorConfig",
-              "TaskList": [
+              "$type": "RPG.GameCore.GenericSwitchCase",
+              "SwitchRef": {
+                "$type": "RPG.GameCore.SwitchRefPropState"
+              },
+              "Cases": [
                 {
-                  "$type": "RPG.GameCore.PropStateExecute",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetFetchAdvPropEx"
-                  },
-                  "State": "Locked",
-                  "Execute": [
+                  "$type": "RPG.GameCore.PropStateCaseContainer",
+                  "Case": "Locked",
+                  "OnSuccess": [
                     {
                       "$type": "RPG.GameCore.ToastPile",
                       "DescTextID": {
@@ -158,11 +152,8 @@
                   ]
                 },
                 {
-                  "$type": "RPG.GameCore.PropStateExecute",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetFetchAdvPropEx"
-                  },
-                  "Execute": [
+                  "$type": "RPG.GameCore.PropStateCaseContainer",
+                  "OnSuccess": [
                     {
                       "$type": "RPG.GameCore.TriggerEntityEvent",
                       "EventName": {
@@ -257,24 +248,21 @@
     {
       "TaskList": [
         {
-          "$type": "RPG.GameCore.LoopWaitEntityServerEvent",
-          "TaskEnabled": true
+          "$type": "RPG.GameCore.LoopWaitEntityServerEvent"
         }
       ]
     },
     {
       "TaskList": [
         {
-          "$type": "RPG.GameCore.LoopWaitEntityServerEvent",
-          "TaskEnabled": true
+          "$type": "RPG.GameCore.LoopWaitEntityServerEvent"
         }
       ]
     },
     {
       "TaskList": [
         {
-          "$type": "RPG.GameCore.LoopWaitEntityServerEvent",
-          "TaskEnabled": true
+          "$type": "RPG.GameCore.LoopWaitEntityServerEvent"
         }
       ]
     },
@@ -288,36 +276,33 @@
           },
           "OnEvent": [
             {
-              "$type": "RPG.GameCore.SelectorConfig",
-              "TaskList": [
+              "$type": "RPG.GameCore.GenericSwitchCase",
+              "SwitchRef": {
+                "$type": "RPG.GameCore.SwitchRefPropState"
+              },
+              "Cases": [
                 {
-                  "$type": "RPG.GameCore.PropStateExecute",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetFetchAdvPropEx"
-                  },
-                  "Execute": [
-                    {
-                      "$type": "RPG.GameCore.AdvClientChangePropState",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetFetchAdvPropEx"
-                      },
-                      "ToState": "Locked"
-                    }
-                  ]
-                },
-                {
-                  "$type": "RPG.GameCore.PropStateExecute",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetFetchAdvPropEx"
-                  },
-                  "State": "Open",
-                  "Execute": [
+                  "$type": "RPG.GameCore.PropStateCaseContainer",
+                  "Case": "Open",
+                  "OnSuccess": [
                     {
                       "$type": "RPG.GameCore.AdvClientChangePropState",
                       "TargetType": {
                         "$type": "RPG.GameCore.TargetFetchAdvPropEx"
                       },
                       "FromState": "Open",
+                      "ToState": "Locked"
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.PropStateCaseContainer",
+                  "OnSuccess": [
+                    {
+                      "$type": "RPG.GameCore.AdvClientChangePropState",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+                      },
                       "ToState": "Locked"
                     }
                   ]
@@ -344,15 +329,15 @@
           },
           "OnEvent": [
             {
-              "$type": "RPG.GameCore.SelectorConfig",
-              "TaskList": [
+              "$type": "RPG.GameCore.GenericSwitchCase",
+              "SwitchRef": {
+                "$type": "RPG.GameCore.SwitchRefPropState"
+              },
+              "Cases": [
                 {
-                  "$type": "RPG.GameCore.PropStateExecute",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetFetchAdvPropEx"
-                  },
-                  "State": "Open",
-                  "Execute": [
+                  "$type": "RPG.GameCore.PropStateCaseContainer",
+                  "Case": "Open",
+                  "OnSuccess": [
                     {
                       "$type": "RPG.GameCore.AdvClientChangePropState",
                       "TargetType": {
@@ -363,12 +348,9 @@
                   ]
                 },
                 {
-                  "$type": "RPG.GameCore.PropStateExecute",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetFetchAdvPropEx"
-                  },
-                  "State": "Locked",
-                  "Execute": [
+                  "$type": "RPG.GameCore.PropStateCaseContainer",
+                  "Case": "Locked",
+                  "OnSuccess": [
                     {
                       "$type": "RPG.GameCore.AdvClientChangePropState",
                       "TargetType": {
@@ -400,14 +382,14 @@
           },
           "OnEvent": [
             {
-              "$type": "RPG.GameCore.SelectorConfig",
-              "TaskList": [
+              "$type": "RPG.GameCore.GenericSwitchCase",
+              "SwitchRef": {
+                "$type": "RPG.GameCore.SwitchRefPropState"
+              },
+              "Cases": [
                 {
-                  "$type": "RPG.GameCore.PropStateExecute",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetFetchAdvPropEx"
-                  },
-                  "Execute": [
+                  "$type": "RPG.GameCore.PropStateCaseContainer",
+                  "OnSuccess": [
                     {
                       "$type": "RPG.GameCore.AdvClientChangePropState",
                       "TargetType": {
@@ -418,12 +400,9 @@
                   ]
                 },
                 {
-                  "$type": "RPG.GameCore.PropStateExecute",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetFetchAdvPropEx"
-                  },
-                  "State": "Locked",
-                  "Execute": [
+                  "$type": "RPG.GameCore.PropStateCaseContainer",
+                  "Case": "Locked",
+                  "OnSuccess": [
                     {
                       "$type": "RPG.GameCore.AdvClientChangePropState",
                       "TargetType": {
@@ -556,14 +535,14 @@
           },
           "OnEvent": [
             {
-              "$type": "RPG.GameCore.SelectorConfig",
-              "TaskList": [
+              "$type": "RPG.GameCore.GenericSwitchCase",
+              "SwitchRef": {
+                "$type": "RPG.GameCore.SwitchRefPropState"
+              },
+              "Cases": [
                 {
-                  "$type": "RPG.GameCore.PropStateExecute",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetFetchAdvPropEx"
-                  },
-                  "Execute": [
+                  "$type": "RPG.GameCore.PropStateCaseContainer",
+                  "OnSuccess": [
                     {
                       "$type": "RPG.GameCore.TriggerEntityEvent",
                       "EventName": {
@@ -579,12 +558,9 @@
                   ]
                 },
                 {
-                  "$type": "RPG.GameCore.PropStateExecute",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetFetchAdvPropEx"
-                  },
-                  "State": "Open",
-                  "Execute": [
+                  "$type": "RPG.GameCore.PropStateCaseContainer",
+                  "Case": "Open",
+                  "OnSuccess": [
                     {
                       "$type": "RPG.GameCore.TriggerEntityEvent",
                       "EventName": {
@@ -600,12 +576,9 @@
                   ]
                 },
                 {
-                  "$type": "RPG.GameCore.PropStateExecute",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetFetchAdvPropEx"
-                  },
-                  "State": "Locked",
-                  "Execute": [
+                  "$type": "RPG.GameCore.PropStateCaseContainer",
+                  "Case": "Locked",
+                  "OnSuccess": [
                     {
                       "$type": "RPG.GameCore.TriggerEntityEvent",
                       "EventName": {
@@ -771,24 +744,21 @@
     {
       "TaskList": [
         {
-          "$type": "RPG.GameCore.LoopWaitServerPropStateChange",
-          "TaskEnabled": true
+          "$type": "RPG.GameCore.LoopWaitServerPropStateChange"
         }
       ]
     },
     {
       "TaskList": [
         {
-          "$type": "RPG.GameCore.LoopWaitServerPropStateChange",
-          "TaskEnabled": true
+          "$type": "RPG.GameCore.LoopWaitServerPropStateChange"
         }
       ]
     },
     {
       "TaskList": [
         {
-          "$type": "RPG.GameCore.LoopWaitServerPropStateChange",
-          "TaskEnabled": true
+          "$type": "RPG.GameCore.LoopWaitServerPropStateChange"
         }
       ]
     },

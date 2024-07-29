@@ -4,8 +4,7 @@
       "Modifiers": {
         "MModifier_Monster_W3_Dinosaur_00_MuteHitFly": {
           "BehaviorFlagList": [
-            "MuteHitFly",
-            "KeepOnDeathrattle"
+            "MuteHitFly"
           ]
         }
       },
@@ -91,11 +90,124 @@
     },
     {
       "Modifiers": {
+        "MModifier_Monster_W3_Dinosaur_00_MuteHitFly": {
+          "BehaviorFlagList": [
+            "MuteHitFly"
+          ]
+        },
+        "MModifier_Monster_W3_Dinosaur_00_IF": {
+          "_CallbackList": [
+            {
+              "Event": "OnModifierAdd",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCheckModifierCallBackName",
+                    "ModifierName": "OneMorePerTurn"
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.RemoveModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "ModifierName": "OneMorePerTurn"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "Name": "Monster_W3_Dinosaur_00_RLElite_PassiveSkillInitiate_IF",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "MModifier_Monster_W3_Dinosaur_00_Attack_Listener"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "MModifier_Monster_W3_Dinosaur_00_IF"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "MModifier_Monster_W3_Dinosaur_00_DOT_Listener"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "MModifier_Monster_W3_Dinosaur_00_Break_Listener"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "MModifier_Monster_W3_Dinosaur_00_Calm"
+        },
+        {
+          "$type": "RPG.GameCore.SetAttachmentScale",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AttachPoints": [
+            {
+              "Name": "Lighter"
+            }
+          ],
+          "Scale": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          }
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "W3_Dinosaur_00_BattleScore1"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "MModifier_Monster_W3_Dinosaur_00_MuteHitFly"
+        }
+      ]
+    },
+    {
+      "Modifiers": {
         "MModifier_Monster_W3_Dinosaur_00_RLElite": {},
         "MModifier_Monster_W3_Dinosaur_00_MuteHitFly": {
           "BehaviorFlagList": [
-            "MuteHitFly",
-            "KeepOnDeathrattle"
+            "MuteHitFly"
           ]
         }
       },
@@ -331,6 +443,7 @@
             "Alias": "AbilityTargetEntity"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Fire"
             },
@@ -547,6 +660,7 @@
             "Alias": "AbilityTargetEntity"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Fire"
             },
@@ -583,6 +697,7 @@
             "Alias": "AbilityTargetAdjoinEntity"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Fire"
             },
@@ -975,13 +1090,13 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "ModifierOwnerEntity"
           },
-          "DynamicKey": "Vibrate_Count",
           "Value": {
             "IsDynamic": false,
             "FixedValue": {
               "Value": 0
             }
-          }
+          },
+          "DynamicKey": "Vibrate_Count"
         },
         {
           "$type": "RPG.GameCore.RemoveModifier",
@@ -1211,6 +1326,7 @@
             "Alias": "AllEnemy"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Fire"
             },
@@ -1272,6 +1388,7 @@
             "Alias": "AllEnemy"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Fire"
             },
@@ -1323,6 +1440,7 @@
             "Alias": "AllEnemy"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Fire"
             },
@@ -1687,6 +1805,7 @@
             "Alias": "AllEnemy"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Fire"
             },
@@ -1748,6 +1867,7 @@
             "Alias": "AllEnemy"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Fire"
             },
@@ -1799,6 +1919,7 @@
             "Alias": "AllEnemy"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Fire"
             },
@@ -2059,6 +2180,7 @@
             "Alias": "AllTeammate"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Fire"
             },
@@ -2091,6 +2213,7 @@
             "Alias": "Caster"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Fire"
             },
@@ -2563,6 +2686,7 @@
             "Alias": "AllTeammate"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Fire"
             },
@@ -2595,6 +2719,7 @@
             "Alias": "Caster"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Fire"
             },
@@ -2707,20 +2832,48 @@
               "ModifierName": "OneMore"
             },
             {
-              "$type": "RPG.GameCore.RemoveModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "Caster"
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "Caster"
+                    },
+                    "Flag": "Break",
+                    "Inverse": true
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "Caster"
+                    },
+                    "Flag": "STAT_CTRL",
+                    "Inverse": true
+                  }
+                ]
               },
-              "ModifierName": "MModifier_Monster_W3_Dinosaur_00_Fury"
-            },
-            {
-              "$type": "RPG.GameCore.AddModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "Caster"
-              },
-              "ModifierName": "MModifier_Monster_W3_Dinosaur_00_Calm"
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.RemoveModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "MModifier_Monster_W3_Dinosaur_00_Fury"
+                },
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "MModifier_Monster_W3_Dinosaur_00_Calm"
+                }
+              ]
             },
             {
               "$type": "RPG.GameCore.RemoveModifier",
@@ -2759,7 +2912,117 @@
               "WaitTime": {
                 "IsDynamic": false,
                 "FixedValue": {
-                  "Value": 2.667
+                  "Value": 1
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAny",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "Caster"
+                    },
+                    "Flag": "Break"
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "Caster"
+                    },
+                    "Flag": "STAT_CTRL"
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.TriggerAnimState",
+                  "AnimStateName": "Stagger",
+                  "NormalizedTransitionDuration": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0.3
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "MModifier_Monster_W3_Dinosaur_00_DOT_Listener"
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "MModifier_Monster_W3_Dinosaur_00_Attack_Listener"
+                },
+                {
+                  "$type": "RPG.GameCore.DefineDynamicValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "DynamicKey": "Vibrate_Count",
+                  "ContextScope": "TargetEntity"
+                },
+                {
+                  "$type": "RPG.GameCore.DefineDynamicValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "DynamicKey": "Crazy_Flag",
+                  "ContextScope": "TargetEntity"
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "MModifier_Monster_W3_Dinosaur_00_AttackUpRatio"
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "MModifier_Monster_W3_Dinosaur_00_AttackUpRatio"
+                },
+                {
+                  "$type": "RPG.GameCore.TriggerEnergyBarEffect"
+                },
+                {
+                  "$type": "RPG.GameCore.SetMonsterEnergyBarState",
+                  "Active": "False"
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "W1_Mecha02_AttackBuff_Effect"
+                }
+              ]
+            },
+            {
+              "$type": "RPG.GameCore.WaitSecond",
+              "WaitTime": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1.667
                 }
               }
             },
@@ -2772,30 +3035,58 @@
               "ModifierName": "Monster_APShow"
             },
             {
-              "$type": "RPG.GameCore.AddModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "Caster"
-              },
-              "ModifierName": "MModifier_Monster_W3_Dinosaur_00_MonsterEnergyBar",
-              "DynamicValues": {
-                "MDF_MaxCount": {
-                  "IsDynamic": true,
-                  "PostfixExpr": {
-                    "OpCodes": "AQAK",
-                    "FixedValues": [],
-                    "DynamicHashes": [
-                      -1984939615
-                    ]
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "Caster"
+                    },
+                    "Flag": "Break",
+                    "Inverse": true
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "Caster"
+                    },
+                    "Flag": "STAT_CTRL",
+                    "Inverse": true
                   }
-                },
-                "MDF_PhaseFlag": {
-                  "IsDynamic": false,
-                  "FixedValue": {
-                    "Value": 0
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "MModifier_Monster_W3_Dinosaur_00_MonsterEnergyBar",
+                  "DynamicValues": {
+                    "MDF_MaxCount": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          -1984939615
+                        ]
+                      }
+                    },
+                    "MDF_PhaseFlag": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    }
                   }
                 }
-              }
+              ]
             }
           ]
         }
@@ -3052,13 +3343,13 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "ModifierOwnerEntity"
           },
-          "DynamicKey": "Vibrate_Count",
           "Value": {
             "IsDynamic": false,
             "FixedValue": {
               "Value": 0
             }
-          }
+          },
+          "DynamicKey": "Vibrate_Count"
         },
         {
           "$type": "RPG.GameCore.RemoveModifier",
@@ -3435,13 +3726,13 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "ModifierOwnerEntity"
           },
-          "DynamicKey": "Vibrate_Count",
           "Value": {
             "IsDynamic": false,
             "FixedValue": {
               "Value": 0
             }
-          }
+          },
+          "DynamicKey": "Vibrate_Count"
         },
         {
           "$type": "RPG.GameCore.RemoveModifier",
@@ -3881,6 +4172,7 @@
             "Alias": "AllEnemy"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Fire"
             },
@@ -3942,6 +4234,7 @@
             "Alias": "AllEnemy"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Fire"
             },
@@ -3993,6 +4286,7 @@
             "Alias": "AllEnemy"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Fire"
             },
@@ -4122,13 +4416,13 @@
         },
         {
           "$type": "RPG.GameCore.SetDynamicValue",
-          "DynamicKey": "AIFlag",
           "Value": {
             "IsDynamic": false,
             "FixedValue": {
               "Value": 8
             }
-          }
+          },
+          "DynamicKey": "AIFlag"
         },
         {
           "$type": "RPG.GameCore.SkillPerformFinish"
@@ -4299,6 +4593,7 @@
             "Alias": "AllTeammate"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Fire"
             },
@@ -4331,6 +4626,7 @@
             "Alias": "Caster"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Fire"
             },
@@ -4697,6 +4993,7 @@
             "Alias": "AllTeammate"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Fire"
             },
@@ -4729,6 +5026,7 @@
             "Alias": "Caster"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Fire"
             },
@@ -5070,7 +5368,6 @@
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetDynamicValue",
-              "DynamicKey": "MDF_PropertyValue",
               "Value": {
                 "IsDynamic": true,
                 "PostfixExpr": {
@@ -5080,7 +5377,8 @@
                     -391359801
                   ]
                 }
-              }
+              },
+              "DynamicKey": "MDF_PropertyValue"
             }
           ]
         }
@@ -6746,146 +7044,186 @@
           "Event": "OnBeingBreak",
           "CallbackConfig": [
             {
-              "$type": "RPG.GameCore.RemoveModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "Caster"
-              },
-              "ModifierName": "MModifier_Monster_W3_Dinosaur_00_DOT_Listener"
-            },
-            {
-              "$type": "RPG.GameCore.RemoveModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "Caster"
-              },
-              "ModifierName": "MModifier_Monster_W3_Dinosaur_00_Attack_Listener"
-            },
-            {
-              "$type": "RPG.GameCore.DefineDynamicValue",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "Caster"
-              },
-              "DynamicKey": "Vibrate_Count",
-              "ContextScope": "TargetEntity"
-            },
-            {
-              "$type": "RPG.GameCore.DefineDynamicValue",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "Caster"
-              },
-              "DynamicKey": "Crazy_Flag",
-              "ContextScope": "TargetEntity"
-            },
-            {
-              "$type": "RPG.GameCore.RemoveModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "Caster"
-              },
-              "ModifierName": "MModifier_Monster_W3_Dinosaur_00_AttackUpRatio"
-            },
-            {
-              "$type": "RPG.GameCore.RemoveModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "Caster"
-              },
-              "ModifierName": "MModifier_Monster_W3_Dinosaur_00_AttackUpRatio"
-            },
-            {
-              "$type": "RPG.GameCore.TriggerEnergyBarEffect"
-            },
-            {
-              "$type": "RPG.GameCore.SetMonsterEnergyBarState",
-              "Active": "False"
-            },
-            {
-              "$type": "RPG.GameCore.RemoveModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "Caster"
-              },
-              "ModifierName": "MModifier_Monster_W3_Dinosaur_00_Effect_Fire1"
-            },
-            {
-              "$type": "RPG.GameCore.RemoveModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "Caster"
-              },
-              "ModifierName": "MModifier_Monster_W3_Dinosaur_00_Effect_Fire2"
-            },
-            {
-              "$type": "RPG.GameCore.RemoveModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "Caster"
-              },
-              "ModifierName": "MModifier_Monster_W3_Dinosaur_00_Effect_Fire3"
-            },
-            {
-              "$type": "RPG.GameCore.RemoveModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "Caster"
-              },
-              "ModifierName": "MModifier_Monster_W3_Dinosaur_00_Effect_Smoke3"
-            },
-            {
-              "$type": "RPG.GameCore.RemoveModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "ModifierName": "MModifier_Monster_W3_Dinosaur_00_Calm"
-            },
-            {
-              "$type": "RPG.GameCore.RemoveModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "ModifierName": "MModifier_Monster_W3_Dinosaur_00_Fury"
-            },
-            {
               "$type": "RPG.GameCore.PredicateTaskList",
               "Predicate": {
-                "$type": "RPG.GameCore.ByIsContainModifier",
-                "TargetType": {
-                  "$type": "RPG.GameCore.TargetAlias",
-                  "Alias": "ParamEntity"
-                },
-                "ModifierName": "OneMorePerTurn"
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "DynamicKey": "Vibrate_Count",
+                    "CompareType": "GreaterEqual",
+                    "CompareValue": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAAAAMK",
+                        "FixedValues": [
+                          {
+                            "Value": 1
+                          }
+                        ],
+                        "DynamicHashes": [
+                          -1699655567
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "DynamicKey": "Crazy_Flag",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 1
+                      }
+                    }
+                  }
+                ]
               },
-              "SuccessTaskList": [
+              "FailedTaskList": [
                 {
-                  "$type": "RPG.GameCore.AddModifier",
+                  "$type": "RPG.GameCore.RemoveModifier",
                   "TargetType": {
                     "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
+                    "Alias": "Caster"
                   },
-                  "ModifierName": "OneMorePerTurn"
+                  "ModifierName": "MModifier_Monster_W3_Dinosaur_00_DOT_Listener"
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "MModifier_Monster_W3_Dinosaur_00_Attack_Listener"
+                },
+                {
+                  "$type": "RPG.GameCore.DefineDynamicValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "DynamicKey": "Vibrate_Count",
+                  "ContextScope": "TargetEntity"
+                },
+                {
+                  "$type": "RPG.GameCore.DefineDynamicValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "DynamicKey": "Crazy_Flag",
+                  "ContextScope": "TargetEntity"
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "MModifier_Monster_W3_Dinosaur_00_AttackUpRatio"
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "MModifier_Monster_W3_Dinosaur_00_AttackUpRatio"
+                },
+                {
+                  "$type": "RPG.GameCore.TriggerEnergyBarEffect"
+                },
+                {
+                  "$type": "RPG.GameCore.SetMonsterEnergyBarState",
+                  "Active": "False"
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "MModifier_Monster_W3_Dinosaur_00_Effect_Fire1"
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "MModifier_Monster_W3_Dinosaur_00_Effect_Fire2"
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "MModifier_Monster_W3_Dinosaur_00_Effect_Fire3"
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "MModifier_Monster_W3_Dinosaur_00_Effect_Smoke3"
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "ModifierName": "MModifier_Monster_W3_Dinosaur_00_Calm"
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "ModifierName": "MModifier_Monster_W3_Dinosaur_00_Fury"
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByIsContainModifier",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "ModifierName": "OneMorePerTurn"
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "OneMorePerTurn"
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "Monster_APShow"
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "W1_Mecha02_AttackBuff_Effect"
                 }
               ]
-            },
-            {
-              "$type": "RPG.GameCore.RemoveModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "Caster"
-              },
-              "ModifierName": "Monster_APShow"
-            },
-            {
-              "$type": "RPG.GameCore.RemoveModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "Caster"
-              },
-              "ModifierName": "W1_Mecha02_AttackBuff_Effect"
             }
           ]
         },

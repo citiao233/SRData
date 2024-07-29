@@ -226,6 +226,7 @@
             "Alias": "AbilityTargetEntity"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Imaginary"
             },
@@ -290,6 +291,7 @@
             "Alias": "AbilityTargetEntity"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Imaginary"
             },
@@ -356,6 +358,7 @@
             "Alias": "AbilityTargetEntity"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Imaginary"
             },
@@ -760,13 +763,13 @@
           "FailedTaskList": [
             {
               "$type": "RPG.GameCore.SetDynamicValue",
-              "DynamicKey": "IsInserAbilityTrigger",
               "Value": {
                 "IsDynamic": false,
                 "FixedValue": {
                   "Value": 0
                 }
-              }
+              },
+              "DynamicKey": "IsInserAbilityTrigger"
             }
           ]
         }
@@ -1365,6 +1368,7 @@
             "Alias": "AllEnemy"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Imaginary"
             },
@@ -1416,13 +1420,13 @@
         },
         {
           "$type": "RPG.GameCore.SetDynamicValue",
-          "DynamicKey": "BuffNumber",
           "Value": {
             "IsDynamic": false,
             "FixedValue": {
               "Value": 0
             }
-          }
+          },
+          "DynamicKey": "BuffNumber"
         },
         {
           "$type": "RPG.GameCore.SkillPerformFinish"
@@ -1439,14 +1443,27 @@
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
                   "Predicate": {
-                    "$type": "RPG.GameCore.ByCompareParamValue",
-                    "CompareType": "Less",
-                    "CompareValue": {
-                      "IsDynamic": false,
-                      "FixedValue": {
-                        "Value": 0
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByCompareParamValue",
+                        "CompareType": "Less",
+                        "CompareValue": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 0
+                          }
+                        }
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByIsBattleEventEntity",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "Inverse": true
                       }
-                    }
+                    ]
                   },
                   "SuccessTaskList": [
                     {
@@ -1491,8 +1508,33 @@
                             {
                               "$type": "RPG.GameCore.Retarget",
                               "TargetType": {
-                                "$type": "RPG.GameCore.TargetAlias",
-                                "Alias": "AllTeamMember"
+                                "$type": "RPG.GameCore.TargetSequence",
+                                "Sequence": [
+                                  {
+                                    "$type": "RPG.GameCore.TargetConcat",
+                                    "Targets": [
+                                      {
+                                        "$type": "RPG.GameCore.TargetAlias",
+                                        "Alias": "AllTeammate"
+                                      },
+                                      {
+                                        "$type": "RPG.GameCore.TargetAlias",
+                                        "Alias": "Caster"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "$type": "RPG.GameCore.TargetFilter",
+                                    "Predicate": {
+                                      "$type": "RPG.GameCore.ByIsBattleEventEntity",
+                                      "TargetType": {
+                                        "$type": "RPG.GameCore.TargetAlias",
+                                        "Alias": "ParamEntity"
+                                      },
+                                      "Inverse": true
+                                    }
+                                  }
+                                ]
                               },
                               "Predicate": {
                                 "$type": "RPG.GameCore.ByAnd",
@@ -1504,8 +1546,33 @@
                                       "Alias": "ParamEntity"
                                     },
                                     "CompareTargetType": {
-                                      "$type": "RPG.GameCore.TargetAlias",
-                                      "Alias": "AllTeamMember"
+                                      "$type": "RPG.GameCore.TargetSequence",
+                                      "Sequence": [
+                                        {
+                                          "$type": "RPG.GameCore.TargetConcat",
+                                          "Targets": [
+                                            {
+                                              "$type": "RPG.GameCore.TargetAlias",
+                                              "Alias": "AllTeammate"
+                                            },
+                                            {
+                                              "$type": "RPG.GameCore.TargetAlias",
+                                              "Alias": "Caster"
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "$type": "RPG.GameCore.TargetFilter",
+                                          "Predicate": {
+                                            "$type": "RPG.GameCore.ByIsBattleEventEntity",
+                                            "TargetType": {
+                                              "$type": "RPG.GameCore.TargetAlias",
+                                              "Alias": "ParamEntity"
+                                            },
+                                            "Inverse": true
+                                          }
+                                        }
+                                      ]
                                     },
                                     "PropertyRatioType": "HPRatio"
                                   },
@@ -1522,9 +1589,18 @@
                                         "Value": 0
                                       }
                                     }
+                                  },
+                                  {
+                                    "$type": "RPG.GameCore.ByIsBattleEventEntity",
+                                    "TargetType": {
+                                      "$type": "RPG.GameCore.TargetAlias",
+                                      "Alias": "ParamEntity"
+                                    },
+                                    "Inverse": true
                                   }
                                 ]
                               },
+                              "ByRandom": true,
                               "MaxNumber": {
                                 "IsDynamic": false,
                                 "FixedValue": {
@@ -1618,13 +1694,13 @@
                     },
                     {
                       "$type": "RPG.GameCore.SetDynamicValue",
-                      "DynamicKey": "IsInserAbilityTrigger",
                       "Value": {
                         "IsDynamic": false,
                         "FixedValue": {
                           "Value": 0
                         }
-                      }
+                      },
+                      "DynamicKey": "IsInserAbilityTrigger"
                     },
                     {
                       "$type": "RPG.GameCore.PredicateTaskList",
@@ -1735,8 +1811,33 @@
                 {
                   "$type": "RPG.GameCore.Retarget",
                   "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "AllTeamMember"
+                    "$type": "RPG.GameCore.TargetSequence",
+                    "Sequence": [
+                      {
+                        "$type": "RPG.GameCore.TargetConcat",
+                        "Targets": [
+                          {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "AllTeammate"
+                          },
+                          {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "Caster"
+                          }
+                        ]
+                      },
+                      {
+                        "$type": "RPG.GameCore.TargetFilter",
+                        "Predicate": {
+                          "$type": "RPG.GameCore.ByIsBattleEventEntity",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "Inverse": true
+                        }
+                      }
+                    ]
                   },
                   "Predicate": {
                     "$type": "RPG.GameCore.ByAnd",
@@ -1748,8 +1849,33 @@
                           "Alias": "ParamEntity"
                         },
                         "CompareTargetType": {
-                          "$type": "RPG.GameCore.TargetAlias",
-                          "Alias": "AllTeamMember"
+                          "$type": "RPG.GameCore.TargetSequence",
+                          "Sequence": [
+                            {
+                              "$type": "RPG.GameCore.TargetConcat",
+                              "Targets": [
+                                {
+                                  "$type": "RPG.GameCore.TargetAlias",
+                                  "Alias": "AllTeammate"
+                                },
+                                {
+                                  "$type": "RPG.GameCore.TargetAlias",
+                                  "Alias": "Caster"
+                                }
+                              ]
+                            },
+                            {
+                              "$type": "RPG.GameCore.TargetFilter",
+                              "Predicate": {
+                                "$type": "RPG.GameCore.ByIsBattleEventEntity",
+                                "TargetType": {
+                                  "$type": "RPG.GameCore.TargetAlias",
+                                  "Alias": "ParamEntity"
+                                },
+                                "Inverse": true
+                              }
+                            }
+                          ]
                         },
                         "PropertyRatioType": "HPRatio"
                       },
@@ -1769,7 +1895,6 @@
                       }
                     ]
                   },
-                  "ByRandom": false,
                   "MaxNumber": {
                     "IsDynamic": false,
                     "FixedValue": {
@@ -1862,7 +1987,7 @@
           "Active": "True",
           "BarType": 2,
           "CurrentState": "Normal",
-          "IconPath": "SpriteOutput/BuffIcon/Inlevel/Icon1203Passive.png",
+          "IconPath": "SpriteOutput/BuffIcon/Inlevel/Avatar/Icon1203Passive.png",
           "MaxCount": {
             "IsDynamic": false,
             "FixedValue": {
@@ -1898,13 +2023,13 @@
         },
         {
           "$type": "RPG.GameCore.SetDynamicValue",
-          "DynamicKey": "IsInserAbilityTrigger",
           "Value": {
             "IsDynamic": false,
             "FixedValue": {
               "Value": 0
             }
-          }
+          },
+          "DynamicKey": "IsInserAbilityTrigger"
         }
       ],
       "Name": "Avatar_Luocha_00_Skill02_InsertAbility",
@@ -1914,13 +2039,13 @@
       "OnStart": [
         {
           "$type": "RPG.GameCore.SetDynamicValue",
-          "DynamicKey": "IsInserAbilityTrigger",
           "Value": {
             "IsDynamic": false,
             "FixedValue": {
               "Value": 1
             }
-          }
+          },
+          "DynamicKey": "IsInserAbilityTrigger"
         },
         {
           "$type": "RPG.GameCore.SetTeamFormation",
@@ -1930,8 +2055,33 @@
         {
           "$type": "RPG.GameCore.Retarget",
           "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AllTeamMember"
+            "$type": "RPG.GameCore.TargetSequence",
+            "Sequence": [
+              {
+                "$type": "RPG.GameCore.TargetConcat",
+                "Targets": [
+                  {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllTeammate"
+                  },
+                  {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  }
+                ]
+              },
+              {
+                "$type": "RPG.GameCore.TargetFilter",
+                "Predicate": {
+                  "$type": "RPG.GameCore.ByIsBattleEventEntity",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "Inverse": true
+                }
+              }
+            ]
           },
           "Predicate": {
             "$type": "RPG.GameCore.ByAnd",
@@ -1943,8 +2093,33 @@
                   "Alias": "ParamEntity"
                 },
                 "CompareTargetType": {
-                  "$type": "RPG.GameCore.TargetAlias",
-                  "Alias": "AllTeamMember"
+                  "$type": "RPG.GameCore.TargetSequence",
+                  "Sequence": [
+                    {
+                      "$type": "RPG.GameCore.TargetConcat",
+                      "Targets": [
+                        {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "AllTeammate"
+                        },
+                        {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "Caster"
+                        }
+                      ]
+                    },
+                    {
+                      "$type": "RPG.GameCore.TargetFilter",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByIsBattleEventEntity",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "Inverse": true
+                      }
+                    }
+                  ]
                 },
                 "PropertyRatioType": "HPRatio"
               },
@@ -1964,6 +2139,7 @@
               }
             ]
           },
+          "ByRandom": true,
           "MaxNumber": {
             "IsDynamic": false,
             "FixedValue": {
@@ -2096,13 +2272,13 @@
                 },
                 {
                   "$type": "RPG.GameCore.SetDynamicValue",
-                  "DynamicKey": "IsInserAbilityTrigger",
                   "Value": {
                     "IsDynamic": false,
                     "FixedValue": {
                       "Value": 0
                     }
-                  }
+                  },
+                  "DynamicKey": "IsInserAbilityTrigger"
                 }
               ]
             }

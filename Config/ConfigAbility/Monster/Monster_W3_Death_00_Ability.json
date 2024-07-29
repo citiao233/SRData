@@ -2,6 +2,123 @@
   "AbilityList": [
     {
       "Modifiers": {
+        "MMonster_W3_Death_00_ResetStageBGM": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValueByVariateType",
+                  "DynamicKey": "MDF_WaveIndex",
+                  "VariateType": "CurWaveIndex"
+                }
+              ]
+            },
+            {
+              "Event": "OnWaveMonster",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValueByVariateType",
+                  "DynamicKey": "MDF_WaveIndex2",
+                  "VariateType": "CurWaveIndex"
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "DynamicKey": "MDF_WaveIndex",
+                    "CompareType": "NotEqual",
+                    "CompareValue": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          -2056435799
+                        ]
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.ResetBattleBGMToStage",
+                      "ResetStateNames": [
+                        "State_Penocony_Combat_Death"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "DynamicValues": {
+            "Values": {
+              "354277359": {},
+              "-2056435799": {}
+            }
+          }
+        }
+      },
+      "Name": "Monster_W3_Death_00_PassiveSkill_BGM",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByAny",
+            "PredicateList": [
+              {
+                "$type": "RPG.GameCore.ByCompareStageType",
+                "CurrentStageType": "Challenge"
+              },
+              {
+                "$type": "RPG.GameCore.ByCompareStageType",
+                "CurrentStageType": "VerseSimulation"
+              },
+              {
+                "$type": "RPG.GameCore.ByCompareStageType",
+                "CurrentStageType": "StrongChallengeActivity"
+              },
+              {
+                "$type": "RPG.GameCore.ByCompareStageType",
+                "CurrentStageType": "RogueRelic"
+              }
+            ]
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.SetBattleBGMState",
+              "StateName": {
+                "Value": "State_Penocony_Combat_Death"
+              },
+              "InsertSpecial": true,
+              "DelayTime": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0
+                }
+              }
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "LevelEntity"
+          },
+          "ModifierName": "MMonster_W3_Death_00_ResetStageBGM"
+        }
+      ]
+    },
+    {
+      "Modifiers": {
         "MMonster_W3_Death_00_MainLine02_DeathControl": {
           "_CallbackList": [
             {
@@ -30,6 +147,7 @@
                       }
                     }
                   },
+                  "ByRandom": true,
                   "MaxNumber": {
                     "IsDynamic": false,
                     "FixedValue": {
@@ -43,7 +161,29 @@
                         "$type": "RPG.GameCore.TargetAlias",
                         "Alias": "ParamEntity"
                       },
-                      "ModifierName": "Death_Control_Modifier"
+                      "ModifierName": "Death_Control_Modifier",
+                      "DynamicValues": {
+                        "MDF_HealHPPercentage": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              -78306730
+                            ]
+                          }
+                        },
+                        "MDF_AddSPValue": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              1536492802
+                            ]
+                          }
+                        }
+                      }
                     }
                   ]
                 },
@@ -70,6 +210,7 @@
                       }
                     }
                   },
+                  "ByRandom": true,
                   "MaxNumber": {
                     "IsDynamic": false,
                     "FixedValue": {
@@ -83,7 +224,29 @@
                         "$type": "RPG.GameCore.TargetAlias",
                         "Alias": "ParamEntity"
                       },
-                      "ModifierName": "Death_Control_Modifier"
+                      "ModifierName": "Death_Control_Modifier",
+                      "DynamicValues": {
+                        "MDF_HealHPPercentage": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              -78306730
+                            ]
+                          }
+                        },
+                        "MDF_AddSPValue": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              1536492802
+                            ]
+                          }
+                        }
+                      }
                     }
                   ]
                 },
@@ -198,7 +361,6 @@
                         "$type": "RPG.GameCore.TargetAlias",
                         "Alias": "CasterSummonedMinions"
                       },
-                      "DynamicKey": "Owner_MaxHPCount",
                       "ContextScope": "TargetEntity",
                       "Value": {
                         "IsDynamic": true,
@@ -209,7 +371,8 @@
                             1914539696
                           ]
                         }
-                      }
+                      },
+                      "DynamicKey": "Owner_MaxHPCount"
                     }
                   ]
                 }
@@ -388,8 +551,7 @@
         },
         "Monster_W3_Death_00_MuteHitFly": {
           "BehaviorFlagList": [
-            "MuteHitFly",
-            "KeepOnDeathrattle"
+            "MuteHitFly"
           ]
         }
       },
@@ -889,6 +1051,7 @@
             "Alias": "AbilityTargetEntity"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Physical"
             },
@@ -1288,6 +1451,7 @@
             "Alias": "AllEnemy"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Wind"
             },
@@ -1803,7 +1967,6 @@
       "OnStart": [
         {
           "$type": "RPG.GameCore.SetDynamicValue",
-          "DynamicKey": "BonusAttackCounter",
           "Value": {
             "IsDynamic": true,
             "PostfixExpr": {
@@ -1817,7 +1980,8 @@
                 -1683287075
               ]
             }
-          }
+          },
+          "DynamicKey": "BonusAttackCounter"
         },
         {
           "$type": "RPG.GameCore.AddModifier",
@@ -2143,6 +2307,7 @@
             "Alias": "AbilityTargetEntity"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Physical"
             },
@@ -2671,6 +2836,7 @@
             },
             "ModifierName": "Modifier_W3_Death_00_Attack_Sign"
           },
+          "ByRandom": true,
           "MaxNumber": {
             "IsDynamic": false,
             "FixedValue": {
@@ -2685,6 +2851,7 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "AllEnemy"
               },
+              "ByRandom": true,
               "MaxNumber": {
                 "IsDynamic": false,
                 "FixedValue": {
@@ -2952,6 +3119,7 @@
             },
             "ModifierName": "Modifier_W3_Death_00_Attack_Sign"
           },
+          "ByRandom": true,
           "MaxNumber": {
             "IsDynamic": false,
             "FixedValue": {
@@ -2975,6 +3143,7 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "AllEnemy"
               },
+              "ByRandom": true,
               "MaxNumber": {
                 "IsDynamic": false,
                 "FixedValue": {
@@ -3030,6 +3199,7 @@
             },
             "ModifierName": "Modifier_W3_Death_00_Attack_Sign"
           },
+          "ByRandom": true,
           "MaxNumber": {
             "IsDynamic": false,
             "FixedValue": {
@@ -3052,6 +3222,7 @@
                 "Alias": "ParamEntity"
               },
               "AttackProperty": {
+                "$type": "RPG.GameCore.AttackData",
                 "DamageType": {
                   "DamageType": "Physical"
                 },
@@ -3493,7 +3664,6 @@
                         "$type": "RPG.GameCore.TargetAlias",
                         "Alias": "CasterSummonedMinions"
                       },
-                      "DynamicKey": "Owner_MaxHPCount",
                       "ContextScope": "TargetEntity",
                       "Value": {
                         "IsDynamic": true,
@@ -3504,7 +3674,8 @@
                             1914539696
                           ]
                         }
-                      }
+                      },
+                      "DynamicKey": "Owner_MaxHPCount"
                     }
                   ]
                 }
@@ -3726,13 +3897,13 @@
         },
         {
           "$type": "RPG.GameCore.SetDynamicValue",
-          "DynamicKey": "BonusAttackCounter",
           "Value": {
             "IsDynamic": false,
             "FixedValue": {
               "Value": 0
             }
-          }
+          },
+          "DynamicKey": "BonusAttackCounter"
         },
         {
           "$type": "RPG.GameCore.WaitAnimState",
@@ -3850,7 +4021,6 @@
         },
         {
           "$type": "RPG.GameCore.SetDynamicValue",
-          "DynamicKey": "BonusAttackCounter",
           "Value": {
             "IsDynamic": true,
             "PostfixExpr": {
@@ -3864,7 +4034,8 @@
                 -1683287075
               ]
             }
-          }
+          },
+          "DynamicKey": "BonusAttackCounter"
         },
         {
           "$type": "RPG.GameCore.PredicateTaskList",
@@ -4112,6 +4283,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "AllEnemy"
           },
+          "ByRandom": true,
           "MaxNumber": {
             "IsDynamic": false,
             "FixedValue": {
@@ -4143,6 +4315,7 @@
             },
             "ModifierName": "Modifier_W3_Death_00_Attack_Sign"
           },
+          "ByRandom": true,
           "MaxNumber": {
             "IsDynamic": false,
             "FixedValue": {
@@ -4203,6 +4376,7 @@
               }
             ]
           },
+          "ByRandom": true,
           "MaxNumber": {
             "IsDynamic": false,
             "FixedValue": {
@@ -4473,6 +4647,7 @@
             },
             "ModifierName": "Modifier_W3_Death_00_Attack_Sign"
           },
+          "ByRandom": true,
           "MaxNumber": {
             "IsDynamic": false,
             "FixedValue": {
@@ -4518,6 +4693,7 @@
             },
             "ModifierName": "Modifier_W3_Death_00_Attack_Sign"
           },
+          "ByRandom": true,
           "MaxNumber": {
             "IsDynamic": false,
             "FixedValue": {
@@ -4532,6 +4708,7 @@
                 "Alias": "ParamEntity"
               },
               "AttackProperty": {
+                "$type": "RPG.GameCore.AttackData",
                 "DamageType": {
                   "DamageType": "Physical"
                 },
@@ -4569,7 +4746,29 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "ParamEntity"
               },
-              "ModifierName": "Death_Control_Modifier_MainLine"
+              "ModifierName": "Death_Control_Modifier_MainLine",
+              "DynamicValues": {
+                "MDF_HealHPPercentage": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAK",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      -78306730
+                    ]
+                  }
+                },
+                "MDF_AddSPValue": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAK",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      1536492802
+                    ]
+                  }
+                }
+              }
             },
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -5145,13 +5344,13 @@
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetDynamicValue",
-              "DynamicKey": "BonusAttackCounter",
               "Value": {
                 "IsDynamic": false,
                 "FixedValue": {
                   "Value": 0
                 }
-              }
+              },
+              "DynamicKey": "BonusAttackCounter"
             },
             {
               "$type": "RPG.GameCore.RemoveModifier",
@@ -5759,6 +5958,7 @@
                 },
                 "ModifierName": "W3_Death_00_AddDeathSuccess"
               },
+              "ByRandom": true,
               "TaskList": [
                 {
                   "$type": "RPG.GameCore.RemoveModifier",
@@ -6094,7 +6294,29 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "ModifierOwnerEntity"
               },
-              "ModifierName": "Death_Control_Modifier"
+              "ModifierName": "Death_Control_Modifier",
+              "DynamicValues": {
+                "MDF_HealHPPercentage": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAK",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      -78306730
+                    ]
+                  }
+                },
+                "MDF_AddSPValue": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAK",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      1536492802
+                    ]
+                  }
+                }
+              }
             },
             {
               "$type": "RPG.GameCore.AddModifier",
@@ -6196,7 +6418,7 @@
                   "OpCodes": "AQAK",
                   "FixedValues": [],
                   "DynamicHashes": [
-                    1536492802
+                    276032797
                   ]
                 }
               }
@@ -6214,7 +6436,7 @@
                   "OpCodes": "AQAK",
                   "FixedValues": [],
                   "DynamicHashes": [
-                    -78306730
+                    2023560306
                   ]
                 }
               }
@@ -6284,7 +6506,10 @@
         }
       ],
       "DynamicValues": {
-        "Values": {}
+        "Values": {
+          "2023560306": {},
+          "276032797": {}
+        }
       }
     },
     "Death_Control_Modifier_MainLine": {
@@ -6347,7 +6572,7 @@
                   "OpCodes": "AQAK",
                   "FixedValues": [],
                   "DynamicHashes": [
-                    1536492802
+                    276032797
                   ]
                 }
               }
@@ -6365,7 +6590,7 @@
                   "OpCodes": "AQAK",
                   "FixedValues": [],
                   "DynamicHashes": [
-                    -78306730
+                    2023560306
                   ]
                 }
               }
@@ -6435,7 +6660,10 @@
         }
       ],
       "DynamicValues": {
-        "Values": {}
+        "Values": {
+          "2023560306": {},
+          "276032797": {}
+        }
       }
     },
     "M_Death_CTRL": {
@@ -6607,6 +6835,30 @@
                 "Alias": "ModifierOwnerEntity"
               },
               "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Death_00/Eff_Monster_W3_Death_00_Skill06_Hit.prefab"
+            }
+          ]
+        },
+        {
+          "Event": "OnListenCharacterDie",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareTarget",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "CompareType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "Caster"
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.RemoveSelfModifier"
+                }
+              ]
             }
           ]
         }

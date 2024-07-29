@@ -2,6 +2,123 @@
   "AbilityList": [
     {
       "Modifiers": {
+        "MMonster_W2_Argenti_00_ResetStageBGM": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValueByVariateType",
+                  "DynamicKey": "MDF_WaveIndex",
+                  "VariateType": "CurWaveIndex"
+                }
+              ]
+            },
+            {
+              "Event": "OnWaveMonster",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValueByVariateType",
+                  "DynamicKey": "MDF_WaveIndex2",
+                  "VariateType": "CurWaveIndex"
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "DynamicKey": "MDF_WaveIndex",
+                    "CompareType": "NotEqual",
+                    "CompareValue": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          -2056435799
+                        ]
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.ResetBattleBGMToStage",
+                      "ResetStateNames": [
+                        "State_Spacetrain_Combat_Argenti"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "DynamicValues": {
+            "Values": {
+              "354277359": {},
+              "-2056435799": {}
+            }
+          }
+        }
+      },
+      "Name": "Monster_W2_Argenti_00_PassiveSkill_BGM",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByAny",
+            "PredicateList": [
+              {
+                "$type": "RPG.GameCore.ByCompareStageType",
+                "CurrentStageType": "Challenge"
+              },
+              {
+                "$type": "RPG.GameCore.ByCompareStageType",
+                "CurrentStageType": "VerseSimulation"
+              },
+              {
+                "$type": "RPG.GameCore.ByCompareStageType",
+                "CurrentStageType": "StrongChallengeActivity"
+              },
+              {
+                "$type": "RPG.GameCore.ByCompareStageType",
+                "CurrentStageType": "RogueRelic"
+              }
+            ]
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.SetBattleBGMState",
+              "StateName": {
+                "Value": "State_Spacetrain_Combat_Argenti"
+              },
+              "InsertSpecial": true,
+              "DelayTime": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0
+                }
+              }
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "LevelEntity"
+          },
+          "ModifierName": "MMonster_W2_Argenti_00_ResetStageBGM"
+        }
+      ]
+    },
+    {
+      "Modifiers": {
         "Monster_W2_Argenti_00_Initiate": {
           "_CallbackList": [
             {
@@ -768,13 +885,13 @@
                   "SuccessTaskList": [
                     {
                       "$type": "RPG.GameCore.SetDynamicValue",
-                      "DynamicKey": "MDF_InsertCheck",
                       "Value": {
                         "IsDynamic": false,
                         "FixedValue": {
                           "Value": 1
                         }
-                      }
+                      },
+                      "DynamicKey": "MDF_InsertCheck"
                     },
                     {
                       "$type": "RPG.GameCore.TriggerAnimState",
@@ -1148,6 +1265,7 @@
             "Alias": "AbilityTargetEntity"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Physical"
             },
@@ -1351,6 +1469,7 @@
             "Alias": "AbilityTargetEntity"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Physical"
             },
@@ -1389,6 +1508,7 @@
             "Alias": "AbilityTargetAdjoinEntity"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Physical"
             },
@@ -1648,6 +1768,7 @@
                   }
                 }
               },
+              "ByRandom": true,
               "MaxNumber": {
                 "IsDynamic": false,
                 "FixedValue": {
@@ -1834,6 +1955,7 @@
                   }
                 }
               },
+              "ByRandom": true,
               "MaxNumber": {
                 "IsDynamic": false,
                 "FixedValue": {
@@ -2211,6 +2333,7 @@
               }
             ]
           },
+          "ByRandom": true,
           "MaxNumber": {
             "IsDynamic": false,
             "FixedValue": {
@@ -2329,6 +2452,7 @@
                   }
                 ]
               },
+              "ByRandom": true,
               "MaxNumber": {
                 "IsDynamic": false,
                 "FixedValue": {
@@ -2608,6 +2732,7 @@
             "Alias": "AllEnemy"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Physical"
             },
@@ -2662,6 +2787,7 @@
             "Alias": "AllEnemy"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Physical"
             },
@@ -2920,6 +3046,7 @@
               }
             }
           },
+          "ByRandom": true,
           "MaxNumber": {
             "IsDynamic": false,
             "FixedValue": {
@@ -3028,6 +3155,7 @@
               }
             }
           },
+          "ByRandom": true,
           "MaxNumber": {
             "IsDynamic": false,
             "FixedValue": {

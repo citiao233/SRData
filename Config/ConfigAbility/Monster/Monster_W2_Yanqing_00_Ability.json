@@ -1,6 +1,123 @@
 {
   "AbilityList": [
     {
+      "Modifiers": {
+        "MMonster_W2_Yanqing_00_ResetStageBGM": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValueByVariateType",
+                  "DynamicKey": "MDF_WaveIndex",
+                  "VariateType": "CurWaveIndex"
+                }
+              ]
+            },
+            {
+              "Event": "OnWaveMonster",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValueByVariateType",
+                  "DynamicKey": "MDF_WaveIndex2",
+                  "VariateType": "CurWaveIndex"
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "DynamicKey": "MDF_WaveIndex",
+                    "CompareType": "NotEqual",
+                    "CompareValue": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          -2056435799
+                        ]
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.ResetBattleBGMToStage",
+                      "ResetStateNames": [
+                        "State_Xianzhou_Combat_Yanqing"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "DynamicValues": {
+            "Values": {
+              "354277359": {},
+              "-2056435799": {}
+            }
+          }
+        }
+      },
+      "Name": "Monster_W2_Yanqing_00_PassiveSkill_BGM",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByAny",
+            "PredicateList": [
+              {
+                "$type": "RPG.GameCore.ByCompareStageType",
+                "CurrentStageType": "Challenge"
+              },
+              {
+                "$type": "RPG.GameCore.ByCompareStageType",
+                "CurrentStageType": "VerseSimulation"
+              },
+              {
+                "$type": "RPG.GameCore.ByCompareStageType",
+                "CurrentStageType": "StrongChallengeActivity"
+              },
+              {
+                "$type": "RPG.GameCore.ByCompareStageType",
+                "CurrentStageType": "RogueRelic"
+              }
+            ]
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.SetBattleBGMState",
+              "StateName": {
+                "Value": "State_Xianzhou_Combat_Yanqing"
+              },
+              "InsertSpecial": true,
+              "DelayTime": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0
+                }
+              }
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "LevelEntity"
+          },
+          "ModifierName": "MMonster_W2_Yanqing_00_ResetStageBGM"
+        }
+      ]
+    },
+    {
       "Name": "Monster_W2_Yanqing_00_Skill01_Phase01",
       "TargetInfo": {
         "TargetType": "SkillTargetEntityList"
@@ -116,6 +233,7 @@
             "Alias": "AbilityTargetEntity"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Ice"
             },
@@ -170,6 +288,7 @@
             "Alias": "AbilityTargetEntity"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Ice"
             },
@@ -582,6 +701,7 @@
                   }
                 }
               },
+              "ByRandom": true,
               "MaxNumber": {
                 "IsDynamic": false,
                 "FixedValue": {
@@ -622,6 +742,7 @@
                   }
                 }
               },
+              "ByRandom": true,
               "MaxNumber": {
                 "IsDynamic": false,
                 "FixedValue": {
@@ -668,6 +789,7 @@
                     "ModifierName": "MMonster_W2_Yanqing_00_Skill02_UnknownWeakPoint_Unrevealed",
                     "Inverse": true
                   },
+                  "ByRandom": true,
                   "MaxNumber": {
                     "IsDynamic": false,
                     "FixedValue": {
@@ -700,6 +822,7 @@
                     "ModifierName": "MMonster_W2_Yanqing_00_Skill02_UnknownWeakPoint_Unrevealed",
                     "Inverse": true
                   },
+                  "ByRandom": true,
                   "MaxNumber": {
                     "IsDynamic": false,
                     "FixedValue": {
@@ -732,6 +855,7 @@
                     "ModifierName": "MMonster_W2_Yanqing_00_Skill02_UnknownWeakPoint_Unrevealed",
                     "Inverse": true
                   },
+                  "ByRandom": true,
                   "MaxNumber": {
                     "IsDynamic": false,
                     "FixedValue": {
@@ -778,6 +902,7 @@
                         "ModifierName": "MMonster_W2_Yanqing_00_Skill02_UnknownWeakPoint_Unrevealed",
                         "Inverse": true
                       },
+                      "ByRandom": true,
                       "MaxNumber": {
                         "IsDynamic": false,
                         "FixedValue": {
@@ -810,6 +935,7 @@
                         "ModifierName": "MMonster_W2_Yanqing_00_Skill02_UnknownWeakPoint_Unrevealed",
                         "Inverse": true
                       },
+                      "ByRandom": true,
                       "MaxNumber": {
                         "IsDynamic": false,
                         "FixedValue": {
@@ -842,6 +968,7 @@
                         "ModifierName": "MMonster_W2_Yanqing_00_Skill02_UnknownWeakPoint_Unrevealed",
                         "Inverse": true
                       },
+                      "ByRandom": true,
                       "MaxNumber": {
                         "IsDynamic": false,
                         "FixedValue": {
@@ -876,6 +1003,7 @@
                         "ModifierName": "MMonster_W2_Yanqing_00_Skill02_UnknownWeakPoint_Unrevealed",
                         "Inverse": true
                       },
+                      "ByRandom": true,
                       "MaxNumber": {
                         "IsDynamic": false,
                         "FixedValue": {
@@ -908,6 +1036,7 @@
                         "ModifierName": "MMonster_W2_Yanqing_00_Skill02_UnknownWeakPoint_Unrevealed",
                         "Inverse": true
                       },
+                      "ByRandom": true,
                       "MaxNumber": {
                         "IsDynamic": false,
                         "FixedValue": {
@@ -940,6 +1069,7 @@
                         "ModifierName": "MMonster_W2_Yanqing_00_Skill02_UnknownWeakPoint_Unrevealed",
                         "Inverse": true
                       },
+                      "ByRandom": true,
                       "MaxNumber": {
                         "IsDynamic": false,
                         "FixedValue": {
@@ -965,13 +1095,13 @@
         },
         {
           "$type": "RPG.GameCore.SetDynamicValue",
-          "DynamicKey": "W2_Yanqing_00_Skill02_AccumulateRevealed",
           "Value": {
             "IsDynamic": false,
             "FixedValue": {
               "Value": 0
             }
-          }
+          },
+          "DynamicKey": "W2_Yanqing_00_Skill02_AccumulateRevealed"
         },
         {
           "$type": "RPG.GameCore.PredicateTaskList",
@@ -1879,6 +2009,7 @@
             "Alias": "AbilityTargetEntity"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Ice"
             },
@@ -1932,6 +2063,7 @@
             "Alias": "AbilityTargetEntity"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Ice"
             },
@@ -1983,6 +2115,7 @@
             "Alias": "AbilityTargetEntity"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Ice"
             },
@@ -2034,6 +2167,7 @@
             "Alias": "AbilityTargetEntity"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Ice"
             },
@@ -2085,6 +2219,7 @@
             "Alias": "AbilityTargetEntity"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Ice"
             },
@@ -2424,6 +2559,7 @@
             "Alias": "AbilityTargetEntity"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Ice"
             },
@@ -2466,6 +2602,7 @@
             "Alias": "AbilityTargetAdjoinEntity"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Ice"
             },
@@ -2521,6 +2658,7 @@
             "Alias": "AbilityTargetEntity"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Ice"
             },
@@ -2563,6 +2701,7 @@
             "Alias": "AbilityTargetAdjoinEntity"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Ice"
             },
@@ -2618,6 +2757,7 @@
             "Alias": "AbilityTargetEntity"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Ice"
             },
@@ -2661,6 +2801,7 @@
             "Alias": "AbilityTargetAdjoinEntity"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Ice"
             },
@@ -3179,6 +3320,7 @@
             "Alias": "AllEnemy"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Ice"
             },
@@ -3242,6 +3384,7 @@
             "Alias": "AllEnemy"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Ice"
             },
@@ -3305,6 +3448,7 @@
             "Alias": "AllEnemy"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Ice"
             },
@@ -3368,6 +3512,7 @@
             "Alias": "AllEnemy"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Ice"
             },
@@ -3431,6 +3576,7 @@
             "Alias": "AllEnemy"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Ice"
             },
@@ -3494,6 +3640,7 @@
             "Alias": "AllEnemy"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Ice"
             },
@@ -4192,6 +4339,7 @@
                           }
                         ]
                       },
+                      "ByRandom": true,
                       "TaskList": [
                         {
                           "$type": "RPG.GameCore.AddModifier",
@@ -4306,6 +4454,7 @@
                       }
                     ]
                   },
+                  "ByRandom": true,
                   "TaskList": [
                     {
                       "$type": "RPG.GameCore.AddModifier",
@@ -4384,6 +4533,7 @@
                       }
                     }
                   },
+                  "ByRandom": true,
                   "TaskList": [
                     {
                       "$type": "RPG.GameCore.AddModifier",
@@ -4414,6 +4564,7 @@
                       }
                     }
                   },
+                  "ByRandom": true,
                   "TaskList": [
                     {
                       "$type": "RPG.GameCore.AddModifier",
@@ -4668,6 +4819,7 @@
               }
             }
           },
+          "ByRandom": true,
           "TaskList": [
             {
               "$type": "RPG.GameCore.AddModifier",
@@ -5117,7 +5269,6 @@
                   "SuccessTaskList": [
                     {
                       "$type": "RPG.GameCore.SetDynamicValue",
-                      "DynamicKey": "W2_Yanqing_00_Skill02_AccumulateRevealed",
                       "Value": {
                         "IsDynamic": true,
                         "PostfixExpr": {
@@ -5131,7 +5282,8 @@
                             841051693
                           ]
                         }
-                      }
+                      },
+                      "DynamicKey": "W2_Yanqing_00_Skill02_AccumulateRevealed"
                     }
                   ],
                   "FailedTaskList": []
@@ -5316,7 +5468,6 @@
                   "SuccessTaskList": [
                     {
                       "$type": "RPG.GameCore.SetDynamicValue",
-                      "DynamicKey": "W2_Yanqing_00_Skill02_AccumulateRevealed",
                       "Value": {
                         "IsDynamic": true,
                         "PostfixExpr": {
@@ -5330,7 +5481,8 @@
                             841051693
                           ]
                         }
-                      }
+                      },
+                      "DynamicKey": "W2_Yanqing_00_Skill02_AccumulateRevealed"
                     }
                   ],
                   "FailedTaskList": []
@@ -7374,14 +7526,14 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "ModifierOwnerEntity"
               },
-              "DynamicKey": "EXSkill01",
               "ContextScope": "TargetEntity",
               "Value": {
                 "IsDynamic": false,
                 "FixedValue": {
                   "Value": 1
                 }
-              }
+              },
+              "DynamicKey": "EXSkill01"
             },
             {
               "$type": "RPG.GameCore.SetDynamicValue",
@@ -7389,14 +7541,14 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "ModifierOwnerEntity"
               },
-              "DynamicKey": "BPExChange",
               "ContextScope": "TargetEntity",
               "Value": {
                 "IsDynamic": false,
                 "FixedValue": {
                   "Value": 1
                 }
-              }
+              },
+              "DynamicKey": "BPExChange"
             },
             {
               "$type": "RPG.GameCore.SetEnergyBarState",
@@ -7471,14 +7623,14 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "ModifierOwnerEntity"
               },
-              "DynamicKey": "EXSkill01",
               "ContextScope": "TargetEntity",
               "Value": {
                 "IsDynamic": false,
                 "FixedValue": {
                   "Value": 2
                 }
-              }
+              },
+              "DynamicKey": "EXSkill01"
             },
             {
               "$type": "RPG.GameCore.SetDynamicValue",
@@ -7486,14 +7638,14 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "ModifierOwnerEntity"
               },
-              "DynamicKey": "BPExChange",
               "ContextScope": "TargetEntity",
               "Value": {
                 "IsDynamic": false,
                 "FixedValue": {
                   "Value": 2
                 }
-              }
+              },
+              "DynamicKey": "BPExChange"
             },
             {
               "$type": "RPG.GameCore.SetEnergyBarState",
@@ -7568,14 +7720,14 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "ModifierOwnerEntity"
               },
-              "DynamicKey": "EXSkill01",
               "ContextScope": "TargetEntity",
               "Value": {
                 "IsDynamic": false,
                 "FixedValue": {
                   "Value": 3
                 }
-              }
+              },
+              "DynamicKey": "EXSkill01"
             },
             {
               "$type": "RPG.GameCore.SetDynamicValue",
@@ -7583,14 +7735,14 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "ModifierOwnerEntity"
               },
-              "DynamicKey": "BPExChange",
               "ContextScope": "TargetEntity",
               "Value": {
                 "IsDynamic": false,
                 "FixedValue": {
                   "Value": 3
                 }
-              }
+              },
+              "DynamicKey": "BPExChange"
             },
             {
               "$type": "RPG.GameCore.SetEnergyBarState",
@@ -7995,10 +8147,6 @@
                 "PredicateList": [
                   {
                     "$type": "RPG.GameCore.ByAttackType",
-                    "TargetType": {
-                      "$type": "RPG.GameCore.TargetAlias",
-                      "Alias": "ModifierOwnerEntity"
-                    },
                     "AttackTypes": [
                       "Insert",
                       "Ultra"
@@ -8041,10 +8189,6 @@
                     "PredicateList": [
                       {
                         "$type": "RPG.GameCore.ByAttackType",
-                        "TargetType": {
-                          "$type": "RPG.GameCore.TargetAlias",
-                          "Alias": "ModifierOwnerEntity"
-                        },
                         "AttackTypes": [
                           "Insert",
                           "Ultra"

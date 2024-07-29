@@ -1,6 +1,123 @@
 {
   "AbilityList": [
     {
+      "Modifiers": {
+        "MMonster_W2_Fuyan_00_ResetStageBGM": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValueByVariateType",
+                  "DynamicKey": "MDF_WaveIndex",
+                  "VariateType": "CurWaveIndex"
+                }
+              ]
+            },
+            {
+              "Event": "OnWaveMonster",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValueByVariateType",
+                  "DynamicKey": "MDF_WaveIndex2",
+                  "VariateType": "CurWaveIndex"
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "DynamicKey": "MDF_WaveIndex",
+                    "CompareType": "NotEqual",
+                    "CompareValue": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          -2056435799
+                        ]
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.ResetBattleBGMToStage",
+                      "ResetStateNames": [
+                        "State_Xianzhou_Combat_Fuyan"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "DynamicValues": {
+            "Values": {
+              "354277359": {},
+              "-2056435799": {}
+            }
+          }
+        }
+      },
+      "Name": "Monster_W2_Fuyan_00_PassiveSkill_BGM",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByAny",
+            "PredicateList": [
+              {
+                "$type": "RPG.GameCore.ByCompareStageType",
+                "CurrentStageType": "Challenge"
+              },
+              {
+                "$type": "RPG.GameCore.ByCompareStageType",
+                "CurrentStageType": "VerseSimulation"
+              },
+              {
+                "$type": "RPG.GameCore.ByCompareStageType",
+                "CurrentStageType": "StrongChallengeActivity"
+              },
+              {
+                "$type": "RPG.GameCore.ByCompareStageType",
+                "CurrentStageType": "RogueRelic"
+              }
+            ]
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.SetBattleBGMState",
+              "StateName": {
+                "Value": "State_Xianzhou_Combat_Fuyan"
+              },
+              "InsertSpecial": true,
+              "DelayTime": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0
+                }
+              }
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "LevelEntity"
+          },
+          "ModifierName": "MMonster_W2_Fuyan_00_ResetStageBGM"
+        }
+      ]
+    },
+    {
       "Name": "Monster_Fuyan_00_PassiveSkillInitiate",
       "TargetInfo": {
         "TargetType": "Caster"
@@ -503,7 +620,6 @@
         },
         {
           "$type": "RPG.GameCore.SetDynamicValue",
-          "DynamicKey": "ADF_HPDamageRatioValue",
           "Value": {
             "IsDynamic": true,
             "PostfixExpr": {
@@ -520,7 +636,8 @@
                 -383608905
               ]
             }
-          }
+          },
+          "DynamicKey": "ADF_HPDamageRatioValue"
         },
         {
           "$type": "RPG.GameCore.LoopExecuteTaskList",
@@ -601,13 +718,13 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "ModifierOwnerEntity"
           },
-          "DynamicKey": "DeathCount",
           "Value": {
             "IsDynamic": false,
             "FixedValue": {
               "Value": 0
             }
-          }
+          },
+          "DynamicKey": "DeathCount"
         }
       ],
       "DynamicValues": {
@@ -1200,7 +1317,6 @@
                     "$type": "RPG.GameCore.TargetAlias",
                     "Alias": "ModifierOwnerEntity"
                   },
-                  "DynamicKey": "DeathCount",
                   "Value": {
                     "IsDynamic": true,
                     "PostfixExpr": {
@@ -1214,7 +1330,8 @@
                         -1564771881
                       ]
                     }
-                  }
+                  },
+                  "DynamicKey": "DeathCount"
                 },
                 {
                   "$type": "RPG.GameCore.SetDynamicValueByProperty",
@@ -1227,7 +1344,6 @@
                 },
                 {
                   "$type": "RPG.GameCore.SetDynamicValue",
-                  "DynamicKey": "ADF_HPDamageRatioValue",
                   "Value": {
                     "IsDynamic": true,
                     "PostfixExpr": {
@@ -1244,7 +1360,8 @@
                         -383608905
                       ]
                     }
-                  }
+                  },
+                  "DynamicKey": "ADF_HPDamageRatioValue"
                 },
                 {
                   "$type": "RPG.GameCore.SetDynamicValueByProperty",
@@ -1309,13 +1426,13 @@
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetDynamicValue",
-              "DynamicKey": "AchievementCount",
               "Value": {
                 "IsDynamic": false,
                 "FixedValue": {
                   "Value": 0
                 }
-              }
+              },
+              "DynamicKey": "AchievementCount"
             },
             {
               "$type": "RPG.GameCore.Retarget",
@@ -1323,6 +1440,7 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "AllDarkTeam"
               },
+              "ByRandom": true,
               "TaskList": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -1342,7 +1460,6 @@
                   "SuccessTaskList": [
                     {
                       "$type": "RPG.GameCore.SetDynamicValue",
-                      "DynamicKey": "AchievementCount",
                       "Value": {
                         "IsDynamic": true,
                         "PostfixExpr": {
@@ -1356,7 +1473,8 @@
                             -898834796
                           ]
                         }
-                      }
+                      },
+                      "DynamicKey": "AchievementCount"
                     }
                   ]
                 }
@@ -1438,6 +1556,7 @@
                         "$type": "RPG.GameCore.TargetAlias",
                         "Alias": "ParamEntityAttackTargetList"
                       },
+                      "ByRandom": true,
                       "MaxNumber": {
                         "IsDynamic": false,
                         "FixedValue": {

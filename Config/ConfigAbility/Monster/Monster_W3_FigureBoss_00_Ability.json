@@ -1,6 +1,123 @@
 {
   "AbilityList": [
     {
+      "Modifiers": {
+        "MMonster_W3_FigureBoss_00_ResetStageBGM": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValueByVariateType",
+                  "DynamicKey": "MDF_WaveIndex",
+                  "VariateType": "CurWaveIndex"
+                }
+              ]
+            },
+            {
+              "Event": "OnWaveMonster",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValueByVariateType",
+                  "DynamicKey": "MDF_WaveIndex2",
+                  "VariateType": "CurWaveIndex"
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "DynamicKey": "MDF_WaveIndex",
+                    "CompareType": "NotEqual",
+                    "CompareValue": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          -2056435799
+                        ]
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.ResetBattleBGMToStage",
+                      "ResetStateNames": [
+                        "State_Penocony_Combat_P03_InDoor_High_Ver2"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "DynamicValues": {
+            "Values": {
+              "354277359": {},
+              "-2056435799": {}
+            }
+          }
+        }
+      },
+      "Name": "Monster_W3_FigureBoss_00_PassiveSkill_BGM",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByAny",
+            "PredicateList": [
+              {
+                "$type": "RPG.GameCore.ByCompareStageType",
+                "CurrentStageType": "Challenge"
+              },
+              {
+                "$type": "RPG.GameCore.ByCompareStageType",
+                "CurrentStageType": "VerseSimulation"
+              },
+              {
+                "$type": "RPG.GameCore.ByCompareStageType",
+                "CurrentStageType": "StrongChallengeActivity"
+              },
+              {
+                "$type": "RPG.GameCore.ByCompareStageType",
+                "CurrentStageType": "RogueRelic"
+              }
+            ]
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.SetBattleBGMState",
+              "StateName": {
+                "Value": "State_Penocony_Combat_P03_InDoor_High_Ver2"
+              },
+              "InsertSpecial": true,
+              "DelayTime": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0
+                }
+              }
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "LevelEntity"
+          },
+          "ModifierName": "MMonster_W3_FigureBoss_00_ResetStageBGM"
+        }
+      ]
+    },
+    {
       "Modifiers": {},
       "Name": "Monster_W3_Figure_Solo_PassiveSkill_Initiate",
       "TargetInfo": {
@@ -81,6 +198,7 @@
                       }
                     ]
                   },
+                  "ByRandom": true,
                   "TaskList": []
                 }
               ]
@@ -168,6 +286,7 @@
                       }
                     ]
                   },
+                  "ByRandom": true,
                   "TaskList": [
                     {
                       "$type": "RPG.GameCore.SetTeamFormation",
@@ -1136,6 +1255,7 @@
               }
             }
           },
+          "ByRandom": true,
           "MaxNumber": {
             "IsDynamic": false,
             "FixedValue": {
@@ -1203,6 +1323,7 @@
               }
             ]
           },
+          "ByRandom": true,
           "TaskList": [
             {
               "$type": "RPG.GameCore.ExitBreakState",
@@ -1625,7 +1746,6 @@
               }
             ]
           },
-          "ByRandom": false,
           "TaskList": [
             {
               "$type": "RPG.GameCore.TriggerAnimState",
@@ -1815,6 +1935,7 @@
               }
             ]
           },
+          "ByRandom": true,
           "TaskList": [
             {
               "$type": "RPG.GameCore.AddModifier",
@@ -1956,6 +2077,7 @@
                   }
                 ]
               },
+              "ByRandom": true,
               "TaskList": [
                 {
                   "$type": "RPG.GameCore.AddModifier",
@@ -2408,6 +2530,7 @@
                 },
                 "Flag": "Break"
               },
+              "ByRandom": true,
               "TaskList": [
                 {
                   "$type": "RPG.GameCore.ResetStance",
@@ -2500,6 +2623,7 @@
                   }
                 ]
               },
+              "ByRandom": true,
               "TaskList": [
                 {
                   "$type": "RPG.GameCore.RemoveModifierByBehaviorFlag",
@@ -2859,6 +2983,7 @@
               }
             ]
           },
+          "ByRandom": true,
           "MaxNumber": {
             "IsDynamic": false,
             "FixedValue": {
@@ -3735,6 +3860,7 @@
                       }
                     ]
                   },
+                  "ByRandom": true,
                   "TaskList": [
                     {
                       "$type": "RPG.GameCore.SetActionDelay",
@@ -3866,6 +3992,7 @@
                           }
                         ]
                       },
+                      "ByRandom": true,
                       "TaskList": [
                         {
                           "$type": "RPG.GameCore.ExitBreakState",
@@ -3938,6 +4065,7 @@
                           }
                         ]
                       },
+                      "ByRandom": true,
                       "TaskList": [
                         {
                           "$type": "RPG.GameCore.RemoveModifierByBehaviorFlag",
@@ -4344,22 +4472,34 @@
                           }
                         ]
                       },
+                      "ByRandom": true,
                       "TaskList": [
                         {
-                          "$type": "RPG.GameCore.TriggerAnimState",
-                          "TargetType": {
-                            "$type": "RPG.GameCore.TargetAlias",
-                            "Alias": "ParamEntity"
+                          "$type": "RPG.GameCore.PredicateTaskList",
+                          "Predicate": {
+                            "$type": "RPG.GameCore.ByAny",
+                            "PredicateList": [
+                              {
+                                "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                "TargetType": {
+                                  "$type": "RPG.GameCore.TargetAlias",
+                                  "Alias": "ParamEntity"
+                                },
+                                "Flag": "Break"
+                              }
+                            ]
                           },
-                          "AnimStateName": "Stagger"
-                        },
-                        {
-                          "$type": "RPG.GameCore.RemoveModifier",
-                          "TargetType": {
-                            "$type": "RPG.GameCore.TargetAlias",
-                            "Alias": "ParamEntity"
-                          },
-                          "ModifierName": "MAvatar_RuanMei_PassiveArea_EnemyCD"
+                          "SuccessTaskList": [],
+                          "FailedTaskList": [
+                            {
+                              "$type": "RPG.GameCore.TriggerAnimState",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "ParamEntity"
+                              },
+                              "AnimStateName": "Stagger"
+                            }
+                          ]
                         },
                         {
                           "$type": "RPG.GameCore.RemoveModifier",
@@ -4377,6 +4517,14 @@
                           },
                           "OnlyAlive": false,
                           "IsSlientDispel": true
+                        },
+                        {
+                          "$type": "RPG.GameCore.DispelStatus",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "OnlyAlive": false
                         }
                       ]
                     },
@@ -4500,6 +4648,7 @@
                       }
                     ]
                   },
+                  "ByRandom": true,
                   "TaskList": [
                     {
                       "$type": "RPG.GameCore.DebugLog",
@@ -4731,6 +4880,7 @@
                     },
                     "ModifierName": "MMonster_W3_DollElite_Commnon_TheChosenOne"
                   },
+                  "ByRandom": true,
                   "TaskList": [
                     {
                       "$type": "RPG.GameCore.SetDynamicValueByAddValue",
@@ -5011,14 +5161,14 @@
                     "$type": "RPG.GameCore.TargetAlias",
                     "Alias": "ModifierOwnerEntity"
                   },
-                  "DynamicKey": "AIFlag",
                   "ContextScope": "TargetEntity",
                   "Value": {
                     "IsDynamic": false,
                     "FixedValue": {
                       "Value": 1
                     }
-                  }
+                  },
+                  "DynamicKey": "AIFlag"
                 }
               ],
               "FailedTaskList": [
@@ -5033,14 +5183,14 @@
                     "$type": "RPG.GameCore.TargetAlias",
                     "Alias": "ModifierOwnerEntity"
                   },
-                  "DynamicKey": "AIFlag",
                   "ContextScope": "TargetEntity",
                   "Value": {
                     "IsDynamic": false,
                     "FixedValue": {
                       "Value": 5
                     }
-                  }
+                  },
+                  "DynamicKey": "AIFlag"
                 }
               ]
             }
@@ -5176,6 +5326,7 @@
                           }
                         ]
                       },
+                      "ByRandom": true,
                       "MaxNumber": {
                         "IsDynamic": false,
                         "FixedValue": {
@@ -5346,6 +5497,7 @@
                           }
                         ]
                       },
+                      "ByRandom": true,
                       "MaxNumber": {
                         "IsDynamic": false,
                         "FixedValue": {

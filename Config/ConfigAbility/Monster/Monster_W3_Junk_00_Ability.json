@@ -80,13 +80,13 @@
                   "SuccessTaskList": [
                     {
                       "$type": "RPG.GameCore.SetDynamicValue",
-                      "DynamicKey": "Unlock_Flag",
                       "Value": {
                         "IsDynamic": false,
                         "FixedValue": {
                           "Value": 1
                         }
-                      }
+                      },
+                      "DynamicKey": "Unlock_Flag"
                     },
                     {
                       "$type": "RPG.GameCore.PredicateTaskList",
@@ -454,13 +454,13 @@
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.SetDynamicValue",
-                  "DynamicKey": "Unlock_Flag",
                   "Value": {
                     "IsDynamic": false,
                     "FixedValue": {
                       "Value": 0
                     }
-                  }
+                  },
+                  "DynamicKey": "Unlock_Flag"
                 }
               ]
             },
@@ -531,6 +531,30 @@
                 {
                   "$type": "RPG.GameCore.TriggerAnimState",
                   "AnimStateName": "Stagger"
+                },
+                {
+                  "$type": "RPG.GameCore.CharacterChangePhase",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "OnlyAlive": false,
+                  "PhaseName": "Phase1",
+                  "PhaseAnimConfig": {
+                    "ModifierBehaviorVisuals": [
+                      {
+                        "Flag": "Break",
+                        "ModifierBehaviorVisualPriority": "MonsterStanceBreak",
+                        "AnimOccur": "Stagger_Loop",
+                        "AnimLoop": "Stagger_Loop",
+                        "AnimRecover": "Stagger_Recover",
+                        "AnimOccurTransition": 0,
+                        "ForecHitH": true
+                      }
+                    ],
+                    "Hit": "Hit_H_Break",
+                    "HitH": "Hit_H_Break"
+                  }
                 },
                 {
                   "$type": "RPG.GameCore.DispelStatus",
@@ -739,6 +763,7 @@
             "Alias": "AbilityTargetEntity"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Physical"
             },
@@ -1130,13 +1155,13 @@
       "OnStart": [
         {
           "$type": "RPG.GameCore.SetDynamicValue",
-          "DynamicKey": "WeaknessCount",
           "Value": {
             "IsDynamic": false,
             "FixedValue": {
               "Value": 3
             }
-          }
+          },
+          "DynamicKey": "WeaknessCount"
         },
         {
           "$type": "RPG.GameCore.AddModifier",
@@ -1369,6 +1394,7 @@
             },
             "Inverse": true
           },
+          "ByRandom": true,
           "TaskList": [
             {
               "$type": "RPG.GameCore.ResetStance",
@@ -1412,13 +1438,13 @@
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetDynamicValue",
-              "DynamicKey": "MDF_AttackAddRatioCurrent",
               "Value": {
                 "IsDynamic": false,
                 "FixedValue": {
                   "Value": 1
                 }
-              }
+              },
+              "DynamicKey": "MDF_AttackAddRatioCurrent"
             },
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -1449,7 +1475,6 @@
                   "TaskList": [
                     {
                       "$type": "RPG.GameCore.SetDynamicValue",
-                      "DynamicKey": "MDF_AttackAddRatioCurrent",
                       "Value": {
                         "IsDynamic": true,
                         "PostfixExpr": {
@@ -1463,7 +1488,8 @@
                             -1638428951
                           ]
                         }
-                      }
+                      },
+                      "DynamicKey": "MDF_AttackAddRatioCurrent"
                     }
                   ]
                 }
@@ -1497,7 +1523,6 @@
             },
             {
               "$type": "RPG.GameCore.SetDynamicValue",
-              "DynamicKey": "MDF_AttackAddRatioCurrent",
               "Value": {
                 "IsDynamic": true,
                 "PostfixExpr": {
@@ -1508,7 +1533,8 @@
                     -1638428951
                   ]
                 }
-              }
+              },
+              "DynamicKey": "MDF_AttackAddRatioCurrent"
             },
             {
               "$type": "RPG.GameCore.StackProperty",
@@ -1561,10 +1587,6 @@
                 "PredicateList": [
                   {
                     "$type": "RPG.GameCore.ByAttackType",
-                    "TargetType": {
-                      "$type": "RPG.GameCore.TargetAlias",
-                      "Alias": "ModifierOwnerEntity"
-                    },
                     "AttackTypes": [
                       "Normal",
                       "BPSkill",

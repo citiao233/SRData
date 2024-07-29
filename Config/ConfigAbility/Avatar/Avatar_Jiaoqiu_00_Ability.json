@@ -17,7 +17,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "AbilityName": "Avatar_Dr_Ratio_00_Skill01_Camera",
+          "AbilityName": "Avatar_Jiaoqiu_00_Skill01_Camera",
           "IsSkillPerform": true
         },
         {
@@ -30,62 +30,14 @@
           "IsSkillPerform": true
         },
         {
-          "$type": "RPG.GameCore.TriggerAnimStateWithMove",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
+          "$type": "RPG.GameCore.TriggerAnimState",
           "AnimStateName": "Skill01",
-          "MovingRangeList": [
-            {
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "AbilityTargetEntity"
-              },
-              "OffsetTargetDistance": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 1.5
-                }
-              },
-              "NormalizedTimeStart": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 0.08
-                }
-              },
-              "NormalizedTimeEnd": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 0.18
-                }
-              }
-            },
-            {
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "TeamFormation"
-              },
-              "OffsetTargetDistance": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 0
-                }
-              },
-              "NormalizedTimeStart": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 0.57
-                }
-              },
-              "NormalizedTimeEnd": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 0.68
-                }
-              }
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.8
             }
-          ]
+          }
         },
         {
           "$type": "RPG.GameCore.WaitAnimState",
@@ -97,7 +49,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.096
+              "Value": 0.2727
             }
           }
         },
@@ -107,11 +59,12 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "AbilityTargetEntity"
           },
+          "Duration": 0.3,
           "BlurX": 0.3,
-          "BlurY": 0,
           "BlurRadius": 0.8,
-          "Iteration": 4,
-          "BlurFeather": 0.2
+          "Iteration": 3,
+          "BlurStart": 0.02,
+          "BlurFeather": 0.04
         },
         {
           "$type": "RPG.GameCore.WaitAnimState",
@@ -119,7 +72,7 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.16
+              "Value": 0.36
             }
           }
         },
@@ -130,16 +83,6 @@
             "Alias": "AbilityTargetEntity"
           },
           "Active": false
-        },
-        {
-          "$type": "RPG.GameCore.WaitAnimState",
-          "AnimStateName": "Skill01",
-          "NormalizedTimeEnd": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0.669
-            }
-          }
         }
       ]
     },
@@ -159,9 +102,56 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.22
+              "Value": 0.2727
             }
           }
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByRankActivated",
+            "TriggerKey": {
+              "Hash": 2089636447
+            }
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValue",
+              "Value": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AAABAAIK",
+                  "FixedValues": [
+                    {
+                      "Value": 1
+                    }
+                  ],
+                  "DynamicHashes": [
+                    64440183
+                  ]
+                }
+              },
+              "DynamicKey": "Rank01_Stack_Layer"
+            }
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValue",
+              "Value": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AAAK",
+                  "FixedValues": [
+                    {
+                      "Value": 1
+                    }
+                  ],
+                  "DynamicHashes": []
+                }
+              },
+              "DynamicKey": "Rank01_Stack_Layer"
+            }
+          ]
         },
         {
           "$type": "RPG.GameCore.AddModifier",
@@ -196,17 +186,51 @@
               "OpCodes": "AQAK",
               "FixedValues": [],
               "DynamicHashes": [
-                -1542519066
+                916155872
               ]
             }
           },
           "LayerAddWhenStack": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 1
+            "IsDynamic": true,
+            "PostfixExpr": {
+              "OpCodes": "AQAK",
+              "FixedValues": [],
+              "DynamicHashes": [
+                -642010470
+              ]
             }
           },
           "DynamicValues": {
+            "DOT_Ratio": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  -1507106655
+                ]
+              }
+            },
+            "SkillRank_Rank02_P1_Ratio": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  -1183793641
+                ]
+              }
+            },
+            "SkillRank_Rank06_P3_DownRatio": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  15812359
+                ]
+              }
+            },
             "MDF_PropertyValue": {
               "IsDynamic": true,
               "PostfixExpr": {
@@ -227,7 +251,8 @@
                 ]
               }
             }
-          }
+          },
+          "IsShowUIMessageOnUpdate": false
         },
         {
           "$type": "RPG.GameCore.DamageByAttackProperty",
@@ -236,7 +261,10 @@
             "Alias": "AbilityTargetEntity"
           },
           "AttackProperty": {
-            "DamageType": "Fire",
+            "$type": "RPG.GameCore.AttackData",
+            "DamageType": {
+              "DamageType": "Fire"
+            },
             "DamagePercentage": {
               "IsDynamic": true,
               "PostfixExpr": {
@@ -264,9 +292,9 @@
               }
             },
             "HitAnimation": "Hit",
-            "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Dr_Ratio/Eff_Avatar_Dr_Ratio_00_Skill01_Hit.prefab",
-            "HitEffectHeight": 1.4,
-            "HitPosHeight": 1.4
+            "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Jiaoqiu_00/Eff_Avatar_Jiaoqiu_00_Skill01_Hit.prefab",
+            "HitEffectHeight": 1.3,
+            "HitPosHeight": 1.3
           },
           "CanTriggerLastKill": true
         },
@@ -295,7 +323,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "AbilityName": "Avatar_Dr_Ratio_00_Skill02_Camera",
+          "AbilityName": "Avatar_Jiaoqiu_00_Skill02_Camera",
           "IsSkillPerform": true
         },
         {
@@ -309,24 +337,26 @@
         },
         {
           "$type": "RPG.GameCore.TriggerAnimState",
+          "AnimStateName": "Skill02"
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
           "AnimStateName": "Skill02",
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 1
-            }
-          },
-          "NormalizedTimeWait": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0.04
+              "Value": 0.306
             }
           }
         },
         {
           "$type": "RPG.GameCore.GlobalMainIntensityEffect",
           "TargetIntensity": 0.35,
-          "FadeDuration": 0.2
+          "FadeDuration": 0.25
         },
         {
           "$type": "RPG.GameCore.WaitAnimState",
@@ -338,35 +368,14 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.26
-            }
-          }
-        },
-        {
-          "$type": "RPG.GameCore.StartAim",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AbilityTargetEntity"
-          },
-          "TransitTime": 0.3
-        },
-        {
-          "$type": "RPG.GameCore.WaitAnimState",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "AnimStateName": "Skill02",
-          "NormalizedTimeEnd": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0.639
+              "Value": 0.457
             }
           }
         },
         {
           "$type": "RPG.GameCore.GlobalMainIntensityEffect",
-          "TargetIntensity": 0.1
+          "IsRevert": true,
+          "FadeDuration": 0.1
         },
         {
           "$type": "RPG.GameCore.RadialBlurEffect",
@@ -374,6 +383,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "AbilityTargetEntity"
           },
+          "Duration": 0.22,
           "BlurX": 0.3,
           "BlurY": 0,
           "BlurRadius": 0.8,
@@ -390,77 +400,13 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.64
-            }
-          }
-        },
-        {
-          "$type": "RPG.GameCore.GlobalMainIntensityEffect",
-          "TargetIntensity": 0.35,
-          "FadeDuration": 0.1
-        },
-        {
-          "$type": "RPG.GameCore.StopAim"
-        },
-        {
-          "$type": "RPG.GameCore.WaitAnimState",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "AnimStateName": "Skill02",
-          "NormalizedTimeEnd": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0.7
-            }
-          }
-        },
-        {
-          "$type": "RPG.GameCore.RadialBlurEffect",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AbilityTargetEntity"
-          },
-          "Active": false
-        },
-        {
-          "$type": "RPG.GameCore.WaitAnimState",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "AnimStateName": "Skill02",
-          "NormalizedTimeEnd": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0.8
-            }
-          }
-        },
-        {
-          "$type": "RPG.GameCore.GlobalMainIntensityEffect",
-          "IsRevert": true,
-          "FadeDuration": 0.2
-        },
-        {
-          "$type": "RPG.GameCore.WaitAnimState",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "AnimStateName": "Skill02",
-          "NormalizedTimeEnd": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0.83
+              "Value": 1
             }
           }
         }
       ]
     },
     {
-      "Modifiers": {},
       "Name": "Avatar_Jiaoqiu_00_Skill02_Phase02",
       "TargetInfo": {
         "TargetType": "SkillTargetEntityList"
@@ -476,193 +422,56 @@
           "NormalizedTimeEnd": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.092
+              "Value": 0.434
             }
           }
         },
         {
-          "$type": "RPG.GameCore.WaitAnimState",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "AnimStateName": "Skill02",
-          "NormalizedTimeEnd": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0.4
-            }
-          }
-        },
-        {
-          "$type": "RPG.GameCore.TriggerEffect",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AbilityTargetAndAdjoinEntity"
-          },
-          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Dr_Ratio/Eff_Avatar_Dr_Ratio_00_Skill02_Hit.prefab"
-        },
-        {
-          "$type": "RPG.GameCore.TriggerAnimState",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AbilityTargetAndAdjoinEntity"
-          },
-          "AnimLogicState": "OnHit",
-          "AnimStateName": "Hit",
-          "RandomHitAngle": true
-        },
-        {
-          "$type": "RPG.GameCore.WaitAnimState",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "AnimStateName": "Skill02",
-          "NormalizedTimeEnd": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0.46
-            }
-          }
-        },
-        {
-          "$type": "RPG.GameCore.TriggerAnimState",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AbilityTargetAndAdjoinEntity"
-          },
-          "AnimLogicState": "OnHit",
-          "AnimStateName": "Hit",
-          "RandomHitAngle": true
-        },
-        {
-          "$type": "RPG.GameCore.WaitAnimState",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "AnimStateName": "Skill02",
-          "NormalizedTimeEnd": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0.507
-            }
-          }
-        },
-        {
-          "$type": "RPG.GameCore.TriggerAnimState",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AbilityTargetAndAdjoinEntity"
-          },
-          "AnimLogicState": "OnHit",
-          "AnimStateName": "Hit",
-          "RandomHitAngle": true
-        },
-        {
-          "$type": "RPG.GameCore.WaitAnimState",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "AnimStateName": "Skill02",
-          "NormalizedTimeEnd": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0.548
-            }
-          }
-        },
-        {
-          "$type": "RPG.GameCore.TriggerAnimState",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AbilityTargetAndAdjoinEntity"
-          },
-          "AnimLogicState": "OnHit",
-          "AnimStateName": "Hit",
-          "RandomHitAngle": true
-        },
-        {
-          "$type": "RPG.GameCore.WaitAnimState",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "AnimStateName": "Skill02",
-          "NormalizedTimeEnd": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0.638
-            }
-          }
-        },
-        {
-          "$type": "RPG.GameCore.AddModifier",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AbilityTargetEntity"
-          },
-          "ModifierName": "MAvatar_Jiaoqiu_00_Debuff_Flavor",
-          "Chance": {
-            "IsDynamic": true,
-            "PostfixExpr": {
-              "OpCodes": "AQAK",
-              "FixedValues": [],
-              "DynamicHashes": [
-                242174909
-              ]
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByRankActivated",
+            "TriggerKey": {
+              "Hash": 2089636447
             }
           },
-          "LifeTime": {
-            "IsDynamic": true,
-            "PostfixExpr": {
-              "OpCodes": "AQAK",
-              "FixedValues": [],
-              "DynamicHashes": [
-                -1935328048
-              ]
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValue",
+              "Value": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AAABAAIK",
+                  "FixedValues": [
+                    {
+                      "Value": 1
+                    }
+                  ],
+                  "DynamicHashes": [
+                    64440183
+                  ]
+                }
+              },
+              "DynamicKey": "Rank01_Stack_Layer"
             }
-          },
-          "MaxLayer": {
-            "IsDynamic": true,
-            "PostfixExpr": {
-              "OpCodes": "AQAK",
-              "FixedValues": [],
-              "DynamicHashes": [
-                -1542519066
-              ]
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValue",
+              "Value": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AAAK",
+                  "FixedValues": [
+                    {
+                      "Value": 1
+                    }
+                  ],
+                  "DynamicHashes": []
+                }
+              },
+              "DynamicKey": "Rank01_Stack_Layer"
             }
-          },
-          "LayerAddWhenStack": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 1
-            }
-          },
-          "DynamicValues": {
-            "MDF_PropertyValue": {
-              "IsDynamic": true,
-              "PostfixExpr": {
-                "OpCodes": "AQAK",
-                "FixedValues": [],
-                "DynamicHashes": [
-                  713155818
-                ]
-              }
-            },
-            "MDF_PropertyValue_2": {
-              "IsDynamic": true,
-              "PostfixExpr": {
-                "OpCodes": "AQAK",
-                "FixedValues": [],
-                "DynamicHashes": [
-                  1539289637
-                ]
-              }
-            }
-          }
+          ]
         },
         {
           "$type": "RPG.GameCore.AddModifier",
@@ -697,17 +506,51 @@
               "OpCodes": "AQAK",
               "FixedValues": [],
               "DynamicHashes": [
-                -1542519066
+                916155872
               ]
             }
           },
           "LayerAddWhenStack": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 1
+            "IsDynamic": true,
+            "PostfixExpr": {
+              "OpCodes": "AQAK",
+              "FixedValues": [],
+              "DynamicHashes": [
+                -642010470
+              ]
             }
           },
           "DynamicValues": {
+            "DOT_Ratio": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  -1507106655
+                ]
+              }
+            },
+            "SkillRank_Rank02_P1_Ratio": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  -1183793641
+                ]
+              }
+            },
+            "SkillRank_Rank06_P3_DownRatio": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  15812359
+                ]
+              }
+            },
             "MDF_PropertyValue": {
               "IsDynamic": true,
               "PostfixExpr": {
@@ -728,7 +571,8 @@
                 ]
               }
             }
-          }
+          },
+          "IsShowUIMessageOnUpdate": false
         },
         {
           "$type": "RPG.GameCore.DamageByAttackProperty",
@@ -737,7 +581,10 @@
             "Alias": "AbilityTargetEntity"
           },
           "AttackProperty": {
-            "DamageType": "Fire",
+            "$type": "RPG.GameCore.AttackData",
+            "DamageType": {
+              "DamageType": "Fire"
+            },
             "DamagePercentage": {
               "IsDynamic": true,
               "PostfixExpr": {
@@ -782,7 +629,10 @@
             "Alias": "AbilityTargetAdjoinEntity"
           },
           "AttackProperty": {
-            "DamageType": "Fire",
+            "$type": "RPG.GameCore.AttackData",
+            "DamageType": {
+              "DamageType": "Fire"
+            },
             "DamagePercentage": {
               "IsDynamic": true,
               "PostfixExpr": {
@@ -804,7 +654,9 @@
               }
             },
             "HitAnimation": "Hit_H",
-            "HitPosHeight": 1.4
+            "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Jiaoqiu_00/Eff_Avatar_Jiaoqiu_00_Skill02_Hit.prefab",
+            "HitEffectHeight": 1.3,
+            "HitPosHeight": 1.3
           },
           "CanTriggerLastKill": true,
           "DisplayData": {
@@ -818,32 +670,101 @@
           "$type": "RPG.GameCore.DamagePerformFinish"
         },
         {
-          "$type": "RPG.GameCore.PredicateTaskList",
-          "Predicate": {
-            "$type": "RPG.GameCore.BySkillPointActivated",
-            "PointTriggerKey": {
-              "Hash": 1455742904
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "ModifierName": "MAvatar_Jiaoqiu_00_Debuff_Flavor",
+          "Chance": {
+            "IsDynamic": true,
+            "PostfixExpr": {
+              "OpCodes": "AQAK",
+              "FixedValues": [],
+              "DynamicHashes": [
+                242174909
+              ]
             }
           },
-          "SuccessTaskList": [
-            {
-              "$type": "RPG.GameCore.ModifySPNew",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "Caster"
-              },
-              "AddValue": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQAK",
-                  "FixedValues": [],
-                  "DynamicHashes": [
-                    -155221699
-                  ]
-                }
+          "LifeTime": {
+            "IsDynamic": true,
+            "PostfixExpr": {
+              "OpCodes": "AQAK",
+              "FixedValues": [],
+              "DynamicHashes": [
+                -1935328048
+              ]
+            }
+          },
+          "MaxLayer": {
+            "IsDynamic": true,
+            "PostfixExpr": {
+              "OpCodes": "AQAK",
+              "FixedValues": [],
+              "DynamicHashes": [
+                916155872
+              ]
+            }
+          },
+          "LayerAddWhenStack": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          },
+          "DynamicValues": {
+            "DOT_Ratio": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  -1507106655
+                ]
+              }
+            },
+            "SkillRank_Rank02_P1_Ratio": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  -1183793641
+                ]
+              }
+            },
+            "SkillRank_Rank06_P3_DownRatio": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  15812359
+                ]
+              }
+            },
+            "MDF_PropertyValue": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  713155818
+                ]
+              }
+            },
+            "MDF_PropertyValue_2": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  1539289637
+                ]
               }
             }
-          ]
+          },
+          "IsShowUIMessageOnUpdate": false
         },
         {
           "$type": "RPG.GameCore.SkillPerformFinish"
@@ -856,6 +777,9 @@
         "TargetType": "InherentTargetEntity"
       },
       "OnStart": [
+        {
+          "$type": "RPG.GameCore.SyncCharLightAndCameraDir"
+        },
         {
           "$type": "RPG.GameCore.WaitSecond",
           "WaitTime": {
@@ -951,21 +875,21 @@
               "CameraState": "SelectDarkTeamEntity",
               "IsLocalOffset": true,
               "AnchorOffset": {
-                "X": 0.05,
-                "Y": -0.28,
-                "Z": 0.01
+                "X": 0.33,
+                "Y": -0.46,
+                "Z": -0.11
               },
               "AimTargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "AbilityTargetEntity"
               },
               "AimOffset": {
-                "X": -3.63,
-                "Y": 1.76,
+                "X": -3.44,
+                "Y": 1.9,
                 "Z": 0.17
               },
-              "FollowRadius": 2.1,
-              "AnchorToAimAngle": 22,
+              "FollowRadius": 1.65,
+              "AnchorToAimAngle": 26,
               "Dutch": 4,
               "FOV": 60
             },
@@ -991,28 +915,96 @@
       },
       "OnStart": [
         {
+          "$type": "RPG.GameCore.SyncCharLightAndCameraDir",
+          "IsSync": false
+        },
+        {
           "$type": "RPG.GameCore.LookAt",
           "TargetType": "AbilityTargetEntity"
         },
         {
-          "$type": "RPG.GameCore.SetTeamFormation",
-          "FormationTarget": {
+          "$type": "RPG.GameCore.HideLevelStage",
+          "IsHide": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAnimState",
+          "AnimStateName": "Skill03"
+        },
+        {
+          "$type": "RPG.GameCore.SetSkillTargetFormationByPos",
+          "Team": "TeamDark",
+          "CustomTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllEnemy"
+          },
+          "CustomCenterTargetType": {
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "CustomFormationName": "Dr_Ratio_00_PassiveSkill",
-          "CustomCenterTargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "LevelEntity"
+          "IgnoreHitBoxRadius": true,
+          "TargetFormation": {
+            "LocalDelta": {
+              "X": 0,
+              "Y": 0,
+              "Z": 15
+            },
+            "Yaw": -197
+          },
+          "LeftSideFormations": [
+            {
+              "LocalDelta": {
+                "X": -1,
+                "Y": 0,
+                "Z": 15
+              },
+              "Yaw": -220
+            },
+            {
+              "LocalDelta": {
+                "X": -0.5,
+                "Y": 0,
+                "Z": 15
+              },
+              "Yaw": -197
+            }
+          ],
+          "RightSideFormations": [
+            {
+              "LocalDelta": {
+                "X": 0.5,
+                "Y": 0,
+                "Z": 15
+              },
+              "Yaw": -220
+            },
+            {
+              "LocalDelta": {
+                "X": 1,
+                "Y": 0,
+                "Z": 15
+              },
+              "Yaw": -197
+            }
+          ],
+          "FormationDeltaMaxRange": {
+            "X": 10,
+            "Y": 0,
+            "Z": 0
+          },
+          "FormationDeltaMinRange": {
+            "X": 4,
+            "Y": 0,
+            "Z": 0
           }
         },
         {
           "$type": "RPG.GameCore.ScaleCharacterModel",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AllEnemy"
+            "Alias": "AllDarkTeam"
           },
-          "OutlineWidthScale": 0.3,
+          "ModelScaleBase": 1.5,
+          "OutlineWidthScale": 1.5,
           "Multiplier": {
             "3": 0.8,
             "4": 0.8,
@@ -1022,63 +1014,12 @@
           "SaveTargetToCaster": true
         },
         {
-          "$type": "RPG.GameCore.SetSkillTargetFormationByPos",
-          "CustomCenterTargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "CenterOffset": {
-            "X": 18.24,
-            "Y": 0,
-            "Z": 22.7
-          },
-          "CenterRootYaw": 180,
-          "TargetFormation": {
-            "Yaw": 30
-          },
-          "LeftSideFormations": [
-            {
-              "LocalDelta": {
-                "X": 3,
-                "Y": 0,
-                "Z": 0
-              },
-              "Yaw": -30
-            },
-            {
-              "LocalDelta": {
-                "X": 1.5,
-                "Y": 0,
-                "Z": 0
-              }
-            }
-          ],
-          "RightSideFormations": [
-            {
-              "LocalDelta": {
-                "X": -1.75,
-                "Y": 0,
-                "Z": 0
-              }
-            },
-            {
-              "LocalDelta": {
-                "X": -3.5,
-                "Y": 0,
-                "Z": 0
-              },
-              "Yaw": 20
-            }
-          ],
-          "IgnoreCharacterRootOffset": true
-        },
-        {
           "$type": "RPG.GameCore.TriggerAbility",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Caster"
           },
-          "AbilityName": "W_Jiaoqiu_00_Skill03_Camera",
+          "AbilityName": "Avatar_Jiaoqiu_00_Skill03_Camera",
           "IsSkillPerform": true
         },
         {
@@ -1091,88 +1032,147 @@
           "IsSkillPerform": true
         },
         {
-          "$type": "RPG.GameCore.TriggerEffect",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Dr_Ratio/Eff_Avatar_Dr_Ratio_00_Ani_Skill03.prefab",
-          "AttachPoint": "EffectScale"
-        },
-        {
           "$type": "RPG.GameCore.ShowBattleUI"
         },
         {
-          "$type": "RPG.GameCore.TriggerAnimState",
-          "AnimStateName": "Skill03"
-        },
-        {
-          "$type": "RPG.GameCore.HideLevelStage",
-          "IsHide": true
-        },
-        {
-          "$type": "RPG.GameCore.WaitAnimState",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "AnimStateName": "Skill03",
-          "NormalizedTimeEnd": {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.789
+              "Value": 0.466
             }
           }
         },
         {
-          "$type": "RPG.GameCore.TargetTimeSlow",
+          "$type": "RPG.GameCore.TriggerEffect",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AllEnemy"
+            "Alias": "AllDarkTeam"
           },
-          "TimeScale": 0.2,
-          "UnscaledDuration": 1
+          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Jiaoqiu_00/Eff_Avatar_Jiaoqiu_00_Skill03_Hit_01.prefab",
+          "AttachPoint": "SelectRoot"
         },
         {
-          "$type": "RPG.GameCore.WaitAnimState",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "AnimStateName": "Skill03",
-          "NormalizedTimeEnd": {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 0.98
+              "Value": 0.95
             }
           }
-        },
-        {
-          "$type": "RPG.GameCore.TryStartConnectUltraSkillFrameCapture"
-        },
-        {
-          "$type": "RPG.GameCore.WaitTimelineFinish",
-          "TimelineName": "Character_Dr_Ratio_00_Skill03_TimeLine"
-        },
-        {
-          "$type": "RPG.GameCore.RemoveEffect",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Dr_Ratio/Eff_Avatar_Dr_Ratio_00_Ani_Skill03.prefab"
         },
         {
           "$type": "RPG.GameCore.ScaleCharacterModel",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "AliveOnly": false,
+          "ReadTargetFromCaster": true
+        },
+        {
+          "$type": "RPG.GameCore.SetSkillTargetFormationByPos",
+          "Team": "TeamDark",
+          "CustomTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
             "Alias": "AllEnemy"
+          },
+          "CustomCenterTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "IgnoreHitBoxRadius": true,
+          "TargetFormation": {
+            "LocalDelta": {
+              "X": 0,
+              "Y": 0.4,
+              "Z": 15
+            },
+            "Yaw": -197
+          },
+          "LeftSideFormations": [
+            {
+              "LocalDelta": {
+                "X": -1,
+                "Y": 0.4,
+                "Z": 15
+              },
+              "Yaw": -220
+            },
+            {
+              "LocalDelta": {
+                "X": -0.5,
+                "Y": 0.4,
+                "Z": 15
+              },
+              "Yaw": -197
+            }
+          ],
+          "RightSideFormations": [
+            {
+              "LocalDelta": {
+                "X": 0.5,
+                "Y": 0.4,
+                "Z": 15
+              },
+              "Yaw": -220
+            },
+            {
+              "LocalDelta": {
+                "X": 1,
+                "Y": 0.4,
+                "Z": 15
+              },
+              "Yaw": -197
+            }
+          ],
+          "FormationDeltaMaxRange": {
+            "X": 10,
+            "Y": 0,
+            "Z": 0
+          },
+          "FormationDeltaMinRange": {
+            "X": 5,
+            "Y": 0,
+            "Z": 0
+          }
+        },
+        {
+          "$type": "RPG.GameCore.ScaleCharacterModel",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllDarkTeam"
+          },
+          "ModelScaleBase": 0.5,
+          "OutlineWidthScale": 0.5,
+          "Multiplier": {
+            "3": 0.8,
+            "4": 0.8,
+            "5": 0.3,
+            "8": 0.3
+          },
+          "SaveTargetToCaster": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitTimelineFinish",
+          "TimelineName": "Character_Jiaoqiu_00_Skill03_TimeLine"
+        },
+        {
+          "$type": "RPG.GameCore.ScaleCharacterModel",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
           },
           "AliveOnly": false,
           "ReadTargetFromCaster": true
         },
         {
           "$type": "RPG.GameCore.HideLevelStage"
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamDark",
+          "FormationType": "DarkTeamNormal"
         },
         {
           "$type": "RPG.GameCore.ShowBattleUI",
@@ -1188,13 +1188,13 @@
       "OnStart": [
         {
           "$type": "RPG.GameCore.SetDynamicValue",
-          "DynamicKey": "_Layer_Total",
           "Value": {
             "IsDynamic": false,
             "FixedValue": {
               "Value": 0
             }
-          }
+          },
+          "DynamicKey": "_Layer_Total"
         },
         {
           "$type": "RPG.GameCore.WaitAnimState",
@@ -1239,187 +1239,6 @@
           }
         },
         {
-          "$type": "RPG.GameCore.AddModifier",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "ModifierName": "MAvatar_Jiaoqiu_00_Aura",
-          "LifeTime": {
-            "IsDynamic": true,
-            "PostfixExpr": {
-              "OpCodes": "AQAK",
-              "FixedValues": [],
-              "DynamicHashes": [
-                -2000290270
-              ]
-            }
-          },
-          "DynamicValues": {
-            "MDF_PropertyValue": {
-              "IsDynamic": true,
-              "PostfixExpr": {
-                "OpCodes": "AQAK",
-                "FixedValues": [],
-                "DynamicHashes": [
-                  1324641752
-                ]
-              }
-            },
-            "MDF_HealRatio_2": {
-              "IsDynamic": true,
-              "PostfixExpr": {
-                "OpCodes": "AQAK",
-                "FixedValues": [],
-                "DynamicHashes": [
-                  1324641752
-                ]
-              }
-            },
-            "MDF_HealValue_2": {
-              "IsDynamic": true,
-              "PostfixExpr": {
-                "OpCodes": "AQAK",
-                "FixedValues": [],
-                "DynamicHashes": [
-                  200310092
-                ]
-              }
-            }
-          }
-        },
-        {
-          "$type": "RPG.GameCore.WaitAnimState",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "AnimStateName": "Skill03",
-          "NormalizedTimeEnd": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0.789
-            }
-          }
-        },
-        {
-          "$type": "RPG.GameCore.Retarget",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AllDarkTeam"
-          },
-          "TaskList": [
-            {
-              "$type": "RPG.GameCore.AddModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ParamEntity"
-              },
-              "ModifierName": "MAvatar_Jiaoqiu_00_Debuff_Flavor",
-              "Chance": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQAK",
-                  "FixedValues": [],
-                  "DynamicHashes": [
-                    1833643208
-                  ]
-                }
-              },
-              "LifeTime": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQAK",
-                  "FixedValues": [],
-                  "DynamicHashes": [
-                    -1935328048
-                  ]
-                }
-              },
-              "MaxLayer": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQAK",
-                  "FixedValues": [],
-                  "DynamicHashes": [
-                    -1542519066
-                  ]
-                }
-              },
-              "LayerAddWhenStack": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 1
-                }
-              },
-              "DynamicValues": {
-                "MDF_PropertyValue": {
-                  "IsDynamic": true,
-                  "PostfixExpr": {
-                    "OpCodes": "AQAK",
-                    "FixedValues": [],
-                    "DynamicHashes": [
-                      713155818
-                    ]
-                  }
-                },
-                "MDF_PropertyValue_2": {
-                  "IsDynamic": true,
-                  "PostfixExpr": {
-                    "OpCodes": "AQAK",
-                    "FixedValues": [],
-                    "DynamicHashes": [
-                      1539289637
-                    ]
-                  }
-                }
-              }
-            },
-            {
-              "$type": "RPG.GameCore.DamageByAttackProperty",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ParamEntity"
-              },
-              "AttackProperty": {
-                "DamageType": "Fire",
-                "DamagePercentage": {
-                  "IsDynamic": true,
-                  "PostfixExpr": {
-                    "OpCodes": "AQAK",
-                    "FixedValues": [],
-                    "DynamicHashes": [
-                      -56289053
-                    ]
-                  }
-                },
-                "StanceValue": {
-                  "IsDynamic": true,
-                  "PostfixExpr": {
-                    "OpCodes": "AQAK",
-                    "FixedValues": [],
-                    "DynamicHashes": [
-                      1182064154
-                    ]
-                  }
-                },
-                "SPHitRatio": {
-                  "IsDynamic": false,
-                  "FixedValue": {
-                    "Value": 1
-                  }
-                },
-                "HitAnimation": "Hit"
-              },
-              "CanTriggerLastKill": true,
-              "DisplayData": {
-                "UIMessageHeight": 3,
-                "Scale": 2
-              }
-            }
-          ]
-        },
-        {
           "$type": "RPG.GameCore.Retarget",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
@@ -1433,6 +1252,7 @@
             },
             "ModifierName": "MAvatar_Jiaoqiu_00_Debuff_Flavor"
           },
+          "ByRandom": true,
           "IncludeLimbo": true,
           "TaskList": [
             {
@@ -1471,7 +1291,6 @@
               "SuccessTaskList": [
                 {
                   "$type": "RPG.GameCore.SetDynamicValue",
-                  "DynamicKey": "_Layer_Total",
                   "Value": {
                     "IsDynamic": true,
                     "PostfixExpr": {
@@ -1481,7 +1300,8 @@
                         1157263263
                       ]
                     }
-                  }
+                  },
+                  "DynamicKey": "_Layer_Total"
                 }
               ]
             }
@@ -1507,16 +1327,17 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "AllDarkTeam"
               },
+              "ByRandom": true,
               "TaskList": [
                 {
                   "$type": "RPG.GameCore.SetDynamicValue",
-                  "DynamicKey": "_Temp_Val",
                   "Value": {
                     "IsDynamic": false,
                     "FixedValue": {
                       "Value": 0
                     }
-                  }
+                  },
+                  "DynamicKey": "_Temp_Val"
                 },
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -1588,7 +1409,7 @@
                           "OpCodes": "AQAK",
                           "FixedValues": [],
                           "DynamicHashes": [
-                            -1542519066
+                            916155872
                           ]
                         }
                       },
@@ -1602,7 +1423,60 @@
                             1157263263
                           ]
                         }
-                      }
+                      },
+                      "DynamicValues": {
+                        "DOT_Ratio": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              -1507106655
+                            ]
+                          }
+                        },
+                        "SkillRank_Rank02_P1_Ratio": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              -1183793641
+                            ]
+                          }
+                        },
+                        "SkillRank_Rank06_P3_DownRatio": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              15812359
+                            ]
+                          }
+                        },
+                        "MDF_PropertyValue": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              713155818
+                            ]
+                          }
+                        },
+                        "MDF_PropertyValue_2": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              1539289637
+                            ]
+                          }
+                        }
+                      },
+                      "IsShowUIMessageOnUpdate": false
                     }
                   ]
                 }
@@ -1611,7 +1485,325 @@
           ]
         },
         {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "MAvatar_Jiaoqiu_00_Aura",
+          "LifeTime": {
+            "IsDynamic": true,
+            "PostfixExpr": {
+              "OpCodes": "AQAK",
+              "FixedValues": [],
+              "DynamicHashes": [
+                -2006209309
+              ]
+            }
+          },
+          "DynamicValues": {
+            "Skill03_P1_DamagePercentage": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  -56289053
+                ]
+              }
+            },
+            "Skill03_P2_Ratio": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 0
+              }
+            },
+            "Skill03_P3_Value": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 0
+              }
+            },
+            "Skill03_P3_Ratio": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 0
+              }
+            },
+            "Skill03_P4_Duration": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 0
+              }
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill03",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.78
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.Retarget",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllDarkTeam"
+          },
+          "ByRandom": true,
+          "TaskList": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByRankActivated",
+                "TriggerKey": {
+                  "Hash": 2089636447
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "Value": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AAABAAIK",
+                      "FixedValues": [
+                        {
+                          "Value": 1
+                        }
+                      ],
+                      "DynamicHashes": [
+                        64440183
+                      ]
+                    }
+                  },
+                  "DynamicKey": "Rank01_Stack_Layer"
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "Value": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AAAK",
+                      "FixedValues": [
+                        {
+                          "Value": 1
+                        }
+                      ],
+                      "DynamicHashes": []
+                    }
+                  },
+                  "DynamicKey": "Rank01_Stack_Layer"
+                }
+              ]
+            },
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ParamEntity"
+              },
+              "ModifierName": "MAvatar_Jiaoqiu_00_Debuff_Flavor",
+              "Chance": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    1833643208
+                  ]
+                }
+              },
+              "LifeTime": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    -1935328048
+                  ]
+                }
+              },
+              "MaxLayer": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    916155872
+                  ]
+                }
+              },
+              "LayerAddWhenStack": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    -642010470
+                  ]
+                }
+              },
+              "DynamicValues": {
+                "DOT_Ratio": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAK",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      -1507106655
+                    ]
+                  }
+                },
+                "SkillRank_Rank02_P1_Ratio": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAK",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      -1183793641
+                    ]
+                  }
+                },
+                "SkillRank_Rank06_P3_DownRatio": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAK",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      15812359
+                    ]
+                  }
+                },
+                "MDF_PropertyValue": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAK",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      713155818
+                    ]
+                  }
+                },
+                "MDF_PropertyValue_2": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAK",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      1539289637
+                    ]
+                  }
+                }
+              },
+              "IsShowUIMessageOnUpdate": false
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.DamageByAttackProperty",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllDarkTeam"
+          },
+          "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
+            "DamageType": {
+              "DamageType": "Fire"
+            },
+            "DamagePercentage": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  -56289053
+                ]
+              }
+            },
+            "StanceValue": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  1182064154
+                ]
+              }
+            },
+            "SPHitRatio": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 1
+              }
+            },
+            "HitAnimation": "Hit"
+          },
+          "CanTriggerLastKill": true,
+          "DisplayData": {
+            "UIMessageHeight": 3,
+            "Scale": 2
+          }
+        },
+        {
           "$type": "RPG.GameCore.DamagePerformFinish"
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill03",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.SetEnergyBarState",
+          "Active": "True",
+          "BarType": 3,
+          "CurrentState": "Active",
+          "CD": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0
+            }
+          },
+          "IconPath": "SpriteOutput/BuffIcon/Inlevel/Avatar/Icon1218Ultra.png",
+          "MaxCount": {
+            "IsDynamic": true,
+            "PostfixExpr": {
+              "OpCodes": "AQAK",
+              "FixedValues": [],
+              "DynamicHashes": [
+                -2006209309
+              ]
+            }
+          },
+          "CurrentCount": {
+            "IsDynamic": true,
+            "PostfixExpr": {
+              "OpCodes": "AQAK",
+              "FixedValues": [],
+              "DynamicHashes": [
+                -2006209309
+              ]
+            }
+          }
         },
         {
           "$type": "RPG.GameCore.SkillPerformFinish"
@@ -1661,13 +1853,13 @@
                   "FailedTaskList": [
                     {
                       "$type": "RPG.GameCore.SetDynamicValue",
-                      "DynamicKey": "EnergyBarCount",
                       "Value": {
                         "IsDynamic": false,
                         "FixedValue": {
                           "Value": 0
                         }
-                      }
+                      },
+                      "DynamicKey": "EnergyBarCount"
                     }
                   ]
                 },
@@ -1696,7 +1888,7 @@
                           "Value": 0
                         }
                       },
-                      "IconPath": "SpriteOutput/BuffIcon/Inlevel/Icon1203Passive.png",
+                      "IconPath": "SpriteOutput/BuffIcon/Inlevel/Avatar/Icon1218Ultra.png",
                       "CurrentCount": {
                         "IsDynamic": true,
                         "PostfixExpr": {
@@ -1721,13 +1913,163 @@
                           "Value": 0
                         }
                       },
-                      "IconPath": "SpriteOutput/BuffIcon/Inlevel/Icon1203Passive.png",
+                      "IconPath": "SpriteOutput/BuffIcon/Inlevel/Avatar/Icon1218Ultra.png",
                       "CurrentCount": {
                         "IsDynamic": false,
                         "FixedValue": {
                           "Value": 0
                         }
                       }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Event": "OnStack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "Value": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        1475155158
+                      ]
+                    }
+                  },
+                  "DynamicKey": "SkillP01_DotRatio"
+                },
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllDarkTeam"
+                  },
+                  "ModifierName": "MAvatar_Jiaoqiu_00_PassiveSkill_Debuff"
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.BySkillPointActivated",
+                    "PointTriggerKey": {
+                      "Hash": 1455742903
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "ModifierName": "MAvatar_Jiaoqiu_00_Tree01_recoverSP"
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.BySkillPointActivated",
+                    "PointTriggerKey": {
+                      "Hash": 1455742904
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "ModifierName": "MAvatar_Jiaoqiu_00_Tree02_StatusProbabilityShow"
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByRankActivated",
+                    "TriggerKey": {
+                      "Hash": -1445815962
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "ModifierName": "MAvatar_Jiaoqiu_00_Rank06_ListenFlavor"
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareWaveCount",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 1
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "Value": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1
+                        }
+                      },
+                      "DynamicKey": "SkillRank_Rank04_Flag"
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByRankActivated",
+                    "TriggerKey": {
+                      "Hash": -1445815962
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "Value": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAK",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            379544836
+                          ]
+                        }
+                      },
+                      "DynamicKey": "_MaxLayer"
+                    }
+                  ],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "Value": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAK",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            -1542519066
+                          ]
+                        }
+                      },
+                      "DynamicKey": "_MaxLayer"
                     }
                   ]
                 }
@@ -1758,27 +2100,87 @@
                   ]
                 }
               ]
-            },
-            {
-              "Event": "OnEnterBattle",
-              "CallbackConfig": [
-                {
-                  "$type": "RPG.GameCore.AddModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "AllDarkTeam"
-                  },
-                  "ModifierName": "MAvatar_Jiaoqiu_00_PassiveSkill_Debuff"
-                }
-              ]
             }
           ],
+          "AdditionConfig": {
+            "SubModifierList": [
+              {
+                "Name": "MAvatar_Jiaoqiu_00_Rank01_ListenDamage",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "AllTeamMemberWithUnselectable"
+                },
+                "Predicate": {
+                  "$type": "RPG.GameCore.ByRankActivated",
+                  "TriggerKey": {
+                    "Hash": 2089636447
+                  }
+                },
+                "IsHaloStatus": true
+              }
+            ]
+          },
           "Stacking": "ReplaceByCaster",
           "DynamicValues": {
             "Values": {
               "-735026910": {}
             }
           }
+        },
+        "MAvatar_Jiaoqiu_00_Tree01_recoverSP": {
+          "_CallbackList": [
+            {
+              "Event": "OnEnterBattle",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareWaveCount",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 1
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.ModifySPNew",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "AddValue": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAK",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            1899211628
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.TriggerEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_MAZ_RecoverSP.prefab"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "_PriorityList": [
+            {
+              "PriorityName": "EnterBattlePriority",
+              "Key": "CharacterBuff"
+            }
+          ]
         }
       },
       "Name": "Avatar_Jiaoqiu_00_PassiveSkill01",
@@ -1791,14 +2193,14 @@
           "Active": "True",
           "BarType": 3,
           "CurrentState": "Normal",
-          "IconPath": "SpriteOutput/BuffIcon/Inlevel/Icon1203Passive.png",
+          "IconPath": "SpriteOutput/BuffIcon/Inlevel/Avatar/Icon1218Ultra.png",
           "MaxCount": {
             "IsDynamic": true,
             "PostfixExpr": {
               "OpCodes": "AQAK",
               "FixedValues": [],
               "DynamicHashes": [
-                -2000290270
+                -2006209309
               ]
             }
           },
@@ -1820,16 +2222,357 @@
       ]
     },
     {
+      "Modifiers": {
+        "StageAbility_Maze_Jiaoqiu_00_Modifier": {
+          "_CallbackList": [
+            {
+              "Event": "OnEnterBattle",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByIsMazeSkillAffectCurrentWave"
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.DamageByAttackProperty",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AllDarkTeam"
+                      },
+                      "AttackProperty": {
+                        "$type": "RPG.GameCore.AttackData",
+                        "DamageType": {
+                          "DamageType": "Fire"
+                        },
+                        "DamagePercentage": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              -544327743
+                            ]
+                          }
+                        },
+                        "AttackType": "Maze",
+                        "HitAnimation": "Hit",
+                        "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Jiaoqiu_00/Eff_Avatar_Jiaoqiu_00_PassiveSkill_Hit_02.prefab",
+                        "HitEffectHeight": 1.3,
+                        "HitPosHeight": 1.3
+                      },
+                      "CanTriggerLastKill": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.DamagePerformFinish"
+                    },
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AllDarkTeam"
+                      },
+                      "ModifierName": "MAvatar_Jiaoqiu_00_Debuff_Flavor",
+                      "Chance": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAK",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            -837080574
+                          ]
+                        }
+                      },
+                      "LifeTime": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAK",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            -1935328048
+                          ]
+                        }
+                      },
+                      "MaxLayer": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAK",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            916155872
+                          ]
+                        }
+                      },
+                      "LayerAddWhenStack": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1
+                        }
+                      },
+                      "DynamicValues": {
+                        "DOT_Ratio": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              -1507106655
+                            ]
+                          }
+                        },
+                        "SkillRank_Rank02_P1_Ratio": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              -1183793641
+                            ]
+                          }
+                        },
+                        "SkillRank_Rank06_P3_DownRatio": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              15812359
+                            ]
+                          }
+                        },
+                        "MDF_PropertyValue": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              713155818
+                            ]
+                          }
+                        },
+                        "MDF_PropertyValue_2": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              1539289637
+                            ]
+                          }
+                        }
+                      },
+                      "IsShowUIMessageOnUpdate": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "_PriorityList": [
+            {
+              "PriorityName": "EnterBattlePriority",
+              "Key": "AvatarDamage"
+            }
+          ]
+        }
+      },
       "Name": "Avatar_Jiaoqiu_00_SkillMazeInLevel",
       "TargetInfo": {
         "TargetType": "Caster"
-      }
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "StageAbility_Maze_Jiaoqiu_00_Modifier"
+        }
+      ]
     }
   ],
   "GlobalModifiers": {
+    "MAvatar_Jiaoqiu_00_Tree02_StatusProbabilityShow": {
+      "OnAbilityPropertyChange": [
+        {
+          "Property": "StatusProbability",
+          "Ranges": [
+            {
+              "Min": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0
+                }
+              },
+              "Max": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1E+09
+                }
+              },
+              "OnEnterRange": [
+                {
+                  "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                  "Name": "Jiaoqiu_00_Tree02_Sub"
+                }
+              ],
+              "OnChange": [
+                {
+                  "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                  "Name": "Jiaoqiu_00_Tree02_Sub"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "Stacking": "ReplaceByCaster",
+      "TaskListTemplate": [
+        {
+          "Name": "Jiaoqiu_00_Tree02_Sub",
+          "TaskList": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValueByProperty",
+              "DynamicKey": "SkillTree_PointB2_StatusProbabilityValue",
+              "ReadTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "Value": "StatusProbability"
+            },
+            {
+              "$type": "RPG.GameCore.SetDynamicValue",
+              "Value": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQABAQECAwEDBQkBAQQECg==",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    -1226284721,
+                    -253496675,
+                    1817645354,
+                    -281734718,
+                    -2003691260
+                  ]
+                }
+              },
+              "DynamicKey": "SkillTree_PointB2_StatusProbabilityValue"
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                "DynamicKey": "SkillTree_PointB2_StatusProbabilityValue",
+                "ContextScope": "ContextCaster",
+                "CompareType": "LessEqual",
+                "CompareValue": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 0
+                  }
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0
+                    }
+                  },
+                  "DynamicKey": "SkillTree_PointB2_StatusProbabilityValue"
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "MAvatar_Jiaoqiu_00_Tree02_AttackUp"
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "DynamicKey": "SkillTree_PointB2_StatusProbabilityValue",
+                    "ContextScope": "ContextCaster",
+                    "CompareType": "GreaterEqual",
+                    "CompareValue": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          1691141008
+                        ]
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "Value": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAK",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            1691141008
+                          ]
+                        }
+                      },
+                      "DynamicKey": "SkillTree_PointB2_StatusProbabilityValue"
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "MAvatar_Jiaoqiu_00_Tree02_AttackUp"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
     "MAvatar_Jiaoqiu_00_Passive_TargetMark": {},
     "MAvatar_Jiaoqiu_00_Debuff_Ultra": {
       "_CallbackList": [
+        {
+          "Event": "OnListenTurnEnd",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByIsTurnOwnerEntity",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ModifierOwnerEntity"
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0
+                    }
+                  },
+                  "DynamicKey": "DV_TurnCD"
+                }
+              ]
+            }
+          ]
+        },
         {
           "Event": "OnBeforeBeingHitAll",
           "CallbackConfig": [
@@ -1862,24 +2605,528 @@
               ]
             }
           ]
+        },
+        {
+          "Event": "OnBeforeSkillUse",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "DynamicKey": "DV_TurnCD",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    }
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "DynamicKey": "_Max_Count_Left",
+                    "CompareType": "Greater",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    }
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "ModifierName": "MAvatar_Jiaoqiu_00_Debuff_Flavor",
+                  "Chance": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        -894095079
+                      ]
+                    }
+                  },
+                  "LifeTime": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        -1935328048
+                      ]
+                    }
+                  },
+                  "MaxLayer": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        916155872
+                      ]
+                    }
+                  },
+                  "LayerAddWhenStack": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  },
+                  "DynamicValues": {
+                    "DOT_Ratio": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          -1507106655
+                        ]
+                      }
+                    },
+                    "SkillRank_Rank02_P1_Ratio": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          -1183793641
+                        ]
+                      }
+                    },
+                    "SkillRank_Rank06_P3_DownRatio": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          15812359
+                        ]
+                      }
+                    },
+                    "MDF_PropertyValue": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          713155818
+                        ]
+                      }
+                    },
+                    "MDF_PropertyValue_2": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          1539289637
+                        ]
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "Value": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1
+                        }
+                      },
+                      "DynamicKey": "DV_TurnCD"
+                    },
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "Value": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAAAAMK",
+                          "FixedValues": [
+                            {
+                              "Value": 1
+                            }
+                          ],
+                          "DynamicHashes": [
+                            248526211
+                          ]
+                        }
+                      },
+                      "DynamicKey": "_Max_Count_Left"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Event": "OnListenInsertAbilityStart",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByTargetListIntersects",
+                "FirstTargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ModifierOwnerEntity"
+                },
+                "SecondTargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "DynamicKey": "DV_TurnCD",
+                        "CompareType": "Equal",
+                        "CompareValue": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 0
+                          }
+                        }
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "DynamicKey": "_Max_Count_Left",
+                        "CompareType": "Greater",
+                        "CompareValue": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 0
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "ModifierName": "MAvatar_Jiaoqiu_00_Debuff_Flavor",
+                      "Chance": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAK",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            -894095079
+                          ]
+                        }
+                      },
+                      "LifeTime": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAK",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            -1935328048
+                          ]
+                        }
+                      },
+                      "MaxLayer": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAK",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            916155872
+                          ]
+                        }
+                      },
+                      "LayerAddWhenStack": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1
+                        }
+                      },
+                      "DynamicValues": {
+                        "DOT_Ratio": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              -1507106655
+                            ]
+                          }
+                        },
+                        "SkillRank_Rank02_P1_Ratio": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              -1183793641
+                            ]
+                          }
+                        },
+                        "SkillRank_Rank06_P3_DownRatio": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              15812359
+                            ]
+                          }
+                        },
+                        "MDF_PropertyValue": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              713155818
+                            ]
+                          }
+                        },
+                        "MDF_PropertyValue_2": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              1539289637
+                            ]
+                          }
+                        }
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.SetDynamicValue",
+                          "Value": {
+                            "IsDynamic": false,
+                            "FixedValue": {
+                              "Value": 1
+                            }
+                          },
+                          "DynamicKey": "DV_TurnCD"
+                        },
+                        {
+                          "$type": "RPG.GameCore.SetDynamicValue",
+                          "Value": {
+                            "IsDynamic": true,
+                            "PostfixExpr": {
+                              "OpCodes": "AQAAAAMK",
+                              "FixedValues": [
+                                {
+                                  "Value": 1
+                                }
+                              ],
+                              "DynamicHashes": [
+                                248526211
+                              ]
+                            }
+                          },
+                          "DynamicKey": "_Max_Count_Left"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ],
+      "AdditionConfig": {
+        "DependencyOnRemove": {
+          "DependentModifier": "MAvatar_Jiaoqiu_00_Aura"
+        }
+      },
       "Stacking": "ReplaceByCaster",
       "DynamicValues": {
         "Values": {
-          "2128130574": {}
+          "2128130574": {},
+          "-1482587249": {}
         }
       }
     },
     "MAvatar_Jiaoqiu_00_Debuff_Flavor": {
+      "LifeStepMoment": "ModifierPhase1End",
+      "PerformTime": {
+        "IsDynamic": false,
+        "FixedValue": {
+          "Value": 0.3
+        }
+      },
       "BehaviorFlagList": [
-        "STAT_DefenceDown",
+        "STAT_DOT",
+        "KeepOnDeathrattle",
         "RemoveWhenCasterDead"
       ],
+      "UseSnapshotEntity": true,
+      "UIConfig": {
+        "ModifierUIPriority": "DealDamage"
+      },
       "_CallbackList": [
+        {
+          "Event": "OnCreate",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByInTurnBasedGameModeState"
+              },
+              "SuccessTaskList": [],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.AddBuffPerform",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "TaskList": [
+                    {
+                      "$type": "RPG.GameCore.TriggerEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Buff_Common_Fire_Add.prefab",
+                      "AttachPoint": "SelectRoot"
+                    }
+                  ],
+                  "AddPerformTime": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0.75
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Event": "OnPhase1",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.TriggerEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Buff_Common_Fire_Trigger.prefab",
+              "AttachPoint": "SelectRoot"
+            },
+            {
+              "$type": "RPG.GameCore.WaitSecond",
+              "WaitTime": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0.1
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.DamageByAttackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "AttackProperty": {
+                "$type": "RPG.GameCore.AttackData",
+                "DamageType": {
+                  "DamageType": "Fire"
+                },
+                "DamagePercentage": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAK",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      -1309803219
+                    ]
+                  }
+                },
+                "DamageValue": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAK",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      989678584
+                    ]
+                  }
+                },
+                "ExtraFormulaType": "ByDefence",
+                "ExtraDamagePercentage": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAK",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      -1601634912
+                    ]
+                  }
+                },
+                "AttackType": "DOT",
+                "DamageTag": [
+                  "Burn"
+                ]
+              },
+              "DisplayData": {
+                "AttachPoint": "SelectRoot"
+              }
+            },
+            {
+              "$type": "RPG.GameCore.WaitSecond",
+              "WaitTime": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0.1
+                }
+              }
+            }
+          ]
+        },
         {
           "Event": "OnStack",
           "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.AddBehaviorFlagForModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ModifierName": "MAvatar_Jiaoqiu_00_Debuff_Flavor",
+              "CasterFilter": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AddBehaviorFlags": [
+                "STAT_DOT_Burn"
+              ]
+            },
             {
               "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
               "ReadTargetType": {
@@ -1897,25 +3144,39 @@
               "DynamicKey": "MDF_Layer"
             },
             {
-              "$type": "RPG.GameCore.StackProperty",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "Property": "DefenceAddedRatio",
-              "PropertyValue": {
+              "$type": "RPG.GameCore.SetDynamicValue",
+              "Value": {
                 "IsDynamic": true,
                 "PostfixExpr": {
-                  "OpCodes": "AAABAAEBAQIEAgMK",
+                  "OpCodes": "AQABAQAAAwECBAIK",
                   "FixedValues": [
                     {
-                      "Value": 0
+                      "Value": 1
                     }
                   ],
                   "DynamicHashes": [
                     2128130574,
                     1662446059,
                     561100665
+                  ]
+                }
+              },
+              "DynamicKey": "MDF_PropertyValue"
+            },
+            {
+              "$type": "RPG.GameCore.StackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "Property": "AllDamageTypeTakenRatio",
+              "PropertyValue": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    2128130574
                   ]
                 }
               }
@@ -1926,18 +3187,17 @@
                 "$type": "RPG.GameCore.ByCompareDynamicValue",
                 "TargetType": {
                   "$type": "RPG.GameCore.TargetAlias",
-                  "Alias": "ModifierOwnerEntity"
+                  "Alias": "SnapshotEntityActualOwner"
                 },
-                "DynamicKey": "MDF_Layer",
-                "ContextScope": "TargetEntity",
-                "CompareType": "Greater",
+                "DynamicKey": "_Layer_Total",
+                "CompareType": "Less",
                 "CompareValue": {
                   "IsDynamic": true,
                   "PostfixExpr": {
                     "OpCodes": "AQAK",
                     "FixedValues": [],
                     "DynamicHashes": [
-                      546065205
+                      1662446059
                     ]
                   }
                 }
@@ -1945,7 +3205,10 @@
               "SuccessTaskList": [
                 {
                   "$type": "RPG.GameCore.SetDynamicValue",
-                  "DynamicKey": "_Layer_Total",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "SnapshotEntityActualOwner"
+                  },
                   "Value": {
                     "IsDynamic": true,
                     "PostfixExpr": {
@@ -1955,9 +3218,146 @@
                         1662446059
                       ]
                     }
+                  },
+                  "DynamicKey": "_Layer_Total"
+                }
+              ]
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByRankActivated",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "SnapshotEntityActualOwner"
+                },
+                "TriggerKey": {
+                  "Hash": 523552506
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "Value": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQABAQIK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        -1309803219,
+                        1376378888
+                      ]
+                    }
+                  },
+                  "DynamicKey": "DOT_Ratio"
+                }
+              ]
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByRankActivated",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "SnapshotEntityActualOwner"
+                },
+                "TriggerKey": {
+                  "Hash": -1445815962
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "ModifierName": "MAvatar_Jiaoqiu_00_SkillRank06_ResistDown",
+                  "DynamicValues": {
+                    "ResistDownRatio": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQABAQQK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          1662446059,
+                          -647411478
+                        ]
+                      }
+                    }
                   }
                 }
               ]
+            }
+          ]
+        },
+        {
+          "Event": "OnCustomEvent",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.ModifierAttachEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Buff_Common_Fire_Trigger.prefab",
+              "AttachPoint": "SelectRoot",
+              "MinMutexTime": -1,
+              "MutexType": "Entity"
+            },
+            {
+              "$type": "RPG.GameCore.DamageByAttackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "AttackProperty": {
+                "$type": "RPG.GameCore.AttackData",
+                "DamageType": {
+                  "DamageType": "Fire"
+                },
+                "DamagePercentage": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQABAQQK",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      375103313,
+                      -1309803219
+                    ]
+                  }
+                },
+                "DamageValue": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQABAQQK",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      375103313,
+                      989678584
+                    ]
+                  }
+                },
+                "ExtraFormulaType": "ByDefence",
+                "ExtraDamagePercentage": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQABAQQK",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      375103313,
+                      -1601634912
+                    ]
+                  }
+                },
+                "AttackType": "DOT",
+                "DamageTag": [
+                  "Burn"
+                ]
+              },
+              "DisplayData": {
+                "AttachPoint": "SelectRoot"
+              }
             }
           ]
         }
@@ -1967,192 +3367,18 @@
         "Values": {
           "1662446059": {},
           "2128130574": {},
-          "561100665": {}
+          "561100665": {},
+          "-1309803219": {},
+          "1376378888": {},
+          "-647411478": {},
+          "375103313": {},
+          "-1601634912": {},
+          "989678584": {}
         }
       }
     },
     "MAvatar_Jiaoqiu_00_Aura_DebuffForShow": {
       "Stacking": "ReplaceByCaster"
-    },
-    "MAvatar_Jiaoqiu_00_Aura_SkillTree01_Debuff": {
-      "_CallbackList": [
-        {
-          "Event": "OnPhase1",
-          "CallbackConfig": [
-            {
-              "$type": "RPG.GameCore.DamageByAttackProperty",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "AttackProperty": {
-                "DamageType": "Fire",
-                "DamagePercentage": {
-                  "IsDynamic": true,
-                  "PostfixExpr": {
-                    "OpCodes": "AQAK",
-                    "FixedValues": [],
-                    "DynamicHashes": [
-                      -1495119037
-                    ]
-                  }
-                },
-                "AttackType": "Pursued",
-                "HitAnimation": "Hit",
-                "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Asta/Eff_Avatar_Asta_00_Skill02_Hit01.prefab"
-              }
-            }
-          ]
-        },
-        {
-          "Event": "OnBeforeSkillUse",
-          "CallbackConfig": [
-            {
-              "$type": "RPG.GameCore.AddModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "ModifierName": "MAvatar_Jiaoqiu_00_Debuff_Flavor",
-              "Chance": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQAK",
-                  "FixedValues": [],
-                  "DynamicHashes": [
-                    -1761699449
-                  ]
-                }
-              },
-              "LifeTime": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQAK",
-                  "FixedValues": [],
-                  "DynamicHashes": [
-                    -1935328048
-                  ]
-                }
-              },
-              "MaxLayer": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQAK",
-                  "FixedValues": [],
-                  "DynamicHashes": [
-                    -1542519066
-                  ]
-                }
-              },
-              "LayerAddWhenStack": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 1
-                }
-              },
-              "DynamicValues": {
-                "MDF_PropertyValue": {
-                  "IsDynamic": true,
-                  "PostfixExpr": {
-                    "OpCodes": "AQAK",
-                    "FixedValues": [],
-                    "DynamicHashes": [
-                      713155818
-                    ]
-                  }
-                },
-                "MDF_PropertyValue_2": {
-                  "IsDynamic": true,
-                  "PostfixExpr": {
-                    "OpCodes": "AQAK",
-                    "FixedValues": [],
-                    "DynamicHashes": [
-                      1539289637
-                    ]
-                  }
-                }
-              }
-            }
-          ]
-        },
-        {
-          "Event": "OnInsertAbilityStart",
-          "CallbackConfig": [
-            {
-              "$type": "RPG.GameCore.AddModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "ModifierName": "MAvatar_Jiaoqiu_00_Debuff_Flavor",
-              "Chance": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQAK",
-                  "FixedValues": [],
-                  "DynamicHashes": [
-                    -1761699449
-                  ]
-                }
-              },
-              "LifeTime": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQAK",
-                  "FixedValues": [],
-                  "DynamicHashes": [
-                    -1935328048
-                  ]
-                }
-              },
-              "MaxLayer": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQAK",
-                  "FixedValues": [],
-                  "DynamicHashes": [
-                    -1542519066
-                  ]
-                }
-              },
-              "LayerAddWhenStack": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 1
-                }
-              },
-              "DynamicValues": {
-                "MDF_PropertyValue": {
-                  "IsDynamic": true,
-                  "PostfixExpr": {
-                    "OpCodes": "AQAK",
-                    "FixedValues": [],
-                    "DynamicHashes": [
-                      713155818
-                    ]
-                  }
-                },
-                "MDF_PropertyValue_2": {
-                  "IsDynamic": true,
-                  "PostfixExpr": {
-                    "OpCodes": "AQAK",
-                    "FixedValues": [],
-                    "DynamicHashes": [
-                      1539289637
-                    ]
-                  }
-                }
-              }
-            }
-          ]
-        }
-      ],
-      "Stacking": "ReplaceByCaster",
-      "DynamicValues": {
-        "Values": {
-          "-1266164220": {}
-        }
-      }
     },
     "MAvatar_Jiaoqiu_00_PassiveSkill_Debuff": {
       "BehaviorFlagList": [
@@ -2160,42 +3386,34 @@
       ],
       "Stacking": "ReplaceByCaster"
     },
-    "MAvatar_Jiaoqiu_00_Aura_Heal": {
+    "MAvatar_Jiaoqiu_00_Ultra_FriendForShow": {
       "_CallbackList": [
         {
-          "Event": "OnPhase1",
+          "Event": "OnStack",
+          "CallbackConfig": []
+        }
+      ],
+      "Stacking": "ReplaceByCaster"
+    },
+    "MAvatar_Jiaoqiu_00_Tree02_AttackUp": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
           "CallbackConfig": [
             {
-              "$type": "RPG.GameCore.TriggerEffect",
+              "$type": "RPG.GameCore.StackProperty",
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "ModifierOwnerEntity"
               },
-              "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_Heal.prefab"
-            },
-            {
-              "$type": "RPG.GameCore.HealHP",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "HealPercentage": {
+              "Property": "AttackAddedRatio",
+              "PropertyValue": {
                 "IsDynamic": true,
                 "PostfixExpr": {
                   "OpCodes": "AQAK",
                   "FixedValues": [],
                   "DynamicHashes": [
-                    -2118159447
-                  ]
-                }
-              },
-              "ModifyValue": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQAK",
-                  "FixedValues": [],
-                  "DynamicHashes": [
-                    1276127143
+                    -253496675
                   ]
                 }
               }
@@ -2203,13 +3421,7 @@
           ]
         }
       ],
-      "Stacking": "ReplaceByCaster",
-      "DynamicValues": {
-        "Values": {
-          "-2118159447": {},
-          "1276127143": {}
-        }
-      }
+      "Stacking": "ReplaceByCaster"
     },
     "MAvatar_Jiaoqiu_00_Aura": {
       "LifeStepMoment": "ModifierPhase1End",
@@ -2226,8 +3438,7 @@
               "Flags": [
                 "Field"
               ],
-              "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_FuXuan/Eff_Avatar_FuXuan_00_Skill02_Shield_Loop.prefab",
-              "UniqueEffectName": "Eff_Avatar_FuXuan_00_Skill02_Shield_Loop",
+              "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Jiaoqiu_00/Eff_Avatar_Jiaoqiu_00_PassiveSkill.prefab",
               "MinMutexTime": -1,
               "MinMutexType": "Entity"
             }
@@ -2237,45 +3448,14 @@
           "Event": "OnDestroy",
           "CallbackConfig": [
             {
-              "$type": "RPG.GameCore.RemoveModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetConcat",
-                "Targets": [
-                  {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "AllTeamMember"
-                  },
-                  {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "AllUnselectable"
-                  }
-                ]
+              "$type": "RPG.GameCore.SetDynamicValue",
+              "Value": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0
+                }
               },
-              "ModifierName": "MAvatar_Jiaoqiu_00_Aura_Heal"
-            },
-            {
-              "$type": "RPG.GameCore.RemoveModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "AllEnemyWithUnSelectable"
-              },
-              "ModifierName": "MAvatar_Jiaoqiu_00_Aura_DebuffForShow"
-            },
-            {
-              "$type": "RPG.GameCore.RemoveModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "AllEnemyWithUnSelectable"
-              },
-              "ModifierName": "MAvatar_Jiaoqiu_00_Aura_SkillTree01_Debuff"
-            },
-            {
-              "$type": "RPG.GameCore.RemoveModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "AllEnemyWithUnSelectable"
-              },
-              "ModifierName": "MAvatar_Jiaoqiu_00_Debuff_Ultra"
+              "DynamicKey": "SkillRank_Rank04_Flag"
             },
             {
               "$type": "RPG.GameCore.SetEnergyBarState",
@@ -2294,41 +3474,7 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "AllTeamCenter"
               },
-              "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_FuXuan/Eff_Avatar_FuXuan_00_Skill02_Shield_Loop.prefab"
-            }
-          ]
-        },
-        {
-          "Event": "OnListenTurnEnd",
-          "CallbackConfig": [
-            {
-              "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
-              "ReadTargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "ModifierName": "MAvatar_Jiaoqiu_00_Aura",
-              "ValueType": "LifeTime",
-              "Multiplier": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 1
-                }
-              },
-              "DynamicKey": "_Temp_Time"
-            },
-            {
-              "$type": "RPG.GameCore.SetEnergyBarState",
-              "CurrentCount": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQAK",
-                  "FixedValues": [],
-                  "DynamicHashes": [
-                    -491984287
-                  ]
-                }
-              }
+              "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Jiaoqiu_00/Eff_Avatar_Jiaoqiu_00_PassiveSkill.prefab"
             }
           ]
         },
@@ -2336,110 +3482,18 @@
           "Event": "OnStack",
           "CallbackConfig": [
             {
-              "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
-              "ReadTargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "ModifierName": "MAvatar_Jiaoqiu_00_Aura",
-              "ValueType": "LifeTime",
-              "Multiplier": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 1
-                }
-              },
-              "DynamicKey": "_Temp_Time"
-            },
-            {
-              "$type": "RPG.GameCore.SetEnergyBarState",
-              "CurrentCount": {
+              "$type": "RPG.GameCore.SetDynamicValue",
+              "Value": {
                 "IsDynamic": true,
                 "PostfixExpr": {
                   "OpCodes": "AQAK",
                   "FixedValues": [],
                   "DynamicHashes": [
-                    -491984287
+                    -1713458805
                   ]
                 }
-              }
-            },
-            {
-              "$type": "RPG.GameCore.AddModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "AllLightTeamWithAllUnselectableLightTeam"
               },
-              "ModifierName": "MAvatar_Jiaoqiu_00_Aura_Heal",
-              "DynamicValues": {
-                "MDF_HealRatio": {
-                  "IsDynamic": true,
-                  "PostfixExpr": {
-                    "OpCodes": "AQAK",
-                    "FixedValues": [],
-                    "DynamicHashes": [
-                      -1038622532
-                    ]
-                  }
-                },
-                "MDF_HealValue": {
-                  "IsDynamic": true,
-                  "PostfixExpr": {
-                    "OpCodes": "AQAK",
-                    "FixedValues": [],
-                    "DynamicHashes": [
-                      1105039990
-                    ]
-                  }
-                }
-              }
-            },
-            {
-              "$type": "RPG.GameCore.AddModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "AllDarkTeamWithAllDarkTeamUnselectable"
-              },
-              "ModifierName": "MAvatar_Jiaoqiu_00_Aura_DebuffForShow"
-            },
-            {
-              "$type": "RPG.GameCore.PredicateTaskList",
-              "Predicate": {
-                "$type": "RPG.GameCore.BySkillPointActivated",
-                "PointTriggerKey": {
-                  "Hash": 1455742903
-                }
-              },
-              "SuccessTaskList": [
-                {
-                  "$type": "RPG.GameCore.AddModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "AllEnemyWithUnSelectable"
-                  },
-                  "ModifierName": "MAvatar_Jiaoqiu_00_Aura_SkillTree01_Debuff"
-                }
-              ]
-            },
-            {
-              "$type": "RPG.GameCore.AddModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "AllEnemyWithUnSelectable"
-              },
-              "ModifierName": "MAvatar_Jiaoqiu_00_Debuff_Ultra",
-              "DynamicValues": {
-                "MDF_PropertyValue": {
-                  "IsDynamic": true,
-                  "PostfixExpr": {
-                    "OpCodes": "AQAK",
-                    "FixedValues": [],
-                    "DynamicHashes": [
-                      1324426262
-                    ]
-                  }
-                }
-              }
+              "DynamicKey": "_Max_Count_Left"
             }
           ]
         },
@@ -2454,99 +3508,9 @@
                   "$type": "RPG.GameCore.TargetAlias",
                   "Alias": "ParamEntity"
                 },
-                "Team": "TeamLight"
-              },
-              "SuccessTaskList": [
-                {
-                  "$type": "RPG.GameCore.AddModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  },
-                  "ModifierName": "MAvatar_Jiaoqiu_00_Aura_Heal",
-                  "DynamicValues": {
-                    "MDF_HealRatio": {
-                      "IsDynamic": true,
-                      "PostfixExpr": {
-                        "OpCodes": "AQAK",
-                        "FixedValues": [],
-                        "DynamicHashes": [
-                          -1038622532
-                        ]
-                      }
-                    },
-                    "MDF_HealValue": {
-                      "IsDynamic": true,
-                      "PostfixExpr": {
-                        "OpCodes": "AQAK",
-                        "FixedValues": [],
-                        "DynamicHashes": [
-                          1105039990
-                        ]
-                      }
-                    }
-                  }
-                }
-              ]
-            },
-            {
-              "$type": "RPG.GameCore.PredicateTaskList",
-              "Predicate": {
-                "$type": "RPG.GameCore.ByTargetTeam",
-                "TargetType": {
-                  "$type": "RPG.GameCore.TargetAlias",
-                  "Alias": "ParamEntity"
-                },
                 "Team": "TeamDark"
               },
               "SuccessTaskList": [
-                {
-                  "$type": "RPG.GameCore.AddModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  },
-                  "ModifierName": "MAvatar_Jiaoqiu_00_Aura_DebuffForShow"
-                },
-                {
-                  "$type": "RPG.GameCore.PredicateTaskList",
-                  "Predicate": {
-                    "$type": "RPG.GameCore.BySkillPointActivated",
-                    "PointTriggerKey": {
-                      "Hash": 1455742903
-                    }
-                  },
-                  "SuccessTaskList": [
-                    {
-                      "$type": "RPG.GameCore.AddModifier",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "ParamEntity"
-                      },
-                      "ModifierName": "MAvatar_Jiaoqiu_00_Aura_SkillTree01_Debuff"
-                    }
-                  ]
-                },
-                {
-                  "$type": "RPG.GameCore.AddModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  },
-                  "ModifierName": "MAvatar_Jiaoqiu_00_Debuff_Ultra",
-                  "DynamicValues": {
-                    "MDF_PropertyValue": {
-                      "IsDynamic": true,
-                      "PostfixExpr": {
-                        "OpCodes": "AQAK",
-                        "FixedValues": [],
-                        "DynamicHashes": [
-                          1324426262
-                        ]
-                      }
-                    }
-                  }
-                },
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
                   "Predicate": {
@@ -2572,7 +3536,6 @@
                       "FailedTaskList": [
                         {
                           "$type": "RPG.GameCore.SetDynamicValue",
-                          "DynamicKey": "_Layer_Total",
                           "Value": {
                             "IsDynamic": true,
                             "PostfixExpr": {
@@ -2582,7 +3545,8 @@
                                 -81405534
                               ]
                             }
-                          }
+                          },
+                          "DynamicKey": "_Layer_Total"
                         }
                       ]
                     },
@@ -2590,7 +3554,7 @@
                       "$type": "RPG.GameCore.Retarget",
                       "TargetType": {
                         "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "AllDarkTeam"
+                        "Alias": "AllEnemyWithUnSelectable"
                       },
                       "Predicate": {
                         "$type": "RPG.GameCore.ByIsContainModifier",
@@ -2600,6 +3564,7 @@
                         },
                         "ModifierName": "MAvatar_Jiaoqiu_00_Debuff_Flavor"
                       },
+                      "ByRandom": true,
                       "TaskList": [
                         {
                           "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
@@ -2637,7 +3602,6 @@
                           "SuccessTaskList": [
                             {
                               "$type": "RPG.GameCore.SetDynamicValue",
-                              "DynamicKey": "_Layer_Total",
                               "Value": {
                                 "IsDynamic": true,
                                 "PostfixExpr": {
@@ -2647,7 +3611,8 @@
                                     1157263263
                                   ]
                                 }
-                              }
+                              },
+                              "DynamicKey": "_Layer_Total"
                             }
                           ]
                         }
@@ -2676,7 +3641,7 @@
                           "OpCodes": "AQAK",
                           "FixedValues": [],
                           "DynamicHashes": [
-                            -1542519066
+                            916155872
                           ]
                         }
                       },
@@ -2691,6 +3656,510 @@
                         }
                       },
                       "DynamicValues": {
+                        "DOT_Ratio": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              -1507106655
+                            ]
+                          }
+                        },
+                        "SkillRank_Rank02_P1_Ratio": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              -1183793641
+                            ]
+                          }
+                        },
+                        "SkillRank_Rank06_P3_DownRatio": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              15812359
+                            ]
+                          }
+                        },
+                        "MDF_PropertyValue": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              713155818
+                            ]
+                          }
+                        },
+                        "MDF_PropertyValue_2": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              1539289637
+                            ]
+                          }
+                        }
+                      },
+                      "IsShowUIMessageOnUpdate": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Event": "OnBeforeDying",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.SetEnergyBarState",
+              "BarType": 3,
+              "CurrentState": "Normal",
+              "CurrentCount": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllTeamCenter"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Jiaoqiu_00/Eff_Avatar_Jiaoqiu_00_PassiveSkill.prefab"
+            }
+          ]
+        }
+      ],
+      "AdditionConfig": {
+        "SubModifierList": [
+          {
+            "Name": "MAvatar_Jiaoqiu_00_Ultra_FriendForShow",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "AllTeammateWithUnselectable"
+            },
+            "IsHaloStatus": true
+          },
+          {
+            "Name": "MAvatar_Jiaoqiu_00_Aura_DebuffForShow",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "AllEnemyWithUnSelectable"
+            },
+            "IsHaloStatus": true
+          },
+          {
+            "Name": "MAvatar_Jiaoqiu_00_Debuff_Ultra",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "AllEnemyWithUnSelectable"
+            },
+            "DynamicValues": {
+              "MDF_PropertyValue": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    1324533879
+                  ]
+                }
+              }
+            },
+            "IsHaloStatus": true
+          },
+          {
+            "Name": "MAvatar_Jiaoqiu_00_Rank04_AttackDown",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "AllEnemyWithUnSelectable"
+            },
+            "DynamicValues": {
+              "MDF_PropertyValue": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    495206713
+                  ]
+                }
+              }
+            },
+            "Predicate": {
+              "$type": "RPG.GameCore.ByRankActivated",
+              "TriggerKey": {
+                "Hash": 1686351920
+              }
+            },
+            "IsHaloStatus": true
+          }
+        ]
+      },
+      "Stacking": "ReplaceByCaster",
+      "DynamicValues": {
+        "Values": {
+          "898701636": {},
+          "-109265675": {},
+          "810186272": {},
+          "-935399494": {},
+          "2060931488": {}
+        }
+      }
+    },
+    "MAvatar_Jiaoqiu_00_Rank01_ListenDamage": {
+      "_CallbackList": [
+        {
+          "Event": "OnBeforeHitAll",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByIsContainModifier",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "ModifierName": "MAvatar_Jiaoqiu_00_Debuff_Flavor",
+                "AddedOrAlive": true
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.ModifyDamageData",
+                  "Attacker_AllDamageTypeAddedRatio": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        -193024732
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "Stacking": "ReplaceByCaster"
+    },
+    "MAvatar_Jiaoqiu_00_Rank06_ListenFlavor": {
+      "_CallbackList": [
+        {
+          "Event": "OnListenCharacterDie",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByIsTargetValid",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity2"
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByIsContainModifier",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "ModifierName": "MAvatar_Jiaoqiu_00_Debuff_Flavor"
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByTargetTeam",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "Team": "TeamDark"
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByNot",
+                        "Predicate": {
+                          "$type": "RPG.GameCore.ByTargetTeam",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity2"
+                          },
+                          "Team": "TeamDark"
+                        }
+                      }
+                    ]
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                      "Name": "Jiaoqiu_00_Rank06_Sub"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "Stacking": "ReplaceByCaster",
+      "DynamicValues": {
+        "Values": {
+          "1662446059": {},
+          "2100385170": {}
+        }
+      },
+      "TaskListTemplate": [
+        {
+          "Name": "Jiaoqiu_00_Rank06_Sub",
+          "TaskList": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByRankActivated",
+                "TriggerKey": {
+                  "Hash": -1445815962
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
+                  "ReadTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "ModifierName": "MAvatar_Jiaoqiu_00_Debuff_Flavor",
+                  "ValueType": "Layer",
+                  "Multiplier": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  },
+                  "DynamicKey": "MDF_Layer"
+                },
+                {
+                  "$type": "RPG.GameCore.Retarget",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllDarkTeam"
+                  },
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByIsContainModifier",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "ModifierName": "MAvatar_Jiaoqiu_00_Debuff_Flavor",
+                    "Inverse": true
+                  },
+                  "ByRandom": true,
+                  "MaxNumber": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  },
+                  "TaskList": [
+                    {
+                      "$type": "RPG.GameCore.RemoveModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AllDarkTeamWithAllDarkTeamUnselectable"
+                      },
+                      "ModifierName": "MAvatar_Jiaoqiu_00_SkillRank06_Flag"
+                    },
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "MAvatar_Jiaoqiu_00_SkillRank06_Flag"
+                    }
+                  ],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.Retarget",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AllDarkTeam"
+                      },
+                      "ByRandom": true,
+                      "MaxNumber": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 10
+                        }
+                      },
+                      "TaskList": [
+                        {
+                          "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
+                          "ReadTargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "ModifierName": "MAvatar_Jiaoqiu_00_Debuff_Flavor",
+                          "ValueType": "Layer",
+                          "Multiplier": {
+                            "IsDynamic": false,
+                            "FixedValue": {
+                              "Value": 1
+                            }
+                          },
+                          "DynamicKey": "_TempLayer"
+                        },
+                        {
+                          "$type": "RPG.GameCore.PredicateTaskList",
+                          "Predicate": {
+                            "$type": "RPG.GameCore.ByCompareDynamicValue",
+                            "DynamicKey": "_Layer_Min",
+                            "CompareType": "Greater",
+                            "CompareValue": {
+                              "IsDynamic": true,
+                              "PostfixExpr": {
+                                "OpCodes": "AQAK",
+                                "FixedValues": [],
+                                "DynamicHashes": [
+                                  2100385170
+                                ]
+                              }
+                            }
+                          },
+                          "SuccessTaskList": [
+                            {
+                              "$type": "RPG.GameCore.SetDynamicValue",
+                              "Value": {
+                                "IsDynamic": true,
+                                "PostfixExpr": {
+                                  "OpCodes": "AQAK",
+                                  "FixedValues": [],
+                                  "DynamicHashes": [
+                                    2100385170
+                                  ]
+                                }
+                              },
+                              "DynamicKey": "_Layer_Min"
+                            },
+                            {
+                              "$type": "RPG.GameCore.RemoveModifier",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "AllDarkTeamWithAllDarkTeamUnselectable"
+                              },
+                              "ModifierName": "MAvatar_Jiaoqiu_00_SkillRank06_Flag"
+                            },
+                            {
+                              "$type": "RPG.GameCore.AddModifier",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "ParamEntity"
+                              },
+                              "ModifierName": "MAvatar_Jiaoqiu_00_SkillRank06_Flag"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.Retarget",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllDarkTeam"
+                  },
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByIsContainModifier",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "ModifierName": "MAvatar_Jiaoqiu_00_SkillRank06_Flag"
+                  },
+                  "ByRandom": true,
+                  "TaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "MAvatar_Jiaoqiu_00_Debuff_Flavor",
+                      "LifeTime": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAK",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            -1935328048
+                          ]
+                        }
+                      },
+                      "MaxLayer": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAK",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            916155872
+                          ]
+                        }
+                      },
+                      "LayerAddWhenStack": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAK",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            1662446059
+                          ]
+                        }
+                      },
+                      "DynamicValues": {
+                        "DOT_Ratio": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              -1507106655
+                            ]
+                          }
+                        },
+                        "SkillRank_Rank02_P1_Ratio": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              -1183793641
+                            ]
+                          }
+                        },
+                        "SkillRank_Rank06_P3_DownRatio": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              15812359
+                            ]
+                          }
+                        },
                         "MDF_PropertyValue": {
                           "IsDynamic": true,
                           "PostfixExpr": {
@@ -2712,90 +4181,120 @@
                           }
                         }
                       }
+                    },
+                    {
+                      "$type": "RPG.GameCore.RemoveModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AllDarkTeamWithAllDarkTeamUnselectable"
+                      },
+                      "ModifierName": "MAvatar_Jiaoqiu_00_SkillRank06_Flag"
+                    },
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "Value": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 99
+                        }
+                      },
+                      "DynamicKey": "_Layer_Min"
                     }
                   ]
                 }
               ]
             }
           ]
-        },
+        }
+      ]
+    },
+    "MAvatar_Jiaoqiu_00_SkillRank06_Flag": {
+      "Stacking": "ReplaceByCaster"
+    },
+    "MAvatar_Jiaoqiu_00_Rank04_AttackDown": {
+      "BehaviorFlagList": [
+        "STAT_AttackDown"
+      ],
+      "_CallbackList": [
         {
-          "Event": "OnBeforeDying",
+          "Event": "OnStack",
           "CallbackConfig": [
             {
-              "$type": "RPG.GameCore.RemoveModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetConcat",
-                "Targets": [
-                  {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "AllTeamMember"
-                  },
-                  {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "AllUnselectable"
-                  }
-                ]
-              },
-              "ModifierName": "MAvatar_Jiaoqiu_00_Aura_Heal"
-            },
-            {
-              "$type": "RPG.GameCore.RemoveModifier",
+              "$type": "RPG.GameCore.StackProperty",
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "AllEnemyWithUnSelectable"
+                "Alias": "ModifierOwnerEntity"
               },
-              "ModifierName": "MAvatar_Jiaoqiu_00_Aura_DebuffForShow"
-            },
-            {
-              "$type": "RPG.GameCore.RemoveModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "AllEnemyWithUnSelectable"
-              },
-              "ModifierName": "MAvatar_Jiaoqiu_00_Aura_SkillTree01_Debuff"
-            },
-            {
-              "$type": "RPG.GameCore.RemoveModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "AllEnemyWithUnSelectable"
-              },
-              "ModifierName": "MAvatar_Jiaoqiu_00_Debuff_Ultra"
-            },
-            {
-              "$type": "RPG.GameCore.SetEnergyBarState",
-              "BarType": 3,
-              "CurrentState": "Normal",
-              "CurrentCount": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 0
+              "Property": "AttackAddedRatio",
+              "PropertyValue": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AAABAAMK",
+                  "FixedValues": [
+                    {
+                      "Value": 0
+                    }
+                  ],
+                  "DynamicHashes": [
+                    2128130574
+                  ]
                 }
               }
-            },
-            {
-              "$type": "RPG.GameCore.RemoveEffect",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "AllTeamCenter"
-              },
-              "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_FuXuan/Eff_Avatar_FuXuan_00_Skill02_Shield_Loop.prefab"
             }
           ]
         }
       ],
+      "AdditionConfig": {
+        "DependencyOnRemove": {
+          "DependentModifier": "MAvatar_Jiaoqiu_00_Debuff_Flavor"
+        }
+      },
       "Stacking": "ReplaceByCaster",
       "DynamicValues": {
         "Values": {
-          "2128130574": {},
-          "-2118159447": {},
-          "1276127143": {},
-          "-1038622532": {},
-          "1105039990": {},
-          "1157263263": {},
-          "-491984287": {},
-          "1157262468": {}
+          "2128130574": {}
+        }
+      }
+    },
+    "MAvatar_Jiaoqiu_00_SkillRank06_ResistDown": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.StackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "Property": "AllDamageTypeResistance",
+              "PropertyValue": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AAABAAMK",
+                  "FixedValues": [
+                    {
+                      "Value": 0
+                    }
+                  ],
+                  "DynamicHashes": [
+                    -641525199
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "AdditionConfig": {
+        "DependencyOnRemove": {
+          "DependentModifier": "MAvatar_Jiaoqiu_00_Debuff_Flavor"
+        }
+      },
+      "Stacking": "ReplaceByCaster",
+      "DynamicValues": {
+        "Values": {
+          "-641525199": {}
         }
       }
     }

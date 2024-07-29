@@ -42,8 +42,7 @@
     },
     "Boss_Cocolia_MuteHitFly_Modifier": {
       "BehaviorFlagList": [
-        "MuteHitFly",
-        "KeepOnDeathrattle"
+        "MuteHitFly"
       ],
       "_CallbackList": [
         {
@@ -599,6 +598,7 @@
                   "Hash": -1891648880
                 }
               },
+              "ByRandom": true,
               "MaxNumber": {
                 "IsDynamic": false,
                 "FixedValue": {
@@ -840,6 +840,7 @@
                     "$type": "RPG.GameCore.TargetAlias",
                     "Alias": "AttackTargetList"
                   },
+                  "ByRandom": true,
                   "IncludeLimbo": true,
                   "TaskList": [
                     {
@@ -1485,6 +1486,7 @@
                 },
                 "Flag": "STAT_CTRL_Frozen"
               },
+              "ByRandom": true,
               "MaxNumber": {
                 "IsDynamic": false,
                 "FixedValue": {
@@ -2176,6 +2178,7 @@
                       "Hash": -1610307492
                     }
                   },
+                  "ByRandom": true,
                   "MaxNumber": {
                     "IsDynamic": false,
                     "FixedValue": {
@@ -2583,6 +2586,7 @@
                 "ModifierName": "Death_Control_Modifier",
                 "Inverse": true
               },
+              "ByRandom": true,
               "MaxNumber": {
                 "IsDynamic": false,
                 "FixedValue": {
@@ -2640,6 +2644,119 @@
                   "$type": "RPG.GameCore.SetBattleAchievement",
                   "AchievementID": 30079,
                   "TagMatch": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "W2_Lycan_00_BattleScore1": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.SetBattleAchievement",
+              "AchievementID": 30156
+            }
+          ]
+        }
+      ]
+    },
+    "W2_LycanMecha_00_BattleScore1": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.DefineDynamicValue",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LevelEntity"
+              },
+              "DynamicKey": "LycanMecha_AddFearPreSuc"
+            },
+            {
+              "$type": "RPG.GameCore.DefineDynamicValue",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LevelEntity"
+              },
+              "DynamicKey": "LycanMecha_FearPreNum"
+            }
+          ]
+        },
+        {
+          "Event": "OnLeaveBattle",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "LevelEntity"
+                    },
+                    "DynamicKey": "LycanMecha_AddFearPreSuc",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 1
+                      }
+                    }
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "LevelEntity"
+                    },
+                    "DynamicKey": "LycanMecha_FearPreNum",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    }
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetBattleAchievement",
+                  "AchievementID": 30157
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "W2_LycanMecha_00_BattleScore2": {
+      "_CallbackList": [
+        {
+          "Event": "OnTriggerDeath",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByIsContainModifier",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "ModifierName": "MCommon_Fear"
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetBattleAchievement",
+                  "AchievementID": 30158
                 }
               ]
             }
@@ -2847,13 +2964,13 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "ModifierOwnerEntity"
               },
-              "DynamicKey": "Dinosaur_BreakCount",
               "Value": {
                 "IsDynamic": false,
                 "FixedValue": {
                   "Value": 1
                 }
-              }
+              },
+              "DynamicKey": "Dinosaur_BreakCount"
             }
           ]
         }
@@ -3092,13 +3209,13 @@
               "SuccessTaskList": [
                 {
                   "$type": "RPG.GameCore.SetDynamicValue",
-                  "DynamicKey": "Sam_BattleScore1_Flag",
                   "Value": {
                     "IsDynamic": false,
                     "FixedValue": {
                       "Value": 2
                     }
-                  }
+                  },
+                  "DynamicKey": "Sam_BattleScore1_Flag"
                 }
               ]
             }
@@ -3133,13 +3250,13 @@
             },
             {
               "$type": "RPG.GameCore.SetDynamicValue",
-              "DynamicKey": "Sam_BattleScore1_Flag",
               "Value": {
                 "IsDynamic": false,
                 "FixedValue": {
                   "Value": 0
                 }
-              }
+              },
+              "DynamicKey": "Sam_BattleScore1_Flag"
             }
           ]
         },
@@ -3155,13 +3272,13 @@
               "SuccessTaskList": [
                 {
                   "$type": "RPG.GameCore.SetDynamicValue",
-                  "DynamicKey": "Sam_BattleScore1_Flag",
                   "Value": {
                     "IsDynamic": false,
                     "FixedValue": {
                       "Value": 1
                     }
-                  }
+                  },
+                  "DynamicKey": "Sam_BattleScore1_Flag"
                 }
               ]
             }
@@ -3190,23 +3307,23 @@
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetDynamicValue",
-              "DynamicKey": "Aventurine_BattleScore1_Flag",
               "Value": {
                 "IsDynamic": false,
                 "FixedValue": {
                   "Value": 0
                 }
-              }
+              },
+              "DynamicKey": "Aventurine_BattleScore1_Flag"
             },
             {
               "$type": "RPG.GameCore.SetDynamicValue",
-              "DynamicKey": "MDF_LastLayer",
               "Value": {
                 "IsDynamic": false,
                 "FixedValue": {
                   "Value": 0
                 }
-              }
+              },
+              "DynamicKey": "MDF_LastLayer"
             }
           ]
         },
@@ -3273,7 +3390,6 @@
                   "SuccessTaskList": [
                     {
                       "$type": "RPG.GameCore.SetDynamicValue",
-                      "DynamicKey": "Aventurine_BattleScore1_Flag",
                       "Value": {
                         "IsDynamic": true,
                         "PostfixExpr": {
@@ -3287,13 +3403,13 @@
                             17637024
                           ]
                         }
-                      }
+                      },
+                      "DynamicKey": "Aventurine_BattleScore1_Flag"
                     }
                   ]
                 },
                 {
                   "$type": "RPG.GameCore.SetDynamicValue",
-                  "DynamicKey": "MDF_LastLayer",
                   "Value": {
                     "IsDynamic": true,
                     "PostfixExpr": {
@@ -3303,7 +3419,8 @@
                         -63529766
                       ]
                     }
-                  }
+                  },
+                  "DynamicKey": "MDF_LastLayer"
                 },
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -3365,7 +3482,6 @@
               "SuccessTaskList": [
                 {
                   "$type": "RPG.GameCore.SetDynamicValue",
-                  "DynamicKey": "Aventurine_BattleScore2_Flag",
                   "Value": {
                     "IsDynamic": true,
                     "PostfixExpr": {
@@ -3379,7 +3495,8 @@
                         17636193
                       ]
                     }
-                  }
+                  },
+                  "DynamicKey": "Aventurine_BattleScore2_Flag"
                 },
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -3410,13 +3527,13 @@
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetDynamicValue",
-              "DynamicKey": "Aventurine_BattleScore2_Flag",
               "Value": {
                 "IsDynamic": false,
                 "FixedValue": {
                   "Value": 0
                 }
-              }
+              },
+              "DynamicKey": "Aventurine_BattleScore2_Flag"
             }
           ]
         }
@@ -3617,23 +3734,23 @@
               "SuccessTaskList": [
                 {
                   "$type": "RPG.GameCore.SetDynamicValue",
-                  "DynamicKey": "W3_Figure_02_BattleScore1_Flag1",
                   "Value": {
                     "IsDynamic": false,
                     "FixedValue": {
                       "Value": 0
                     }
-                  }
+                  },
+                  "DynamicKey": "W3_Figure_02_BattleScore1_Flag1"
                 },
                 {
                   "$type": "RPG.GameCore.SetDynamicValue",
-                  "DynamicKey": "W3_Figure_02_BattleScore1_Flag2",
                   "Value": {
                     "IsDynamic": false,
                     "FixedValue": {
                       "Value": 1
                     }
-                  }
+                  },
+                  "DynamicKey": "W3_Figure_02_BattleScore1_Flag2"
                 }
               ]
             }
@@ -3668,13 +3785,13 @@
             },
             {
               "$type": "RPG.GameCore.SetDynamicValue",
-              "DynamicKey": "W3_Figure_02_BattleScore1_Flag2",
               "Value": {
                 "IsDynamic": false,
                 "FixedValue": {
                   "Value": 0
                 }
-              }
+              },
+              "DynamicKey": "W3_Figure_02_BattleScore1_Flag2"
             }
           ]
         },
@@ -3683,13 +3800,13 @@
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetDynamicValue",
-              "DynamicKey": "W3_Figure_02_BattleScore1_Flag2",
               "Value": {
                 "IsDynamic": false,
                 "FixedValue": {
                   "Value": 0
                 }
-              }
+              },
+              "DynamicKey": "W3_Figure_02_BattleScore1_Flag2"
             }
           ]
         }
@@ -3773,13 +3890,13 @@
                   "SuccessTaskList": [
                     {
                       "$type": "RPG.GameCore.SetDynamicValue",
-                      "DynamicKey": "W3_FigureBoss_00_BattleScore1_Flag1",
                       "Value": {
                         "IsDynamic": false,
                         "FixedValue": {
                           "Value": 1
                         }
-                      }
+                      },
+                      "DynamicKey": "W3_FigureBoss_00_BattleScore1_Flag1"
                     }
                   ]
                 },
@@ -3798,13 +3915,13 @@
                   "SuccessTaskList": [
                     {
                       "$type": "RPG.GameCore.SetDynamicValue",
-                      "DynamicKey": "W3_FigureBoss_00_BattleScore1_Flag2",
                       "Value": {
                         "IsDynamic": false,
                         "FixedValue": {
                           "Value": 1
                         }
-                      }
+                      },
+                      "DynamicKey": "W3_FigureBoss_00_BattleScore1_Flag2"
                     }
                   ]
                 },
@@ -3823,13 +3940,13 @@
                   "SuccessTaskList": [
                     {
                       "$type": "RPG.GameCore.SetDynamicValue",
-                      "DynamicKey": "W3_FigureBoss_00_BattleScore1_Flag3",
                       "Value": {
                         "IsDynamic": false,
                         "FixedValue": {
                           "Value": 1
                         }
-                      }
+                      },
+                      "DynamicKey": "W3_FigureBoss_00_BattleScore1_Flag3"
                     }
                   ]
                 },
@@ -4127,14 +4244,14 @@
                     "$type": "RPG.GameCore.TargetAlias",
                     "Alias": "ModifierOwnerEntity"
                   },
-                  "DynamicKey": "W3_Sunday_00_BattleScore2_Flag",
                   "ContextScope": "TargetEntity",
                   "Value": {
                     "IsDynamic": false,
                     "FixedValue": {
                       "Value": 1
                     }
-                  }
+                  },
+                  "DynamicKey": "W3_Sunday_00_BattleScore2_Flag"
                 }
               ]
             }
@@ -4220,6 +4337,7 @@
                 "Alias": "ModifierOwnerEntity"
               },
               "AttackProperty": {
+                "$type": "RPG.GameCore.AttackData",
                 "DamageType": {
                   "DamageType": "Physical"
                 },
@@ -4306,6 +4424,7 @@
                 "Alias": "ModifierOwnerEntity"
               },
               "AttackProperty": {
+                "$type": "RPG.GameCore.AttackData",
                 "DamageType": {
                   "DamageType": "Physical"
                 },
@@ -4412,7 +4531,6 @@
             },
             {
               "$type": "RPG.GameCore.SetDynamicValue",
-              "DynamicKey": "MDF_PropertyValue",
               "Value": {
                 "IsDynamic": true,
                 "PostfixExpr": {
@@ -4423,7 +4541,8 @@
                     -1503716773
                   ]
                 }
-              }
+              },
+              "DynamicKey": "MDF_PropertyValue"
             },
             {
               "$type": "RPG.GameCore.StackProperty",
@@ -4619,7 +4738,6 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "ModifierOwnerEntity"
               },
-              "DynamicKey": "_StanceLock",
               "Value": {
                 "IsDynamic": true,
                 "PostfixExpr": {
@@ -4633,7 +4751,8 @@
                     -179683352
                   ]
                 }
-              }
+              },
+              "DynamicKey": "_StanceLock"
             }
           ]
         },
@@ -4646,7 +4765,6 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "ModifierOwnerEntity"
               },
-              "DynamicKey": "_StanceLock",
               "Value": {
                 "IsDynamic": true,
                 "PostfixExpr": {
@@ -4660,7 +4778,8 @@
                     -179683352
                   ]
                 }
-              }
+              },
+              "DynamicKey": "_StanceLock"
             }
           ]
         },
@@ -6074,6 +6193,7 @@
                 "Alias": "ModifierOwnerEntity"
               },
               "AttackProperty": {
+                "$type": "RPG.GameCore.AttackData",
                 "DamageType": {
                   "DamageType": "Fire"
                 },
@@ -6306,6 +6426,7 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "Monster_Svarog_00_Unselectable"
               },
+              "ByRandom": true,
               "MaxNumber": {
                 "IsDynamic": false,
                 "FixedValue": {
@@ -6449,7 +6570,6 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "ModifierOwnerEntity"
               },
-              "DynamicKey": "_StanceLock",
               "Value": {
                 "IsDynamic": true,
                 "PostfixExpr": {
@@ -6463,7 +6583,8 @@
                     -179683352
                   ]
                 }
-              }
+              },
+              "DynamicKey": "_StanceLock"
             }
           ]
         }
@@ -6537,6 +6658,7 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "Monster_Svarog_00_Unselectable"
               },
+              "ByRandom": true,
               "IncludeLimbo": true,
               "MaxNumber": {
                 "IsDynamic": false,
@@ -6876,7 +6998,6 @@
             },
             {
               "$type": "RPG.GameCore.SetDynamicValue",
-              "DynamicKey": "ModifierCriticalChanceRatio",
               "Value": {
                 "IsDynamic": true,
                 "PostfixExpr": {
@@ -6887,7 +7008,8 @@
                     1458882163
                   ]
                 }
-              }
+              },
+              "DynamicKey": "ModifierCriticalChanceRatio"
             },
             {
               "$type": "RPG.GameCore.StackProperty",
@@ -7345,7 +7467,6 @@
             },
             {
               "$type": "RPG.GameCore.SetDynamicValue",
-              "DynamicKey": "MDF_IceResistanceRatio",
               "Value": {
                 "IsDynamic": true,
                 "PostfixExpr": {
@@ -7360,7 +7481,8 @@
                     1458882163
                   ]
                 }
-              }
+              },
+              "DynamicKey": "MDF_IceResistanceRatio"
             },
             {
               "$type": "RPG.GameCore.StackProperty",
@@ -7382,7 +7504,6 @@
             },
             {
               "$type": "RPG.GameCore.SetDynamicValue",
-              "DynamicKey": "MDF_SpeedAddedDelta",
               "Value": {
                 "IsDynamic": true,
                 "PostfixExpr": {
@@ -7397,7 +7518,8 @@
                     1458882163
                   ]
                 }
-              }
+              },
+              "DynamicKey": "MDF_SpeedAddedDelta"
             },
             {
               "$type": "RPG.GameCore.StackProperty",
@@ -8049,6 +8171,7 @@
                 "Alias": "ModifierOwnerEntity"
               },
               "AttackProperty": {
+                "$type": "RPG.GameCore.AttackData",
                 "DamageType": {
                   "DamageType": "Fire"
                 },
@@ -8125,6 +8248,7 @@
                 "Alias": "ModifierOwnerEntity"
               },
               "AttackProperty": {
+                "$type": "RPG.GameCore.AttackData",
                 "DamageType": {
                   "DamageType": "Fire"
                 },
@@ -8159,8 +8283,7 @@
     },
     "MMonster_Common_MuteHitFly": {
       "BehaviorFlagList": [
-        "MuteHitFly",
-        "KeepOnDeathrattle"
+        "MuteHitFly"
       ]
     },
     "MMonster_Common_HideMonsterHUD": {
@@ -8610,6 +8733,7 @@
                 "Alias": "ModifierOwnerEntity"
               },
               "AttackProperty": {
+                "$type": "RPG.GameCore.AttackData",
                 "DamageType": {
                   "DamageType": "Imaginary"
                 },
@@ -9090,7 +9214,6 @@
             },
             {
               "$type": "RPG.GameCore.SetDynamicValue",
-              "DynamicKey": "ModifierAttackAddedRatio",
               "Value": {
                 "IsDynamic": true,
                 "PostfixExpr": {
@@ -9101,7 +9224,8 @@
                     1458882163
                   ]
                 }
-              }
+              },
+              "DynamicKey": "ModifierAttackAddedRatio"
             },
             {
               "$type": "RPG.GameCore.StackProperty",
@@ -9123,7 +9247,6 @@
             },
             {
               "$type": "RPG.GameCore.SetDynamicValue",
-              "DynamicKey": "ModifierMaxLayer",
               "Value": {
                 "IsDynamic": true,
                 "PostfixExpr": {
@@ -9133,7 +9256,8 @@
                     -1303207772
                   ]
                 }
-              }
+              },
+              "DynamicKey": "ModifierMaxLayer"
             }
           ]
         },

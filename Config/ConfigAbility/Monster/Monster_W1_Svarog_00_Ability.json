@@ -2,6 +2,123 @@
   "AbilityList": [
     {
       "Modifiers": {
+        "MMonster_W1_Svarog_00_ResetStageBGM": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValueByVariateType",
+                  "DynamicKey": "MDF_WaveIndex",
+                  "VariateType": "CurWaveIndex"
+                }
+              ]
+            },
+            {
+              "Event": "OnWaveMonster",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValueByVariateType",
+                  "DynamicKey": "MDF_WaveIndex2",
+                  "VariateType": "CurWaveIndex"
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "DynamicKey": "MDF_WaveIndex",
+                    "CompareType": "NotEqual",
+                    "CompareValue": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          -2056435799
+                        ]
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.ResetBattleBGMToStage",
+                      "ResetStateNames": [
+                        "State_Belobog_Underworld_Combat_Svarog"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "DynamicValues": {
+            "Values": {
+              "354277359": {},
+              "-2056435799": {}
+            }
+          }
+        }
+      },
+      "Name": "Monster_W1_Svarog_00_PassiveSkill_BGM",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByAny",
+            "PredicateList": [
+              {
+                "$type": "RPG.GameCore.ByCompareStageType",
+                "CurrentStageType": "Challenge"
+              },
+              {
+                "$type": "RPG.GameCore.ByCompareStageType",
+                "CurrentStageType": "VerseSimulation"
+              },
+              {
+                "$type": "RPG.GameCore.ByCompareStageType",
+                "CurrentStageType": "StrongChallengeActivity"
+              },
+              {
+                "$type": "RPG.GameCore.ByCompareStageType",
+                "CurrentStageType": "RogueRelic"
+              }
+            ]
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.SetBattleBGMState",
+              "StateName": {
+                "Value": "State_Belobog_Underworld_Combat_Svarog"
+              },
+              "InsertSpecial": true,
+              "DelayTime": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0
+                }
+              }
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "LevelEntity"
+          },
+          "ModifierName": "MMonster_W1_Svarog_00_ResetStageBGM"
+        }
+      ]
+    },
+    {
+      "Modifiers": {
         "Monster_W1_GS_Svarog_Break": {
           "_CallbackList": [
             {
@@ -348,6 +465,7 @@
             "Alias": "AbilityTargetEntity"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Physical"
             },
@@ -513,6 +631,7 @@
             "Alias": "AbilityTargetEntity"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Physical"
             },
@@ -546,6 +665,9 @@
           }
         },
         {
+          "$type": "RPG.GameCore.DamagePerformFinish"
+        },
+        {
           "$type": "RPG.GameCore.ShowEntityFloatMessage",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
@@ -574,9 +696,6 @@
               ]
             }
           }
-        },
-        {
-          "$type": "RPG.GameCore.DamagePerformFinish"
         },
         {
           "$type": "RPG.GameCore.SkillPerformFinish"
@@ -751,6 +870,7 @@
                     "$type": "RPG.GameCore.TargetAlias",
                     "Alias": "Monster_Svarog_00_Unselectable"
                   },
+                  "ByRandom": true,
                   "MaxNumber": {
                     "IsDynamic": false,
                     "FixedValue": {
@@ -1400,11 +1520,13 @@
           },
           "WaitProjectileFinish": true,
           "PerProjectileDamage": {
+            "$type": "RPG.GameCore.DamageByAttackProperty",
             "TargetType": {
               "$type": "RPG.GameCore.TargetAlias",
               "Alias": "AllEnemy"
             },
             "AttackProperty": {
+              "$type": "RPG.GameCore.AttackData",
               "DamageType": {
                 "DamageType": "Physical"
               },
@@ -1690,6 +1812,7 @@
             "Alias": "AbilityTargetEntity"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Fire"
             },
@@ -1714,6 +1837,9 @@
             "DitherRangeX": 0.02,
             "DitherRangeY": 0.02
           }
+        },
+        {
+          "$type": "RPG.GameCore.DamagePerformFinish"
         },
         {
           "$type": "RPG.GameCore.WaitAnimState",
@@ -1745,9 +1871,6 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "CasterSummonedMinions"
           }
-        },
-        {
-          "$type": "RPG.GameCore.DamagePerformFinish"
         },
         {
           "$type": "RPG.GameCore.WaitSecond",

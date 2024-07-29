@@ -13,6 +13,7 @@
                     "$type": "RPG.GameCore.TargetAlias",
                     "Alias": "AllLightTeam"
                   },
+                  "ByRandom": true,
                   "TaskList": [
                     {
                       "$type": "RPG.GameCore.AddModifier",
@@ -59,6 +60,21 @@
               ]
             },
             {
+              "Event": "OnPhase1",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0
+                    }
+                  },
+                  "DynamicKey": "Used_Flag"
+                }
+              ]
+            },
+            {
               "Event": "OnHPChange",
               "CallbackConfig": [
                 {
@@ -82,10 +98,31 @@
                           "$type": "RPG.GameCore.TargetAlias",
                           "Alias": "ModifierOwnerEntity"
                         }
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "DynamicKey": "Used_Flag",
+                        "CompareType": "Equal",
+                        "CompareValue": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 0
+                          }
+                        }
                       }
                     ]
                   },
                   "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "Value": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1
+                        }
+                      },
+                      "DynamicKey": "Used_Flag"
+                    },
                     {
                       "$type": "RPG.GameCore.ModifySPNew",
                       "TargetType": {
@@ -117,7 +154,12 @@
                 }
               ]
             }
-          ]
+          ],
+          "DynamicValues": {
+            "Values": {
+              "1819385770": {}
+            }
+          }
         }
       },
       "Name": "FantasticStory_Big_Ability_0001",
@@ -145,6 +187,7 @@
                     "$type": "RPG.GameCore.TargetAlias",
                     "Alias": "AllLightTeam"
                   },
+                  "ByRandom": true,
                   "TaskList": [
                     {
                       "$type": "RPG.GameCore.AddModifier",
@@ -260,6 +303,7 @@
                     "$type": "RPG.GameCore.TargetAlias",
                     "Alias": "AllLightTeam"
                   },
+                  "ByRandom": true,
                   "TaskList": [
                     {
                       "$type": "RPG.GameCore.AddModifier",
@@ -312,10 +356,6 @@
                   "$type": "RPG.GameCore.PredicateTaskList",
                   "Predicate": {
                     "$type": "RPG.GameCore.ByAttackType",
-                    "TargetType": {
-                      "$type": "RPG.GameCore.TargetAlias",
-                      "Alias": "ModifierOwnerEntity"
-                    },
                     "AttackTypes": [
                       "Insert"
                     ]
@@ -351,6 +391,7 @@
                         "$type": "RPG.GameCore.TargetAlias",
                         "Alias": "AllDarkTeam"
                       },
+                      "ByRandom": true,
                       "TaskList": [
                         {
                           "$type": "RPG.GameCore.DamageByAttackProperty",
@@ -359,6 +400,7 @@
                             "Alias": "ParamEntity"
                           },
                           "AttackProperty": {
+                            "$type": "RPG.GameCore.AttackData",
                             "DamageType": {
                               "DamageType": "Physical"
                             },
@@ -554,13 +596,13 @@
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.SetDynamicValue",
-                  "DynamicKey": "Attacked_Flag",
                   "Value": {
                     "IsDynamic": false,
                     "FixedValue": {
                       "Value": 1
                     }
-                  }
+                  },
+                  "DynamicKey": "Attacked_Flag"
                 }
               ]
             },
@@ -569,13 +611,13 @@
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.SetDynamicValue",
-                  "DynamicKey": "Attacked_Flag",
                   "Value": {
                     "IsDynamic": false,
                     "FixedValue": {
                       "Value": 0
                     }
-                  }
+                  },
+                  "DynamicKey": "Attacked_Flag"
                 }
               ]
             }
@@ -607,6 +649,7 @@
                     "$type": "RPG.GameCore.TargetAlias",
                     "Alias": "AllDarkTeam"
                   },
+                  "ByRandom": true,
                   "TaskList": [
                     {
                       "$type": "RPG.GameCore.AddModifier",
@@ -629,6 +672,7 @@
                     "$type": "RPG.GameCore.TargetAlias",
                     "Alias": "AllDarkTeam"
                   },
+                  "ByRandom": true,
                   "TaskList": [
                     {
                       "$type": "RPG.GameCore.AddModifier",
@@ -651,6 +695,7 @@
                     "$type": "RPG.GameCore.TargetAlias",
                     "Alias": "AllDarkTeam"
                   },
+                  "ByRandom": true,
                   "TaskList": [
                     {
                       "$type": "RPG.GameCore.AddModifier",
@@ -731,6 +776,7 @@
                     "$type": "RPG.GameCore.TargetAlias",
                     "Alias": "AllDarkTeam"
                   },
+                  "ByRandom": true,
                   "TaskList": [
                     {
                       "$type": "RPG.GameCore.AddModifier",
@@ -753,6 +799,7 @@
                     "$type": "RPG.GameCore.TargetAlias",
                     "Alias": "AllDarkTeam"
                   },
+                  "ByRandom": true,
                   "TaskList": [
                     {
                       "$type": "RPG.GameCore.AddModifier",
@@ -775,6 +822,7 @@
                     "$type": "RPG.GameCore.TargetAlias",
                     "Alias": "AllDarkTeam"
                   },
+                  "ByRandom": true,
                   "TaskList": [
                     {
                       "$type": "RPG.GameCore.AddModifier",
@@ -911,6 +959,7 @@
                     "$type": "RPG.GameCore.TargetAlias",
                     "Alias": "AllLightTeam"
                   },
+                  "ByRandom": true,
                   "TaskList": [
                     {
                       "$type": "RPG.GameCore.AddModifier",
@@ -941,10 +990,6 @@
                   "$type": "RPG.GameCore.PredicateTaskList",
                   "Predicate": {
                     "$type": "RPG.GameCore.ByAttackType",
-                    "TargetType": {
-                      "$type": "RPG.GameCore.TargetAlias",
-                      "Alias": "ModifierOwnerEntity"
-                    },
                     "AttackTypes": [
                       "BPSkill"
                     ]
@@ -995,6 +1040,7 @@
                     "$type": "RPG.GameCore.TargetAlias",
                     "Alias": "AllLightTeam"
                   },
+                  "ByRandom": true,
                   "TaskList": [
                     {
                       "$type": "RPG.GameCore.AddModifier",
@@ -1025,10 +1071,6 @@
                   "$type": "RPG.GameCore.PredicateTaskList",
                   "Predicate": {
                     "$type": "RPG.GameCore.ByAttackType",
-                    "TargetType": {
-                      "$type": "RPG.GameCore.TargetAlias",
-                      "Alias": "ModifierOwnerEntity"
-                    },
                     "AttackTypes": [
                       "Insert"
                     ]
@@ -1079,6 +1121,7 @@
                     "$type": "RPG.GameCore.TargetAlias",
                     "Alias": "AllLightTeam"
                   },
+                  "ByRandom": true,
                   "TaskList": [
                     {
                       "$type": "RPG.GameCore.AddModifier",
@@ -1115,13 +1158,13 @@
                 },
                 {
                   "$type": "RPG.GameCore.SetDynamicValue",
-                  "DynamicKey": "MFantasticStory_Big_Ability_0009_Flag",
                   "Value": {
                     "IsDynamic": false,
                     "FixedValue": {
                       "Value": 0
                     }
-                  }
+                  },
+                  "DynamicKey": "MFantasticStory_Big_Ability_0009_Flag"
                 }
               ]
             },
@@ -1163,13 +1206,13 @@
                   "SuccessTaskList": [
                     {
                       "$type": "RPG.GameCore.SetDynamicValue",
-                      "DynamicKey": "MFantasticStory_Big_Ability_0009_Flag",
                       "Value": {
                         "IsDynamic": false,
                         "FixedValue": {
                           "Value": 1
                         }
-                      }
+                      },
+                      "DynamicKey": "MFantasticStory_Big_Ability_0009_Flag"
                     },
                     {
                       "$type": "RPG.GameCore.ModifyTeamBoostPoint",

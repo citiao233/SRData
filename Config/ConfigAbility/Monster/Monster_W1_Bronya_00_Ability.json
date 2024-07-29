@@ -96,6 +96,7 @@
                 "Alias": "AbilityTargetEntity"
               },
               "AttackProperty": {
+                "$type": "RPG.GameCore.AttackData",
                 "DamageType": {
                   "DamageType": "Wind"
                 },
@@ -736,6 +737,7 @@
                 "Alias": "AbilityTargetEntity"
               },
               "AttackProperty": {
+                "$type": "RPG.GameCore.AttackData",
                 "DamageType": {
                   "DamageType": "Wind"
                 },
@@ -1212,12 +1214,26 @@
           "ContextScope": "TargetEntity"
         },
         {
-          "$type": "RPG.GameCore.AddModifier",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByIsContainModifier",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "ModifierName": "MMonster_W1_Bronya_00_PassiveSkill_NoLockStance",
+            "Inverse": true
           },
-          "ModifierName": "MMonster_W1_Bronya_00_WeakPointProtectController"
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "ModifierName": "MMonster_W1_Bronya_00_WeakPointProtectController"
+            }
+          ]
         },
         {
           "$type": "RPG.GameCore.AddModifier",
@@ -1447,6 +1463,25 @@
           "ContextScope": "TargetEntity"
         }
       ]
+    },
+    {
+      "Name": "Monster_W1_Bronya_00_PassiveSkill_NoLockStance",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "MMonster_W1_Bronya_00_PassiveSkill_NoLockStance"
+        }
+      ]
     }
-  ]
+  ],
+  "GlobalModifiers": {
+    "MMonster_W1_Bronya_00_PassiveSkill_NoLockStance": {}
+  }
 }

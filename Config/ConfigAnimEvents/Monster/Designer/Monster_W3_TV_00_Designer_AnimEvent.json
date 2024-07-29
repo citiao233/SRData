@@ -254,6 +254,53 @@
       ]
     },
     {
+      "AnimatorStateName": "StandBy",
+      "NormalizedTime": 0.5,
+      "EventList": [
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_TV_00/Eff_Monster_W3_TV_00_BeingHit01.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareDynamicValue",
+            "DynamicKey": "FlopSide",
+            "ContextScope": "TargetEntity",
+            "CompareType": "Equal",
+            "CompareValue": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 1
+              }
+            }
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.AnimSetParameter",
+              "ParameterName": "Side",
+              "ParameterType": "Int"
+            }
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.AnimSetParameter",
+              "ParameterName": "Side",
+              "ParameterType": "Int",
+              "Value": 1
+            }
+          ]
+        }
+      ],
+      "AllowTriggeringOnTransitionIn": false,
+      "AllowTriggeringOnTransitionOut": false,
+      "ForceTrigger": true
+    },
+    {
       "AnimatorStateName": "Skill02",
       "EventList": [
         {
@@ -275,31 +322,6 @@
           "Value": 1
         }
       ]
-    },
-    {
-      "AnimatorStateName": "Standby",
-      "NormalizedTime": 0.5,
-      "EventList": [
-        {
-          "$type": "RPG.GameCore.RemoveEffect",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_TV_00/Eff_Monster_W3_TV_00_BeingHit01.prefab"
-        },
-        {
-          "$type": "RPG.GameCore.TriggerEffect",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_TV_00/Eff_Monster_W3_TV_00_Break_Occur_Blank.prefab",
-          "MinMutexTime": -1,
-          "MinMutexType": "Entity"
-        }
-      ],
-      "ForceTrigger": true
     },
     {
       "AnimatorStateName": "Stun_Occur",

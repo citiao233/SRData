@@ -4,15 +4,6 @@
     {
       "TaskList": [
         {
-          "$type": "RPG.GameCore.CollectDataConditions",
-          "TaskIDList": [],
-          "MainMissionIDList": [],
-          "PerformanceIDList": [],
-          "CustomValueMainMissionIDList": [
-            4140106
-          ]
-        },
-        {
           "$type": "RPG.GameCore.PropSetupHitBox",
           "OnBeHit": [
             {
@@ -67,6 +58,16 @@
     {
       "TaskList": [
         {
+          "$type": "RPG.GameCore.CollectDataConditions",
+          "TaskIDList": [],
+          "MainMissionIDList": [],
+          "PerformanceIDList": [],
+          "PerformanceIDDsList": [],
+          "CustomValueMainMissionIDList": [
+            4140106
+          ]
+        },
+        {
           "$type": "RPG.GameCore.WaitCustomString",
           "CustomString": {
             "Value": "Act_414010601"
@@ -77,68 +78,10 @@
           "ValueSource": {},
           "PerformanceType": "D",
           "PerformanceID": 414010601
-        }
-      ]
-    },
-    {
-      "TaskList": [
+        },
         {
-          "$type": "RPG.GameCore.WaitMissionCustomValueChange",
-          "MainMissionID": 4140106,
-          "MissionCustomValue": {
-            "isLocal": true,
-            "ValidValueParamList": [
-              1,
-              2,
-              3
-            ]
-          },
-          "OnChange": [
-            {
-              "$type": "RPG.GameCore.TriggerCustomString",
-              "CustomString": {
-                "Value": "Battle_4140106"
-              }
-            }
-          ],
-          "Condition": {
-            "$type": "RPG.GameCore.ByCompareMissionCustomValue",
-            "MainMissionID": 4140106,
-            "MissionCustomValue": {
-              "ValidValueParamList": [
-                1,
-                2
-              ]
-            },
-            "EquationType": "Equal",
-            "TargetValue": 1
-          }
-        }
-      ]
-    },
-    {
-      "TaskList": [
-        {
-          "$type": "RPG.GameCore.WaitMissionCustomValueChange",
-          "MainMissionID": 4140106,
-          "MissionCustomValue": {
-            "isLocal": true,
-            "ValidValueParamList": [
-              1,
-              2,
-              3,
-              4
-            ]
-          },
-          "OnChange": [
-            {
-              "$type": "RPG.GameCore.TriggerCustomString",
-              "CustomString": {
-                "Value": "Talk_414010603"
-              }
-            }
-          ],
-          "Condition": {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
             "$type": "RPG.GameCore.ByCompareMissionCustomValue",
             "MainMissionID": 4140106,
             "MissionCustomValue": {
@@ -151,13 +94,39 @@
               ]
             },
             "EquationType": "Equal",
-            "TargetValue": 2
-          }
+            "TargetValue": 1
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.TriggerCustomString",
+              "CustomString": {
+                "Value": "Battle_4140106"
+              }
+            }
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.TriggerCustomString",
+              "CustomString": {
+                "Value": "Talk_414010603"
+              }
+            }
+          ]
         }
       ]
     },
     {
       "TaskList": [
+        {
+          "$type": "RPG.GameCore.CollectDataConditions",
+          "TaskIDList": [],
+          "MainMissionIDList": [],
+          "PerformanceIDList": [],
+          "PerformanceIDDsList": [],
+          "CustomValueMainMissionIDList": [
+            4140106
+          ]
+        },
         {
           "$type": "RPG.GameCore.WaitMissionCustomValueChange",
           "MainMissionID": 4140106,

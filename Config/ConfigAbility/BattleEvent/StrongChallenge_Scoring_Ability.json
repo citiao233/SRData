@@ -13,6 +13,7 @@
                     "$type": "RPG.GameCore.TargetAlias",
                     "Alias": "AllDarkTeam"
                   },
+                  "ByRandom": true,
                   "TaskList": [
                     {
                       "$type": "RPG.GameCore.PredicateTaskList",
@@ -99,6 +100,7 @@
                     "$type": "RPG.GameCore.TargetAlias",
                     "Alias": "AllDarkTeamWithAllDarkTeamUnselectable"
                   },
+                  "ByRandom": true,
                   "IncludeLimbo": true,
                   "TaskList": [
                     {
@@ -319,6 +321,79 @@
                       }
                     }
                   ]
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAny",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByCompareMonsterID",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "TargetMonsterID": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 100402600
+                          }
+                        }
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCompareMonsterID",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "TargetMonsterID": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 100402600
+                          }
+                        }
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCompareMonsterID",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "TargetMonsterID": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 100402600
+                          }
+                        }
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCompareMonsterID",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "TargetMonsterID": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 100402610
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "ContextScope": "ContextModifier",
+                      "Value": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1
+                        }
+                      },
+                      "DynamicKey": "HasServantModifier"
+                    }
+                  ]
                 }
               ]
             },
@@ -498,7 +573,7 @@
                       "FailedTaskList": [
                         {
                           "$type": "RPG.GameCore.DebugLog",
-                          "Message": "==============CX0429 CurrentBossMaxHP {CurrentBossMaxHP} CurrentBossLeftHP {CurrentBossLeftHP} AllBossMaxHP {AllBossMaxHP} SummonMonsterTotalHP {SummonMonsterTotalHP}======================"
+                          "Message": "==============CX0429 CurrentBossMaxHP {CurrentBossMaxHP} CurrentBossLeftHP {CurrentBossLeftHP} AllBossMaxHP {AllBossMaxHP} SummonMonsterTotalHP {SummonMonsterTotalHP} NotIncludeMonsterTotalHP {NotIncludeMonsterTotalHP}======================"
                         },
                         {
                           "$type": "RPG.GameCore.SetBattleScoringItem",
@@ -544,14 +619,14 @@
                   "SuccessTaskList": [
                     {
                       "$type": "RPG.GameCore.SetDynamicValue",
-                      "DynamicKey": "HasServantModifier",
                       "ContextScope": "ContextModifier",
                       "Value": {
                         "IsDynamic": false,
                         "FixedValue": {
                           "Value": 1
                         }
-                      }
+                      },
+                      "DynamicKey": "HasServantModifier"
                     }
                   ]
                 }
@@ -671,7 +746,6 @@
                 },
                 {
                   "$type": "RPG.GameCore.SetDynamicValue",
-                  "DynamicKey": "RemainDelaySlice",
                   "Value": {
                     "IsDynamic": true,
                     "PostfixExpr": {
@@ -691,7 +765,8 @@
                         -800957302
                       ]
                     }
-                  }
+                  },
+                  "DynamicKey": "RemainDelaySlice"
                 },
                 {
                   "$type": "RPG.GameCore.SetBattleScoringItem",

@@ -4,8 +4,7 @@
       "Modifiers": {
         "Monster_SW_Minion01_00_MuteHitFly": {
           "BehaviorFlagList": [
-            "MuteHitFly",
-            "KeepOnDeathrattle"
+            "MuteHitFly"
           ]
         },
         "Monster_SW_Minion01_00_Deathrattle": {
@@ -208,6 +207,7 @@
             "Alias": "AbilityTargetEntity"
           },
           "AttackProperty": {
+            "$type": "RPG.GameCore.AttackData",
             "DamageType": {
               "DamageType": "Wind"
             },
@@ -450,6 +450,7 @@
             "ModifierName": "Monster_SW_Minion01_00_Split_Old",
             "Inverse": true
           },
+          "ByRandom": true,
           "MaxNumber": {
             "IsDynamic": false,
             "FixedValue": {
@@ -620,6 +621,14 @@
               "WaitAnimState": false
             },
             {
+              "$type": "RPG.GameCore.TriggerAnimState",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ParamEntity"
+              },
+              "AnimLogicState": "Idle"
+            },
+            {
               "$type": "RPG.GameCore.TriggerEffect",
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
@@ -692,6 +701,7 @@
                   "ModifierName": "Monster_SW_Boss_00_DamageUp"
                 }
               },
+              "ByRandom": true,
               "TaskList": [
                 {
                   "$type": "RPG.GameCore.AddModifier",
@@ -730,14 +740,14 @@
         },
         {
           "$type": "RPG.GameCore.SetDynamicValue",
-          "DynamicKey": "BossCount",
           "ContextScope": "TargetEntity",
           "Value": {
             "IsDynamic": false,
             "FixedValue": {
               "Value": 0
             }
-          }
+          },
+          "DynamicKey": "BossCount"
         },
         {
           "$type": "RPG.GameCore.Retarget",
@@ -776,10 +786,10 @@
               }
             ]
           },
+          "ByRandom": true,
           "TaskList": [
             {
               "$type": "RPG.GameCore.SetDynamicValue",
-              "DynamicKey": "BossCount",
               "ContextScope": "TargetEntity",
               "Value": {
                 "IsDynamic": true,
@@ -794,7 +804,8 @@
                     1928047182
                   ]
                 }
-              }
+              },
+              "DynamicKey": "BossCount"
             }
           ]
         },
@@ -849,7 +860,6 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "CasterSummonedMinions"
           },
-          "DynamicKey": "DamageUpRatio",
           "ContextScope": "TargetEntity",
           "Value": {
             "IsDynamic": true,
@@ -860,7 +870,8 @@
                 -1270921393
               ]
             }
-          }
+          },
+          "DynamicKey": "DamageUpRatio"
         }
       ]
     },
@@ -902,6 +913,7 @@
             },
             "ModifierName": "WMonster_TY_Elite01_00_Skill07_Mark"
           },
+          "ByRandom": true,
           "MaxNumber": {
             "IsDynamic": false,
             "FixedValue": {
@@ -1011,6 +1023,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "AllLightTeam"
           },
+          "ByRandom": true,
           "MaxNumber": {
             "IsDynamic": false,
             "FixedValue": {
@@ -1042,6 +1055,7 @@
             },
             "ModifierName": "WMonster_TY_Elite01_00_Skill07_Mark"
           },
+          "ByRandom": true,
           "MaxNumber": {
             "IsDynamic": false,
             "FixedValue": {
@@ -1074,6 +1088,7 @@
                 "Alias": "ParamEntity"
               },
               "AttackProperty": {
+                "$type": "RPG.GameCore.AttackData",
                 "DamageType": {
                   "DamageType": "Wind"
                 },
@@ -1297,6 +1312,7 @@
                     "Alias": "AllTeammate"
                   },
                   "AttackProperty": {
+                    "$type": "RPG.GameCore.AttackData",
                     "DamageType": {
                       "DamageType": "Wind"
                     },
@@ -1504,7 +1520,6 @@
               "SuccessTaskList": [
                 {
                   "$type": "RPG.GameCore.SetDynamicValue",
-                  "DynamicKey": "Modifier_TurnCount",
                   "ContextScope": "ContextModifier",
                   "Value": {
                     "IsDynamic": true,
@@ -1519,7 +1534,8 @@
                         206313846
                       ]
                     }
-                  }
+                  },
+                  "DynamicKey": "Modifier_TurnCount"
                 }
               ]
             },
@@ -1578,14 +1594,14 @@
                   "SuccessTaskList": [
                     {
                       "$type": "RPG.GameCore.SetDynamicValue",
-                      "DynamicKey": "Modifier_TurnCount",
                       "ContextScope": "ContextModifier",
                       "Value": {
                         "IsDynamic": false,
                         "FixedValue": {
                           "Value": 2
                         }
-                      }
+                      },
+                      "DynamicKey": "Modifier_TurnCount"
                     },
                     {
                       "$type": "RPG.GameCore.TurnInsertAbility",
@@ -1605,14 +1621,14 @@
                   "FailedTaskList": [
                     {
                       "$type": "RPG.GameCore.SetDynamicValue",
-                      "DynamicKey": "Modifier_TurnCount",
                       "ContextScope": "ContextModifier",
                       "Value": {
                         "IsDynamic": false,
                         "FixedValue": {
                           "Value": 1
                         }
-                      }
+                      },
+                      "DynamicKey": "Modifier_TurnCount"
                     }
                   ]
                 }
@@ -1644,13 +1660,13 @@
               "SuccessTaskList": [
                 {
                   "$type": "RPG.GameCore.SetDynamicValue",
-                  "DynamicKey": "BreakRecover",
                   "Value": {
                     "IsDynamic": false,
                     "FixedValue": {
                       "Value": 0
                     }
-                  }
+                  },
+                  "DynamicKey": "BreakRecover"
                 }
               ]
             },
@@ -1686,13 +1702,13 @@
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetDynamicValue",
-              "DynamicKey": "BreakRecover",
               "Value": {
                 "IsDynamic": false,
                 "FixedValue": {
                   "Value": 1
                 }
-              }
+              },
+              "DynamicKey": "BreakRecover"
             }
           ]
         },

@@ -311,6 +311,7 @@
             },
             "ModifierName": "Monster_W3_AventurinePart_00_OddsZero_RL"
           },
+          "ByRandom": true,
           "TaskList": [
             {
               "$type": "RPG.GameCore.TurnInsertAbility",
@@ -377,6 +378,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "CasterSummonedMinions"
           },
+          "ByRandom": true,
           "TaskList": [
             {
               "$type": "RPG.GameCore.TriggerAnimState",
@@ -448,6 +450,7 @@
             "ModifierName": "Monster_W3_Aventurine_00_Gambling",
             "Inverse": true
           },
+          "ByRandom": true,
           "TaskList": [
             {
               "$type": "RPG.GameCore.AddModifier",
@@ -559,25 +562,25 @@
               "SuccessTaskList": [
                 {
                   "$type": "RPG.GameCore.SetDynamicValue",
-                  "DynamicKey": "WaitInsert",
                   "ContextScope": "TargetEntity",
                   "Value": {
                     "IsDynamic": false,
                     "FixedValue": {
                       "Value": 1
                     }
-                  }
+                  },
+                  "DynamicKey": "WaitInsert"
                 },
                 {
                   "$type": "RPG.GameCore.SetDynamicValue",
-                  "DynamicKey": "GamblingInsertCheck",
                   "ContextScope": "TargetEntity",
                   "Value": {
                     "IsDynamic": false,
                     "FixedValue": {
                       "Value": 0
                     }
-                  }
+                  },
+                  "DynamicKey": "GamblingInsertCheck"
                 },
                 {
                   "$type": "RPG.GameCore.Retarget",
@@ -585,6 +588,7 @@
                     "$type": "RPG.GameCore.TargetAlias",
                     "Alias": "CasterSummonedMinions"
                   },
+                  "ByRandom": true,
                   "MaxNumber": {
                     "IsDynamic": false,
                     "FixedValue": {
@@ -779,13 +783,13 @@
         },
         {
           "$type": "RPG.GameCore.SetDynamicValue",
-          "DynamicKey": "ChangePhaseCheck_RL",
           "Value": {
             "IsDynamic": false,
             "FixedValue": {
               "Value": 0
             }
-          }
+          },
+          "DynamicKey": "ChangePhaseCheck_RL"
         },
         {
           "$type": "RPG.GameCore.RemoveModifier",
@@ -1075,6 +1079,7 @@
             },
             "ModifierName": "Monster_W3_AventurinePart_00_OddsZero_RL"
           },
+          "ByRandom": true,
           "TaskList": [
             {
               "$type": "RPG.GameCore.TurnInsertAbility",
@@ -1106,6 +1111,52 @@
               "$type": "RPG.GameCore.SetBattleBGMState",
               "StateName": {
                 "Value": "State_Penocony_Combat_Aventurine_Ultra"
+              },
+              "InsertSpecial": true,
+              "DelayTime": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0
+                }
+              }
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByAny",
+            "PredicateList": [
+              {
+                "$type": "RPG.GameCore.ByCompareStageType",
+                "CurrentStageType": "Challenge"
+              },
+              {
+                "$type": "RPG.GameCore.ByCompareStageType",
+                "CurrentStageType": "VerseSimulation"
+              },
+              {
+                "$type": "RPG.GameCore.ByCompareStageType",
+                "CurrentStageType": "StrongChallengeActivity"
+              },
+              {
+                "$type": "RPG.GameCore.ByCompareStageType",
+                "CurrentStageType": "RogueRelic"
+              }
+            ]
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.SetBattleBGMState",
+              "StateName": {
+                "Value": "State_Penocony_Combat_Aventurine_Ultra"
+              },
+              "InsertSpecial": true,
+              "DelayTime": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0
+                }
               }
             }
           ]
@@ -1214,6 +1265,7 @@
             },
             "ModifierName": "Monster_W3_Aventurine_00_TargetDice"
           },
+          "ByRandom": true,
           "TaskList": [
             {
               "$type": "RPG.GameCore.AddModifier",
@@ -1707,14 +1759,14 @@
         },
         {
           "$type": "RPG.GameCore.SetDynamicValue",
-          "DynamicKey": "WaitInsert",
           "ContextScope": "TargetEntity",
           "Value": {
             "IsDynamic": false,
             "FixedValue": {
               "Value": 0
             }
-          }
+          },
+          "DynamicKey": "WaitInsert"
         },
         {
           "$type": "RPG.GameCore.TriggerEffect",
@@ -3162,13 +3214,13 @@
         },
         {
           "$type": "RPG.GameCore.SetDynamicValue",
-          "DynamicKey": "DiceResult",
           "Value": {
             "IsDynamic": false,
             "FixedValue": {
               "Value": 0
             }
-          }
+          },
+          "DynamicKey": "DiceResult"
         },
         {
           "$type": "RPG.GameCore.AddGlobalDynamicOffset",
@@ -3287,23 +3339,23 @@
         },
         {
           "$type": "RPG.GameCore.SetDynamicValue",
-          "DynamicKey": "AvatarDiceResult",
           "Value": {
             "IsDynamic": false,
             "FixedValue": {
               "Value": 0
             }
-          }
+          },
+          "DynamicKey": "AvatarDiceResult"
         },
         {
           "$type": "RPG.GameCore.SetDynamicValue",
-          "DynamicKey": "Win_Flag",
           "Value": {
             "IsDynamic": false,
             "FixedValue": {
               "Value": 0
             }
-          }
+          },
+          "DynamicKey": "Win_Flag"
         },
         {
           "$type": "RPG.GameCore.Retarget",
@@ -3319,6 +3371,7 @@
             },
             "ModifierName": "Monster_W3_AventurinePart_00_ResultCount"
           },
+          "ByRandom": true,
           "TaskList": [
             {
               "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
@@ -3356,13 +3409,13 @@
               "SuccessTaskList": [
                 {
                   "$type": "RPG.GameCore.SetDynamicValue",
-                  "DynamicKey": "Win_Flag",
                   "Value": {
                     "IsDynamic": false,
                     "FixedValue": {
                       "Value": 1
                     }
-                  }
+                  },
+                  "DynamicKey": "Win_Flag"
                 }
               ]
             }
@@ -3707,14 +3760,14 @@
         },
         {
           "$type": "RPG.GameCore.SetDynamicValue",
-          "DynamicKey": "WaitInsert",
           "ContextScope": "TargetEntity",
           "Value": {
             "IsDynamic": false,
             "FixedValue": {
               "Value": 0
             }
-          }
+          },
+          "DynamicKey": "WaitInsert"
         },
         {
           "$type": "RPG.GameCore.TriggerEffect",
@@ -3748,7 +3801,6 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "Monster_W3_Aventurine_00_Skill10_Target"
           },
-          "ByRandom": false,
           "TaskList": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -4372,6 +4424,7 @@
               }
             }
           },
+          "ByRandom": true,
           "MaxNumber": {
             "IsDynamic": false,
             "FixedValue": {
@@ -4417,6 +4470,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "AllEnemy"
           },
+          "ByRandom": true,
           "TaskList": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -4498,6 +4552,7 @@
               }
             }
           },
+          "ByRandom": true,
           "MaxNumber": {
             "IsDynamic": false,
             "FixedValue": {
@@ -4535,6 +4590,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "AllEnemy"
           },
+          "ByRandom": true,
           "TaskList": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -5042,6 +5098,7 @@
               }
             ]
           },
+          "ByRandom": true,
           "MaxNumber": {
             "IsDynamic": false,
             "FixedValue": {
@@ -5157,13 +5214,13 @@
         },
         {
           "$type": "RPG.GameCore.SetDynamicValue",
-          "DynamicKey": "DiceResult",
           "Value": {
             "IsDynamic": false,
             "FixedValue": {
               "Value": 0
             }
-          }
+          },
+          "DynamicKey": "DiceResult"
         },
         {
           "$type": "RPG.GameCore.AddModifier",
@@ -5207,10 +5264,42 @@
               },
               "SuccessTaskList": [
                 {
-                  "$type": "RPG.GameCore.SetBattleBGMState",
-                  "StateName": {
-                    "Value": "State_Penocony_Combat_Aventurine_Common"
+                  "$type": "RPG.GameCore.ResetBattleBGMToStage",
+                  "ResetStateNames": [
+                    "State_Penocony_Combat_Aventurine_Ultra"
+                  ]
+                }
+              ]
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAny",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCompareStageType",
+                    "CurrentStageType": "Challenge"
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByCompareStageType",
+                    "CurrentStageType": "VerseSimulation"
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByCompareStageType",
+                    "CurrentStageType": "StrongChallengeActivity"
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByCompareStageType",
+                    "CurrentStageType": "RogueRelic"
                   }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.ResetBattleBGMToStage",
+                  "ResetStateNames": [
+                    "State_Penocony_Combat_Aventurine_Ultra"
+                  ]
                 }
               ]
             }
@@ -5722,13 +5811,13 @@
         },
         {
           "$type": "RPG.GameCore.SetDynamicValue",
-          "DynamicKey": "DiceResult",
           "Value": {
             "IsDynamic": false,
             "FixedValue": {
               "Value": 0
             }
-          }
+          },
+          "DynamicKey": "DiceResult"
         },
         {
           "$type": "RPG.GameCore.SetDieImmediately",
@@ -6341,13 +6430,13 @@
                         "$type": "RPG.GameCore.TargetAlias",
                         "Alias": "ModifierOwnerEntity"
                       },
-                      "DynamicKey": "ChangePhaseCheck_RL",
                       "Value": {
                         "IsDynamic": false,
                         "FixedValue": {
                           "Value": 1
                         }
-                      }
+                      },
+                      "DynamicKey": "ChangePhaseCheck_RL"
                     }
                   ],
                   "FailedTaskList": []
@@ -6392,7 +6481,6 @@
             },
             {
               "$type": "RPG.GameCore.SetDynamicValue",
-              "DynamicKey": "MDF_DamageTakenUpRatio_Total",
               "Value": {
                 "IsDynamic": true,
                 "PostfixExpr": {
@@ -6403,7 +6491,8 @@
                     1458882163
                   ]
                 }
-              }
+              },
+              "DynamicKey": "MDF_DamageTakenUpRatio_Total"
             },
             {
               "$type": "RPG.GameCore.StackProperty",
@@ -6463,7 +6552,6 @@
             },
             {
               "$type": "RPG.GameCore.SetDynamicValue",
-              "DynamicKey": "MDF_DamageUpRatio_Total",
               "Value": {
                 "IsDynamic": true,
                 "PostfixExpr": {
@@ -6474,7 +6562,8 @@
                     1458882163
                   ]
                 }
-              }
+              },
+              "DynamicKey": "MDF_DamageUpRatio_Total"
             },
             {
               "$type": "RPG.GameCore.StackProperty",
